@@ -34,6 +34,8 @@
             this.BtnDefault = new System.Windows.Forms.Button();
             this.LblTheme = new System.Windows.Forms.Label();
             this.ChkTheme = new System.Windows.Forms.Button();
+            this.LblEAX = new System.Windows.Forms.Label();
+            this.ChkEAX = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnCancel
@@ -45,7 +47,7 @@
             this.BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancel.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnCancel.Location = new System.Drawing.Point(812, 706);
+            this.BtnCancel.Location = new System.Drawing.Point(588, 537);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(200, 51);
             this.BtnCancel.TabIndex = 1;
@@ -67,7 +69,7 @@
             this.BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnApply.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnApply.Location = new System.Drawing.Point(606, 706);
+            this.BtnApply.Location = new System.Drawing.Point(382, 537);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(200, 51);
             this.BtnApply.TabIndex = 2;
@@ -89,7 +91,7 @@
             this.BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDefault.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnDefault.Location = new System.Drawing.Point(12, 706);
+            this.BtnDefault.Location = new System.Drawing.Point(12, 537);
             this.BtnDefault.Name = "BtnDefault";
             this.BtnDefault.Size = new System.Drawing.Size(200, 51);
             this.BtnDefault.TabIndex = 3;
@@ -97,6 +99,7 @@
             this.BtnDefault.Text = "DEFAULT";
             this.BtnDefault.UseMnemonic = false;
             this.BtnDefault.UseVisualStyleBackColor = false;
+            this.BtnDefault.Click += new System.EventHandler(this.BtnDefault_Click);
             this.BtnDefault.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnDefault_MouseDown);
             this.BtnDefault.MouseEnter += new System.EventHandler(this.BtnDefault_MouseEnter);
             this.BtnDefault.MouseLeave += new System.EventHandler(this.BtnDefault_MouseLeave);
@@ -133,12 +136,47 @@
             this.ChkTheme.MouseEnter += new System.EventHandler(this.ChkTheme_MouseEnter);
             this.ChkTheme.MouseLeave += new System.EventHandler(this.ChkTheme_MouseLeave);
             // 
+            // LblEAX
+            // 
+            this.LblEAX.AutoSize = true;
+            this.LblEAX.Location = new System.Drawing.Point(243, 175);
+            this.LblEAX.Name = "LblEAX";
+            this.LblEAX.Size = new System.Drawing.Size(43, 15);
+            this.LblEAX.TabIndex = 8;
+            this.LblEAX.Text = "Theme";
+            // 
+            // ChkEAX
+            // 
+            this.ChkEAX.BackColor = System.Drawing.Color.Black;
+            this.ChkEAX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkEAX.FlatAppearance.BorderSize = 0;
+            this.ChkEAX.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkEAX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkEAX.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkEAX.Location = new System.Drawing.Point(203, 171);
+            this.ChkEAX.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkEAX.Name = "ChkEAX";
+            this.ChkEAX.Size = new System.Drawing.Size(29, 29);
+            this.ChkEAX.TabIndex = 7;
+            this.ChkEAX.TabStop = false;
+            this.ChkEAX.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkEAX.UseMnemonic = false;
+            this.ChkEAX.UseVisualStyleBackColor = false;
+            this.ChkEAX.Click += new System.EventHandler(this.ChkEAX_Click);
+            this.ChkEAX.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkEAX_MouseDown);
+            this.ChkEAX.MouseEnter += new System.EventHandler(this.ChkEAX_MouseEnter);
+            this.ChkEAX.MouseLeave += new System.EventHandler(this.ChkEAX_MouseLeave);
+            // 
             // OptionsBFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1024, 769);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.LblEAX);
+            this.Controls.Add(this.ChkEAX);
             this.Controls.Add(this.LblTheme);
             this.Controls.Add(this.ChkTheme);
             this.Controls.Add(this.BtnDefault);
@@ -150,6 +188,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OptionsBFME1";
             this.TopMost = true;
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OptionsBFME1_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,5 +201,7 @@
         private System.Windows.Forms.Button BtnDefault;
         private System.Windows.Forms.Label LblTheme;
         private System.Windows.Forms.Button ChkTheme;
+        private System.Windows.Forms.Label LblEAX;
+        private System.Windows.Forms.Button ChkEAX;
     }
 }

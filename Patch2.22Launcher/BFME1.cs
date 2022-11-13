@@ -68,7 +68,9 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
                 if (Properties.Settings.Default.PlayBackgroundMusic)
                 {
-
+                    this._theme.Stop();
+                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                    _theme.Play();
                 }
             }
             else if (Properties.Settings.Default.BackgroundMusicIcon == 1)
@@ -115,41 +117,14 @@ namespace PatchLauncher
 
             #region Internal Logic
             //Internal Logic
-            string language = RegistryFunctions.ReadRegKey("lang");
-            string gameInstallPath = RegistryFunctions.ReadRegKey("path");
-            string appdataFolder = RegistryFunctions.ReadRegKey("appData");
-            string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + appdataFolder + "\\";
-            string optionsFile = "Options.ini";
 
-            if (gameInstallPath != null)
+            if (ConstStrings.GameInstallPath() != null)
             {
-                if (!Directory.Exists(appdataPath))
-                    Directory.CreateDirectory(appdataPath);
+                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
+                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
 
-                if (!File.Exists(appdataPath + optionsFile))
-                    File.Copy("Tools\\" + optionsFile, appdataPath + optionsFile);
-            }
-
-            if (Properties.Settings.Default.EAXSupport)
-            {
-                if (!File.Exists(gameInstallPath + "\\dsound.dll"))
-                {
-                    List<string> _EAXFiles = new() { "dsol-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                    foreach (var file in _EAXFiles)
-                    {
-                        File.Copy(Path.Combine("Tools", file), Path.Combine(gameInstallPath, file), true);
-                    }
-                }
-            }
-            else if (File.Exists(gameInstallPath + "\\dsound.dll"))
-            {
-                List<string> _EAXFiles = new() { "dsol-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                foreach (var file in _EAXFiles)
-                {
-                    File.Delete(Path.Combine(gameInstallPath, file));
-                }
+                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.OptionsIniFileName()))
+                    File.Copy("Tools\\" + ConstStrings.OptionsIniFileName(), ConstStrings.GameAppdataFolderPath() + ConstStrings.OptionsIniFileName());
             }
             #endregion
         }
@@ -270,8 +245,6 @@ namespace PatchLauncher
 
         private void PiBThemeSwitcher_Click(object sender, EventArgs e)
         {
-            List<string> ThemeIcons = ThemenIconList.GetThemeIcons();
-
             iconNumber++;
             if (iconNumber >= 5)
                 iconNumber = 0;

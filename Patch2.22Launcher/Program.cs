@@ -33,7 +33,7 @@ namespace PatchLauncher
                     UpdaterWindow _updater = new();
                     _updater.Show();
                     _updater.TopMost = true;
-                    Thread.Sleep(2000);
+                    //Thread.Sleep(2000);
                     _updater.Hide();
 
                     Application.Run(new GameSelect());
