@@ -37,7 +37,6 @@ namespace PatchLauncher
                 {
                     try
                     {
-                        Thread.Sleep(2000);
                         if (AutoUpdater.DownloadUpdate(args))
                         {
                             Application.Exit();

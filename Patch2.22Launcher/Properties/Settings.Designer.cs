@@ -58,5 +58,17 @@ namespace PatchLauncher.Properties {
                 this["BackgroundMusicFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EAXSupport {
+            get {
+                return ((bool)(this["EAXSupport"]));
+            }
+            set {
+                this["EAXSupport"] = value;
+            }
+        }
     }
 }

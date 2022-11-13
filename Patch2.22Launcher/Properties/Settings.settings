@@ -11,5 +11,8 @@
     <Setting Name="BackgroundMusicFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sounds\\music_Default.wav</Value>
     </Setting>
+    <Setting Name="EAXSupport" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

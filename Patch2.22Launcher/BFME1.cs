@@ -44,33 +44,15 @@ namespace PatchLauncher
             BtnLaunch.Font = new Font("Albertus MT", 16, FontStyle.Regular);
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
 
-            //Checkbox-Styles
-            ChkTheme.FlatAppearance.BorderSize = 0;
-            ChkTheme.FlatStyle = FlatStyle.Flat;
-            ChkTheme.BackColor = Color.Transparent;
-            ChkTheme.Font = new Font("Albertus MT", 16, FontStyle.Regular);
-            ChkTheme.ForeColor = Color.FromArgb(192, 145, 69);
-            if (Properties.Settings.Default.PlayBackgroundMusic)
-            {
-                ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-                SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                _theme.Play();
-            }
-            else
-            {
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
-                _theme.Stop();
-                _theme.Dispose();
-            }
+            BtnOptions.FlatAppearance.BorderSize = 0;
+            BtnOptions.FlatStyle = FlatStyle.Flat;
+            BtnOptions.BackColor = Color.Transparent;
+            BtnOptions.Image = Image.FromFile("Images\\btnNeutral.png");
+            BtnOptions.Font = new Font("Albertus MT", 16, FontStyle.Regular);
+            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
             #endregion
 
-            #region Labels and Tooltips
-            //Label-Styles
-            LblTheme.Text = "Play Theme Music";
-            LblTheme.Font = new Font("Albertus MT", 16, FontStyle.Regular);
-            LblTheme.ForeColor = Color.FromArgb(192, 145, 69);
-            LblTheme.BackColor = Color.Transparent;
-
+            #region Tooltips
             //Tooltips
             ToolTip.SetToolTip(PiBThemeSwitcher, "Switches the themes beetween 4 factions and the default theme");
             #endregion
@@ -147,6 +129,28 @@ namespace PatchLauncher
                 if (!File.Exists(appdataPath + optionsFile))
                     File.Copy("Tools\\" + optionsFile, appdataPath + optionsFile);
             }
+
+            if (Properties.Settings.Default.EAXSupport)
+            {
+                if (!File.Exists(gameInstallPath + "\\dsound.dll"))
+                {
+                    List<string> _EAXFiles = new() { "dsol-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                    foreach (var file in _EAXFiles)
+                    {
+                        File.Copy(Path.Combine("Tools", file), Path.Combine(gameInstallPath, file), true);
+                    }
+                }
+            }
+            else if (File.Exists(gameInstallPath + "\\dsound.dll"))
+            {
+                List<string> _EAXFiles = new() { "dsol-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                foreach (var file in _EAXFiles)
+                {
+                    File.Delete(Path.Combine(gameInstallPath, file));
+                }
+            }
             #endregion
         }
 
@@ -160,7 +164,14 @@ namespace PatchLauncher
             }
         }
 
-
+        private void PibHeader_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                WindowMover.ReleaseCapture();
+                _ = WindowMover.SendMessage(Handle, WindowMover.WM_NCLBUTTONDOWN, WindowMover.HT_CAPTION, 0);
+            }
+        }
         #endregion
 
         #region Button Behaviours
@@ -219,49 +230,27 @@ namespace PatchLauncher
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
-
-        private void ChkTheme_Click(object sender, EventArgs e)
+        private void BtnOptions_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
-            {
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
-                Properties.Settings.Default.PlayBackgroundMusic = false;
-                Properties.Settings.Default.Save();
-                _theme.Stop();
-                _theme.Dispose();
-            }
-            else
-            {
-                ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
-                Properties.Settings.Default.PlayBackgroundMusic = true;
-                Properties.Settings.Default.Save();
-                SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                _theme.Play();
-            }
+            OptionsBFME1 _options = new();
+            _options.ShowDialog();
         }
-
-        private void ChkTheme_MouseEnter(object sender, EventArgs e)
+        private void BtnOptions_MouseEnter(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
+            BtnOptions.Image = Image.FromFile("Images\\btnHover.png");
+            BtnOptions.ForeColor = Color.FromArgb(100, 53, 5);
+            Task.Run(() => PlaySoundHover());
         }
-
-        private void ChkTheme_MouseLeave(object sender, EventArgs e)
+        private void BtnOptions_MouseLeave(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
+            BtnOptions.Image = Image.FromFile("Images\\btnNeutral.png");
+            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
         }
-
-        private void ChkTheme_MouseDown(object sender, MouseEventArgs e)
+        private void BtnOptions_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
+            BtnOptions.Image = Image.FromFile("Images\\btnClick.png");
+            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
+            Task.Run(() => PlaySoundClick());
         }
 
         private void PiBYoutube_Click(object sender, EventArgs e)
@@ -350,7 +339,7 @@ namespace PatchLauncher
 
         #region Sound System
         //Initialize Sound-System
-        static void PLaySoundFile(XAudio2 device, string text, string fileName)
+        public static void PLaySoundFile(XAudio2 device, string text, string fileName)
         {
             var stream = new SoundStream(File.OpenRead(fileName));
             var waveFormat = stream.Format;
@@ -383,7 +372,7 @@ namespace PatchLauncher
             buffer.Stream.Dispose();
         }
 
-        static void PlaySoundClick()
+        public static void PlaySoundClick()
         {
             XAudio2 _xaudio2 = new();
             MasteringVoice _masteringVoice = new(_xaudio2);
@@ -392,7 +381,7 @@ namespace PatchLauncher
             _xaudio2.Dispose();
         }
 
-        static void PlaySoundHover()
+        public static void PlaySoundHover()
         {
             XAudio2 _xaudio2 = new();
             MasteringVoice _masteringVoice = new(_xaudio2);
@@ -402,7 +391,8 @@ namespace PatchLauncher
         }
         #endregion
 
-        private void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
+        #region ToolTip System
+        public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
         {
             Font tooltipFont = new("Albertus MT", 16, FontStyle.Regular);
             e.DrawBackground();
@@ -410,9 +400,10 @@ namespace PatchLauncher
             e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
         }
 
-        private void _tooltip_Popup(object sender, PopupEventArgs e)
+        public void TooltipPopup(object sender, PopupEventArgs e)
         {
             e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), new Font("Albertus MT", 16, FontStyle.Regular));
         }
+        #endregion
     }
 }

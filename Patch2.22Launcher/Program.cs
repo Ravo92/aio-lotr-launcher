@@ -32,10 +32,11 @@ namespace PatchLauncher
                     Process p = Process.Start(startInfo);
                     UpdaterWindow _updater = new();
                     _updater.Show();
-                    //Thread.Sleep(2000);
+                    _updater.TopMost = true;
+                    Thread.Sleep(2000);
                     _updater.Hide();
 
-                    Application.Run(new BFME1());
+                    Application.Run(new GameSelect());
                 }
                 catch (System.ComponentModel.Win32Exception)
                 {

@@ -21,7 +21,6 @@ namespace PatchLauncher.Classes
                 @"Images\bgLorien.png",
                 @"Images\bgOlifant.png",
                 @"Images\bgThomb.png",
-                @"Images\bgMap.png"
             };
 
             Random rnd = new();
