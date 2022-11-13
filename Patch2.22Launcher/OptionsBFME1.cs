@@ -46,7 +46,7 @@ namespace PatchLauncher
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
-            LblTheme.Text = "Play Theme Music in launcher at start";
+            LblTheme.Text = "Play theme music in launcher at start";
             LblTheme.Font = new Font("Albertus MT", 16, FontStyle.Regular);
             LblTheme.ForeColor = Color.FromArgb(192, 145, 69);
             LblTheme.BackColor = Color.Transparent;

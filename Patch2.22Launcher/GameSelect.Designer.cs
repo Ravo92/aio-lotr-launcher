@@ -85,7 +85,6 @@
             this.MaximizeBox = false;
             this.Name = "GameSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GameSelect";
             this.TopMost = true;
             this.ResumeLayout(false);
 
