@@ -42,6 +42,7 @@ namespace PatchLauncher
             this.PiBThemeSwitcher = new System.Windows.Forms.PictureBox();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.BtnOptions = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.wv2Patchnotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
@@ -59,7 +60,7 @@ namespace PatchLauncher
             this.BtnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnClose.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnClose.Location = new System.Drawing.Point(1321, 715);
+            this.BtnClose.Location = new System.Drawing.Point(1321, 717);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(200, 51);
             this.BtnClose.TabIndex = 0;
@@ -79,7 +80,7 @@ namespace PatchLauncher
             this.wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
             this.wv2Patchnotes.Location = new System.Drawing.Point(390, 132);
             this.wv2Patchnotes.Name = "wv2Patchnotes";
-            this.wv2Patchnotes.Size = new System.Drawing.Size(1131, 574);
+            this.wv2Patchnotes.Size = new System.Drawing.Size(1131, 537);
             this.wv2Patchnotes.Source = new System.Uri("https://docs.google.com/document/d/1eG95mVD_TYnvkfKEwcXaQvWS5AYbFIq4rDdXrifsKUw", System.UriKind.Absolute);
             this.wv2Patchnotes.TabIndex = 1;
             this.wv2Patchnotes.ZoomFactor = 1D;
@@ -93,7 +94,7 @@ namespace PatchLauncher
             this.BtnLaunch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnLaunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnLaunch.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnLaunch.Location = new System.Drawing.Point(12, 715);
+            this.BtnLaunch.Location = new System.Drawing.Point(12, 717);
             this.BtnLaunch.Name = "BtnLaunch";
             this.BtnLaunch.Size = new System.Drawing.Size(200, 51);
             this.BtnLaunch.TabIndex = 2;
@@ -186,7 +187,7 @@ namespace PatchLauncher
             this.BtnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOptions.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnOptions.Location = new System.Drawing.Point(1115, 715);
+            this.BtnOptions.Location = new System.Drawing.Point(1115, 717);
             this.BtnOptions.Name = "BtnOptions";
             this.BtnOptions.Size = new System.Drawing.Size(200, 51);
             this.BtnOptions.TabIndex = 10;
@@ -199,20 +200,41 @@ namespace PatchLauncher
             this.BtnOptions.MouseEnter += new System.EventHandler(this.BtnOptions_MouseEnter);
             this.BtnOptions.MouseLeave += new System.EventHandler(this.BtnOptions_MouseLeave);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.Transparent;
+            this.button1.Location = new System.Drawing.Point(218, 717);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(200, 51);
+            this.button1.TabIndex = 11;
+            this.button1.TabStop = false;
+            this.button1.Text = "UPDATE";
+            this.button1.UseMnemonic = false;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // BFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1533, 778);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.wv2Patchnotes);
+            this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnOptions);
+            this.Controls.Add(this.BtnLaunch);
             this.Controls.Add(this.PiBThemeSwitcher);
             this.Controls.Add(this.PiBModDB);
             this.Controls.Add(this.PiBDiscord);
             this.Controls.Add(this.PiBYoutube);
             this.Controls.Add(this.PibHeader);
-            this.Controls.Add(this.BtnLaunch);
-            this.Controls.Add(this.wv2Patchnotes);
-            this.Controls.Add(this.BtnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -244,5 +266,6 @@ namespace PatchLauncher
         private PictureBox PiBThemeSwitcher;
         private ToolTip ToolTip;
         private Button BtnOptions;
+        private Button button1;
     }
 }

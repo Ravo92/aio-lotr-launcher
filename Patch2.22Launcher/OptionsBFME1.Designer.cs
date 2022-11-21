@@ -36,6 +36,9 @@
             this.ChkTheme = new System.Windows.Forms.Button();
             this.LblEAX = new System.Windows.Forms.Label();
             this.ChkEAX = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LblLauncherSettings = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnCancel
@@ -47,7 +50,7 @@
             this.BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancel.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnCancel.Location = new System.Drawing.Point(588, 537);
+            this.BtnCancel.Location = new System.Drawing.Point(812, 705);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(200, 51);
             this.BtnCancel.TabIndex = 1;
@@ -69,12 +72,12 @@
             this.BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnApply.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnApply.Location = new System.Drawing.Point(382, 537);
+            this.BtnApply.Location = new System.Drawing.Point(606, 705);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(200, 51);
             this.BtnApply.TabIndex = 2;
             this.BtnApply.TabStop = false;
-            this.BtnApply.Text = "APPLY";
+            this.BtnApply.Text = "SAVE";
             this.BtnApply.UseMnemonic = false;
             this.BtnApply.UseVisualStyleBackColor = false;
             this.BtnApply.Click += new System.EventHandler(this.BtnApply_Click);
@@ -91,7 +94,7 @@
             this.BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDefault.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnDefault.Location = new System.Drawing.Point(12, 537);
+            this.BtnDefault.Location = new System.Drawing.Point(12, 705);
             this.BtnDefault.Name = "BtnDefault";
             this.BtnDefault.Size = new System.Drawing.Size(200, 51);
             this.BtnDefault.TabIndex = 3;
@@ -107,7 +110,7 @@
             // LblTheme
             // 
             this.LblTheme.AutoSize = true;
-            this.LblTheme.Location = new System.Drawing.Point(243, 134);
+            this.LblTheme.Location = new System.Drawing.Point(74, 84);
             this.LblTheme.Name = "LblTheme";
             this.LblTheme.Size = new System.Drawing.Size(43, 15);
             this.LblTheme.TabIndex = 6;
@@ -122,7 +125,7 @@
             this.ChkTheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkTheme.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkTheme.Location = new System.Drawing.Point(203, 130);
+            this.ChkTheme.Location = new System.Drawing.Point(34, 80);
             this.ChkTheme.Margin = new System.Windows.Forms.Padding(0);
             this.ChkTheme.Name = "ChkTheme";
             this.ChkTheme.Size = new System.Drawing.Size(29, 29);
@@ -139,7 +142,7 @@
             // LblEAX
             // 
             this.LblEAX.AutoSize = true;
-            this.LblEAX.Location = new System.Drawing.Point(243, 175);
+            this.LblEAX.Location = new System.Drawing.Point(74, 125);
             this.LblEAX.Name = "LblEAX";
             this.LblEAX.Size = new System.Drawing.Size(43, 15);
             this.LblEAX.TabIndex = 8;
@@ -154,7 +157,7 @@
             this.ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkEAX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkEAX.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkEAX.Location = new System.Drawing.Point(203, 171);
+            this.ChkEAX.Location = new System.Drawing.Point(34, 121);
             this.ChkEAX.Margin = new System.Windows.Forms.Padding(0);
             this.ChkEAX.Name = "ChkEAX";
             this.ChkEAX.Size = new System.Drawing.Size(29, 29);
@@ -168,13 +171,33 @@
             this.ChkEAX.MouseEnter += new System.EventHandler(this.ChkEAX_MouseEnter);
             this.ChkEAX.MouseLeave += new System.EventHandler(this.ChkEAX_MouseLeave);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(600, 400);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
+            // LblLauncherSettings
+            // 
+            this.LblLauncherSettings.AutoSize = true;
+            this.LblLauncherSettings.Location = new System.Drawing.Point(34, 23);
+            this.LblLauncherSettings.Name = "LblLauncherSettings";
+            this.LblLauncherSettings.Size = new System.Drawing.Size(43, 15);
+            this.LblLauncherSettings.TabIndex = 10;
+            this.LblLauncherSettings.Text = "Theme";
+            // 
             // OptionsBFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
+            this.Controls.Add(this.LblLauncherSettings);
             this.Controls.Add(this.LblEAX);
             this.Controls.Add(this.ChkEAX);
             this.Controls.Add(this.LblTheme);
@@ -182,6 +205,7 @@
             this.Controls.Add(this.BtnDefault);
             this.Controls.Add(this.BtnApply);
             this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OptionsBFME1";
@@ -189,6 +213,7 @@
             this.Text = "OptionsBFME1";
             this.TopMost = true;
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OptionsBFME1_MouseDown);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,5 +228,7 @@
         private System.Windows.Forms.Button ChkTheme;
         private System.Windows.Forms.Label LblEAX;
         private System.Windows.Forms.Button ChkEAX;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label LblLauncherSettings;
     }
 }

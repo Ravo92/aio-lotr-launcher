@@ -12,6 +12,7 @@ namespace PatchLauncher
     public partial class OptionsBFME1 : Form
     {
         bool FlagEAX = Properties.Settings.Default.EAXSupport;
+        bool FlagThemeMusic = Properties.Settings.Default.PlayBackgroundMusic;
 
         SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
         public OptionsBFME1()
@@ -56,23 +57,24 @@ namespace PatchLauncher
             LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
             LblEAX.BackColor = Color.Transparent;
 
+            LblLauncherSettings.Text = "Launcher-specific Settings";
+            LblLauncherSettings.Font = new Font("SachaWynterTight", 16, FontStyle.Regular);
+            LblLauncherSettings.ForeColor = Color.FromArgb(192, 145, 69);
+            LblLauncherSettings.BackColor = Color.Transparent;
+
             //Checkbox-Styles
             ChkTheme.FlatAppearance.BorderSize = 0;
             ChkTheme.FlatStyle = FlatStyle.Flat;
             ChkTheme.BackColor = Color.Transparent;
             ChkTheme.Font = new Font("Albertus MT", 16, FontStyle.Regular);
             ChkTheme.ForeColor = Color.FromArgb(192, 145, 69);
-            if (Properties.Settings.Default.PlayBackgroundMusic)
+            if (FlagThemeMusic)
             {
                 ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-                SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                _theme.Play();
             }
             else
             {
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
-                _theme.Stop();
-                _theme.Dispose();
             }
 
             ChkEAX.FlatAppearance.BorderSize = 0;
@@ -150,7 +152,7 @@ namespace PatchLauncher
 
         private void ChkTheme_MouseEnter(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
+            if (FlagThemeMusic)
                 ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
             else
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
@@ -158,7 +160,7 @@ namespace PatchLauncher
 
         private void ChkTheme_MouseLeave(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
+            if (FlagThemeMusic)
                 ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
             else
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
@@ -166,33 +168,41 @@ namespace PatchLauncher
 
         private void ChkTheme_MouseDown(object sender, MouseEventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
+            if (FlagThemeMusic)
                 ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
             else
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
         }
         private void ChkTheme_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
+            if (FlagThemeMusic)
             {
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
-                Properties.Settings.Default.PlayBackgroundMusic = false;
-                _theme.Stop();
-                _theme.Dispose();
+                FlagThemeMusic = false;
             }
             else
             {
                 ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
-                Properties.Settings.Default.PlayBackgroundMusic = true;
-                SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                _theme.Play();
+                FlagThemeMusic = true;
             }
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.PlayBackgroundMusic = FlagThemeMusic;
             Properties.Settings.Default.EAXSupport = FlagEAX;
             Properties.Settings.Default.Save();
+
+            if (FlagThemeMusic)
+            {
+                SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                _theme.Play();
+            }
+            else
+            {
+                _theme.Stop();
+                _theme.Dispose();
+            }
 
             if (!File.Exists(ConstStrings.GameInstallPath() + "dsound.dll") && FlagEAX == true)
             {
@@ -219,6 +229,23 @@ namespace PatchLauncher
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            if (Properties.Settings.Default.PlayBackgroundMusic)
+            {
+                ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
+            }
+            else
+            {
+                ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
+            }
+
+            if (Properties.Settings.Default.EAXSupport)
+            {
+                ChkEAX.Image = Image.FromFile("Images\\chkSelected.png");
+            }
+            else
+            {
+                ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
+            }
             Close();
         }
 
@@ -226,7 +253,10 @@ namespace PatchLauncher
         {
             Properties.Settings.Default.PlayBackgroundMusic = true;
             Properties.Settings.Default.EAXSupport = false;
+            FlagThemeMusic = true;
             FlagEAX = false;
+            ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
         }
 
         private void OptionsBFME1_MouseDown(object sender, MouseEventArgs e)

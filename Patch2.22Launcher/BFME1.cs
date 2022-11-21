@@ -50,6 +50,13 @@ namespace PatchLauncher
             BtnOptions.Image = Image.FromFile("Images\\btnNeutral.png");
             BtnOptions.Font = new Font("Albertus MT", 16, FontStyle.Regular);
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
+
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.BackColor = Color.Transparent;
+            button1.Image = Image.FromFile("Images\\btnClickgr.png");
+            button1.Font = new Font("Albertus MT", 16, FontStyle.Regular);
+            button1.ForeColor = Color.FromArgb(170, 192, 99);
             #endregion
 
             #region Tooltips
@@ -378,5 +385,12 @@ namespace PatchLauncher
             e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), new Font("Albertus MT", 16, FontStyle.Regular));
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Image = Image.FromFile("Images\\btnClickgrgr.png");
+            button1.ForeColor = Color.FromArgb(170, 192, 99);
+            Task.Run(() => PlaySoundClick());
+        }
     }
 }
