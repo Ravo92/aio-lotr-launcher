@@ -12,6 +12,7 @@ namespace PatchLauncher
     public partial class OptionsBFME1 : Form
     {
         bool FlagEAX = Properties.Settings.Default.EAXSupport;
+        bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + "dsound.dll");
         bool FlagThemeMusic = Properties.Settings.Default.PlayBackgroundMusic;
 
         SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
@@ -68,28 +69,28 @@ namespace PatchLauncher
             ChkTheme.BackColor = Color.Transparent;
             ChkTheme.Font = new Font("Albertus MT", 16, FontStyle.Regular);
             ChkTheme.ForeColor = Color.FromArgb(192, 145, 69);
+
             if (FlagThemeMusic)
-            {
                 ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-            }
             else
-            {
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
-            }
 
             ChkEAX.FlatAppearance.BorderSize = 0;
             ChkEAX.FlatStyle = FlatStyle.Flat;
             ChkEAX.BackColor = Color.Transparent;
             ChkEAX.Font = new Font("Albertus MT", 16, FontStyle.Regular);
             ChkEAX.ForeColor = Color.FromArgb(192, 145, 69);
-            if (Properties.Settings.Default.EAXSupport && (File.Exists(ConstStrings.GameInstallPath() + "dsound.dll")))
-            {
+
+            if (Properties.Settings.Default.EAXSupport && FlagEAXFileExists && FlagEAX)
                 ChkEAX.Image = Image.FromFile("Images\\chkSelected.png");
-            }
             else
-            {
                 ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
-            }
+
+
+            if (FlagEAXFileExists)
+                FlagEAX = true;
+            else
+                FlagEAX = false;
             #endregion
         }
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
@@ -204,7 +205,7 @@ namespace PatchLauncher
                 _theme.Dispose();
             }
 
-            if (!File.Exists(ConstStrings.GameInstallPath() + "dsound.dll") && FlagEAX == true)
+            if (!FlagEAXFileExists && FlagEAX == true)
             {
                 List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
 
@@ -214,7 +215,7 @@ namespace PatchLauncher
                 }
             }
 
-            if (File.Exists(ConstStrings.GameInstallPath() + "dsound.dll") && FlagEAX == false)
+            if (FlagEAXFileExists && FlagEAX == false)
             {
                 List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
 
@@ -229,30 +230,22 @@ namespace PatchLauncher
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic)
-            {
+            if (Properties.Settings.Default.PlayBackgroundMusic && FlagThemeMusic)
                 ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-            }
             else
-            {
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
-            }
 
-            if (Properties.Settings.Default.EAXSupport)
-            {
+
+            if (Properties.Settings.Default.EAXSupport && FlagThemeMusic)
                 ChkEAX.Image = Image.FromFile("Images\\chkSelected.png");
-            }
             else
-            {
                 ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
-            }
+
             Close();
         }
 
         private void BtnDefault_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.PlayBackgroundMusic = true;
-            Properties.Settings.Default.EAXSupport = false;
             FlagThemeMusic = true;
             FlagEAX = false;
             ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
