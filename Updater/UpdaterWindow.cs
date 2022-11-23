@@ -1,9 +1,5 @@
 ﻿using AutoUpdaterDotNET;
-using System;
-using System.Drawing;
 using System.Net;
-using System.Threading;
-using System.Windows.Forms;
 
 namespace PatchLauncher
 {
@@ -12,7 +8,16 @@ namespace PatchLauncher
         public UpdaterWindow()
         {
             InitializeComponent();
+        }
+
+        private void TmrCowndown_Tick(object sender, EventArgs e)
+        {
+            PBarLoading.Increment(10);
+            if (PBarLoading.Value == 100) TmrCowndown.Stop();
             CheckForUpdates();
+
+            if (!TmrCowndown.Enabled)
+                Close();
         }
 
         public static void CheckForUpdates()

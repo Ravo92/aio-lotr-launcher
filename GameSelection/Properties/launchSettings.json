@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GameSelection": {
+      "commandName": "Project",
+      "commandLineArgs": "-official"
+    }
+  }
+}

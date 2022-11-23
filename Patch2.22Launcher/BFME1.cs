@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
-using System.Collections.Generic;
 using System.Media;
 
 namespace PatchLauncher
@@ -29,34 +28,36 @@ namespace PatchLauncher
             BackgroundImage = Image.FromFile(RandomLauncherPicture.RandomizePicture());
             BackgroundImageLayout = ImageLayout.Stretch;
 
+            //Uri _uri = new Uri(Application.StartupPath + "Html/index.html");
+            //Wv2Background.Source = new Uri(_uri.ToString());
+            Wv2Patchnotes.Hide();
+
+            TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
+            TmrPatchNotes.Interval = 4000;
+            TmrPatchNotes.Start();
+
             // Button-Styles
             BtnClose.FlatAppearance.BorderSize = 0;
             BtnClose.FlatStyle = FlatStyle.Flat;
             BtnClose.BackColor = Color.Transparent;
-            BtnClose.Image = Image.FromFile("Images\\btnNeutral.png");
-            BtnClose.Font = new Font("Albertus MT", 16, FontStyle.Regular);
+            BtnClose.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnClose.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnLaunch.FlatAppearance.BorderSize = 0;
             BtnLaunch.FlatStyle = FlatStyle.Flat;
             BtnLaunch.BackColor = Color.Transparent;
-            BtnLaunch.Image = Image.FromFile("Images\\btnNeutral.png");
-            BtnLaunch.Font = new Font("Albertus MT", 16, FontStyle.Regular);
+            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnLaunch.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnOptions.FlatAppearance.BorderSize = 0;
             BtnOptions.FlatStyle = FlatStyle.Flat;
             BtnOptions.BackColor = Color.Transparent;
-            BtnOptions.Image = Image.FromFile("Images\\btnNeutral.png");
-            BtnOptions.Font = new Font("Albertus MT", 16, FontStyle.Regular);
+            BtnOptions.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnOptions.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
 
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.BackColor = Color.Transparent;
-            button1.Image = Image.FromFile("Images\\btnClickgr.png");
-            button1.Font = new Font("Albertus MT", 16, FontStyle.Regular);
-            button1.ForeColor = Color.FromArgb(170, 192, 99);
             #endregion
 
             #region Tooltips
@@ -166,20 +167,20 @@ namespace PatchLauncher
 
         private void BtnClose_MouseLeave(object sender, EventArgs e)
         {
-            BtnClose.Image = Image.FromFile("Images\\btnNeutral.png");
+            BtnClose.BackgroundImage = ConstStrings.ButtonImageNeutral();
             BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnClose_MouseEnter(object sender, EventArgs e)
         {
-            BtnClose.Image = Image.FromFile("Images\\btnHover.png");
+            BtnClose.BackgroundImage = ConstStrings.ButtonImageHover();
             BtnClose.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
 
         private void BtnClose_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnClose.Image = Image.FromFile("Images\\btnClick.png");
+            BtnClose.BackgroundImage = ConstStrings.ButtonImageClick();
             BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
@@ -188,27 +189,38 @@ namespace PatchLauncher
         {
             Thread.Sleep(1000);
 
-            //TO-DO: Start Game Routine
+            Process _process = new();
+            _process.StartInfo.FileName = ConstStrings.GameInstallPath() + "lotrbfme.exe";
+
+            // Start game windowed
+            if (Properties.Settings.Default.StartGameWindowed)
+            {
+                _process.StartInfo.Arguments = "-win";
+            }
+
+            _process.StartInfo.WorkingDirectory = Application.StartupPath;
+            _process.Start();
+            Dispose();
 
             Application.Exit();
         }
 
         private void BtnLaunch_MouseLeave(object sender, EventArgs e)
         {
-            BtnLaunch.Image = Image.FromFile("Images\\btnNeutral.png");
+            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageNeutral();
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnLaunch_MouseEnter(object sender, EventArgs e)
         {
-            BtnLaunch.Image = Image.FromFile("Images\\btnHover.png");
+            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageHover();
             BtnLaunch.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
 
         private void BtnLaunch_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnLaunch.Image = Image.FromFile("Images\\btnClick.png");
+            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageClick();
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
@@ -217,20 +229,20 @@ namespace PatchLauncher
             OptionsBFME1 _options = new();
             _options.ShowDialog();
         }
+        private void BtnOptions_MouseLeave(object sender, EventArgs e)
+        {
+            BtnOptions.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
+        }
         private void BtnOptions_MouseEnter(object sender, EventArgs e)
         {
-            BtnOptions.Image = Image.FromFile("Images\\btnHover.png");
+            BtnOptions.BackgroundImage = ConstStrings.ButtonImageHover();
             BtnOptions.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
-        private void BtnOptions_MouseLeave(object sender, EventArgs e)
-        {
-            BtnOptions.Image = Image.FromFile("Images\\btnNeutral.png");
-            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
-        }
         private void BtnOptions_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnOptions.Image = Image.FromFile("Images\\btnClick.png");
+            BtnOptions.BackgroundImage = ConstStrings.ButtonImageClick();
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
@@ -257,61 +269,61 @@ namespace PatchLauncher
                 iconNumber = 0;
 
             switch (iconNumber) {
-            case 0:
-                {
-                    Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_default.wav";
-                    Properties.Settings.Default.BackgroundMusicIcon = 0;
-                    Properties.Settings.Default.Save();
-                    PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
-                    break;
-                }
-            case 1:
-                {
-                    Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_gondor.wav";
-                    Properties.Settings.Default.BackgroundMusicIcon = 1;
-                    Properties.Settings.Default.Save();
-                    PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoGondor.png");
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
-                    break;
-                }
-            case 2:
-                {
-                    Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_rohan.wav";
-                    Properties.Settings.Default.BackgroundMusicIcon = 2;
-                    Properties.Settings.Default.Save();
-                    PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoRohan.png");
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
-                    break;
-                }
-            case 3:
-                {
-                    Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_isengard.wav";
-                    Properties.Settings.Default.BackgroundMusicIcon = 3;
-                    Properties.Settings.Default.Save();
-                    PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoIsengard.png");
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
-                    break;
-                }
-            case 4:
-                {
-                    Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_mordor.wav";
-                    Properties.Settings.Default.BackgroundMusicIcon = 4;
-                    Properties.Settings.Default.Save();
-                    PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoMordor.png");
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
-                    break;
-                }
+                case 0:
+                    {
+                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_default.wav";
+                        Properties.Settings.Default.BackgroundMusicIcon = 0;
+                        Properties.Settings.Default.Save();
+                        PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
+                        this._theme.Stop();
+                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                        _theme.Play();
+                        break;
+                    }
+                case 1:
+                    {
+                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_gondor.wav";
+                        Properties.Settings.Default.BackgroundMusicIcon = 1;
+                        Properties.Settings.Default.Save();
+                        PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoGondor.png");
+                        this._theme.Stop();
+                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                        _theme.Play();
+                        break;
+                    }
+                case 2:
+                    {
+                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_rohan.wav";
+                        Properties.Settings.Default.BackgroundMusicIcon = 2;
+                        Properties.Settings.Default.Save();
+                        PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoRohan.png");
+                        this._theme.Stop();
+                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                        _theme.Play();
+                        break;
+                    }
+                case 3:
+                    {
+                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_isengard.wav";
+                        Properties.Settings.Default.BackgroundMusicIcon = 3;
+                        Properties.Settings.Default.Save();
+                        PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoIsengard.png");
+                        this._theme.Stop();
+                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                        _theme.Play();
+                        break;
+                    }
+                case 4:
+                    {
+                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_mordor.wav";
+                        Properties.Settings.Default.BackgroundMusicIcon = 4;
+                        Properties.Settings.Default.Save();
+                        PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoMordor.png");
+                        this._theme.Stop();
+                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                        _theme.Play();
+                        break;
+                    }
             }
         }
 
@@ -356,7 +368,7 @@ namespace PatchLauncher
         {
             XAudio2 _xaudio2 = new();
             MasteringVoice _masteringVoice = new(_xaudio2);
-            PLaySoundFile(_xaudio2, "", "Sounds\\btnClick.wav");
+            PLaySoundFile(_xaudio2, "", ConstStrings.ButtonSoundClick());
             _masteringVoice.Dispose();
             _xaudio2.Dispose();
         }
@@ -365,7 +377,7 @@ namespace PatchLauncher
         {
             XAudio2 _xaudio2 = new();
             MasteringVoice _masteringVoice = new(_xaudio2);
-            PLaySoundFile(_xaudio2, "", "Sounds\\btnHover.wav");
+            PLaySoundFile(_xaudio2, "", ConstStrings.ButtonSoundHover());
             _masteringVoice.Dispose();
             _xaudio2.Dispose();
         }
@@ -374,7 +386,7 @@ namespace PatchLauncher
         #region ToolTip System
         public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
         {
-            Font tooltipFont = new("Albertus MT", 16, FontStyle.Regular);
+            Font tooltipFont = ConstStrings.UseFont("Albertus Nova", 14);
             e.DrawBackground();
             e.DrawBorder();
             e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
@@ -382,15 +394,14 @@ namespace PatchLauncher
 
         public void TooltipPopup(object sender, PopupEventArgs e)
         {
-            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), new Font("Albertus MT", 16, FontStyle.Regular));
+            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), ConstStrings.UseFont("Albertus Nova", 14));
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        private void TmrPatchNotes_Tick(object sender, EventArgs e)
         {
-            button1.Image = Image.FromFile("Images\\btnClickgrgr.png");
-            button1.ForeColor = Color.FromArgb(170, 192, 99);
-            Task.Run(() => PlaySoundClick());
+            TmrPatchNotes.Stop();
+            Wv2Patchnotes.Show();
         }
     }
 }

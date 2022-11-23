@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.Security.Principal;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace PatchLauncher
@@ -14,6 +13,7 @@ namespace PatchLauncher
         [STAThread]
         static void Main()
         {
+            GC.TryStartNoGCRegion(134217728);
             ApplicationConfiguration.Initialize();
             WindowsPrincipal pricipal = new(WindowsIdentity.GetCurrent());
             bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
@@ -29,20 +29,16 @@ namespace PatchLauncher
                 };
                 try
                 {
-                    Process p = Process.Start(startInfo);
-                    UpdaterWindow _updater = new();
-                    _updater.Show();
-                    _updater.TopMost = true;
-                    //Thread.Sleep(2000);
-                    _updater.Hide();
+                    Process ?p = Process.Start(startInfo);
 
-                    Application.Run(new GameSelect());
+                    Application.Run(new BFME1());
                 }
                 catch (System.ComponentModel.Win32Exception)
                 {
                     return;
                 }
             }
+            GC.EndNoGCRegion();
         }
     }
 }

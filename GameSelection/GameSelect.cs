@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Diagnostics;
 
 namespace PatchLauncher
 {
@@ -15,15 +7,12 @@ namespace PatchLauncher
         public GameSelect()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
-            Focus();
         }
 
         private void BtnBFME1_Click(object sender, EventArgs e)
         {
-            Hide();
-            BFME1 _bFME1 = new();
-            _bFME1.Show();
+            Process.Start("PatchLauncherBFME1");
+            Dispose();
         }
 
         private void BtnBFME2_Click(object sender, EventArgs e)

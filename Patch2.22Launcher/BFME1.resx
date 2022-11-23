@@ -58,10 +58,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PibHeader.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PibHeader.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAwcAAABpCAYAAABvTl/4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAA/7JJREFUeF7s/Qe8Xdd5HngL5aJedFzUi9470UgQBAg2kSJFSmwSmzrVu+RRc5Ft
+        DwAACw8BkvkDpQAA/7JJREFUeF7s/Qe8Xdd5HngL5aJedFzUi9470UgQBAg2kSJFSmwSmzrVu+RRc5Ft
         uTu2LFuWJdkjK3JLNI4cT8aKk5lMi2fyTcuXmfkyM5lkYjsuccZFklUoiiSwvve/znkvFjb2BUBSkiX7
         3N/v+Z1zz9ln71Wf53n3Kvs58bcjsDdwOHBt4IbAbYEXBF4UeEngVYE3BN4eeFfguwIfCPxw4G8Ffirw
         4cDHAj8f+ETgbwd+OfCrgb8T+E8Cvx74e4HfCPz9If7TIf7BEP/ZJZDHOP43h3AO53Ne53edTwdc07V/
@@ -1319,6 +1319,12 @@
   </data>
   <metadata name="ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="TmrPatchNotes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>109, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>52</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
