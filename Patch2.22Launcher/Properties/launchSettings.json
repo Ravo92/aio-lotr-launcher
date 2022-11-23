@@ -2,6 +2,7 @@
   "profiles": {
     "Patch2.22Launcher": {
       "commandName": "Project",
+      "commandLineArgs": "-official",
       "workingDirectory": "C:\\GIT\\Patch-2.22-Launcher\\Patch2.22Launcher",
       "remoteDebugEnabled": false
     }

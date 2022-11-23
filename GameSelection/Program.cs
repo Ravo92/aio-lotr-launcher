@@ -15,8 +15,6 @@ namespace GameSelection
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-
-
             if (args[0].ToString() != "-official")
             {
                 Application.Exit();

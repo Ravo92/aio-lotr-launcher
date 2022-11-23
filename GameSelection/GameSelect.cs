@@ -11,7 +11,11 @@ namespace PatchLauncher
 
         private void BtnBFME1_Click(object sender, EventArgs e)
         {
-            Process.Start("PatchLauncherBFME1");
+            Process _process = new();
+            _process.StartInfo.FileName = "PatchLauncherBFME1.exe";
+            _process.StartInfo.Arguments = "-official";
+            _process.StartInfo.WorkingDirectory = Application.StartupPath;
+            _process.Start();
             Dispose();
         }
 
