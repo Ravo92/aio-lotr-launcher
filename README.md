@@ -1,4 +1,4 @@
-![Patch 2.22 Launcher]
+[Patch 2.22 Launcher]
 ============================================================
 
 [![Build Status](https://github.com/Ravo92/Patch-2.22-Launcher/workflows/CI/badge.svg)](https://github.com/Ravo92/Patch-2.22-Launcher/actions)
