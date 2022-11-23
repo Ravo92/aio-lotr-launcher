@@ -18,9 +18,8 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: PatchLauncher.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: Patch2.22Launcher                      # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Wap_Project_Path: Build
+      Solution_Name: PatchLauncher.sln                                   # Replace with your solution name, i.e. MyWpfApp.sln.
+      Test_Project_Path: Patch2.22Launcher\PatchLauncherBFME1.csproj     # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
 
     steps:
     - name: Checkout
