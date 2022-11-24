@@ -1,31 +1,71 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Windows;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PatchLauncher.Classes
 {
     internal class RegistryFunctions
     {
+        private const string notInstalled = "GameNotInstalled";
+        private const string wrongParameter = "WrongParameter";
+        private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
+
         public static string ReadRegKey(string kindOf)
         {
-            RegistryKey localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
-
-            switch (kindOf)
+            if (kindOf != null)
             {
-                case "lang":
-                    string lang = (string)localKey.GetValue("Language");
-                    return lang;
+                RegistryKey? localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
+                if (IsNotNull(localKey))
+                {
+                    switch (kindOf)
+                    {
+                        case "lang":
+                            string? lang = localKey.GetValue("Language")!.ToString();
 
-                case "appData":
-                    string appData = (string)localKey.GetValue("UserDataLeafName");
-                    return appData;
+                            if (IsNotNull(lang))
+                            {
+                                return lang;
+                            }
+                            else
+                            {
+                                return notInstalled;
+                            }
 
-                case "path":
-                    string path = (string)localKey.GetValue("InstallPath");
-                    return path;
+                        case "appData":
+                            string? appData = localKey.GetValue("UserDataLeafName")!.ToString();
 
-                default:
-                    return null;
+                            if (IsNotNull(appData))
+                            {
+                                return appData;
+                            }
+                            else
+                            {
+                                return notInstalled;
+                            }
+
+                        case "path":
+                            string? path = localKey.GetValue("InstallPath")!.ToString();
+
+                            if (IsNotNull(path))
+                            {
+                                return path;
+                            }
+                            else
+                            {
+                                return notInstalled;
+                            }
+
+                        default:
+                            return wrongParameter;
+                    }
+                }
+                else
+                {
+                    return notInstalled;
+                }
+            }
+            else
+            {
+                return wrongParameter;
             }
         }
     }

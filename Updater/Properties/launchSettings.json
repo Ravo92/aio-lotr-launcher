@@ -1,8 +1,7 @@
 {
   "profiles": {
-    "GameSelection": {
+    "Updater": {
       "commandName": "Project",
-      "commandLineArgs": "-official",
       "workingDirectory": "..\\build\\Debug\\net6.0-windows"
     }
   }
