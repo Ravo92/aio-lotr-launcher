@@ -43,6 +43,11 @@ namespace PatchLauncher
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.BtnOptions = new System.Windows.Forms.Button();
             this.TmrPatchNotes = new System.Windows.Forms.Timer(this.components);
+            this.PBarActualFile = new System.Windows.Forms.ProgressBar();
+            this.LblDownloadSpeed = new System.Windows.Forms.Label();
+            this.LblBytes = new System.Windows.Forms.Label();
+            this.BtnInstall = new System.Windows.Forms.Button();
+            this.LblFileName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
@@ -205,13 +210,76 @@ namespace PatchLauncher
             // 
             this.TmrPatchNotes.Enabled = true;
             // 
+            // PBarActualFile
+            // 
+            this.PBarActualFile.Location = new System.Drawing.Point(228, 825);
+            this.PBarActualFile.Name = "PBarActualFile";
+            this.PBarActualFile.Size = new System.Drawing.Size(551, 25);
+            this.PBarActualFile.TabIndex = 12;
+            this.PBarActualFile.Visible = false;
+            // 
+            // LblDownloadSpeed
+            // 
+            this.LblDownloadSpeed.AutoSize = true;
+            this.LblDownloadSpeed.Location = new System.Drawing.Point(524, 793);
+            this.LblDownloadSpeed.Name = "LblDownloadSpeed";
+            this.LblDownloadSpeed.Size = new System.Drawing.Size(92, 15);
+            this.LblDownloadSpeed.TabIndex = 13;
+            this.LblDownloadSpeed.Text = "Downloadspeed";
+            // 
+            // LblBytes
+            // 
+            this.LblBytes.AutoSize = true;
+            this.LblBytes.Location = new System.Drawing.Point(785, 820);
+            this.LblBytes.Name = "LblBytes";
+            this.LblBytes.Size = new System.Drawing.Size(71, 15);
+            this.LblBytes.TabIndex = 14;
+            this.LblBytes.Text = "Percentages";
+            // 
+            // BtnInstall
+            // 
+            this.BtnInstall.BackColor = System.Drawing.Color.Black;
+            this.BtnInstall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnInstall.FlatAppearance.BorderSize = 0;
+            this.BtnInstall.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnInstall.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInstall.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnInstall.Location = new System.Drawing.Point(12, 794);
+            this.BtnInstall.Name = "BtnInstall";
+            this.BtnInstall.Size = new System.Drawing.Size(210, 61);
+            this.BtnInstall.TabIndex = 16;
+            this.BtnInstall.TabStop = false;
+            this.BtnInstall.Text = "INSTALL GAME";
+            this.BtnInstall.UseMnemonic = false;
+            this.BtnInstall.UseVisualStyleBackColor = false;
+            this.BtnInstall.Click += new System.EventHandler(this.BtnInstall_Click);
+            this.BtnInstall.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnInstall_MouseDown);
+            this.BtnInstall.MouseEnter += new System.EventHandler(this.BtnInstall_MouseEnter);
+            this.BtnInstall.MouseLeave += new System.EventHandler(this.BtnInstall_MouseLeave);
+            // 
+            // LblFileName
+            // 
+            this.LblFileName.AutoSize = true;
+            this.LblFileName.Location = new System.Drawing.Point(228, 793);
+            this.LblFileName.Name = "LblFileName";
+            this.LblFileName.Size = new System.Drawing.Size(55, 15);
+            this.LblFileName.TabIndex = 17;
+            this.LblFileName.Text = "Filename";
+            // 
             // BFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1536, 864);
+            this.Controls.Add(this.LblFileName);
+            this.Controls.Add(this.BtnInstall);
+            this.Controls.Add(this.LblBytes);
+            this.Controls.Add(this.LblDownloadSpeed);
+            this.Controls.Add(this.PBarActualFile);
             this.Controls.Add(this.Wv2Patchnotes);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnOptions);
@@ -221,6 +289,7 @@ namespace PatchLauncher
             this.Controls.Add(this.PiBDiscord);
             this.Controls.Add(this.PiBYoutube);
             this.Controls.Add(this.PibHeader);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -239,6 +308,7 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBModDB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBThemeSwitcher)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -255,5 +325,10 @@ namespace PatchLauncher
         private ToolTip ToolTip;
         private Button BtnOptions;
         private Timer TmrPatchNotes;
+        private ProgressBar PBarActualFile;
+        private Label LblDownloadSpeed;
+        private Label LblBytes;
+        private Button BtnInstall;
+        private Label LblFileName;
     }
 }

@@ -19,7 +19,6 @@ namespace PatchLauncher
             }
             else
             {
-                GC.TryStartNoGCRegion(134217728);
                 ApplicationConfiguration.Initialize();
                 WindowsPrincipal pricipal = new(WindowsIdentity.GetCurrent());
                 bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
@@ -37,6 +36,8 @@ namespace PatchLauncher
                     {
                         Process? p = Process.Start(startInfo);
 
+                        Application.EnableVisualStyles();
+                        Application.SetCompatibleTextRenderingDefault(false);
                         Application.Run(new BFME1());
                     }
                     catch (System.ComponentModel.Win32Exception)
@@ -44,7 +45,6 @@ namespace PatchLauncher
                         return;
                     }
                 }
-                GC.EndNoGCRegion();
             }
         }
     }

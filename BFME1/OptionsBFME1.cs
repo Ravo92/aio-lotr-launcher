@@ -17,12 +17,14 @@ namespace PatchLauncher
         bool FlagWindowed = Properties.Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Properties.Settings.Default.UseBrutalAI;
 
+        readonly ConstStrings _font = new();
+
         SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
         public OptionsBFME1()
         {
             InitializeComponent();
 
-            #region Button Styles
+            #region Styles
             //Main Form style behaviour
 
             BackgroundImage = Image.FromFile(@"Images\bgMap.png");
@@ -32,66 +34,66 @@ namespace PatchLauncher
             BtnDefault.FlatStyle = FlatStyle.Flat;
             BtnDefault.BackColor = Color.Transparent;
             BtnDefault.Image = Image.FromFile("Images\\btnNeutral.png");
-            BtnDefault.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnDefault.Font = _font.UseFont("Albertus Nova", 14);
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnApply.FlatAppearance.BorderSize = 0;
             BtnApply.FlatStyle = FlatStyle.Flat;
             BtnApply.BackColor = Color.Transparent;
             BtnApply.Image = Image.FromFile("Images\\btnNeutral.png");
-            BtnApply.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnApply.Font = _font.UseFont("Albertus Nova", 14);
             BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnCancel.FlatAppearance.BorderSize = 0;
             BtnCancel.FlatStyle = FlatStyle.Flat;
             BtnCancel.BackColor = Color.Transparent;
             BtnCancel.Image = Image.FromFile("Images\\btnNeutral.png");
-            BtnCancel.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnCancel.Font = _font.UseFont("Albertus Nova", 14);
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
             LblTheme.Text = "Play theme music in launcher at start";
-            LblTheme.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblTheme.Font = _font.UseFont("Albertus Nova", 16);
             LblTheme.ForeColor = Color.FromArgb(192, 145, 69);
             LblTheme.BackColor = Color.Transparent;
 
             LblEAX.Text = "Activate support for the EAX-Sound-System";
-            LblEAX.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblEAX.Font = _font.UseFont("Albertus Nova", 16);
             LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
             LblEAX.BackColor = Color.Transparent;
 
             LblLauncherSettings.Text = "Launcher-specific Settings";
-            LblLauncherSettings.Font = ConstStrings.UseFont("SachaWynterTight", 16);
+            LblLauncherSettings.Font = _font.UseFont("SachaWynterTight", 16);
             LblLauncherSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblLauncherSettings.BackColor = Color.Transparent;
 
             LblGameSettings.Text = "Game-specific Settings";
-            LblGameSettings.Font = ConstStrings.UseFont("SachaWynterTight", 16);
+            LblGameSettings.Font = _font.UseFont("SachaWynterTight", 16);
             LblGameSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblGameSettings.BackColor = Color.Transparent;
 
             LblOptions.Text = "Settings";
-            LblOptions.Font = ConstStrings.UseFont("SachaWynterTight", 20);
+            LblOptions.Font = _font.UseFont("SachaWynterTight", 20);
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
             LblVersion.Text = "Patch 2.22v.3.0";
-            LblVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
+            LblVersion.Font = _font.UseFont("Albertus Nova", 11);
             LblVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblVersion.BackColor = Color.Transparent;
 
             LblWindowed.Text = "Launch the game in windowed mode";
-            LblWindowed.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblWindowed.Font = _font.UseFont("Albertus Nova", 16);
             LblWindowed.ForeColor = Color.FromArgb(192, 145, 69);
             LblWindowed.BackColor = Color.Transparent;
 
             LblBrutalAI.Text = "Use the experimental brutal AI";
-            LblBrutalAI.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblBrutalAI.Font = _font.UseFont("Albertus Nova", 16);
             LblBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
             LblBrutalAI.BackColor = Color.Transparent;
 
             LblWarningAI.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
-            LblWarningAI.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblWarningAI.Font = _font.UseFont("Albertus Nova", 16);
             LblWarningAI.ForeColor = Color.Red;
             LblWarningAI.BackColor = Color.Transparent;
 
@@ -101,7 +103,7 @@ namespace PatchLauncher
                 LblWarningAI.Hide();
 
             LblAniTextureFiltering.Text = "Anisotropic  Texture  Filtering";
-            LblAniTextureFiltering.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblAniTextureFiltering.Font = _font.UseFont("Albertus Nova", 16);
             LblAniTextureFiltering.ForeColor = Color.FromArgb(192, 145, 69);
             LblAniTextureFiltering.BackColor = Color.Transparent;
 

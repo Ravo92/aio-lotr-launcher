@@ -1,5 +1,9 @@
 ﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Forms;
 
 namespace PatchLauncher.Classes
 {
@@ -7,9 +11,10 @@ namespace PatchLauncher.Classes
     {
         private const string notInstalled = "GameNotInstalled";
         private const string wrongParameter = "WrongParameter";
+
         private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
 
-        public static string ReadRegKey(string kindOf)
+        public static string? ReadRegKey(string kindOf)
         {
             if (kindOf != null)
             {
@@ -27,7 +32,7 @@ namespace PatchLauncher.Classes
                             }
                             else
                             {
-                                return notInstalled;
+                                return null;
                             }
 
                         case "appData":
@@ -39,7 +44,7 @@ namespace PatchLauncher.Classes
                             }
                             else
                             {
-                                return notInstalled;
+                                return null;
                             }
 
                         case "path":
@@ -51,7 +56,7 @@ namespace PatchLauncher.Classes
                             }
                             else
                             {
-                                return notInstalled;
+                                return null;
                             }
 
                         default:
@@ -60,7 +65,7 @@ namespace PatchLauncher.Classes
                 }
                 else
                 {
-                    return notInstalled;
+                    return null;
                 }
             }
             else

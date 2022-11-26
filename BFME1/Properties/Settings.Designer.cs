@@ -94,5 +94,17 @@ namespace PatchLauncher.Properties {
                 this["UseBrutalAI"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameInstallPath {
+            get {
+                return ((string)(this["GameInstallPath"]));
+            }
+            set {
+                this["GameInstallPath"] = value;
+            }
+        }
     }
 }

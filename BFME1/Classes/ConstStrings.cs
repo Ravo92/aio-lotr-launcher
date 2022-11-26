@@ -7,6 +7,9 @@ namespace PatchLauncher.Classes
 {
     public class ConstStrings
     {
+        public PrivateFontCollection collection = new();
+        public const string gameFolderName = "The Battle for Middle-earth (tm)";
+
         public static string GameLanguage()
         {
             return RegistryFunctions.ReadRegKey("lang");
@@ -29,9 +32,8 @@ namespace PatchLauncher.Classes
             return "Options.ini";
         }
 
-        public static Font UseFont(string font, int size)
+        public Font UseFont(string font, int size)
         {
-            PrivateFontCollection collection = new();
             collection.AddFontFile(@"Fonts\albertusmt.otf");
             collection.AddFontFile(@"Fonts\AlbertusNova.ttf");
             collection.AddFontFile(@"Fonts\sachwt.ttf");
