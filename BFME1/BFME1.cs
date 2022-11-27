@@ -35,7 +35,7 @@ namespace PatchLauncher
             #region Styles
             //Main Form style behaviour
 
-            BackgroundImage = Image.FromFile(RandomLauncherPicture.RandomizePicture());
+            BackgroundImage = Image.FromFile(RandomLauncherPicture.GetRandomizedPicture());
             BackgroundImageLayout = ImageLayout.Stretch;
 
             Wv2Patchnotes.Hide();

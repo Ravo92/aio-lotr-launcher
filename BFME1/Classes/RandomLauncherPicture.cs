@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 namespace PatchLauncher.Classes
 {
-    public static class RandomLauncherPicture
+    internal class RandomLauncherPicture
     {
-        public static string RandomizePicture()
+        private static readonly List<string> _pictures = new()
         {
-            List<string> _pictures = new()
-            {
                 @"Images\bgEnts.png",
                 @"Images\bgGate.png",
                 @"Images\bgHelms.png",
@@ -16,12 +14,14 @@ namespace PatchLauncher.Classes
                 @"Images\bgLorien.png",
                 @"Images\bgOlifant.png",
                 @"Images\bgThomb.png",
-            };
+        };
 
-            Random rnd = new();
-            int bgPicture = rnd.Next(_pictures.Count);
+        private static readonly Random _rnd = new();
 
-            return _pictures[bgPicture];
+        public static string GetRandomizedPicture()
+        {
+            int imageIndex = _rnd.Next(_pictures.Count);
+            return _pictures[imageIndex];
         }
     }
 }
