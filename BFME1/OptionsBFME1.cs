@@ -12,7 +12,7 @@ namespace PatchLauncher
     public partial class OptionsBFME1 : Form
     {
         bool FlagEAX = Properties.Settings.Default.EAXSupport;
-        bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + "dsound.dll");
+        bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + @"\dsound.dll");
         bool FlagThemeMusic = Properties.Settings.Default.PlayBackgroundMusic;
         bool FlagWindowed = Properties.Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Properties.Settings.Default.UseBrutalAI;

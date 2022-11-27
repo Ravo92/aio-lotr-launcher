@@ -12,6 +12,27 @@ namespace PatchLauncher.Classes
 
         private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
 
+        public static string? ReadStartMenuFolder()
+        {
+            RegistryKey? localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\");
+            if (IsNotNull(localKey))
+            {
+                if (localKey.GetValue("Folder") != null)
+                {
+                    string? startmenu = localKey.GetValue("Folder")!.ToString();
+                    return startmenu;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static string? ReadRegKey(string kindOf)
         {
             if (kindOf != null)
@@ -69,9 +90,9 @@ namespace PatchLauncher.Classes
             }
         }
 
-        public static string RandomString(int length)
+        public static string RandomCDKeyGenerator(int length)
         {
-            Random _random = new Random();
+            Random _random = new();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[_random.Next(s.Length)]).ToArray());
@@ -114,7 +135,7 @@ namespace PatchLauncher.Classes
             keyFolder6.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             RegistryKey keyFolder7 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\ergc");
-            keyFolder7.SetValue("", RandomString(18));
+            keyFolder7.SetValue("", RandomCDKeyGenerator(18));
 
             keyFolder1.Close();
             keyFolder2.Close();

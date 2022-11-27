@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Media;
-using System.Collections.Generic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.ComponentModel;
 using Downloader;
@@ -18,6 +17,7 @@ using SharpCompress.Common;
 using System.Linq;
 using SharpCompress.Archives;
 using System.Diagnostics;
+using IWshRuntimeLibrary;
 
 namespace PatchLauncher
 {
@@ -162,7 +162,7 @@ namespace PatchLauncher
             #region Internal Logic
             //Internal Logic
 
-            if (ConstStrings.GameInstallPath() != null && !File.Exists(ConstStrings.GameInstallPath() + "lotrbfme.exe"))
+            if (ConstStrings.GameInstallPath() != null && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe"))
             {
                 LblBytes.Hide();
                 LblDownloadSpeed.Hide();
@@ -176,7 +176,7 @@ namespace PatchLauncher
                 if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.OptionsIniFileName()))
                     File.Copy("Tools\\" + ConstStrings.OptionsIniFileName(), ConstStrings.GameAppdataFolderPath() + ConstStrings.OptionsIniFileName());
             }
-            else if (Properties.Settings.Default.GameInstallPath == "" || !File.Exists(ConstStrings.GameInstallPath() + "lotrbfme.exe")) 
+            else if (Properties.Settings.Default.GameInstallPath == "" || !File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe")) 
             {
                 BtnInstall.Show();
                 BtnLaunch.Hide();
@@ -239,9 +239,11 @@ namespace PatchLauncher
 
         private void BtnLaunch_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo _processInfo = new();
-            _processInfo.WorkingDirectory = @ConstStrings.GameInstallPath();
-            _processInfo.FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe";
+            ProcessStartInfo _processInfo = new()
+            {
+                WorkingDirectory = @ConstStrings.GameInstallPath(),
+                FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe"
+            };
 
             // Start game windowed
             if (Properties.Settings.Default.StartGameWindowed)
@@ -249,7 +251,7 @@ namespace PatchLauncher
                 _processInfo.Arguments = "-win";
             }
 
-            Process _startGame = Process.Start(_processInfo)!;
+            _ = Process.Start(_processInfo)!;
 
             Thread.Sleep(1000);
 
@@ -301,9 +303,26 @@ namespace PatchLauncher
         private void BtnInstall_Click(object sender, EventArgs e)
         {
             InstallPathDialog _install = new();
-            _install.ShowDialog();
 
-            InstallRoutine(Properties.Settings.Default.GameInstallPath);
+            DialogResult dr = _install.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                PBarActualFile.Show();
+                LblBytes.Show();
+                LblDownloadSpeed.Show();
+                LblFileName.Show();
+
+                BtnInstall.Hide();
+                BtnOptions.Hide();
+                BtnLaunch.Show();
+
+                LblFileName.Text = "Preparing Setup...";
+
+                BtnLaunch.Enabled = false;
+                BtnClose.Enabled = false;
+
+                InstallRoutine();
+            }
         }
 
         private void BtnInstall_MouseLeave(object sender, EventArgs e)
@@ -328,17 +347,17 @@ namespace PatchLauncher
 
         private void PiBYoutube_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://www.youtube.com/BeyondStandards") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://www.youtube.com/BeyondStandards") { UseShellExecute = true });
         }
 
         private void PiBDiscord_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://discord.gg/beyondstandards") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://discord.gg/beyondstandards") { UseShellExecute = true });
         }
 
         private void PiBModDB_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://www.moddb.com/mods/battle-for-middle-earth-patch-222") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://www.moddb.com/mods/battle-for-middle-earth-patch-222") { UseShellExecute = true });
         }
 
         private void PiBThemeSwitcher_Click(object sender, EventArgs e)
@@ -479,22 +498,24 @@ namespace PatchLauncher
 
         #region GameInstall
 
-        public async void InstallRoutine(string installPath)
+        public async Task InstallRoutine()
         {
-            PBarActualFile.Show();
-            LblBytes.Show();
-            LblDownloadSpeed.Show();
-            LblFileName.Show();
-
-            BtnInstall.Hide();
-            BtnOptions.Hide();
-            BtnLaunch.Show();
-
-            BtnLaunch.Enabled = false;
-            BtnClose.Enabled = false;
-
             RegistryFunctions.WriteRegKeysInstallation();
 
+            if (!Directory.Exists(Properties.Settings.Default.GameInstallPath))
+            {
+                Directory.CreateDirectory(Properties.Settings.Default.GameInstallPath);
+            }
+
+            Task download = DownloadGame();
+            await download;
+
+            Task extract = ExtractGame();
+            await extract;
+        }
+
+        public async Task DownloadGame()
+        {
             var downloadOpt = new DownloadConfiguration()
             {
                 ChunkCount = 1, // file parts to download, default value is 1
@@ -504,7 +525,8 @@ namespace PatchLauncher
             var downloader = new DownloadService(downloadOpt);
 
             downloadOpt.ReserveStorageSpaceBeforeStartingDownload = true;
-            downloadOpt.BufferBlockSize = 1024;
+            downloadOpt.BufferBlockSize = 8000;
+            downloadOpt.ClearPackageOnCompletionWithFailure = true;
 
             // Provide `FileName` and `TotalBytesToReceive` at the start of each downloads
             downloader.DownloadStarted += OnDownloadStarted;
@@ -523,129 +545,126 @@ namespace PatchLauncher
             {
                 await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=15Fp9jm21AC_908zlGA_xYkZ2yjB4bwkB&confirm=t", Application.StartupPath + "\\Download\\Bin.7z");
             }
-            else if (!File.Exists(Application.StartupPath + "\\Download\\System.7z"))
+
+            if (!File.Exists(Application.StartupPath + "\\Download\\System.7z"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1Cag-rDgG6CNbb3Yx5mLsHiX5-JP55OuD&confirm=t", Application.StartupPath + "\\Download\\System.7z");
             }
-            else if (!File.Exists(Application.StartupPath + "\\Download\\Textures.7z"))
+
+            if (!File.Exists(Application.StartupPath + "\\Download\\Textures.7z"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L639ovBau8cZtwBETuRtCuQkYHMq6jdQ&confirm=t", Application.StartupPath + "\\Download\\Textures.7z");
             }
-            else if (!File.Exists(Application.StartupPath + "\\Download\\Movies.7z"))
+
+            if (!File.Exists(Application.StartupPath + "\\Download\\Movies.7z"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L6caFHjV5eq_o6Jt_Z_9IITKo1DcbgGj&confirm=t", Application.StartupPath + "\\Download\\Movies.7z");
             }
-            else if (!File.Exists(Application.StartupPath + "\\Download\\LangPack_EN.7z"))
+
+            if (!File.Exists(Application.StartupPath + "\\Download\\LangPack_EN.7z"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L5wHphcet9s0BMUbe8LR44LBLvHn2bJX&confirm=t", Application.StartupPath + "\\Download\\LangPack_EN.7z");
             }
-
-            if (!Directory.Exists(Properties.Settings.Default.GameInstallPath))
-            {
-                Directory.CreateDirectory(Properties.Settings.Default.GameInstallPath);
-            }
-
-            LblDownloadSpeed.Hide();
-
-            Thread _thread = new(new ThreadStart(delegate { ExtractGame(); }));
-            _thread.Start();
         }
 
-        public void ExtractGame()
+        public async Task ExtractGame()
         {
             int counter = 0;
             SetPBar(0);
             SetPBarMax(371);
 
-            using SevenZipArchive archiveSystem = SevenZipArchive.Open(Application.StartupPath + "\\Download\\System.7z");
-            {
-                SetTextPercentages("Extracting from Archive 1/5: System.7zip");
-                foreach (var entry in archiveSystem.Entries)
+            await Task.Run(() =>
                 {
-                    SetTextFileName("Extracting file: " + entry.ToString());
-                    counter++;
-                    SetPBar(counter);
-                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    using SevenZipArchive archiveSystem = SevenZipArchive.Open(Application.StartupPath + "\\Download\\System.7z");
                     {
-                        ExtractFullPath = true,
-                        Overwrite = true,
-                        PreserveFileTime = true,
-                        PreserveAttributes = true
-                    });
-                }
-            }
+                        SetTextPercentages("Extracting from Archive 1/5: System.7zip");
+                        foreach (var entry in archiveSystem.Entries)
+                        {
+                            SetTextFileName("Extracting file: " + entry.ToString());
+                            counter++;
+                            SetPBar(counter);
+                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                            {
+                                ExtractFullPath = true,
+                                Overwrite = true,
+                                PreserveFileTime = true,
+                                PreserveAttributes = true
+                            });
+                        }
+                    }
 
-            using SevenZipArchive archiveTextures = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Textures.7z");
-            {
-                SetTextPercentages("Extracting from Archive 2/5: Textures.7zip");
-                foreach (var entry in archiveTextures.Entries)
-                {
-                    SetTextFileName("Extracting file: " + entry.ToString());
-                    counter++;
-                    SetPBar(counter);
-                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    using SevenZipArchive archiveTextures = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Textures.7z");
                     {
-                        ExtractFullPath = true,
-                        Overwrite = true,
-                        PreserveFileTime = true,
-                        PreserveAttributes = true
-                    });
-                }
-            }
+                        SetTextPercentages("Extracting from Archive 2/5: Textures.7zip");
+                        foreach (var entry in archiveTextures.Entries)
+                        {
+                            SetTextFileName("Extracting file: " + entry.ToString());
+                            counter++;
+                            SetPBar(counter);
+                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                            {
+                                ExtractFullPath = true,
+                                Overwrite = true,
+                                PreserveFileTime = true,
+                                PreserveAttributes = true
+                            });
+                        }
+                    }
 
-            using SevenZipArchive archiveLangEN = SevenZipArchive.Open(Application.StartupPath + "\\Download\\LangPack_EN.7z");
-            {
-                SetTextPercentages("Extracting from Archive 3/5: LangPack_EN.7zip");
-                foreach (var entry in archiveLangEN.Entries)
-                {
-                    SetTextFileName("Extracting file: " + entry.ToString());
-                    counter++;
-                    SetPBar(counter);
-                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    using SevenZipArchive archiveLangEN = SevenZipArchive.Open(Application.StartupPath + "\\Download\\LangPack_EN.7z");
                     {
-                        ExtractFullPath = true,
-                        Overwrite = true,
-                        PreserveFileTime = true,
-                        PreserveAttributes = true
-                    });
-                }
-            }
+                        SetTextPercentages("Extracting from Archive 3/5: LangPack_EN.7zip");
+                        foreach (var entry in archiveLangEN.Entries)
+                        {
+                            SetTextFileName("Extracting file: " + entry.ToString());
+                            counter++;
+                            SetPBar(counter);
+                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                            {
+                                ExtractFullPath = true,
+                                Overwrite = true,
+                                PreserveFileTime = true,
+                                PreserveAttributes = true
+                            });
+                        }
+                    }
 
-            using SevenZipArchive archiveBin = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Bin.7z");
-            {
-                SetTextPercentages("Extracting from Archive 4/5: Bin.7zip");
-                foreach (var entry in archiveBin.Entries.Where(entry => !entry.IsDirectory))
-                {
-                    SetTextFileName("Extracting file: " + entry.ToString());
-                    counter++;
-                    SetPBar(counter);
-                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    using SevenZipArchive archiveBin = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Bin.7z");
                     {
-                        ExtractFullPath = true,
-                        Overwrite = true,
-                        PreserveFileTime = true,
-                        PreserveAttributes = true
-                    });
-                }
-            }
+                        SetTextPercentages("Extracting from Archive 4/5: Bin.7zip");
+                        foreach (var entry in archiveBin.Entries.Where(entry => !entry.IsDirectory))
+                        {
+                            SetTextFileName("Extracting file: " + entry.ToString());
+                            counter++;
+                            SetPBar(counter);
+                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                            {
+                                ExtractFullPath = true,
+                                Overwrite = true,
+                                PreserveFileTime = true,
+                                PreserveAttributes = true
+                            });
+                        }
+                    }
 
-            using SevenZipArchive archiveMovies = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Movies.7z");
-            {
-                SetTextPercentages("Extracting from Archive 5/5: Movies.7zip");
-                foreach (var entry in archiveMovies.Entries.Where(entry => !entry.IsDirectory))
-                {
-                    SetTextFileName("Extracting file: " + entry.ToString());
-                    counter++;
-                    SetPBar(counter);
-                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    using SevenZipArchive archiveMovies = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Movies.7z");
                     {
-                        ExtractFullPath = true,
-                        Overwrite = true,
-                        PreserveFileTime = true,
-                        PreserveAttributes = true
-                    });
-                }
-            }
+                        SetTextPercentages("Extracting from Archive 5/5: Movies.7zip");
+                        foreach (var entry in archiveMovies.Entries.Where(entry => !entry.IsDirectory))
+                        {
+                            SetTextFileName("Extracting file: " + entry.ToString());
+                            counter++;
+                            SetPBar(counter);
+                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                            {
+                                ExtractFullPath = true,
+                                Overwrite = true,
+                                PreserveFileTime = true,
+                                PreserveAttributes = true
+                            });
+                        }
+                    }
+                });
                 FinishingGameInstall();
         }
 
@@ -659,6 +678,20 @@ namespace PatchLauncher
 
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
             Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
+
+           //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
+           //{
+           //    Directory.CreateDirectory(RegistryFunctions.ReadStartMenuFolder()!);
+           //
+           //    object shDesktop = "Desktop";
+           //    WshShell shell = new();
+           //    string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\The Battle for Middle-earth (tm).lnk";
+           //    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
+           //    shortcut.Description = "Play The Battle for Middle-earth (tm)";
+           //    shortcut.Hotkey = "Ctrl+Shift+N";
+           //    shortcut.TargetPath = Path.Combine(Properties.Settings.Default.GameInstallPath, @"\lotrbfme.exe");
+           //    shortcut.Save();
+           //}
         }
 
         private void OnDownloadStarted(object sender, DownloadStartedEventArgs e)
@@ -677,8 +710,6 @@ namespace PatchLauncher
         private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             SetTextFileName("Working...");
-            //PBarActualFile.Tick(10000);
-
 
             if (e.Error != null)
             {

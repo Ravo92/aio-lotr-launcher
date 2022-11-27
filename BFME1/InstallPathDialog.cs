@@ -88,8 +88,8 @@ namespace PatchLauncher
         {
             Properties.Settings.Default.GameInstallPath = TxtInstallPath.Text;
             Properties.Settings.Default.Save();
+            DialogResult = DialogResult.OK;
             Close();
-            Dispose();
         }
 
         private void BtnAccept_MouseDown(object sender, MouseEventArgs e)
