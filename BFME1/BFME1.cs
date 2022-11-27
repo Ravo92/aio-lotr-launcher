@@ -17,17 +17,16 @@ using SharpCompress.Common;
 using System.Linq;
 using SharpCompress.Archives;
 using System.Diagnostics;
+using System.Xml;
 
 namespace PatchLauncher
 {
     public partial class BFME1 : Form
     {
-        //Initialize Font-System
-        readonly ConstStrings _font = new();
-
         //Sound-Object
         SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
         int iconNumber = Properties.Settings.Default.BackgroundMusicIcon;
+        readonly string checkforPatchUpdatesXML = "https://ravo92.github.io/PatchUpdate_BFME1.xml";
 
         public BFME1()
         {
@@ -47,17 +46,17 @@ namespace PatchLauncher
 
             // label-Styles
             LblDownloadSpeed.Text = "";
-            LblDownloadSpeed.Font = _font.UseFont("Albertus Nova", 16);
+            LblDownloadSpeed.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblDownloadSpeed.ForeColor = Color.FromArgb(192, 145, 69);
             LblDownloadSpeed.BackColor = Color.Transparent;
 
             LblFileName.Text = "";
-            LblFileName.Font = _font.UseFont("Albertus Nova", 16);
+            LblFileName.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblFileName.ForeColor = Color.FromArgb(192, 145, 69);
             LblFileName.BackColor = Color.Transparent;
 
             LblBytes.Text = "";
-            LblBytes.Font = _font.UseFont("Albertus Nova", 16);
+            LblBytes.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblBytes.ForeColor = Color.FromArgb(192, 145, 69);
             LblBytes.BackColor = Color.Transparent;
 
@@ -68,29 +67,29 @@ namespace PatchLauncher
             BtnClose.FlatAppearance.BorderSize = 0;
             BtnClose.FlatStyle = FlatStyle.Flat;
             BtnClose.BackColor = Color.Transparent;
-            BtnClose.BackgroundImage = ConstStrings.ButtonImageNeutral();
-            BtnClose.Font = _font.UseFont("Albertus Nova", 14);
+            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnClose.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnLaunch.FlatAppearance.BorderSize = 0;
             BtnLaunch.FlatStyle = FlatStyle.Flat;
             BtnLaunch.BackColor = Color.Transparent;
-            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageNeutral();
-            BtnLaunch.Font = _font.UseFont("Albertus Nova", 14);
+            BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnLaunch.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnOptions.FlatAppearance.BorderSize = 0;
             BtnOptions.FlatStyle = FlatStyle.Flat;
             BtnOptions.BackColor = Color.Transparent;
-            BtnOptions.BackgroundImage = ConstStrings.ButtonImageNeutral();
-            BtnOptions.Font = _font.UseFont("Albertus Nova", 14);
+            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnOptions.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnInstall.FlatAppearance.BorderSize = 0;
             BtnInstall.FlatStyle = FlatStyle.Flat;
             BtnInstall.BackColor = Color.Transparent;
-            BtnInstall.BackgroundImage = ConstStrings.ButtonImageNeutral();
-            BtnInstall.Font = _font.UseFont("Albertus Nova", 14);
+            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnInstall.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
 
             #endregion
@@ -185,6 +184,31 @@ namespace PatchLauncher
                 BtnInstall.Hide();
                 BtnLaunch.Show();
             }
+
+            XmlTextReader reader = new(checkforPatchUpdatesXML);
+
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        Console.Write("<" + reader.Name);
+
+                        while (reader.MoveToNextAttribute())
+                            Console.Write(" " + reader.Name + "='" + reader.Value + "'");
+                        Console.Write(">");
+                        Console.WriteLine(">");
+                        break;
+                    case XmlNodeType.Text:
+                        Console.WriteLine(reader.Value);
+                        break;
+                    case XmlNodeType.EndElement:
+                        Console.Write("</" + reader.Name);
+                        Console.WriteLine(">");
+                        break;
+                }
+            }
+
             #endregion
         }
 
@@ -218,20 +242,20 @@ namespace PatchLauncher
 
         private void BtnClose_MouseLeave(object sender, EventArgs e)
         {
-            BtnClose.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnClose_MouseEnter(object sender, EventArgs e)
         {
-            BtnClose.BackgroundImage = ConstStrings.ButtonImageHover();
+            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnClose.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
 
         private void BtnClose_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnClose.BackgroundImage = ConstStrings.ButtonImageClick();
+            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
@@ -259,20 +283,20 @@ namespace PatchLauncher
 
         private void BtnLaunch_MouseLeave(object sender, EventArgs e)
         {
-            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnLaunch_MouseEnter(object sender, EventArgs e)
         {
-            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageHover();
+            BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnLaunch.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
 
         private void BtnLaunch_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnLaunch.BackgroundImage = ConstStrings.ButtonImageClick();
+            BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
@@ -283,23 +307,23 @@ namespace PatchLauncher
         }
         private void BtnOptions_MouseLeave(object sender, EventArgs e)
         {
-            BtnOptions.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
         }
         private void BtnOptions_MouseEnter(object sender, EventArgs e)
         {
-            BtnOptions.BackgroundImage = ConstStrings.ButtonImageHover();
+            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnOptions.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
         private void BtnOptions_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnOptions.BackgroundImage = ConstStrings.ButtonImageClick();
+            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
 
-        private void BtnInstall_Click(object sender, EventArgs e)
+        private async void BtnInstall_Click(object sender, EventArgs e)
         {
             InstallPathDialog _install = new();
 
@@ -320,26 +344,26 @@ namespace PatchLauncher
                 BtnLaunch.Enabled = false;
                 BtnClose.Enabled = false;
 
-                InstallRoutine();
+                await InstallRoutine();
             }
         }
 
         private void BtnInstall_MouseLeave(object sender, EventArgs e)
         {
-            BtnInstall.BackgroundImage = ConstStrings.ButtonImageNeutral();
+            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnInstall_MouseEnter(object sender, EventArgs e)
         {
-            BtnInstall.BackgroundImage = ConstStrings.ButtonImageHover();
+            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnInstall.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
 
         private void BtnInstall_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnInstall.BackgroundImage = ConstStrings.ButtonImageClick();
+            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
@@ -465,7 +489,7 @@ namespace PatchLauncher
         {
             XAudio2 _xaudio2 = new();
             MasteringVoice _masteringVoice = new(_xaudio2);
-            PLaySoundFile(_xaudio2, "", ConstStrings.ButtonSoundClick());
+            PLaySoundFile(_xaudio2, "", ConstStrings.C_BUTTONSOUND_CLICK);
             _masteringVoice.Dispose();
             _xaudio2.Dispose();
         }
@@ -474,7 +498,7 @@ namespace PatchLauncher
         {
             XAudio2 _xaudio2 = new();
             MasteringVoice _masteringVoice = new(_xaudio2);
-            PLaySoundFile(_xaudio2, "", ConstStrings.ButtonSoundHover());
+            PLaySoundFile(_xaudio2, "", ConstStrings.C_BUTTONSOUND_HOVER);
             _masteringVoice.Dispose();
             _xaudio2.Dispose();
         }
@@ -483,7 +507,7 @@ namespace PatchLauncher
         #region ToolTip System
         public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
         {
-            Font tooltipFont = _font.UseFont("Albertus Nova", 14);
+            Font tooltipFont = ConstStrings.UseFont("Albertus Nova", 14);
             e.DrawBackground();
             e.DrawBorder();
             e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
@@ -491,7 +515,7 @@ namespace PatchLauncher
 
         public void TooltipPopup(object sender, PopupEventArgs e)
         {
-            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), _font.UseFont("Albertus Nova", 14));
+            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), ConstStrings.UseFont("Albertus Nova", 14));
         }
         #endregion
 
