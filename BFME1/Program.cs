@@ -20,31 +20,9 @@ namespace PatchLauncher
             else
             {
                 ApplicationConfiguration.Initialize();
-                WindowsPrincipal pricipal = new(WindowsIdentity.GetCurrent());
-                bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
-
-                if (!hasAdministrativeRight)
-                {
-                    ProcessStartInfo startInfo = new()
-                    {
-                        UseShellExecute = true,
-                        WorkingDirectory = Environment.CurrentDirectory,
-                        FileName = Application.ExecutablePath,
-                        Verb = "runas"
-                    };
-                    try
-                    {
-                        Process? p = Process.Start(startInfo);
-
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new BFME1());
-                    }
-                    catch (System.ComponentModel.Win32Exception)
-                    {
-                        return;
-                    }
-                }
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new BFME1());
             }
         }
     }

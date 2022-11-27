@@ -299,7 +299,6 @@ namespace PatchLauncher
             this.Name = "BFME1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bfme 2.22 Launcher";
-            this.TopMost = true;
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainWindow_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();

@@ -8,10 +8,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
-using System.Diagnostics;
 using System.Media;
 using System.Collections.Generic;
-using System.Net;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.ComponentModel;
 using Downloader;
@@ -19,6 +17,7 @@ using SharpCompress.Archives.SevenZip;
 using SharpCompress.Common;
 using System.Linq;
 using SharpCompress.Archives;
+using System.Diagnostics;
 
 namespace PatchLauncher
 {
@@ -64,6 +63,7 @@ namespace PatchLauncher
             LblBytes.BackColor = Color.Transparent;
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
+            PBarActualFile.BackColor = Color.FromArgb(192, 145, 69);
 
             // Button-Styles
             BtnClose.FlatAppearance.BorderSize = 0;
@@ -239,20 +239,19 @@ namespace PatchLauncher
 
         private void BtnLaunch_Click(object sender, EventArgs e)
         {
-            Thread.Sleep(1000);
-
-            Process _process = new();
-            _process.StartInfo.FileName = ConstStrings.GameInstallPath() + "lotrbfme.exe";
+            ProcessStartInfo _processInfo = new();
+            _processInfo.WorkingDirectory = @ConstStrings.GameInstallPath();
+            _processInfo.FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe";
 
             // Start game windowed
             if (Properties.Settings.Default.StartGameWindowed)
             {
-                _process.StartInfo.Arguments = "-win";
+                _processInfo.Arguments = "-win";
             }
 
-            _process.StartInfo.WorkingDirectory = Application.StartupPath;
-            _process.Start();
-            Dispose();
+            Process _startGame = Process.Start(_processInfo)!;
+
+            Thread.Sleep(1000);
 
             Application.Exit();
         }
@@ -329,17 +328,17 @@ namespace PatchLauncher
 
         private void PiBYoutube_Click(object sender, EventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://www.youtube.com/BeyondStandards") { UseShellExecute = true });
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://www.youtube.com/BeyondStandards") { UseShellExecute = true });
         }
 
         private void PiBDiscord_Click(object sender, EventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://discord.gg/beyondstandards") { UseShellExecute = true });
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://discord.gg/beyondstandards") { UseShellExecute = true });
         }
 
         private void PiBModDB_Click(object sender, EventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://www.moddb.com/mods/battle-for-middle-earth-patch-222") { UseShellExecute = true });
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://www.moddb.com/mods/battle-for-middle-earth-patch-222") { UseShellExecute = true });
         }
 
         private void PiBThemeSwitcher_Click(object sender, EventArgs e)
@@ -482,86 +481,19 @@ namespace PatchLauncher
 
         public async void InstallRoutine(string installPath)
         {
-            List<string> _regKeyFolderNames = new()
-            {
-                "EA GAMES",
-                "The Battle for Middle-earth",
-                "1.0",
-
-                "Electronic Arts",
-                "EA Games",
-                "The Battle for Middle-earth",
-                "ergc"
-            };
-
-            List<string> _regKeyNames = new()
-            {
-                "CacheSize",
-                "CD Drive",
-                "DisplayName",
-                "Folder",
-                "Install Dir",
-                "Installed From",
-                "Language",
-                "Locale",
-                "Patch URL",
-                "Product GUID",
-                "Region",
-                "Registration",
-                "Suppression Exe",
-                "SwapSize",
-
-                "DisplayName",
-                "Language",
-                "LanguageName",
-
-                "InstallPath",
-                "Language",
-                "MapPackVersion",
-                "UseLocalUserMaps",
-                "UserDataLeafName",
-                "Version",
-                "(Default)"
-            };
-
-            List<string> _regKeyValues = new()
-            {
-                "3351006208",
-                "I:\\",
-                "The Battle for Middle-earth (tm)",
-                "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\EA GAMES\\The Battle for Middle-earth (tm)\\",
-                "E:\\Spiele\\The Battle for Middle-earth (tm)\\", // TODO: Changing the Install dir dynamically when installing the actual Game!!!
-                "I:\\",
-                "English US",
-                "en_us",
-                "http://transtest.ea.com/Electronic Arts/The Battle for Middle-earth/Europe",
-                "{3F290582-3F4E-4B96-009C-E0BABAA40C42}",
-                "Europe",
-                "SOFTWARE\\Electronic Arts\\EA GAMES\\The Battle for Middle-earth\\ergc",
-                "rtsi.exe",
-                "0",
-
-                "The Battle for Middle-earth (tm)",
-                "1", // DWORD
-                "English US",
-
-                "E:\\Spiele\\The Battle for Middle-earth (tm)\\", // TODO: Changing the Install dir dynamically when installing the actual Game!!!
-                "english",
-                "10000", //DWORD
-                "0", //DWORD
-                "My Battle for Middle-earth Files",
-                "10003", //DWORD
-                "FVZZM2FSUCWDH2F73B5P" //CDKEY UPPERCASE ALPHANUMERAL 18 CHARAKTERS WIDE
-            };
-
             PBarActualFile.Show();
             LblBytes.Show();
             LblDownloadSpeed.Show();
             LblFileName.Show();
 
             BtnInstall.Hide();
+            BtnOptions.Hide();
             BtnLaunch.Show();
+
             BtnLaunch.Enabled = false;
+            BtnClose.Enabled = false;
+
+            RegistryFunctions.WriteRegKeysInstallation();
 
             var downloadOpt = new DownloadConfiguration()
             {
@@ -570,6 +502,9 @@ namespace PatchLauncher
             };
 
             var downloader = new DownloadService(downloadOpt);
+
+            downloadOpt.ReserveStorageSpaceBeforeStartingDownload = true;
+            downloadOpt.BufferBlockSize = 1024;
 
             // Provide `FileName` and `TotalBytesToReceive` at the start of each downloads
             downloader.DownloadStarted += OnDownloadStarted;
@@ -594,97 +529,136 @@ namespace PatchLauncher
             }
             else if (!File.Exists(Application.StartupPath + "\\Download\\Textures.7z"))
             {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1jMOkrbTASVpE6VNzxA3i3XyO-LqG6BrH&confirm=t", Application.StartupPath + "\\Download\\Textures.7z");
+                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L639ovBau8cZtwBETuRtCuQkYHMq6jdQ&confirm=t", Application.StartupPath + "\\Download\\Textures.7z");
             }
-            else if (!File.Exists(Application.StartupPath + "\\Download\\LangEN.7z"))
+            else if (!File.Exists(Application.StartupPath + "\\Download\\Movies.7z"))
             {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L5wHphcet9s0BMUbe8LR44LBLvHn2bJX&confirm=t", Application.StartupPath + "\\Download\\LangEN.7z");
+                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L6caFHjV5eq_o6Jt_Z_9IITKo1DcbgGj&confirm=t", Application.StartupPath + "\\Download\\Movies.7z");
             }
-
-            PBarActualFile.Value = 0;
+            else if (!File.Exists(Application.StartupPath + "\\Download\\LangPack_EN.7z"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L5wHphcet9s0BMUbe8LR44LBLvHn2bJX&confirm=t", Application.StartupPath + "\\Download\\LangPack_EN.7z");
+            }
 
             if (!Directory.Exists(Properties.Settings.Default.GameInstallPath))
             {
                 Directory.CreateDirectory(Properties.Settings.Default.GameInstallPath);
             }
 
-            Thread _thread = new(new ThreadStart(ExtractGame));
+            LblDownloadSpeed.Hide();
+
+            Thread _thread = new(new ThreadStart(delegate { ExtractGame(); }));
             _thread.Start();
         }
 
         public void ExtractGame()
         {
-            using (var archiveTest = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Bin.7z"))
+            int counter = 0;
+            SetPBar(0);
+            SetPBarMax(371);
+
+            using SevenZipArchive archiveSystem = SevenZipArchive.Open(Application.StartupPath + "\\Download\\System.7z");
             {
-                SetPBarMax(archiveTest.Entries.Count);
-                foreach (var entry in archiveTest.Entries)
+                SetTextPercentages("Extracting from Archive 1/5: System.7zip");
+                foreach (var entry in archiveSystem.Entries)
                 {
                     SetTextFileName("Extracting file: " + entry.ToString());
-                    SetPBar(+1);
-                    if (!entry.IsDirectory)
-                        entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions() { ExtractFullPath = true, Overwrite = true, PreserveFileTime = true, PreserveAttributes = true });
+                    counter++;
+                    SetPBar(counter);
+                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true,
+                        PreserveFileTime = true,
+                        PreserveAttributes = true
+                    });
+                }
+            }
+
+            using SevenZipArchive archiveTextures = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Textures.7z");
+            {
+                SetTextPercentages("Extracting from Archive 2/5: Textures.7zip");
+                foreach (var entry in archiveTextures.Entries)
+                {
+                    SetTextFileName("Extracting file: " + entry.ToString());
+                    counter++;
+                    SetPBar(counter);
+                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true,
+                        PreserveFileTime = true,
+                        PreserveAttributes = true
+                    });
+                }
+            }
+
+            using SevenZipArchive archiveLangEN = SevenZipArchive.Open(Application.StartupPath + "\\Download\\LangPack_EN.7z");
+            {
+                SetTextPercentages("Extracting from Archive 3/5: LangPack_EN.7zip");
+                foreach (var entry in archiveLangEN.Entries)
+                {
+                    SetTextFileName("Extracting file: " + entry.ToString());
+                    counter++;
+                    SetPBar(counter);
+                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true,
+                        PreserveFileTime = true,
+                        PreserveAttributes = true
+                    });
                 }
             }
 
             using SevenZipArchive archiveBin = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Bin.7z");
-            SetPBarMax(archiveBin.Entries.Count);
-            foreach (var entry in archiveBin.Entries.Where(entry => !entry.IsDirectory))
             {
-                SetTextFileName("Extracting file: " + entry.ToString());
-                SetPBar(+1);
-                entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                SetTextPercentages("Extracting from Archive 4/5: Bin.7zip");
+                foreach (var entry in archiveBin.Entries.Where(entry => !entry.IsDirectory))
                 {
-                    ExtractFullPath = true,
-                    Overwrite = true,
-                    PreserveFileTime = true,
-                    PreserveAttributes = true
-                });
+                    SetTextFileName("Extracting file: " + entry.ToString());
+                    counter++;
+                    SetPBar(counter);
+                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true,
+                        PreserveFileTime = true,
+                        PreserveAttributes = true
+                    });
+                }
             }
 
-            using SevenZipArchive archiveSystem = SevenZipArchive.Open(Application.StartupPath + "\\Download\\System.7z");
-            SetPBarMax(archiveBin.Entries.Count);
-            foreach (var entry in archiveSystem.Entries.Where(entry => !entry.IsDirectory))
+            using SevenZipArchive archiveMovies = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Movies.7z");
             {
-                SetTextFileName("Extracting file: " + entry.ToString());
-                SetPBar(+1);
-                entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                SetTextPercentages("Extracting from Archive 5/5: Movies.7zip");
+                foreach (var entry in archiveMovies.Entries.Where(entry => !entry.IsDirectory))
                 {
-                    ExtractFullPath = true,
-                    Overwrite = true,
-                    PreserveFileTime = true,
-                    PreserveAttributes = true
-                });
+                    SetTextFileName("Extracting file: " + entry.ToString());
+                    counter++;
+                    SetPBar(counter);
+                    entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
+                    {
+                        ExtractFullPath = true,
+                        Overwrite = true,
+                        PreserveFileTime = true,
+                        PreserveAttributes = true
+                    });
+                }
             }
+                FinishingGameInstall();
+        }
 
-            using SevenZipArchive archiveTextures = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Textures.7z");
-            SetPBarMax(archiveBin.Entries.Count);
-            foreach (var entry in archiveTextures.Entries.Where(entry => !entry.IsDirectory))
-            {
-                SetTextFileName("Extracting file: " + entry.ToString());
-                SetPBar(+1);
-                entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
-                {
-                    ExtractFullPath = true,
-                    Overwrite = true,
-                    PreserveFileTime = true,
-                    PreserveAttributes = true
-                });
-            }
+        private void FinishingGameInstall()
+        {
+            Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
+            Invoke((MethodInvoker)(() => LblBytes.Hide()));
+            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
+            Invoke((MethodInvoker)(() => LblFileName.Hide()));
+            Invoke((MethodInvoker)(() => BtnOptions.Show()));
 
-            using SevenZipArchive archiveLangEN = SevenZipArchive.Open(Application.StartupPath + "\\Download\\LangEN.7z");
-            SetPBarMax(archiveBin.Entries.Count);
-            foreach (var entry in archiveLangEN.Entries.Where(entry => !entry.IsDirectory))
-            {
-                SetTextFileName("Extracting file: " + entry.ToString());
-                SetPBar(+1);
-                entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
-                {
-                    ExtractFullPath = true,
-                    Overwrite = true,
-                    PreserveFileTime = true,
-                    PreserveAttributes = true
-                });
-            }
+            Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+            Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
         }
 
         private void OnDownloadStarted(object sender, DownloadStartedEventArgs e)
@@ -700,6 +674,28 @@ namespace PatchLauncher
             SetTextPercentages(Math.Round(e.ProgressPercentage).ToString() + " %");
         }
 
+        private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            SetTextFileName("Working...");
+            //PBarActualFile.Tick(10000);
+
+
+            if (e.Error != null)
+            {
+                if (PBarActualFile is null)
+                {
+                    SetTextFileName(e.Error.Message);
+                }
+            }
+            else
+            {
+                SetTextFileName("Configuring...");
+                SetPBar(100);
+            }
+        }
+        #endregion
+
+        #region Delegates
         delegate void SetTextDLSpeedCallback(string text);
         private void SetTextDlSpeed(string text)
         {
@@ -784,32 +780,6 @@ namespace PatchLauncher
                 PBarActualFile.Maximum = value;
             }
         }
-
-        private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            SetTextFileName("Working...");
-            //PBarActualFile.Tick(10000);
-
-
-            if (e.Error != null)
-            {
-                if (PBarActualFile is null)
-                {
-                    SetTextFileName(e.Error.Message);
-                }
-                else
-                {
-                    SetTextFileName(e.Error.Message);
-                }
-                Debugger.Break();
-            }
-            else
-            {
-                SetTextFileName("Configuring...");
-                SetPBar(100);
-            }
-        }
-
         #endregion
 
         private void TmrPatchNotes_Tick(object sender, EventArgs e)
