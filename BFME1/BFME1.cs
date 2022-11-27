@@ -17,7 +17,6 @@ using SharpCompress.Common;
 using System.Linq;
 using SharpCompress.Archives;
 using System.Diagnostics;
-using IWshRuntimeLibrary;
 
 namespace PatchLauncher
 {
@@ -572,6 +571,7 @@ namespace PatchLauncher
             int counter = 0;
             SetPBar(0);
             SetPBarMax(371);
+            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
 
             await Task.Run(() =>
                 {
@@ -672,7 +672,6 @@ namespace PatchLauncher
         {
             Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
             Invoke((MethodInvoker)(() => LblBytes.Hide()));
-            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
             Invoke((MethodInvoker)(() => BtnOptions.Show()));
 
