@@ -106,5 +106,17 @@ namespace PatchLauncher.Properties {
                 this["GameInstallPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int PatchVersionInstalled {
+            get {
+                return ((int)(this["PatchVersionInstalled"]));
+            }
+            set {
+                this["PatchVersionInstalled"] = value;
+            }
+        }
     }
 }

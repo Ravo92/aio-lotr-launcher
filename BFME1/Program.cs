@@ -13,6 +13,13 @@ namespace PatchLauncher
         [STAThread]
         static void Main(string[] args)
         {
+            // ***this line is added***
+            if (Environment.OSVersion.Version.Major >= 6)
+                SetProcessDPIAware();
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             if (args[0].ToString() != "-official")
             {
                 Application.Exit();
@@ -20,10 +27,10 @@ namespace PatchLauncher
             else
             {
                 ApplicationConfiguration.Initialize();
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new BFME1());
             }
         }
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
     }
 }

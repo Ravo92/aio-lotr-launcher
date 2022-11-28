@@ -13,8 +13,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.0.1.1</AssemblyVersion>
+    <FileVersion>1.0.1.1</FileVersion>
     <Copyright>BFME Patch 2.22 Team</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
@@ -232,6 +232,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Sounds\music_rohan.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\asset.dat.103">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Tools\dsoal-aldrv.dll">

@@ -17,7 +17,6 @@ using SharpCompress.Common;
 using System.Linq;
 using SharpCompress.Archives;
 using System.Diagnostics;
-using System.Xml;
 
 namespace PatchLauncher
 {
@@ -26,11 +25,14 @@ namespace PatchLauncher
         //Sound-Object
         SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
         int iconNumber = Properties.Settings.Default.BackgroundMusicIcon;
-        readonly string checkforPatchUpdatesXML = "https://ravo92.github.io/PatchUpdate_BFME1.xml";
+
+        public const string C_UPDATE_VERSION = "Patch 2.22v29";
 
         public BFME1()
         {
             InitializeComponent();
+
+            ReadXMLFile.GetXMLFileData();
 
             #region Styles
             //Main Form style behaviour
@@ -164,6 +166,7 @@ namespace PatchLauncher
             {
                 LblBytes.Hide();
                 LblDownloadSpeed.Hide();
+                LblDownloadSpeed.Hide();
                 PBarActualFile.Hide();
                 BtnInstall.Hide();
                 BtnLaunch.Show();
@@ -185,30 +188,23 @@ namespace PatchLauncher
                 BtnLaunch.Show();
             }
 
-            XmlTextReader reader = new(checkforPatchUpdatesXML);
-
-            while (reader.Read())
+            if (ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe") && Properties.Settings.Default.PatchVersionInstalled != 29)
             {
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        Console.Write("<" + reader.Name);
+                LblFileName.Text = "Preparing Update...";
 
-                        while (reader.MoveToNextAttribute())
-                            Console.Write(" " + reader.Name + "='" + reader.Value + "'");
-                        Console.Write(">");
-                        Console.WriteLine(">");
-                        break;
-                    case XmlNodeType.Text:
-                        Console.WriteLine(reader.Value);
-                        break;
-                    case XmlNodeType.EndElement:
-                        Console.Write("</" + reader.Name);
-                        Console.WriteLine(">");
-                        break;
-                }
+                PBarActualFile.Show();
+                LblBytes.Show();
+                LblDownloadSpeed.Show();
+                LblFileName.Show();
+
+                BtnInstall.Hide();
+                BtnOptions.Hide();
+                BtnLaunch.Show();
+
+                BtnLaunch.Enabled = false;
+                BtnClose.Enabled = false;
+                UpdateRoutine();
             }
-
             #endregion
         }
 
@@ -262,23 +258,42 @@ namespace PatchLauncher
 
         private void BtnLaunch_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo _processInfo = new()
+            if (ReadXMLFile.GetXMLFileVersion() == 29 && Properties.Settings.Default.PatchVersionInstalled != 29)
             {
-                WorkingDirectory = @ConstStrings.GameInstallPath(),
-                FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe"
-            };
+                PBarActualFile.Show();
+                LblBytes.Show();
+                LblDownloadSpeed.Show();
+                LblFileName.Show();
 
-            // Start game windowed
-            if (Properties.Settings.Default.StartGameWindowed)
-            {
-                _processInfo.Arguments = "-win";
+                BtnOptions.Hide();
+                BtnLaunch.Show();
+
+                LblFileName.Text = "Preparing Update...";
+
+                BtnLaunch.Enabled = false;
+                BtnClose.Enabled = false;
+                UpdateRoutine();
             }
+            else
+            {
+                ProcessStartInfo _processInfo = new()
+                {
+                    WorkingDirectory = @ConstStrings.GameInstallPath(),
+                    FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe"
+                };
 
-            _ = Process.Start(_processInfo)!;
+                // Start game windowed
+                if (Properties.Settings.Default.StartGameWindowed)
+                {
+                    _processInfo.Arguments = "-win";
+                }
 
-            Thread.Sleep(1000);
+                _ = Process.Start(_processInfo)!;
 
-            Application.Exit();
+                Thread.Sleep(1000);
+
+                Application.Exit();
+            }
         }
 
         private void BtnLaunch_MouseLeave(object sender, EventArgs e)
@@ -519,6 +534,103 @@ namespace PatchLauncher
         }
         #endregion
 
+        #region Update
+
+        public async Task UpdateRoutine()
+        {
+            Task download = DownloadUpdate();
+            await download;
+
+            Task extract = ExtractUpdate();
+            await extract;
+        }
+
+        public async Task DownloadUpdate()
+        {
+            SetPBarMax(100);
+
+            var downloadOpt = new DownloadConfiguration()
+            {
+                ChunkCount = 1, // file parts to download, default value is 1
+                ParallelDownload = false // download parts of file as parallel or not. Default value is false
+            };
+
+            var downloader = new DownloadService(downloadOpt);
+
+            downloadOpt.ReserveStorageSpaceBeforeStartingDownload = true;
+            downloadOpt.BufferBlockSize = 10240;
+            downloadOpt.MaximumBytesPerSecond = 9223372036854775800;
+            downloadOpt.ClearPackageOnCompletionWithFailure = true;
+
+            // Provide `FileName` and `TotalBytesToReceive` at the start of each downloads
+            downloader.DownloadStarted += OnDownloadStarted;
+
+            // Provide any information about download progress, 
+            // like progress percentage of sum of chunks, total speed, 
+            // average speed, total received bytes and received bytes array 
+            // to live streaming.
+            downloader.DownloadProgressChanged += OnDownloadProgressChanged;
+
+            // Download completed event that can include occurred errors or 
+            // cancelled or download completed successfully.
+            downloader.DownloadFileCompleted += OnDownloadFileCompleted;
+
+            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/DTNGQqMHnJHYj6Z/download/asset.dat", Application.StartupPath + "\\Patch_29\\asset.dat");
+            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/kGJRQwLbWb23Ymy/download/_wsmaps222.big", Application.StartupPath + "\\Patch_29\\_wsmaps222.big");
+            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/LNRJjzi579CBAjB/download/_patch222optional.big", Application.StartupPath + "\\Patch_29\\_patch222optional.big");
+            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/qc7qkE6W52E8qwy/download/_patch222newtextures.big", Application.StartupPath + "\\Patch_29\\_patch222newtextures.big");
+            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/d47Yq6ZG99PJaZq/download/_patch222libraries.big", Application.StartupPath + "\\Patch_29\\_patch222libraries.big");
+            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/GsEdcqaY6gbmrSd/download/_patch222bases.big", Application.StartupPath + "\\Patch_29\\_patch222bases.big");
+            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/KnPrKk9Sc9FpAr4/download/_patch222.big", Application.StartupPath + "\\Patch_29\\_patch222.big");
+        }
+
+        public async Task ExtractUpdate()
+        {
+            Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
+            Invoke((MethodInvoker)(() => LblBytes.Hide()));
+            Invoke((MethodInvoker)(() => LblFileName.Text = "Copy files and apply patch..."));
+
+            await Task.Run(() =>
+            {
+                    foreach (var file in Directory.GetFiles(Path.Combine(Application.StartupPath, "Patch_29")))
+                        File.Copy(file, Path.Combine(Properties.Settings.Default.GameInstallPath, Path.GetFileName(file)), true);
+            });
+            FinishingGameUpdate();
+        }
+
+        private void FinishingGameUpdate()
+        {
+            Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
+            Invoke((MethodInvoker)(() => LblBytes.Hide()));
+            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
+            Invoke((MethodInvoker)(() => LblFileName.Hide()));
+            Invoke((MethodInvoker)(() => BtnOptions.Show()));
+            
+            Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+            Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
+
+            Properties.Settings.Default.PatchVersionInstalled = 29;
+            Properties.Settings.Default.Save();
+
+            Invoke((MethodInvoker)(() => BtnLaunch.Text = "LAUNCH"));
+
+            //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
+            //{
+            //    Directory.CreateDirectory(RegistryFunctions.ReadStartMenuFolder()!);
+            //
+            //    object shDesktop = "Desktop";
+            //    WshShell shell = new();
+            //    string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\The Battle for Middle-earth (tm).lnk";
+            //    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
+            //    shortcut.Description = "Play The Battle for Middle-earth (tm)";
+            //    shortcut.Hotkey = "Ctrl+Shift+N";
+            //    shortcut.TargetPath = Path.Combine(Properties.Settings.Default.GameInstallPath, @"\lotrbfme.exe");
+            //    shortcut.Save();
+            //}
+        }
+
+        #endregion
+
         #region GameInstall
 
         public async Task InstallRoutine()
@@ -548,7 +660,8 @@ namespace PatchLauncher
             var downloader = new DownloadService(downloadOpt);
 
             downloadOpt.ReserveStorageSpaceBeforeStartingDownload = true;
-            downloadOpt.BufferBlockSize = 8000;
+            downloadOpt.BufferBlockSize = 10240;
+            downloadOpt.MaximumBytesPerSecond = 9223372036854775800;
             downloadOpt.ClearPackageOnCompletionWithFailure = true;
 
             // Provide `FileName` and `TotalBytesToReceive` at the start of each downloads
@@ -694,13 +807,25 @@ namespace PatchLauncher
 
         private void FinishingGameInstall()
         {
-            Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
-            Invoke((MethodInvoker)(() => LblBytes.Hide()));
-            Invoke((MethodInvoker)(() => LblFileName.Hide()));
-            Invoke((MethodInvoker)(() => BtnOptions.Show()));
+            if(ReadXMLFile.GetXMLFileVersion() != 29)
+            {
+                Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
+                Invoke((MethodInvoker)(() => LblBytes.Hide()));
+                Invoke((MethodInvoker)(() => LblFileName.Hide()));
+                Invoke((MethodInvoker)(() => BtnOptions.Show()));
 
-            Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
-            Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
+                Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+                Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
+            }
+            else if (ReadXMLFile.GetXMLFileVersion() == 29)
+            {
+                Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
+                Invoke((MethodInvoker)(() => LblBytes.Hide()));
+                Invoke((MethodInvoker)(() => LblFileName.Hide()));
+                Invoke((MethodInvoker)(() => BtnLaunch.Text = C_UPDATE_VERSION));
+                Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+                Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
+            }
 
            //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
            //{
