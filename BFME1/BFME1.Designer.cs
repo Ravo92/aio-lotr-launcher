@@ -65,9 +65,9 @@ namespace PatchLauncher
             this.BtnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnClose.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnClose.Location = new System.Drawing.Point(1314, 794);
+            this.BtnClose.Location = new System.Drawing.Point(1068, 661);
             this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(210, 61);
+            this.BtnClose.Size = new System.Drawing.Size(200, 51);
             this.BtnClose.TabIndex = 0;
             this.BtnClose.TabStop = false;
             this.BtnClose.Text = "QUIT";
@@ -84,9 +84,9 @@ namespace PatchLauncher
             this.Wv2Patchnotes.BackColor = System.Drawing.Color.Black;
             this.Wv2Patchnotes.CreationProperties = null;
             this.Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.Wv2Patchnotes.Location = new System.Drawing.Point(393, 185);
+            this.Wv2Patchnotes.Location = new System.Drawing.Point(12, 110);
             this.Wv2Patchnotes.Name = "Wv2Patchnotes";
-            this.Wv2Patchnotes.Size = new System.Drawing.Size(1131, 537);
+            this.Wv2Patchnotes.Size = new System.Drawing.Size(1256, 539);
             this.Wv2Patchnotes.Source = new System.Uri("https://docs.google.com/document/d/1eG95mVD_TYnvkfKEwcXaQvWS5AYbFIq4rDdXrifsKUw", System.UriKind.Absolute);
             this.Wv2Patchnotes.TabIndex = 1;
             this.Wv2Patchnotes.ZoomFactor = 1D;
@@ -100,9 +100,9 @@ namespace PatchLauncher
             this.BtnLaunch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnLaunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnLaunch.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnLaunch.Location = new System.Drawing.Point(12, 794);
+            this.BtnLaunch.Location = new System.Drawing.Point(12, 661);
             this.BtnLaunch.Name = "BtnLaunch";
-            this.BtnLaunch.Size = new System.Drawing.Size(210, 61);
+            this.BtnLaunch.Size = new System.Drawing.Size(200, 51);
             this.BtnLaunch.TabIndex = 2;
             this.BtnLaunch.TabStop = false;
             this.BtnLaunch.Text = "LAUNCH";
@@ -120,7 +120,7 @@ namespace PatchLauncher
             this.PibHeader.ErrorImage = null;
             this.PibHeader.Image = ((System.Drawing.Image)(resources.GetObject("PibHeader.Image")));
             this.PibHeader.InitialImage = null;
-            this.PibHeader.Location = new System.Drawing.Point(390, 0);
+            this.PibHeader.Location = new System.Drawing.Point(253, -1);
             this.PibHeader.Name = "PibHeader";
             this.PibHeader.Size = new System.Drawing.Size(775, 105);
             this.PibHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -132,7 +132,7 @@ namespace PatchLauncher
             // 
             this.PiBYoutube.BackColor = System.Drawing.Color.Black;
             this.PiBYoutube.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBYoutube.Location = new System.Drawing.Point(635, 12);
+            this.PiBYoutube.Location = new System.Drawing.Point(497, 11);
             this.PiBYoutube.Name = "PiBYoutube";
             this.PiBYoutube.Size = new System.Drawing.Size(55, 55);
             this.PiBYoutube.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -144,7 +144,7 @@ namespace PatchLauncher
             // 
             this.PiBDiscord.BackColor = System.Drawing.Color.Black;
             this.PiBDiscord.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBDiscord.Location = new System.Drawing.Point(696, 12);
+            this.PiBDiscord.Location = new System.Drawing.Point(558, 11);
             this.PiBDiscord.Name = "PiBDiscord";
             this.PiBDiscord.Size = new System.Drawing.Size(55, 55);
             this.PiBDiscord.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -156,7 +156,7 @@ namespace PatchLauncher
             // 
             this.PiBModDB.BackColor = System.Drawing.Color.Black;
             this.PiBModDB.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBModDB.Location = new System.Drawing.Point(757, 12);
+            this.PiBModDB.Location = new System.Drawing.Point(619, 11);
             this.PiBModDB.Name = "PiBModDB";
             this.PiBModDB.Size = new System.Drawing.Size(55, 55);
             this.PiBModDB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -168,7 +168,7 @@ namespace PatchLauncher
             // 
             this.PiBThemeSwitcher.BackColor = System.Drawing.Color.Black;
             this.PiBThemeSwitcher.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBThemeSwitcher.Location = new System.Drawing.Point(865, 12);
+            this.PiBThemeSwitcher.Location = new System.Drawing.Point(727, 11);
             this.PiBThemeSwitcher.Name = "PiBThemeSwitcher";
             this.PiBThemeSwitcher.Size = new System.Drawing.Size(55, 55);
             this.PiBThemeSwitcher.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -193,9 +193,9 @@ namespace PatchLauncher
             this.BtnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOptions.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnOptions.Location = new System.Drawing.Point(1090, 794);
+            this.BtnOptions.Location = new System.Drawing.Point(862, 661);
             this.BtnOptions.Name = "BtnOptions";
-            this.BtnOptions.Size = new System.Drawing.Size(210, 61);
+            this.BtnOptions.Size = new System.Drawing.Size(200, 51);
             this.BtnOptions.TabIndex = 10;
             this.BtnOptions.TabStop = false;
             this.BtnOptions.Text = "OPTIONS";
@@ -212,27 +212,29 @@ namespace PatchLauncher
             // 
             // PBarActualFile
             // 
-            this.PBarActualFile.Location = new System.Drawing.Point(228, 825);
+            this.PBarActualFile.Location = new System.Drawing.Point(218, 693);
             this.PBarActualFile.Name = "PBarActualFile";
-            this.PBarActualFile.Size = new System.Drawing.Size(551, 25);
+            this.PBarActualFile.Size = new System.Drawing.Size(439, 15);
             this.PBarActualFile.TabIndex = 12;
             this.PBarActualFile.Visible = false;
             // 
             // LblDownloadSpeed
             // 
             this.LblDownloadSpeed.AutoSize = true;
-            this.LblDownloadSpeed.Location = new System.Drawing.Point(524, 793);
+            this.LblDownloadSpeed.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblDownloadSpeed.Location = new System.Drawing.Point(558, 665);
             this.LblDownloadSpeed.Name = "LblDownloadSpeed";
-            this.LblDownloadSpeed.Size = new System.Drawing.Size(92, 15);
+            this.LblDownloadSpeed.Size = new System.Drawing.Size(103, 25);
             this.LblDownloadSpeed.TabIndex = 13;
-            this.LblDownloadSpeed.Text = "Downloadspeed";
+            this.LblDownloadSpeed.Text = "@ 32 MB/s";
             // 
             // LblBytes
             // 
             this.LblBytes.AutoSize = true;
-            this.LblBytes.Location = new System.Drawing.Point(785, 820);
+            this.LblBytes.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblBytes.Location = new System.Drawing.Point(663, 683);
             this.LblBytes.Name = "LblBytes";
-            this.LblBytes.Size = new System.Drawing.Size(71, 15);
+            this.LblBytes.Size = new System.Drawing.Size(114, 25);
             this.LblBytes.TabIndex = 14;
             this.LblBytes.Text = "Percentages";
             // 
@@ -245,9 +247,9 @@ namespace PatchLauncher
             this.BtnInstall.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInstall.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnInstall.Location = new System.Drawing.Point(12, 794);
+            this.BtnInstall.Location = new System.Drawing.Point(12, 661);
             this.BtnInstall.Name = "BtnInstall";
-            this.BtnInstall.Size = new System.Drawing.Size(210, 61);
+            this.BtnInstall.Size = new System.Drawing.Size(200, 51);
             this.BtnInstall.TabIndex = 16;
             this.BtnInstall.TabStop = false;
             this.BtnInstall.Text = "INSTALL GAME";
@@ -261,20 +263,20 @@ namespace PatchLauncher
             // LblFileName
             // 
             this.LblFileName.AutoSize = true;
-            this.LblFileName.Location = new System.Drawing.Point(228, 793);
+            this.LblFileName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblFileName.Location = new System.Drawing.Point(218, 665);
             this.LblFileName.Name = "LblFileName";
-            this.LblFileName.Size = new System.Drawing.Size(55, 15);
+            this.LblFileName.Size = new System.Drawing.Size(88, 25);
             this.LblFileName.TabIndex = 17;
             this.LblFileName.Text = "Filename";
             // 
             // BFME1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1536, 864);
+            this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnInstall);
             this.Controls.Add(this.LblBytes);

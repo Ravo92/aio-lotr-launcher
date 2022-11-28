@@ -74,8 +74,7 @@
             // 
             // GameSelect
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1024, 381);
             this.Controls.Add(this.BtnBFME2EP1);
             this.Controls.Add(this.BtnBFME2);

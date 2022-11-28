@@ -30,6 +30,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Classes\InterfaceProgress.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Classes\NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="MainIcon.ico" />
   </ItemGroup>
 

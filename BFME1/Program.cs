@@ -14,8 +14,8 @@ namespace PatchLauncher
         static void Main(string[] args)
         {
             // ***this line is added***
-            if (Environment.OSVersion.Version.Major >= 6)
-                SetProcessDPIAware();
+            // if (Environment.OSVersion.Version.Major >= 6)
+            //    SetProcessDPIAware();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -30,7 +30,7 @@ namespace PatchLauncher
                 Application.Run(new BFME1());
             }
         }
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool SetProcessDPIAware();
+        //[System.Runtime.InteropServices.DllImport("user32.dll")]
+        //private static extern bool SetProcessDPIAware();
     }
 }

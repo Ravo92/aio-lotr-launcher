@@ -17,6 +17,7 @@ using SharpCompress.Common;
 using System.Linq;
 using SharpCompress.Archives;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace PatchLauncher
 {
@@ -48,17 +49,17 @@ namespace PatchLauncher
 
             // label-Styles
             LblDownloadSpeed.Text = "";
-            LblDownloadSpeed.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblDownloadSpeed.Font = ConstStrings.UseFont("Albertus Nova", 14);
             LblDownloadSpeed.ForeColor = Color.FromArgb(192, 145, 69);
             LblDownloadSpeed.BackColor = Color.Transparent;
 
             LblFileName.Text = "";
-            LblFileName.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblFileName.Font = ConstStrings.UseFont("Albertus Nova", 14);
             LblFileName.ForeColor = Color.FromArgb(192, 145, 69);
             LblFileName.BackColor = Color.Transparent;
 
             LblBytes.Text = "";
-            LblBytes.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblBytes.Font = ConstStrings.UseFont("Albertus Nova", 14);
             LblBytes.ForeColor = Color.FromArgb(192, 145, 69);
             LblBytes.BackColor = Color.Transparent;
 
@@ -226,6 +227,7 @@ namespace PatchLauncher
                 _ = WindowMover.SendMessage(Handle, WindowMover.WM_NCLBUTTONDOWN, WindowMover.HT_CAPTION, 0);
             }
         }
+
         #endregion
 
         #region Button Behaviours
@@ -692,6 +694,11 @@ namespace PatchLauncher
                 await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L639ovBau8cZtwBETuRtCuQkYHMq6jdQ&confirm=t", Application.StartupPath + "\\Download\\Textures.7z");
             }
 
+            if (!File.Exists(Application.StartupPath + "\\Download\\Audio.7z"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L7j-72tM6e_Pte1Wfc_B1XRS-fl81knT&confirm=t", Application.StartupPath + "\\Download\\Audio.7z");
+            }
+
             if (!File.Exists(Application.StartupPath + "\\Download\\Movies.7z"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L6caFHjV5eq_o6Jt_Z_9IITKo1DcbgGj&confirm=t", Application.StartupPath + "\\Download\\Movies.7z");
@@ -705,113 +712,44 @@ namespace PatchLauncher
 
         public async Task ExtractGame()
         {
-            int counter = 0;
             SetPBar(0);
-            SetPBarMax(371);
-            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
+            SetPBarMax(100);
 
-            await Task.Run(() =>
-                {
-                    using SevenZipArchive archiveSystem = SevenZipArchive.Open(Application.StartupPath + "\\Download\\System.7z");
-                    {
-                        SetTextPercentages("Extracting from Archive 1/5: System.7zip");
-                        foreach (var entry in archiveSystem.Entries)
-                        {
-                            SetTextFileName("Extracting file: " + entry.ToString());
-                            counter++;
-                            SetPBar(counter);
-                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
-                            {
-                                ExtractFullPath = true,
-                                Overwrite = true,
-                                PreserveFileTime = true,
-                                PreserveAttributes = true
-                            });
-                        }
-                    }
+            var progressHandler = new Progress<ExtractionProgress>(progress =>
+            {
+                SetPBar(progress.Percentage);
+                SetTextFileName(progress.Filename!);
+                SetTextDlSpeed(String.Concat(progress.Count, "/", progress.Max));
+            });
 
-                    using SevenZipArchive archiveTextures = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Textures.7z");
-                    {
-                        SetTextPercentages("Extracting from Archive 2/5: Textures.7zip");
-                        foreach (var entry in archiveTextures.Entries)
-                        {
-                            SetTextFileName("Extracting file: " + entry.ToString());
-                            counter++;
-                            SetPBar(counter);
-                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
-                            {
-                                ExtractFullPath = true,
-                                Overwrite = true,
-                                PreserveFileTime = true,
-                                PreserveAttributes = true
-                            });
-                        }
-                    }
+            var archiveFileNames = new List<string>()
+            {
+                "Textures.7z",
+                "System.7z",
+                "Audio.7z",
+                "LangPack_EN.7z",
+                "Bin.7z",
+                "Movies.7z"
+            };
 
-                    using SevenZipArchive archiveLangEN = SevenZipArchive.Open(Application.StartupPath + "\\Download\\LangPack_EN.7z");
-                    {
-                        SetTextPercentages("Extracting from Archive 3/5: LangPack_EN.7zip");
-                        foreach (var entry in archiveLangEN.Entries)
-                        {
-                            SetTextFileName("Extracting file: " + entry.ToString());
-                            counter++;
-                            SetPBar(counter);
-                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
-                            {
-                                ExtractFullPath = true,
-                                Overwrite = true,
-                                PreserveFileTime = true,
-                                PreserveAttributes = true
-                            });
-                        }
-                    }
+            for (int i = 0; i < archiveFileNames.Count; i++)
+            {
+                SetTextPercentages($"Extracting from Archive {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
+                await ZIPFileHelper.ExtractZIP(archiveFileNames[i], Properties.Settings.Default.GameInstallPath, progressHandler);
+            }
 
-                    using SevenZipArchive archiveBin = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Bin.7z");
-                    {
-                        SetTextPercentages("Extracting from Archive 4/5: Bin.7zip");
-                        foreach (var entry in archiveBin.Entries.Where(entry => !entry.IsDirectory))
-                        {
-                            SetTextFileName("Extracting file: " + entry.ToString());
-                            counter++;
-                            SetPBar(counter);
-                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
-                            {
-                                ExtractFullPath = true,
-                                Overwrite = true,
-                                PreserveFileTime = true,
-                                PreserveAttributes = true
-                            });
-                        }
-                    }
-
-                    using SevenZipArchive archiveMovies = SevenZipArchive.Open(Application.StartupPath + "\\Download\\Movies.7z");
-                    {
-                        SetTextPercentages("Extracting from Archive 5/5: Movies.7zip");
-                        foreach (var entry in archiveMovies.Entries.Where(entry => !entry.IsDirectory))
-                        {
-                            SetTextFileName("Extracting file: " + entry.ToString());
-                            counter++;
-                            SetPBar(counter);
-                            entry.WriteToDirectory(Properties.Settings.Default.GameInstallPath, new ExtractionOptions()
-                            {
-                                ExtractFullPath = true,
-                                Overwrite = true,
-                                PreserveFileTime = true,
-                                PreserveAttributes = true
-                            });
-                        }
-                    }
-                });
-                FinishingGameInstall();
+            FinishingGameInstall();               
         }
 
         private void FinishingGameInstall()
         {
-            if(ReadXMLFile.GetXMLFileVersion() != 29)
+            Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
+            Invoke((MethodInvoker)(() => LblBytes.Hide()));
+            Invoke((MethodInvoker)(() => LblFileName.Hide()));
+            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
+
+            if (ReadXMLFile.GetXMLFileVersion() != 29)
             {
-                Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
-                Invoke((MethodInvoker)(() => LblBytes.Hide()));
-                Invoke((MethodInvoker)(() => LblFileName.Hide()));
                 Invoke((MethodInvoker)(() => BtnOptions.Show()));
 
                 Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
@@ -819,9 +757,6 @@ namespace PatchLauncher
             }
             else if (ReadXMLFile.GetXMLFileVersion() == 29)
             {
-                Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
-                Invoke((MethodInvoker)(() => LblBytes.Hide()));
-                Invoke((MethodInvoker)(() => LblFileName.Hide()));
                 Invoke((MethodInvoker)(() => BtnLaunch.Text = C_UPDATE_VERSION));
                 Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
                 Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
@@ -910,7 +845,7 @@ namespace PatchLauncher
         }
 
         delegate void SetTextPercentagesCallback(string text);
-        private void SetTextPercentages(string text)
+        public void SetTextPercentages(string text)
         {
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
@@ -927,7 +862,7 @@ namespace PatchLauncher
         }
 
         delegate void SetPBarCallback(int value);
-        private void SetPBar(int value)
+        public void SetPBar(int value)
         {
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.

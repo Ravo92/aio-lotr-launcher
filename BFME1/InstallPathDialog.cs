@@ -46,6 +46,10 @@ namespace PatchLauncher
             {
                 TxtInstallPath.Text = Properties.Settings.Default.GameInstallPath;
             }
+            else if (RegistryFunctions.ReadRegKey("path") != null)
+            {
+                TxtInstallPath.Text = RegistryFunctions.ReadRegKey("path");
+            }
             else
             {
                 TxtInstallPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), ConstStrings.C_GAMEFOLDER_NAME);
