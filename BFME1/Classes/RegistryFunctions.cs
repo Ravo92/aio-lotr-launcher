@@ -135,7 +135,7 @@ namespace PatchLauncher.Classes
             keyFolder6.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             RegistryKey keyFolder7 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\ergc");
-            keyFolder7.SetValue("", RandomCDKeyGenerator(18));
+            keyFolder7.SetValue("", RandomCDKeyGenerator(20));
 
             keyFolder1.Close();
             keyFolder2.Close();
