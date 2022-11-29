@@ -27,7 +27,7 @@ namespace PatchLauncher
         SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
         int iconNumber = Properties.Settings.Default.BackgroundMusicIcon;
 
-        public const string C_UPDATE_VERSION = "Patch 2.22v29";
+        public const string C_UPDATE_VERSION = "29";
 
         public BFME1()
         {
@@ -65,14 +65,6 @@ namespace PatchLauncher
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
             PBarActualFile.BackColor = Color.FromArgb(192, 145, 69);
-
-            // Button-Styles
-            BtnClose.FlatAppearance.BorderSize = 0;
-            BtnClose.FlatStyle = FlatStyle.Flat;
-            BtnClose.BackColor = Color.Transparent;
-            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnClose.Font = ConstStrings.UseFont("Albertus Nova", 14);
-            BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnLaunch.FlatAppearance.BorderSize = 0;
             BtnLaunch.FlatStyle = FlatStyle.Flat;
@@ -199,11 +191,9 @@ namespace PatchLauncher
                 LblFileName.Show();
 
                 BtnInstall.Hide();
-                BtnOptions.Hide();
                 BtnLaunch.Show();
 
                 BtnLaunch.Enabled = false;
-                BtnClose.Enabled = false;
                 UpdateRoutine();
             }
             #endregion
@@ -232,32 +222,6 @@ namespace PatchLauncher
 
         #region Button Behaviours
 
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            Thread.Sleep(1000);
-            Application.Exit();
-        }
-
-        private void BtnClose_MouseLeave(object sender, EventArgs e)
-        {
-            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
-        }
-
-        private void BtnClose_MouseEnter(object sender, EventArgs e)
-        {
-            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
-            BtnClose.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => PlaySoundHover());
-        }
-
-        private void BtnClose_MouseDown(object sender, MouseEventArgs e)
-        {
-            BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
-            BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => PlaySoundClick());
-        }
-
         private void BtnLaunch_Click(object sender, EventArgs e)
         {
             if (ReadXMLFile.GetXMLFileVersion() == 29 && Properties.Settings.Default.PatchVersionInstalled != 29)
@@ -267,13 +231,11 @@ namespace PatchLauncher
                 LblDownloadSpeed.Show();
                 LblFileName.Show();
 
-                BtnOptions.Hide();
                 BtnLaunch.Show();
 
                 LblFileName.Text = "Preparing Update...";
 
                 BtnLaunch.Enabled = false;
-                BtnClose.Enabled = false;
                 UpdateRoutine();
             }
             else
@@ -353,13 +315,11 @@ namespace PatchLauncher
                 LblFileName.Show();
 
                 BtnInstall.Hide();
-                BtnOptions.Hide();
                 BtnLaunch.Show();
 
                 LblFileName.Text = "Preparing Setup...";
 
                 BtnLaunch.Enabled = false;
-                BtnClose.Enabled = false;
 
                 await InstallRoutine();
             }
@@ -549,6 +509,7 @@ namespace PatchLauncher
 
         public async Task DownloadUpdate()
         {
+            SetPBar(0);
             SetPBarMax(100);
 
             var downloadOpt = new DownloadConfiguration()
@@ -577,19 +538,47 @@ namespace PatchLauncher
             // cancelled or download completed successfully.
             downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/DTNGQqMHnJHYj6Z/download/asset.dat", Application.StartupPath + "\\Patch_29\\asset.dat");
-            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/kGJRQwLbWb23Ymy/download/_wsmaps222.big", Application.StartupPath + "\\Patch_29\\_wsmaps222.big");
-            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/LNRJjzi579CBAjB/download/_patch222optional.big", Application.StartupPath + "\\Patch_29\\_patch222optional.big");
-            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/qc7qkE6W52E8qwy/download/_patch222newtextures.big", Application.StartupPath + "\\Patch_29\\_patch222newtextures.big");
-            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/d47Yq6ZG99PJaZq/download/_patch222libraries.big", Application.StartupPath + "\\Patch_29\\_patch222libraries.big");
-            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/GsEdcqaY6gbmrSd/download/_patch222bases.big", Application.StartupPath + "\\Patch_29\\_patch222bases.big");
-            await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/KnPrKk9Sc9FpAr4/download/_patch222.big", Application.StartupPath + "\\Patch_29\\_patch222.big");
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/DTNGQqMHnJHYj6Z/download/asset.dat", Application.StartupPath + "\\Patch_29\\asset.dat");
+            }
+
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_wsmaps222.big"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/kGJRQwLbWb23Ymy/download/_wsmaps222.big", Application.StartupPath + "\\Patch_29\\_wsmaps222.big");
+            }
+
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/LNRJjzi579CBAjB/download/_patch222optional.big", Application.StartupPath + "\\Patch_29\\_patch222optional.big");
+            }
+
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/qc7qkE6W52E8qwy/download/_patch222newtextures.big", Application.StartupPath + "\\Patch_29\\_patch222newtextures.big");
+            }
+
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/d47Yq6ZG99PJaZq/download/_patch222libraries.big", Application.StartupPath + "\\Patch_29\\_patch222libraries.big");
+            }
+
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/GsEdcqaY6gbmrSd/download/_patch222bases.big", Application.StartupPath + "\\Patch_29\\_patch222bases.big");
+            }
+
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            {
+                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/KnPrKk9Sc9FpAr4/download/_patch222.big", Application.StartupPath + "\\Patch_29\\_patch222.big");
+            }
         }
 
         public async Task ExtractUpdate()
         {
             Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
             Invoke((MethodInvoker)(() => LblBytes.Hide()));
+            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Text = "Copy files and apply patch..."));
 
             await Task.Run(() =>
@@ -606,10 +595,8 @@ namespace PatchLauncher
             Invoke((MethodInvoker)(() => LblBytes.Hide()));
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
-            Invoke((MethodInvoker)(() => BtnOptions.Show()));
             
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
-            Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
 
             Properties.Settings.Default.PatchVersionInstalled = 29;
             Properties.Settings.Default.Save();
@@ -750,16 +737,12 @@ namespace PatchLauncher
 
             if (ReadXMLFile.GetXMLFileVersion() != 29)
             {
-                Invoke((MethodInvoker)(() => BtnOptions.Show()));
-
                 Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
-                Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
             }
             else if (ReadXMLFile.GetXMLFileVersion() == 29)
             {
-                Invoke((MethodInvoker)(() => BtnLaunch.Text = C_UPDATE_VERSION));
+                Invoke((MethodInvoker)(() => BtnLaunch.Text = "INSTALL PATCH 2.22V29"));
                 Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
-                Invoke((MethodInvoker)(() => BtnClose.Enabled = true));
             }
 
            //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))

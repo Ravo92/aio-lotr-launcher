@@ -32,7 +32,6 @@ namespace PatchLauncher
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BFME1));
-            this.BtnClose = new System.Windows.Forms.Button();
             this.Wv2Patchnotes = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.BtnLaunch = new System.Windows.Forms.Button();
             this.PibHeader = new System.Windows.Forms.PictureBox();
@@ -55,28 +54,6 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBModDB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBThemeSwitcher)).BeginInit();
             this.SuspendLayout();
-            // 
-            // BtnClose
-            // 
-            this.BtnClose.BackColor = System.Drawing.Color.Black;
-            this.BtnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnClose.FlatAppearance.BorderSize = 0;
-            this.BtnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnClose.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnClose.Location = new System.Drawing.Point(1068, 661);
-            this.BtnClose.Name = "BtnClose";
-            this.BtnClose.Size = new System.Drawing.Size(200, 51);
-            this.BtnClose.TabIndex = 0;
-            this.BtnClose.TabStop = false;
-            this.BtnClose.Text = "QUIT";
-            this.BtnClose.UseMnemonic = false;
-            this.BtnClose.UseVisualStyleBackColor = false;
-            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
-            this.BtnClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnClose_MouseDown);
-            this.BtnClose.MouseEnter += new System.EventHandler(this.BtnClose_MouseEnter);
-            this.BtnClose.MouseLeave += new System.EventHandler(this.BtnClose_MouseLeave);
             // 
             // Wv2Patchnotes
             // 
@@ -193,7 +170,7 @@ namespace PatchLauncher
             this.BtnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOptions.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnOptions.Location = new System.Drawing.Point(862, 661);
+            this.BtnOptions.Location = new System.Drawing.Point(1068, 661);
             this.BtnOptions.Name = "BtnOptions";
             this.BtnOptions.Size = new System.Drawing.Size(200, 51);
             this.BtnOptions.TabIndex = 10;
@@ -283,7 +260,6 @@ namespace PatchLauncher
             this.Controls.Add(this.LblDownloadSpeed);
             this.Controls.Add(this.PBarActualFile);
             this.Controls.Add(this.Wv2Patchnotes);
-            this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnOptions);
             this.Controls.Add(this.BtnLaunch);
             this.Controls.Add(this.PiBThemeSwitcher);
@@ -293,11 +269,10 @@ namespace PatchLauncher
             this.Controls.Add(this.PibHeader);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MdiChildrenMinimizedAnchorBottom = false;
-            this.MinimizeBox = false;
             this.Name = "BFME1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bfme 2.22 Launcher";
@@ -314,8 +289,6 @@ namespace PatchLauncher
         }
 
         #endregion
-
-        private Button BtnClose;
         private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
         private Button BtnLaunch;
         private PictureBox PibHeader;
