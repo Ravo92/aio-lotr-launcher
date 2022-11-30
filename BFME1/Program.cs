@@ -1,5 +1,6 @@
 using PatchLauncher.Helper;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PatchLauncher
@@ -27,7 +28,7 @@ namespace PatchLauncher
             {
                 ApplicationConfiguration.Initialize();
 
-                if (RegistryFunctions.ReadRegKey("path") == null)
+                if (RegistryFunctions.ReadRegKey("path") == null || !Directory.Exists(RegistryFunctions.ReadRegKey("path")))
                 {
                     Properties.Settings.Default.IsGameInstalled = false;
                     Properties.Settings.Default.Save();

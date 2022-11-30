@@ -109,7 +109,6 @@ namespace PatchLauncher
             this.PibHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PibHeader.TabIndex = 5;
             this.PibHeader.TabStop = false;
-            this.PibHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PibHeader_MouseDown);
             // 
             // PiBYoutube
             // 
@@ -344,7 +343,6 @@ namespace PatchLauncher
             this.Name = "BFME1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bfme 2.22 Launcher";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainWindow_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).EndInit();

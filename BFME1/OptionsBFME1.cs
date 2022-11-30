@@ -319,7 +319,7 @@ namespace PatchLauncher
 
             if (FlagBrutalAI && ConstStrings.GameInstallPath() != null)
                 File.Copy(Path.Combine("Tools", "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
-            else if (ConstStrings.GameInstallPath() != null)
+            else if (ConstStrings.GameInstallPath() != null && File.Exists(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big")))
                 File.Delete(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"));
 
             Close();

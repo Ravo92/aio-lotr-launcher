@@ -165,17 +165,20 @@ namespace PatchLauncher
             }
             #endregion
 
-            MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE));
-
             #region Internal Logic
             //Internal Logic
+            if (File.Exists(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE)))
+            {
+                MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE));
+            }
+
             if (File.Exists(Path.Combine(ConstStrings.GameInstallPath() + C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
             {
                 Properties.Settings.Default.PatchVersionInstalled = 29;
                 Properties.Settings.Default.Save();
             }
 
-            if (ConstStrings.GameInstallPath() != null && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe"))
+            if (ConstStrings.GameInstallPath() != null && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe") && Properties.Settings.Default.PatchVersionInstalled == 29)
             {
                 LblBytes.Hide();
                 LblDownloadSpeed.Hide();
@@ -197,9 +200,11 @@ namespace PatchLauncher
                 BtnLaunch.Hide();
                 BtnUpdate.Hide();
             }
-            else if ((ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe")) || ((true) && Properties.Settings.Default.PatchVersionInstalled != 29))
+            else if ((ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe")) || (File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe") && Properties.Settings.Default.PatchVersionInstalled != 29))
             {
-
+                BtnInstall.Hide();
+                BtnLaunch.Hide();
+                BtnUpdate.Show();
             }
             else
             {
@@ -209,27 +214,6 @@ namespace PatchLauncher
             }
             #endregion
         }
-
-        #region Form Behaviours
-        private void MainWindow_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                WindowMover.ReleaseCapture();
-                _ = WindowMover.SendMessage(Handle, WindowMover.WM_NCLBUTTONDOWN, WindowMover.HT_CAPTION, 0);
-            }
-        }
-
-        private void PibHeader_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                WindowMover.ReleaseCapture();
-                _ = WindowMover.SendMessage(Handle, WindowMover.WM_NCLBUTTONDOWN, WindowMover.HT_CAPTION, 0);
-            }
-        }
-
-        #endregion
 
         #region Button Behaviours
 
@@ -339,21 +323,21 @@ namespace PatchLauncher
 
         private void BtnUpdate_MouseLeave(object sender, EventArgs e)
         {
-            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
+            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK_GREEN;
+            BtnUpdate.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnUpdate_MouseEnter(object sender, EventArgs e)
         {
-            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
-            BtnInstall.ForeColor = Color.FromArgb(100, 53, 5);
+            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnUpdate.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => PlaySoundHover());
         }
 
         private void BtnUpdate_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
-            BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
+            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnUpdate.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => PlaySoundClick());
         }
 
@@ -648,13 +632,16 @@ namespace PatchLauncher
             Invoke((MethodInvoker)(() => LblBytes.Hide()));
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
-            
+
+            Invoke((MethodInvoker)(() => BtnUpdate.Enabled = false));
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+
+            Invoke((MethodInvoker)(() => BtnLaunch.Show()));
 
             Properties.Settings.Default.PatchVersionInstalled = 29;
             Properties.Settings.Default.Save();
 
-            Invoke((MethodInvoker)(() => BtnLaunch.Text = "LAUNCH"));
+            Invoke((MethodInvoker)(() => BtnLaunch.Text = "PLAY GAME"));
 
             //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
             //{
@@ -752,14 +739,11 @@ namespace PatchLauncher
 
         public async Task ExtractGame()
         {
-            SetPBar(0);
-            SetPBarMax(100);
-
             var progressHandler = new Progress<ExtractionProgress>(progress =>
             {
                 SetPBar(progress.Percentage);
                 SetTextFileName(progress.Filename!);
-                SetTextDlSpeed(String.Concat(progress.Count, "/", progress.Max));
+                SetTextDlSpeed(string.Concat(progress.Count, "/", progress.Max));
             });
 
             var archiveFileNames = new List<string>()
@@ -788,14 +772,16 @@ namespace PatchLauncher
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
 
+            Invoke((MethodInvoker)(() => BtnLaunch.Hide()));
+
             if (ReadXMLFile.GetXMLFileVersion() != 29)
             {
-                Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+                Invoke((MethodInvoker)(() => BtnUpdate.Enabled = true));
             }
             else if (ReadXMLFile.GetXMLFileVersion() == 29)
             {
-                Invoke((MethodInvoker)(() => BtnLaunch.Text = "INSTALL 2.22V29"));
-                Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+                Invoke((MethodInvoker)(() => BtnUpdate.Text = "INSTALL 2.22V29"));
+                Invoke((MethodInvoker)(() => BtnUpdate.Enabled = true));
             }
 
            //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
