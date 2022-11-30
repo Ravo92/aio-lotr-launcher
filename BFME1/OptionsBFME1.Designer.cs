@@ -64,7 +64,7 @@
             this.BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancel.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnCancel.Location = new System.Drawing.Point(940, 801);
+            this.BtnCancel.Location = new System.Drawing.Point(412, 734);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(200, 51);
             this.BtnCancel.TabIndex = 1;
@@ -86,7 +86,7 @@
             this.BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnApply.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnApply.Location = new System.Drawing.Point(734, 801);
+            this.BtnApply.Location = new System.Drawing.Point(412, 677);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(200, 51);
             this.BtnApply.TabIndex = 2;
@@ -108,7 +108,7 @@
             this.BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDefault.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnDefault.Location = new System.Drawing.Point(12, 801);
+            this.BtnDefault.Location = new System.Drawing.Point(12, 734);
             this.BtnDefault.Name = "BtnDefault";
             this.BtnDefault.Size = new System.Drawing.Size(200, 51);
             this.BtnDefault.TabIndex = 3;
@@ -156,7 +156,7 @@
             // LblEAX
             // 
             this.LblEAX.AutoSize = true;
-            this.LblEAX.Location = new System.Drawing.Point(75, 230);
+            this.LblEAX.Location = new System.Drawing.Point(75, 280);
             this.LblEAX.Name = "LblEAX";
             this.LblEAX.Size = new System.Drawing.Size(43, 15);
             this.LblEAX.TabIndex = 8;
@@ -171,7 +171,7 @@
             this.ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkEAX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkEAX.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkEAX.Location = new System.Drawing.Point(35, 230);
+            this.ChkEAX.Location = new System.Drawing.Point(35, 280);
             this.ChkEAX.Margin = new System.Windows.Forms.Padding(0);
             this.ChkEAX.Name = "ChkEAX";
             this.ChkEAX.Size = new System.Drawing.Size(29, 29);
@@ -290,7 +290,7 @@
             // LblWindowed
             // 
             this.LblWindowed.AutoSize = true;
-            this.LblWindowed.Location = new System.Drawing.Point(75, 280);
+            this.LblWindowed.Location = new System.Drawing.Point(75, 230);
             this.LblWindowed.Name = "LblWindowed";
             this.LblWindowed.Size = new System.Drawing.Size(43, 15);
             this.LblWindowed.TabIndex = 19;
@@ -305,7 +305,7 @@
             this.ChkWindowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkWindowed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkWindowed.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkWindowed.Location = new System.Drawing.Point(35, 280);
+            this.ChkWindowed.Location = new System.Drawing.Point(35, 230);
             this.ChkWindowed.Margin = new System.Windows.Forms.Padding(0);
             this.ChkWindowed.Name = "ChkWindowed";
             this.ChkWindowed.Size = new System.Drawing.Size(29, 29);
@@ -354,9 +354,10 @@
             // LblWarningAI
             // 
             this.LblWarningAI.AutoSize = true;
-            this.LblWarningAI.Location = new System.Drawing.Point(221, 792);
+            this.LblWarningAI.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblWarningAI.Location = new System.Drawing.Point(12, 518);
             this.LblWarningAI.Name = "LblWarningAI";
-            this.LblWarningAI.Size = new System.Drawing.Size(43, 15);
+            this.LblWarningAI.Size = new System.Drawing.Size(69, 25);
             this.LblWarningAI.TabIndex = 22;
             this.LblWarningAI.Text = "Theme";
             // 
@@ -365,7 +366,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1152, 864);
+            this.ClientSize = new System.Drawing.Size(1152, 798);
             this.Controls.Add(this.LblWarningAI);
             this.Controls.Add(this.LblBrutalAI);
             this.Controls.Add(this.ChkBrutalAI);

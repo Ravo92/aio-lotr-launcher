@@ -47,12 +47,18 @@ namespace PatchLauncher
             this.LblBytes = new System.Windows.Forms.Label();
             this.BtnInstall = new System.Windows.Forms.Button();
             this.LblFileName = new System.Windows.Forms.Label();
+            this.PibLoadingRing = new System.Windows.Forms.PictureBox();
+            this.LblPatchNotes = new PatchLauncher.Helper.CustomLabel();
+            this.BtnUpdate = new System.Windows.Forms.Button();
+            this.PibLoadingBorder = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBModDB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBThemeSwitcher)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PibLoadingRing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PibLoadingBorder)).BeginInit();
             this.SuspendLayout();
             // 
             // Wv2Patchnotes
@@ -61,9 +67,9 @@ namespace PatchLauncher
             this.Wv2Patchnotes.BackColor = System.Drawing.Color.Black;
             this.Wv2Patchnotes.CreationProperties = null;
             this.Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.Wv2Patchnotes.Location = new System.Drawing.Point(12, 110);
+            this.Wv2Patchnotes.Location = new System.Drawing.Point(218, 110);
             this.Wv2Patchnotes.Name = "Wv2Patchnotes";
-            this.Wv2Patchnotes.Size = new System.Drawing.Size(1256, 539);
+            this.Wv2Patchnotes.Size = new System.Drawing.Size(1050, 539);
             this.Wv2Patchnotes.Source = new System.Uri("https://docs.google.com/document/d/1eG95mVD_TYnvkfKEwcXaQvWS5AYbFIq4rDdXrifsKUw", System.UriKind.Absolute);
             this.Wv2Patchnotes.TabIndex = 1;
             this.Wv2Patchnotes.ZoomFactor = 1D;
@@ -247,6 +253,64 @@ namespace PatchLauncher
             this.LblFileName.TabIndex = 17;
             this.LblFileName.Text = "Filename";
             // 
+            // PibLoadingRing
+            // 
+            this.PibLoadingRing.BackColor = System.Drawing.Color.Black;
+            this.PibLoadingRing.Image = ((System.Drawing.Image)(resources.GetObject("PibLoadingRing.Image")));
+            this.PibLoadingRing.Location = new System.Drawing.Point(587, 292);
+            this.PibLoadingRing.Name = "PibLoadingRing";
+            this.PibLoadingRing.Size = new System.Drawing.Size(128, 128);
+            this.PibLoadingRing.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PibLoadingRing.TabIndex = 18;
+            this.PibLoadingRing.TabStop = false;
+            // 
+            // LblPatchNotes
+            // 
+            this.LblPatchNotes.AutoSize = true;
+            this.LblPatchNotes.BackColor = System.Drawing.Color.Transparent;
+            this.LblPatchNotes.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.LblPatchNotes.Font = new System.Drawing.Font("Albertus MT", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblPatchNotes.ForeColor = System.Drawing.SystemColors.Control;
+            this.LblPatchNotes.Location = new System.Drawing.Point(544, 488);
+            this.LblPatchNotes.Name = "LblPatchNotes";
+            this.LblPatchNotes.OutlineForeColor = System.Drawing.Color.Black;
+            this.LblPatchNotes.OutlineWidth = 4F;
+            this.LblPatchNotes.Size = new System.Drawing.Size(208, 25);
+            this.LblPatchNotes.TabIndex = 19;
+            this.LblPatchNotes.Text = "Loading Patch-Notes...";
+            // 
+            // BtnUpdate
+            // 
+            this.BtnUpdate.BackColor = System.Drawing.Color.Black;
+            this.BtnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnUpdate.FlatAppearance.BorderSize = 0;
+            this.BtnUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnUpdate.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnUpdate.Location = new System.Drawing.Point(12, 661);
+            this.BtnUpdate.Name = "BtnUpdate";
+            this.BtnUpdate.Size = new System.Drawing.Size(200, 51);
+            this.BtnUpdate.TabIndex = 20;
+            this.BtnUpdate.TabStop = false;
+            this.BtnUpdate.Text = "UPDATE GAME";
+            this.BtnUpdate.UseMnemonic = false;
+            this.BtnUpdate.UseVisualStyleBackColor = false;
+            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
+            this.BtnUpdate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnUpdate_MouseDown);
+            this.BtnUpdate.MouseEnter += new System.EventHandler(this.BtnUpdate_MouseEnter);
+            this.BtnUpdate.MouseLeave += new System.EventHandler(this.BtnUpdate_MouseLeave);
+            // 
+            // PibLoadingBorder
+            // 
+            this.PibLoadingBorder.BackColor = System.Drawing.Color.Transparent;
+            this.PibLoadingBorder.Image = ((System.Drawing.Image)(resources.GetObject("PibLoadingBorder.Image")));
+            this.PibLoadingBorder.Location = new System.Drawing.Point(527, 235);
+            this.PibLoadingBorder.Name = "PibLoadingBorder";
+            this.PibLoadingBorder.Size = new System.Drawing.Size(250, 250);
+            this.PibLoadingBorder.TabIndex = 21;
+            this.PibLoadingBorder.TabStop = false;
+            // 
             // BFME1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -254,12 +318,13 @@ namespace PatchLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.BtnUpdate);
+            this.Controls.Add(this.LblPatchNotes);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnInstall);
             this.Controls.Add(this.LblBytes);
             this.Controls.Add(this.LblDownloadSpeed);
             this.Controls.Add(this.PBarActualFile);
-            this.Controls.Add(this.Wv2Patchnotes);
             this.Controls.Add(this.BtnOptions);
             this.Controls.Add(this.BtnLaunch);
             this.Controls.Add(this.PiBThemeSwitcher);
@@ -267,6 +332,9 @@ namespace PatchLauncher
             this.Controls.Add(this.PiBDiscord);
             this.Controls.Add(this.PiBYoutube);
             this.Controls.Add(this.PibHeader);
+            this.Controls.Add(this.PibLoadingRing);
+            this.Controls.Add(this.PibLoadingBorder);
+            this.Controls.Add(this.Wv2Patchnotes);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -283,6 +351,8 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBModDB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBThemeSwitcher)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PibLoadingRing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PibLoadingBorder)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,5 +374,9 @@ namespace PatchLauncher
         private Label LblBytes;
         private Button BtnInstall;
         private Label LblFileName;
+        private PictureBox PibLoadingRing;
+        private Helper.CustomLabel LblPatchNotes;
+        private Button BtnUpdate;
+        private PictureBox PibLoadingBorder;
     }
 }

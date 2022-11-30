@@ -30,11 +30,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Classes\InterfaceProgress.cs" />
+    <Compile Remove="Helper\InterfaceProgress.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Classes\NewFile1.txt" />
+    <None Remove="Helper\NewFile1.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -209,6 +209,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\launcher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\loadingRing.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\moddb.png">

@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PatchLauncher.Classes
+namespace PatchLauncher.Helper
 {
     internal class ZIPFileHelper
     {

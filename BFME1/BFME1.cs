@@ -1,4 +1,4 @@
-using PatchLauncher.Classes;
+using PatchLauncher.Helper;
 using Color = System.Drawing.Color;
 using SharpDX.XAudio2;
 using SharpDX.Multimedia;
@@ -12,10 +12,6 @@ using System.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.ComponentModel;
 using Downloader;
-using SharpCompress.Archives.SevenZip;
-using SharpCompress.Common;
-using System.Linq;
-using SharpCompress.Archives;
 using System.Diagnostics;
 using System.Collections.Generic;
 
@@ -28,6 +24,7 @@ namespace PatchLauncher
         int iconNumber = Properties.Settings.Default.BackgroundMusicIcon;
 
         public const string C_UPDATE_VERSION = "29";
+        public const string C_MAIN_PATCH_FILE = "_patch222.big";
 
         public BFME1()
         {
@@ -41,10 +38,13 @@ namespace PatchLauncher
             BackgroundImage = Image.FromFile(RandomLauncherPicture.GetRandomizedPicture());
             BackgroundImageLayout = ImageLayout.Stretch;
 
+            PibLoadingRing.Show();
+            PibLoadingBorder.Show();
+            LblPatchNotes.Show();
             Wv2Patchnotes.Hide();
 
             TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
-            TmrPatchNotes.Interval = 4000;
+            TmrPatchNotes.Interval = 5000;
             TmrPatchNotes.Start();
 
             // label-Styles
@@ -62,6 +62,12 @@ namespace PatchLauncher
             LblBytes.Font = ConstStrings.UseFont("Albertus Nova", 14);
             LblBytes.ForeColor = Color.FromArgb(192, 145, 69);
             LblBytes.BackColor = Color.Transparent;
+
+            LblPatchNotes.Text = "Loading Patch-Notes...";
+            LblPatchNotes.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblPatchNotes.ForeColor = Color.FromArgb(192, 145, 69);
+            LblPatchNotes.BackColor = Color.Transparent;
+            LblPatchNotes.BorderStyle = BorderStyle.None;
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
             PBarActualFile.BackColor = Color.FromArgb(192, 145, 69);
@@ -86,6 +92,13 @@ namespace PatchLauncher
             BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnInstall.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
+
+            BtnUpdate.FlatAppearance.BorderSize = 0;
+            BtnUpdate.FlatStyle = FlatStyle.Flat;
+            BtnUpdate.BackColor = Color.Transparent;
+            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK_GREEN;
+            BtnUpdate.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnUpdate.ForeColor = Color.FromArgb(192, 145, 69);
 
             #endregion
 
@@ -152,8 +165,15 @@ namespace PatchLauncher
             }
             #endregion
 
+            MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE));
+
             #region Internal Logic
             //Internal Logic
+            if (File.Exists(Path.Combine(ConstStrings.GameInstallPath() + C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
+            {
+                Properties.Settings.Default.PatchVersionInstalled = 29;
+                Properties.Settings.Default.Save();
+            }
 
             if (ConstStrings.GameInstallPath() != null && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe"))
             {
@@ -162,6 +182,7 @@ namespace PatchLauncher
                 LblDownloadSpeed.Hide();
                 PBarActualFile.Hide();
                 BtnInstall.Hide();
+                BtnUpdate.Hide();
                 BtnLaunch.Show();
 
                 if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
@@ -174,27 +195,17 @@ namespace PatchLauncher
             {
                 BtnInstall.Show();
                 BtnLaunch.Hide();
+                BtnUpdate.Hide();
+            }
+            else if ((ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe")) || ((true) && Properties.Settings.Default.PatchVersionInstalled != 29))
+            {
+
             }
             else
             {
                 BtnInstall.Hide();
+                BtnUpdate.Hide();
                 BtnLaunch.Show();
-            }
-
-            if (ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe") && Properties.Settings.Default.PatchVersionInstalled != 29)
-            {
-                LblFileName.Text = "Preparing Update...";
-
-                PBarActualFile.Show();
-                LblBytes.Show();
-                LblDownloadSpeed.Show();
-                LblFileName.Show();
-
-                BtnInstall.Hide();
-                BtnLaunch.Show();
-
-                BtnLaunch.Enabled = false;
-                UpdateRoutine();
             }
             #endregion
         }
@@ -224,40 +235,23 @@ namespace PatchLauncher
 
         private void BtnLaunch_Click(object sender, EventArgs e)
         {
-            if (ReadXMLFile.GetXMLFileVersion() == 29 && Properties.Settings.Default.PatchVersionInstalled != 29)
+            ProcessStartInfo _processInfo = new()
             {
-                PBarActualFile.Show();
-                LblBytes.Show();
-                LblDownloadSpeed.Show();
-                LblFileName.Show();
-
-                BtnLaunch.Show();
-
-                LblFileName.Text = "Preparing Update...";
-
-                BtnLaunch.Enabled = false;
-                UpdateRoutine();
-            }
-            else
+                WorkingDirectory = @ConstStrings.GameInstallPath(),
+                FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe"
+            };
+            
+            // Start game windowed
+            if (Properties.Settings.Default.StartGameWindowed)
             {
-                ProcessStartInfo _processInfo = new()
-                {
-                    WorkingDirectory = @ConstStrings.GameInstallPath(),
-                    FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe"
-                };
-
-                // Start game windowed
-                if (Properties.Settings.Default.StartGameWindowed)
-                {
-                    _processInfo.Arguments = "-win";
-                }
-
-                _ = Process.Start(_processInfo)!;
-
-                Thread.Sleep(1000);
-
-                Application.Exit();
+                _processInfo.Arguments = "-win";
             }
+            
+            _ = Process.Start(_processInfo)!;
+            
+            Thread.Sleep(1000);
+            
+            Application.Exit();
         }
 
         private void BtnLaunch_MouseLeave(object sender, EventArgs e)
@@ -325,6 +319,44 @@ namespace PatchLauncher
             }
         }
 
+        private async void BtnUpdate_Click(object sender, EventArgs e)
+        {
+            PBarActualFile.Show();
+            LblBytes.Show();
+            LblDownloadSpeed.Show();
+            LblFileName.Show();
+
+            BtnInstall.Hide();
+            BtnUpdate.Hide();
+            BtnLaunch.Show();
+
+            LblFileName.Text = "Preparing Update...";
+
+            BtnLaunch.Enabled = false;
+
+            await UpdateRoutine();
+        }
+
+        private void BtnUpdate_MouseLeave(object sender, EventArgs e)
+        {
+            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
+        }
+
+        private void BtnUpdate_MouseEnter(object sender, EventArgs e)
+        {
+            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnInstall.ForeColor = Color.FromArgb(100, 53, 5);
+            Task.Run(() => PlaySoundHover());
+        }
+
+        private void BtnUpdate_MouseDown(object sender, MouseEventArgs e)
+        {
+            BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
+            Task.Run(() => PlaySoundClick());
+        }
+
         private void BtnInstall_MouseLeave(object sender, EventArgs e)
         {
             BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
@@ -373,9 +405,14 @@ namespace PatchLauncher
                         Properties.Settings.Default.BackgroundMusicIcon = 0;
                         Properties.Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
-                        this._theme.Stop();
-                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                        _theme.Play();
+                        _theme.Stop();
+
+                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        {
+                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            _theme.Play();
+                        }
+
                         break;
                     }
                 case 1:
@@ -384,9 +421,13 @@ namespace PatchLauncher
                         Properties.Settings.Default.BackgroundMusicIcon = 1;
                         Properties.Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoGondor.png");
-                        this._theme.Stop();
-                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                        _theme.Play();
+                        _theme.Stop();
+
+                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        {
+                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            _theme.Play();
+                        }
                         break;
                     }
                 case 2:
@@ -395,9 +436,13 @@ namespace PatchLauncher
                         Properties.Settings.Default.BackgroundMusicIcon = 2;
                         Properties.Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoRohan.png");
-                        this._theme.Stop();
-                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                        _theme.Play();
+                        _theme.Stop();
+
+                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        {
+                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            _theme.Play();
+                        }
                         break;
                     }
                 case 3:
@@ -406,9 +451,13 @@ namespace PatchLauncher
                         Properties.Settings.Default.BackgroundMusicIcon = 3;
                         Properties.Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoIsengard.png");
-                        this._theme.Stop();
-                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                        _theme.Play();
+                        _theme.Stop();
+
+                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        {
+                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            _theme.Play();
+                        }
                         break;
                     }
                 case 4:
@@ -417,9 +466,13 @@ namespace PatchLauncher
                         Properties.Settings.Default.BackgroundMusicIcon = 4;
                         Properties.Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoMordor.png");
-                        this._theme.Stop();
-                        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-                        _theme.Play();
+                        _theme.Stop();
+
+                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        {
+                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            _theme.Play();
+                        }
                         break;
                     }
             }
@@ -548,27 +601,27 @@ namespace PatchLauncher
                 await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/kGJRQwLbWb23Ymy/download/_wsmaps222.big", Application.StartupPath + "\\Patch_29\\_wsmaps222.big");
             }
 
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222optional.big"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/LNRJjzi579CBAjB/download/_patch222optional.big", Application.StartupPath + "\\Patch_29\\_patch222optional.big");
             }
 
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222newtextures.big"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/qc7qkE6W52E8qwy/download/_patch222newtextures.big", Application.StartupPath + "\\Patch_29\\_patch222newtextures.big");
             }
 
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222libraries.big"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/d47Yq6ZG99PJaZq/download/_patch222libraries.big", Application.StartupPath + "\\Patch_29\\_patch222libraries.big");
             }
 
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222bases.big"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/GsEdcqaY6gbmrSd/download/_patch222bases.big", Application.StartupPath + "\\Patch_29\\_patch222bases.big");
             }
 
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222.big"))
             {
                 await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/KnPrKk9Sc9FpAr4/download/_patch222.big", Application.StartupPath + "\\Patch_29\\_patch222.big");
             }
@@ -741,7 +794,7 @@ namespace PatchLauncher
             }
             else if (ReadXMLFile.GetXMLFileVersion() == 29)
             {
-                Invoke((MethodInvoker)(() => BtnLaunch.Text = "INSTALL PATCH 2.22V29"));
+                Invoke((MethodInvoker)(() => BtnLaunch.Text = "INSTALL 2.22V29"));
                 Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
             }
 
@@ -883,6 +936,9 @@ namespace PatchLauncher
         {
             TmrPatchNotes.Stop();
             Wv2Patchnotes.Show();
+            PibLoadingRing.Hide();
+            PibLoadingBorder.Hide();
+            LblPatchNotes.Hide();
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Text;
 
-namespace PatchLauncher.Classes
+namespace PatchLauncher.Helper
 {
     public static class ConstStrings
     {
@@ -22,6 +22,7 @@ namespace PatchLauncher.Classes
         public static readonly Image C_BUTTONIMAGE_NEUTR = Image.FromFile(@"Images\btnNeutral.png");
         public static readonly Image C_BUTTONIMAGE_HOVER = Image.FromFile(@"Images\btnHover.png");
         public static readonly Image C_BUTTONIMAGE_CLICK = Image.FromFile(@"Images\btnClick.png");
+        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Image.FromFile(@"Images\btnClickgr.png"); 
 
         public static readonly string C_BUTTONSOUND_HOVER = @"Sounds\btnHover.wav";
         public static readonly string C_BUTTONSOUND_CLICK = @"Sounds\btnClick.wav";

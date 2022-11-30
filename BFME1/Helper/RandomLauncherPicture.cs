@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PatchLauncher.Classes
+namespace PatchLauncher.Helper
 {
     internal class RandomLauncherPicture
     {

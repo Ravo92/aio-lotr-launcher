@@ -1,6 +1,5 @@
+using PatchLauncher.Helper;
 using System;
-using System.Diagnostics;
-using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace PatchLauncher
@@ -27,6 +26,19 @@ namespace PatchLauncher
             else
             {
                 ApplicationConfiguration.Initialize();
+
+                if (RegistryFunctions.ReadRegKey("path") == null)
+                {
+                    Properties.Settings.Default.IsGameInstalled = false;
+                    Properties.Settings.Default.Save();
+                }
+                else
+                {
+                    Properties.Settings.Default.IsGameInstalled = true;
+                    Properties.Settings.Default.GameInstallPath = RegistryFunctions.ReadRegKey("path");
+                    Properties.Settings.Default.Save();
+                }
+
                 Application.Run(new BFME1());
             }
         }

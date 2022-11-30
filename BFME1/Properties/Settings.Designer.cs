@@ -25,7 +25,7 @@ namespace PatchLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool PlayBackgroundMusic {
             get {
                 return ((bool)(this["PlayBackgroundMusic"]));
@@ -116,6 +116,18 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["PatchVersionInstalled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsGameInstalled {
+            get {
+                return ((bool)(this["IsGameInstalled"]));
+            }
+            set {
+                this["IsGameInstalled"] = value;
             }
         }
     }

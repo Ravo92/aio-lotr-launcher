@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace PatchLauncher.Classes
+namespace PatchLauncher.Helper
 {
     internal static class ReadXMLFile
     {

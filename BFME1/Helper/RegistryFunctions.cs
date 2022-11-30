@@ -1,37 +1,15 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace PatchLauncher.Classes
+namespace PatchLauncher.Helper
 {
     internal class RegistryFunctions
     {
         private const string wrongParameter = "WrongParameter";
 
         private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
-
-        public static string? ReadStartMenuFolder()
-        {
-            RegistryKey? localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\");
-            if (IsNotNull(localKey))
-            {
-                if (localKey.GetValue("Folder") != null)
-                {
-                    string? startmenu = localKey.GetValue("Folder")!.ToString();
-                    return startmenu;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                return null;
-            }
-        }
 
         public static string? ReadRegKey(string kindOf)
         {
@@ -72,6 +50,7 @@ namespace PatchLauncher.Classes
                             }
                             else
                             {
+                                Properties.Settings.Default.IsGameInstalled = false;
                                 return null;
                             }
 

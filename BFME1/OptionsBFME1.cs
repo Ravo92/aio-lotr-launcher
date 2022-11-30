@@ -1,4 +1,4 @@
-﻿using PatchLauncher.Classes;
+﻿using PatchLauncher.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -90,15 +90,38 @@ namespace PatchLauncher
             LblBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
             LblBrutalAI.BackColor = Color.Transparent;
 
-            LblWarningAI.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
+            LblWarningAI.Text = "";
             LblWarningAI.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblWarningAI.ForeColor = Color.Red;
             LblWarningAI.BackColor = Color.Transparent;
 
-            if (FlagBrutalAI)
+            if (Properties.Settings.Default.IsGameInstalled == false)
+            {
+                ChkBrutalAI.Enabled = false;
+                ChkEAX.Enabled = false;
+                ChkAniTextureFiltering.Enabled = false;
+
+                LblWarningAI.Text = "Some Settings are Disabled until the game is installed.";
                 LblWarningAI.Show();
+            }
             else
+            {
+                ChkBrutalAI.Enabled = true;
+                ChkEAX.Enabled = true;
+                ChkAniTextureFiltering.Enabled = true;
+
                 LblWarningAI.Hide();
+            }
+
+            if (FlagBrutalAI && Properties.Settings.Default.IsGameInstalled)
+            {
+                LblWarningAI.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
+                LblWarningAI.Show();
+            }
+            else if (Properties.Settings.Default.IsGameInstalled)
+            {
+                LblWarningAI.Hide();
+            }
 
             LblAniTextureFiltering.Text = "Anisotropic  Texture  Filtering";
             LblAniTextureFiltering.Font = ConstStrings.UseFont("Albertus Nova", 16);
@@ -294,9 +317,9 @@ namespace PatchLauncher
                 }
             }
 
-            if (FlagBrutalAI)
+            if (FlagBrutalAI && ConstStrings.GameInstallPath() != null)
                 File.Copy(Path.Combine("Tools", "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
-            else
+            else if (ConstStrings.GameInstallPath() != null)
                 File.Delete(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"));
 
             Close();
