@@ -17,7 +17,7 @@ namespace PatchLauncher.Helper
             {
                 using (var s = client.GetStreamAsync("https://ravo92.github.io/PatchUpdate_BFME1.xml"))
                 {
-                    using (var fs = new FileStream("PatchUpdate_BFME1.xml", FileMode.OpenOrCreate))
+                    using (var fs = new FileStream("PatchUpdate_BFME1.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         s.Result.CopyTo(fs);
                     }

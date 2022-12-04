@@ -69,7 +69,7 @@ namespace PatchLauncher
             this.Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
             this.Wv2Patchnotes.Location = new System.Drawing.Point(218, 110);
             this.Wv2Patchnotes.Name = "Wv2Patchnotes";
-            this.Wv2Patchnotes.Size = new System.Drawing.Size(1050, 539);
+            this.Wv2Patchnotes.Size = new System.Drawing.Size(1050, 514);
             this.Wv2Patchnotes.Source = new System.Uri("https://docs.google.com/document/d/1eG95mVD_TYnvkfKEwcXaQvWS5AYbFIq4rDdXrifsKUw", System.UriKind.Absolute);
             this.Wv2Patchnotes.TabIndex = 1;
             this.Wv2Patchnotes.ZoomFactor = 1D;
@@ -194,9 +194,9 @@ namespace PatchLauncher
             // 
             // PBarActualFile
             // 
-            this.PBarActualFile.Location = new System.Drawing.Point(218, 693);
+            this.PBarActualFile.Location = new System.Drawing.Point(218, 664);
             this.PBarActualFile.Name = "PBarActualFile";
-            this.PBarActualFile.Size = new System.Drawing.Size(439, 15);
+            this.PBarActualFile.Size = new System.Drawing.Size(440, 46);
             this.PBarActualFile.TabIndex = 12;
             this.PBarActualFile.Visible = false;
             // 
@@ -204,7 +204,7 @@ namespace PatchLauncher
             // 
             this.LblDownloadSpeed.AutoSize = true;
             this.LblDownloadSpeed.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblDownloadSpeed.Location = new System.Drawing.Point(558, 665);
+            this.LblDownloadSpeed.Location = new System.Drawing.Point(554, 633);
             this.LblDownloadSpeed.Name = "LblDownloadSpeed";
             this.LblDownloadSpeed.Size = new System.Drawing.Size(103, 25);
             this.LblDownloadSpeed.TabIndex = 13;
@@ -214,7 +214,7 @@ namespace PatchLauncher
             // 
             this.LblBytes.AutoSize = true;
             this.LblBytes.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblBytes.Location = new System.Drawing.Point(663, 683);
+            this.LblBytes.Location = new System.Drawing.Point(668, 671);
             this.LblBytes.Name = "LblBytes";
             this.LblBytes.Size = new System.Drawing.Size(114, 25);
             this.LblBytes.TabIndex = 14;
@@ -246,7 +246,7 @@ namespace PatchLauncher
             // 
             this.LblFileName.AutoSize = true;
             this.LblFileName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblFileName.Location = new System.Drawing.Point(218, 665);
+            this.LblFileName.Location = new System.Drawing.Point(12, 633);
             this.LblFileName.Name = "LblFileName";
             this.LblFileName.Size = new System.Drawing.Size(88, 25);
             this.LblFileName.TabIndex = 17;
@@ -312,7 +312,8 @@ namespace PatchLauncher
             // 
             // BFME1
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;

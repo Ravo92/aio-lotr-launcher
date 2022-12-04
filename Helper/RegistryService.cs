@@ -1,21 +1,20 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace PatchLauncher.Helper
 {
-    internal class RegistryFunctions
+    public class RegistryService
     {
-        private const string wrongParameter = "WrongParameter";
+        private const string C_WRONG_PARAMETER = "WrongParameter";
+        private const string C_NOT_FOUND = "ValueNotFound";
 
         private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
 
-        public static string? ReadRegKey(string kindOf)
+        public static string ReadRegKey(string kindOf)
         {
             if (kindOf != null)
             {
-                RegistryKey? localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
+                RegistryKey localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
                 if (IsNotNull(localKey))
                 {
                     switch (kindOf)
@@ -28,7 +27,7 @@ namespace PatchLauncher.Helper
                             }
                             else
                             {
-                                return null;
+                                return C_NOT_FOUND;
                             }
 
                         case "appData":
@@ -39,7 +38,7 @@ namespace PatchLauncher.Helper
                             }
                             else
                             {
-                                return null;
+                                return C_NOT_FOUND;
                             }
 
                         case "path":
@@ -50,22 +49,21 @@ namespace PatchLauncher.Helper
                             }
                             else
                             {
-                                Properties.Settings.Default.IsGameInstalled = false;
-                                return null;
+                                return C_NOT_FOUND;
                             }
 
                         default:
-                            return wrongParameter;
+                            return C_WRONG_PARAMETER;
                     }
                 }
                 else
                 {
-                    return null;
+                    return C_NOT_FOUND;
                 }
             }
             else
             {
-                return wrongParameter;
+                return C_WRONG_PARAMETER;
             }
         }
 
@@ -77,7 +75,7 @@ namespace PatchLauncher.Helper
                 .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
 
-        public static void WriteRegKeysInstallation()
+        public static void WriteRegKeysInstallation(string installpath)
         {
             RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games");
 
@@ -86,7 +84,7 @@ namespace PatchLauncher.Helper
             keyFolder2.SetValue("CD Drive", @"I:\");
             keyFolder2.SetValue("DisplayName", "The Battle for Middle-earth (tm)");
             keyFolder2.SetValue("Folder", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\EA GAMES\The Battle for Middle-earth (tm)\");
-            keyFolder2.SetValue("Install Dir", Properties.Settings.Default.GameInstallPath);
+            keyFolder2.SetValue("Install Dir", installpath);
             keyFolder2.SetValue("Installed From", @"I:\");
             keyFolder2.SetValue("Language", "English US");
             keyFolder2.SetValue("Locale", "en_us");
@@ -106,7 +104,7 @@ namespace PatchLauncher.Helper
             RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games");
 
             RegistryKey keyFolder6 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth");
-            keyFolder6.SetValue("InstallPath", Properties.Settings.Default.GameInstallPath);
+            keyFolder6.SetValue("InstallPath", installpath);
             keyFolder6.SetValue("Language", "english");
             keyFolder6.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder6.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);

@@ -50,22 +50,22 @@ namespace PatchLauncher
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
-            LblTheme.Text = "Play theme music in launcher at start";
+            LblTheme.Text = "Play theme music in launcher";
             LblTheme.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblTheme.ForeColor = Color.FromArgb(192, 145, 69);
             LblTheme.BackColor = Color.Transparent;
 
-            LblEAX.Text = "Activate support for the EAX-Sound-System";
+            LblEAX.Text = "Activate support for EAX-Sound";
             LblEAX.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
             LblEAX.BackColor = Color.Transparent;
 
-            LblLauncherSettings.Text = "Launcher-specific Settings";
+            LblLauncherSettings.Text = "Launcher Settings";
             LblLauncherSettings.Font = ConstStrings.UseFont("SachaWynterTight", 16);
             LblLauncherSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblLauncherSettings.BackColor = Color.Transparent;
 
-            LblGameSettings.Text = "Game-specific Settings";
+            LblGameSettings.Text = "Game Settings";
             LblGameSettings.Font = ConstStrings.UseFont("SachaWynterTight", 16);
             LblGameSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblGameSettings.BackColor = Color.Transparent;
@@ -80,7 +80,7 @@ namespace PatchLauncher
             LblVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblVersion.BackColor = Color.Transparent;
 
-            LblWindowed.Text = "Launch the game in windowed mode";
+            LblWindowed.Text = "Launch game in windowed mode";
             LblWindowed.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblWindowed.ForeColor = Color.FromArgb(192, 145, 69);
             LblWindowed.BackColor = Color.Transparent;

@@ -38,7 +38,7 @@
             // TxtInstallPath
             // 
             this.TxtInstallPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TxtInstallPath.Location = new System.Drawing.Point(12, 36);
+            this.TxtInstallPath.Location = new System.Drawing.Point(12, 48);
             this.TxtInstallPath.Name = "TxtInstallPath";
             this.TxtInstallPath.Size = new System.Drawing.Size(537, 16);
             this.TxtInstallPath.TabIndex = 0;
@@ -63,9 +63,9 @@
             this.BtnChoose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnChoose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnChoose.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnChoose.Location = new System.Drawing.Point(555, 12);
+            this.BtnChoose.Location = new System.Drawing.Point(555, 30);
             this.BtnChoose.Name = "BtnChoose";
-            this.BtnChoose.Size = new System.Drawing.Size(210, 61);
+            this.BtnChoose.Size = new System.Drawing.Size(200, 51);
             this.BtnChoose.TabIndex = 15;
             this.BtnChoose.TabStop = false;
             this.BtnChoose.Text = "CHOOSE...";
@@ -85,9 +85,9 @@
             this.BtnAccept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAccept.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnAccept.Location = new System.Drawing.Point(771, 12);
+            this.BtnAccept.Location = new System.Drawing.Point(761, 30);
             this.BtnAccept.Name = "BtnAccept";
-            this.BtnAccept.Size = new System.Drawing.Size(210, 61);
+            this.BtnAccept.Size = new System.Drawing.Size(200, 51);
             this.BtnAccept.TabIndex = 16;
             this.BtnAccept.TabStop = false;
             this.BtnAccept.Text = "ACCEPT";
@@ -100,9 +100,10 @@
             // 
             // InstallPathDialog
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(986, 85);
+            this.ClientSize = new System.Drawing.Size(969, 93);
             this.Controls.Add(this.BtnAccept);
             this.Controls.Add(this.BtnChoose);
             this.Controls.Add(this.LblChooseDir);

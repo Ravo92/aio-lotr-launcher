@@ -36,7 +36,9 @@
             // 
             // BtnBFME1
             // 
+            this.BtnBFME1.AutoSize = true;
             this.BtnBFME1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnBFME1.BackgroundImage")));
+            this.BtnBFME1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnBFME1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBFME1.Location = new System.Drawing.Point(12, 12);
             this.BtnBFME1.Name = "BtnBFME1";
@@ -48,7 +50,9 @@
             // 
             // BtnBFME2
             // 
+            this.BtnBFME2.AutoSize = true;
             this.BtnBFME2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnBFME2.BackgroundImage")));
+            this.BtnBFME2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnBFME2.Enabled = false;
             this.BtnBFME2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBFME2.Location = new System.Drawing.Point(348, 12);
@@ -61,7 +65,9 @@
             // 
             // BtnBFME2EP1
             // 
+            this.BtnBFME2EP1.AutoSize = true;
             this.BtnBFME2EP1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnBFME2EP1.BackgroundImage")));
+            this.BtnBFME2EP1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnBFME2EP1.Enabled = false;
             this.BtnBFME2EP1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnBFME2EP1.Location = new System.Drawing.Point(684, 12);
@@ -87,6 +93,7 @@
             this.Name = "GameSelect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

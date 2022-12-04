@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Text;
+﻿using System.Drawing.Text;
 
 namespace PatchLauncher.Helper
 {
@@ -14,8 +12,8 @@ namespace PatchLauncher.Helper
             collection.AddFontFile(@"Fonts\sachwt.ttf");
         }
 
-
         public const string C_GAMEFOLDER_NAME = "The Battle for Middle-earth (tm)";
+        public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
         public const string C_FONT_ALBERTUS_NOVA = "Albertus Nova";
 
@@ -29,24 +27,20 @@ namespace PatchLauncher.Helper
 
         public static string GameLanguage()
         {
-            return RegistryFunctions.ReadRegKey("lang");
+            return RegistryService.ReadRegKey("lang");
         }
 
         public static string GameInstallPath()
         {
-            return RegistryFunctions.ReadRegKey("path");
+            return RegistryService.ReadRegKey("path");
         }
         public static string GameAppdataFolder()
         {
-            return RegistryFunctions.ReadRegKey("appData");
+            return RegistryService.ReadRegKey("appData");
         }
         public static string GameAppdataFolderPath()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + GameAppdataFolder() + "\\";
-        }
-        public static string OptionsIniFileName()
-        {
-            return "Options.ini";
         }
 
         public static Font UseFont(string font, int size)
@@ -55,33 +49,6 @@ namespace PatchLauncher.Helper
             FontFamily _fontFamily = new(font, collection);
             Font _font = new(_fontFamily, size);
             return _font;
-            //switch (font)
-            //{
-            //    case "Albertus MT":
-            //        {
-            //            FontFamily _fontFamily = new("Albertus MT", collection);
-            //            Font _font = new(_fontFamily, size);
-            //            return _font;
-            //        }
-            //    case "Albertus Nova":
-            //        {
-            //            FontFamily _fontFamily = new("Albertus Nova", collection);
-            //            Font _font = new(_fontFamily, size);
-            //            return _font;
-            //        }
-            //    case "SachaWynterTight":
-            //        {
-            //            FontFamily _fontFamily = new("SachaWynterTight", collection);
-            //            Font _font = new(_fontFamily, size);
-            //            return _font;
-            //        }
-            //    default:
-            //        {
-            //            FontFamily _fontFamily = new("Albertus Nova", collection);
-            //            Font _font = new(_fontFamily, size);
-            //            return _font;
-            //        }
-            //}
         }
     }
 }

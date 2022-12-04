@@ -25,12 +25,16 @@ namespace PatchLauncher
 
         public const string C_UPDATE_VERSION = "29";
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
+        public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
 
         public BFME1()
         {
             InitializeComponent();
 
             ReadXMLFile.GetXMLFileData();
+
+            Debug.WriteLine(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE));
+            Debug.WriteLine(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE));
 
             #region Styles
             //Main Form style behaviour
@@ -167,21 +171,20 @@ namespace PatchLauncher
 
             #region Internal Logic
             //Internal Logic
-            if (File.Exists(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE)))
+            if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)))
             {
-                MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE));
+                MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE));
             }
 
-            if (File.Exists(Path.Combine(ConstStrings.GameInstallPath() + C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
+            if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
             {
                 Properties.Settings.Default.PatchVersionInstalled = 29;
                 Properties.Settings.Default.Save();
             }
 
-            if (ConstStrings.GameInstallPath() != null && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe") && Properties.Settings.Default.PatchVersionInstalled == 29)
+            if (Properties.Settings.Default.GameInstallPath != null && File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Properties.Settings.Default.PatchVersionInstalled == 29)
             {
                 LblBytes.Hide();
-                LblDownloadSpeed.Hide();
                 LblDownloadSpeed.Hide();
                 PBarActualFile.Hide();
                 BtnInstall.Hide();
@@ -191,16 +194,16 @@ namespace PatchLauncher
                 if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
                     Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
 
-                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.OptionsIniFileName()))
-                    File.Copy("Tools\\" + ConstStrings.OptionsIniFileName(), ConstStrings.GameAppdataFolderPath() + ConstStrings.OptionsIniFileName());
+                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
+                    File.Copy("Tools\\" + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
             }
-            else if (Properties.Settings.Default.GameInstallPath == "" || !File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe")) 
+            else if (Properties.Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath!, C_MAIN_GAME_FILE)))
             {
                 BtnInstall.Show();
                 BtnLaunch.Hide();
                 BtnUpdate.Hide();
             }
-            else if ((ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe")) || (File.Exists(ConstStrings.GameInstallPath() + @"\lotrbfme.exe") && Properties.Settings.Default.PatchVersionInstalled != 29))
+            else if ((ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath + C_MAIN_GAME_FILE))) || (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Properties.Settings.Default.PatchVersionInstalled != 29))
             {
                 BtnInstall.Hide();
                 BtnLaunch.Hide();
@@ -221,20 +224,20 @@ namespace PatchLauncher
         {
             ProcessStartInfo _processInfo = new()
             {
-                WorkingDirectory = @ConstStrings.GameInstallPath(),
-                FileName = @ConstStrings.GameInstallPath() + @"\lotrbfme.exe"
+                WorkingDirectory = Properties.Settings.Default.GameInstallPath,
+                FileName = Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)
             };
-            
+
             // Start game windowed
             if (Properties.Settings.Default.StartGameWindowed)
             {
                 _processInfo.Arguments = "-win";
             }
-            
+
             _ = Process.Start(_processInfo)!;
-            
+
             Thread.Sleep(1000);
-            
+
             Application.Exit();
         }
 
@@ -287,7 +290,6 @@ namespace PatchLauncher
             DialogResult dr = _install.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                PBarActualFile.Show();
                 LblBytes.Show();
                 LblDownloadSpeed.Show();
                 LblFileName.Show();
@@ -305,10 +307,11 @@ namespace PatchLauncher
 
         private async void BtnUpdate_Click(object sender, EventArgs e)
         {
-            PBarActualFile.Show();
             LblBytes.Show();
             LblDownloadSpeed.Show();
             LblFileName.Show();
+
+            PBarActualFile.Show();
 
             BtnInstall.Hide();
             BtnUpdate.Hide();
@@ -382,7 +385,8 @@ namespace PatchLauncher
             if (iconNumber >= 5)
                 iconNumber = 0;
 
-            switch (iconNumber) {
+            switch (iconNumber)
+            {
                 case 0:
                     {
                         Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_default.wav";
@@ -546,8 +550,8 @@ namespace PatchLauncher
 
         public async Task DownloadUpdate()
         {
-            SetPBar(0);
-            SetPBarMax(100);
+            SetPBarFiles(0);
+            SetPBarFilesMax(100);
 
             var downloadOpt = new DownloadConfiguration()
             {
@@ -575,54 +579,30 @@ namespace PatchLauncher
             // cancelled or download completed successfully.
             downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\asset.dat"))
+            if (!File.Exists(Application.StartupPath + "\\Patch_29\\Patch_2.22v2.9.7z"))
             {
-                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/DTNGQqMHnJHYj6Z/download/asset.dat", Application.StartupPath + "\\Patch_29\\asset.dat");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_wsmaps222.big"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/kGJRQwLbWb23Ymy/download/_wsmaps222.big", Application.StartupPath + "\\Patch_29\\_wsmaps222.big");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222optional.big"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/LNRJjzi579CBAjB/download/_patch222optional.big", Application.StartupPath + "\\Patch_29\\_patch222optional.big");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222newtextures.big"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/qc7qkE6W52E8qwy/download/_patch222newtextures.big", Application.StartupPath + "\\Patch_29\\_patch222newtextures.big");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222libraries.big"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/d47Yq6ZG99PJaZq/download/_patch222libraries.big", Application.StartupPath + "\\Patch_29\\_patch222libraries.big");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222bases.big"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/GsEdcqaY6gbmrSd/download/_patch222bases.big", Application.StartupPath + "\\Patch_29\\_patch222bases.big");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\_patch222.big"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://nx22048.your-storageshare.de/s/KnPrKk9Sc9FpAr4/download/_patch222.big", Application.StartupPath + "\\Patch_29\\_patch222.big");
+                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1LIpMSUGVdHlRerQl8Z6awyu-8KdwECZb&confirm=t", Application.StartupPath + "\\Patch_29\\Patch_2.22v2.9.7z");
             }
         }
 
         public async Task ExtractUpdate()
         {
-            Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
             Invoke((MethodInvoker)(() => LblBytes.Hide()));
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
+
             Invoke((MethodInvoker)(() => LblFileName.Text = "Copy files and apply patch..."));
 
-            await Task.Run(() =>
+            var progressHandler = new Progress<ExtractionProgress>(progress =>
             {
-                    foreach (var file in Directory.GetFiles(Path.Combine(Application.StartupPath, "Patch_29")))
-                        File.Copy(file, Path.Combine(Properties.Settings.Default.GameInstallPath, Path.GetFileName(file)), true);
+                SetPBarFiles(progress.Count);
+                SetPBarFilesMax(progress.Max);
+                SetTextFileName(progress.Filename!);
+                SetTextDlSpeed(string.Concat(progress.Count, "/", progress.Max));
             });
+
+            ZIPFileHelper _ZIPFileHelper = new();
+            await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Patch_29", "Patch_2.22v2.9.7z"), Properties.Settings.Default.GameInstallPath, progressHandler);
+
             FinishingGameUpdate();
         }
 
@@ -664,7 +644,7 @@ namespace PatchLauncher
 
         public async Task InstallRoutine()
         {
-            RegistryFunctions.WriteRegKeysInstallation();
+            RegistryService.WriteRegKeysInstallation(Properties.Settings.Default.GameInstallPath);
 
             if (!Directory.Exists(Properties.Settings.Default.GameInstallPath))
             {
@@ -680,6 +660,8 @@ namespace PatchLauncher
 
         public async Task DownloadGame()
         {
+            PBarActualFile.Show();
+
             var downloadOpt = new DownloadConfiguration()
             {
                 ChunkCount = 1, // file parts to download, default value is 1
@@ -706,29 +688,9 @@ namespace PatchLauncher
             // cancelled or download completed successfully.
             downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-            if (!File.Exists(Application.StartupPath + "\\Download\\Bin.7z"))
+            if (!File.Exists(Application.StartupPath + "\\Download\\BFME1.7z"))
             {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=15Fp9jm21AC_908zlGA_xYkZ2yjB4bwkB&confirm=t", Application.StartupPath + "\\Download\\Bin.7z");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Download\\System.7z"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1Cag-rDgG6CNbb3Yx5mLsHiX5-JP55OuD&confirm=t", Application.StartupPath + "\\Download\\System.7z");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Download\\Textures.7z"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L639ovBau8cZtwBETuRtCuQkYHMq6jdQ&confirm=t", Application.StartupPath + "\\Download\\Textures.7z");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Download\\Audio.7z"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L7j-72tM6e_Pte1Wfc_B1XRS-fl81knT&confirm=t", Application.StartupPath + "\\Download\\Audio.7z");
-            }
-
-            if (!File.Exists(Application.StartupPath + "\\Download\\Movies.7z"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L6caFHjV5eq_o6Jt_Z_9IITKo1DcbgGj&confirm=t", Application.StartupPath + "\\Download\\Movies.7z");
+                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1LHGbdAXxwlvshcF5suS-VKKyOMlfh1XC&confirm=t", Application.StartupPath + "\\Download\\BFME1.7z");
             }
 
             if (!File.Exists(Application.StartupPath + "\\Download\\LangPack_EN.7z"))
@@ -739,30 +701,31 @@ namespace PatchLauncher
 
         public async Task ExtractGame()
         {
+            Invoke((MethodInvoker)(() => PBarActualFile.Show()));
+            SetPBarFilesMax(100);
+
             var progressHandler = new Progress<ExtractionProgress>(progress =>
             {
-                SetPBar(progress.Percentage);
+                SetPBarFiles(progress.Count);
+                SetPBarFilesMax(progress.Max);
                 SetTextFileName(progress.Filename!);
                 SetTextDlSpeed(string.Concat(progress.Count, "/", progress.Max));
             });
 
             var archiveFileNames = new List<string>()
             {
-                "Textures.7z",
-                "System.7z",
-                "Audio.7z",
-                "LangPack_EN.7z",
-                "Bin.7z",
-                "Movies.7z"
+                "BFME1.7z",
+                "LangPack_EN.7z"
             };
 
             for (int i = 0; i < archiveFileNames.Count; i++)
             {
-                SetTextPercentages($"Extracting from Archive {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
-                await ZIPFileHelper.ExtractZIP(archiveFileNames[i], Properties.Settings.Default.GameInstallPath, progressHandler);
+                SetTextPercentages($"Extracting {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
+                ZIPFileHelper _ZIPFileHelper = new();
+                await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Download", archiveFileNames[i]), Properties.Settings.Default.GameInstallPath, progressHandler);
             }
 
-            FinishingGameInstall();               
+            FinishingGameInstall();
         }
 
         private void FinishingGameInstall()
@@ -774,40 +737,40 @@ namespace PatchLauncher
 
             Invoke((MethodInvoker)(() => BtnLaunch.Hide()));
 
-            if (ReadXMLFile.GetXMLFileVersion() != 29)
+            if (ReadXMLFile.GetXMLFileVersion() == 29)
             {
-                Invoke((MethodInvoker)(() => BtnUpdate.Enabled = true));
-            }
-            else if (ReadXMLFile.GetXMLFileVersion() == 29)
-            {
+                Invoke((MethodInvoker)(() => BtnUpdate.Show()));
                 Invoke((MethodInvoker)(() => BtnUpdate.Text = "INSTALL 2.22V29"));
                 Invoke((MethodInvoker)(() => BtnUpdate.Enabled = true));
             }
 
-           //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
-           //{
-           //    Directory.CreateDirectory(RegistryFunctions.ReadStartMenuFolder()!);
-           //
-           //    object shDesktop = "Desktop";
-           //    WshShell shell = new();
-           //    string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\The Battle for Middle-earth (tm).lnk";
-           //    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
-           //    shortcut.Description = "Play The Battle for Middle-earth (tm)";
-           //    shortcut.Hotkey = "Ctrl+Shift+N";
-           //    shortcut.TargetPath = Path.Combine(Properties.Settings.Default.GameInstallPath, @"\lotrbfme.exe");
-           //    shortcut.Save();
-           //}
+            Properties.Settings.Default.IsGameInstalled = true;
+            Properties.Settings.Default.Save();
+
+            //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
+            //{
+            //    Directory.CreateDirectory(RegistryFunctions.ReadStartMenuFolder()!);
+            //
+            //    object shDesktop = "Desktop";
+            //    WshShell shell = new();
+            //    string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\The Battle for Middle-earth (tm).lnk";
+            //    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
+            //    shortcut.Description = "Play The Battle for Middle-earth (tm)";
+            //    shortcut.Hotkey = "Ctrl+Shift+N";
+            //    shortcut.TargetPath = Path.Combine(Properties.Settings.Default.GameInstallPath, @"\lotrbfme.exe");
+            //    shortcut.Save();
+            //}
         }
 
         private void OnDownloadStarted(object sender, DownloadStartedEventArgs e)
         {
-            SetPBar(0);
+            SetPBarFiles(0);
             SetTextFileName("Downloading: " + Path.GetFileName(e.FileName));
         }
 
         private void OnDownloadProgressChanged(object sender, Downloader.DownloadProgressChangedEventArgs e)
         {
-            SetPBar((int)e.ProgressPercentage);
+            SetPBarFiles((int)e.ProgressPercentage);
             SetTextDlSpeed("@ " + Math.Round(e.AverageBytesPerSecondSpeed / 1024000).ToString() + " MB/s");
             SetTextPercentages(Math.Round(e.ProgressPercentage).ToString() + " %");
         }
@@ -826,7 +789,7 @@ namespace PatchLauncher
             else
             {
                 SetTextFileName("Configuring...");
-                SetPBar(100);
+                SetPBarFiles(100);
             }
         }
         #endregion
@@ -883,15 +846,15 @@ namespace PatchLauncher
             }
         }
 
-        delegate void SetPBarCallback(int value);
-        public void SetPBar(int value)
+        delegate void SetPBarFilesCallback(int value);
+        public void SetPBarFiles(int value)
         {
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
             if (PBarActualFile.InvokeRequired)
             {
-                SetPBarCallback d = new(SetPBar);
+                SetPBarFilesCallback d = new(SetPBarFiles);
                 Invoke(d, new object[] { value });
             }
             else
@@ -900,15 +863,15 @@ namespace PatchLauncher
             }
         }
 
-        delegate void SetPBarMaxCallback(int value);
-        private void SetPBarMax(int value)
+        delegate void SetPBarFilesMaxCallback(int value);
+        private void SetPBarFilesMax(int value)
         {
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
             if (PBarActualFile.InvokeRequired)
             {
-                SetPBarMaxCallback d = new(SetPBarMax);
+                SetPBarFilesMaxCallback d = new(SetPBarFilesMax);
                 Invoke(d, new object[] { value });
             }
             else

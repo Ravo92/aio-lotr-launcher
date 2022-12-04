@@ -12,7 +12,7 @@ namespace PatchLauncher
 
         private void TmrCowndown_Tick(object sender, EventArgs e)
         {
-            PBarLoading.Increment(10);
+            PBarLoading.Increment(30);
             if (PBarLoading.Value == 100) TmrCowndown.Stop();
             CheckForUpdates();
 

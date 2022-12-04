@@ -40,9 +40,9 @@ namespace PatchLauncher
             {
                 TxtInstallPath.Text = Properties.Settings.Default.GameInstallPath;
             }
-            else if (RegistryFunctions.ReadRegKey("path") != null)
+            else if (RegistryService.ReadRegKey("path") != null)
             {
-                TxtInstallPath.Text = RegistryFunctions.ReadRegKey("path");
+                TxtInstallPath.Text = RegistryService.ReadRegKey("path");
             }
             else
             {
