@@ -33,9 +33,6 @@ namespace PatchLauncher
 
             ReadXMLFile.GetXMLFileData();
 
-            Debug.WriteLine(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE));
-            Debug.WriteLine(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE));
-
             #region Styles
             //Main Form style behaviour
 
