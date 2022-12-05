@@ -50,6 +50,22 @@
             this.LblBrutalAI = new System.Windows.Forms.Label();
             this.ChkBrutalAI = new System.Windows.Forms.Button();
             this.LblWarningAI = new System.Windows.Forms.Label();
+            this.ChkTerrainLighting = new System.Windows.Forms.Button();
+            this.LblTerrainLighting = new System.Windows.Forms.Label();
+            this.Lbl2DShadows = new System.Windows.Forms.Label();
+            this.Chk2DShadows = new System.Windows.Forms.Button();
+            this.Lbl3DShadows = new System.Windows.Forms.Label();
+            this.Chk3DShadows = new System.Windows.Forms.Button();
+            this.LblShowProps = new System.Windows.Forms.Label();
+            this.ChkShowProps = new System.Windows.Forms.Button();
+            this.LblSmoothWaterBorder = new System.Windows.Forms.Label();
+            this.ChkSmoothWaterBorder = new System.Windows.Forms.Button();
+            this.LblDynamicLOD = new System.Windows.Forms.Label();
+            this.ChkDynamicLOD = new System.Windows.Forms.Button();
+            this.LblHeatEffects = new System.Windows.Forms.Label();
+            this.ChkHeatEffects = new System.Windows.Forms.Button();
+            this.LblShowAnimations = new System.Windows.Forms.Label();
+            this.ChkShowAnimations = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).BeginInit();
@@ -198,7 +214,7 @@
             // LblLauncherSettings
             // 
             this.LblLauncherSettings.AutoSize = true;
-            this.LblLauncherSettings.Location = new System.Drawing.Point(57, 126);
+            this.LblLauncherSettings.Location = new System.Drawing.Point(60, 125);
             this.LblLauncherSettings.Name = "LblLauncherSettings";
             this.LblLauncherSettings.Size = new System.Drawing.Size(43, 15);
             this.LblLauncherSettings.TabIndex = 10;
@@ -249,7 +265,7 @@
             // LblGameSettings
             // 
             this.LblGameSettings.AutoSize = true;
-            this.LblGameSettings.Location = new System.Drawing.Point(653, 126);
+            this.LblGameSettings.Location = new System.Drawing.Point(650, 125);
             this.LblGameSettings.Name = "LblGameSettings";
             this.LblGameSettings.Size = new System.Drawing.Size(43, 15);
             this.LblGameSettings.TabIndex = 15;
@@ -260,9 +276,9 @@
             this.LblAniTextureFiltering.AutoSize = true;
             this.LblAniTextureFiltering.Location = new System.Drawing.Point(675, 180);
             this.LblAniTextureFiltering.Name = "LblAniTextureFiltering";
-            this.LblAniTextureFiltering.Size = new System.Drawing.Size(43, 15);
+            this.LblAniTextureFiltering.Size = new System.Drawing.Size(155, 15);
             this.LblAniTextureFiltering.TabIndex = 17;
-            this.LblAniTextureFiltering.Text = "Theme";
+            this.LblAniTextureFiltering.Text = "Anisotropic Texture Filtering";
             // 
             // ChkAniTextureFiltering
             // 
@@ -273,7 +289,7 @@
             this.ChkAniTextureFiltering.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkAniTextureFiltering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkAniTextureFiltering.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkAniTextureFiltering.Location = new System.Drawing.Point(635, 183);
+            this.ChkAniTextureFiltering.Location = new System.Drawing.Point(635, 180);
             this.ChkAniTextureFiltering.Margin = new System.Windows.Forms.Padding(0);
             this.ChkAniTextureFiltering.Name = "ChkAniTextureFiltering";
             this.ChkAniTextureFiltering.Size = new System.Drawing.Size(29, 29);
@@ -361,6 +377,262 @@
             this.LblWarningAI.TabIndex = 22;
             this.LblWarningAI.Text = "Theme";
             // 
+            // ChkTerrainLighting
+            // 
+            this.ChkTerrainLighting.BackColor = System.Drawing.Color.Black;
+            this.ChkTerrainLighting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkTerrainLighting.FlatAppearance.BorderSize = 0;
+            this.ChkTerrainLighting.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkTerrainLighting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkTerrainLighting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkTerrainLighting.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkTerrainLighting.Location = new System.Drawing.Point(635, 230);
+            this.ChkTerrainLighting.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkTerrainLighting.Name = "ChkTerrainLighting";
+            this.ChkTerrainLighting.Size = new System.Drawing.Size(29, 29);
+            this.ChkTerrainLighting.TabIndex = 23;
+            this.ChkTerrainLighting.TabStop = false;
+            this.ChkTerrainLighting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkTerrainLighting.UseMnemonic = false;
+            this.ChkTerrainLighting.UseVisualStyleBackColor = false;
+            this.ChkTerrainLighting.Click += new System.EventHandler(this.ChkTerrainLighting_Click);
+            this.ChkTerrainLighting.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkTerrainLighting_MouseDown);
+            this.ChkTerrainLighting.MouseEnter += new System.EventHandler(this.ChkTerrainLighting_MouseEnter);
+            this.ChkTerrainLighting.MouseLeave += new System.EventHandler(this.ChkTerrainLighting_MouseLeave);
+            // 
+            // LblTerrainLighting
+            // 
+            this.LblTerrainLighting.AutoSize = true;
+            this.LblTerrainLighting.Location = new System.Drawing.Point(675, 230);
+            this.LblTerrainLighting.Name = "LblTerrainLighting";
+            this.LblTerrainLighting.Size = new System.Drawing.Size(89, 15);
+            this.LblTerrainLighting.TabIndex = 24;
+            this.LblTerrainLighting.Text = "Terrain Lighting";
+            // 
+            // Lbl2DShadows
+            // 
+            this.Lbl2DShadows.AutoSize = true;
+            this.Lbl2DShadows.Location = new System.Drawing.Point(675, 330);
+            this.Lbl2DShadows.Name = "Lbl2DShadows";
+            this.Lbl2DShadows.Size = new System.Drawing.Size(71, 15);
+            this.Lbl2DShadows.TabIndex = 28;
+            this.Lbl2DShadows.Text = "2D Shadows";
+            // 
+            // Chk2DShadows
+            // 
+            this.Chk2DShadows.BackColor = System.Drawing.Color.Black;
+            this.Chk2DShadows.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Chk2DShadows.FlatAppearance.BorderSize = 0;
+            this.Chk2DShadows.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Chk2DShadows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Chk2DShadows.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Chk2DShadows.ForeColor = System.Drawing.Color.Transparent;
+            this.Chk2DShadows.Location = new System.Drawing.Point(635, 330);
+            this.Chk2DShadows.Margin = new System.Windows.Forms.Padding(0);
+            this.Chk2DShadows.Name = "Chk2DShadows";
+            this.Chk2DShadows.Size = new System.Drawing.Size(29, 29);
+            this.Chk2DShadows.TabIndex = 27;
+            this.Chk2DShadows.TabStop = false;
+            this.Chk2DShadows.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Chk2DShadows.UseMnemonic = false;
+            this.Chk2DShadows.UseVisualStyleBackColor = false;
+            this.Chk2DShadows.Click += new System.EventHandler(this.Chk2DShadows_Click);
+            this.Chk2DShadows.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Chk2DShadows_MouseDown);
+            this.Chk2DShadows.MouseEnter += new System.EventHandler(this.Chk2DShadows_MouseEnter);
+            this.Chk2DShadows.MouseLeave += new System.EventHandler(this.Chk2DShadows_MouseLeave);
+            // 
+            // Lbl3DShadows
+            // 
+            this.Lbl3DShadows.AutoSize = true;
+            this.Lbl3DShadows.Location = new System.Drawing.Point(675, 280);
+            this.Lbl3DShadows.Name = "Lbl3DShadows";
+            this.Lbl3DShadows.Size = new System.Drawing.Size(71, 15);
+            this.Lbl3DShadows.TabIndex = 26;
+            this.Lbl3DShadows.Text = "3D Shadows";
+            // 
+            // Chk3DShadows
+            // 
+            this.Chk3DShadows.BackColor = System.Drawing.Color.Black;
+            this.Chk3DShadows.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Chk3DShadows.FlatAppearance.BorderSize = 0;
+            this.Chk3DShadows.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Chk3DShadows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Chk3DShadows.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Chk3DShadows.ForeColor = System.Drawing.Color.Transparent;
+            this.Chk3DShadows.Location = new System.Drawing.Point(635, 280);
+            this.Chk3DShadows.Margin = new System.Windows.Forms.Padding(0);
+            this.Chk3DShadows.Name = "Chk3DShadows";
+            this.Chk3DShadows.Size = new System.Drawing.Size(29, 29);
+            this.Chk3DShadows.TabIndex = 25;
+            this.Chk3DShadows.TabStop = false;
+            this.Chk3DShadows.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Chk3DShadows.UseMnemonic = false;
+            this.Chk3DShadows.UseVisualStyleBackColor = false;
+            this.Chk3DShadows.Click += new System.EventHandler(this.Chk3DShadows_Click);
+            this.Chk3DShadows.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Chk3DShadows_MouseDown);
+            this.Chk3DShadows.MouseEnter += new System.EventHandler(this.Chk3DShadows_MouseEnter);
+            this.Chk3DShadows.MouseLeave += new System.EventHandler(this.Chk3DShadows_MouseLeave);
+            // 
+            // LblShowProps
+            // 
+            this.LblShowProps.AutoSize = true;
+            this.LblShowProps.Location = new System.Drawing.Point(675, 430);
+            this.LblShowProps.Name = "LblShowProps";
+            this.LblShowProps.Size = new System.Drawing.Size(69, 15);
+            this.LblShowProps.TabIndex = 32;
+            this.LblShowProps.Text = "Show Props";
+            // 
+            // ChkShowProps
+            // 
+            this.ChkShowProps.BackColor = System.Drawing.Color.Black;
+            this.ChkShowProps.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkShowProps.FlatAppearance.BorderSize = 0;
+            this.ChkShowProps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkShowProps.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkShowProps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkShowProps.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkShowProps.Location = new System.Drawing.Point(635, 430);
+            this.ChkShowProps.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkShowProps.Name = "ChkShowProps";
+            this.ChkShowProps.Size = new System.Drawing.Size(29, 29);
+            this.ChkShowProps.TabIndex = 31;
+            this.ChkShowProps.TabStop = false;
+            this.ChkShowProps.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkShowProps.UseMnemonic = false;
+            this.ChkShowProps.UseVisualStyleBackColor = false;
+            this.ChkShowProps.Click += new System.EventHandler(this.ChkShowProps_Click);
+            this.ChkShowProps.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkShowProps_MouseDown);
+            this.ChkShowProps.MouseEnter += new System.EventHandler(this.ChkShowProps_MouseEnter);
+            this.ChkShowProps.MouseLeave += new System.EventHandler(this.ChkShowProps_MouseLeave);
+            // 
+            // LblSmoothWaterBorder
+            // 
+            this.LblSmoothWaterBorder.AutoSize = true;
+            this.LblSmoothWaterBorder.Location = new System.Drawing.Point(675, 380);
+            this.LblSmoothWaterBorder.Name = "LblSmoothWaterBorder";
+            this.LblSmoothWaterBorder.Size = new System.Drawing.Size(121, 15);
+            this.LblSmoothWaterBorder.TabIndex = 30;
+            this.LblSmoothWaterBorder.Text = "Smooth Water Border";
+            // 
+            // ChkSmoothWaterBorder
+            // 
+            this.ChkSmoothWaterBorder.BackColor = System.Drawing.Color.Black;
+            this.ChkSmoothWaterBorder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkSmoothWaterBorder.FlatAppearance.BorderSize = 0;
+            this.ChkSmoothWaterBorder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkSmoothWaterBorder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkSmoothWaterBorder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkSmoothWaterBorder.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkSmoothWaterBorder.Location = new System.Drawing.Point(635, 380);
+            this.ChkSmoothWaterBorder.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkSmoothWaterBorder.Name = "ChkSmoothWaterBorder";
+            this.ChkSmoothWaterBorder.Size = new System.Drawing.Size(29, 29);
+            this.ChkSmoothWaterBorder.TabIndex = 29;
+            this.ChkSmoothWaterBorder.TabStop = false;
+            this.ChkSmoothWaterBorder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkSmoothWaterBorder.UseMnemonic = false;
+            this.ChkSmoothWaterBorder.UseVisualStyleBackColor = false;
+            this.ChkSmoothWaterBorder.Click += new System.EventHandler(this.ChkSmoothWaterBorder_Click);
+            this.ChkSmoothWaterBorder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkSmoothWaterBorder_MouseDown);
+            this.ChkSmoothWaterBorder.MouseEnter += new System.EventHandler(this.ChkSmoothWaterBorder_MouseEnter);
+            this.ChkSmoothWaterBorder.MouseLeave += new System.EventHandler(this.ChkSmoothWaterBorder_MouseLeave);
+            // 
+            // LblDynamicLOD
+            // 
+            this.LblDynamicLOD.AutoSize = true;
+            this.LblDynamicLOD.Location = new System.Drawing.Point(675, 580);
+            this.LblDynamicLOD.Name = "LblDynamicLOD";
+            this.LblDynamicLOD.Size = new System.Drawing.Size(80, 15);
+            this.LblDynamicLOD.TabIndex = 38;
+            this.LblDynamicLOD.Text = "Dynamic LOD";
+            // 
+            // ChkDynamicLOD
+            // 
+            this.ChkDynamicLOD.BackColor = System.Drawing.Color.Black;
+            this.ChkDynamicLOD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkDynamicLOD.FlatAppearance.BorderSize = 0;
+            this.ChkDynamicLOD.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkDynamicLOD.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkDynamicLOD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkDynamicLOD.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkDynamicLOD.Location = new System.Drawing.Point(635, 580);
+            this.ChkDynamicLOD.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkDynamicLOD.Name = "ChkDynamicLOD";
+            this.ChkDynamicLOD.Size = new System.Drawing.Size(29, 29);
+            this.ChkDynamicLOD.TabIndex = 37;
+            this.ChkDynamicLOD.TabStop = false;
+            this.ChkDynamicLOD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkDynamicLOD.UseMnemonic = false;
+            this.ChkDynamicLOD.UseVisualStyleBackColor = false;
+            this.ChkDynamicLOD.Click += new System.EventHandler(this.ChkDynamicLOD_Click);
+            this.ChkDynamicLOD.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkDynamicLOD_MouseDown);
+            this.ChkDynamicLOD.MouseEnter += new System.EventHandler(this.ChkDynamicLOD_MouseEnter);
+            this.ChkDynamicLOD.MouseLeave += new System.EventHandler(this.ChkDynamicLOD_MouseLeave);
+            // 
+            // LblHeatEffects
+            // 
+            this.LblHeatEffects.AutoSize = true;
+            this.LblHeatEffects.Location = new System.Drawing.Point(675, 530);
+            this.LblHeatEffects.Name = "LblHeatEffects";
+            this.LblHeatEffects.Size = new System.Drawing.Size(70, 15);
+            this.LblHeatEffects.TabIndex = 36;
+            this.LblHeatEffects.Text = "Heat Effects";
+            // 
+            // ChkHeatEffects
+            // 
+            this.ChkHeatEffects.BackColor = System.Drawing.Color.Black;
+            this.ChkHeatEffects.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkHeatEffects.FlatAppearance.BorderSize = 0;
+            this.ChkHeatEffects.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkHeatEffects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkHeatEffects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkHeatEffects.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkHeatEffects.Location = new System.Drawing.Point(635, 530);
+            this.ChkHeatEffects.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkHeatEffects.Name = "ChkHeatEffects";
+            this.ChkHeatEffects.Size = new System.Drawing.Size(29, 29);
+            this.ChkHeatEffects.TabIndex = 35;
+            this.ChkHeatEffects.TabStop = false;
+            this.ChkHeatEffects.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkHeatEffects.UseMnemonic = false;
+            this.ChkHeatEffects.UseVisualStyleBackColor = false;
+            this.ChkHeatEffects.Click += new System.EventHandler(this.ChkHeatEffects_Click);
+            this.ChkHeatEffects.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkHeatEffects_MouseDown);
+            this.ChkHeatEffects.MouseEnter += new System.EventHandler(this.ChkHeatEffects_MouseEnter);
+            this.ChkHeatEffects.MouseLeave += new System.EventHandler(this.ChkHeatEffects_MouseLeave);
+            // 
+            // LblShowAnimations
+            // 
+            this.LblShowAnimations.AutoSize = true;
+            this.LblShowAnimations.Location = new System.Drawing.Point(675, 480);
+            this.LblShowAnimations.Name = "LblShowAnimations";
+            this.LblShowAnimations.Size = new System.Drawing.Size(100, 15);
+            this.LblShowAnimations.TabIndex = 34;
+            this.LblShowAnimations.Text = "Show Animations";
+            // 
+            // ChkShowAnimations
+            // 
+            this.ChkShowAnimations.BackColor = System.Drawing.Color.Black;
+            this.ChkShowAnimations.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkShowAnimations.FlatAppearance.BorderSize = 0;
+            this.ChkShowAnimations.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkShowAnimations.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkShowAnimations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkShowAnimations.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkShowAnimations.Location = new System.Drawing.Point(635, 480);
+            this.ChkShowAnimations.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkShowAnimations.Name = "ChkShowAnimations";
+            this.ChkShowAnimations.Size = new System.Drawing.Size(29, 29);
+            this.ChkShowAnimations.TabIndex = 33;
+            this.ChkShowAnimations.TabStop = false;
+            this.ChkShowAnimations.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkShowAnimations.UseMnemonic = false;
+            this.ChkShowAnimations.UseVisualStyleBackColor = false;
+            this.ChkShowAnimations.Click += new System.EventHandler(this.ChkShowAnimations_Click);
+            this.ChkShowAnimations.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkShowAnimations_MouseDown);
+            this.ChkShowAnimations.MouseEnter += new System.EventHandler(this.ChkShowAnimations_MouseEnter);
+            this.ChkShowAnimations.MouseLeave += new System.EventHandler(this.ChkShowAnimations_MouseLeave);
+            // 
             // OptionsBFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -368,6 +640,22 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1152, 798);
+            this.Controls.Add(this.LblDynamicLOD);
+            this.Controls.Add(this.ChkDynamicLOD);
+            this.Controls.Add(this.LblHeatEffects);
+            this.Controls.Add(this.ChkHeatEffects);
+            this.Controls.Add(this.LblShowAnimations);
+            this.Controls.Add(this.ChkShowAnimations);
+            this.Controls.Add(this.LblShowProps);
+            this.Controls.Add(this.ChkShowProps);
+            this.Controls.Add(this.LblSmoothWaterBorder);
+            this.Controls.Add(this.ChkSmoothWaterBorder);
+            this.Controls.Add(this.Lbl2DShadows);
+            this.Controls.Add(this.Chk2DShadows);
+            this.Controls.Add(this.Lbl3DShadows);
+            this.Controls.Add(this.Chk3DShadows);
+            this.Controls.Add(this.LblTerrainLighting);
+            this.Controls.Add(this.ChkTerrainLighting);
             this.Controls.Add(this.LblWarningAI);
             this.Controls.Add(this.LblBrutalAI);
             this.Controls.Add(this.ChkBrutalAI);
@@ -427,5 +715,21 @@
         private System.Windows.Forms.Label LblBrutalAI;
         private System.Windows.Forms.Button ChkBrutalAI;
         private System.Windows.Forms.Label LblWarningAI;
+        private System.Windows.Forms.Button ChkTerrainLighting;
+        private System.Windows.Forms.Label LblTerrainLighting;
+        private System.Windows.Forms.Label Lbl2DShadows;
+        private System.Windows.Forms.Button Chk2DShadows;
+        private System.Windows.Forms.Label Lbl3DShadows;
+        private System.Windows.Forms.Button Chk3DShadows;
+        private System.Windows.Forms.Label LblShowProps;
+        private System.Windows.Forms.Button ChkShowProps;
+        private System.Windows.Forms.Label LblSmoothWaterBorder;
+        private System.Windows.Forms.Button ChkSmoothWaterBorder;
+        private System.Windows.Forms.Label LblDynamicLOD;
+        private System.Windows.Forms.Button ChkDynamicLOD;
+        private System.Windows.Forms.Label LblHeatEffects;
+        private System.Windows.Forms.Button ChkHeatEffects;
+        private System.Windows.Forms.Label LblShowAnimations;
+        private System.Windows.Forms.Button ChkShowAnimations;
     }
 }
