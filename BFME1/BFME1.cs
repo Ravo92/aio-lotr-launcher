@@ -765,7 +765,7 @@ namespace PatchLauncher
             SetTextFileName("Downloading: " + Path.GetFileName(e.FileName));
         }
 
-        private void OnDownloadProgressChanged(object sender, Downloader.DownloadProgressChangedEventArgs e)
+        private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             SetPBarFiles((int)e.ProgressPercentage);
             SetTextDlSpeed("@ " + Math.Round(e.AverageBytesPerSecondSpeed / 1024000).ToString() + " MB/s");
