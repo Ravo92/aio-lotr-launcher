@@ -108,6 +108,7 @@
             this.Controls.Add(this.BtnChoose);
             this.Controls.Add(this.LblChooseDir);
             this.Controls.Add(this.TxtInstallPath);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InstallPathDialog";

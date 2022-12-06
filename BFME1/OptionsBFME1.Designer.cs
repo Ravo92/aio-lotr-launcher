@@ -210,6 +210,7 @@
             this.PibBorderLauncherOptions.Size = new System.Drawing.Size(600, 400);
             this.PibBorderLauncherOptions.TabIndex = 9;
             this.PibBorderLauncherOptions.TabStop = false;
+            this.PibBorderLauncherOptions.WaitOnLoad = true;
             // 
             // LblLauncherSettings
             // 
@@ -233,6 +234,7 @@
             this.PibHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PibHeader.TabIndex = 11;
             this.PibHeader.TabStop = false;
+            this.PibHeader.WaitOnLoad = true;
             // 
             // LblOptions
             // 
@@ -261,6 +263,7 @@
             this.PibBorderGameOptions.Size = new System.Drawing.Size(520, 670);
             this.PibBorderGameOptions.TabIndex = 14;
             this.PibBorderGameOptions.TabStop = false;
+            this.PibBorderGameOptions.WaitOnLoad = true;
             // 
             // LblGameSettings
             // 
@@ -677,12 +680,12 @@
             this.Controls.Add(this.BtnApply);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.PibBorderLauncherOptions);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OptionsBFME1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OptionsBFME1";
-            this.TopMost = true;
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OptionsBFME1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
