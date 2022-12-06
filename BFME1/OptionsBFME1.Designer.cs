@@ -66,6 +66,10 @@
             this.ChkHeatEffects = new System.Windows.Forms.Button();
             this.LblShowAnimations = new System.Windows.Forms.Label();
             this.ChkShowAnimations = new System.Windows.Forms.Button();
+            this.ResolutionX = new System.Windows.Forms.TextBox();
+            this.ResolutionY = new System.Windows.Forms.TextBox();
+            this.LblResolutionX = new System.Windows.Forms.Label();
+            this.LblResolution = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).BeginInit();
@@ -636,6 +640,45 @@
             this.ChkShowAnimations.MouseEnter += new System.EventHandler(this.ChkShowAnimations_MouseEnter);
             this.ChkShowAnimations.MouseLeave += new System.EventHandler(this.ChkShowAnimations_MouseLeave);
             // 
+            // ResolutionX
+            // 
+            this.ResolutionX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ResolutionX.Location = new System.Drawing.Point(635, 630);
+            this.ResolutionX.Name = "ResolutionX";
+            this.ResolutionX.Size = new System.Drawing.Size(70, 16);
+            this.ResolutionX.TabIndex = 39;
+            this.ResolutionX.Text = "1920";
+            this.ResolutionX.WordWrap = false;
+            // 
+            // ResolutionY
+            // 
+            this.ResolutionY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ResolutionY.Location = new System.Drawing.Point(742, 630);
+            this.ResolutionY.Name = "ResolutionY";
+            this.ResolutionY.Size = new System.Drawing.Size(70, 16);
+            this.ResolutionY.TabIndex = 40;
+            this.ResolutionY.Text = "1080";
+            this.ResolutionY.WordWrap = false;
+            // 
+            // LblResolutionX
+            // 
+            this.LblResolutionX.AutoSize = true;
+            this.LblResolutionX.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblResolutionX.Location = new System.Drawing.Point(711, 626);
+            this.LblResolutionX.Name = "LblResolutionX";
+            this.LblResolutionX.Size = new System.Drawing.Size(25, 30);
+            this.LblResolutionX.TabIndex = 41;
+            this.LblResolutionX.Text = "X";
+            // 
+            // LblResolution
+            // 
+            this.LblResolution.AutoSize = true;
+            this.LblResolution.Location = new System.Drawing.Point(820, 625);
+            this.LblResolution.Name = "LblResolution";
+            this.LblResolution.Size = new System.Drawing.Size(116, 15);
+            this.LblResolution.TabIndex = 42;
+            this.LblResolution.Text = "Set Game Resolution";
+            // 
             // OptionsBFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -643,6 +686,10 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1152, 798);
+            this.Controls.Add(this.LblResolution);
+            this.Controls.Add(this.LblResolutionX);
+            this.Controls.Add(this.ResolutionY);
+            this.Controls.Add(this.ResolutionX);
             this.Controls.Add(this.LblDynamicLOD);
             this.Controls.Add(this.ChkDynamicLOD);
             this.Controls.Add(this.LblHeatEffects);
@@ -734,5 +781,9 @@
         private System.Windows.Forms.Button ChkHeatEffects;
         private System.Windows.Forms.Label LblShowAnimations;
         private System.Windows.Forms.Button ChkShowAnimations;
+        private System.Windows.Forms.TextBox ResolutionX;
+        private System.Windows.Forms.TextBox ResolutionY;
+        private System.Windows.Forms.Label LblResolutionX;
+        private System.Windows.Forms.Label LblResolution;
     }
 }

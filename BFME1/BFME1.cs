@@ -45,7 +45,7 @@ namespace PatchLauncher
             Wv2Patchnotes.Hide();
 
             TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
-            TmrPatchNotes.Interval = 5000;
+            TmrPatchNotes.Interval = 2000;
             TmrPatchNotes.Start();
 
             // label-Styles
@@ -69,6 +69,13 @@ namespace PatchLauncher
             LblPatchNotes.ForeColor = Color.FromArgb(192, 145, 69);
             LblPatchNotes.BackColor = Color.Transparent;
             LblPatchNotes.BorderStyle = BorderStyle.None;
+
+            LblCurrentVersion.Text = "Active: Patch 1.03";
+            LblCurrentVersion.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            LblCurrentVersion.ForeColor = Color.FromArgb(192, 145, 69);
+            LblCurrentVersion.BackColor = Color.Transparent;
+            LblCurrentVersion.BorderStyle = BorderStyle.None;
+            LblCurrentVersion.OutlineWidth = 2;
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
             PBarActualFile.BackColor = Color.FromArgb(192, 145, 69);

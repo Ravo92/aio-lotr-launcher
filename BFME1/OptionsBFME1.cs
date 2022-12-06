@@ -2,6 +2,8 @@
 using PatchLauncher.Helper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Media;
@@ -30,6 +32,7 @@ namespace PatchLauncher
         string FlagShowAnimations;
         string FlagHeatEffects;
         string FlagDynamicLOD;
+        string FlagResolution;
 
         readonly SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
         public OptionsBFME1()
@@ -114,6 +117,16 @@ namespace PatchLauncher
                 ChkBrutalAI.Enabled = false;
                 ChkEAX.Enabled = false;
                 ChkAniTextureFiltering.Enabled = false;
+                ChkTerrainLighting.Enabled = false;
+                Chk3DShadows.Enabled = false;
+                Chk2DShadows.Enabled = false;
+                ChkSmoothWaterBorder.Enabled = false;
+                ChkShowProps.Enabled = false;
+                ChkShowAnimations.Enabled = false;
+                ChkHeatEffects.Enabled = false;
+                ChkDynamicLOD.Enabled = false;
+                ResolutionX.Enabled = false;
+                ResolutionY.Enabled = false;
 
                 LblWarningAI.Text = "Some Settings are Disabled until the game is installed.";
                 LblWarningAI.Show();
@@ -123,6 +136,16 @@ namespace PatchLauncher
                 ChkBrutalAI.Enabled = true;
                 ChkEAX.Enabled = true;
                 ChkAniTextureFiltering.Enabled = true;
+                ChkTerrainLighting.Enabled = true;
+                Chk3DShadows.Enabled = true;
+                Chk2DShadows.Enabled = true;
+                ChkSmoothWaterBorder.Enabled = true;
+                ChkShowProps.Enabled = true;
+                ChkShowAnimations.Enabled = true;
+                ChkHeatEffects.Enabled = true;
+                ChkDynamicLOD.Enabled = true;
+                ResolutionX.Enabled = true;
+                ResolutionY.Enabled = true;
 
                 LblWarningAI.Hide();
             }
@@ -181,6 +204,16 @@ namespace PatchLauncher
             LblDynamicLOD.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblDynamicLOD.ForeColor = Color.FromArgb(192, 145, 69);
             LblDynamicLOD.BackColor = Color.Transparent;
+
+            LblResolutionX.Text = "X";
+            LblResolutionX.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblResolutionX.ForeColor = Color.FromArgb(192, 145, 69);
+            LblResolutionX.BackColor = Color.Transparent;
+
+            LblResolution.Text = "Set Game Resolution";
+            LblResolution.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblResolution.ForeColor = Color.FromArgb(192, 145, 69);
+            LblResolution.BackColor = Color.Transparent;
 
             //Checkbox-Styles
             ChkAniTextureFiltering.FlatAppearance.BorderSize = 0;
@@ -353,6 +386,36 @@ namespace PatchLauncher
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
+          
+            ResolutionX.BackColor = Color.Black;
+            ResolutionX.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            ResolutionX.ForeColor = Color.FromArgb(192, 145, 69);
+
+            ResolutionY.BackColor = Color.Black;
+            ResolutionY.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            ResolutionY.ForeColor = Color.FromArgb(192, 145, 69);
+
+            FlagResolution = _iniFile.ReadKey("Resolution");
+
+            //  
+
+            if (FlagResolution != null)
+            {
+                string[] resolutionXY = FlagResolution.Split(" ", StringSplitOptions.TrimEntries);
+
+                string resolutionX = resolutionXY[0];
+                string resolutionY = resolutionXY[1];
+
+                ResolutionX.Text = resolutionX;
+                ResolutionY.Text = resolutionY;
+            }
+            else if (FlagResolution == null)
+            {
+                ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
+                ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
 
             ChkTheme.FlatAppearance.BorderSize = 0;
             ChkTheme.FlatStyle = FlatStyle.Flat;
@@ -508,15 +571,19 @@ namespace PatchLauncher
             Properties.Settings.Default.Save();
 
             //Save Game-Settings
-            _iniFile.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
-            _iniFile.WriteKey("TerrainLighting", FlagTerrainLighting);
-            _iniFile.WriteKey("3DShadows", Flag3DShadows);
-            _iniFile.WriteKey("2DShadows", Flag2DShadows);
-            _iniFile.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder);
-            _iniFile.WriteKey("ShowProps", FlagShowProps);
-            _iniFile.WriteKey("ExtraAnimations", FlagShowAnimations);
-            _iniFile.WriteKey("HeatEffects", FlagHeatEffects);
-            _iniFile.WriteKey("DynamicLOD", FlagDynamicLOD);
+            if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
+            {
+                _iniFile.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
+                _iniFile.WriteKey("TerrainLighting", FlagTerrainLighting);
+                _iniFile.WriteKey("3DShadows", Flag3DShadows);
+                _iniFile.WriteKey("2DShadows", Flag2DShadows);
+                _iniFile.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder);
+                _iniFile.WriteKey("ShowProps", FlagShowProps);
+                _iniFile.WriteKey("ExtraAnimations", FlagShowAnimations);
+                _iniFile.WriteKey("HeatEffects", FlagHeatEffects);
+                _iniFile.WriteKey("DynamicLOD", FlagDynamicLOD);
+                _iniFile.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
+            }
 
             //Settings-Valuations
             if (FlagThemeMusic)
@@ -593,6 +660,9 @@ namespace PatchLauncher
             ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
             ChkWindowed.Image = Image.FromFile("Images\\chkUnselected.png");
             ChkBrutalAI.Image = Image.FromFile("Images\\chkUnselected.png");
+
+            ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
+            ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
         }
 
         private void OptionsBFME1_MouseDown(object sender, MouseEventArgs e)
