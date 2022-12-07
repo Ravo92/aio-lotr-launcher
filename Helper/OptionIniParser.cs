@@ -5,16 +5,6 @@
         // TODO: Change the Game Directory detection Behaviours when game isnt installed yet, so every key defaults to "noValue"...
         public static readonly string fullPathOptionIniFile = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files")).ToString(); // Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME);
 
-        public static void CreateDummyIniFile()
-        {
-            Directory.CreateDirectory(fullPathOptionIniFile);
-
-            if (!File.Exists(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME)))
-            {
-                File.Create(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
-            }
-        }
-
         public string ReadKey(string keyName)
         {
             StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));

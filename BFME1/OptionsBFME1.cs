@@ -12,7 +12,6 @@ namespace PatchLauncher
 {
     public partial class OptionsBFME1 : Form
     {
-        readonly OptionIniParser _iniFile = new();
         //Launcher Settings
         bool FlagEAX = Settings.Default.EAXSupport;
         readonly bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + @"\dsound.dll");
@@ -205,7 +204,21 @@ namespace PatchLauncher
             ChkAniTextureFiltering.BackColor = Color.Transparent;
             ChkAniTextureFiltering.ForeColor = Color.FromArgb(192, 145, 69);
 
-            FlagAnisotropicTextureFiltering = _iniFile.ReadKey("AnisotropicTextureFiltering");
+            if (Settings.Default.IsGameInstalled == true)
+            {
+                OptionIniParser _iniFile = new();
+
+                FlagAnisotropicTextureFiltering = _iniFile.ReadKey("AnisotropicTextureFiltering");
+                FlagTerrainLighting = _iniFile.ReadKey("TerrainLighting");
+                Flag3DShadows = _iniFile.ReadKey("3DShadows");
+                Flag2DShadows = _iniFile.ReadKey("2DShadows");
+                FlagSmoothWaterBorder = _iniFile.ReadKey("SmoothWaterBorder");
+                FlagShowProps = _iniFile.ReadKey("ShowProps");
+                FlagShowAnimations = _iniFile.ReadKey("ExtraAnimations");
+                FlagHeatEffects = _iniFile.ReadKey("HeatEffects");
+                FlagDynamicLOD = _iniFile.ReadKey("DynamicLOD");
+                FlagResolution = _iniFile.ReadKey("Resolution");
+            }
 
             if (FlagAnisotropicTextureFiltering == "no")
             {
@@ -224,8 +237,6 @@ namespace PatchLauncher
             ChkTerrainLighting.BackColor = Color.Transparent;
             ChkTerrainLighting.ForeColor = Color.FromArgb(192, 145, 69);
 
-            FlagTerrainLighting = _iniFile.ReadKey("TerrainLighting");
-
             if (FlagTerrainLighting == "no")
             {
                 ChkTerrainLighting.Image = Image.FromFile("Images\\chkUnselected.png");
@@ -242,8 +253,6 @@ namespace PatchLauncher
             Chk3DShadows.FlatStyle = FlatStyle.Flat;
             Chk3DShadows.BackColor = Color.Transparent;
             Chk3DShadows.ForeColor = Color.FromArgb(192, 145, 69);
-
-            Flag3DShadows = _iniFile.ReadKey("3DShadows");
 
             if (Flag3DShadows == "no")
             {
@@ -262,8 +271,6 @@ namespace PatchLauncher
             Chk2DShadows.BackColor = Color.Transparent;
             Chk2DShadows.ForeColor = Color.FromArgb(192, 145, 69);
 
-            Flag2DShadows = _iniFile.ReadKey("2DShadows");
-
             if (Flag2DShadows == "no")
             {
                 Chk2DShadows.Image = Image.FromFile("Images\\chkUnselected.png");
@@ -280,8 +287,6 @@ namespace PatchLauncher
             ChkSmoothWaterBorder.FlatStyle = FlatStyle.Flat;
             ChkSmoothWaterBorder.BackColor = Color.Transparent;
             ChkSmoothWaterBorder.ForeColor = Color.FromArgb(192, 145, 69);
-
-            FlagSmoothWaterBorder = _iniFile.ReadKey("SmoothWaterBorder");
 
             if (FlagSmoothWaterBorder == "no")
             {
@@ -300,8 +305,6 @@ namespace PatchLauncher
             ChkShowProps.BackColor = Color.Transparent;
             ChkShowProps.ForeColor = Color.FromArgb(192, 145, 69);
 
-            FlagShowProps = _iniFile.ReadKey("ShowProps");
-
             if (FlagShowProps == "no")
             {
                 ChkShowProps.Image = Image.FromFile("Images\\chkUnselected.png");
@@ -318,8 +321,6 @@ namespace PatchLauncher
             ChkShowAnimations.FlatStyle = FlatStyle.Flat;
             ChkShowAnimations.BackColor = Color.Transparent;
             ChkShowAnimations.ForeColor = Color.FromArgb(192, 145, 69);
-
-            FlagShowAnimations = _iniFile.ReadKey("ExtraAnimations");
 
             if (FlagShowAnimations == "no")
             {
@@ -338,8 +339,6 @@ namespace PatchLauncher
             ChkHeatEffects.BackColor = Color.Transparent;
             ChkHeatEffects.ForeColor = Color.FromArgb(192, 145, 69);
 
-            FlagHeatEffects = _iniFile.ReadKey("HeatEffects");
-
             if (FlagHeatEffects == "no")
             {
                 ChkHeatEffects.Image = Image.FromFile("Images\\chkUnselected.png");
@@ -356,8 +355,6 @@ namespace PatchLauncher
             ChkDynamicLOD.FlatStyle = FlatStyle.Flat;
             ChkDynamicLOD.BackColor = Color.Transparent;
             ChkDynamicLOD.ForeColor = Color.FromArgb(192, 145, 69);
-
-            FlagDynamicLOD = _iniFile.ReadKey("DynamicLOD");
 
             if (FlagDynamicLOD == "no")
             {
@@ -378,8 +375,6 @@ namespace PatchLauncher
             ResolutionY.BackColor = Color.Black;
             ResolutionY.Font = ConstStrings.UseFont("Albertus Nova", 14);
             ResolutionY.ForeColor = Color.FromArgb(192, 145, 69);
-
-            FlagResolution = _iniFile.ReadKey("Resolution");
 
             //  
 
@@ -556,6 +551,8 @@ namespace PatchLauncher
             //Save Game-Settings
             if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
+                OptionIniParser _iniFile = new();
+
                 _iniFile.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
                 _iniFile.WriteKey("TerrainLighting", FlagTerrainLighting);
                 _iniFile.WriteKey("3DShadows", Flag3DShadows);

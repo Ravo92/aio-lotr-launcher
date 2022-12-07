@@ -409,12 +409,12 @@ namespace PatchLauncher
             {
                 XMLFileHelper.GetXMLFileVersion();
 
-                if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
+                if (File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
                 {
-                    Properties.Settings.Default.PatchVersionInstalled = 29;
-                    Properties.Settings.Default.Save();
+                    Settings.Default.PatchVersionInstalled = 29;
+                    Settings.Default.Save();
                 }
-                else if (MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "a007b2ea1f87a530c1e412255e1d7896" && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "404")
+                else if (MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "a007b2ea1f87a530c1e412255e1d7896" && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "404")
                 {
                     PBarActualFile.Show();
                     LblBytes.Show();
@@ -422,12 +422,12 @@ namespace PatchLauncher
                     LblFileName.Show();
                     LblFileName.Text = "Installed Patch 2.22v29 is damaged and will be reaquired...";
 
-                    Properties.Settings.Default.PatchVersionInstalled = 103;
-                    Properties.Settings.Default.Save();
+                    Settings.Default.PatchVersionInstalled = 103;
+                    Settings.Default.Save();
 
                     await UpdateRoutine();
                 }
-                else if (MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "404")
+                else if (MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "404")
                 {
                     PBarActualFile.Show();
                     LblBytes.Show();
@@ -445,17 +445,17 @@ namespace PatchLauncher
                 {
                     XMLFileHelper.GetXMLFileVersion();
 
-                    if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
+                    if (File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
                     {
-                        Properties.Settings.Default.PatchVersionInstalled = 29;
-                        Properties.Settings.Default.Save();
+                        Settings.Default.PatchVersionInstalled = 29;
+                        Settings.Default.Save();
                     }
-                    else if (MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "a007b2ea1f87a530c1e412255e1d7896" && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "404")
+                    else if (MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "a007b2ea1f87a530c1e412255e1d7896" && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "404")
                     {
                         LblFileName.Show();
                         LblFileName.Text = "Installed Patch 2.22v29 is damaged and will be reaquired...";
-                        Properties.Settings.Default.PatchVersionInstalled = 103;
-                        Properties.Settings.Default.Save();
+                        Settings.Default.PatchVersionInstalled = 103;
+                        Settings.Default.Save();
 
                         await UpdateRoutine();
                     }
@@ -525,7 +525,7 @@ namespace PatchLauncher
             });
 
             ZIPFileHelper _ZIPFileHelper = new();
-            await _ZIPFileHelper.ExtractArchive(Path.Combine("Patches", "Patch_2.22v29.7z"), Properties.Settings.Default.GameInstallPath, progressHandler);
+            await _ZIPFileHelper.ExtractArchive(Path.Combine("Patches", "Patch_2.22v29.7z"), Settings.Default.GameInstallPath, progressHandler);
 
             FinishingGameUpdate();
         }
@@ -539,8 +539,8 @@ namespace PatchLauncher
 
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
 
-            Properties.Settings.Default.PatchVersionInstalled = 29;
-            Properties.Settings.Default.Save();
+            Settings.Default.PatchVersionInstalled = 29;
+            Settings.Default.Save();
 
             Invoke((MethodInvoker)(() => BtnLaunch.Text = "PLAY GAME"));
 
@@ -572,20 +572,20 @@ namespace PatchLauncher
                 Directory.CreateDirectory(Settings.Default.GameInstallPath);
             }
 
-            if (Settings.Default.GameInstallPath != null && File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Settings.Default.PatchVersionInstalled == 29)
-            {
-                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
-                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
+            if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
+                Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
 
-                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
-                    File.Copy("Tools\\" + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
-            }
+            if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
+                File.Copy("Tools\\" + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
 
             Settings.Default.IsGameInstalled = true;
             Settings.Default.Save();
 
             Task download = DownloadGame();
             await download;
+
+            OptionsBFME1 _options = new();
+            _options.ShowDialog();
 
             Task extract = ExtractGame();
             await extract;
@@ -658,7 +658,7 @@ namespace PatchLauncher
             {
                 SetTextPercentages($"Extracting {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
                 ZIPFileHelper _ZIPFileHelper = new();
-                await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Download", archiveFileNames[i]), Properties.Settings.Default.GameInstallPath, progressHandler);
+                await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Download", archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler);
             }
         }
 
@@ -799,8 +799,8 @@ namespace PatchLauncher
                 BtnInstall.Show();
                 BtnLaunch.Hide();
             }
-            else if ((XMLFileHelper.GetXMLFileVersion() == 29 && File.Exists(Path.Combine(Settings.Default.GameInstallPath + C_MAIN_GAME_FILE))) || 
-                (File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Settings.Default.PatchVersionInstalled != 29) || 
+            else if ((XMLFileHelper.GetXMLFileVersion() == 29 && File.Exists(Path.Combine(Settings.Default.GameInstallPath + C_MAIN_GAME_FILE))) ||
+                (File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Settings.Default.PatchVersionInstalled != 29) ||
                 !File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)))
             {
                 LblFileName.Show();
@@ -812,7 +812,7 @@ namespace PatchLauncher
             else
             {
                 BtnLaunch.Enabled = true;
-                BtnLaunch.Text = "LAUNCH";
+                BtnLaunch.Text = "PLAY GAME";
                 CheckForUpdates(false);
             }
         }

@@ -40,8 +40,6 @@ namespace PatchLauncher
                     Properties.Settings.Default.Save();
                 }
 
-                OptionIniParser.CreateDummyIniFile();
-
                 Application.Run(new BFME1());
             }
         }
