@@ -28,7 +28,7 @@ namespace PatchLauncher
             {
                 ApplicationConfiguration.Initialize();
 
-                if (RegistryService.ReadRegKey("path") == null || !Directory.Exists(RegistryService.ReadRegKey("path")))
+                if (RegistryService.ReadRegKey("path") == "ValueNotFound" || !Directory.Exists(RegistryService.ReadRegKey("path")))
                 {
                     Properties.Settings.Default.IsGameInstalled = false;
                     Properties.Settings.Default.Save();

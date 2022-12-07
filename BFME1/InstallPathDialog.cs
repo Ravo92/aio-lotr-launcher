@@ -40,13 +40,13 @@ namespace PatchLauncher
             {
                 TxtInstallPath.Text = Properties.Settings.Default.GameInstallPath;
             }
-            else if (RegistryService.ReadRegKey("path") != null)
+            else if (RegistryService.ReadRegKey("path") != "ValueNotFound")
             {
                 TxtInstallPath.Text = RegistryService.ReadRegKey("path");
             }
             else
             {
-                TxtInstallPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), ConstStrings.C_GAMEFOLDER_NAME);
+                TxtInstallPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), ConstStrings.C_EAFOLDER_NAME, ConstStrings.C_GAMEFOLDER_NAME);
             }
         }
 
@@ -68,14 +68,14 @@ namespace PatchLauncher
         {
             BtnChoose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnChoose.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => BFME1.PlaySoundClick());
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private void BtnChoose_MouseEnter(object sender, EventArgs e)
         {
             BtnChoose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnChoose.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => BFME1.PlaySoundHover());
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnChoose_MouseLeave(object sender, EventArgs e)
@@ -96,14 +96,14 @@ namespace PatchLauncher
         {
             BtnAccept.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnAccept.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => BFME1.PlaySoundClick());
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private void BtnAccept_MouseEnter(object sender, EventArgs e)
         {
             BtnAccept.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnAccept.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => BFME1.PlaySoundHover());
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnAccept_MouseLeave(object sender, EventArgs e)

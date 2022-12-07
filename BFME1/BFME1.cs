@@ -1,7 +1,5 @@
 using PatchLauncher.Helper;
 using Color = System.Drawing.Color;
-using SharpDX.XAudio2;
-using SharpDX.Multimedia;
 using System.Windows.Forms;
 using System.Drawing;
 using System;
@@ -124,53 +122,53 @@ namespace PatchLauncher
             PiBDiscord.Image = Image.FromFile("Images\\discord.png");
             PiBModDB.Image = Image.FromFile("Images\\moddb.png");
 
-            if (Properties.Settings.Default.BackgroundMusicIcon == 0)
+            if (Settings.Default.BackgroundMusicIcon == 0)
             {
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
-                if (Properties.Settings.Default.PlayBackgroundMusic)
+                if (Settings.Default.PlayBackgroundMusic)
                 {
                     this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                     _theme.Play();
                 }
             }
-            else if (Properties.Settings.Default.BackgroundMusicIcon == 1)
+            else if (Settings.Default.BackgroundMusicIcon == 1)
             {
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoGondor.png");
-                if (Properties.Settings.Default.PlayBackgroundMusic)
+                if (Settings.Default.PlayBackgroundMusic)
                 {
                     this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                     _theme.Play();
                 }
             }
-            else if (Properties.Settings.Default.BackgroundMusicIcon == 2)
+            else if (Settings.Default.BackgroundMusicIcon == 2)
             {
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoRohan.png");
-                if (Properties.Settings.Default.PlayBackgroundMusic)
+                if (Settings.Default.PlayBackgroundMusic)
                 {
                     this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                     _theme.Play();
                 }
             }
-            else if (Properties.Settings.Default.BackgroundMusicIcon == 3)
+            else if (Settings.Default.BackgroundMusicIcon == 3)
             {
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoIsengard.png");
-                if (Properties.Settings.Default.PlayBackgroundMusic)
+                if (Settings.Default.PlayBackgroundMusic)
                 {
                     this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                     _theme.Play();
                 }
             }
-            else if (Properties.Settings.Default.BackgroundMusicIcon == 4)
+            else if (Settings.Default.BackgroundMusicIcon == 4)
             {
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoMordor.png");
-                if (Properties.Settings.Default.PlayBackgroundMusic)
+                if (Settings.Default.PlayBackgroundMusic)
                 {
                     this._theme.Stop();
-                    SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                     _theme.Play();
                 }
             }
@@ -183,12 +181,12 @@ namespace PatchLauncher
         {
             ProcessStartInfo _processInfo = new()
             {
-                WorkingDirectory = Properties.Settings.Default.GameInstallPath,
-                FileName = Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)
+                WorkingDirectory = Settings.Default.GameInstallPath,
+                FileName = Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)
             };
 
             // Start game windowed
-            if (Properties.Settings.Default.StartGameWindowed)
+            if (Settings.Default.StartGameWindowed)
             {
                 _processInfo.Arguments = "-win";
             }
@@ -210,14 +208,14 @@ namespace PatchLauncher
         {
             BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnLaunch.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => PlaySoundHover());
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnLaunch_MouseDown(object sender, MouseEventArgs e)
         {
             BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => PlaySoundClick());
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
         private void BtnOptions_Click(object sender, EventArgs e)
         {
@@ -233,13 +231,13 @@ namespace PatchLauncher
         {
             BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnOptions.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => PlaySoundHover());
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
         private void BtnOptions_MouseDown(object sender, MouseEventArgs e)
         {
             BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => PlaySoundClick());
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private async void BtnInstall_Click(object sender, EventArgs e)
@@ -274,14 +272,14 @@ namespace PatchLauncher
         {
             BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnInstall.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => PlaySoundHover());
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnInstall_MouseDown(object sender, MouseEventArgs e)
         {
             BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => PlaySoundClick());
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private void PiBYoutube_Click(object sender, EventArgs e)
@@ -309,15 +307,15 @@ namespace PatchLauncher
             {
                 case 0:
                     {
-                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_default.wav";
-                        Properties.Settings.Default.BackgroundMusicIcon = 0;
-                        Properties.Settings.Default.Save();
+                        Settings.Default.BackgroundMusicFile = @"Sounds\\music_default.wav";
+                        Settings.Default.BackgroundMusicIcon = 0;
+                        Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
                         _theme.Stop();
 
-                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                             _theme.Play();
                         }
 
@@ -325,60 +323,60 @@ namespace PatchLauncher
                     }
                 case 1:
                     {
-                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_gondor.wav";
-                        Properties.Settings.Default.BackgroundMusicIcon = 1;
-                        Properties.Settings.Default.Save();
+                        Settings.Default.BackgroundMusicFile = @"Sounds\\music_gondor.wav";
+                        Settings.Default.BackgroundMusicIcon = 1;
+                        Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoGondor.png");
                         _theme.Stop();
 
-                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                             _theme.Play();
                         }
                         break;
                     }
                 case 2:
                     {
-                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_rohan.wav";
-                        Properties.Settings.Default.BackgroundMusicIcon = 2;
-                        Properties.Settings.Default.Save();
+                        Settings.Default.BackgroundMusicFile = @"Sounds\\music_rohan.wav";
+                        Settings.Default.BackgroundMusicIcon = 2;
+                        Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoRohan.png");
                         _theme.Stop();
 
-                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                             _theme.Play();
                         }
                         break;
                     }
                 case 3:
                     {
-                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_isengard.wav";
-                        Properties.Settings.Default.BackgroundMusicIcon = 3;
-                        Properties.Settings.Default.Save();
+                        Settings.Default.BackgroundMusicFile = @"Sounds\\music_isengard.wav";
+                        Settings.Default.BackgroundMusicIcon = 3;
+                        Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoIsengard.png");
                         _theme.Stop();
 
-                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                             _theme.Play();
                         }
                         break;
                     }
                 case 4:
                     {
-                        Properties.Settings.Default.BackgroundMusicFile = @"Sounds\\music_mordor.wav";
-                        Properties.Settings.Default.BackgroundMusicIcon = 4;
-                        Properties.Settings.Default.Save();
+                        Settings.Default.BackgroundMusicFile = @"Sounds\\music_mordor.wav";
+                        Settings.Default.BackgroundMusicIcon = 4;
+                        Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoMordor.png");
                         _theme.Stop();
 
-                        if (Properties.Settings.Default.PlayBackgroundMusic == true)
+                        if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                             _theme.Play();
                         }
                         break;
@@ -386,60 +384,6 @@ namespace PatchLauncher
             }
         }
 
-        #endregion
-
-        #region Sound System
-        //Initialize Sound-System
-        public static void PLaySoundFile(XAudio2 device, string text, string fileName)
-        {
-            var stream = new SoundStream(File.OpenRead(fileName));
-            var waveFormat = stream.Format;
-            var buffer = new AudioBuffer
-            {
-                Stream = stream.ToDataStream(),
-                AudioBytes = (int)stream.Length,
-                Flags = BufferFlags.EndOfStream
-            };
-            stream.Close();
-
-            var sourceVoice = new SourceVoice(device, waveFormat, true);
-            // Adds a sample callback to check that they are working on source voices
-            sourceVoice.SubmitSourceBuffer(buffer, stream.DecodedPacketsInfo);
-            sourceVoice.Start();
-
-            int count = 0;
-            while (sourceVoice.State.BuffersQueued > 0)
-            {
-                if (count == 50)
-                {
-                    count = 0;
-                }
-                Thread.Sleep(10);
-                count++;
-            }
-
-            sourceVoice.DestroyVoice();
-            sourceVoice.Dispose();
-            buffer.Stream.Dispose();
-        }
-
-        public static void PlaySoundClick()
-        {
-            XAudio2 _xaudio2 = new();
-            MasteringVoice _masteringVoice = new(_xaudio2);
-            PLaySoundFile(_xaudio2, "", ConstStrings.C_BUTTONSOUND_CLICK);
-            _masteringVoice.Dispose();
-            _xaudio2.Dispose();
-        }
-
-        public static void PlaySoundHover()
-        {
-            XAudio2 _xaudio2 = new();
-            MasteringVoice _masteringVoice = new(_xaudio2);
-            PLaySoundFile(_xaudio2, "", ConstStrings.C_BUTTONSOUND_HOVER);
-            _masteringVoice.Dispose();
-            _xaudio2.Dispose();
-        }
         #endregion
 
         #region ToolTip System
@@ -621,11 +565,20 @@ namespace PatchLauncher
 
         public async Task InstallRoutine()
         {
-            RegistryService.WriteRegKeysInstallation(Properties.Settings.Default.GameInstallPath);
+            RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath);
 
-            if (!Directory.Exists(Properties.Settings.Default.GameInstallPath))
+            if (!Directory.Exists(Settings.Default.GameInstallPath))
             {
-                Directory.CreateDirectory(Properties.Settings.Default.GameInstallPath);
+                Directory.CreateDirectory(Settings.Default.GameInstallPath);
+            }
+
+            if (Settings.Default.GameInstallPath != null && File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Settings.Default.PatchVersionInstalled == 29)
+            {
+                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
+                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
+
+                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
+                    File.Copy("Tools\\" + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
             }
 
             Settings.Default.IsGameInstalled = true;
@@ -839,15 +792,6 @@ namespace PatchLauncher
 
         private void BFME1_Shown(object sender, EventArgs e)
         {
-            if (Settings.Default.GameInstallPath != null && File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Settings.Default.PatchVersionInstalled == 29)
-            {
-                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
-                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
-
-                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
-                    File.Copy("Tools\\" + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
-            }
-
             if (Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Settings.Default.GameInstallPath!, C_MAIN_GAME_FILE)))
             {
                 Settings.Default.IsGameInstalled = false;
@@ -867,6 +811,8 @@ namespace PatchLauncher
             }
             else
             {
+                BtnLaunch.Enabled = true;
+                BtnLaunch.Text = "LAUNCH";
                 CheckForUpdates(false);
             }
         }

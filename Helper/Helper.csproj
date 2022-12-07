@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="SevenZipExtractor" Version="1.0.17" />
+    <PackageReference Include="SharpDX.XAudio2" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>

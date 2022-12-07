@@ -2,21 +2,22 @@
 {
     public class OptionIniParser
     {
-        public readonly string fullPathOptionIniFile = Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME);
+        // TODO: Change the Game Directory detection Behaviours when game isnt installed yet, so every key defaults to "noValue"...
+        public static readonly string fullPathOptionIniFile = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files")).ToString(); // Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME);
 
         public static void CreateDummyIniFile()
         {
-            string appdataPath = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files")).ToString();
+            Directory.CreateDirectory(fullPathOptionIniFile);
 
-            if (!File.Exists(Path.Combine(appdataPath, ConstStrings.C_OPTIONSINI_FILENAME)))
+            if (!File.Exists(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME)))
             {
-                File.Create(Path.Combine(appdataPath, ConstStrings.C_OPTIONSINI_FILENAME));
+                File.Create(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
             }
         }
 
         public string ReadKey(string keyName)
         {
-            StreamReader _streamReader = new(fullPathOptionIniFile);
+            StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
             {
                 string? keyValue = null;
                 using (_streamReader)
@@ -37,7 +38,7 @@
 
         public void WriteKey(string keyName, string keyValue)
         {
-            StreamReader _streamReader = new(fullPathOptionIniFile);
+            StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
             string inp;
             string changedFile;
             inp = _streamReader.ReadToEnd();
@@ -53,7 +54,7 @@
                 changedFile = inp.Replace(keyName + " = " + ReadKey(keyName), keyName + " = " + keyValue);
             }
 
-            File.WriteAllText(fullPathOptionIniFile, changedFile);
+            File.WriteAllText(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME), changedFile);
         }
     }
 }

@@ -497,14 +497,14 @@ namespace PatchLauncher
         {
             BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
             BtnDefault.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => BFME1.PlaySoundHover());
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnDefault_MouseDown(object sender, MouseEventArgs e)
         {
             BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => BFME1.PlaySoundClick());
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private void ChkTheme_MouseEnter(object sender, EventArgs e)

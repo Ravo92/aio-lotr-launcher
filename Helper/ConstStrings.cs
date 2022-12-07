@@ -13,6 +13,7 @@ namespace PatchLauncher.Helper
         }
 
         public const string C_GAMEFOLDER_NAME = "The Battle for Middle-earth (tm)";
+        public const string C_EAFOLDER_NAME = "EA Games";
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
         public const string C_FONT_ALBERTUS_NOVA = "Albertus Nova";
