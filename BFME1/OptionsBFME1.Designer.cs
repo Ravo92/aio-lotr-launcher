@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsBFME1));
-            this.BtnCancel = new System.Windows.Forms.Button();
-            this.BtnApply = new System.Windows.Forms.Button();
             this.BtnDefault = new System.Windows.Forms.Button();
             this.LblTheme = new System.Windows.Forms.Label();
             this.ChkTheme = new System.Windows.Forms.Button();
@@ -75,50 +73,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).BeginInit();
             this.SuspendLayout();
             // 
-            // BtnCancel
-            // 
-            this.BtnCancel.BackColor = System.Drawing.Color.Black;
-            this.BtnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BtnCancel.FlatAppearance.BorderSize = 0;
-            this.BtnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancel.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnCancel.Location = new System.Drawing.Point(412, 734);
-            this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(200, 51);
-            this.BtnCancel.TabIndex = 1;
-            this.BtnCancel.TabStop = false;
-            this.BtnCancel.Text = "CANCEL";
-            this.BtnCancel.UseMnemonic = false;
-            this.BtnCancel.UseVisualStyleBackColor = false;
-            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            this.BtnCancel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnCancel_MouseDown);
-            this.BtnCancel.MouseEnter += new System.EventHandler(this.BtnCancel_MouseEnter);
-            this.BtnCancel.MouseLeave += new System.EventHandler(this.BtnCancel_MouseLeave);
-            // 
-            // BtnApply
-            // 
-            this.BtnApply.BackColor = System.Drawing.Color.Black;
-            this.BtnApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BtnApply.FlatAppearance.BorderSize = 0;
-            this.BtnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnApply.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnApply.Location = new System.Drawing.Point(412, 677);
-            this.BtnApply.Name = "BtnApply";
-            this.BtnApply.Size = new System.Drawing.Size(200, 51);
-            this.BtnApply.TabIndex = 2;
-            this.BtnApply.TabStop = false;
-            this.BtnApply.Text = "SAVE";
-            this.BtnApply.UseMnemonic = false;
-            this.BtnApply.UseVisualStyleBackColor = false;
-            this.BtnApply.Click += new System.EventHandler(this.BtnApply_Click);
-            this.BtnApply.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnApply_MouseDown);
-            this.BtnApply.MouseEnter += new System.EventHandler(this.BtnApply_MouseEnter);
-            this.BtnApply.MouseLeave += new System.EventHandler(this.BtnApply_MouseLeave);
-            // 
             // BtnDefault
             // 
             this.BtnDefault.BackColor = System.Drawing.Color.Black;
@@ -128,7 +82,7 @@
             this.BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnDefault.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnDefault.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnDefault.Location = new System.Drawing.Point(12, 734);
+            this.BtnDefault.Location = new System.Drawing.Point(940, 54);
             this.BtnDefault.Name = "BtnDefault";
             this.BtnDefault.Size = new System.Drawing.Size(200, 51);
             this.BtnDefault.TabIndex = 3;
@@ -686,6 +640,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1152, 798);
+            this.Controls.Add(this.BtnDefault);
             this.Controls.Add(this.LblResolution);
             this.Controls.Add(this.LblResolutionX);
             this.Controls.Add(this.ResolutionY);
@@ -723,17 +678,14 @@
             this.Controls.Add(this.ChkEAX);
             this.Controls.Add(this.LblTheme);
             this.Controls.Add(this.ChkTheme);
-            this.Controls.Add(this.BtnDefault);
-            this.Controls.Add(this.BtnApply);
-            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.PibBorderLauncherOptions);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OptionsBFME1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OptionsBFME1";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OptionsBFME1_MouseDown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsBFME1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).EndInit();
@@ -743,9 +695,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button BtnCancel;
-        private System.Windows.Forms.Button BtnApply;
         private System.Windows.Forms.Button BtnDefault;
         private System.Windows.Forms.Label LblTheme;
         private System.Windows.Forms.Button ChkTheme;

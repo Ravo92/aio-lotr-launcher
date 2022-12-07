@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PatchLauncher.Helper
 {
-    internal class RandomLauncherPicture
+    public class RandomLauncherPicture
     {
         private static readonly List<string> _pictures = new()
         {

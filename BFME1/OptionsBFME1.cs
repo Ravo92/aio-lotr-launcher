@@ -2,13 +2,12 @@
 using PatchLauncher.Helper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Media;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PatchLauncher.Properties;
 
 namespace PatchLauncher
 {
@@ -16,11 +15,11 @@ namespace PatchLauncher
     {
         readonly OptionIniParser _iniFile = new();
         //Launcher Settings
-        bool FlagEAX = Properties.Settings.Default.EAXSupport;
+        bool FlagEAX = Settings.Default.EAXSupport;
         readonly bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + @"\dsound.dll");
-        bool FlagThemeMusic = Properties.Settings.Default.PlayBackgroundMusic;
-        bool FlagWindowed = Properties.Settings.Default.StartGameWindowed;
-        bool FlagBrutalAI = Properties.Settings.Default.UseBrutalAI;
+        bool FlagThemeMusic = Settings.Default.PlayBackgroundMusic;
+        bool FlagWindowed = Settings.Default.StartGameWindowed;
+        bool FlagBrutalAI = Settings.Default.UseBrutalAI;
 
         //Game Settings
         string FlagAnisotropicTextureFiltering;
@@ -34,7 +33,7 @@ namespace PatchLauncher
         string FlagDynamicLOD;
         string FlagResolution;
 
-        readonly SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+        readonly SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
         public OptionsBFME1()
         {
             InitializeComponent();
@@ -51,20 +50,6 @@ namespace PatchLauncher
             BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnDefault.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
-
-            BtnApply.FlatAppearance.BorderSize = 0;
-            BtnApply.FlatStyle = FlatStyle.Flat;
-            BtnApply.BackColor = Color.Transparent;
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnApply.Font = ConstStrings.UseFont("Albertus Nova", 14);
-            BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
-
-            BtnCancel.FlatAppearance.BorderSize = 0;
-            BtnCancel.FlatStyle = FlatStyle.Flat;
-            BtnCancel.BackColor = Color.Transparent;
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnCancel.Font = ConstStrings.UseFont("Albertus Nova", 14);
-            BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
             LblTheme.Text = "Play theme music in launcher";
@@ -112,7 +97,7 @@ namespace PatchLauncher
             LblWarningAI.ForeColor = Color.Red;
             LblWarningAI.BackColor = Color.Transparent;
 
-            if (Properties.Settings.Default.IsGameInstalled == false)
+            if (Settings.Default.IsGameInstalled == false)
             {
                 ChkBrutalAI.Enabled = false;
                 ChkEAX.Enabled = false;
@@ -150,12 +135,12 @@ namespace PatchLauncher
                 LblWarningAI.Hide();
             }
 
-            if (FlagBrutalAI && Properties.Settings.Default.IsGameInstalled)
+            if (FlagBrutalAI && Settings.Default.IsGameInstalled)
             {
                 LblWarningAI.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
                 LblWarningAI.Show();
             }
-            else if (Properties.Settings.Default.IsGameInstalled)
+            else if (Settings.Default.IsGameInstalled)
             {
                 LblWarningAI.Hide();
             }
@@ -466,6 +451,43 @@ namespace PatchLauncher
         }
 
         #region Buttons and checkboxes for launcher specific settings
+
+        private void BtnDefault_Click(object sender, EventArgs e)
+        {
+            FlagThemeMusic = true;
+            FlagEAX = false;
+            FlagWindowed = false;
+            FlagBrutalAI = false;
+            ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
+            ChkWindowed.Image = Image.FromFile("Images\\chkUnselected.png");
+            ChkBrutalAI.Image = Image.FromFile("Images\\chkUnselected.png");
+
+            FlagAnisotropicTextureFiltering = "yes";
+            FlagTerrainLighting = "yes";
+            Flag3DShadows = "yes";
+            Flag2DShadows = "yes";
+            FlagSmoothWaterBorder = "yes";
+            FlagShowProps = "yes";
+            FlagShowAnimations = "yes";
+            FlagHeatEffects = "yes";
+            FlagDynamicLOD = "yes";
+            FlagResolution = "yes";
+
+            ChkAniTextureFiltering.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkTerrainLighting.Image = Image.FromFile("Images\\chkSelected.png");
+            Chk3DShadows.Image = Image.FromFile("Images\\chkSelected.png");
+            Chk2DShadows.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkSmoothWaterBorder.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkShowProps.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkShowAnimations.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkHeatEffects.Image = Image.FromFile("Images\\chkSelected.png");
+            ChkDynamicLOD.Image = Image.FromFile("Images\\chkSelected.png");
+
+            ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
+            ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
+        }
+
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
         {
             BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
@@ -483,44 +505,6 @@ namespace PatchLauncher
         {
             BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => BFME1.PlaySoundClick());
-        }
-        private void BtnApply_MouseLeave(object sender, EventArgs e)
-        {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
-        }
-
-        private void BtnApply_MouseEnter(object sender, EventArgs e)
-        {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
-            BtnApply.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => BFME1.PlaySoundHover());
-        }
-
-        private void BtnApply_MouseDown(object sender, MouseEventArgs e)
-        {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
-            BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => BFME1.PlaySoundClick());
-        }
-        private void BtnCancel_MouseLeave(object sender, EventArgs e)
-        {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
-        }
-
-        private void BtnCancel_MouseEnter(object sender, EventArgs e)
-        {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
-            BtnCancel.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => BFME1.PlaySoundHover());
-        }
-
-        private void BtnCancel_MouseDown(object sender, MouseEventArgs e)
-        {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
-            BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => BFME1.PlaySoundClick());
         }
 
@@ -561,14 +545,14 @@ namespace PatchLauncher
             }
         }
 
-        private void BtnApply_Click(object sender, EventArgs e)
+        private void SaveSettings()
         {
             //Save Launcher-Settings
-            Properties.Settings.Default.PlayBackgroundMusic = FlagThemeMusic;
-            Properties.Settings.Default.EAXSupport = FlagEAX;
-            Properties.Settings.Default.StartGameWindowed = FlagWindowed;
-            Properties.Settings.Default.UseBrutalAI = FlagBrutalAI;
-            Properties.Settings.Default.Save();
+            Settings.Default.PlayBackgroundMusic = FlagThemeMusic;
+            Settings.Default.EAXSupport = FlagEAX;
+            Settings.Default.StartGameWindowed = FlagWindowed;
+            Settings.Default.UseBrutalAI = FlagBrutalAI;
+            Settings.Default.Save();
 
             //Save Game-Settings
             if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
@@ -588,7 +572,7 @@ namespace PatchLauncher
             //Settings-Valuations
             if (FlagThemeMusic)
             {
-                SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
+                SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
                 _theme.Play();
             }
             else
@@ -621,57 +605,29 @@ namespace PatchLauncher
                 File.Copy(Path.Combine("Tools", "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
             else if (ConstStrings.GameInstallPath() != null && File.Exists(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big")))
                 File.Delete(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"));
-
-            Close();
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private void DontSave()
         {
-            if (Properties.Settings.Default.PlayBackgroundMusic && FlagThemeMusic)
+            if (Settings.Default.PlayBackgroundMusic && FlagThemeMusic)
                 ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
             else
                 ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
 
-            if (Properties.Settings.Default.EAXSupport)
+            if (Settings.Default.EAXSupport)
                 ChkEAX.Image = Image.FromFile("Images\\chkSelected.png");
             else
                 ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
 
-            if (Properties.Settings.Default.StartGameWindowed)
+            if (Settings.Default.StartGameWindowed)
                 ChkWindowed.Image = Image.FromFile("Images\\chkSelected.png");
             else
                 ChkWindowed.Image = Image.FromFile("Images\\chkUnselected.png");
 
-            if (Properties.Settings.Default.UseBrutalAI)
+            if (Settings.Default.UseBrutalAI)
                 ChkBrutalAI.Image = Image.FromFile("Images\\chkSelected.png");
             else
                 ChkBrutalAI.Image = Image.FromFile("Images\\chkUnselected.png");
-
-            Close();
-        }
-
-        private void BtnDefault_Click(object sender, EventArgs e)
-        {
-            FlagThemeMusic = true;
-            FlagEAX = false;
-            FlagWindowed = false;
-            FlagBrutalAI = false;
-            ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-            ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
-            ChkWindowed.Image = Image.FromFile("Images\\chkUnselected.png");
-            ChkBrutalAI.Image = Image.FromFile("Images\\chkUnselected.png");
-
-            ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
-            ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
-        }
-
-        private void OptionsBFME1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                WindowMover.ReleaseCapture();
-                _ = WindowMover.SendMessage(Handle, WindowMover.WM_NCLBUTTONDOWN, WindowMover.HT_CAPTION, 0);
-            }
         }
 
         private void ChkEAX_Click(object sender, EventArgs e)
@@ -1137,5 +1093,17 @@ namespace PatchLauncher
         }
         #endregion
 
+        private void OptionsBFME1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want to save the settings made?", "Save Settings", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SaveSettings();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                DontSave();
+            }
+        }
     }
 }

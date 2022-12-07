@@ -49,7 +49,6 @@ namespace PatchLauncher
             this.LblFileName = new System.Windows.Forms.Label();
             this.PibLoadingRing = new System.Windows.Forms.PictureBox();
             this.LblPatchNotes = new PatchLauncher.Helper.CustomLabel();
-            this.BtnUpdate = new System.Windows.Forms.Button();
             this.PibLoadingBorder = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -197,9 +196,9 @@ namespace PatchLauncher
             // 
             // PBarActualFile
             // 
-            this.PBarActualFile.Location = new System.Drawing.Point(218, 664);
+            this.PBarActualFile.Location = new System.Drawing.Point(218, 661);
             this.PBarActualFile.Name = "PBarActualFile";
-            this.PBarActualFile.Size = new System.Drawing.Size(440, 46);
+            this.PBarActualFile.Size = new System.Drawing.Size(440, 51);
             this.PBarActualFile.TabIndex = 12;
             this.PBarActualFile.Visible = false;
             // 
@@ -281,28 +280,6 @@ namespace PatchLauncher
             this.LblPatchNotes.TabIndex = 19;
             this.LblPatchNotes.Text = "Loading Patch-Notes...";
             // 
-            // BtnUpdate
-            // 
-            this.BtnUpdate.BackColor = System.Drawing.Color.Black;
-            this.BtnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnUpdate.FlatAppearance.BorderSize = 0;
-            this.BtnUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnUpdate.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnUpdate.Location = new System.Drawing.Point(12, 661);
-            this.BtnUpdate.Name = "BtnUpdate";
-            this.BtnUpdate.Size = new System.Drawing.Size(200, 51);
-            this.BtnUpdate.TabIndex = 20;
-            this.BtnUpdate.TabStop = false;
-            this.BtnUpdate.Text = "UPDATE GAME";
-            this.BtnUpdate.UseMnemonic = false;
-            this.BtnUpdate.UseVisualStyleBackColor = false;
-            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
-            this.BtnUpdate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnUpdate_MouseDown);
-            this.BtnUpdate.MouseEnter += new System.EventHandler(this.BtnUpdate_MouseEnter);
-            this.BtnUpdate.MouseLeave += new System.EventHandler(this.BtnUpdate_MouseLeave);
-            // 
             // PibLoadingBorder
             // 
             this.PibLoadingBorder.BackColor = System.Drawing.Color.Transparent;
@@ -375,7 +352,6 @@ namespace PatchLauncher
             this.Controls.Add(this.LblCurrentVersion);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.BtnUpdate);
             this.Controls.Add(this.LblPatchNotes);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnInstall);
@@ -401,6 +377,8 @@ namespace PatchLauncher
             this.Name = "BFME1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bfme 2.22 Launcher";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BFME1_FormClosing);
+            this.Shown += new System.EventHandler(this.BFME1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).EndInit();
@@ -432,7 +410,6 @@ namespace PatchLauncher
         private Label LblFileName;
         private PictureBox PibLoadingRing;
         private Helper.CustomLabel LblPatchNotes;
-        private Button BtnUpdate;
         private PictureBox PibLoadingBorder;
         private Button button1;
         private Button button2;

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PatchLauncher.Helper
 {
-    internal class CustomLabel : Label
+    public class CustomLabel : Label
     {
         public CustomLabel()
         {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Windows.Forms;
+﻿using System.Data;
 using System.Xml.Linq;
 
 namespace PatchLauncher.Helper
 {
-    internal static class ReadXMLFile
+    public static class XMLFileHelper
     {
         public const string C_XMLFile = "PatchUpdate_BFME1.xml";
        
@@ -24,10 +19,15 @@ namespace PatchLauncher.Helper
 
             using var fs = new FileStream(C_XMLFile, FileMode.CreateNew, FileAccess.ReadWrite);
             s.Result.CopyTo(fs);
+
+            client.Dispose();
+            s.Dispose();
+            fs.Dispose();
         }
 
         public static int GetXMLFileVersion()
         {
+            GetXMLFileData();
             XElement response = XElement.Load(C_XMLFile);
             var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
 

@@ -14,14 +14,15 @@ using System.ComponentModel;
 using Downloader;
 using System.Diagnostics;
 using System.Collections.Generic;
+using PatchLauncher.Properties;
 
 namespace PatchLauncher
 {
     public partial class BFME1 : Form
     {
         //Sound-Object
-        SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
-        int iconNumber = Properties.Settings.Default.BackgroundMusicIcon;
+        SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
+        int iconNumber = Settings.Default.BackgroundMusicIcon;
 
         public const string C_UPDATE_VERSION = "29";
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
@@ -29,9 +30,19 @@ namespace PatchLauncher
 
         public BFME1()
         {
+            #region logic
+
             InitializeComponent();
 
-            ReadXMLFile.GetXMLFileData();
+            XMLFileHelper.GetXMLFileData();
+
+            TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
+            TmrPatchNotes.Interval = 2000;
+            TmrPatchNotes.Start();
+
+            BtnInstall.Hide();
+
+            #endregion
 
             #region Styles
             //Main Form style behaviour
@@ -44,9 +55,8 @@ namespace PatchLauncher
             LblPatchNotes.Show();
             Wv2Patchnotes.Hide();
 
-            TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
-            TmrPatchNotes.Interval = 2000;
-            TmrPatchNotes.Start();
+            BtnLaunch.Text = "WORKING...";
+            BtnLaunch.Enabled = false;
 
             // label-Styles
             LblDownloadSpeed.Text = "";
@@ -100,13 +110,6 @@ namespace PatchLauncher
             BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnInstall.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
-
-            BtnUpdate.FlatAppearance.BorderSize = 0;
-            BtnUpdate.FlatStyle = FlatStyle.Flat;
-            BtnUpdate.BackColor = Color.Transparent;
-            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK_GREEN;
-            BtnUpdate.Font = ConstStrings.UseFont("Albertus Nova", 14);
-            BtnUpdate.ForeColor = Color.FromArgb(192, 145, 69);
 
             #endregion
 
@@ -170,54 +173,6 @@ namespace PatchLauncher
                     SoundPlayer _theme = new(Properties.Settings.Default.BackgroundMusicFile);
                     _theme.Play();
                 }
-            }
-            #endregion
-
-            #region Internal Logic
-            //Internal Logic
-            if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)))
-            {
-                MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE));
-            }
-
-            if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
-            {
-                Properties.Settings.Default.PatchVersionInstalled = 29;
-                Properties.Settings.Default.Save();
-            }
-
-            if (Properties.Settings.Default.GameInstallPath != null && File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Properties.Settings.Default.PatchVersionInstalled == 29)
-            {
-                LblBytes.Hide();
-                LblDownloadSpeed.Hide();
-                PBarActualFile.Hide();
-                BtnInstall.Hide();
-                BtnUpdate.Hide();
-                BtnLaunch.Show();
-
-                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
-                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
-
-                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
-                    File.Copy("Tools\\" + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
-            }
-            else if (Properties.Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath!, C_MAIN_GAME_FILE)))
-            {
-                BtnInstall.Show();
-                BtnLaunch.Hide();
-                BtnUpdate.Hide();
-            }
-            else if ((ReadXMLFile.GetXMLFileVersion() == 29 && File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath + C_MAIN_GAME_FILE))) || (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Properties.Settings.Default.PatchVersionInstalled != 29))
-            {
-                BtnInstall.Hide();
-                BtnLaunch.Hide();
-                BtnUpdate.Show();
-            }
-            else
-            {
-                BtnInstall.Hide();
-                BtnUpdate.Hide();
-                BtnLaunch.Show();
             }
             #endregion
         }
@@ -307,45 +262,6 @@ namespace PatchLauncher
 
                 await InstallRoutine();
             }
-        }
-
-        private async void BtnUpdate_Click(object sender, EventArgs e)
-        {
-            LblBytes.Show();
-            LblDownloadSpeed.Show();
-            LblFileName.Show();
-
-            PBarActualFile.Show();
-
-            BtnInstall.Hide();
-            BtnUpdate.Hide();
-            BtnLaunch.Show();
-
-            LblFileName.Text = "Preparing Update...";
-
-            BtnLaunch.Enabled = false;
-
-            await UpdateRoutine();
-        }
-
-        private void BtnUpdate_MouseLeave(object sender, EventArgs e)
-        {
-            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK_GREEN;
-            BtnUpdate.ForeColor = Color.FromArgb(192, 145, 69);
-        }
-
-        private void BtnUpdate_MouseEnter(object sender, EventArgs e)
-        {
-            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
-            BtnUpdate.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => PlaySoundHover());
-        }
-
-        private void BtnUpdate_MouseDown(object sender, MouseEventArgs e)
-        {
-            BtnUpdate.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
-            BtnUpdate.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => PlaySoundClick());
         }
 
         private void BtnInstall_MouseLeave(object sender, EventArgs e)
@@ -543,6 +459,66 @@ namespace PatchLauncher
 
         #region Update
 
+        public async void CheckForUpdates(bool manual)
+        {
+            if (manual)
+            {
+                XMLFileHelper.GetXMLFileVersion();
+
+                if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
+                {
+                    Properties.Settings.Default.PatchVersionInstalled = 29;
+                    Properties.Settings.Default.Save();
+                }
+                else if (MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "a007b2ea1f87a530c1e412255e1d7896" && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "404")
+                {
+                    PBarActualFile.Show();
+                    LblBytes.Show();
+                    LblDownloadSpeed.Show();
+                    LblFileName.Show();
+                    LblFileName.Text = "Installed Patch 2.22v29 is damaged and will be reaquired...";
+
+                    Properties.Settings.Default.PatchVersionInstalled = 103;
+                    Properties.Settings.Default.Save();
+
+                    await UpdateRoutine();
+                }
+                else if (MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "404")
+                {
+                    PBarActualFile.Show();
+                    LblBytes.Show();
+                    LblDownloadSpeed.Show();
+                    LblFileName.Show();
+
+                    await UpdateRoutine();
+                }
+            }
+            else
+            {
+                var timer = new PeriodicTimer(TimeSpan.FromSeconds(600));
+
+                while (await timer.WaitForNextTickAsync())
+                {
+                    XMLFileHelper.GetXMLFileVersion();
+
+                    if (File.Exists(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) == "a007b2ea1f87a530c1e412255e1d7896")
+                    {
+                        Properties.Settings.Default.PatchVersionInstalled = 29;
+                        Properties.Settings.Default.Save();
+                    }
+                    else if (MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "a007b2ea1f87a530c1e412255e1d7896" && MD5Tools.CalculateMD5(Path.Combine(Properties.Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)) != "404")
+                    {
+                        LblFileName.Show();
+                        LblFileName.Text = "Installed Patch 2.22v29 is damaged and will be reaquired...";
+                        Properties.Settings.Default.PatchVersionInstalled = 103;
+                        Properties.Settings.Default.Save();
+
+                        await UpdateRoutine();
+                    }
+                }
+            }
+        }
+
         public async Task UpdateRoutine()
         {
             Task download = DownloadUpdate();
@@ -583,9 +559,9 @@ namespace PatchLauncher
             // cancelled or download completed successfully.
             downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-            if (!File.Exists(Application.StartupPath + "\\Patch_29\\Patch_2.22v2.9.7z"))
+            if (!File.Exists(Path.Combine(Application.StartupPath, "Patches", "Patch_2.22v29.7z")))
             {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1LIpMSUGVdHlRerQl8Z6awyu-8KdwECZb&confirm=t", Application.StartupPath + "\\Patch_29\\Patch_2.22v2.9.7z");
+                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1LIpMSUGVdHlRerQl8Z6awyu-8KdwECZb&confirm=t", Path.Combine(Application.StartupPath, "Patches", "Patch_2.22v29.7z"));
             }
         }
 
@@ -605,7 +581,7 @@ namespace PatchLauncher
             });
 
             ZIPFileHelper _ZIPFileHelper = new();
-            await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Patch_29", "Patch_2.22v2.9.7z"), Properties.Settings.Default.GameInstallPath, progressHandler);
+            await _ZIPFileHelper.ExtractArchive(Path.Combine("Patches", "Patch_2.22v29.7z"), Properties.Settings.Default.GameInstallPath, progressHandler);
 
             FinishingGameUpdate();
         }
@@ -617,10 +593,7 @@ namespace PatchLauncher
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
 
-            Invoke((MethodInvoker)(() => BtnUpdate.Enabled = false));
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
-
-            Invoke((MethodInvoker)(() => BtnLaunch.Show()));
 
             Properties.Settings.Default.PatchVersionInstalled = 29;
             Properties.Settings.Default.Save();
@@ -655,11 +628,17 @@ namespace PatchLauncher
                 Directory.CreateDirectory(Properties.Settings.Default.GameInstallPath);
             }
 
+            Settings.Default.IsGameInstalled = true;
+            Settings.Default.Save();
+
             Task download = DownloadGame();
             await download;
 
             Task extract = ExtractGame();
             await extract;
+
+            Task update = UpdateRoutine();
+            await update;
         }
 
         public async Task DownloadGame()
@@ -728,42 +707,6 @@ namespace PatchLauncher
                 ZIPFileHelper _ZIPFileHelper = new();
                 await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Download", archiveFileNames[i]), Properties.Settings.Default.GameInstallPath, progressHandler);
             }
-
-            FinishingGameInstall();
-        }
-
-        private void FinishingGameInstall()
-        {
-            Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
-            Invoke((MethodInvoker)(() => LblBytes.Hide()));
-            Invoke((MethodInvoker)(() => LblFileName.Hide()));
-            Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
-
-            Invoke((MethodInvoker)(() => BtnLaunch.Hide()));
-
-            if (ReadXMLFile.GetXMLFileVersion() == 29)
-            {
-                Invoke((MethodInvoker)(() => BtnUpdate.Show()));
-                Invoke((MethodInvoker)(() => BtnUpdate.Text = "INSTALL 2.22V29"));
-                Invoke((MethodInvoker)(() => BtnUpdate.Enabled = true));
-            }
-
-            Properties.Settings.Default.IsGameInstalled = true;
-            Properties.Settings.Default.Save();
-
-            //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
-            //{
-            //    Directory.CreateDirectory(RegistryFunctions.ReadStartMenuFolder()!);
-            //
-            //    object shDesktop = "Desktop";
-            //    WshShell shell = new();
-            //    string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\The Battle for Middle-earth (tm).lnk";
-            //    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
-            //    shortcut.Description = "Play The Battle for Middle-earth (tm)";
-            //    shortcut.Hotkey = "Ctrl+Shift+N";
-            //    shortcut.TargetPath = Path.Combine(Properties.Settings.Default.GameInstallPath, @"\lotrbfme.exe");
-            //    shortcut.Save();
-            //}
         }
 
         private void OnDownloadStarted(object sender, DownloadStartedEventArgs e)
@@ -892,6 +835,45 @@ namespace PatchLauncher
             PibLoadingRing.Hide();
             PibLoadingBorder.Hide();
             LblPatchNotes.Hide();
+        }
+
+        private void BFME1_Shown(object sender, EventArgs e)
+        {
+            if (Settings.Default.GameInstallPath != null && File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Settings.Default.PatchVersionInstalled == 29)
+            {
+                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
+                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
+
+                if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
+                    File.Copy("Tools\\" + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
+            }
+
+            if (Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Settings.Default.GameInstallPath!, C_MAIN_GAME_FILE)))
+            {
+                Settings.Default.IsGameInstalled = false;
+                Settings.Default.Save();
+                BtnInstall.Show();
+                BtnLaunch.Hide();
+            }
+            else if ((XMLFileHelper.GetXMLFileVersion() == 29 && File.Exists(Path.Combine(Settings.Default.GameInstallPath + C_MAIN_GAME_FILE))) || 
+                (File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_GAME_FILE)) && Settings.Default.PatchVersionInstalled != 29) || 
+                !File.Exists(Path.Combine(Settings.Default.GameInstallPath, C_MAIN_PATCH_FILE)))
+            {
+                LblFileName.Show();
+                LblFileName.Text = "Preparing Update...";
+                BtnLaunch.Enabled = false;
+
+                CheckForUpdates(true);
+            }
+            else
+            {
+                CheckForUpdates(false);
+            }
+        }
+
+        private void BFME1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

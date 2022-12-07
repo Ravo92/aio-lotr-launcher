@@ -30,14 +30,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Helper\InterfaceProgress.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Helper\NewFile1.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="MainIcon.ico" />
   </ItemGroup>
 
@@ -63,7 +55,7 @@
 
   <ItemGroup>
     <PackageReference Include="Downloader" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1418.22" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1462.37" />
     <PackageReference Include="SharpDX.XAudio2" Version="4.2.0" />
   </ItemGroup>
 

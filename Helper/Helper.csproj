@@ -13,4 +13,10 @@
     <PackageReference Include="SevenZipExtractor" Version="1.0.17" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="CustomLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
