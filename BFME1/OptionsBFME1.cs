@@ -1,5 +1,4 @@
-﻿using Helper;
-using PatchLauncher.Helper;
+﻿using PatchLauncher.Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
