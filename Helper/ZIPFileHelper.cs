@@ -1,7 +1,4 @@
 ﻿using SevenZipExtractor;
-using System;
-using System.ComponentModel;
-using System.Diagnostics;
 
 namespace PatchLauncher.Helper
 {

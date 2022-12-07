@@ -1,10 +1,18 @@
-﻿using PatchLauncher.Helper;
-
-namespace Helper
+﻿namespace PatchLauncher.Helper
 {
     public class OptionIniParser
     {
         public readonly string fullPathOptionIniFile = Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME);
+
+        public static void CreateDummyIniFile()
+        {
+            string appdataPath = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files")).ToString();
+
+            if (!File.Exists(Path.Combine(appdataPath, ConstStrings.C_OPTIONSINI_FILENAME)))
+            {
+                File.Create(Path.Combine(appdataPath, ConstStrings.C_OPTIONSINI_FILENAME));
+            }
+        }
 
         public string ReadKey(string keyName)
         {

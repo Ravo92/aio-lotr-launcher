@@ -1,7 +1,7 @@
+using PatchLauncher.Helper;
 using System;
 using System.IO;
 using System.Windows.Forms;
-using PatchLauncher.Helper;
 
 namespace PatchLauncher
 {
@@ -39,6 +39,8 @@ namespace PatchLauncher
                     Properties.Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                     Properties.Settings.Default.Save();
                 }
+
+                OptionIniParser.CreateDummyIniFile();
 
                 Application.Run(new BFME1());
             }
