@@ -9,7 +9,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="BackgroundMusicFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Sounds\\music_Default.wav</Value>
+      <Value Profile="(Default)">ConstStrings.C_THEMESOUND_DEFAULT</Value>
     </Setting>
     <Setting Name="EAXSupport" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

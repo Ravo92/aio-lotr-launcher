@@ -31,7 +31,6 @@ namespace PatchLauncher
         string FlagDynamicLOD;
         string FlagResolution;
 
-        readonly SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
         public OptionsBFME1()
         {
             InitializeComponent();
@@ -566,16 +565,6 @@ namespace PatchLauncher
             }
 
             //Settings-Valuations
-            if (FlagThemeMusic)
-            {
-                SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                _theme.Play();
-            }
-            else
-            {
-                _theme.Stop();
-                _theme.Dispose();
-            }
 
             if (!FlagEAXFileExists && FlagEAX == true)
             {

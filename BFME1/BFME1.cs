@@ -13,13 +13,12 @@ using Downloader;
 using System.Diagnostics;
 using System.Collections.Generic;
 using PatchLauncher.Properties;
+using SharpDX.XAudio2;
 
 namespace PatchLauncher
 {
     public partial class BFME1 : Form
     {
-        //Sound-Object
-        SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
         int iconNumber = Settings.Default.BackgroundMusicIcon;
 
         public const string C_UPDATE_VERSION = "29";
@@ -127,9 +126,7 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
                 if (Settings.Default.PlayBackgroundMusic)
                 {
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
+                    SoundPlayerHelper.PlayThemeDefault();
                 }
             }
             else if (Settings.Default.BackgroundMusicIcon == 1)
@@ -137,9 +134,7 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoGondor.png");
                 if (Settings.Default.PlayBackgroundMusic)
                 {
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
+                    SoundPlayerHelper.PlayThemeGondor();
                 }
             }
             else if (Settings.Default.BackgroundMusicIcon == 2)
@@ -147,9 +142,7 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoRohan.png");
                 if (Settings.Default.PlayBackgroundMusic)
                 {
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
+                    SoundPlayerHelper.PlayThemeRohan();
                 }
             }
             else if (Settings.Default.BackgroundMusicIcon == 3)
@@ -157,9 +150,7 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoIsengard.png");
                 if (Settings.Default.PlayBackgroundMusic)
                 {
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
+                    SoundPlayerHelper.PlayThemeIsengard();
                 }
             }
             else if (Settings.Default.BackgroundMusicIcon == 4)
@@ -167,9 +158,7 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoMordor.png");
                 if (Settings.Default.PlayBackgroundMusic)
                 {
-                    this._theme.Stop();
-                    SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                    _theme.Play();
+                    SoundPlayerHelper.PlayThemeMordor();
                 }
             }
             #endregion
@@ -311,12 +300,11 @@ namespace PatchLauncher
                         Settings.Default.BackgroundMusicIcon = 0;
                         Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoDefault.png");
-                        _theme.Stop();
 
                         if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                            _theme.Play();
+                            SoundPlayerHelper._source.Cancel();
+                            SoundPlayerHelper.PlayThemeDefault();
                         }
 
                         break;
@@ -327,12 +315,11 @@ namespace PatchLauncher
                         Settings.Default.BackgroundMusicIcon = 1;
                         Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoGondor.png");
-                        _theme.Stop();
 
                         if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                            _theme.Play();
+                            SoundPlayerHelper._source.Cancel();
+                            SoundPlayerHelper.PlayThemeGondor();
                         }
                         break;
                     }
@@ -342,12 +329,11 @@ namespace PatchLauncher
                         Settings.Default.BackgroundMusicIcon = 2;
                         Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoRohan.png");
-                        _theme.Stop();
 
                         if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                            _theme.Play();
+                            SoundPlayerHelper._source.Cancel();
+                            SoundPlayerHelper.PlayThemeRohan();
                         }
                         break;
                     }
@@ -357,12 +343,11 @@ namespace PatchLauncher
                         Settings.Default.BackgroundMusicIcon = 3;
                         Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoIsengard.png");
-                        _theme.Stop();
 
                         if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                            _theme.Play();
+                            SoundPlayerHelper._source.Cancel();
+                            SoundPlayerHelper.PlayThemeIsengard();
                         }
                         break;
                     }
@@ -372,12 +357,11 @@ namespace PatchLauncher
                         Settings.Default.BackgroundMusicIcon = 4;
                         Settings.Default.Save();
                         PiBThemeSwitcher.Image = Image.FromFile("Images\\IcoMordor.png");
-                        _theme.Stop();
 
                         if (Settings.Default.PlayBackgroundMusic == true)
                         {
-                            SoundPlayer _theme = new(Settings.Default.BackgroundMusicFile);
-                            _theme.Play();
+                            SoundPlayerHelper._source.Cancel();
+                            SoundPlayerHelper.PlayThemeMordor();
                         }
                         break;
                     }
@@ -814,6 +798,20 @@ namespace PatchLauncher
                 BtnLaunch.Enabled = true;
                 BtnLaunch.Text = "PLAY GAME";
                 CheckForUpdates(false);
+            }
+
+            Settings.Default.PropertyChanged += SettingChanged;
+        }
+
+        void SettingChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!Settings.Default.PlayBackgroundMusic)
+            {
+                SoundPlayerHelper._source.Cancel();
+            }
+            else
+            {
+
             }
         }
 

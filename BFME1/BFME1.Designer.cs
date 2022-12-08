@@ -50,9 +50,10 @@ namespace PatchLauncher
             this.PibLoadingRing = new System.Windows.Forms.PictureBox();
             this.LblPatchNotes = new PatchLauncher.Helper.CustomLabel();
             this.PibLoadingBorder = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnPatch103 = new System.Windows.Forms.Button();
             this.LblCurrentVersion = new PatchLauncher.Helper.CustomLabel();
+            this.BtnPatch106 = new System.Windows.Forms.Button();
+            this.BtnPatch222 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
@@ -290,41 +291,24 @@ namespace PatchLauncher
             this.PibLoadingBorder.TabIndex = 21;
             this.PibLoadingBorder.TabStop = false;
             // 
-            // button1
+            // BtnPatch103
             // 
-            this.button1.BackColor = System.Drawing.Color.Black;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(31, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 51);
-            this.button1.TabIndex = 22;
-            this.button1.TabStop = false;
-            this.button1.Text = "1.06";
-            this.button1.UseMnemonic = false;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Black;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(31, 110);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(200, 51);
-            this.button2.TabIndex = 23;
-            this.button2.TabStop = false;
-            this.button2.Text = "1.03";
-            this.button2.UseMnemonic = false;
-            this.button2.UseVisualStyleBackColor = false;
+            this.BtnPatch103.BackColor = System.Drawing.Color.Black;
+            this.BtnPatch103.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnPatch103.BackgroundImage")));
+            this.BtnPatch103.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnPatch103.FlatAppearance.BorderSize = 0;
+            this.BtnPatch103.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnPatch103.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnPatch103.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnPatch103.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnPatch103.Location = new System.Drawing.Point(12, 110);
+            this.BtnPatch103.Name = "BtnPatch103";
+            this.BtnPatch103.Size = new System.Drawing.Size(235, 55);
+            this.BtnPatch103.TabIndex = 23;
+            this.BtnPatch103.TabStop = false;
+            this.BtnPatch103.Text = "Patch 1.03 (Default)";
+            this.BtnPatch103.UseMnemonic = false;
+            this.BtnPatch103.UseVisualStyleBackColor = false;
             // 
             // LblCurrentVersion
             // 
@@ -341,6 +325,44 @@ namespace PatchLauncher
             this.LblCurrentVersion.TabIndex = 24;
             this.LblCurrentVersion.Text = "Active Patch: 1.03";
             // 
+            // BtnPatch106
+            // 
+            this.BtnPatch106.BackColor = System.Drawing.Color.Black;
+            this.BtnPatch106.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnPatch106.BackgroundImage")));
+            this.BtnPatch106.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnPatch106.FlatAppearance.BorderSize = 0;
+            this.BtnPatch106.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnPatch106.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnPatch106.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnPatch106.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnPatch106.Location = new System.Drawing.Point(12, 171);
+            this.BtnPatch106.Name = "BtnPatch106";
+            this.BtnPatch106.Size = new System.Drawing.Size(235, 55);
+            this.BtnPatch106.TabIndex = 25;
+            this.BtnPatch106.TabStop = false;
+            this.BtnPatch106.Text = "Patch 1.06";
+            this.BtnPatch106.UseMnemonic = false;
+            this.BtnPatch106.UseVisualStyleBackColor = false;
+            // 
+            // BtnPatch222
+            // 
+            this.BtnPatch222.BackColor = System.Drawing.Color.Black;
+            this.BtnPatch222.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnPatch222.BackgroundImage")));
+            this.BtnPatch222.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnPatch222.FlatAppearance.BorderSize = 0;
+            this.BtnPatch222.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnPatch222.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnPatch222.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnPatch222.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnPatch222.Location = new System.Drawing.Point(12, 235);
+            this.BtnPatch222.Name = "BtnPatch222";
+            this.BtnPatch222.Size = new System.Drawing.Size(235, 55);
+            this.BtnPatch222.TabIndex = 26;
+            this.BtnPatch222.TabStop = false;
+            this.BtnPatch222.Text = "Patch 2.22 V29";
+            this.BtnPatch222.UseMnemonic = false;
+            this.BtnPatch222.UseVisualStyleBackColor = false;
+            // 
             // BFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -349,9 +371,10 @@ namespace PatchLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.BtnPatch222);
+            this.Controls.Add(this.BtnPatch106);
             this.Controls.Add(this.LblCurrentVersion);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnPatch103);
             this.Controls.Add(this.LblPatchNotes);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnInstall);
@@ -411,8 +434,9 @@ namespace PatchLauncher
         private PictureBox PibLoadingRing;
         private Helper.CustomLabel LblPatchNotes;
         private PictureBox PibLoadingBorder;
-        private Button button1;
-        private Button button2;
+        private Button BtnPatch103;
         private Helper.CustomLabel LblCurrentVersion;
+        private Button BtnPatch106;
+        private Button BtnPatch222;
     }
 }
