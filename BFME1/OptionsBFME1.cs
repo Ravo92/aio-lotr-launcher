@@ -375,8 +375,6 @@ namespace PatchLauncher
             ResolutionY.Font = ConstStrings.UseFont("Albertus Nova", 14);
             ResolutionY.ForeColor = Color.FromArgb(192, 145, 69);
 
-            //  
-
             if (FlagResolution != null)
             {
                 string[] resolutionXY = FlagResolution.Split(" ", StringSplitOptions.TrimEntries);

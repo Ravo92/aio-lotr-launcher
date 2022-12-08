@@ -7,14 +7,9 @@ namespace PatchLauncher.Helper
 {
     public class SoundPlayerHelper
     {
-        public static readonly CancellationTokenSource _source = new();
-        public static CancellationToken _token = _source.Token;
-
-        public static void PlaySoundFile(XAudio2 device, Stream fileName, CancellationToken _token)
+        public SoundPlayer _soundPlayer = new();
+        public static void PlaySoundFile(XAudio2 device, Stream fileName)
         {
-            //SoundPlayer _soundPlayer = new(fileName);
-            //_soundPlayer.PlayLooping();
-
             var stream = new SoundStream(fileName);
             var waveFormat = stream.Format;
             var buffer = new AudioBuffer
@@ -33,8 +28,6 @@ namespace PatchLauncher.Helper
             int count = 0;
             while (sourceVoice.State.BuffersQueued > 0)
             {
-                if (_token.IsCancellationRequested) break;
-
                 if (count == 50)
                 {
                     count = 0;
@@ -55,7 +48,7 @@ namespace PatchLauncher.Helper
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
             _masteringVoice.SetVolume(0.5f);
-            PlaySoundFile(_sound, _SoundClickFile, _token);
+            PlaySoundFile(_sound, _SoundClickFile);
             _masteringVoice.Dispose();
             _sound.Dispose();
         }
@@ -67,69 +60,61 @@ namespace PatchLauncher.Helper
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
             _masteringVoice.SetVolume(0.5f);
-            PlaySoundFile(_sound, _SoundHoverFile, _token);
+            PlaySoundFile(_sound, _SoundHoverFile);
             _masteringVoice.Dispose();
             _sound.Dispose();
         }
 
-        public static async void PlayThemeDefault()
+        public void PlayTheme(string theme)
         {
-            Stream _ThemeDefault = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_DEFAULT)!;
+            switch (theme)
+            {
+                case ConstStrings.C_THEMESOUND_DEFAULT:
+                    {
+                        Stream _ThemeDefault = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_DEFAULT)!;
 
-            XAudio2 _sound = new();
-            MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.5f);
-            await Task.Run(() => PlaySoundFile(_sound, _ThemeDefault, _token));
-            _masteringVoice.Dispose();
-            _sound.Dispose();
+                        _soundPlayer.Stream = _ThemeDefault;
+                        _soundPlayer.PlayLooping();
+                        break;
+                    }
+                case ConstStrings.C_THEMESOUND_GONDOR:
+                    {
+                        Stream _ThemeGondor = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_GONDOR)!;
+
+                        _soundPlayer.Stream = _ThemeGondor;
+                        _soundPlayer.PlayLooping();
+                        break;
+                    }
+                case ConstStrings.C_THEMESOUND_ROHAN:
+                    {
+                        Stream _ThemeRohan = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_ROHAN)!;
+
+                        _soundPlayer.Stream = _ThemeRohan;
+                        _soundPlayer.PlayLooping();
+                        break;
+                    }
+                case ConstStrings.C_THEMESOUND_ISENGARD:
+                    {
+                        Stream _ThemeIsengard = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_ISENGARD)!;
+
+                        _soundPlayer.Stream = _ThemeIsengard;
+                        _soundPlayer.PlayLooping();
+                        break;
+                    }
+                case ConstStrings.C_THEMESOUND_MORDOR:
+                    {
+                        Stream _ThemeMordor = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_MORDOR)!;
+
+                        _soundPlayer.Stream = _ThemeMordor;
+                        _soundPlayer.PlayLooping();
+                        break;
+                    }
+            }
         }
 
-        public static async void PlayThemeGondor()
+        public void StopTheme()
         {
-            Stream _ThemeGondor = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_GONDOR)!;
-
-            XAudio2 _sound = new();
-            MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.5f);
-            await Task.Run(() => PlaySoundFile(_sound, _ThemeGondor, _token));
-            _masteringVoice.Dispose();
-            _sound.Dispose();
-        }
-
-        public static async void PlayThemeRohan()
-        {
-            Stream _ThemeRohan = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_ROHAN)!;
-
-            XAudio2 _sound = new();
-            MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.5f);
-            await Task.Run(() => PlaySoundFile(_sound, _ThemeRohan, _token));
-            _masteringVoice.Dispose();
-            _sound.Dispose();
-        }
-
-        public static async void PlayThemeIsengard()
-        {
-            Stream _ThemeIsengard = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_ISENGARD)!;
-
-            XAudio2 _sound = new();
-            MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.5f);
-            await Task.Run(() => PlaySoundFile(_sound, _ThemeIsengard, _token));
-            _masteringVoice.Dispose();
-            _sound.Dispose();
-        }
-
-        public static async void PlayThemeMordor()
-        {
-            Stream _ThemeMordor = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_MORDOR)!;
-
-            XAudio2 _sound = new();
-            MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.5f);
-            await Task.Run(() => PlaySoundFile(_sound, _ThemeMordor, _token));
-            _masteringVoice.Dispose();
-            _sound.Dispose();
+            _soundPlayer.Stop();
         }
     }
 }
