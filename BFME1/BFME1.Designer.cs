@@ -32,7 +32,6 @@ namespace PatchLauncher
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BFME1));
-            this.Wv2Patchnotes = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.BtnLaunch = new System.Windows.Forms.Button();
             this.PibHeader = new System.Windows.Forms.PictureBox();
             this.PiBYoutube = new System.Windows.Forms.PictureBox();
@@ -54,7 +53,7 @@ namespace PatchLauncher
             this.LblCurrentVersion = new PatchLauncher.Helper.CustomLabel();
             this.BtnPatch106 = new System.Windows.Forms.Button();
             this.BtnPatch222 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).BeginInit();
+            this.Wv2Patchnotes = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).BeginInit();
@@ -62,20 +61,8 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBThemeSwitcher)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingRing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingBorder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Wv2Patchnotes
-            // 
-            this.Wv2Patchnotes.AllowExternalDrop = true;
-            this.Wv2Patchnotes.BackColor = System.Drawing.Color.Black;
-            this.Wv2Patchnotes.CreationProperties = null;
-            this.Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.Wv2Patchnotes.Location = new System.Drawing.Point(253, 110);
-            this.Wv2Patchnotes.Name = "Wv2Patchnotes";
-            this.Wv2Patchnotes.Size = new System.Drawing.Size(818, 514);
-            this.Wv2Patchnotes.Source = new System.Uri("https://ravo92.github.io/changelogpage/index.html", System.UriKind.Absolute);
-            this.Wv2Patchnotes.TabIndex = 1;
-            this.Wv2Patchnotes.ZoomFactor = 1D;
             // 
             // BtnLaunch
             // 
@@ -271,13 +258,13 @@ namespace PatchLauncher
             this.LblPatchNotes.AutoSize = true;
             this.LblPatchNotes.BackColor = System.Drawing.Color.Transparent;
             this.LblPatchNotes.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.LblPatchNotes.Font = new System.Drawing.Font("Albertus MT", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblPatchNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LblPatchNotes.ForeColor = System.Drawing.SystemColors.Control;
             this.LblPatchNotes.Location = new System.Drawing.Point(544, 488);
             this.LblPatchNotes.Name = "LblPatchNotes";
             this.LblPatchNotes.OutlineForeColor = System.Drawing.Color.Black;
             this.LblPatchNotes.OutlineWidth = 4F;
-            this.LblPatchNotes.Size = new System.Drawing.Size(208, 25);
+            this.LblPatchNotes.Size = new System.Drawing.Size(231, 25);
             this.LblPatchNotes.TabIndex = 19;
             this.LblPatchNotes.Text = "Loading Patch-Notes...";
             // 
@@ -315,13 +302,13 @@ namespace PatchLauncher
             this.LblCurrentVersion.AutoSize = true;
             this.LblCurrentVersion.BackColor = System.Drawing.Color.Transparent;
             this.LblCurrentVersion.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.LblCurrentVersion.Font = new System.Drawing.Font("Albertus MT", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblCurrentVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LblCurrentVersion.ForeColor = System.Drawing.SystemColors.Control;
             this.LblCurrentVersion.Location = new System.Drawing.Point(51, 79);
             this.LblCurrentVersion.Name = "LblCurrentVersion";
             this.LblCurrentVersion.OutlineForeColor = System.Drawing.Color.Black;
             this.LblCurrentVersion.OutlineWidth = 4F;
-            this.LblCurrentVersion.Size = new System.Drawing.Size(168, 25);
+            this.LblCurrentVersion.Size = new System.Drawing.Size(186, 25);
             this.LblCurrentVersion.TabIndex = 24;
             this.LblCurrentVersion.Text = "Active Patch: 1.03";
             // 
@@ -363,6 +350,19 @@ namespace PatchLauncher
             this.BtnPatch222.UseMnemonic = false;
             this.BtnPatch222.UseVisualStyleBackColor = false;
             // 
+            // Wv2Patchnotes
+            // 
+            this.Wv2Patchnotes.AllowExternalDrop = true;
+            this.Wv2Patchnotes.BackColor = System.Drawing.Color.Black;
+            this.Wv2Patchnotes.CreationProperties = null;
+            this.Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.Wv2Patchnotes.Location = new System.Drawing.Point(253, 110);
+            this.Wv2Patchnotes.Name = "Wv2Patchnotes";
+            this.Wv2Patchnotes.Size = new System.Drawing.Size(818, 514);
+            this.Wv2Patchnotes.Source = new System.Uri("https://ravo92.github.io/changelogpage/index.html", System.UriKind.Absolute);
+            this.Wv2Patchnotes.TabIndex = 1;
+            this.Wv2Patchnotes.ZoomFactor = 1D;
+            // 
             // BFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -402,7 +402,6 @@ namespace PatchLauncher
             this.Text = "Bfme 2.22 Launcher";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BFME1_FormClosing);
             this.Shown += new System.EventHandler(this.BFME1_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).EndInit();
@@ -410,13 +409,13 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBThemeSwitcher)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingRing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingBorder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
         private Button BtnLaunch;
         private PictureBox PibHeader;
         private PictureBox PiBYoutube;
@@ -438,5 +437,6 @@ namespace PatchLauncher
         private Helper.CustomLabel LblCurrentVersion;
         private Button BtnPatch106;
         private Button BtnPatch222;
+        private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
     }
 }

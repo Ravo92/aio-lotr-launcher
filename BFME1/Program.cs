@@ -17,9 +17,6 @@ namespace PatchLauncher
             // if (Environment.OSVersion.Version.Major >= 6)
             //    SetProcessDPIAware();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
             if (args[0].ToString() != "-official")
             {
                 Application.Exit();

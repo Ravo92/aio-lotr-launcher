@@ -55,7 +55,7 @@
 
   <ItemGroup>
     <PackageReference Include="Downloader" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1462.37" />
+    <PackageReference Include="microsoft.web.webview2" Version="1.0.1462.37" />
   </ItemGroup>
 
   <ItemGroup>
@@ -228,6 +228,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Tools\dsound.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\MicrosoftEdgeWebview2Setup.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Tools\Options.ini">

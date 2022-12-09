@@ -1,4 +1,6 @@
 ﻿using AutoUpdaterDotNET;
+using Microsoft.Web.WebView2.Core;
+using System.Diagnostics;
 using System.Net;
 
 namespace PatchLauncher
@@ -8,6 +10,32 @@ namespace PatchLauncher
         public UpdaterWindow()
         {
             InitializeComponent();
+            InitializeWebView2Settings();
+        }
+
+        private async void InitializeWebView2Settings()
+        {
+            try
+            {
+                var version = CoreWebView2Environment.GetAvailableBrowserVersionString();
+
+                File.WriteAllText("webView2_Version.log", version);
+                TmrCowndown.Enabled = true;
+                TmrCowndown.Start();
+            }
+            catch (WebView2RuntimeNotFoundException)
+            {
+                string fileName = Path.Combine(Application.StartupPath, "Tools", "MicrosoftEdgeWebview2Setup.exe");
+                await RunWebViewSilentSetupAsync(fileName);
+                TmrCowndown.Enabled = true;
+                TmrCowndown.Start();
+            }
+        }
+
+        public static async Task RunWebViewSilentSetupAsync(string fileName)
+        {
+            var p = Process.Start(fileName, new[] { "/silent", "/install" });
+            await p.WaitForExitAsync().ConfigureAwait(false);
         }
 
         private void TmrCowndown_Tick(object sender, EventArgs e)

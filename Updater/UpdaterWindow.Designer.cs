@@ -44,7 +44,6 @@
             // 
             // TmrCowndown
             // 
-            this.TmrCowndown.Enabled = true;
             this.TmrCowndown.Interval = 200;
             this.TmrCowndown.Tick += new System.EventHandler(this.TmrCowndown_Tick);
             // 
