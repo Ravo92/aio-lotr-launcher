@@ -236,6 +236,15 @@
     <None Update="Tools\Options.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Tools\_patch105.big">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\_patch106.big">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\_patch106textures.big">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Tools\_patch222LibrariesBrutalAI.big">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

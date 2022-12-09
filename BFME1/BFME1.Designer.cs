@@ -304,7 +304,7 @@ namespace PatchLauncher
             this.LblCurrentVersion.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.LblCurrentVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LblCurrentVersion.ForeColor = System.Drawing.SystemColors.Control;
-            this.LblCurrentVersion.Location = new System.Drawing.Point(51, 79);
+            this.LblCurrentVersion.Location = new System.Drawing.Point(40, 79);
             this.LblCurrentVersion.Name = "LblCurrentVersion";
             this.LblCurrentVersion.OutlineForeColor = System.Drawing.Color.Black;
             this.LblCurrentVersion.OutlineWidth = 4F;
