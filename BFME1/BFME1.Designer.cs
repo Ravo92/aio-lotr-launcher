@@ -49,11 +49,18 @@ namespace PatchLauncher
             this.PibLoadingRing = new System.Windows.Forms.PictureBox();
             this.LblPatchNotes = new PatchLauncher.Helper.CustomLabel();
             this.PibLoadingBorder = new System.Windows.Forms.PictureBox();
-            this.BtnPatch103 = new System.Windows.Forms.Button();
-            this.LblCurrentVersion = new PatchLauncher.Helper.CustomLabel();
-            this.BtnPatch106 = new System.Windows.Forms.Button();
-            this.BtnPatch222 = new System.Windows.Forms.Button();
             this.Wv2Patchnotes = new Microsoft.Web.WebView2.WinForms.WebView2();
+            this.PiBTwitch = new System.Windows.Forms.PictureBox();
+            this.PiBArrow = new System.Windows.Forms.PictureBox();
+            this.TmrAnimation = new System.Windows.Forms.Timer(this.components);
+            this.PnlPlaceholder = new System.Windows.Forms.Panel();
+            this.PibMod1 = new System.Windows.Forms.PictureBox();
+            this.PibMod2 = new System.Windows.Forms.PictureBox();
+            this.LblModExplanation = new PatchLauncher.Helper.CustomLabel();
+            this.LblInstalledMods = new PatchLauncher.Helper.CustomLabel();
+            this.PiBVersion222 = new System.Windows.Forms.PictureBox();
+            this.PiBVersion106 = new System.Windows.Forms.PictureBox();
+            this.PiBVersion103 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).BeginInit();
@@ -62,6 +69,14 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingRing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingBorder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBTwitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBArrow)).BeginInit();
+            this.PnlPlaceholder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PibMod1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PibMod2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnLaunch
@@ -95,7 +110,7 @@ namespace PatchLauncher
             this.PibHeader.InitialImage = null;
             this.PibHeader.Location = new System.Drawing.Point(253, -1);
             this.PibHeader.Name = "PibHeader";
-            this.PibHeader.Size = new System.Drawing.Size(775, 105);
+            this.PibHeader.Size = new System.Drawing.Size(792, 105);
             this.PibHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PibHeader.TabIndex = 5;
             this.PibHeader.TabStop = false;
@@ -140,7 +155,7 @@ namespace PatchLauncher
             // 
             this.PiBThemeSwitcher.BackColor = System.Drawing.Color.Black;
             this.PiBThemeSwitcher.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBThemeSwitcher.Location = new System.Drawing.Point(727, 11);
+            this.PiBThemeSwitcher.Location = new System.Drawing.Point(741, 11);
             this.PiBThemeSwitcher.Name = "PiBThemeSwitcher";
             this.PiBThemeSwitcher.Size = new System.Drawing.Size(55, 55);
             this.PiBThemeSwitcher.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -278,90 +293,147 @@ namespace PatchLauncher
             this.PibLoadingBorder.TabIndex = 21;
             this.PibLoadingBorder.TabStop = false;
             // 
-            // BtnPatch103
-            // 
-            this.BtnPatch103.BackColor = System.Drawing.Color.Black;
-            this.BtnPatch103.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnPatch103.BackgroundImage")));
-            this.BtnPatch103.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnPatch103.FlatAppearance.BorderSize = 0;
-            this.BtnPatch103.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnPatch103.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnPatch103.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPatch103.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnPatch103.Location = new System.Drawing.Point(12, 110);
-            this.BtnPatch103.Name = "BtnPatch103";
-            this.BtnPatch103.Size = new System.Drawing.Size(235, 55);
-            this.BtnPatch103.TabIndex = 23;
-            this.BtnPatch103.TabStop = false;
-            this.BtnPatch103.Text = "Patch 1.03 (Default)";
-            this.BtnPatch103.UseMnemonic = false;
-            this.BtnPatch103.UseVisualStyleBackColor = false;
-            // 
-            // LblCurrentVersion
-            // 
-            this.LblCurrentVersion.AutoSize = true;
-            this.LblCurrentVersion.BackColor = System.Drawing.Color.Transparent;
-            this.LblCurrentVersion.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.LblCurrentVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblCurrentVersion.ForeColor = System.Drawing.SystemColors.Control;
-            this.LblCurrentVersion.Location = new System.Drawing.Point(40, 79);
-            this.LblCurrentVersion.Name = "LblCurrentVersion";
-            this.LblCurrentVersion.OutlineForeColor = System.Drawing.Color.Black;
-            this.LblCurrentVersion.OutlineWidth = 4F;
-            this.LblCurrentVersion.Size = new System.Drawing.Size(186, 25);
-            this.LblCurrentVersion.TabIndex = 24;
-            this.LblCurrentVersion.Text = "Active Patch: 1.03";
-            // 
-            // BtnPatch106
-            // 
-            this.BtnPatch106.BackColor = System.Drawing.Color.Black;
-            this.BtnPatch106.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnPatch106.BackgroundImage")));
-            this.BtnPatch106.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnPatch106.FlatAppearance.BorderSize = 0;
-            this.BtnPatch106.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnPatch106.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnPatch106.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPatch106.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnPatch106.Location = new System.Drawing.Point(12, 171);
-            this.BtnPatch106.Name = "BtnPatch106";
-            this.BtnPatch106.Size = new System.Drawing.Size(235, 55);
-            this.BtnPatch106.TabIndex = 25;
-            this.BtnPatch106.TabStop = false;
-            this.BtnPatch106.Text = "Patch 1.06";
-            this.BtnPatch106.UseMnemonic = false;
-            this.BtnPatch106.UseVisualStyleBackColor = false;
-            // 
-            // BtnPatch222
-            // 
-            this.BtnPatch222.BackColor = System.Drawing.Color.Black;
-            this.BtnPatch222.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtnPatch222.BackgroundImage")));
-            this.BtnPatch222.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnPatch222.FlatAppearance.BorderSize = 0;
-            this.BtnPatch222.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnPatch222.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnPatch222.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPatch222.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnPatch222.Location = new System.Drawing.Point(12, 235);
-            this.BtnPatch222.Name = "BtnPatch222";
-            this.BtnPatch222.Size = new System.Drawing.Size(235, 55);
-            this.BtnPatch222.TabIndex = 26;
-            this.BtnPatch222.TabStop = false;
-            this.BtnPatch222.Text = "Patch 2.22 V29";
-            this.BtnPatch222.UseMnemonic = false;
-            this.BtnPatch222.UseVisualStyleBackColor = false;
-            // 
             // Wv2Patchnotes
             // 
             this.Wv2Patchnotes.AllowExternalDrop = true;
-            this.Wv2Patchnotes.BackColor = System.Drawing.Color.Black;
+            this.Wv2Patchnotes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.Wv2Patchnotes.CreationProperties = null;
             this.Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.Wv2Patchnotes.Location = new System.Drawing.Point(253, 110);
+            this.Wv2Patchnotes.Location = new System.Drawing.Point(12, 110);
             this.Wv2Patchnotes.Name = "Wv2Patchnotes";
-            this.Wv2Patchnotes.Size = new System.Drawing.Size(818, 514);
+            this.Wv2Patchnotes.Size = new System.Drawing.Size(1256, 514);
             this.Wv2Patchnotes.Source = new System.Uri("https://ravo92.github.io/changelogpage/index.html", System.UriKind.Absolute);
             this.Wv2Patchnotes.TabIndex = 1;
             this.Wv2Patchnotes.ZoomFactor = 1D;
+            // 
+            // PiBTwitch
+            // 
+            this.PiBTwitch.BackColor = System.Drawing.Color.Black;
+            this.PiBTwitch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PiBTwitch.Location = new System.Drawing.Point(680, 12);
+            this.PiBTwitch.Name = "PiBTwitch";
+            this.PiBTwitch.Size = new System.Drawing.Size(55, 55);
+            this.PiBTwitch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PiBTwitch.TabIndex = 22;
+            this.PiBTwitch.TabStop = false;
+            this.PiBTwitch.Click += new System.EventHandler(this.PiBTwitch_Click);
+            // 
+            // PiBArrow
+            // 
+            this.PiBArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.PiBArrow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PiBArrow.Image = ((System.Drawing.Image)(resources.GetObject("PiBArrow.Image")));
+            this.PiBArrow.Location = new System.Drawing.Point(12, 110);
+            this.PiBArrow.Name = "PiBArrow";
+            this.PiBArrow.Size = new System.Drawing.Size(55, 55);
+            this.PiBArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PiBArrow.TabIndex = 23;
+            this.PiBArrow.TabStop = false;
+            this.PiBArrow.Click += new System.EventHandler(this.PiBArrow_Click);
+            // 
+            // TmrAnimation
+            // 
+            this.TmrAnimation.Interval = 10;
+            this.TmrAnimation.Tick += new System.EventHandler(this.TmrAnimation_Tick);
+            // 
+            // PnlPlaceholder
+            // 
+            this.PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.PnlPlaceholder.Controls.Add(this.PibMod1);
+            this.PnlPlaceholder.Controls.Add(this.PibMod2);
+            this.PnlPlaceholder.Controls.Add(this.LblModExplanation);
+            this.PnlPlaceholder.Controls.Add(this.LblInstalledMods);
+            this.PnlPlaceholder.Controls.Add(this.PiBVersion222);
+            this.PnlPlaceholder.Controls.Add(this.PiBVersion106);
+            this.PnlPlaceholder.Controls.Add(this.PiBVersion103);
+            this.PnlPlaceholder.Location = new System.Drawing.Point(12, 110);
+            this.PnlPlaceholder.Name = "PnlPlaceholder";
+            this.PnlPlaceholder.Size = new System.Drawing.Size(1256, 514);
+            this.PnlPlaceholder.TabIndex = 24;
+            // 
+            // PibMod1
+            // 
+            this.PibMod1.BackColor = System.Drawing.Color.Black;
+            this.PibMod1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PibMod1.Image = ((System.Drawing.Image)(resources.GetObject("PibMod1.Image")));
+            this.PibMod1.Location = new System.Drawing.Point(755, 160);
+            this.PibMod1.Name = "PibMod1";
+            this.PibMod1.Size = new System.Drawing.Size(200, 250);
+            this.PibMod1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PibMod1.TabIndex = 32;
+            this.PibMod1.TabStop = false;
+            // 
+            // PibMod2
+            // 
+            this.PibMod2.BackColor = System.Drawing.Color.Black;
+            this.PibMod2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PibMod2.Image = ((System.Drawing.Image)(resources.GetObject("PibMod2.Image")));
+            this.PibMod2.Location = new System.Drawing.Point(985, 160);
+            this.PibMod2.Name = "PibMod2";
+            this.PibMod2.Size = new System.Drawing.Size(200, 250);
+            this.PibMod2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PibMod2.TabIndex = 31;
+            this.PibMod2.TabStop = false;
+            // 
+            // LblModExplanation
+            // 
+            this.LblModExplanation.AutoSize = true;
+            this.LblModExplanation.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblModExplanation.Location = new System.Drawing.Point(85, 427);
+            this.LblModExplanation.Name = "LblModExplanation";
+            this.LblModExplanation.OutlineForeColor = System.Drawing.Color.Black;
+            this.LblModExplanation.OutlineWidth = 4F;
+            this.LblModExplanation.Size = new System.Drawing.Size(945, 47);
+            this.LblModExplanation.TabIndex = 29;
+            this.LblModExplanation.Text = "Here you can choose which mod or patch you want to play.";
+            // 
+            // LblInstalledMods
+            // 
+            this.LblInstalledMods.AutoSize = true;
+            this.LblInstalledMods.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblInstalledMods.Location = new System.Drawing.Point(420, 50);
+            this.LblInstalledMods.Name = "LblInstalledMods";
+            this.LblInstalledMods.OutlineForeColor = System.Drawing.Color.Black;
+            this.LblInstalledMods.OutlineWidth = 4F;
+            this.LblInstalledMods.Size = new System.Drawing.Size(277, 47);
+            this.LblInstalledMods.TabIndex = 28;
+            this.LblInstalledMods.Text = "Installed Patches";
+            // 
+            // PiBVersion222
+            // 
+            this.PiBVersion222.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion222.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PiBVersion222.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222.Image")));
+            this.PiBVersion222.Location = new System.Drawing.Point(525, 160);
+            this.PiBVersion222.Name = "PiBVersion222";
+            this.PiBVersion222.Size = new System.Drawing.Size(200, 250);
+            this.PiBVersion222.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PiBVersion222.TabIndex = 27;
+            this.PiBVersion222.TabStop = false;
+            // 
+            // PiBVersion106
+            // 
+            this.PiBVersion106.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion106.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PiBVersion106.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion106.Image")));
+            this.PiBVersion106.Location = new System.Drawing.Point(295, 160);
+            this.PiBVersion106.Name = "PiBVersion106";
+            this.PiBVersion106.Size = new System.Drawing.Size(200, 250);
+            this.PiBVersion106.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PiBVersion106.TabIndex = 26;
+            this.PiBVersion106.TabStop = false;
+            // 
+            // PiBVersion103
+            // 
+            this.PiBVersion103.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion103.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PiBVersion103.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion103.Image")));
+            this.PiBVersion103.Location = new System.Drawing.Point(65, 160);
+            this.PiBVersion103.Name = "PiBVersion103";
+            this.PiBVersion103.Size = new System.Drawing.Size(200, 250);
+            this.PiBVersion103.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PiBVersion103.TabIndex = 25;
+            this.PiBVersion103.TabStop = false;
             // 
             // BFME1
             // 
@@ -371,10 +443,8 @@ namespace PatchLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Controls.Add(this.BtnPatch222);
-            this.Controls.Add(this.BtnPatch106);
-            this.Controls.Add(this.LblCurrentVersion);
-            this.Controls.Add(this.BtnPatch103);
+            this.Controls.Add(this.PiBArrow);
+            this.Controls.Add(this.PiBTwitch);
             this.Controls.Add(this.LblPatchNotes);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnInstall);
@@ -390,6 +460,7 @@ namespace PatchLauncher
             this.Controls.Add(this.PibHeader);
             this.Controls.Add(this.PibLoadingRing);
             this.Controls.Add(this.PibLoadingBorder);
+            this.Controls.Add(this.PnlPlaceholder);
             this.Controls.Add(this.Wv2Patchnotes);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -410,6 +481,15 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingRing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibLoadingBorder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Wv2Patchnotes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBTwitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBArrow)).EndInit();
+            this.PnlPlaceholder.ResumeLayout(false);
+            this.PnlPlaceholder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PibMod1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PibMod2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,10 +513,17 @@ namespace PatchLauncher
         private PictureBox PibLoadingRing;
         private Helper.CustomLabel LblPatchNotes;
         private PictureBox PibLoadingBorder;
-        private Button BtnPatch103;
-        private Helper.CustomLabel LblCurrentVersion;
-        private Button BtnPatch106;
-        private Button BtnPatch222;
         private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
+        private PictureBox PiBTwitch;
+        private PictureBox PiBArrow;
+        private Timer TmrAnimation;
+        private Panel PnlPlaceholder;
+        private PictureBox PiBVersion222;
+        private PictureBox PiBVersion106;
+        private PictureBox PiBVersion103;
+        private Helper.CustomLabel LblInstalledMods;
+        private Helper.CustomLabel LblModExplanation;
+        private PictureBox PibMod2;
+        private PictureBox PibMod1;
     }
 }

@@ -12,6 +12,7 @@ using Downloader;
 using System.Diagnostics;
 using System.Collections.Generic;
 using PatchLauncher.Properties;
+using System.Drawing.Configuration;
 
 namespace PatchLauncher
 {
@@ -23,6 +24,7 @@ namespace PatchLauncher
         public const string C_UPDATE_VERSION = "29";
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
         public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
+        public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
 
         public BFME1()
         {
@@ -48,7 +50,9 @@ namespace PatchLauncher
 
             PibLoadingRing.Show();
             PibLoadingBorder.Show();
+            PiBArrow.Hide();
             LblPatchNotes.Show();
+            PnlPlaceholder.Hide();
             Wv2Patchnotes.Hide();
 
             BtnLaunch.Text = "WORKING...";
@@ -76,12 +80,19 @@ namespace PatchLauncher
             LblPatchNotes.BackColor = Color.Transparent;
             LblPatchNotes.BorderStyle = BorderStyle.None;
 
-            LblCurrentVersion.Text = "Active: Patch 1.03";
-            LblCurrentVersion.Font = ConstStrings.UseFont("Albertus Nova", 14);
-            LblCurrentVersion.ForeColor = Color.FromArgb(192, 145, 69);
-            LblCurrentVersion.BackColor = Color.Transparent;
-            LblCurrentVersion.BorderStyle = BorderStyle.None;
-            LblCurrentVersion.OutlineWidth = 2;
+            LblInstalledMods.Text = "Installed Patches";
+            LblInstalledMods.Font = ConstStrings.UseFont("SachaWynterTight", 24);
+            LblInstalledMods.ForeColor = Color.FromArgb(192, 145, 69);
+            LblInstalledMods.BackColor = Color.Transparent;
+            LblInstalledMods.BorderStyle = BorderStyle.None;
+            LblInstalledMods.OutlineWidth = 6;
+
+            LblModExplanation.Text = "Here you can choose which patch you want to play. The active one will get a check-sign.";
+            LblModExplanation.Font = ConstStrings.UseFont("Albertus Nova", 20);
+            LblModExplanation.ForeColor = Color.FromArgb(192, 145, 69);
+            LblModExplanation.BackColor = Color.Transparent;
+            LblModExplanation.BorderStyle = BorderStyle.None;
+            LblModExplanation.OutlineWidth = 6;
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
             PBarActualFile.BackColor = Color.FromArgb(192, 145, 69);
@@ -111,7 +122,7 @@ namespace PatchLauncher
 
             #region Tooltips
             //Tooltips
-            ToolTip.SetToolTip(PiBThemeSwitcher, "Switches the themes beetween 4 factions and the default theme");
+            ToolTip.SetToolTip(PiBThemeSwitcher, "Switch between faction music and default theme music");
             #endregion
 
             #region HUD Elements
@@ -119,6 +130,11 @@ namespace PatchLauncher
             PiBYoutube.Image = Image.FromFile("Images\\youtube.png");
             PiBDiscord.Image = Image.FromFile("Images\\discord.png");
             PiBModDB.Image = Image.FromFile("Images\\moddb.png");
+            PiBTwitch.Image = Image.FromFile("Images\\twitch.png");
+            PiBArrow.Image = Image.FromFile("Images\\btnArrowRight.png");
+            PiBVersion103.Image = Image.FromFile("Images\\BtnPatchSelection_103.png");
+            PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+            PiBVersion222.Image = Image.FromFile("Images\\BtnPatchSelection_222V29.png");
 
             if (Settings.Default.BackgroundMusicIcon == 0)
             {
@@ -265,6 +281,11 @@ namespace PatchLauncher
             Process.Start(new ProcessStartInfo("https://www.moddb.com/mods/battle-for-middle-earth-patch-222") { UseShellExecute = true });
         }
 
+        private void PiBTwitch_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://www.twitch.tv/beyondstandards") { UseShellExecute = true });
+        }
+
         private void PiBThemeSwitcher_Click(object sender, EventArgs e)
         {
             iconNumber++;
@@ -340,6 +361,11 @@ namespace PatchLauncher
                         break;
                     }
             }
+        }
+
+        private void PiBArrow_Click(object sender, EventArgs e)
+        {
+            TmrAnimation.Enabled = true;
         }
 
         #endregion
@@ -743,13 +769,83 @@ namespace PatchLauncher
         {
             TmrPatchNotes.Stop();
             Wv2Patchnotes.Show();
+            PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
+            PiBArrow.Show();
             PibLoadingRing.Hide();
             PibLoadingBorder.Hide();
             LblPatchNotes.Hide();
+            PnlPlaceholder.Show();
+        }
+
+        private void TmrAnimation_Tick(object sender, EventArgs e)
+        {
+            int _startLeft = 12;  // start position of the panel
+            int _endLeft = 1300;      // end position of the panel
+            int _endLeftArrow = 1210;
+            int _stepSize = 5;     // pixels to move
+            int _endRight = 12;      // end position of the panel
+
+            // incrementally move
+
+            if (Wv2Patchnotes.Left == _startLeft)
+            {
+                while (Wv2Patchnotes.Left != _endLeft)
+                {
+                    Wv2Patchnotes.Left += _stepSize;
+
+                    if (PiBArrow.Left < _endLeftArrow)
+                    {
+                        PiBArrow.Left += _stepSize;
+                    }
+                    // make sure we didn't over shoot
+                    if (Wv2Patchnotes.Left > _endLeft) Wv2Patchnotes.Left = _endLeft;
+
+                    // have we arrived?
+                    if (Wv2Patchnotes.Left == _endLeft)
+                    {
+                        TmrAnimation.Enabled = false;
+                    }
+                }
+                PiBArrow.Image = Image.FromFile("Images\\btnArrowLeft.png");
+                PiBArrow.BackColor = Color.Transparent;
+                PnlPlaceholder.BackgroundImage = Image.FromFile("Images\\borderRectangleModPanel.png");
+                PnlPlaceholder.BackColor = Color.Transparent;
+                LblInstalledMods.BackColor = Color.Transparent;
+                LblModExplanation.BackColor = Color.Transparent;
+            }
+            else
+            {
+                PnlPlaceholder.BackColor = Color.FromArgb(24, 24, 24);
+                PnlPlaceholder.BackgroundImage = null;
+
+                while (Wv2Patchnotes.Left != _endRight)
+                {
+                    Wv2Patchnotes.Left -= _stepSize;
+
+                    if (PiBArrow.Left > _endRight)
+                    {
+                        PiBArrow.Left -= _stepSize;
+                    }
+                    // make sure we didn't over shoot
+                    if (Wv2Patchnotes.Left < _endRight) Wv2Patchnotes.Left = _endRight;
+
+                    // have we arrived?
+                    if (Wv2Patchnotes.Left == _endRight)
+                    {
+                        TmrAnimation.Enabled = false;
+                    }
+                }
+                PiBArrow.Image = Image.FromFile("Images\\btnArrowRight.png");
+                PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
+            }
+
         }
 
         private void BFME1_Shown(object sender, EventArgs e)
         {
+            //TODO: Add Twitch integration to show Stream in Webview Object when gone live.
+            //TwitchHelper.IsOnline(C_TWITCHCHANNEL_NAME);
+
             if (Settings.Default.PlayBackgroundMusic)
             {
                 _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
