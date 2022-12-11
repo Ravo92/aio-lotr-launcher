@@ -17,11 +17,12 @@ namespace Helper
 
         public const string C_PATCHFOLDER_NAME = "Patches";
 
-        public const string C_PATCHFOLDER26_NAME = "Patch222_2.41";
-        public const string C_PATCHFOLDER27_NAME = "Patch222_2.43";
-        public const string C_PATCHFOLDER28_NAME = "Patch222_2.45";
-
+        public const string C_PATCHZIP26_NAME = "Patch_2.22v26.7z";
+        public const string C_PATCHZIP27_NAME = "Patch_2.22v27.7z";
+        public const string C_PATCHZIP28_NAME = "Patch_2.22v28.7z";
         public const string C_PATCHZIP29_NAME = "Patch_2.22v29.7z";
+        public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
+        public const string C_PATCHZIP31_NAME = "Patch_2.22v31.7z";
 
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
         public const string C_TEXTURES_PATCH_FILE = "_patch222newtextures.big";
@@ -29,6 +30,8 @@ namespace Helper
         public const string C_BASES_PATCH_FILE = "_patch222bases.big";
         public const string C_MAPS_PATCH_FILE = "_wsmaps222.big";
         public const string C_ASSET_PATCH_FILE = "asset.dat.222V29";
+
+        public const string C_OPTIONAL_PATCH_FILE = "_patch222optional.big";
 
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
@@ -71,10 +74,12 @@ namespace Helper
         {
             return RegistryService.ReadRegKey("path");
         }
+
         public static string GameAppdataFolderName()
         {
             return RegistryService.ReadRegKey("appData");
         }
+
         public static string GameAppdataFolderPath()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), GameAppdataFolderName());

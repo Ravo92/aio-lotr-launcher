@@ -69,6 +69,10 @@ namespace PatchLauncher
             this.LblInstalledMods = new Helper.CustomLabel();
             this.LblInstalledPatches = new Helper.CustomLabel();
             this.LblModExplanation = new Helper.CustomLabel();
+            this.SysTray = new System.Windows.Forms.NotifyIcon(this.components);
+            this.NotifyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemLaunchGame = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeTheLauncherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).BeginInit();
@@ -92,6 +96,7 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).BeginInit();
+            this.NotifyContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnLaunch
@@ -563,6 +568,38 @@ namespace PatchLauncher
             this.LblModExplanation.TabIndex = 29;
             this.LblModExplanation.Text = "Here you can choose which mod or patch you want to play.";
             // 
+            // SysTray
+            // 
+            this.SysTray.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.SysTray.BalloonTipText = "Launcher is minimized to SysTray. If you want to Close, press \"X\" in the App or r" +
+    "ightclick on the Icon in SysTray.";
+            this.SysTray.BalloonTipTitle = "Launcher is still running.";
+            this.SysTray.Icon = ((System.Drawing.Icon)(resources.GetObject("SysTray.Icon")));
+            this.SysTray.Text = "BFME 2.22 Launcher";
+            this.SysTray.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SysTray_MouseDoubleClick);
+            // 
+            // NotifyContextMenu
+            // 
+            this.NotifyContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemLaunchGame,
+            this.closeTheLauncherToolStripMenuItem});
+            this.NotifyContextMenu.Name = "NotifyContextMenu";
+            this.NotifyContextMenu.Size = new System.Drawing.Size(176, 48);
+            // 
+            // MenuItemLaunchGame
+            // 
+            this.MenuItemLaunchGame.Name = "MenuItemLaunchGame";
+            this.MenuItemLaunchGame.Size = new System.Drawing.Size(175, 22);
+            this.MenuItemLaunchGame.Text = "Launch the Game";
+            this.MenuItemLaunchGame.Click += new System.EventHandler(this.MenuItemLaunchGame_Click);
+            // 
+            // closeTheLauncherToolStripMenuItem
+            // 
+            this.closeTheLauncherToolStripMenuItem.Name = "closeTheLauncherToolStripMenuItem";
+            this.closeTheLauncherToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.closeTheLauncherToolStripMenuItem.Text = "Close the Launcher";
+            this.closeTheLauncherToolStripMenuItem.Click += new System.EventHandler(this.CloseTheLauncherToolStripMenuItem_Click);
+            // 
             // BFME1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -604,6 +641,7 @@ namespace PatchLauncher
             this.Text = "Bfme 2.22 Launcher";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BFME1_FormClosing);
             this.Shown += new System.EventHandler(this.BFME1_Shown);
+            this.Resize += new System.EventHandler(this.BFME1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).EndInit();
@@ -627,6 +665,7 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).EndInit();
+            this.NotifyContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -670,5 +709,9 @@ namespace PatchLauncher
         private PictureBox PiBVersion222_2;
         private PictureBox PiBVersion222_5;
         private Helper.CustomLabel LblInstalledMods;
+        private NotifyIcon SysTray;
+        private ContextMenuStrip NotifyContextMenu;
+        private ToolStripMenuItem MenuItemLaunchGame;
+        private ToolStripMenuItem closeTheLauncherToolStripMenuItem;
     }
 }
