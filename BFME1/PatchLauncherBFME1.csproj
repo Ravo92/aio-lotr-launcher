@@ -159,6 +159,9 @@
     <None Update="Images\btnArrowRight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Images\btnArrowRight_Disabled.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\btnClick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -28,6 +28,12 @@ namespace PatchLauncher
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
 
+            if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
+                Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
+
+            if (!File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
+                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
+
             XMLFileHelper.GetXMLFileData();
 
             TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
@@ -607,6 +613,9 @@ namespace PatchLauncher
                 Settings.Default.IsPatch26Installed = true;
                 PiBVersion222_1.Image = Image.FromFile("Images\\BtnPatchSelection_222V26_Selected.png");
 
+                PatchModDetectionHelper.CopyPatch106(false);
+                PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+
                 Settings.Default.IsPatch27Installed = false;
                 Settings.Default.IsPatch28Installed = false;
                 Settings.Default.IsPatch29Installed = false;
@@ -691,6 +700,9 @@ namespace PatchLauncher
                     Settings.Default.IsPatch26Installed = true;
                     PiBVersion222_1.Image = Image.FromFile("Images\\BtnPatchSelection_222V26_Selected.png");
 
+                    PatchModDetectionHelper.CopyPatch106(false);
+                    PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+
                     Settings.Default.IsPatch27Installed = false;
                     Settings.Default.IsPatch28Installed = false;
                     Settings.Default.IsPatch29Installed = false;
@@ -769,6 +781,9 @@ namespace PatchLauncher
                 BtnLaunch.Text = "PATCHING...";
 
                 await UpdateRoutine(ConstStrings.C_PATCHZIP27_NAME, "https://dl.dropboxusercontent.com/s/18q8awyhbddrnl4/Patch_2.22v27.7z");
+
+                PatchModDetectionHelper.CopyPatch106(false);
+                PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
 
                 Settings.Default.IsPatch27Downloaded = true;
                 Settings.Default.IsPatch27Installed = true;
@@ -857,6 +872,9 @@ namespace PatchLauncher
                     Settings.Default.IsPatch27Installed = true;
                     PiBVersion222_2.Image = Image.FromFile("Images\\BtnPatchSelection_222V27_Selected.png");
 
+                    PatchModDetectionHelper.CopyPatch106(false);
+                    PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+
                     Settings.Default.IsPatch26Installed = false;
                     Settings.Default.IsPatch28Installed = false;
                     Settings.Default.IsPatch29Installed = false;
@@ -935,6 +953,9 @@ namespace PatchLauncher
                 Settings.Default.IsPatch28Downloaded = true;
                 Settings.Default.IsPatch28Installed = true;
                 PiBVersion222_3.Image = Image.FromFile("Images\\BtnPatchSelection_222V28_Selected.png");
+
+                PatchModDetectionHelper.CopyPatch106(false);
+                PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
 
                 Settings.Default.IsPatch26Installed = false;
                 Settings.Default.IsPatch27Installed = false;
@@ -1020,6 +1041,9 @@ namespace PatchLauncher
                     Settings.Default.IsPatch28Installed = true;
                     PiBVersion222_3.Image = Image.FromFile("Images\\BtnPatchSelection_222V28_Selected.png");
 
+                    PatchModDetectionHelper.CopyPatch106(false);
+                    PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+
                     Settings.Default.IsPatch26Installed = false;
                     Settings.Default.IsPatch27Installed = false;
                     Settings.Default.IsPatch29Installed = false;
@@ -1098,6 +1122,9 @@ namespace PatchLauncher
                 Settings.Default.IsPatch29Downloaded = true;
                 Settings.Default.IsPatch29Installed = true;
                 PiBVersion222_4.Image = Image.FromFile("Images\\BtnPatchSelection_222V29_Selected.png");
+
+                PatchModDetectionHelper.CopyPatch106(false);
+                PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
 
                 Settings.Default.IsPatch26Installed = false;
                 Settings.Default.IsPatch27Installed = false;
@@ -1183,6 +1210,9 @@ namespace PatchLauncher
                     Settings.Default.IsPatch29Installed = true;
                     PiBVersion222_4.Image = Image.FromFile("Images\\BtnPatchSelection_222V29_Selected.png");
 
+                    PatchModDetectionHelper.CopyPatch106(false);
+                    PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+
                     Settings.Default.IsPatch26Installed = false;
                     Settings.Default.IsPatch27Installed = false;
                     Settings.Default.IsPatch28Installed = false;
@@ -1261,6 +1291,9 @@ namespace PatchLauncher
                 Settings.Default.IsPatch30Downloaded = true;
                 Settings.Default.IsPatch30Installed = true;
                 PiBVersion222_5.Image = Image.FromFile("Images\\BtnPatchSelection_222V30_Selected.png");
+
+                PatchModDetectionHelper.CopyPatch106(false);
+                PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
 
                 Settings.Default.IsPatch26Installed = false;
                 Settings.Default.IsPatch27Installed = false;
@@ -1346,6 +1379,9 @@ namespace PatchLauncher
                     Settings.Default.IsPatch30Installed = true;
                     PiBVersion222_5.Image = Image.FromFile("Images\\BtnPatchSelection_222V30_Selected.png");
 
+                    PatchModDetectionHelper.CopyPatch106(false);
+                    PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+
                     Settings.Default.IsPatch26Installed = false;
                     Settings.Default.IsPatch27Installed = false;
                     Settings.Default.IsPatch28Installed = false;
@@ -1424,6 +1460,9 @@ namespace PatchLauncher
                 Settings.Default.IsPatch31Downloaded = true;
                 Settings.Default.IsPatch31Installed = true;
                 PiBVersion222_6.Image = Image.FromFile("Images\\BtnPatchSelection_222V31_Selected.png");
+
+                PatchModDetectionHelper.CopyPatch106(false);
+                PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
 
                 Settings.Default.IsPatch26Installed = false;
                 Settings.Default.IsPatch27Installed = false;
@@ -1508,6 +1547,9 @@ namespace PatchLauncher
 
                     Settings.Default.IsPatch31Installed = true;
                     PiBVersion222_6.Image = Image.FromFile("Images\\BtnPatchSelection_222V31_Selected.png");
+
+                    PatchModDetectionHelper.CopyPatch106(false);
+                    PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
 
                     Settings.Default.IsPatch26Installed = false;
                     Settings.Default.IsPatch27Installed = false;
@@ -1782,12 +1824,6 @@ namespace PatchLauncher
             {
                 Directory.CreateDirectory(Settings.Default.GameInstallPath);
             }
-
-            if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
-                Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
-
-            if (!File.Exists(ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME))
-                File.Copy(ConstStrings.C_TOOLFOLDER_NAME + ConstStrings.C_OPTIONSINI_FILENAME, ConstStrings.GameAppdataFolderPath() + ConstStrings.C_OPTIONSINI_FILENAME);
 
             Settings.Default.IsGameInstalled = true;
             Settings.Default.Save();
