@@ -353,7 +353,7 @@ namespace PatchLauncher
 
         private void PiBDiscord_Click(object sender, EventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://discord.gg/beyondstandards") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://discord.gg/Q5Yyy3XCuu") { UseShellExecute = true });
         }
 
         private void PiBModDB_Click(object sender, EventArgs e)
@@ -596,6 +596,13 @@ namespace PatchLauncher
 
         private async void PiBVersion222_1_Click(object sender, EventArgs e)
         {
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (!Settings.Default.IsPatch26Downloaded)
             {
                 LblModExplanation.Hide();
@@ -764,10 +771,24 @@ namespace PatchLauncher
                     LblModExplanation.Show();
                 }
             }
+
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_3.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private async void PiBVersion222_2_Click(object sender, EventArgs e)
         {
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (!Settings.Default.IsPatch27Downloaded)
             {
                 LblModExplanation.Hide();
@@ -934,10 +955,24 @@ namespace PatchLauncher
                     LblModExplanation.Show();
                 }
             }
+
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_3.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private async void PiBVersion222_3_Click(object sender, EventArgs e)
         {
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (!Settings.Default.IsPatch28Downloaded)
             {
                 LblModExplanation.Hide();
@@ -1103,10 +1138,23 @@ namespace PatchLauncher
                     LblModExplanation.Show();
                 }
             }
+
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private async void PiBVersion222_4_Click(object sender, EventArgs e)
         {
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (!Settings.Default.IsPatch29Downloaded)
             {
                 LblModExplanation.Hide();
@@ -1272,10 +1320,24 @@ namespace PatchLauncher
                     LblModExplanation.Show();
                 }
             }
+
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_3.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private async void PiBVersion222_5_Click(object sender, EventArgs e)
         {
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (!Settings.Default.IsPatch30Downloaded)
             {
                 LblModExplanation.Hide();
@@ -1441,10 +1503,24 @@ namespace PatchLauncher
                     LblModExplanation.Show();
                 }
             }
+
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_3.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private async void PiBVersion222_6_Click(object sender, EventArgs e)
         {
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (!Settings.Default.IsPatch31Downloaded)
             {
                 LblModExplanation.Hide();
@@ -1610,6 +1686,13 @@ namespace PatchLauncher
                     LblModExplanation.Show();
                 }
             }
+
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_3.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private void PiBMod_1_Click(object sender, EventArgs e)
@@ -1718,11 +1801,17 @@ namespace PatchLauncher
 
         public async Task UpdateRoutine(string ZIPFileName, string DownloadUrl)
         {
+            PiBArrow.Enabled = false;
+            PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
+
             Task download = DownloadUpdate(ZIPFileName, DownloadUrl);
             await download;
 
             Task extract = ExtractUpdate(ZIPFileName);
             await extract;
+
+            PiBArrow.Enabled = true;
+            PiBArrow.Image = Image.FromFile("Images\\btnArrowRight.png");
         }
 
         public async Task DownloadUpdate(string ZIPFileName, string DownloadUrl)
@@ -1818,6 +1907,9 @@ namespace PatchLauncher
 
         public async Task InstallRoutine()
         {
+            PiBArrow.Enabled = false;
+            PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
+
             RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath);
 
             if (!Directory.Exists(Settings.Default.GameInstallPath))
@@ -1839,6 +1931,13 @@ namespace PatchLauncher
 
             Task update = UpdateRoutine(ConstStrings.C_PATCHZIP29_NAME, "https://dl.dropboxusercontent.com/s/ej1mdbuv4xi53ln/Patch_2.22v29.7z");
             await update;
+
+            PiBArrow.Enabled = true;
+            PiBArrow.Image = Image.FromFile("Images\\btnArrowRight.png");
+
+            Settings.Default.IsPatch29Downloaded = true;
+            Settings.Default.IsPatch29Installed = true;
+            PiBVersion222_4.Image = Image.FromFile("Images\\BtnPatchSelection_222V29_Selected.png");
         }
 
         public async Task DownloadGame()
@@ -2141,14 +2240,16 @@ namespace PatchLauncher
 
                 CheckForUpdates(true);
             }
-
-            if (Settings.Default.FirstTimeUse)
+            else if (Settings.Default.FirstTimeUse && Settings.Default.IsGameInstalled)
             {
                 LblModExplanation.Hide();
                 PBarActualFile.Show();
                 LblBytes.Show();
                 LblDownloadSpeed.Show();
                 LblFileName.Show();
+
+                PiBArrow.Enabled = false;
+                PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
 
                 BtnLaunch.Enabled = false;
                 BtnLaunch.Text = "PATCHING...";
@@ -2161,11 +2262,15 @@ namespace PatchLauncher
                 Settings.Default.FirstTimeUse = false;
                 Settings.Default.Save();
             }
-            PiBArrow.Enabled = true;
+            else
+            {
+                PiBArrow.Enabled = true;
 
-            BtnLaunch.Enabled = true;
-            BtnLaunch.Text = "PLAY GAME";
-            CheckForUpdates(false);
+                BtnLaunch.Enabled = true;
+                BtnLaunch.Text = "PLAY GAME";
+                CheckForUpdates(false);
+            }
+
 
             if (PatchModDetectionHelper.DetectPatch106())
             {
