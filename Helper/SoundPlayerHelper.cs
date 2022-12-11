@@ -3,7 +3,7 @@ using SharpDX.XAudio2;
 using System.Media;
 using System.Reflection;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public class SoundPlayerHelper
     {

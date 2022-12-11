@@ -1,6 +1,6 @@
 ﻿using SevenZipExtractor;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public class ZIPFileHelper
     {

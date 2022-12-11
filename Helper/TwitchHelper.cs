@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
-using SharpDX.Multimedia;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public class TwitchHelper
     {

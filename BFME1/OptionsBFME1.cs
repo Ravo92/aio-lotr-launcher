@@ -1,9 +1,8 @@
-﻿using PatchLauncher.Helper;
+﻿using Helper;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Media;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PatchLauncher.Properties;
@@ -572,6 +571,9 @@ namespace PatchLauncher
                 {
                     File.Copy(Path.Combine("Tools", file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
                 }
+
+                OptionIniParser _iniFile = new();
+                _iniFile.WriteKey("UseEAX3", "yes");
             }
 
             if (FlagEAXFileExists && FlagEAX == false)
@@ -582,6 +584,9 @@ namespace PatchLauncher
                 {
                     File.Delete(Path.Combine(ConstStrings.GameInstallPath(), file));
                 }
+
+                OptionIniParser _iniFile = new();
+                _iniFile.WriteKey("UseEAX3", "no");
             }
 
             if (FlagBrutalAI && ConstStrings.GameInstallPath() != null)

@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Xml.Linq;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public static class XMLFileHelper
     {

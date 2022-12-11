@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Text;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public static class ConstStrings
     {
@@ -14,10 +14,39 @@ namespace PatchLauncher.Helper
 
         public const string C_GAMEFOLDER_NAME = "The Battle for Middle-earth (tm)";
         public const string C_EAFOLDER_NAME = "EA Games";
+
+        public const string C_PATCHFOLDER_NAME = "Patches";
+
+        public const string C_PATCHFOLDER26_NAME = "Patch222_2.41";
+        public const string C_PATCHFOLDER27_NAME = "Patch222_2.43";
+        public const string C_PATCHFOLDER28_NAME = "Patch222_2.45";
+
+        public const string C_PATCHZIP29_NAME = "Patch_2.22v29.7z";
+
+        public const string C_MAIN_PATCH_FILE = "_patch222.big";
+        public const string C_TEXTURES_PATCH_FILE = "_patch222newtextures.big";
+        public const string C_LIBRARIES_PATCH_FILE = "_patch222libraries.big";
+        public const string C_BASES_PATCH_FILE = "_patch222bases.big";
+        public const string C_MAPS_PATCH_FILE = "_wsmaps222.big";
+        public const string C_ASSET_PATCH_FILE = "asset.dat.222V29";
+
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
-        public const string C_FONT_ALBERTUS_NOVA = "Albertus Nova";
+        public const int C_UPDATE_VERSION = 29;
+        public const string C_UPDATEMD5_HASH = "a007b2ea1f87a530c1e412255e1d7896";
+        public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
+        public const string C_MAIN_ASSET_FILE = "asset.dat";
+        public const string C_103_ASSET_FILE = "asset.dat.103";
+        public const string C_ORIGINAL_ASSET_FILE = "asset.dat.BACKUP";
 
+        public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
+
+        public const string C_TOOLFOLDER_NAME = "Tools";
+        public const string C_PATCH105MAIN_FILENAME = "_patch105.big";
+        public const string C_PATCH106MAIN_FILENAME = "_patch106.big";
+        public const string C_PATCH106TEXTURES_FILENAME = "_patch106textures.big";
+
+        public const string C_FONT_ALBERTUS_NOVA = "Albertus Nova";
 
         public const string C_BUTTONSOUND_HOVER = "Helper.Sounds.btnHover.wav";
         public const string C_BUTTONSOUND_CLICK = "Helper.Sounds.btnClick.wav";
@@ -42,13 +71,13 @@ namespace PatchLauncher.Helper
         {
             return RegistryService.ReadRegKey("path");
         }
-        public static string GameAppdataFolder()
+        public static string GameAppdataFolderName()
         {
             return RegistryService.ReadRegKey("appData");
         }
         public static string GameAppdataFolderPath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + GameAppdataFolder() + "\\";
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), GameAppdataFolderName());
         }
 
         public static Font UseFont(string font, int size)

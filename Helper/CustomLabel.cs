@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public class CustomLabel : Label
     {

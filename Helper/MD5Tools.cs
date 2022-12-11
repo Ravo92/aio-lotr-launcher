@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public class MD5Tools
     {

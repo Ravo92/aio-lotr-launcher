@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Diagnostics.CodeAnalysis;
 
-namespace PatchLauncher.Helper
+namespace Helper
 {
     public class RegistryService
     {

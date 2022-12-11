@@ -1,4 +1,4 @@
-﻿using PatchLauncher.Helper;
+﻿using Helper;
 using System;
 using System.Drawing;
 using System.IO;
