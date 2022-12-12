@@ -34,7 +34,7 @@ namespace PatchLauncher
 
         public static async Task RunWebViewSilentSetupAsync(string fileName)
         {
-            var p = Process.Start(fileName, new[] { "/silent", "/install" });
+            var p = Process.Start(fileName, new[] { "/SILENT", "/install" });
             await p.WaitForExitAsync().ConfigureAwait(false);
         }
 
@@ -51,7 +51,7 @@ namespace PatchLauncher
         public static void CheckForUpdates()
         {
             AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
-            AutoUpdater.InstalledVersion = new Version("1.0.1");
+            AutoUpdater.InstalledVersion = new Version("1.0.2");
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.ShowRemindLaterButton = false;
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";
