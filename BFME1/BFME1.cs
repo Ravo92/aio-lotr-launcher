@@ -445,6 +445,15 @@ namespace PatchLauncher
 
         private void PiBVersion103_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (PatchModDetectionHelper.DetectPatch106())
             {
                 PatchModDetectionHelper.CopyPatch106(false);
@@ -512,10 +521,28 @@ namespace PatchLauncher
             {
                 PiBVersion222_6.Image = Image.FromFile("Images\\BtnPatchSelection_222V31_Download.png");
             }
+
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_3.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private void PiBVersion106_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
+            PiBVersion222_1.Enabled = false;
+            PiBVersion222_2.Enabled = false;
+            PiBVersion222_3.Enabled = false;
+            PiBVersion222_4.Enabled = false;
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+
             if (!PatchModDetectionHelper.DetectPatch106())
             {
                 Settings.Default.IsPatch106Installed = true;
@@ -592,10 +619,21 @@ namespace PatchLauncher
                 PatchModDetectionHelper.CopyPatch106(false);
                 PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
             }
+
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
+            PiBVersion222_1.Enabled = true;
+            PiBVersion222_2.Enabled = true;
+            PiBVersion222_3.Enabled = true;
+            PiBVersion222_4.Enabled = true;
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
         }
 
         private async void PiBVersion222_1_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
             PiBVersion222_1.Enabled = false;
             PiBVersion222_2.Enabled = false;
             PiBVersion222_3.Enabled = false;
@@ -772,6 +810,8 @@ namespace PatchLauncher
                 }
             }
 
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
             PiBVersion222_1.Enabled = true;
             PiBVersion222_2.Enabled = true;
             PiBVersion222_3.Enabled = true;
@@ -782,6 +822,8 @@ namespace PatchLauncher
 
         private async void PiBVersion222_2_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
             PiBVersion222_1.Enabled = false;
             PiBVersion222_2.Enabled = false;
             PiBVersion222_3.Enabled = false;
@@ -956,6 +998,8 @@ namespace PatchLauncher
                 }
             }
 
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
             PiBVersion222_1.Enabled = true;
             PiBVersion222_2.Enabled = true;
             PiBVersion222_3.Enabled = true;
@@ -966,6 +1010,8 @@ namespace PatchLauncher
 
         private async void PiBVersion222_3_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
             PiBVersion222_1.Enabled = false;
             PiBVersion222_2.Enabled = false;
             PiBVersion222_3.Enabled = false;
@@ -1139,6 +1185,8 @@ namespace PatchLauncher
                 }
             }
 
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
             PiBVersion222_1.Enabled = true;
             PiBVersion222_2.Enabled = true;
             PiBVersion222_4.Enabled = true;
@@ -1148,6 +1196,8 @@ namespace PatchLauncher
 
         private async void PiBVersion222_4_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
             PiBVersion222_1.Enabled = false;
             PiBVersion222_2.Enabled = false;
             PiBVersion222_3.Enabled = false;
@@ -1321,6 +1371,8 @@ namespace PatchLauncher
                 }
             }
 
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
             PiBVersion222_1.Enabled = true;
             PiBVersion222_2.Enabled = true;
             PiBVersion222_3.Enabled = true;
@@ -1331,6 +1383,8 @@ namespace PatchLauncher
 
         private async void PiBVersion222_5_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
             PiBVersion222_1.Enabled = false;
             PiBVersion222_2.Enabled = false;
             PiBVersion222_3.Enabled = false;
@@ -1504,6 +1558,8 @@ namespace PatchLauncher
                 }
             }
 
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
             PiBVersion222_1.Enabled = true;
             PiBVersion222_2.Enabled = true;
             PiBVersion222_3.Enabled = true;
@@ -1514,6 +1570,8 @@ namespace PatchLauncher
 
         private async void PiBVersion222_6_Click(object sender, EventArgs e)
         {
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
             PiBVersion222_1.Enabled = false;
             PiBVersion222_2.Enabled = false;
             PiBVersion222_3.Enabled = false;
@@ -1687,6 +1745,8 @@ namespace PatchLauncher
                 }
             }
 
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
             PiBVersion222_1.Enabled = true;
             PiBVersion222_2.Enabled = true;
             PiBVersion222_3.Enabled = true;
