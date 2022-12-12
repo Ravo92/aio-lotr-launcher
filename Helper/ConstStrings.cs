@@ -12,7 +12,8 @@ namespace Helper
             collection.AddFontFile(@"Fonts\sachwt.ttf");
         }
 
-        public const string C_GAMEFOLDER_NAME = "The Battle for Middle-earth (tm)";
+        public const string C_GAMEFOLDER_NAME_EN = "The Battle for Middle-earth (tm)";
+        public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
         public const string C_EAFOLDER_NAME = "EA Games";
 
         public const string C_PATCHFOLDER_NAME = "Patches";
@@ -75,14 +76,9 @@ namespace Helper
             return RegistryService.ReadRegKey("path");
         }
 
-        public static string GameAppdataFolderName()
-        {
-            return RegistryService.ReadRegKey("appData");
-        }
-
         public static string GameAppdataFolderPath()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), GameAppdataFolderName());
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), C_GAMEFOLDER_NAME_EN);
         }
 
         public static Font UseFont(string font, int size)
