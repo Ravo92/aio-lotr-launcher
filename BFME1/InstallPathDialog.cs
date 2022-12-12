@@ -46,7 +46,7 @@ namespace PatchLauncher
             }
             else
             {
-                TxtInstallPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), ConstStrings.C_EAFOLDER_NAME, ConstStrings.C_GAMEFOLDER_NAME);
+                TxtInstallPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), ConstStrings.C_EAFOLDER_NAME, ConstStrings.C_GAMEFOLDER_NAME_EN);
             }
         }
 
@@ -60,7 +60,7 @@ namespace PatchLauncher
 
             if (_result == DialogResult.OK)
             {
-                TxtInstallPath.Text = Path.Combine(_installPath.SelectedPath, ConstStrings.C_GAMEFOLDER_NAME);
+                TxtInstallPath.Text = Path.Combine(_installPath.SelectedPath, ConstStrings.C_GAMEFOLDER_NAME_EN);
             }
         }
 
