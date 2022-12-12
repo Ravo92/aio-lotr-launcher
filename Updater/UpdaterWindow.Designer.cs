@@ -28,24 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdaterWindow));
-            this.PBarLoading = new System.Windows.Forms.ProgressBar();
-            this.TmrCowndown = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // PBarLoading
-            // 
-            this.PBarLoading.Location = new System.Drawing.Point(365, 12);
-            this.PBarLoading.Name = "PBarLoading";
-            this.PBarLoading.Size = new System.Drawing.Size(121, 36);
-            this.PBarLoading.TabIndex = 0;
-            this.PBarLoading.UseWaitCursor = true;
-            // 
-            // TmrCowndown
-            // 
-            this.TmrCowndown.Interval = 200;
-            this.TmrCowndown.Tick += new System.EventHandler(this.TmrCowndown_Tick);
             // 
             // UpdaterWindow
             // 
@@ -54,7 +38,6 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(498, 60);
-            this.Controls.Add(this.PBarLoading);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -63,15 +46,11 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Updater";
-            this.TopMost = true;
             this.UseWaitCursor = true;
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private ProgressBar PBarLoading;
-        private System.Windows.Forms.Timer TmrCowndown;
     }
 }

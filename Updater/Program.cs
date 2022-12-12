@@ -16,12 +16,6 @@ namespace Updater
             ApplicationConfiguration.Initialize();
             Application.Run(new UpdaterWindow());
 
-            Process _process = new();
-            _process.StartInfo.FileName = "GameSelection.exe";
-            _process.StartInfo.Arguments = "-official";
-            _process.StartInfo.WorkingDirectory = Application.StartupPath;
-            _process.Start();
-
             Application.Exit();
         }
     }

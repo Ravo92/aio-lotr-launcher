@@ -11,47 +11,34 @@ namespace PatchLauncher
         {
             InitializeComponent();
             InitializeWebView2Settings();
+            CheckForUpdates();
         }
 
-        private async void InitializeWebView2Settings()
+        private static async void InitializeWebView2Settings()
         {
             try
             {
                 var version = CoreWebView2Environment.GetAvailableBrowserVersionString();
 
                 File.WriteAllText("webView2_Version.log", version);
-                TmrCowndown.Enabled = true;
-                TmrCowndown.Start();
             }
             catch (WebView2RuntimeNotFoundException)
             {
                 string fileName = Path.Combine(Application.StartupPath, "Tools", "MicrosoftEdgeWebview2Setup.exe");
                 await RunWebViewSilentSetupAsync(fileName);
-                TmrCowndown.Enabled = true;
-                TmrCowndown.Start();
             }
         }
 
         public static async Task RunWebViewSilentSetupAsync(string fileName)
         {
-            var p = Process.Start(fileName, new[] { "/SILENT", "/install" });
+            var p = Process.Start(fileName, new[] { "/silent", "/install" });
             await p.WaitForExitAsync().ConfigureAwait(false);
-        }
-
-        private void TmrCowndown_Tick(object sender, EventArgs e)
-        {
-            PBarLoading.Increment(30);
-            if (PBarLoading.Value == 100) TmrCowndown.Stop();
-            CheckForUpdates();
-
-            if (!TmrCowndown.Enabled)
-                Close();
         }
 
         public static void CheckForUpdates()
         {
             AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
-            AutoUpdater.InstalledVersion = new Version("1.0.2");
+            AutoUpdater.InstalledVersion = new Version("1.0.1");
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.ShowRemindLaterButton = false;
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";
@@ -80,6 +67,17 @@ namespace PatchLauncher
                         MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     }
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                    Process _process = new();
+                    _process.StartInfo.FileName = "GameSelection.exe";
+                    _process.StartInfo.Arguments = "-official";
+                    _process.StartInfo.WorkingDirectory = Application.StartupPath;
+                    _process.Start();
+
+                    Application.Exit();
                 }
             }
             else
