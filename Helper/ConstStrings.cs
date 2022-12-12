@@ -78,7 +78,7 @@ namespace Helper
 
         public static string GameAppdataFolderPath()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), C_GAMEFOLDER_NAME_EN);
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), C_APPDATAFOLDER_NAME_EN);
         }
 
         public static Font UseFont(string font, int size)

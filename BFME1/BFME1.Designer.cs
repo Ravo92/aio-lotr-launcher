@@ -341,6 +341,7 @@ namespace PatchLauncher
             // PiBArrow
             // 
             this.PiBArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.PiBArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBArrow.Image = ((System.Drawing.Image)(resources.GetObject("PiBArrow.Image")));
             this.PiBArrow.Location = new System.Drawing.Point(12, 110);
@@ -359,6 +360,7 @@ namespace PatchLauncher
             // PnlPlaceholder
             // 
             this.PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.PnlPlaceholder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PnlPlaceholder.Controls.Add(this.PiBVersion222_5);
             this.PnlPlaceholder.Controls.Add(this.PiBMod_4);
             this.PnlPlaceholder.Controls.Add(this.PiBMod_3);
@@ -379,6 +381,7 @@ namespace PatchLauncher
             // PiBVersion222_5
             // 
             this.PiBVersion222_5.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion222_5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_5.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_5.Image")));
             this.PiBVersion222_5.Location = new System.Drawing.Point(400, 270);
@@ -392,6 +395,7 @@ namespace PatchLauncher
             // PiBMod_4
             // 
             this.PiBMod_4.BackColor = System.Drawing.Color.Black;
+            this.PiBMod_4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBMod_4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBMod_4.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_4.Image")));
             this.PiBMod_4.Location = new System.Drawing.Point(1040, 270);
@@ -405,6 +409,7 @@ namespace PatchLauncher
             // PiBMod_3
             // 
             this.PiBMod_3.BackColor = System.Drawing.Color.Black;
+            this.PiBMod_3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBMod_3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBMod_3.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_3.Image")));
             this.PiBMod_3.Location = new System.Drawing.Point(870, 270);
@@ -418,6 +423,7 @@ namespace PatchLauncher
             // PiBVersion222_6
             // 
             this.PiBVersion222_6.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion222_6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_6.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_6.Image")));
             this.PiBVersion222_6.Location = new System.Drawing.Point(570, 270);
@@ -431,6 +437,7 @@ namespace PatchLauncher
             // PiBVersion222_4
             // 
             this.PiBVersion222_4.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion222_4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_4.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_4.Image")));
             this.PiBVersion222_4.Location = new System.Drawing.Point(230, 270);
@@ -444,6 +451,7 @@ namespace PatchLauncher
             // PiBVersion222_3
             // 
             this.PiBVersion222_3.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion222_3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_3.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_3.Image")));
             this.PiBVersion222_3.Location = new System.Drawing.Point(60, 270);
@@ -457,6 +465,7 @@ namespace PatchLauncher
             // PiBVersion222_2
             // 
             this.PiBVersion222_2.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion222_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_2.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_2.Image")));
             this.PiBVersion222_2.Location = new System.Drawing.Point(570, 50);
@@ -470,6 +479,7 @@ namespace PatchLauncher
             // PiBMod_2
             // 
             this.PiBMod_2.BackColor = System.Drawing.Color.Black;
+            this.PiBMod_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBMod_2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBMod_2.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_2.Image")));
             this.PiBMod_2.Location = new System.Drawing.Point(1040, 50);
@@ -483,6 +493,7 @@ namespace PatchLauncher
             // PiBMod_1
             // 
             this.PiBMod_1.BackColor = System.Drawing.Color.Black;
+            this.PiBMod_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBMod_1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBMod_1.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_1.Image")));
             this.PiBMod_1.Location = new System.Drawing.Point(870, 50);
@@ -496,6 +507,7 @@ namespace PatchLauncher
             // PiBVersion222_1
             // 
             this.PiBVersion222_1.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion222_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_1.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_1.Image")));
             this.PiBVersion222_1.Location = new System.Drawing.Point(400, 50);
@@ -509,6 +521,7 @@ namespace PatchLauncher
             // PiBVersion106
             // 
             this.PiBVersion106.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion106.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion106.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion106.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion106.Image")));
             this.PiBVersion106.Location = new System.Drawing.Point(230, 50);
@@ -522,6 +535,7 @@ namespace PatchLauncher
             // PiBVersion103
             // 
             this.PiBVersion103.BackColor = System.Drawing.Color.Black;
+            this.PiBVersion103.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion103.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion103.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion103.Image")));
             this.PiBVersion103.Location = new System.Drawing.Point(60, 50);
@@ -602,8 +616,7 @@ namespace PatchLauncher
             // 
             // BFME1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
