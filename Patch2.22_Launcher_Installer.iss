@@ -44,3 +44,6 @@ Type: filesandordirs; Name: "Download"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch Application after Install"; Flags: postinstall nowait unchecked shellexec runasoriginaluser
+
+[InstallDelete]
+Type: filesandordirs; Name: "{app}\Images"
