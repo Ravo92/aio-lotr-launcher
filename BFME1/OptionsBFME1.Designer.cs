@@ -685,6 +685,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OptionsBFME1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsBFME1_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OptionsBFME1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).EndInit();

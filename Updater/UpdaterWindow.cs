@@ -2,6 +2,7 @@
 using Microsoft.Web.WebView2.Core;
 using System.Diagnostics;
 using System.Net;
+using System.Reflection;
 
 namespace PatchLauncher
 {
@@ -38,7 +39,7 @@ namespace PatchLauncher
         public static void CheckForUpdates()
         {
             AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
-            AutoUpdater.InstalledVersion = new Version("1.0.2");
+            AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly().GetName().Version;
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.ShowRemindLaterButton = false;
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";

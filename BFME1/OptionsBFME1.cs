@@ -34,6 +34,8 @@ namespace PatchLauncher
         {
             InitializeComponent();
 
+            KeyPreview = true;
+
             #region Styles
             //Main Form style behaviour
 
@@ -1091,6 +1093,14 @@ namespace PatchLauncher
             else if (dialogResult == DialogResult.No)
             {
                 DontSave();
+            }
+        }
+
+        private void OptionsBFME1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
             }
         }
     }

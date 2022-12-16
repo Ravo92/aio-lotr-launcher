@@ -1,7 +1,7 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppVerName "Patch 2.22 Launcher"
 #define MyAppExeName "Updater.exe"
-#define MyAppIcoName "Updater.exe"
+#define MyAppIcoName "GameSelection.exe"
 
 [Setup]
 AppName={#MyAppName}

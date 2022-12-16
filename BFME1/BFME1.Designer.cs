@@ -73,6 +73,7 @@ namespace PatchLauncher
             this.NotifyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuItemLaunchGame = new System.Windows.Forms.ToolStripMenuItem();
             this.closeTheLauncherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnOpenAppDataFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).BeginInit();
@@ -614,6 +615,28 @@ namespace PatchLauncher
             this.closeTheLauncherToolStripMenuItem.Text = "Close the Launcher";
             this.closeTheLauncherToolStripMenuItem.Click += new System.EventHandler(this.CloseTheLauncherToolStripMenuItem_Click);
             // 
+            // BtnOpenAppDataFolder
+            // 
+            this.BtnOpenAppDataFolder.BackColor = System.Drawing.Color.Black;
+            this.BtnOpenAppDataFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnOpenAppDataFolder.FlatAppearance.BorderSize = 0;
+            this.BtnOpenAppDataFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnOpenAppDataFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnOpenAppDataFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOpenAppDataFolder.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnOpenAppDataFolder.Location = new System.Drawing.Point(862, 661);
+            this.BtnOpenAppDataFolder.Name = "BtnOpenAppDataFolder";
+            this.BtnOpenAppDataFolder.Size = new System.Drawing.Size(200, 51);
+            this.BtnOpenAppDataFolder.TabIndex = 42;
+            this.BtnOpenAppDataFolder.TabStop = false;
+            this.BtnOpenAppDataFolder.Text = "APPDATA FOLDER";
+            this.BtnOpenAppDataFolder.UseMnemonic = false;
+            this.BtnOpenAppDataFolder.UseVisualStyleBackColor = false;
+            this.BtnOpenAppDataFolder.Click += new System.EventHandler(this.BtnOpenAppDataFolder_Click);
+            this.BtnOpenAppDataFolder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnOpenAppDataFolder_MouseDown);
+            this.BtnOpenAppDataFolder.MouseEnter += new System.EventHandler(this.BtnOpenAppDataFolder_MouseEnter);
+            this.BtnOpenAppDataFolder.MouseLeave += new System.EventHandler(this.BtnOpenAppDataFolder_MouseLeave);
+            // 
             // BFME1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -621,6 +644,7 @@ namespace PatchLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.BtnOpenAppDataFolder);
             this.Controls.Add(this.LblInstalledMods);
             this.Controls.Add(this.PiBArrow);
             this.Controls.Add(this.PiBTwitch);
@@ -726,5 +750,6 @@ namespace PatchLauncher
         private ContextMenuStrip NotifyContextMenu;
         private ToolStripMenuItem MenuItemLaunchGame;
         private ToolStripMenuItem closeTheLauncherToolStripMenuItem;
+        private Button BtnOpenAppDataFolder;
     }
 }

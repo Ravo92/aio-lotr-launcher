@@ -25,12 +25,26 @@ namespace Helper
         public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
         public const string C_PATCHZIP31_NAME = "Patch_2.22v31.7z";
 
+        //////////////////////////////////////////////////////////////////////////////
+
+        // 222v29 and below
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
         public const string C_TEXTURES_PATCH_FILE = "_patch222newtextures.big";
         public const string C_LIBRARIES_PATCH_FILE = "_patch222libraries.big";
         public const string C_BASES_PATCH_FILE = "_patch222bases.big";
         public const string C_MAPS_PATCH_FILE = "_wsmaps222.big";
         public const string C_ASSET_PATCH_FILE = "asset.dat.222V29";
+
+        // 3.0 and above
+        public const string C_ENGLISHPATCH_V30_FILE = "_englishpatch222.big";
+        public const string C_MAIN_PATCH_V30_FILE = "_patch222.big";
+        public const string C_LIBRARIES_PATCH_V30_FILE = "_patch222libraries.big";
+        public const string C_TEXTURES_PATCH_V30_FILE = "_patch222textures.big";
+        public const string C_BASES_PATCH_V30_FILE = "_patch222bases.big";
+        public const string C_MAPS_PATCH_V30_FILE = "_patch222maps.big";
+        public const string C_ASSET_PATCH_V30_FILE = "asset.dat.222V30";
+
+        //////////////////////////////////////////////////////////////////////////////
 
         public const string C_OPTIONAL_PATCH_FILE = "_patch222optional.big";
 
@@ -78,7 +92,14 @@ namespace Helper
 
         public static string GameAppdataFolderPath()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), C_APPDATAFOLDER_NAME_EN);
+            if (RegistryService.ReadRegKey("appData") != null)
+            {
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), RegistryService.ReadRegKey("appData"));
+            }
+            else
+            {
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), C_APPDATAFOLDER_NAME_EN);
+            }
         }
 
         public static Font UseFont(string font, int size)
