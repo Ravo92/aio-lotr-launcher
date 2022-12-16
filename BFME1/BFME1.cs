@@ -76,6 +76,7 @@ namespace PatchLauncher
 
             BtnLaunch.Text = "WORKING...";
             BtnLaunch.Enabled = false;
+            BtnOpenAppDataFolder.Hide();
 
             // label-Styles
             LblDownloadSpeed.Text = "";
@@ -340,6 +341,7 @@ namespace PatchLauncher
                 LblFileName.Text = "Preparing Setup...";
 
                 BtnLaunch.Enabled = false;
+                BtnOpenAppDataFolder.Hide();
 
                 await InstallRoutine();
             }
@@ -1938,6 +1940,7 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION;
                     Settings.Default.Save();
                     BtnLaunch.Enabled = true;
+                    BtnOpenAppDataFolder.Show();
                     BtnLaunch.Text = "PLAY GAME";
                     LblFileName.Hide();
                     PiBArrow.Enabled = true;
@@ -2068,8 +2071,9 @@ namespace PatchLauncher
             Invoke((MethodInvoker)(() => LblBytes.Hide()));
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
-
+            ;
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
+            Invoke((MethodInvoker)(() => BtnOpenAppDataFolder.Show()));
 
             Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION;
             Settings.Default.Save();
@@ -2443,6 +2447,8 @@ namespace PatchLauncher
                 LblFileName.Text = "Preparing Update...";
                 BtnLaunch.Enabled = false;
                 PiBArrow.Enabled = false;
+                BtnOpenAppDataFolder.Hide();
+
                 PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
 
                 CheckForUpdates(true);
@@ -2458,6 +2464,7 @@ namespace PatchLauncher
                 PiBArrow.Enabled = false;
                 PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
 
+                BtnOpenAppDataFolder.Hide();
                 BtnLaunch.Enabled = false;
                 BtnLaunch.Text = "PATCHING...";
 
@@ -2472,9 +2479,11 @@ namespace PatchLauncher
             else
             {
                 PiBArrow.Enabled = true;
-
                 BtnLaunch.Enabled = true;
                 BtnLaunch.Text = "PLAY GAME";
+
+                BtnOpenAppDataFolder.Show();
+
                 CheckForUpdates(false);
             }
 

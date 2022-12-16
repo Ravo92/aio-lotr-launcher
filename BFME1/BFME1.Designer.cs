@@ -624,7 +624,7 @@ namespace PatchLauncher
             this.BtnOpenAppDataFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnOpenAppDataFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOpenAppDataFolder.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnOpenAppDataFolder.Location = new System.Drawing.Point(862, 661);
+            this.BtnOpenAppDataFolder.Location = new System.Drawing.Point(839, 661);
             this.BtnOpenAppDataFolder.Name = "BtnOpenAppDataFolder";
             this.BtnOpenAppDataFolder.Size = new System.Drawing.Size(200, 51);
             this.BtnOpenAppDataFolder.TabIndex = 42;
