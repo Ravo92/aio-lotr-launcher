@@ -12,6 +12,7 @@ using Downloader;
 using System.Diagnostics;
 using System.Collections.Generic;
 using PatchLauncher.Properties;
+using System.Timers;
 
 namespace PatchLauncher
 {
@@ -19,6 +20,9 @@ namespace PatchLauncher
     {
         int iconNumber = Settings.Default.BackgroundMusicIcon;
         SoundPlayerHelper _soundPlayerHelper = new();
+
+        System.Timers.Timer _ButtonFlashYellow = new();
+        System.Timers.Timer _ButtonFlashNormal = new();
 
         public BFME1()
         {
@@ -283,6 +287,12 @@ namespace PatchLauncher
         }
         private void BtnOptions_Click(object sender, EventArgs e)
         {
+            if (_ButtonFlashYellow.Enabled && _ButtonFlashNormal.Enabled)
+            {
+                _ButtonFlashYellow.Stop();
+                _ButtonFlashNormal.Stop();
+            }
+
             OptionsBFME1 _options = new();
             _options.ShowDialog();
         }
@@ -1983,8 +1993,13 @@ namespace PatchLauncher
             Task download = DownloadGame();
             await download;
 
-            OptionsBFME1 _options = new();
-            _options.ShowDialog();
+            _ButtonFlashYellow.Start();
+            _ButtonFlashYellow.Interval = 1000;
+            _ButtonFlashYellow.Elapsed += new ElapsedEventHandler(TimerFlashYellow);
+
+            _ButtonFlashNormal.Start();
+            _ButtonFlashNormal.Interval = 2000;
+            _ButtonFlashNormal.Elapsed += new ElapsedEventHandler(TimerFlashNormal);
 
             Task extract = ExtractGame();
             await extract;
@@ -1998,6 +2013,18 @@ namespace PatchLauncher
             Settings.Default.IsPatch29Downloaded = true;
             Settings.Default.IsPatch29Installed = true;
             PiBVersion222_4.Image = Image.FromFile("Images\\BtnPatchSelection_222V29_Selected.png");
+        }
+
+        private void TimerFlashYellow(object source, ElapsedEventArgs e)
+        {
+            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
+            //SetOptionsButtonBackgroundImage(ConstStrings.C_BUTTONIMAGE_CLICK);
+        }
+
+        private void TimerFlashNormal(object source, ElapsedEventArgs e)
+        {
+            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            //SetOptionsButtonBackgroundImage(ConstStrings.C_BUTTONIMAGE_NEUTR);
         }
 
         public async Task DownloadGame()
