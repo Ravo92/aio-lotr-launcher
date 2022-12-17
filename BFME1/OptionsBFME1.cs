@@ -17,6 +17,7 @@ namespace PatchLauncher
         bool FlagThemeMusic = Settings.Default.PlayBackgroundMusic;
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
+        bool IsSettingChanged = true;
 
         //Game Settings
         string FlagAnisotropicTextureFiltering;
@@ -33,6 +34,8 @@ namespace PatchLauncher
         public OptionsBFME1()
         {
             InitializeComponent();
+
+            Properties.Settings.Default.SettingChanging += SettingChanging;
 
             KeyPreview = true;
 
@@ -75,7 +78,7 @@ namespace PatchLauncher
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblVersion.Text = "Patch 2.22v.3.0";
+            LblVersion.Text = "Patch 2.22v29";
             LblVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
             LblVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblVersion.BackColor = Color.Transparent;
@@ -206,18 +209,16 @@ namespace PatchLauncher
 
             if (Settings.Default.IsGameInstalled == true)
             {
-                OptionIniParser _iniFile = new();
-
-                FlagAnisotropicTextureFiltering = _iniFile.ReadKey("AnisotropicTextureFiltering");
-                FlagTerrainLighting = _iniFile.ReadKey("TerrainLighting");
-                Flag3DShadows = _iniFile.ReadKey("3DShadows");
-                Flag2DShadows = _iniFile.ReadKey("2DShadows");
-                FlagSmoothWaterBorder = _iniFile.ReadKey("SmoothWaterBorder");
-                FlagShowProps = _iniFile.ReadKey("ShowProps");
-                FlagShowAnimations = _iniFile.ReadKey("ExtraAnimations");
-                FlagHeatEffects = _iniFile.ReadKey("HeatEffects");
-                FlagDynamicLOD = _iniFile.ReadKey("DynamicLOD");
-                FlagResolution = _iniFile.ReadKey("Resolution");
+                FlagAnisotropicTextureFiltering = OptionIniParser.ReadKey("AnisotropicTextureFiltering");
+                FlagTerrainLighting = OptionIniParser.ReadKey("TerrainLighting");
+                Flag3DShadows = OptionIniParser.ReadKey("3DShadows");
+                Flag2DShadows = OptionIniParser.ReadKey("2DShadows");
+                FlagSmoothWaterBorder = OptionIniParser.ReadKey("SmoothWaterBorder");
+                FlagShowProps = OptionIniParser.ReadKey("ShowProps");
+                FlagShowAnimations = OptionIniParser.ReadKey("ExtraAnimations");
+                FlagHeatEffects = OptionIniParser.ReadKey("HeatEffects");
+                FlagDynamicLOD = OptionIniParser.ReadKey("DynamicLOD");
+                FlagResolution = OptionIniParser.ReadKey("Resolution");
             }
 
             if (FlagAnisotropicTextureFiltering == "no")
@@ -549,18 +550,16 @@ namespace PatchLauncher
             //Save Game-Settings
             if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
-                OptionIniParser _iniFile = new();
-
-                _iniFile.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
-                _iniFile.WriteKey("TerrainLighting", FlagTerrainLighting);
-                _iniFile.WriteKey("3DShadows", Flag3DShadows);
-                _iniFile.WriteKey("2DShadows", Flag2DShadows);
-                _iniFile.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder);
-                _iniFile.WriteKey("ShowProps", FlagShowProps);
-                _iniFile.WriteKey("ExtraAnimations", FlagShowAnimations);
-                _iniFile.WriteKey("HeatEffects", FlagHeatEffects);
-                _iniFile.WriteKey("DynamicLOD", FlagDynamicLOD);
-                _iniFile.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
+                OptionIniParser.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
+                OptionIniParser.WriteKey("TerrainLighting", FlagTerrainLighting);
+                OptionIniParser.WriteKey("3DShadows", Flag3DShadows);
+                OptionIniParser.WriteKey("2DShadows", Flag2DShadows);
+                OptionIniParser.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder);
+                OptionIniParser.WriteKey("ShowProps", FlagShowProps);
+                OptionIniParser.WriteKey("ExtraAnimations", FlagShowAnimations);
+                OptionIniParser.WriteKey("HeatEffects", FlagHeatEffects);
+                OptionIniParser.WriteKey("DynamicLOD", FlagDynamicLOD);
+                OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
             }
 
             //Settings-Valuations
@@ -574,8 +573,7 @@ namespace PatchLauncher
                     File.Copy(Path.Combine("Tools", file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
                 }
 
-                OptionIniParser _iniFile = new();
-                _iniFile.WriteKey("UseEAX3", "yes");
+                OptionIniParser.WriteKey("UseEAX3", "yes");
             }
 
             if (FlagEAXFileExists && FlagEAX == false)
@@ -587,8 +585,7 @@ namespace PatchLauncher
                     File.Delete(Path.Combine(ConstStrings.GameInstallPath(), file));
                 }
 
-                OptionIniParser _iniFile = new();
-                _iniFile.WriteKey("UseEAX3", "no");
+                OptionIniParser.WriteKey("UseEAX3", "no");
             }
 
             if (FlagBrutalAI && ConstStrings.GameInstallPath() != null)
@@ -1085,15 +1082,23 @@ namespace PatchLauncher
 
         private void OptionsBFME1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do you want to save the settings made?", "Save Settings", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (IsSettingChanged)
             {
-                SaveSettings();
+                DialogResult dialogResult = MessageBox.Show("Do you want to save the settings made?", "Save Settings", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveSettings();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    DontSave();
+                }
             }
-            else if (dialogResult == DialogResult.No)
-            {
-                DontSave();
-            }
+        }
+
+        void SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
+        {
+            IsSettingChanged = true;
         }
 
         private void OptionsBFME1_KeyDown(object sender, KeyEventArgs e)

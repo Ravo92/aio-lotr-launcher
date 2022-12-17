@@ -310,5 +310,17 @@ namespace PatchLauncher.Properties {
                 this["IsPatch31Installed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsSettingChanged {
+            get {
+                return ((bool)(this["IsSettingChanged"]));
+            }
+            set {
+                this["IsSettingChanged"] = value;
+            }
+        }
     }
 }

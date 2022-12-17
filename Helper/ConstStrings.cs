@@ -92,7 +92,7 @@ namespace Helper
 
         public static string GameAppdataFolderPath()
         {
-            if (RegistryService.ReadRegKey("appData") != null)
+            if (RegistryService.ReadRegKey("appData") != "ValueNotFound")
             {
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), RegistryService.ReadRegKey("appData"));
             }

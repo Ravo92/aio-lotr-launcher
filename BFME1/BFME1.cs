@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using PatchLauncher.Properties;
 using System.Timers;
+using static System.Windows.Forms.LinkLabel;
 
 namespace PatchLauncher
 {
@@ -2014,28 +2015,18 @@ namespace PatchLauncher
 
             var downloadOpt = new DownloadConfiguration()
             {
-                ChunkCount = 1, // file parts to download, default value is 1
-                ParallelDownload = false // download parts of file as parallel or not. Default value is false
+                ChunkCount = 1,
+                ParallelDownload = false,
+                ReserveStorageSpaceBeforeStartingDownload = true,
+                BufferBlockSize = 8000,
+                MaximumBytesPerSecond = 9223372036854775800,
+                ClearPackageOnCompletionWithFailure = true
             };
 
             var downloader = new DownloadService(downloadOpt);
 
-            downloadOpt.ReserveStorageSpaceBeforeStartingDownload = true;
-            downloadOpt.BufferBlockSize = 10240;
-            downloadOpt.MaximumBytesPerSecond = 9223372036854775800;
-            downloadOpt.ClearPackageOnCompletionWithFailure = true;
-
-            // Provide `FileName` and `TotalBytesToReceive` at the start of each downloads
             downloader.DownloadStarted += OnDownloadStarted;
-
-            // Provide any information about download progress, 
-            // like progress percentage of sum of chunks, total speed, 
-            // average speed, total received bytes and received bytes array 
-            // to live streaming.
             downloader.DownloadProgressChanged += OnDownloadProgressChanged;
-
-            // Download completed event that can include occurred errors or 
-            // cancelled or download completed successfully.
             downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
             if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName)))
@@ -2128,8 +2119,11 @@ namespace PatchLauncher
             Task extract = ExtractGame();
             await extract;
 
-            Task update = UpdateRoutine(ConstStrings.C_PATCHZIP29_NAME, "https://dl.dropboxusercontent.com/s/ej1mdbuv4xi53ln/Patch_2.22v29.7z");
-            await update;
+            if (Settings.Default.IsPatch29Downloaded == false)
+            {
+                Task update = UpdateRoutine(ConstStrings.C_PATCHZIP29_NAME, "https://dl.dropboxusercontent.com/s/ej1mdbuv4xi53ln/Patch_2.22v29.7z");
+                await update;
+            }
 
             PiBArrow.Enabled = true;
             PiBArrow.Image = Image.FromFile("Images\\btnArrowRight.png");
@@ -2153,42 +2147,40 @@ namespace PatchLauncher
 
         public async Task DownloadGame()
         {
-            PBarActualFile.Show();
-
-            var downloadOpt = new DownloadConfiguration()
+            try
             {
-                ChunkCount = 1, // file parts to download, default value is 1
-                ParallelDownload = false // download parts of file as parallel or not. Default value is false
-            };
+                PBarActualFile.Show();
 
-            var downloader = new DownloadService(downloadOpt);
+                var downloadOpt = new DownloadConfiguration()
+                {
+                    ChunkCount = 1,
+                    ParallelDownload = false,
+                    ReserveStorageSpaceBeforeStartingDownload = true,
+                    BufferBlockSize = 8000,
+                    MaximumBytesPerSecond = 9223372036854775800,
+                    ClearPackageOnCompletionWithFailure = true
+                };
 
-            downloadOpt.ReserveStorageSpaceBeforeStartingDownload = true;
-            downloadOpt.BufferBlockSize = 10240;
-            downloadOpt.MaximumBytesPerSecond = 9223372036854775800;
-            downloadOpt.ClearPackageOnCompletionWithFailure = true;
+                var downloader = new DownloadService(downloadOpt);
 
-            // Provide `FileName` and `TotalBytesToReceive` at the start of each downloads
-            downloader.DownloadStarted += OnDownloadStarted;
+                downloader.DownloadStarted += OnDownloadStarted;
+                downloader.DownloadProgressChanged += OnDownloadProgressChanged;
+                downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-            // Provide any information about download progress, 
-            // like progress percentage of sum of chunks, total speed, 
-            // average speed, total received bytes and received bytes array 
-            // to live streaming.
-            downloader.DownloadProgressChanged += OnDownloadProgressChanged;
+                if (!File.Exists(Application.StartupPath + "\\Download\\BFME1.7z"))
+                {
+                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/9sn0e8w8w834ywi/BFME1.7z", Application.StartupPath + "\\Download\\BFME1.7z");
+                }
 
-            // Download completed event that can include occurred errors or 
-            // cancelled or download completed successfully.
-            downloader.DownloadFileCompleted += OnDownloadFileCompleted;
-
-            if (!File.Exists(Application.StartupPath + "\\Download\\BFME1.7z"))
-            {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1LHGbdAXxwlvshcF5suS-VKKyOMlfh1XC&confirm=t", Application.StartupPath + "\\Download\\BFME1.7z");
+                if (!File.Exists(Application.StartupPath + "\\Download\\LangPack_EN.7z"))
+                {
+                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/ek7fuypqh8oysvn/LangPack_EN.7z", Application.StartupPath + "\\Download\\LangPack_EN.7z");
+                }
             }
-
-            if (!File.Exists(Application.StartupPath + "\\Download\\LangPack_EN.7z"))
+            catch (Exception e)
             {
-                await downloader.DownloadFileTaskAsync(@"https://drive.google.com/uc?export=download&id=1L5wHphcet9s0BMUbe8LR44LBLvHn2bJX&confirm=t", Application.StartupPath + "\\Download\\LangPack_EN.7z");
+                using StreamWriter file = new("Error.log", append: true);
+                await file.WriteLineAsync(e.Message);
             }
         }
 
