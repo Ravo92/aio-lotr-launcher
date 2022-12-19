@@ -45,7 +45,7 @@ namespace PatchLauncher
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";
             AutoUpdater.ReportErrors = true;
             AutoUpdater.RunUpdateAsAdmin = true;
-            AutoUpdater.DownloadPath = Application.StartupPath + "Downloads\\";
+            AutoUpdater.DownloadPath = Application.StartupPath + "Download\\";
             AutoUpdater.ClearAppDirectory = false;
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
         }

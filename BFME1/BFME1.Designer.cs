@@ -73,7 +73,8 @@ namespace PatchLauncher
             this.NotifyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuItemLaunchGame = new System.Windows.Forms.ToolStripMenuItem();
             this.closeTheLauncherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnOpenAppDataFolder = new System.Windows.Forms.Button();
+            this.BtnAdvanced = new System.Windows.Forms.Button();
+            this.PibMute = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBYoutube)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBDiscord)).BeginInit();
@@ -98,6 +99,7 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).BeginInit();
             this.NotifyContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PibMute)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnLaunch
@@ -615,27 +617,40 @@ namespace PatchLauncher
             this.closeTheLauncherToolStripMenuItem.Text = "Close the Launcher";
             this.closeTheLauncherToolStripMenuItem.Click += new System.EventHandler(this.CloseTheLauncherToolStripMenuItem_Click);
             // 
-            // BtnOpenAppDataFolder
+            // BtnAdvanced
             // 
-            this.BtnOpenAppDataFolder.BackColor = System.Drawing.Color.Black;
-            this.BtnOpenAppDataFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnOpenAppDataFolder.FlatAppearance.BorderSize = 0;
-            this.BtnOpenAppDataFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnOpenAppDataFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnOpenAppDataFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpenAppDataFolder.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnOpenAppDataFolder.Location = new System.Drawing.Point(839, 661);
-            this.BtnOpenAppDataFolder.Name = "BtnOpenAppDataFolder";
-            this.BtnOpenAppDataFolder.Size = new System.Drawing.Size(200, 51);
-            this.BtnOpenAppDataFolder.TabIndex = 42;
-            this.BtnOpenAppDataFolder.TabStop = false;
-            this.BtnOpenAppDataFolder.Text = "APPDATA FOLDER";
-            this.BtnOpenAppDataFolder.UseMnemonic = false;
-            this.BtnOpenAppDataFolder.UseVisualStyleBackColor = false;
-            this.BtnOpenAppDataFolder.Click += new System.EventHandler(this.BtnOpenAppDataFolder_Click);
-            this.BtnOpenAppDataFolder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnOpenAppDataFolder_MouseDown);
-            this.BtnOpenAppDataFolder.MouseEnter += new System.EventHandler(this.BtnOpenAppDataFolder_MouseEnter);
-            this.BtnOpenAppDataFolder.MouseLeave += new System.EventHandler(this.BtnOpenAppDataFolder_MouseLeave);
+            this.BtnAdvanced.BackColor = System.Drawing.Color.Black;
+            this.BtnAdvanced.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnAdvanced.FlatAppearance.BorderSize = 0;
+            this.BtnAdvanced.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnAdvanced.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnAdvanced.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdvanced.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnAdvanced.Location = new System.Drawing.Point(839, 661);
+            this.BtnAdvanced.Name = "BtnAdvanced";
+            this.BtnAdvanced.Size = new System.Drawing.Size(200, 51);
+            this.BtnAdvanced.TabIndex = 42;
+            this.BtnAdvanced.TabStop = false;
+            this.BtnAdvanced.Text = "ADVANCED";
+            this.BtnAdvanced.UseMnemonic = false;
+            this.BtnAdvanced.UseVisualStyleBackColor = false;
+            this.BtnAdvanced.Click += new System.EventHandler(this.BtnOpenAppDataFolder_Click);
+            this.BtnAdvanced.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnOpenAppDataFolder_MouseDown);
+            this.BtnAdvanced.MouseEnter += new System.EventHandler(this.BtnOpenAppDataFolder_MouseEnter);
+            this.BtnAdvanced.MouseLeave += new System.EventHandler(this.BtnOpenAppDataFolder_MouseLeave);
+            // 
+            // PibMute
+            // 
+            this.PibMute.BackColor = System.Drawing.Color.Transparent;
+            this.PibMute.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PibMute.Image = ((System.Drawing.Image)(resources.GetObject("PibMute.Image")));
+            this.PibMute.Location = new System.Drawing.Point(1213, 11);
+            this.PibMute.Name = "PibMute";
+            this.PibMute.Size = new System.Drawing.Size(55, 55);
+            this.PibMute.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PibMute.TabIndex = 43;
+            this.PibMute.TabStop = false;
+            this.PibMute.Click += new System.EventHandler(this.PibMute_Click);
             // 
             // BFME1
             // 
@@ -644,7 +659,8 @@ namespace PatchLauncher
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Controls.Add(this.BtnOpenAppDataFolder);
+            this.Controls.Add(this.PibMute);
+            this.Controls.Add(this.BtnAdvanced);
             this.Controls.Add(this.LblInstalledMods);
             this.Controls.Add(this.PiBArrow);
             this.Controls.Add(this.PiBTwitch);
@@ -703,6 +719,7 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).EndInit();
             this.NotifyContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PibMute)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -750,6 +767,7 @@ namespace PatchLauncher
         private ContextMenuStrip NotifyContextMenu;
         private ToolStripMenuItem MenuItemLaunchGame;
         private ToolStripMenuItem closeTheLauncherToolStripMenuItem;
-        private Button BtnOpenAppDataFolder;
+        private Button BtnAdvanced;
+        private PictureBox PibMute;
     }
 }

@@ -1,19 +1,18 @@
+using Downloader;
 using Helper;
-using Color = System.Drawing.Color;
-using System.Windows.Forms;
-using System.Drawing;
+using PatchLauncher.Properties;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.ComponentModel;
-using Downloader;
-using System.Diagnostics;
-using System.Collections.Generic;
-using PatchLauncher.Properties;
 using System.Timers;
-using static System.Windows.Forms.LinkLabel;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Color = System.Drawing.Color;
 
 namespace PatchLauncher
 {
@@ -77,7 +76,7 @@ namespace PatchLauncher
 
             BtnLaunch.Text = "WORKING...";
             BtnLaunch.Enabled = false;
-            BtnOpenAppDataFolder.Hide();
+            BtnAdvanced.Hide();
 
             // label-Styles
             LblDownloadSpeed.Text = "";
@@ -146,12 +145,12 @@ namespace PatchLauncher
             BtnInstall.Font = ConstStrings.UseFont("Albertus Nova", 14);
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
 
-            BtnOpenAppDataFolder.FlatAppearance.BorderSize = 0;
-            BtnOpenAppDataFolder.FlatStyle = FlatStyle.Flat;
-            BtnOpenAppDataFolder.BackColor = Color.Transparent;
-            BtnOpenAppDataFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnOpenAppDataFolder.Font = ConstStrings.UseFont("Albertus Nova", 14);
-            BtnOpenAppDataFolder.ForeColor = Color.FromArgb(192, 145, 69);
+            BtnAdvanced.FlatAppearance.BorderSize = 0;
+            BtnAdvanced.FlatStyle = FlatStyle.Flat;
+            BtnAdvanced.BackColor = Color.Transparent;
+            BtnAdvanced.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnAdvanced.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnAdvanced.ForeColor = Color.FromArgb(192, 145, 69);
 
             #endregion
 
@@ -169,6 +168,15 @@ namespace PatchLauncher
             PiBArrow.Image = Image.FromFile("Images\\btnArrowRight.png");
             PiBVersion103.Image = Image.FromFile("Images\\BtnPatchSelection_103.png");
             PiBVersion106.Image = Image.FromFile("Images\\BtnPatchSelection_106.png");
+
+            if (Settings.Default.PlayBackgroundMusic)
+            {
+                PibMute.Image = Image.FromFile("Images\\Unmute.png");
+            }
+            else
+            {
+                PibMute.Image = Image.FromFile("Images\\Mute.png");
+            }
 
             if (Settings.Default.IsPatch26Installed)
             {
@@ -274,7 +282,7 @@ namespace PatchLauncher
 
             Thread.Sleep(1000);
 
-            Application.Exit();
+            WindowState = FormWindowState.Minimized;
         }
 
         private void BtnLaunch_MouseLeave(object sender, EventArgs e)
@@ -342,7 +350,7 @@ namespace PatchLauncher
                 LblFileName.Text = "Preparing Setup...";
 
                 BtnLaunch.Enabled = false;
-                BtnOpenAppDataFolder.Hide();
+                BtnAdvanced.Hide();
 
                 await InstallRoutine();
             }
@@ -370,26 +378,27 @@ namespace PatchLauncher
 
         private void BtnOpenAppDataFolder_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath());
+            Advanced _advanced = new();
+            _advanced.ShowDialog();
         }
 
         private void BtnOpenAppDataFolder_MouseLeave(object sender, EventArgs e)
         {
-            BtnOpenAppDataFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnOpenAppDataFolder.ForeColor = Color.FromArgb(192, 145, 69);
+            BtnAdvanced.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnAdvanced.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnOpenAppDataFolder_MouseEnter(object sender, EventArgs e)
         {
-            BtnOpenAppDataFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
-            BtnOpenAppDataFolder.ForeColor = Color.FromArgb(100, 53, 5);
+            BtnAdvanced.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnAdvanced.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnOpenAppDataFolder_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnOpenAppDataFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
-            BtnOpenAppDataFolder.ForeColor = Color.FromArgb(192, 145, 69);
+            BtnAdvanced.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnAdvanced.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
@@ -411,6 +420,24 @@ namespace PatchLauncher
         private void PiBTwitch_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://www.twitch.tv/beyondstandards") { UseShellExecute = true });
+        }
+
+        private void PibMute_Click(object sender, EventArgs e)
+        {
+            if (Settings.Default.PlayBackgroundMusic)
+            {
+                PibMute.Image = Image.FromFile("Images\\Mute.png");
+                Settings.Default.PlayBackgroundMusic = false;
+                _soundPlayerHelper.StopTheme();
+                Settings.Default.Save();
+            }
+            else
+            {
+                PibMute.Image = Image.FromFile("Images\\Unmute.png");
+                Settings.Default.PlayBackgroundMusic = true;
+                Settings.Default.Save();
+                _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
+            }
         }
 
         private void PiBThemeSwitcher_Click(object sender, EventArgs e)
@@ -1941,7 +1968,7 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION;
                     Settings.Default.Save();
                     BtnLaunch.Enabled = true;
-                    BtnOpenAppDataFolder.Show();
+                    BtnAdvanced.Show();
                     BtnLaunch.Text = "PLAY GAME";
                     LblFileName.Hide();
                     PiBArrow.Enabled = true;
@@ -2010,28 +2037,36 @@ namespace PatchLauncher
 
         public async Task DownloadUpdate(string ZIPFileName, string DownloadUrl)
         {
-            SetPBarFiles(0);
-            SetPBarFilesMax(100);
-
-            var downloadOpt = new DownloadConfiguration()
+            try
             {
-                ChunkCount = 1,
-                ParallelDownload = false,
-                ReserveStorageSpaceBeforeStartingDownload = true,
-                BufferBlockSize = 8000,
-                MaximumBytesPerSecond = 9223372036854775800,
-                ClearPackageOnCompletionWithFailure = true
-            };
+                SetPBarFiles(0);
+                SetPBarFilesMax(100);
 
-            var downloader = new DownloadService(downloadOpt);
+                var downloadOpt = new DownloadConfiguration()
+                {
+                    ChunkCount = 1,
+                    ParallelDownload = false,
+                    ReserveStorageSpaceBeforeStartingDownload = true,
+                    BufferBlockSize = 8000,
+                    MaximumBytesPerSecond = 9223372036854775800,
+                    ClearPackageOnCompletionWithFailure = true
+                };
 
-            downloader.DownloadStarted += OnDownloadStarted;
-            downloader.DownloadProgressChanged += OnDownloadProgressChanged;
-            downloader.DownloadFileCompleted += OnDownloadFileCompleted;
+                var downloader = new DownloadService(downloadOpt);
 
-            if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName)))
+                downloader.DownloadStarted += OnDownloadStarted;
+                downloader.DownloadProgressChanged += OnDownloadProgressChanged;
+                downloader.DownloadFileCompleted += OnDownloadFileCompleted;
+
+                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName)))
+                {
+                    await downloader.DownloadFileTaskAsync(DownloadUrl, Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName));
+                }
+            }
+            catch (Exception e)
             {
-                await downloader.DownloadFileTaskAsync(DownloadUrl, Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName));
+                using StreamWriter file = new("Error.log", append: true);
+                await file.WriteLineAsync(e.Message);
             }
         }
 
@@ -2064,7 +2099,7 @@ namespace PatchLauncher
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
             ;
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
-            Invoke((MethodInvoker)(() => BtnOpenAppDataFolder.Show()));
+            Invoke((MethodInvoker)(() => BtnAdvanced.Show()));
 
             Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION;
             Settings.Default.Save();
@@ -2107,6 +2142,8 @@ namespace PatchLauncher
 
             Task download = DownloadGame();
             await download;
+
+            BtnOptions.Show();
 
             _ButtonFlashYellow.Start();
             _ButtonFlashYellow.Interval = 1000;
@@ -2431,6 +2468,7 @@ namespace PatchLauncher
                 PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
 
                 BtnInstall.Show();
+                BtnOptions.Hide();
                 BtnLaunch.Hide();
             }
             else if (XMLFileHelper.GetXMLFileVersion() > ConstStrings.C_UPDATE_VERSION)
@@ -2439,7 +2477,7 @@ namespace PatchLauncher
                 LblFileName.Text = "Preparing Update...";
                 BtnLaunch.Enabled = false;
                 PiBArrow.Enabled = false;
-                BtnOpenAppDataFolder.Hide();
+                BtnAdvanced.Hide();
 
                 PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
 
@@ -2456,7 +2494,7 @@ namespace PatchLauncher
                 PiBArrow.Enabled = false;
                 PiBArrow.Image = Image.FromFile("Images\\btnArrowRight_Disabled.png");
 
-                BtnOpenAppDataFolder.Hide();
+                BtnAdvanced.Hide();
                 BtnLaunch.Enabled = false;
                 BtnLaunch.Text = "PATCHING...";
 
@@ -2474,7 +2512,7 @@ namespace PatchLauncher
                 BtnLaunch.Enabled = true;
                 BtnLaunch.Text = "PLAY GAME";
 
-                BtnOpenAppDataFolder.Show();
+                BtnAdvanced.Show();
 
                 CheckForUpdates(false);
             }
@@ -2579,6 +2617,7 @@ namespace PatchLauncher
                 Hide();
                 SysTray.Visible = true;
                 SysTray.ShowBalloonTip(2000);
+                _soundPlayerHelper.StopTheme();
             }
         }
 
@@ -2587,6 +2626,7 @@ namespace PatchLauncher
             Show();
             WindowState = FormWindowState.Normal;
             SysTray.Visible = false;
+            _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
         }
 
         private void MenuItemLaunchGame_Click(object sender, EventArgs e)

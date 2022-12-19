@@ -30,15 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsBFME1));
             this.BtnDefault = new System.Windows.Forms.Button();
-            this.LblTheme = new System.Windows.Forms.Label();
-            this.ChkTheme = new System.Windows.Forms.Button();
             this.LblEAX = new System.Windows.Forms.Label();
             this.ChkEAX = new System.Windows.Forms.Button();
             this.PibBorderLauncherOptions = new System.Windows.Forms.PictureBox();
             this.LblLauncherSettings = new System.Windows.Forms.Label();
             this.PibHeader = new System.Windows.Forms.PictureBox();
             this.LblOptions = new System.Windows.Forms.Label();
-            this.LblVersion = new System.Windows.Forms.Label();
+            this.LblPatchVersion = new System.Windows.Forms.Label();
             this.PibBorderGameOptions = new System.Windows.Forms.PictureBox();
             this.LblGameSettings = new System.Windows.Forms.Label();
             this.LblAniTextureFiltering = new System.Windows.Forms.Label();
@@ -68,6 +66,7 @@
             this.ResolutionY = new System.Windows.Forms.TextBox();
             this.LblResolutionX = new System.Windows.Forms.Label();
             this.LblResolution = new System.Windows.Forms.Label();
+            this.LblLauncherVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).BeginInit();
@@ -95,42 +94,10 @@
             this.BtnDefault.MouseEnter += new System.EventHandler(this.BtnDefault_MouseEnter);
             this.BtnDefault.MouseLeave += new System.EventHandler(this.BtnDefault_MouseLeave);
             // 
-            // LblTheme
-            // 
-            this.LblTheme.AutoSize = true;
-            this.LblTheme.Location = new System.Drawing.Point(75, 180);
-            this.LblTheme.Name = "LblTheme";
-            this.LblTheme.Size = new System.Drawing.Size(43, 15);
-            this.LblTheme.TabIndex = 6;
-            this.LblTheme.Text = "Theme";
-            // 
-            // ChkTheme
-            // 
-            this.ChkTheme.BackColor = System.Drawing.Color.Black;
-            this.ChkTheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ChkTheme.FlatAppearance.BorderSize = 0;
-            this.ChkTheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.ChkTheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.ChkTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ChkTheme.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkTheme.Location = new System.Drawing.Point(35, 180);
-            this.ChkTheme.Margin = new System.Windows.Forms.Padding(0);
-            this.ChkTheme.Name = "ChkTheme";
-            this.ChkTheme.Size = new System.Drawing.Size(29, 29);
-            this.ChkTheme.TabIndex = 5;
-            this.ChkTheme.TabStop = false;
-            this.ChkTheme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.ChkTheme.UseMnemonic = false;
-            this.ChkTheme.UseVisualStyleBackColor = false;
-            this.ChkTheme.Click += new System.EventHandler(this.ChkTheme_Click);
-            this.ChkTheme.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkTheme_MouseDown);
-            this.ChkTheme.MouseEnter += new System.EventHandler(this.ChkTheme_MouseEnter);
-            this.ChkTheme.MouseLeave += new System.EventHandler(this.ChkTheme_MouseLeave);
-            // 
             // LblEAX
             // 
             this.LblEAX.AutoSize = true;
-            this.LblEAX.Location = new System.Drawing.Point(75, 280);
+            this.LblEAX.Location = new System.Drawing.Point(75, 230);
             this.LblEAX.Name = "LblEAX";
             this.LblEAX.Size = new System.Drawing.Size(43, 15);
             this.LblEAX.TabIndex = 8;
@@ -145,7 +112,7 @@
             this.ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkEAX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkEAX.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkEAX.Location = new System.Drawing.Point(35, 280);
+            this.ChkEAX.Location = new System.Drawing.Point(35, 230);
             this.ChkEAX.Margin = new System.Windows.Forms.Padding(0);
             this.ChkEAX.Name = "ChkEAX";
             this.ChkEAX.Size = new System.Drawing.Size(29, 29);
@@ -203,14 +170,14 @@
             this.LblOptions.TabIndex = 12;
             this.LblOptions.Text = "Theme";
             // 
-            // LblVersion
+            // LblPatchVersion
             // 
-            this.LblVersion.AutoSize = true;
-            this.LblVersion.Location = new System.Drawing.Point(991, 7);
-            this.LblVersion.Name = "LblVersion";
-            this.LblVersion.Size = new System.Drawing.Size(43, 15);
-            this.LblVersion.TabIndex = 13;
-            this.LblVersion.Text = "Theme";
+            this.LblPatchVersion.AutoSize = true;
+            this.LblPatchVersion.Location = new System.Drawing.Point(991, 7);
+            this.LblPatchVersion.Name = "LblPatchVersion";
+            this.LblPatchVersion.Size = new System.Drawing.Size(43, 15);
+            this.LblPatchVersion.TabIndex = 13;
+            this.LblPatchVersion.Text = "Theme";
             // 
             // PibBorderGameOptions
             // 
@@ -267,7 +234,7 @@
             // LblWindowed
             // 
             this.LblWindowed.AutoSize = true;
-            this.LblWindowed.Location = new System.Drawing.Point(75, 230);
+            this.LblWindowed.Location = new System.Drawing.Point(75, 180);
             this.LblWindowed.Name = "LblWindowed";
             this.LblWindowed.Size = new System.Drawing.Size(43, 15);
             this.LblWindowed.TabIndex = 19;
@@ -282,7 +249,7 @@
             this.ChkWindowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkWindowed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkWindowed.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkWindowed.Location = new System.Drawing.Point(35, 230);
+            this.ChkWindowed.Location = new System.Drawing.Point(35, 180);
             this.ChkWindowed.Margin = new System.Windows.Forms.Padding(0);
             this.ChkWindowed.Name = "ChkWindowed";
             this.ChkWindowed.Size = new System.Drawing.Size(29, 29);
@@ -299,7 +266,7 @@
             // LblBrutalAI
             // 
             this.LblBrutalAI.AutoSize = true;
-            this.LblBrutalAI.Location = new System.Drawing.Point(75, 330);
+            this.LblBrutalAI.Location = new System.Drawing.Point(75, 280);
             this.LblBrutalAI.Name = "LblBrutalAI";
             this.LblBrutalAI.Size = new System.Drawing.Size(43, 15);
             this.LblBrutalAI.TabIndex = 21;
@@ -314,7 +281,7 @@
             this.ChkBrutalAI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.ChkBrutalAI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkBrutalAI.ForeColor = System.Drawing.Color.Transparent;
-            this.ChkBrutalAI.Location = new System.Drawing.Point(35, 330);
+            this.ChkBrutalAI.Location = new System.Drawing.Point(35, 280);
             this.ChkBrutalAI.Margin = new System.Windows.Forms.Padding(0);
             this.ChkBrutalAI.Name = "ChkBrutalAI";
             this.ChkBrutalAI.Size = new System.Drawing.Size(29, 29);
@@ -633,12 +600,22 @@
             this.LblResolution.TabIndex = 42;
             this.LblResolution.Text = "Set Game Resolution";
             // 
+            // LblLauncherVersion
+            // 
+            this.LblLauncherVersion.AutoSize = true;
+            this.LblLauncherVersion.Location = new System.Drawing.Point(12, 9);
+            this.LblLauncherVersion.Name = "LblLauncherVersion";
+            this.LblLauncherVersion.Size = new System.Drawing.Size(43, 15);
+            this.LblLauncherVersion.TabIndex = 43;
+            this.LblLauncherVersion.Text = "Theme";
+            // 
             // OptionsBFME1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1152, 798);
+            this.Controls.Add(this.LblLauncherVersion);
             this.Controls.Add(this.BtnDefault);
             this.Controls.Add(this.LblResolution);
             this.Controls.Add(this.LblResolutionX);
@@ -669,14 +646,12 @@
             this.Controls.Add(this.ChkAniTextureFiltering);
             this.Controls.Add(this.LblGameSettings);
             this.Controls.Add(this.PibBorderGameOptions);
-            this.Controls.Add(this.LblVersion);
+            this.Controls.Add(this.LblPatchVersion);
             this.Controls.Add(this.LblOptions);
             this.Controls.Add(this.PibHeader);
             this.Controls.Add(this.LblLauncherSettings);
             this.Controls.Add(this.LblEAX);
             this.Controls.Add(this.ChkEAX);
-            this.Controls.Add(this.LblTheme);
-            this.Controls.Add(this.ChkTheme);
             this.Controls.Add(this.PibBorderLauncherOptions);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -696,15 +671,13 @@
 
         #endregion
         private System.Windows.Forms.Button BtnDefault;
-        private System.Windows.Forms.Label LblTheme;
-        private System.Windows.Forms.Button ChkTheme;
         private System.Windows.Forms.Label LblEAX;
         private System.Windows.Forms.Button ChkEAX;
         private System.Windows.Forms.PictureBox PibBorderLauncherOptions;
         private System.Windows.Forms.Label LblLauncherSettings;
         private System.Windows.Forms.PictureBox PibHeader;
         private System.Windows.Forms.Label LblOptions;
-        private System.Windows.Forms.Label LblVersion;
+        private System.Windows.Forms.Label LblPatchVersion;
         private System.Windows.Forms.PictureBox PibBorderGameOptions;
         private System.Windows.Forms.Label LblGameSettings;
         private System.Windows.Forms.Label LblAniTextureFiltering;
@@ -734,5 +707,6 @@
         private System.Windows.Forms.TextBox ResolutionY;
         private System.Windows.Forms.Label LblResolutionX;
         private System.Windows.Forms.Label LblResolution;
+        private System.Windows.Forms.Label LblLauncherVersion;
     }
 }

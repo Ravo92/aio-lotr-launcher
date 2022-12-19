@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PatchLauncher.Properties;
+using System.Reflection;
 
 namespace PatchLauncher
 {
@@ -14,7 +15,6 @@ namespace PatchLauncher
         //Launcher Settings
         bool FlagEAX = Settings.Default.EAXSupport;
         readonly bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + @"\dsound.dll");
-        bool FlagThemeMusic = Settings.Default.PlayBackgroundMusic;
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
         bool IsSettingChanged = true;
@@ -35,7 +35,7 @@ namespace PatchLauncher
         {
             InitializeComponent();
 
-            Properties.Settings.Default.SettingChanging += SettingChanging;
+            Settings.Default.SettingChanging += SettingChanging;
 
             KeyPreview = true;
 
@@ -53,11 +53,6 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
-            LblTheme.Text = "Play theme music in launcher";
-            LblTheme.Font = ConstStrings.UseFont("Albertus Nova", 16);
-            LblTheme.ForeColor = Color.FromArgb(192, 145, 69);
-            LblTheme.BackColor = Color.Transparent;
-
             LblEAX.Text = "Activate support for EAX-Sound";
             LblEAX.Font = ConstStrings.UseFont("Albertus Nova", 16);
             LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
@@ -78,10 +73,15 @@ namespace PatchLauncher
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblVersion.Text = "Patch 2.22v29";
-            LblVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
-            LblVersion.ForeColor = Color.FromArgb(136, 82, 46);
-            LblVersion.BackColor = Color.Transparent;
+            LblPatchVersion.Text = "Patch 2.22v29";
+            LblPatchVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
+            LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
+            LblPatchVersion.BackColor = Color.Transparent;
+
+            LblLauncherVersion.Text = "Launcher Version: \n" + Assembly.GetEntryAssembly()!.GetName().Version;
+            LblLauncherVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
+            LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
+            LblLauncherVersion.BackColor = Color.Transparent;
 
             LblWindowed.Text = "Launch game in windowed mode";
             LblWindowed.Font = ConstStrings.UseFont("Albertus Nova", 16);
@@ -98,50 +98,12 @@ namespace PatchLauncher
             LblWarningAI.ForeColor = Color.Red;
             LblWarningAI.BackColor = Color.Transparent;
 
-            if (Settings.Default.IsGameInstalled == false)
-            {
-                ChkBrutalAI.Enabled = false;
-                ChkEAX.Enabled = false;
-                ChkAniTextureFiltering.Enabled = false;
-                ChkTerrainLighting.Enabled = false;
-                Chk3DShadows.Enabled = false;
-                Chk2DShadows.Enabled = false;
-                ChkSmoothWaterBorder.Enabled = false;
-                ChkShowProps.Enabled = false;
-                ChkShowAnimations.Enabled = false;
-                ChkHeatEffects.Enabled = false;
-                ChkDynamicLOD.Enabled = false;
-                ResolutionX.Enabled = false;
-                ResolutionY.Enabled = false;
-
-                LblWarningAI.Text = "Some Settings are Disabled until the game is installed.";
-                LblWarningAI.Show();
-            }
-            else
-            {
-                ChkBrutalAI.Enabled = true;
-                ChkEAX.Enabled = true;
-                ChkAniTextureFiltering.Enabled = true;
-                ChkTerrainLighting.Enabled = true;
-                Chk3DShadows.Enabled = true;
-                Chk2DShadows.Enabled = true;
-                ChkSmoothWaterBorder.Enabled = true;
-                ChkShowProps.Enabled = true;
-                ChkShowAnimations.Enabled = true;
-                ChkHeatEffects.Enabled = true;
-                ChkDynamicLOD.Enabled = true;
-                ResolutionX.Enabled = true;
-                ResolutionY.Enabled = true;
-
-                LblWarningAI.Hide();
-            }
-
-            if (FlagBrutalAI && Settings.Default.IsGameInstalled)
+            if (FlagBrutalAI)
             {
                 LblWarningAI.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
                 LblWarningAI.Show();
             }
-            else if (Settings.Default.IsGameInstalled)
+            else
             {
                 LblWarningAI.Hide();
             }
@@ -395,16 +357,6 @@ namespace PatchLauncher
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
-            ChkTheme.FlatAppearance.BorderSize = 0;
-            ChkTheme.FlatStyle = FlatStyle.Flat;
-            ChkTheme.BackColor = Color.Transparent;
-            ChkTheme.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagThemeMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
-
             ChkEAX.FlatAppearance.BorderSize = 0;
             ChkEAX.FlatStyle = FlatStyle.Flat;
             ChkEAX.BackColor = Color.Transparent;
@@ -447,11 +399,9 @@ namespace PatchLauncher
 
         private void BtnDefault_Click(object sender, EventArgs e)
         {
-            FlagThemeMusic = true;
             FlagEAX = false;
             FlagWindowed = false;
             FlagBrutalAI = false;
-            ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
             ChkEAX.Image = Image.FromFile("Images\\chkUnselected.png");
             ChkWindowed.Image = Image.FromFile("Images\\chkUnselected.png");
             ChkBrutalAI.Image = Image.FromFile("Images\\chkUnselected.png");
@@ -501,47 +451,9 @@ namespace PatchLauncher
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
-        private void ChkTheme_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagThemeMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
-        }
-
-        private void ChkTheme_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagThemeMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
-        }
-
-        private void ChkTheme_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagThemeMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
-        }
-        private void ChkTheme_Click(object sender, EventArgs e)
-        {
-            if (FlagThemeMusic)
-            {
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselectedHover.png");
-                FlagThemeMusic = false;
-            }
-            else
-            {
-                ChkTheme.Image = Image.FromFile("Images\\chkSelectedHover.png");
-                FlagThemeMusic = true;
-            }
-        }
-
         private void SaveSettings()
         {
             //Save Launcher-Settings
-            Settings.Default.PlayBackgroundMusic = FlagThemeMusic;
             Settings.Default.EAXSupport = FlagEAX;
             Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
@@ -596,11 +508,6 @@ namespace PatchLauncher
 
         private void DontSave()
         {
-            if (Settings.Default.PlayBackgroundMusic && FlagThemeMusic)
-                ChkTheme.Image = Image.FromFile("Images\\chkSelected.png");
-            else
-                ChkTheme.Image = Image.FromFile("Images\\chkUnselected.png");
-
             if (Settings.Default.EAXSupport)
                 ChkEAX.Image = Image.FromFile("Images\\chkSelected.png");
             else
