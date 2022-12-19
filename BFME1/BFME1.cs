@@ -2051,7 +2051,7 @@ namespace PatchLauncher
             });
 
             ZIPFileHelper _ZIPFileHelper = new();
-            await _ZIPFileHelper.ExtractArchive(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName), Settings.Default.GameInstallPath, progressHandler);
+            await _ZIPFileHelper.ExtractArchive(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName), Settings.Default.GameInstallPath, progressHandler)!;
 
             FinishingGameUpdate();
         }
@@ -2207,7 +2207,7 @@ namespace PatchLauncher
             {
                 SetTextPercentages($"Extracting {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
                 ZIPFileHelper _ZIPFileHelper = new();
-                await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Download", archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler);
+                await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Download", archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler)!;
             }
         }
 
