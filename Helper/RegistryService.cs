@@ -12,17 +12,17 @@ namespace Helper
 
         public static string ReadRegKey(string kindOf)
         {
-            if (kindOf != null)
+            if (IsNotNull(kindOf))
             {
-                RegistryKey localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
+                RegistryKey ?localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
                 if (IsNotNull(localKey))
                 {
                     switch (kindOf)
                     {
                         case "lang":
-                            if (localKey.GetValue("Language") != null)
+                            if (IsNotNull(localKey.GetValue("Language")))
                             {
-                                string? lang = localKey.GetValue("Language")!.ToString();
+                                string? lang = localKey.GetValue("Language")!.ToString()!;
                                 return lang;
                             }
                             else
@@ -31,9 +31,9 @@ namespace Helper
                             }
 
                         case "appData":
-                            if (localKey.GetValue("UserDataLeafName") != null)
+                            if (IsNotNull(localKey.GetValue("UserDataLeafName")))
                             {
-                                string? appData = localKey.GetValue("UserDataLeafName")!.ToString();
+                                string? appData = localKey.GetValue("UserDataLeafName")!.ToString()!;
                                 return appData;
                             }
                             else
@@ -42,9 +42,9 @@ namespace Helper
                             }
 
                         case "path":
-                            if (localKey.GetValue("InstallPath") != null)
+                            if (IsNotNull(localKey.GetValue("InstallPath")))
                             {
-                                string? path = localKey.GetValue("InstallPath")!.ToString();
+                                string? path = localKey.GetValue("InstallPath")!.ToString()!;
                                 return path;
                             }
                             else
