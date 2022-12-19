@@ -22,15 +22,14 @@ ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.4
+VersionInfoVersion=1.0.1.5
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "BFME_Launcher\*"; DestDir: "{app}"; Flags: recursesubdirs
+Source: "BFME_Launcher\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
 Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
-Source: "ReadMe.txt"; DestDir: "{app}\ReadMe.txt"; Languages: en; Flags: isreadme
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\Updater.exe"
@@ -43,7 +42,16 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Type: filesandordirs; Name: "Download"
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "Launch Application after Install"; Flags: postinstall nowait unchecked shellexec runasoriginaluser
+Filename: "{app}\{#MyAppExeName}"; Description: "Launch Application after Install"; Flags: postinstall nowait unchecked runasoriginaluser
+Filename: "{app}\{#MyAppExeName}"; Flags: postinstall nowait runasoriginaluser skipifnotsilent
 
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\Images"
+Type: filesandordirs; Name: "{app}\ReadMe.txt"
+
+[Code]
+procedure CurPageChanged(CurPageID: Integer);
+begin
+  if CurPageID = wpFinished then
+    WizardForm.RunList.Visible := False;
+end;
