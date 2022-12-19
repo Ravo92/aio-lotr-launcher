@@ -1,5 +1,5 @@
 using PatchLauncher;
-using System.Configuration.Internal;
+using System.Diagnostics;
 
 namespace GameSelection
 {
@@ -15,8 +15,13 @@ namespace GameSelection
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            if (args[0].ToString() != "-official")
+            if (args[0].ToString() != "--official")
             {
+                Process _process = new();
+                _process.StartInfo.FileName = "Updater.exe";
+                _process.StartInfo.WorkingDirectory = Application.StartupPath;
+                _process.Start();
+
                 Application.Exit();
             }
             else

@@ -13,7 +13,7 @@ namespace PatchLauncher
         {
             Process _process = new();
             _process.StartInfo.FileName = "PatchLauncherBFME1.exe";
-            _process.StartInfo.Arguments = "-official";
+            _process.StartInfo.Arguments = "--official";
             _process.StartInfo.WorkingDirectory = Application.StartupPath;
             _process.Start();
             Dispose();

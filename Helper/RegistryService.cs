@@ -8,7 +8,7 @@ namespace Helper
         private const string C_WRONG_PARAMETER = "WrongParameter";
         private const string C_NOT_FOUND = "ValueNotFound";
 
-        private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
+        public static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
 
         public static string ReadRegKey(string kindOf)
         {

@@ -64,10 +64,9 @@ namespace PatchLauncher
                         }
                         else
                         {
-                            Thread.Sleep(1000);
                             Process _process = new();
                             _process.StartInfo.FileName = "GameSelection.exe";
-                            _process.StartInfo.Arguments = "-official";
+                            _process.StartInfo.Arguments = "--official";
                             _process.StartInfo.WorkingDirectory = Application.StartupPath;
                             _process.Start();
 
@@ -84,10 +83,9 @@ namespace PatchLauncher
                 }
                 else
                 {
-                    Thread.Sleep(1000);
                     Process _process = new();
                     _process.StartInfo.FileName = "GameSelection.exe";
-                    _process.StartInfo.Arguments = "-official";
+                    _process.StartInfo.Arguments = "--official";
                     _process.StartInfo.WorkingDirectory = Application.StartupPath;
                     _process.Start();
 
