@@ -39,7 +39,7 @@ namespace PatchLauncher
         public static void CheckForUpdates()
         {
             AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
-            AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly().GetName().Version;
+            AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly()!.GetName().Version;
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.ShowRemindLaterButton = false;
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";
