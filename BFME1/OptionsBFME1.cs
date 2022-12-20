@@ -20,15 +20,15 @@ namespace PatchLauncher
         bool IsSettingChanged = true;
 
         //Game Settings
-        string FlagAnisotropicTextureFiltering;
-        string FlagTerrainLighting;
-        string Flag3DShadows;
-        string Flag2DShadows;
-        string FlagSmoothWaterBorder;
-        string FlagShowProps;
-        string FlagShowAnimations;
-        string FlagHeatEffects;
-        string FlagDynamicLOD;
+        string FlagAnisotropicTextureFiltering = "yes";
+        string FlagTerrainLighting = "yes";
+        string Flag3DShadows = "yes";
+        string Flag2DShadows = "yes";
+        string FlagSmoothWaterBorder = "yes";
+        string FlagShowProps = "yes";
+        string FlagShowAnimations = "yes";
+        string FlagHeatEffects = "yes";
+        string FlagDynamicLOD = "no";
         string FlagResolution;
 
         public OptionsBFME1()
@@ -164,11 +164,6 @@ namespace PatchLauncher
             LblResolution.BackColor = Color.Transparent;
 
             //Checkbox-Styles
-            ChkAniTextureFiltering.FlatAppearance.BorderSize = 0;
-            ChkAniTextureFiltering.FlatStyle = FlatStyle.Flat;
-            ChkAniTextureFiltering.BackColor = Color.Transparent;
-            ChkAniTextureFiltering.ForeColor = Color.FromArgb(192, 145, 69);
-
             if (Settings.Default.IsGameInstalled == true)
             {
                 FlagAnisotropicTextureFiltering = OptionIniParser.ReadKey("AnisotropicTextureFiltering");
@@ -183,13 +178,19 @@ namespace PatchLauncher
                 FlagResolution = OptionIniParser.ReadKey("Resolution");
             }
 
+            ///////////////////////////////////////////////////////////////////////////////////////////
+
+            ChkAniTextureFiltering.FlatAppearance.BorderSize = 0;
+            ChkAniTextureFiltering.FlatStyle = FlatStyle.Flat;
+            ChkAniTextureFiltering.BackColor = Color.Transparent;
+            ChkAniTextureFiltering.ForeColor = Color.FromArgb(192, 145, 69);
+
             if (FlagAnisotropicTextureFiltering == "no")
             {
                 ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (FlagAnisotropicTextureFiltering == "yes" || FlagAnisotropicTextureFiltering == null)
+            else if (FlagAnisotropicTextureFiltering == "yes")
             {
-                FlagAnisotropicTextureFiltering = "yes";
                 ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -204,9 +205,8 @@ namespace PatchLauncher
             {
                 ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (FlagTerrainLighting == "yes" || FlagTerrainLighting == null)
+            else if (FlagTerrainLighting == "yes")
             {
-                FlagTerrainLighting = "yes";
                 ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -221,9 +221,8 @@ namespace PatchLauncher
             {
                 Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (Flag3DShadows == "yes" || Flag3DShadows == null)
+            else if (Flag3DShadows == "yes")
             {
-                Flag3DShadows = "yes";
                 Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -238,9 +237,8 @@ namespace PatchLauncher
             {
                 Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (Flag2DShadows == "yes" || Flag2DShadows == null)
+            else if (Flag2DShadows == "yes")
             {
-                Flag2DShadows = "yes";
                 Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -255,9 +253,8 @@ namespace PatchLauncher
             {
                 ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (FlagSmoothWaterBorder == "yes" || FlagSmoothWaterBorder == null)
+            else if (FlagSmoothWaterBorder == "yes")
             {
-                FlagSmoothWaterBorder = "yes";
                 ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -272,9 +269,8 @@ namespace PatchLauncher
             {
                 ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (FlagShowProps == "yes" || FlagShowProps == null)
+            else if (FlagShowProps == "yes")
             {
-                FlagShowProps = "yes";
                 ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -289,9 +285,8 @@ namespace PatchLauncher
             {
                 ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (FlagShowAnimations == "yes" || FlagShowAnimations == null)
+            else if (FlagShowAnimations == "yes")
             {
-                FlagShowAnimations = "yes";
                 ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -306,9 +301,8 @@ namespace PatchLauncher
             {
                 ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (FlagHeatEffects == "yes" || FlagHeatEffects == null)
+            else if (FlagHeatEffects == "yes")
             {
-                FlagHeatEffects = "yes";
                 ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 
@@ -323,9 +317,8 @@ namespace PatchLauncher
             {
                 ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
             }
-            else if (FlagDynamicLOD == "yes" || FlagDynamicLOD == null)
+            else if (FlagDynamicLOD == "yes")
             {
-                FlagDynamicLOD = "yes";
                 ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
             }
 

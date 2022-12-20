@@ -2094,11 +2094,6 @@ namespace PatchLauncher
 
             PBarActualFile.Hide();
 
-            if (!Settings.Default.IsGameInstalled)
-            {
-            LblModExplanation.Show();
-            }
-
             BtnLaunch.Text = "LAUNCH GAME";
 
             BtnLaunch.Enabled = true;
@@ -2109,10 +2104,12 @@ namespace PatchLauncher
             if (Settings.Default.IsPatchModsShown)
             {
                 PiBArrow.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnArrowLeft.png"));
+                LblModExplanation.Show();
             }
             else
             {
                 PiBArrow.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnArrowRight.png"));
+                LblModExplanation.Hide();
             }
         }
 
@@ -2221,6 +2218,13 @@ namespace PatchLauncher
 
                 await DownloadGame();
 
+                await ExtractGame();
+
+                if (Settings.Default.IsPatch29Downloaded == false)
+                {
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP29_NAME, "https://dl.dropboxusercontent.com/s/ej1mdbuv4xi53ln/Patch_2.22v29.7z");
+                }
+
                 BtnOptions.Show();
 
                 _ButtonFlashYellow.Start();
@@ -2230,13 +2234,6 @@ namespace PatchLauncher
                 _ButtonFlashNormal.Start();
                 _ButtonFlashNormal.Interval = 2000;
                 _ButtonFlashNormal.Elapsed += new ElapsedEventHandler(TimerFlashNormal);
-
-                await ExtractGame();
-
-                if (Settings.Default.IsPatch29Downloaded == false)
-                {
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP29_NAME, "https://dl.dropboxusercontent.com/s/ej1mdbuv4xi53ln/Patch_2.22v29.7z");
-                }
 
                 PiBArrow.Enabled = true;
 
