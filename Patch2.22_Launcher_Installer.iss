@@ -22,13 +22,13 @@ ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.5
+VersionInfoVersion=1.0.1.6
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "BFME_Launcher\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
+Source: "BFME_Launcher\*"; DestDir: "{app}"; Flags: recursesubdirs
 Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
