@@ -322,5 +322,17 @@ namespace PatchLauncher.Properties {
                 this["IsSettingChanged"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPatchModsShown {
+            get {
+                return ((bool)(this["IsPatchModsShown"]));
+            }
+            set {
+                this["IsPatchModsShown"] = value;
+            }
+        }
     }
 }

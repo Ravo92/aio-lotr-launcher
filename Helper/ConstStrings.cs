@@ -4,20 +4,19 @@ namespace Helper
 {
     public static class ConstStrings
     {
-        public static PrivateFontCollection collection = new();
+        private static readonly PrivateFontCollection collection = new();
         static ConstStrings()
         {
-            collection.AddFontFile(@"Fonts\albertusmt.otf");
-            collection.AddFontFile(@"Fonts\AlbertusNova.ttf");
-            collection.AddFontFile(@"Fonts\sachwt.ttf");
+            collection.AddFontFile(Path.Combine(Application.StartupPath, C_FONTSFOLDER_NAME, "albertusmt.otf"));
+            collection.AddFontFile(Path.Combine(Application.StartupPath, C_FONTSFOLDER_NAME, "AlbertusNova.ttf"));
+            collection.AddFontFile(Path.Combine(Application.StartupPath, C_FONTSFOLDER_NAME, "sachwt.ttf"));
         }
 
         public const string C_GAMEFOLDER_NAME_EN = "The Battle for Middle-earth (tm)";
         public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
         public const string C_EAFOLDER_NAME = "EA Games";
 
-        public const string C_PATCHFOLDER_NAME = "Patches";
-
+        public const string C_PATCHZIP06_NAME = "Patch_1.06.7z";
         public const string C_PATCHZIP26_NAME = "Patch_2.22v26.7z";
         public const string C_PATCHZIP27_NAME = "Patch_2.22v27.7z";
         public const string C_PATCHZIP28_NAME = "Patch_2.22v28.7z";
@@ -60,9 +59,19 @@ namespace Helper
         public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
 
         public const string C_TOOLFOLDER_NAME = "Tools";
+        public const string C_FONTSFOLDER_NAME = "Fonts";
+        public const string C_IMAGESFOLDER_NAME = "Images";
+        public const string C_PATCHFOLDER_NAME = "Patches";
+
+        //////////////////////////////////////////////////////////////////////////////
+
         public const string C_PATCH105MAIN_FILENAME = "_patch105.big";
         public const string C_PATCH106MAIN_FILENAME = "_patch106.big";
         public const string C_PATCH106TEXTURES_FILENAME = "_patch106textures.big";
+        public const string C_PATCH106APT_FILENAME = "_aptpatch.big";
+        public const string C_PATCH106WSMAPS_FILENAME = "_WSMaps.big";
+
+        //////////////////////////////////////////////////////////////////////////////
 
         public const string C_FONT_ALBERTUS_NOVA = "Albertus Nova";
 
@@ -75,10 +84,10 @@ namespace Helper
         public const string C_THEMESOUND_ISENGARD = "Helper.Sounds.music_isengard.wav";
         public const string C_THEMESOUND_MORDOR = "Helper.Sounds.music_mordor.wav";
 
-        public static readonly Image C_BUTTONIMAGE_NEUTR = Image.FromFile(@"Images\btnNeutral.png");
-        public static readonly Image C_BUTTONIMAGE_HOVER = Image.FromFile(@"Images\btnHover.png");
-        public static readonly Image C_BUTTONIMAGE_CLICK = Image.FromFile(@"Images\btnClick.png");
-        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Image.FromFile(@"Images\btnClickgr.png"); 
+        public static readonly Image C_BUTTONIMAGE_NEUTR = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnNeutral.png"));
+        public static readonly Image C_BUTTONIMAGE_HOVER = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnHover.png"));
+        public static readonly Image C_BUTTONIMAGE_CLICK = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnClick.png"));
+        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnClickgr.png")); 
 
         public static string GameLanguage()
         {

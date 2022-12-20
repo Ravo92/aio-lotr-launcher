@@ -13,30 +13,14 @@ namespace Helper
             return false;
         }
 
-        public static bool CopyPatch106(bool activate)
+        public static bool DeletePatch106()
         {
-            if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_PATCH106MAIN_FILENAME)) && activate == true)
-            {
-                if (!File.Exists(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME)))
-                {
-                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_PATCH105MAIN_FILENAME), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH105MAIN_FILENAME));
-                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_PATCH106MAIN_FILENAME), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME));
-                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_PATCH106TEXTURES_FILENAME), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106TEXTURES_FILENAME));
-
-                }
-                return true;
-            }
-            else if (File.Exists(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME)) && activate == false)
-            {
-                File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH105MAIN_FILENAME));
-                File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME));
-                File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106TEXTURES_FILENAME));
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH105MAIN_FILENAME));
+            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME));
+            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106TEXTURES_FILENAME));
+            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106WSMAPS_FILENAME));
+            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106APT_FILENAME));
+            return true;
         }
 
         public static void DeletePatch222Files()
