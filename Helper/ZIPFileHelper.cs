@@ -9,7 +9,7 @@ namespace Helper
         public int counter = 0;
         public int Percentage = 0;
 
-        public Task? ExtractArchive(string source, string destination, IProgress<ExtractionProgress> progress)
+        public Task? ExtractArchive(string source, string destination, IProgress<ProgressHelper> progress)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace Helper
                         EntrySize = entry.Size;
                         // extract to file
                         EntryFilename = entry.FileName;
-                        progress.Report(new ExtractionProgress() { Filename = EntryFilename, Count = counter, Max = archiveFile.Entries.Count });
+                        progress.Report(new ProgressHelper() { Filename = EntryFilename, Count = counter, Max = archiveFile.Entries.Count });
                         entry.Extract(Path.Combine(destination, entry.FileName));
                     }
                 });
