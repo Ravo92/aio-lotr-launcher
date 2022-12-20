@@ -568,6 +568,7 @@
             this.ResolutionX.Name = "ResolutionX";
             this.ResolutionX.Size = new System.Drawing.Size(70, 16);
             this.ResolutionX.TabIndex = 39;
+            this.ResolutionX.TabStop = false;
             this.ResolutionX.Text = "1920";
             this.ResolutionX.WordWrap = false;
             // 
@@ -578,6 +579,7 @@
             this.ResolutionY.Name = "ResolutionY";
             this.ResolutionY.Size = new System.Drawing.Size(70, 16);
             this.ResolutionY.TabIndex = 40;
+            this.ResolutionY.TabStop = false;
             this.ResolutionY.Text = "1080";
             this.ResolutionY.WordWrap = false;
             // 
