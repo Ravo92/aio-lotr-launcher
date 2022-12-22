@@ -73,7 +73,7 @@ namespace PatchLauncher
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblPatchVersion.Text = "Patch 2.22v29";
+            LblPatchVersion.Text = "Patch 2.22v30";
             LblPatchVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
             LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblPatchVersion.BackColor = Color.Transparent;

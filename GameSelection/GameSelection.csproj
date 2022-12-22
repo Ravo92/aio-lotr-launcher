@@ -8,8 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <BaseOutputPath>..\build</BaseOutputPath>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.1.6</AssemblyVersion>
-    <FileVersion>1.0.1.6</FileVersion>
+    <AssemblyVersion>1.0.1.7</AssemblyVersion>
+    <FileVersion>1.0.1.7</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

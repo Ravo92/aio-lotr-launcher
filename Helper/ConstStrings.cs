@@ -49,7 +49,7 @@ namespace Helper
 
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
-        public const int C_UPDATE_VERSION = 29;
+        public const int C_UPDATE_VERSION = 30;
         public const string C_UPDATEMD5_HASH = "a007b2ea1f87a530c1e412255e1d7896";
         public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
         public const string C_MAIN_ASSET_FILE = "asset.dat";

@@ -1587,7 +1587,7 @@ namespace PatchLauncher
                 BtnLaunch.Enabled = false;
                 BtnLaunch.Text = "PATCHING...";
 
-                await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/mbqfa8n5swxydeo/Patch_2.22v30.7z");
+                await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
                 Settings.Default.IsPatch30Downloaded = true;
                 Settings.Default.IsPatch30Installed = true;
                 PiBVersion222_5.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V30_Selected.png"));
@@ -2013,7 +2013,8 @@ namespace PatchLauncher
                     LblDownloadSpeed.Show();
                     LblFileName.Show();
 
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "TBA");
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
                 }
                 else if (XMLFileHelper.GetXMLFileVersion() > ConstStrings.C_UPDATE_VERSION)
                 {
@@ -2022,7 +2023,8 @@ namespace PatchLauncher
                     LblDownloadSpeed.Show();
                     LblFileName.Show();
 
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "TBA");
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
                 }
             }
             else
@@ -2045,7 +2047,8 @@ namespace PatchLauncher
                         Settings.Default.PatchVersionInstalled = 103;
                         Settings.Default.Save();
 
-                        await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "TBA");
+                        PatchModDetectionHelper.DeletePatch222Files();
+                        await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
                     }
                 }
             }
@@ -2220,9 +2223,9 @@ namespace PatchLauncher
 
                 await ExtractGame();
 
-                if (Settings.Default.IsPatch29Downloaded == false)
+                if (Settings.Default.IsPatch30Downloaded == false)
                 {
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP29_NAME, "https://dl.dropboxusercontent.com/s/ej1mdbuv4xi53ln/Patch_2.22v29.7z");
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
                 }
 
                 BtnOptions.Show();
@@ -2248,10 +2251,10 @@ namespace PatchLauncher
                 }
 
                 Settings.Default.IsGameInstalled = true;
-                Settings.Default.IsPatch29Downloaded = true;
-                Settings.Default.IsPatch29Installed = true;
+                Settings.Default.IsPatch30Downloaded = true;
+                Settings.Default.IsPatch30Installed = true;
                 Settings.Default.Save();
-                PiBVersion222_4.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V29_Selected.png"));
+                PiBVersion222_5.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V30_Selected.png"));
             }
             catch (Exception e)
             {
@@ -2625,10 +2628,11 @@ namespace PatchLauncher
                 BtnLaunch.Enabled = false;
                 BtnLaunch.Text = "PATCHING...";
 
-                await UpdateRoutine(ConstStrings.C_PATCHZIP29_NAME, "https://dl.dropboxusercontent.com/s/ej1mdbuv4xi53ln/Patch_2.22v29.7z");
-                Settings.Default.IsPatch29Downloaded = true;
-                Settings.Default.IsPatch29Installed = true;
-                PiBVersion222_4.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V29_Selected.png"));
+                PatchModDetectionHelper.DeletePatch222Files();
+                await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
+                Settings.Default.IsPatch30Downloaded = true;
+                Settings.Default.IsPatch30Installed = true;
+                PiBVersion222_4.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V30_Selected.png"));
 
                 Settings.Default.FirstTimeUse = false;
                 Settings.Default.Save();
@@ -2700,13 +2704,13 @@ namespace PatchLauncher
             //    _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
             //}
 
-            if (Settings.Default.IsPatch29Installed)
+            if (Settings.Default.IsPatch30Installed)
             {
-                PiBVersion222_4.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V29_Selected.png"));
+                PiBVersion222_5.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V30_Selected.png"));
             }
             else
             {
-                PiBVersion222_4.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V29.png"));
+                PiBVersion222_5.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V30.png"));
             }
         }
 
@@ -2737,6 +2741,12 @@ namespace PatchLauncher
             }
 
             if (Settings.Default.IsPatch29Installed)
+            {
+                Settings.Default.SelectedOlderPatch = true;
+                Settings.Default.Save();
+            }
+
+            if (Settings.Default.IsPatch30Installed)
             {
                 Settings.Default.SelectedOlderPatch = true;
                 Settings.Default.Save();
