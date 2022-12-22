@@ -42,7 +42,7 @@ namespace PatchLauncher
                 Settings.Default.Save();
             }
 
-            if (MD5Tools.CalculateMD5(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME)) != "fbb8967192b666cca1e97f4e06d2d6b0")
+            if (MD5Tools.CalculateMD5(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME)) == "d0e155d71fb19c44ca0c9460fd99f4ca")
             {
                 Settings.Default.IsPatch30Downloaded = false;
                 File.Delete(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME));
