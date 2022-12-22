@@ -71,7 +71,7 @@ namespace PatchLauncher
             PiBVersion222_2.Show();
             PiBVersion222_3.Show();
             PiBVersion222_4.Show();
-            PiBVersion222_5.Hide();
+            PiBVersion222_5.Show();
             PiBVersion222_6.Hide();
 
             PiBMod_1.Hide();
