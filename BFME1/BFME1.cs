@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using System.Xml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Color = System.Drawing.Color;
 
@@ -39,6 +40,12 @@ namespace PatchLauncher
                 Settings.Default.Upgrade();
                 Settings.Default.Reload();
                 Settings.Default.Save();
+            }
+
+            if (MD5Tools.CalculateMD5(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME)) != "fbb8967192b666cca1e97f4e06d2d6b0")
+            {
+                Settings.Default.IsPatch30Downloaded = false;
+                File.Delete(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME));
             }
 
             if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
@@ -1674,7 +1681,7 @@ namespace PatchLauncher
                     BtnLaunch.Enabled = false;
                     BtnLaunch.Text = "PATCHING...";
 
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/mbqfa8n5swxydeo/Patch_2.22v30.7z");
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");                                                 
 
                     Settings.Default.IsPatch30Installed = true;
                     PiBVersion222_5.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "BtnPatchSelection_222V30_Selected.png"));
