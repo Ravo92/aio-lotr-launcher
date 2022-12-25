@@ -52,9 +52,9 @@ jobs:
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}
 
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    # Upload Patch-2.22-Launcher\Patch-2.22-Launcher\build\Release\net6.0-windows folder
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: MSIX Package
-        path: ${{ env.Wap_Project_Directory }}\AppPackages
+        name: Patch Launcher Files
+        path: build\Release\net6.0-windows
