@@ -114,7 +114,18 @@ namespace Helper
         public static Font UseFont(string font, int size)
         {
             font ??= C_FONT_ALBERTUS_NOVA;
-            FontFamily _fontFamily = new(font, collection);
+            FontFamily _fontFamily;
+            try {
+              _fontFamily = new(font, collection);
+            } catch {
+              // Font name not found in collection, try to load it from the system
+              try {
+                _fontFamily = new(font);
+              } catch {
+                // Font name not found in system, use default font
+                _fontFamily = new(FontFamily.GenericSansSerif.Name);
+              }
+            }
             Font _font = new(_fontFamily, size);
             return _font;
         }
