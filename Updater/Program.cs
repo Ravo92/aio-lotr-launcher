@@ -1,5 +1,4 @@
 using PatchLauncher;
-using System.Diagnostics;
 
 namespace Updater
 {

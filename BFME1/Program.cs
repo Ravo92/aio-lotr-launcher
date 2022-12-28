@@ -2,6 +2,7 @@ using Helper;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PatchLauncher
@@ -14,6 +15,15 @@ namespace PatchLauncher
         [STAThread]
         static void Main(string[] args)
         {
+            ApplicationConfiguration.Initialize();
+
+            using Mutex mutex = new(false, Process.GetCurrentProcess().ProcessName);
+            if (!mutex.WaitOne(0, false))
+            {
+                MessageBox.Show("Launcher is already running! Please Check TrayIcon or Taskmanager first.", "Launcher already running!");
+                return;
+            }
+
             if (args[0].ToString() != "--official")
             {
                 Process _process = new();
@@ -25,8 +35,6 @@ namespace PatchLauncher
             }
             else
             {
-                ApplicationConfiguration.Initialize();
-
                 if (RegistryService.ReadRegKey("path") == "ValueNotFound" || !Directory.Exists(RegistryService.ReadRegKey("path")))
                 {
                     Properties.Settings.Default.IsGameInstalled = false;
@@ -38,7 +46,6 @@ namespace PatchLauncher
                     Properties.Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                     Properties.Settings.Default.Save();
                 }
-
                 Application.Run(new BFME1());
             }
         }
