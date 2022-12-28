@@ -75,19 +75,18 @@ namespace Helper
 
         public const string C_FONT_ALBERTUS_NOVA = "Albertus Nova";
 
-        public const string C_BUTTONSOUND_HOVER = "Helper.Sounds.btnHover.wav";
-        public const string C_BUTTONSOUND_CLICK = "Helper.Sounds.btnClick.wav";
+        public const string C_THEMESOUND_DEFAULT = "Default";
+        public const string C_THEMESOUND_GONDOR = "Gondor";
+        public const string C_THEMESOUND_ROHAN = "Rohan";
+        public const string C_THEMESOUND_ISENGARD = "Isengard";
+        public const string C_THEMESOUND_MORDOR = "Mordor";
 
-        public const string C_THEMESOUND_DEFAULT = "Helper.Sounds.music_default.wav";
-        public const string C_THEMESOUND_GONDOR = "Helper.Sounds.music_gondor.wav";
-        public const string C_THEMESOUND_ROHAN = "Helper.Sounds.music_rohan.wav";
-        public const string C_THEMESOUND_ISENGARD = "Helper.Sounds.music_isengard.wav";
-        public const string C_THEMESOUND_MORDOR = "Helper.Sounds.music_mordor.wav";
+        public const string C_IMAGE_BUTTON_NEUTRAL = "Helper.Images.btnNeutral.png";
 
-        public static readonly Image C_BUTTONIMAGE_NEUTR = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnNeutral.png"));
-        public static readonly Image C_BUTTONIMAGE_HOVER = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnHover.png"));
-        public static readonly Image C_BUTTONIMAGE_CLICK = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnClick.png"));
-        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "btnClickgr.png")); 
+        public static readonly Image C_BUTTONIMAGE_NEUTR = Properties.Resources.btnNeutral;
+        public static readonly Image C_BUTTONIMAGE_HOVER = Properties.Resources.btnHover;
+        public static readonly Image C_BUTTONIMAGE_CLICK = Properties.Resources.btnClick;
+        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Properties.Resources.btnClickgr; 
 
         public static string GameLanguage()
         {

@@ -9,7 +9,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="BackgroundMusicFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Helper.Sounds.music_default.wav</Value>
+      <Value Profile="(Default)">Default</Value>
     </Setting>
     <Setting Name="EAXSupport" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

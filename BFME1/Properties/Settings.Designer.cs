@@ -49,7 +49,7 @@ namespace PatchLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Helper.Sounds.music_default.wav")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
         public string BackgroundMusicFile {
             get {
                 return ((string)(this["BackgroundMusicFile"]));

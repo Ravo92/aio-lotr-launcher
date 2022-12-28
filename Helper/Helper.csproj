@@ -11,37 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Sounds\btnClick.wav" />
-    <None Remove="Sounds\btnHover.wav" />
-    <None Remove="Sounds\music_default.wav" />
-    <None Remove="Sounds\music_gondor.wav" />
-    <None Remove="Sounds\music_isengard.wav" />
-    <None Remove="Sounds\music_mordor.wav" />
-    <None Remove="Sounds\music_rohan.wav" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Sounds\btnClick.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sounds\btnHover.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sounds\music_default.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sounds\music_gondor.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sounds\music_isengard.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sounds\music_mordor.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sounds\music_rohan.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <Compile Remove="Images\**" />
+    <Compile Remove="Sounds\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <EmbeddedResource Remove="Sounds\**" />
+    <None Remove="Images\**" />
+    <None Remove="Sounds\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +29,62 @@
     <Compile Update="CustomLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <NativeLibs Remove="Tools\dsoal-aldrv.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <NativeLibs Remove="Tools\dsound.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Fonts\albertusmt.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\AlbertusNova.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\sachwt.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\asset.dat.103">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\dsoal-aldrv.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\dsound.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\dsound.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\MicrosoftEdgeWebview2Setup.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\Options.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\_patch106german.big">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tools\_patch222LibrariesBrutalAI.big">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

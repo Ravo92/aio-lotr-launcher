@@ -42,7 +42,7 @@ namespace PatchLauncher
             #region Styles
             //Main Form style behaviour
 
-            BackgroundImage = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "bgMap.png"));
+            BackgroundImage = Helper.Properties.Resources.bgMap;
 
             // Button-Styles
             BtnDefault.FlatAppearance.BorderSize = 0;
@@ -187,11 +187,11 @@ namespace PatchLauncher
 
             if (FlagAnisotropicTextureFiltering == "no")
             {
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (FlagAnisotropicTextureFiltering == "yes")
             {
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -203,11 +203,11 @@ namespace PatchLauncher
 
             if (FlagTerrainLighting == "no")
             {
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (FlagTerrainLighting == "yes")
             {
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -219,11 +219,11 @@ namespace PatchLauncher
 
             if (Flag3DShadows == "no")
             {
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (Flag3DShadows == "yes")
             {
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -235,11 +235,11 @@ namespace PatchLauncher
 
             if (Flag2DShadows == "no")
             {
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (Flag2DShadows == "yes")
             {
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -251,11 +251,11 @@ namespace PatchLauncher
 
             if (FlagSmoothWaterBorder == "no")
             {
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (FlagSmoothWaterBorder == "yes")
             {
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -267,11 +267,11 @@ namespace PatchLauncher
 
             if (FlagShowProps == "no")
             {
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (FlagShowProps == "yes")
             {
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -283,11 +283,11 @@ namespace PatchLauncher
 
             if (FlagShowAnimations == "no")
             {
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (FlagShowAnimations == "yes")
             {
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -299,11 +299,11 @@ namespace PatchLauncher
 
             if (FlagHeatEffects == "no")
             {
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (FlagHeatEffects == "yes")
             {
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -315,11 +315,11 @@ namespace PatchLauncher
 
             if (FlagDynamicLOD == "no")
             {
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
             }
             else if (FlagDynamicLOD == "yes")
             {
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -361,9 +361,9 @@ namespace PatchLauncher
                 FlagEAX = false;
 
             if (FlagEAXFileExists && FlagEAX)
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
 
             ChkWindowed.FlatAppearance.BorderSize = 0;
             ChkWindowed.FlatStyle = FlatStyle.Flat;
@@ -371,9 +371,9 @@ namespace PatchLauncher
             ChkWindowed.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (FlagWindowed)
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
 
             ChkBrutalAI.FlatAppearance.BorderSize = 0;
             ChkBrutalAI.FlatStyle = FlatStyle.Flat;
@@ -381,9 +381,9 @@ namespace PatchLauncher
             ChkBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
 
             #endregion
         }
@@ -395,9 +395,9 @@ namespace PatchLauncher
             FlagEAX = false;
             FlagWindowed = false;
             FlagBrutalAI = false;
-            ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
-            ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
-            ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+            ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
+            ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
+            ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
 
             FlagAnisotropicTextureFiltering = "yes";
             FlagTerrainLighting = "yes";
@@ -410,15 +410,15 @@ namespace PatchLauncher
             FlagDynamicLOD = "no";
             FlagResolution = "yes";
 
-            ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
-            ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+            ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelected;
+            ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelected;
+            Chk3DShadows.Image = Helper.Properties.Resources.chkSelected;
+            Chk2DShadows.Image = Helper.Properties.Resources.chkSelected;
+            ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelected;
+            ChkShowProps.Image = Helper.Properties.Resources.chkSelected;
+            ChkShowAnimations.Image = Helper.Properties.Resources.chkSelected;
+            ChkHeatEffects.Image = Helper.Properties.Resources.chkSelected;
+            ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
 
             ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
             ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
@@ -475,7 +475,7 @@ namespace PatchLauncher
 
                 foreach (var file in _EAXFiles)
                 {
-                    File.Copy(Path.Combine("Tools", file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
                 }
 
                 OptionIniParser.WriteKey("UseEAX3", "yes");
@@ -494,7 +494,7 @@ namespace PatchLauncher
             }
 
             if (FlagBrutalAI && ConstStrings.GameInstallPath() != null)
-                File.Copy(Path.Combine("Tools", "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
+                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
             else if (ConstStrings.GameInstallPath() != null && File.Exists(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big")))
                 File.Delete(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"));
         }
@@ -502,31 +502,31 @@ namespace PatchLauncher
         private void DontSave()
         {
             if (Settings.Default.EAXSupport)
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
 
             if (Settings.Default.StartGameWindowed)
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
 
             if (Settings.Default.UseBrutalAI)
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkEAX_Click(object sender, EventArgs e)
         {
             if (FlagEAX == true)
             {
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagEAX = false;
             }
             else
             {
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagEAX = true;
             }
         }
@@ -534,37 +534,37 @@ namespace PatchLauncher
         private void ChkEAX_MouseEnter(object sender, EventArgs e)
         {
             if (FlagEAX)
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkEAX_MouseLeave(object sender, EventArgs e)
         {
             if (FlagEAX)
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkEAX_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagEAX)
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkEAX.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkWindowed_MouseClick(object sender, MouseEventArgs e)
         {
             if (FlagWindowed == true)
             {
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagWindowed = false;
             }
             else
             {
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagWindowed = true;
             }
         }
@@ -572,38 +572,38 @@ namespace PatchLauncher
         private void ChkWindowed_MouseEnter(object sender, EventArgs e)
         {
             if (FlagWindowed)
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkWindowed_MouseLeave(object sender, EventArgs e)
         {
             if (FlagWindowed)
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkWindowed_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagWindowed)
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkWindowed.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkBrutalAI_MouseClick(object sender, MouseEventArgs e)
         {
             if (FlagBrutalAI == true)
             {
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
                 LblWarningAI.Hide();
                 FlagBrutalAI = false;
             }
             else
             {
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
                 LblWarningAI.Show();
                 FlagBrutalAI = true;
             }
@@ -612,25 +612,25 @@ namespace PatchLauncher
         private void ChkBrutalAI_MouseEnter(object sender, EventArgs e)
         {
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkBrutalAI_MouseLeave(object sender, EventArgs e)
         {
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkBrutalAI_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkBrutalAI.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         #endregion
@@ -641,12 +641,12 @@ namespace PatchLauncher
         {
             if (FlagAnisotropicTextureFiltering == "yes")
             {
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagAnisotropicTextureFiltering = "no";
             }
             else
             {
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagAnisotropicTextureFiltering = "yes";
             }
         }
@@ -654,37 +654,37 @@ namespace PatchLauncher
         private void ChkAniTextureFiltering_MouseEnter(object sender, EventArgs e)
         {
             if (FlagAnisotropicTextureFiltering == "yes")
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkAniTextureFiltering_MouseLeave(object sender, EventArgs e)
         {
             if (FlagAnisotropicTextureFiltering == "yes")
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkAniTextureFiltering_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagAnisotropicTextureFiltering == "yes")
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkAniTextureFiltering.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkTerrainLighting_Click(object sender, EventArgs e)
         {
             if (FlagTerrainLighting == "yes")
             {
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagTerrainLighting = "no";
             }
             else
             {
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagTerrainLighting = "yes";
             }
         }
@@ -692,37 +692,37 @@ namespace PatchLauncher
         private void ChkTerrainLighting_MouseEnter(object sender, EventArgs e)
         {
             if (FlagTerrainLighting == "yes")
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkTerrainLighting_MouseLeave(object sender, EventArgs e)
         {
             if (FlagTerrainLighting == "yes")
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkTerrainLighting_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagTerrainLighting == "yes")
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkTerrainLighting.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void Chk3DShadows_Click(object sender, EventArgs e)
         {
             if (Flag3DShadows == "yes")
             {
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
                 Flag3DShadows = "no";
             }
             else
             {
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
                 Flag3DShadows = "yes";
             }
         }
@@ -730,37 +730,37 @@ namespace PatchLauncher
         private void Chk3DShadows_MouseEnter(object sender, EventArgs e)
         {
             if (Flag3DShadows == "yes")
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void Chk3DShadows_MouseLeave(object sender, EventArgs e)
         {
             if (Flag3DShadows == "yes")
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkSelected;
             else
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void Chk3DShadows_MouseDown(object sender, MouseEventArgs e)
         {
             if (Flag3DShadows == "yes")
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                Chk3DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void Chk2DShadows_Click(object sender, EventArgs e)
         {
             if (Flag2DShadows == "yes")
             {
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
                 Flag2DShadows = "no";
             }
             else
             {
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
                 Flag2DShadows = "yes";
             }
         }
@@ -768,37 +768,37 @@ namespace PatchLauncher
         private void Chk2DShadows_MouseEnter(object sender, EventArgs e)
         {
             if (Flag2DShadows == "yes")
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void Chk2DShadows_MouseLeave(object sender, EventArgs e)
         {
             if (Flag2DShadows == "yes")
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkSelected;
             else
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void Chk2DShadows_MouseDown(object sender, MouseEventArgs e)
         {
             if (Flag2DShadows == "yes")
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                Chk2DShadows.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkSmoothWaterBorder_Click(object sender, EventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
             {
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagSmoothWaterBorder = "no";
             }
             else
             {
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagSmoothWaterBorder = "yes";
             }
         }
@@ -806,37 +806,37 @@ namespace PatchLauncher
         private void ChkSmoothWaterBorder_MouseEnter(object sender, EventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkSmoothWaterBorder_MouseLeave(object sender, EventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkSmoothWaterBorder_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkSmoothWaterBorder.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkShowProps_Click(object sender, EventArgs e)
         {
             if (FlagShowProps == "yes")
             {
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagShowProps = "no";
             }
             else
             {
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagShowProps = "yes";
             }
         }
@@ -844,37 +844,37 @@ namespace PatchLauncher
         private void ChkShowProps_MouseEnter(object sender, EventArgs e)
         {
             if (FlagShowProps == "yes")
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkShowProps_MouseLeave(object sender, EventArgs e)
         {
             if (FlagShowProps == "yes")
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkShowProps_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagShowProps == "yes")
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkShowProps.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkShowProps.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkShowAnimations_Click(object sender, EventArgs e)
         {
             if (FlagShowAnimations == "yes")
             {
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagShowAnimations = "no";
             }
             else
             {
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagShowAnimations = "yes";
             }
         }
@@ -882,37 +882,37 @@ namespace PatchLauncher
         private void ChkShowAnimations_MouseEnter(object sender, EventArgs e)
         {
             if (FlagShowAnimations == "yes")
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkShowAnimations_MouseLeave(object sender, EventArgs e)
         {
             if (FlagShowAnimations == "yes")
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkShowAnimations_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagShowAnimations == "yes")
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkShowAnimations.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkHeatEffects_Click(object sender, EventArgs e)
         {
             if (FlagHeatEffects == "yes")
             {
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagHeatEffects = "no";
             }
             else
             {
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagHeatEffects = "yes";
             }
         }
@@ -920,37 +920,37 @@ namespace PatchLauncher
         private void ChkHeatEffects_MouseEnter(object sender, EventArgs e)
         {
             if (FlagHeatEffects == "yes")
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkHeatEffects_MouseLeave(object sender, EventArgs e)
         {
             if (FlagHeatEffects == "yes")
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkHeatEffects_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagHeatEffects == "yes")
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkHeatEffects.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkDynamicLOD_Click(object sender, EventArgs e)
         {
             if (FlagDynamicLOD == "yes")
             {
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagDynamicLOD = "no";
             }
             else
             {
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagDynamicLOD = "yes";
             }
         }
@@ -958,25 +958,25 @@ namespace PatchLauncher
         private void ChkDynamicLOD_MouseEnter(object sender, EventArgs e)
         {
             if (FlagDynamicLOD == "yes")
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkDynamicLOD_MouseLeave(object sender, EventArgs e)
         {
             if (FlagDynamicLOD == "yes")
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelected.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelected;
             else
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselected.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkDynamicLOD_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagDynamicLOD == "yes")
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkSelectedHover.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkDynamicLOD.Image = Image.FromFile(Path.Combine(Application.StartupPath, ConstStrings.C_IMAGESFOLDER_NAME, "chkUnselectedHover.png"));
+                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
         #endregion
 

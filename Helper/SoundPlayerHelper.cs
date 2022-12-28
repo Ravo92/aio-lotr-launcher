@@ -43,7 +43,7 @@ namespace Helper
 
         public static void PlaySoundClick()
         {
-            Stream _SoundClickFile = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_BUTTONSOUND_CLICK)!;
+            Stream _SoundClickFile = Properties.Resources.Sound_btnClick;
 
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
@@ -55,7 +55,7 @@ namespace Helper
 
         public static void PlaySoundHover()
         {
-            Stream _SoundHoverFile = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_BUTTONSOUND_HOVER)!;
+            Stream _SoundHoverFile = Properties.Resources.Sound_btnHover;
 
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
@@ -71,7 +71,7 @@ namespace Helper
             {
                 case ConstStrings.C_THEMESOUND_DEFAULT:
                     {
-                        Stream _ThemeDefault = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_DEFAULT)!;
+                        Stream _ThemeDefault = Properties.Resources.music_default;
 
                         _soundPlayer.Stream = _ThemeDefault;
                         _soundPlayer.PlayLooping();
@@ -79,7 +79,7 @@ namespace Helper
                     }
                 case ConstStrings.C_THEMESOUND_GONDOR:
                     {
-                        Stream _ThemeGondor = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_GONDOR)!;
+                        Stream _ThemeGondor = Properties.Resources.music_gondor;
 
                         _soundPlayer.Stream = _ThemeGondor;
                         _soundPlayer.PlayLooping();
@@ -87,7 +87,7 @@ namespace Helper
                     }
                 case ConstStrings.C_THEMESOUND_ROHAN:
                     {
-                        Stream _ThemeRohan = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_ROHAN)!;
+                        Stream _ThemeRohan = Properties.Resources.music_rohan;
 
                         _soundPlayer.Stream = _ThemeRohan;
                         _soundPlayer.PlayLooping();
@@ -95,7 +95,7 @@ namespace Helper
                     }
                 case ConstStrings.C_THEMESOUND_ISENGARD:
                     {
-                        Stream _ThemeIsengard = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_ISENGARD)!;
+                        Stream _ThemeIsengard = Properties.Resources.music_isengard;
 
                         _soundPlayer.Stream = _ThemeIsengard;
                         _soundPlayer.PlayLooping();
@@ -103,7 +103,7 @@ namespace Helper
                     }
                 case ConstStrings.C_THEMESOUND_MORDOR:
                     {
-                        Stream _ThemeMordor = Assembly.GetExecutingAssembly().GetManifestResourceStream(ConstStrings.C_THEMESOUND_MORDOR)!;
+                        Stream _ThemeMordor = Properties.Resources.music_mordor;
 
                         _soundPlayer.Stream = _ThemeMordor;
                         _soundPlayer.PlayLooping();
