@@ -1,5 +1,7 @@
 using Helper;
+using PatchLauncher.Properties;
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -16,6 +18,14 @@ namespace PatchLauncher
         static void Main(string[] args)
         {
             ApplicationConfiguration.Initialize();
+
+            string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+            if (!File.Exists(configPath))
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.Reload();
+                Settings.Default.Save();
+            }
 
             using Mutex mutex = new(false, Process.GetCurrentProcess().ProcessName);
             if (!mutex.WaitOne(0, false))

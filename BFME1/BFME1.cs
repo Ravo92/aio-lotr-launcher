@@ -4,7 +4,6 @@ using PatchLauncher.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -32,14 +31,6 @@ namespace PatchLauncher
             InitializeComponent();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
-
-            string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
-            if (!File.Exists(configPath))
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.Reload();
-                Settings.Default.Save();
-            }
 
             if (MD5Tools.CalculateMD5(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME)) == "d0e155d71fb19c44ca0c9460fd99f4ca")
             {
