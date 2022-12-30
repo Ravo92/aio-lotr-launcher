@@ -48,6 +48,12 @@ Filename: "{app}\{#MyAppExeName}"; Flags: postinstall nowait runasoriginaluser s
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\Images"
 Type: filesandordirs; Name: "{app}\Fonts"
+Type: files; Name: "Updater.exe"
+Type: files; Name: "GameSelection.exe"
+Type: files; Name: "GameSelection.dll"
+Type: files; Name: "Updater.dll"
+Type: files; Name: "PatchLauncherBFME1.exe"
+Type: files; Name: "PatchLauncherBFME1.dll"
 
 [Code]
 procedure CurPageChanged(CurPageID: Integer);

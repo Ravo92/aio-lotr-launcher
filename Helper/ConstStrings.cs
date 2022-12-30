@@ -52,6 +52,7 @@ namespace Helper
 
         public const string C_TOOLFOLDER_NAME = "Tools";
         public const string C_PATCHFOLDER_NAME = "Patches";
+        public const string C_DOWNLOADFOLDER_NAME = "Downloads";
 
         //////////////////////////////////////////////////////////////////////////////
 

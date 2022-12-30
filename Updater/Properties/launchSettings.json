@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Updater": {
-      "commandName": "Project",
-      "workingDirectory": "..\\build\\Debug\\net6.0-windows"
-    }
-  }
-}

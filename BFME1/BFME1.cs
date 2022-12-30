@@ -288,18 +288,23 @@ namespace PatchLauncher
 
         public static void CheckForUpdates()
         {
-            AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater_Test.xml");
+            AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
             AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly()!.GetName().Version;
             AutoUpdater.ShowSkipButton = false;
-            AutoUpdater.ShowRemindLaterButton = false;
+            AutoUpdater.ShowRemindLaterButton = true;
+            AutoUpdater.LetUserSelectRemindLater = false;
+            AutoUpdater.RemindLaterTimeSpan = RemindLaterFormat.Minutes;
+            AutoUpdater.RemindLaterAt = 10;
+            AutoUpdater.UpdateFormSize = new Size(1280, 720);
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";
             AutoUpdater.AppTitle = Application.ProductName;
             AutoUpdater.ReportErrors = true;
             AutoUpdater.RunUpdateAsAdmin = true;
-            AutoUpdater.DownloadPath = Application.StartupPath + "Downloads\\";
+            AutoUpdater.DownloadPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME);
             AutoUpdater.ClearAppDirectory = false;
-            AutoUpdater.Mandatory = true;
-            AutoUpdater.UpdateMode = Mode.Forced;
+
+            string jsonPath = Path.Combine(Environment.CurrentDirectory, "AutoUpdaterSettings.json");
+            AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
         }
 
         #endregion
@@ -2129,14 +2134,14 @@ namespace PatchLauncher
                 downloader.DownloadProgressChanged += OnDownloadProgressChanged;
                 downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-                if (!File.Exists(Application.StartupPath + "\\Download\\BFME1.7z"))
+                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "BFME1.7z")))
                 {
-                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/9sn0e8w8w834ywi/BFME1.7z", Application.StartupPath + "\\Download\\BFME1.7z");
+                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/9sn0e8w8w834ywi/BFME1.7z", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "BFME1.7z"));
                 }
 
-                if (!File.Exists(Application.StartupPath + "\\Download\\LangPack_EN.7z"))
+                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "LangPack_EN.7z")))
                 {
-                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/ek7fuypqh8oysvn/LangPack_EN.7z", Application.StartupPath + "\\Download\\LangPack_EN.7z");
+                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/ek7fuypqh8oysvn/LangPack_EN.7z", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "LangPack_EN.7z"));
                 }
             }
             catch (Exception e)
@@ -2171,7 +2176,7 @@ namespace PatchLauncher
                 {
                     SetTextPercentages($"Extracting {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
                     ZIPFileHelper _ZIPFileHelper = new();
-                    await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Downloads", archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler)!;
+                    await _ZIPFileHelper.ExtractArchive(Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME, archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler)!;
                 }
             }
             catch (Exception e)
