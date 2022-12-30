@@ -86,17 +86,17 @@ namespace PatchLauncher
 
             // label-Styles
             LblDownloadSpeed.Text = "";
-            LblDownloadSpeed.Font = FontHelper.GetFont(0, 14);
+            LblDownloadSpeed.Font = FontHelper.GetFont(0, 16);;
             LblDownloadSpeed.ForeColor = Color.FromArgb(192, 145, 69);
             LblDownloadSpeed.BackColor = Color.Transparent;
 
             LblFileName.Text = "";
-            LblFileName.Font = FontHelper.GetFont(0, 14);
+            LblFileName.Font = FontHelper.GetFont(0, 16);;
             LblFileName.ForeColor = Color.FromArgb(192, 145, 69);
             LblFileName.BackColor = Color.Transparent;
 
             LblBytes.Text = "";
-            LblBytes.Font = FontHelper.GetFont(0, 14);
+            LblBytes.Font = FontHelper.GetFont(0, 16);;
             LblBytes.ForeColor = Color.FromArgb(192, 145, 69);
             LblBytes.BackColor = Color.Transparent;
 
@@ -134,28 +134,28 @@ namespace PatchLauncher
             BtnLaunch.FlatStyle = FlatStyle.Flat;
             BtnLaunch.BackColor = Color.Transparent;
             BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnLaunch.Font = FontHelper.GetFont(0, 14);
+            BtnLaunch.Font = FontHelper.GetFont(0, 16);;
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnOptions.FlatAppearance.BorderSize = 0;
             BtnOptions.FlatStyle = FlatStyle.Flat;
             BtnOptions.BackColor = Color.Transparent;
             BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnOptions.Font = FontHelper.GetFont(0, 14);
+            BtnOptions.Font = FontHelper.GetFont(0, 16);;
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnInstall.FlatAppearance.BorderSize = 0;
             BtnInstall.FlatStyle = FlatStyle.Flat;
             BtnInstall.BackColor = Color.Transparent;
             BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnInstall.Font = FontHelper.GetFont(0, 14);
+            BtnInstall.Font = FontHelper.GetFont(0, 16);;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnAdvanced.FlatAppearance.BorderSize = 0;
             BtnAdvanced.FlatStyle = FlatStyle.Flat;
             BtnAdvanced.BackColor = Color.Transparent;
             BtnAdvanced.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnAdvanced.Font = FontHelper.GetFont(0, 14);
+            BtnAdvanced.Font = FontHelper.GetFont(0, 16);;
             BtnAdvanced.ForeColor = Color.FromArgb(192, 145, 69);
 
             #endregion
@@ -1751,7 +1751,7 @@ namespace PatchLauncher
         #region ToolTip System
         public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
         {
-            Font tooltipFont = FontHelper.GetFont(0, 14);
+            Font tooltipFont = FontHelper.GetFont(0, 16);;
             e.DrawBackground();
             e.DrawBorder();
             e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
@@ -1759,7 +1759,7 @@ namespace PatchLauncher
 
         public void TooltipPopup(object sender, PopupEventArgs e)
         {
-            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), FontHelper.GetFont(0, 14));
+            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), FontHelper.GetFont(0, 16));
         }
         #endregion
 

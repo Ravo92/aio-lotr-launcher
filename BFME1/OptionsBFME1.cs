@@ -36,8 +36,6 @@ namespace PatchLauncher
         {
             InitializeComponent();
 
-            Settings.Default.SettingChanging += SettingChanging;
-
             KeyPreview = true;
 
             #region Styles
@@ -46,11 +44,25 @@ namespace PatchLauncher
             BackgroundImage = Helper.Properties.Resources.bgMap;
 
             // Button-Styles
+            BtnApply.FlatAppearance.BorderSize = 0;
+            BtnApply.FlatStyle = FlatStyle.Flat;
+            BtnApply.BackColor = Color.Transparent;
+            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnApply.Font = FontHelper.GetFont(0, 16);
+            BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
+
+            BtnCancel.FlatAppearance.BorderSize = 0;
+            BtnCancel.FlatStyle = FlatStyle.Flat;
+            BtnCancel.BackColor = Color.Transparent;
+            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnCancel.Font = FontHelper.GetFont(0, 16);
+            BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
+
             BtnDefault.FlatAppearance.BorderSize = 0;
             BtnDefault.FlatStyle = FlatStyle.Flat;
             BtnDefault.BackColor = Color.Transparent;
             BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnDefault.Font = FontHelper.GetFont(0, 14);
+            BtnDefault.Font = FontHelper.GetFont(0, 16);
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
@@ -466,6 +478,57 @@ namespace PatchLauncher
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
+        private void BtnApply_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+            Close();
+        }
+
+        private void BtnApply_MouseLeave(object sender, EventArgs e)
+        {
+            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
+        }
+
+        private void BtnApply_MouseEnter(object sender, EventArgs e)
+        {
+            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnApply.ForeColor = Color.FromArgb(100, 53, 5);
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
+        }
+
+        private void BtnApply_MouseDown(object sender, MouseEventArgs e)
+        {
+            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnCancel_MouseLeave(object sender, EventArgs e)
+        {
+            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
+        }
+
+        private void BtnCancel_MouseEnter(object sender, EventArgs e)
+        {
+            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnCancel.ForeColor = Color.FromArgb(100, 53, 5);
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
+        }
+
+        private void BtnCancel_MouseDown(object sender, MouseEventArgs e)
+        {
+            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
+        }
+
         private void SaveSettings()
         {
             //Save Launcher-Settings
@@ -520,29 +583,6 @@ namespace PatchLauncher
                 File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
             else if (ConstStrings.GameInstallPath() != null && File.Exists(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big")))
                 File.Delete(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"));
-        }
-
-        private void DontSave()
-        {
-            if (Settings.Default.EAXSupport)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
-
-            if (Settings.Default.StartGameWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
-
-            if (Settings.Default.UseBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
-
-            if (Settings.Default.ShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
         }
 
         private void ChkShowPatchesFirst_MouseClick(object sender, MouseEventArgs e)
@@ -1045,27 +1085,6 @@ namespace PatchLauncher
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
         #endregion
-
-        private void OptionsBFME1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (IsSettingChanged)
-            {
-                DialogResult dialogResult = MessageBox.Show("Do you want to save the settings made?", "Save Settings", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    SaveSettings();
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    DontSave();
-                }
-            }
-        }
-
-        void SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
-        {
-            IsSettingChanged = true;
-        }
 
         private void OptionsBFME1_KeyDown(object sender, KeyEventArgs e)
         {
