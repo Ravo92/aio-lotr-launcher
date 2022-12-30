@@ -61,6 +61,26 @@ namespace Helper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] albertusmt {
+            get {
+                object obj = ResourceManager.GetObject("albertusmt", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] AlbertusNova {
+            get {
+                object obj = ResourceManager.GetObject("AlbertusNova", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap BFME1 {
@@ -702,6 +722,16 @@ namespace Helper.Properties {
             get {
                 object obj = ResourceManager.GetObject("Mute", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] sachwt {
+            get {
+                object obj = ResourceManager.GetObject("sachwt", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

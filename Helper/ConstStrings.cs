@@ -1,15 +1,18 @@
-﻿using System.Drawing.Text;
+﻿using Helper.Properties;
+using System.Drawing.Text;
+using System.Runtime.InteropServices;
 
 namespace Helper
 {
     public static class ConstStrings
     {
         private static readonly PrivateFontCollection collection = new();
+
         static ConstStrings()
         {
-            collection.AddFontFile(Path.Combine(Application.StartupPath, C_FONTSFOLDER_NAME, "albertusmt.otf"));
-            collection.AddFontFile(Path.Combine(Application.StartupPath, C_FONTSFOLDER_NAME, "AlbertusNova.ttf"));
-            collection.AddFontFile(Path.Combine(Application.StartupPath, C_FONTSFOLDER_NAME, "sachwt.ttf"));
+            AddFontFromResource(collection, C_FONT_ALBERTUSMT);
+            AddFontFromResource(collection, C_FONT_ALBERTUSNOVA);
+            AddFontFromResource(collection, C_FONT_SACHWT);
         }
 
         public const string C_GAMEFOLDER_NAME_EN = "The Battle for Middle-earth (tm)";
@@ -83,10 +86,14 @@ namespace Helper
 
         public const string C_IMAGE_BUTTON_NEUTRAL = "Helper.Images.btnNeutral.png";
 
-        public static readonly Image C_BUTTONIMAGE_NEUTR = Properties.Resources.btnNeutral;
-        public static readonly Image C_BUTTONIMAGE_HOVER = Properties.Resources.btnHover;
-        public static readonly Image C_BUTTONIMAGE_CLICK = Properties.Resources.btnClick;
-        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Properties.Resources.btnClickgr; 
+        public static readonly Image C_BUTTONIMAGE_NEUTR = Resources.btnNeutral;
+        public static readonly Image C_BUTTONIMAGE_HOVER = Resources.btnHover;
+        public static readonly Image C_BUTTONIMAGE_CLICK = Resources.btnClick;
+        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Resources.btnClickgr;
+
+        public static readonly byte[] C_FONT_ALBERTUSMT = Resources.albertusmt;
+        public static readonly byte[] C_FONT_ALBERTUSNOVA = Resources.AlbertusNova;
+        public static readonly byte[] C_FONT_SACHWT = Resources.sachwt;
 
         public static string GameLanguage()
         {
@@ -108,6 +115,13 @@ namespace Helper
             {
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), C_APPDATAFOLDER_NAME_EN);
             }
+        }
+
+        private static void AddFontFromResource(PrivateFontCollection privateFontCollection, byte[] fontFileFromResource)
+        {
+            IntPtr fontData = Marshal.AllocCoTaskMem(fontFileFromResource.Length);
+            Marshal.Copy(fontFileFromResource, 0, fontData, fontFileFromResource.Length);
+            privateFontCollection.AddMemoryFont(fontData, fontFileFromResource.Length);
         }
 
         public static Font UseFont(string font, int size)
