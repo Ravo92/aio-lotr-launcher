@@ -19,21 +19,21 @@ namespace PatchLauncher
             BtnOpenAppDataFolder.FlatStyle = FlatStyle.Flat;
             BtnOpenAppDataFolder.BackColor = Color.Transparent;
             BtnOpenAppDataFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnOpenAppDataFolder.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnOpenAppDataFolder.Font = FontHelper.GetFont(0, 14);
             BtnOpenAppDataFolder.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnGameInstallFolder.FlatAppearance.BorderSize = 0;
             BtnGameInstallFolder.FlatStyle = FlatStyle.Flat;
             BtnGameInstallFolder.BackColor = Color.Transparent;
             BtnGameInstallFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnGameInstallFolder.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnGameInstallFolder.Font = FontHelper.GetFont(0, 14);
             BtnGameInstallFolder.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnLauncherFolder.FlatAppearance.BorderSize = 0;
             BtnLauncherFolder.FlatStyle = FlatStyle.Flat;
             BtnLauncherFolder.BackColor = Color.Transparent;
             BtnLauncherFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnLauncherFolder.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnLauncherFolder.Font = FontHelper.GetFont(0, 14);
             BtnLauncherFolder.ForeColor = Color.FromArgb(192, 145, 69);
         }
 

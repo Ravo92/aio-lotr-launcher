@@ -334,5 +334,17 @@ namespace PatchLauncher.Properties {
                 this["IsPatchModsShown"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPatch106Downloaded {
+            get {
+                return ((bool)(this["IsPatch106Downloaded"]));
+            }
+            set {
+                this["IsPatch106Downloaded"] = value;
+            }
+        }
     }
 }

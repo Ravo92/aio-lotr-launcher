@@ -14,7 +14,7 @@ namespace PatchLauncher
             InitializeComponent();
 
             LblChooseDir.Text = "Where do you want to install the game \"The Battle for Middle-earth\"?";
-            LblChooseDir.Font = ConstStrings.UseFont("Albertus Nova", 12);
+            LblChooseDir.Font = FontHelper.GetFont(0, 12);
             LblChooseDir.ForeColor = Color.FromArgb(192, 145, 69);
             LblChooseDir.BackColor = Color.Transparent;
 
@@ -22,18 +22,18 @@ namespace PatchLauncher
             BtnChoose.FlatStyle = FlatStyle.Flat;
             BtnChoose.BackColor = Color.Transparent;
             BtnChoose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnChoose.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnChoose.Font = FontHelper.GetFont(0, 14);
             BtnChoose.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnAccept.FlatAppearance.BorderSize = 0;
             BtnAccept.FlatStyle = FlatStyle.Flat;
             BtnAccept.BackColor = Color.Transparent;
             BtnAccept.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnAccept.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnAccept.Font = FontHelper.GetFont(0, 14);
             BtnAccept.ForeColor = Color.FromArgb(192, 145, 69);
 
             TxtInstallPath.BackColor = Color.Black;
-            TxtInstallPath.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            TxtInstallPath.Font = FontHelper.GetFont(0, 14);
             TxtInstallPath.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (Properties.Settings.Default.GameInstallPath != "")

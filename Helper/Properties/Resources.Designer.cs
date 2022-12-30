@@ -63,19 +63,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] albertusmt {
+        public static byte[] AlbertusMT {
             get {
-                object obj = ResourceManager.GetObject("albertusmt", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] AlbertusNova {
-            get {
-                object obj = ResourceManager.GetObject("AlbertusNova", resourceCulture);
+                object obj = ResourceManager.GetObject("AlbertusMT", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -316,6 +306,16 @@ namespace Helper.Properties {
         public static System.Drawing.Bitmap BtnPatchSelection_106 {
             get {
                 object obj = ResourceManager.GetObject("BtnPatchSelection_106", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_106_Download {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_106_Download", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

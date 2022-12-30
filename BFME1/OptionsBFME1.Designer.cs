@@ -173,11 +173,12 @@
             // LblPatchVersion
             // 
             this.LblPatchVersion.AutoSize = true;
-            this.LblPatchVersion.Location = new System.Drawing.Point(991, 7);
+            this.LblPatchVersion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblPatchVersion.Location = new System.Drawing.Point(12, 60);
             this.LblPatchVersion.Name = "LblPatchVersion";
-            this.LblPatchVersion.Size = new System.Drawing.Size(43, 15);
+            this.LblPatchVersion.Size = new System.Drawing.Size(103, 21);
             this.LblPatchVersion.TabIndex = 13;
-            this.LblPatchVersion.Text = "Theme";
+            this.LblPatchVersion.Text = "Patch2.22v30";
             // 
             // PibBorderGameOptions
             // 
@@ -605,11 +606,12 @@
             // LblLauncherVersion
             // 
             this.LblLauncherVersion.AutoSize = true;
-            this.LblLauncherVersion.Location = new System.Drawing.Point(12, 9);
+            this.LblLauncherVersion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblLauncherVersion.Location = new System.Drawing.Point(12, 10);
             this.LblLauncherVersion.Name = "LblLauncherVersion";
-            this.LblLauncherVersion.Size = new System.Drawing.Size(43, 15);
+            this.LblLauncherVersion.Size = new System.Drawing.Size(182, 21);
             this.LblLauncherVersion.TabIndex = 43;
-            this.LblLauncherVersion.Text = "Theme";
+            this.LblLauncherVersion.Text = "Launcher Version: 1.0.1.X";
             // 
             // OptionsBFME1
             // 

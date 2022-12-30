@@ -49,52 +49,52 @@ namespace PatchLauncher
             BtnDefault.FlatStyle = FlatStyle.Flat;
             BtnDefault.BackColor = Color.Transparent;
             BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnDefault.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            BtnDefault.Font = FontHelper.GetFont(0, 14);
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
             LblEAX.Text = "Activate support for EAX-Sound";
-            LblEAX.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblEAX.Font = FontHelper.GetFont(0, 16);
             LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
             LblEAX.BackColor = Color.Transparent;
 
             LblLauncherSettings.Text = "Launcher Settings";
-            LblLauncherSettings.Font = ConstStrings.UseFont("SachaWynterTight", 16);
+            LblLauncherSettings.Font = FontHelper.GetFont(1, 16);
             LblLauncherSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblLauncherSettings.BackColor = Color.Transparent;
 
             LblGameSettings.Text = "Game Settings";
-            LblGameSettings.Font = ConstStrings.UseFont("SachaWynterTight", 16);
+            LblGameSettings.Font = FontHelper.GetFont(1, 16);
             LblGameSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblGameSettings.BackColor = Color.Transparent;
 
             LblOptions.Text = "Settings";
-            LblOptions.Font = ConstStrings.UseFont("SachaWynterTight", 20);
+            LblOptions.Font = FontHelper.GetFont(1, 20);
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblPatchVersion.Text = "Patch 2.22v30";
-            LblPatchVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
+            LblPatchVersion.Text = "Game Version: \n" + (Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "") + Settings.Default.PatchVersionInstalled.ToString();
+            LblPatchVersion.Font = FontHelper.GetFont(0, 12);
             LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblPatchVersion.BackColor = Color.Transparent;
 
             LblLauncherVersion.Text = "Launcher Version: \n" + Assembly.GetEntryAssembly()!.GetName().Version;
-            LblLauncherVersion.Font = ConstStrings.UseFont("Albertus Nova", 11);
+            LblLauncherVersion.Font = FontHelper.GetFont(0, 12);
             LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblLauncherVersion.BackColor = Color.Transparent;
 
             LblWindowed.Text = "Launch game in windowed mode";
-            LblWindowed.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblWindowed.Font = FontHelper.GetFont(0, 16);
             LblWindowed.ForeColor = Color.FromArgb(192, 145, 69);
             LblWindowed.BackColor = Color.Transparent;
 
             LblBrutalAI.Text = "Use the experimental brutal AI";
-            LblBrutalAI.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblBrutalAI.Font = FontHelper.GetFont(0, 16);
             LblBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
             LblBrutalAI.BackColor = Color.Transparent;
 
             LblWarningAI.Text = "";
-            LblWarningAI.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblWarningAI.Font = FontHelper.GetFont(0, 16);
             LblWarningAI.ForeColor = Color.Red;
             LblWarningAI.BackColor = Color.Transparent;
 
@@ -109,57 +109,57 @@ namespace PatchLauncher
             }
 
             LblAniTextureFiltering.Text = "Anisotropic Texture Filtering";
-            LblAniTextureFiltering.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblAniTextureFiltering.Font = FontHelper.GetFont(0, 16);
             LblAniTextureFiltering.ForeColor = Color.FromArgb(192, 145, 69);
             LblAniTextureFiltering.BackColor = Color.Transparent;
 
             LblTerrainLighting.Text = "Terrain Lighting";
-            LblTerrainLighting.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblTerrainLighting.Font = FontHelper.GetFont(0, 16);
             LblTerrainLighting.ForeColor = Color.FromArgb(192, 145, 69);
             LblTerrainLighting.BackColor = Color.Transparent;
 
             Lbl3DShadows.Text = "3D Shadows";
-            Lbl3DShadows.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            Lbl3DShadows.Font = FontHelper.GetFont(0, 16);
             Lbl3DShadows.ForeColor = Color.FromArgb(192, 145, 69);
             Lbl3DShadows.BackColor = Color.Transparent;
 
             Lbl2DShadows.Text = "2D Shadows";
-            Lbl2DShadows.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            Lbl2DShadows.Font = FontHelper.GetFont(0, 16);
             Lbl2DShadows.ForeColor = Color.FromArgb(192, 145, 69);
             Lbl2DShadows.BackColor = Color.Transparent;
 
             LblSmoothWaterBorder.Text = "Smooth Water Border";
-            LblSmoothWaterBorder.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblSmoothWaterBorder.Font = FontHelper.GetFont(0, 16);
             LblSmoothWaterBorder.ForeColor = Color.FromArgb(192, 145, 69);
             LblSmoothWaterBorder.BackColor = Color.Transparent;
 
             LblShowProps.Text = "Show Props";
-            LblShowProps.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblShowProps.Font = FontHelper.GetFont(0, 16);
             LblShowProps.ForeColor = Color.FromArgb(192, 145, 69);
             LblShowProps.BackColor = Color.Transparent;
 
             LblShowAnimations.Text = "Show Animations";
-            LblShowAnimations.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblShowAnimations.Font = FontHelper.GetFont(0, 16);
             LblShowAnimations.ForeColor = Color.FromArgb(192, 145, 69);
             LblShowAnimations.BackColor = Color.Transparent;
 
             LblHeatEffects.Text = "Heat Effects";
-            LblHeatEffects.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblHeatEffects.Font = FontHelper.GetFont(0, 16);
             LblHeatEffects.ForeColor = Color.FromArgb(192, 145, 69);
             LblHeatEffects.BackColor = Color.Transparent;
 
             LblDynamicLOD.Text = "Dynamic Level of Detail";
-            LblDynamicLOD.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblDynamicLOD.Font = FontHelper.GetFont(0, 16);
             LblDynamicLOD.ForeColor = Color.FromArgb(192, 145, 69);
             LblDynamicLOD.BackColor = Color.Transparent;
 
             LblResolutionX.Text = "X";
-            LblResolutionX.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblResolutionX.Font = FontHelper.GetFont(0, 16);
             LblResolutionX.ForeColor = Color.FromArgb(192, 145, 69);
             LblResolutionX.BackColor = Color.Transparent;
 
             LblResolution.Text = "Set Game Resolution";
-            LblResolution.Font = ConstStrings.UseFont("Albertus Nova", 16);
+            LblResolution.Font = FontHelper.GetFont(0, 16);
             LblResolution.ForeColor = Color.FromArgb(192, 145, 69);
             LblResolution.BackColor = Color.Transparent;
 
@@ -325,11 +325,11 @@ namespace PatchLauncher
             ///////////////////////////////////////////////////////////////////////////////////////////
           
             ResolutionX.BackColor = Color.Black;
-            ResolutionX.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            ResolutionX.Font = FontHelper.GetFont(0, 14);
             ResolutionX.ForeColor = Color.FromArgb(192, 145, 69);
 
             ResolutionY.BackColor = Color.Black;
-            ResolutionY.Font = ConstStrings.UseFont("Albertus Nova", 14);
+            ResolutionY.Font = FontHelper.GetFont(0, 14);
             ResolutionY.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (FlagResolution != null)

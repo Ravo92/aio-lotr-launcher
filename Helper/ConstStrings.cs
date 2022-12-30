@@ -1,20 +1,9 @@
 ﻿using Helper.Properties;
-using System.Drawing.Text;
-using System.Runtime.InteropServices;
 
 namespace Helper
 {
     public static class ConstStrings
     {
-        private static readonly PrivateFontCollection collection = new();
-
-        static ConstStrings()
-        {
-            AddFontFromResource(collection, C_FONT_ALBERTUSMT);
-            AddFontFromResource(collection, C_FONT_ALBERTUSNOVA);
-            AddFontFromResource(collection, C_FONT_SACHWT);
-        }
-
         public const string C_GAMEFOLDER_NAME_EN = "The Battle for Middle-earth (tm)";
         public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
         public const string C_EAFOLDER_NAME = "EA Games";
@@ -76,24 +65,16 @@ namespace Helper
 
         //////////////////////////////////////////////////////////////////////////////
 
-        public const string C_FONT_ALBERTUS_NOVA = "Albertus Nova";
-
         public const string C_THEMESOUND_DEFAULT = "Default";
         public const string C_THEMESOUND_GONDOR = "Gondor";
         public const string C_THEMESOUND_ROHAN = "Rohan";
         public const string C_THEMESOUND_ISENGARD = "Isengard";
         public const string C_THEMESOUND_MORDOR = "Mordor";
 
-        public const string C_IMAGE_BUTTON_NEUTRAL = "Helper.Images.btnNeutral.png";
-
         public static readonly Image C_BUTTONIMAGE_NEUTR = Resources.btnNeutral;
         public static readonly Image C_BUTTONIMAGE_HOVER = Resources.btnHover;
         public static readonly Image C_BUTTONIMAGE_CLICK = Resources.btnClick;
         public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Resources.btnClickgr;
-
-        public static readonly byte[] C_FONT_ALBERTUSMT = Resources.albertusmt;
-        public static readonly byte[] C_FONT_ALBERTUSNOVA = Resources.AlbertusNova;
-        public static readonly byte[] C_FONT_SACHWT = Resources.sachwt;
 
         public static string GameLanguage()
         {
@@ -115,32 +96,6 @@ namespace Helper
             {
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), C_APPDATAFOLDER_NAME_EN);
             }
-        }
-
-        private static void AddFontFromResource(PrivateFontCollection privateFontCollection, byte[] fontFileFromResource)
-        {
-            IntPtr fontData = Marshal.AllocCoTaskMem(fontFileFromResource.Length);
-            Marshal.Copy(fontFileFromResource, 0, fontData, fontFileFromResource.Length);
-            privateFontCollection.AddMemoryFont(fontData, fontFileFromResource.Length);
-        }
-
-        public static Font UseFont(string font, int size)
-        {
-            font ??= C_FONT_ALBERTUS_NOVA;
-            FontFamily _fontFamily;
-            try {
-              _fontFamily = new(font, collection);
-            } catch {
-              // Font name not found in collection, try to load it from the system
-              try {
-                _fontFamily = new(font);
-              } catch {
-                // Font name not found in system, use default font
-                _fontFamily = new(FontFamily.GenericSansSerif.Name);
-              }
-            }
-            Font _font = new(_fontFamily, size);
-            return _font;
         }
     }
 }
