@@ -67,6 +67,8 @@
             this.LblResolutionX = new System.Windows.Forms.Label();
             this.LblResolution = new System.Windows.Forms.Label();
             this.LblLauncherVersion = new System.Windows.Forms.Label();
+            this.LblShowPatchesFirst = new System.Windows.Forms.Label();
+            this.ChkShowPatchesFirst = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).BeginInit();
@@ -613,12 +615,46 @@
             this.LblLauncherVersion.TabIndex = 43;
             this.LblLauncherVersion.Text = "Launcher Version: 1.0.1.X";
             // 
+            // LblShowPatchesFirst
+            // 
+            this.LblShowPatchesFirst.AutoSize = true;
+            this.LblShowPatchesFirst.Location = new System.Drawing.Point(75, 330);
+            this.LblShowPatchesFirst.Name = "LblShowPatchesFirst";
+            this.LblShowPatchesFirst.Size = new System.Drawing.Size(43, 15);
+            this.LblShowPatchesFirst.TabIndex = 45;
+            this.LblShowPatchesFirst.Text = "Theme";
+            // 
+            // ChkShowPatchesFirst
+            // 
+            this.ChkShowPatchesFirst.BackColor = System.Drawing.Color.Black;
+            this.ChkShowPatchesFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkShowPatchesFirst.FlatAppearance.BorderSize = 0;
+            this.ChkShowPatchesFirst.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkShowPatchesFirst.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkShowPatchesFirst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkShowPatchesFirst.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkShowPatchesFirst.Location = new System.Drawing.Point(35, 330);
+            this.ChkShowPatchesFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkShowPatchesFirst.Name = "ChkShowPatchesFirst";
+            this.ChkShowPatchesFirst.Size = new System.Drawing.Size(29, 29);
+            this.ChkShowPatchesFirst.TabIndex = 44;
+            this.ChkShowPatchesFirst.TabStop = false;
+            this.ChkShowPatchesFirst.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkShowPatchesFirst.UseMnemonic = false;
+            this.ChkShowPatchesFirst.UseVisualStyleBackColor = false;
+            this.ChkShowPatchesFirst.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ChkShowPatchesFirst_MouseClick);
+            this.ChkShowPatchesFirst.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkShowPatchesFirst_MouseDown);
+            this.ChkShowPatchesFirst.MouseEnter += new System.EventHandler(this.ChkShowPatchesFirst_MouseEnter);
+            this.ChkShowPatchesFirst.MouseLeave += new System.EventHandler(this.ChkShowPatchesFirst_MouseLeave);
+            // 
             // OptionsBFME1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1152, 798);
+            this.Controls.Add(this.LblShowPatchesFirst);
+            this.Controls.Add(this.ChkShowPatchesFirst);
             this.Controls.Add(this.LblLauncherVersion);
             this.Controls.Add(this.BtnDefault);
             this.Controls.Add(this.LblResolution);
@@ -712,5 +748,7 @@
         private System.Windows.Forms.Label LblResolutionX;
         private System.Windows.Forms.Label LblResolution;
         private System.Windows.Forms.Label LblLauncherVersion;
+        private System.Windows.Forms.Label LblShowPatchesFirst;
+        private System.Windows.Forms.Button ChkShowPatchesFirst;
     }
 }

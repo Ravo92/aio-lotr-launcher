@@ -182,70 +182,57 @@ namespace PatchLauncher
             PiBTwitch.Image = Helper.Properties.Resources.twitch;
             PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
             PiBVersion103.Image = Helper.Properties.Resources.BtnPatchSelection_103;
-            PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
-
-            if (Settings.Default.PlayBackgroundMusic)
-            {
-                PibMute.Image = Helper.Properties.Resources.Unmute;
-            }
-            else
-            {
-                PibMute.Image = Helper.Properties.Resources.Mute;
-            }
-
-            if (Settings.Default.IsPatch26Installed)
-            {
-                PiBVersion222_1.Image = Helper.Properties.Resources.BtnPatchSelection_222V26_Selected;
-            }
-            else
-            {
-                PiBVersion222_1.Image = Helper.Properties.Resources.BtnPatchSelection_222V26;
-            }
-
-            if (Settings.Default.IsPatch27Installed)
-            {
-                PiBVersion222_2.Image = Helper.Properties.Resources.BtnPatchSelection_222V27_Selected;
-            }
-            else
-            {
-                PiBVersion222_2.Image = Helper.Properties.Resources.BtnPatchSelection_222V27;
-            }
-
-            if (Settings.Default.IsPatch28Installed)
-            {
-                PiBVersion222_3.Image = Helper.Properties.Resources.BtnPatchSelection_222V28_Selected;
-            }
-            else
-            {
-                PiBVersion222_3.Image = Helper.Properties.Resources.BtnPatchSelection_222V28;
-            }
-
-            if (Settings.Default.IsPatch29Installed)
-            {
-                PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29_Selected;
-            }
-            else
-            {
-                PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29;
-            }
 
             if (Settings.Default.IsPatch30Installed)
-            {
-                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
-            }
+                Settings.Default.PatchVersionInstalled = 30; 
+
+            if (Settings.Default.PlayBackgroundMusic)
+                PibMute.Image = Helper.Properties.Resources.Unmute;
             else
-            {
+                PibMute.Image = Helper.Properties.Resources.Mute;
+
+
+            if (Settings.Default.IsPatch106Installed)
+                PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Selected;
+            else
+                PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
+
+
+            if (Settings.Default.IsPatch26Installed)
+                PiBVersion222_1.Image = Helper.Properties.Resources.BtnPatchSelection_222V26_Selected;
+            else
+                PiBVersion222_1.Image = Helper.Properties.Resources.BtnPatchSelection_222V26;
+
+
+            if (Settings.Default.IsPatch27Installed)
+                PiBVersion222_2.Image = Helper.Properties.Resources.BtnPatchSelection_222V27_Selected;
+            else
+                PiBVersion222_2.Image = Helper.Properties.Resources.BtnPatchSelection_222V27;
+
+
+            if (Settings.Default.IsPatch28Installed)
+                PiBVersion222_3.Image = Helper.Properties.Resources.BtnPatchSelection_222V28_Selected;
+            else
+                PiBVersion222_3.Image = Helper.Properties.Resources.BtnPatchSelection_222V28;
+
+
+            if (Settings.Default.IsPatch29Installed)
+                PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29_Selected;
+            else
+                PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29;
+
+
+            if (Settings.Default.IsPatch30Installed)
+                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
+            else
                 PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30;
-            }
+
 
             if (Settings.Default.IsPatch31Installed)
-            {
                 PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Selected;
-            }
             else
-            {
                 PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31;
-            }
+
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -736,6 +723,29 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch106Installed = false;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
+
+                    if (Settings.Default.IsPatch26Downloaded)
+                        PiBVersion222_1.Image = Helper.Properties.Resources.BtnPatchSelection_222V26;
+                    else
+                        PiBVersion222_1.Image = Helper.Properties.Resources.BtnPatchSelection_222V26_Download;
+
+
+                    if (Settings.Default.IsPatch27Downloaded)
+                        PiBVersion222_2.Image = Helper.Properties.Resources.BtnPatchSelection_222V27;
+                    else
+                        PiBVersion222_2.Image = Helper.Properties.Resources.BtnPatchSelection_222V27_Download;
+
+
+                    if (Settings.Default.IsPatch28Downloaded)
+                        PiBVersion222_3.Image = Helper.Properties.Resources.BtnPatchSelection_222V28;
+                    else
+                        PiBVersion222_3.Image = Helper.Properties.Resources.BtnPatchSelection_222V28_Download;
+
+
+                    if (Settings.Default.IsPatch29Downloaded)
+                        PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29;
+                    else
+                        PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29_Download;
                 }
                 else
                 {
@@ -1201,6 +1211,7 @@ namespace PatchLauncher
             {
                 if (Settings.Default.IsPatch28Installed)
                 {
+                    Settings.Default.PatchVersionInstalled = 106;
                     Settings.Default.IsPatch28Installed = false;
                     PiBVersion222_3.Image = Helper.Properties.Resources.BtnPatchSelection_222V28;
                 }
@@ -1309,6 +1320,7 @@ namespace PatchLauncher
                 PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29_Selected;
                 PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
+                Settings.Default.PatchVersionInstalled = 29;
                 Settings.Default.IsPatch29Downloaded = true;
                 Settings.Default.IsPatch29Installed = true;
 
@@ -1351,6 +1363,7 @@ namespace PatchLauncher
             {
                 if (Settings.Default.IsPatch29Installed)
                 {
+                    Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch29Installed = false;
                     PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29;
                 }
@@ -1370,6 +1383,7 @@ namespace PatchLauncher
                     PiBVersion222_4.Image = Helper.Properties.Resources.BtnPatchSelection_222V29_Selected;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
+                    Settings.Default.PatchVersionInstalled = 29;
                     Settings.Default.IsPatch29Downloaded = true;
                     Settings.Default.IsPatch29Installed = true;
 
@@ -1451,6 +1465,7 @@ namespace PatchLauncher
 
                 await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
 
+                Settings.Default.PatchVersionInstalled = 30;
                 PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
                 PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
@@ -1496,6 +1511,7 @@ namespace PatchLauncher
             {
                 if (Settings.Default.IsPatch30Installed)
                 {
+                    Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch30Installed = false;
                     PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30;
                 }
@@ -1515,6 +1531,7 @@ namespace PatchLauncher
                     PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
+                    Settings.Default.PatchVersionInstalled = 30;
                     Settings.Default.IsPatch30Downloaded = true;
                     Settings.Default.IsPatch30Installed = true;
 
@@ -1599,6 +1616,7 @@ namespace PatchLauncher
                 PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Selected;
                 PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
+                Settings.Default.PatchVersionInstalled = 31;
                 Settings.Default.IsPatch31Downloaded = true;
                 Settings.Default.IsPatch31Installed = true;
 
@@ -1637,6 +1655,7 @@ namespace PatchLauncher
             {
                 if (Settings.Default.IsPatch31Installed)
                 {
+                    Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch31Installed = false;
                     PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31;
                 }
@@ -1656,6 +1675,7 @@ namespace PatchLauncher
                     PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Selected;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
+                    Settings.Default.PatchVersionInstalled = 31;
                     Settings.Default.IsPatch31Downloaded = true;
                     Settings.Default.IsPatch31Installed = true;
 
@@ -2243,13 +2263,50 @@ namespace PatchLauncher
         private void TmrPatchNotes_Tick(object sender, EventArgs e)
         {
             TmrPatchNotes.Stop();
-            Wv2Patchnotes.Show();
-            PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
-            PiBArrow.Show();
             PibLoadingRing.Hide();
             PibLoadingBorder.Hide();
             LblPatchNotes.Hide();
+
+            PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
+            PiBArrow.Show();
+
+            Wv2Patchnotes.Show();
             PnlPlaceholder.Show();
+
+            if (Settings.Default.ShowPatchesFirst)
+            {
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
+                PiBArrow.BackColor = Color.Transparent;
+                PnlPlaceholder.BackgroundImage = Helper.Properties.Resources.borderRectangleModPanel;
+                PnlPlaceholder.BackColor = Color.Transparent;
+                LblInstalledPatches.BackColor = Color.Transparent;
+                LblModExplanation.BackColor = Color.Transparent;
+                LblModExplanation.Show();
+                LblInstalledMods.Show();
+                LblInstalledPatches.Show();
+
+                PiBArrow.Left = 1212;
+                Wv2Patchnotes.Left = 1300;
+
+                Settings.Default.IsPatchModsShown = true;
+                Settings.Default.Save();
+            }
+            else
+            {
+                PnlPlaceholder.BackColor = Color.FromArgb(24, 24, 24);
+                PnlPlaceholder.BackgroundImage = null;
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
+                PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
+                LblModExplanation.Hide();
+                LblInstalledMods.Hide();
+                LblInstalledPatches.Hide();
+
+                PiBArrow.Left = 14;
+                Wv2Patchnotes.Left = 12;
+
+                Settings.Default.IsPatchModsShown = false;
+                Settings.Default.Save();
+            }
         }
 
         private void TmrAnimation_Tick(object sender, EventArgs e)
@@ -2293,7 +2350,6 @@ namespace PatchLauncher
 
                 Settings.Default.IsPatchModsShown = true;
                 Settings.Default.Save();
-
             }
             else
             {
@@ -2326,7 +2382,6 @@ namespace PatchLauncher
                     }
                 }
             }
-
         }
 
         private async void BFME1_Shown(object sender, EventArgs e)

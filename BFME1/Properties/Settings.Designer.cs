@@ -346,5 +346,17 @@ namespace PatchLauncher.Properties {
                 this["IsPatch106Downloaded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowPatchesFirst {
+            get {
+                return ((bool)(this["ShowPatchesFirst"]));
+            }
+            set {
+                this["ShowPatchesFirst"] = value;
+            }
+        }
     }
 }

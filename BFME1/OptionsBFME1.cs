@@ -18,6 +18,7 @@ namespace PatchLauncher
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
         bool IsSettingChanged = true;
+        bool FlagShowPatchesFirst = Settings.Default.ShowPatchesFirst;
 
         //Game Settings
         string FlagAnisotropicTextureFiltering = "yes";
@@ -73,15 +74,15 @@ namespace PatchLauncher
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblPatchVersion.Text = "Game Version: \n" + (Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "") + Settings.Default.PatchVersionInstalled.ToString();
-            LblPatchVersion.Font = FontHelper.GetFont(0, 12);
-            LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
-            LblPatchVersion.BackColor = Color.Transparent;
-
-            LblLauncherVersion.Text = "Launcher Version: \n" + Assembly.GetEntryAssembly()!.GetName().Version;
+            LblLauncherVersion.Text = "Active Launcher Version: \n" + Assembly.GetEntryAssembly()!.GetName().Version;
             LblLauncherVersion.Font = FontHelper.GetFont(0, 12);
             LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblLauncherVersion.BackColor = Color.Transparent;
+
+            LblPatchVersion.Text = "Active Game Version: \n" + (Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "") + Settings.Default.PatchVersionInstalled.ToString();
+            LblPatchVersion.Font = FontHelper.GetFont(0, 12);
+            LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
+            LblPatchVersion.BackColor = Color.Transparent;
 
             LblWindowed.Text = "Launch game in windowed mode";
             LblWindowed.Font = FontHelper.GetFont(0, 16);
@@ -98,6 +99,11 @@ namespace PatchLauncher
             LblWarningAI.ForeColor = Color.Red;
             LblWarningAI.BackColor = Color.Transparent;
 
+            LblShowPatchesFirst.Text = "Show Patch/Mod-Selection first at startup";
+            LblShowPatchesFirst.Font = FontHelper.GetFont(0, 16);
+            LblShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
+            LblShowPatchesFirst.BackColor = Color.Transparent;
+
             if (FlagBrutalAI)
             {
                 LblWarningAI.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
@@ -107,6 +113,8 @@ namespace PatchLauncher
             {
                 LblWarningAI.Hide();
             }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
 
             LblAniTextureFiltering.Text = "Anisotropic Texture Filtering";
             LblAniTextureFiltering.Font = FontHelper.GetFont(0, 16);
@@ -162,6 +170,8 @@ namespace PatchLauncher
             LblResolution.Font = FontHelper.GetFont(0, 16);
             LblResolution.ForeColor = Color.FromArgb(192, 145, 69);
             LblResolution.BackColor = Color.Transparent;
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
 
             //Checkbox-Styles
             if (Settings.Default.IsGameInstalled == true)
@@ -385,6 +395,16 @@ namespace PatchLauncher
             else
                 ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
 
+            ChkShowPatchesFirst.FlatAppearance.BorderSize = 0;
+            ChkShowPatchesFirst.FlatStyle = FlatStyle.Flat;
+            ChkShowPatchesFirst.BackColor = Color.Transparent;
+            ChkShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
+
+            if (FlagShowPatchesFirst)
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
+            else
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
+
             #endregion
         }
 
@@ -395,9 +415,11 @@ namespace PatchLauncher
             FlagEAX = false;
             FlagWindowed = false;
             FlagBrutalAI = false;
+            FlagShowPatchesFirst = false;
             ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
             ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
             ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
+            ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
 
             FlagAnisotropicTextureFiltering = "yes";
             FlagTerrainLighting = "yes";
@@ -450,6 +472,7 @@ namespace PatchLauncher
             Settings.Default.EAXSupport = FlagEAX;
             Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
+            Settings.Default.ShowPatchesFirst = FlagShowPatchesFirst;
             Settings.Default.Save();
 
             //Save Game-Settings
@@ -515,11 +538,54 @@ namespace PatchLauncher
                 ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
             else
                 ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
+
+            if (Settings.Default.ShowPatchesFirst)
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
+            else
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
+        }
+
+        private void ChkShowPatchesFirst_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (FlagShowPatchesFirst == true)
+            {
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
+                FlagShowPatchesFirst = false;
+            }
+            else
+            {
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
+                FlagShowPatchesFirst = true;
+            }
+        }
+
+        private void ChkShowPatchesFirst_MouseEnter(object sender, EventArgs e)
+        {
+            if (FlagShowPatchesFirst)
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
+            else
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover; 
+        }
+
+        private void ChkShowPatchesFirst_MouseLeave(object sender, EventArgs e)
+        {
+            if (FlagShowPatchesFirst)
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
+            else
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
+        }
+
+        private void ChkShowPatchesFirst_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (FlagShowPatchesFirst)
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
+            else
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkEAX_Click(object sender, EventArgs e)
         {
-            if (FlagEAX == true)
+            if (FlagShowPatchesFirst == true)
             {
                 ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagEAX = false;
