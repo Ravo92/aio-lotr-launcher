@@ -1,7 +1,7 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppVerName "Patch 2.22 Launcher"
-#define MyAppExeName "Updater.exe"
-#define MyAppIcoName "GameSelection.exe"
+#define MyAppExeName "PatchLauncherBFME.exe"
+#define MyAppIcoName "PatchLauncherBFME.exe"
 
 [Setup]
 AppName={#MyAppName}
@@ -10,7 +10,7 @@ AppVerName={#MyAppVerName}
 WizardStyle=modern
 DefaultDirName={userappdata}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-UninstallDisplayIcon={app}\Updater.exe
+UninstallDisplayIcon={app}\{MyAppExeName}
 VersionInfoDescription=Patch 2.22 Launcher Setup
 VersionInfoProductName=Patch 2.22 Launcher
 OutputDir=build
@@ -22,7 +22,7 @@ ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.8
+VersionInfoVersion=1.0.1.9
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
@@ -47,7 +47,7 @@ Filename: "{app}\{#MyAppExeName}"; Flags: postinstall nowait runasoriginaluser s
 
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\Images"
-Type: filesandordirs; Name: "{app}\ReadMe.txt"
+Type: filesandordirs; Name: "{app}\Fonts"
 
 [Code]
 procedure CurPageChanged(CurPageID: Integer);

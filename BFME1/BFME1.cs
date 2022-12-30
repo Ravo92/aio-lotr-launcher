@@ -1,5 +1,7 @@
+using AutoUpdaterDotNET;
 using Downloader;
 using Helper;
+using Microsoft.Web.WebView2.Core;
 using PatchLauncher.Properties;
 using System;
 using System.Collections.Generic;
@@ -7,12 +9,15 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Color = System.Drawing.Color;
+using DownloadProgressChangedEventArgs = Downloader.DownloadProgressChangedEventArgs;
 
 namespace PatchLauncher
 {
@@ -29,6 +34,9 @@ namespace PatchLauncher
             #region logic
 
             InitializeComponent();
+
+            InitializeWebView2Settings();
+            CheckForUpdates();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
 
@@ -254,6 +262,47 @@ namespace PatchLauncher
             }
             #endregion
         }
+
+        #region Launcher Auto-Updater
+
+        private static async void InitializeWebView2Settings()
+        {
+            try
+            {
+                var version = CoreWebView2Environment.GetAvailableBrowserVersionString();
+
+                File.WriteAllText("webView2_Version.log", version);
+            }
+            catch (WebView2RuntimeNotFoundException)
+            {
+                string fileName = Path.Combine(Application.StartupPath, "Tools", "MicrosoftEdgeWebview2Setup.exe");
+                await RunWebViewSilentSetupAsync(fileName);
+            }
+        }
+
+        public static async Task RunWebViewSilentSetupAsync(string fileName)
+        {
+            var p = Process.Start(fileName, new[] { "/silent", "/install" });
+            await p.WaitForExitAsync().ConfigureAwait(false);
+        }
+
+        public static void CheckForUpdates()
+        {
+            AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater_Test.xml");
+            AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly()!.GetName().Version;
+            AutoUpdater.ShowSkipButton = false;
+            AutoUpdater.ShowRemindLaterButton = false;
+            AutoUpdater.HttpUserAgent = "BFME Launcher Update";
+            AutoUpdater.AppTitle = Application.ProductName;
+            AutoUpdater.ReportErrors = true;
+            AutoUpdater.RunUpdateAsAdmin = true;
+            AutoUpdater.DownloadPath = Application.StartupPath + "Downloads\\";
+            AutoUpdater.ClearAppDirectory = false;
+            AutoUpdater.Mandatory = true;
+            AutoUpdater.UpdateMode = Mode.Forced;
+        }
+
+        #endregion
 
         #region Button Behaviours
 
@@ -2122,7 +2171,7 @@ namespace PatchLauncher
                 {
                     SetTextPercentages($"Extracting {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
                     ZIPFileHelper _ZIPFileHelper = new();
-                    await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Download", archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler)!;
+                    await _ZIPFileHelper.ExtractArchive(Path.Combine(@"Downloads", archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler)!;
                 }
             }
             catch (Exception e)

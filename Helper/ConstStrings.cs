@@ -51,8 +51,6 @@ namespace Helper
         public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
 
         public const string C_TOOLFOLDER_NAME = "Tools";
-        public const string C_FONTSFOLDER_NAME = "Fonts";
-        public const string C_IMAGESFOLDER_NAME = "Images";
         public const string C_PATCHFOLDER_NAME = "Patches";
 
         //////////////////////////////////////////////////////////////////////////////

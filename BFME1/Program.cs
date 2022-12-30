@@ -15,7 +15,7 @@ namespace PatchLauncher
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        static void Main()
         {
             ApplicationConfiguration.Initialize();
 
@@ -34,30 +34,18 @@ namespace PatchLauncher
                 return;
             }
 
-            if (args[0].ToString() != "--official")
+            if (RegistryService.ReadRegKey("path") == "ValueNotFound" || !Directory.Exists(RegistryService.ReadRegKey("path")))
             {
-                Process _process = new();
-                _process.StartInfo.FileName = "Updater.exe";
-                _process.StartInfo.WorkingDirectory = Application.StartupPath;
-                _process.Start();
-
-                Application.Exit();
+                Settings.Default.IsGameInstalled = false;
+                Settings.Default.Save();
             }
             else
             {
-                if (RegistryService.ReadRegKey("path") == "ValueNotFound" || !Directory.Exists(RegistryService.ReadRegKey("path")))
-                {
-                    Properties.Settings.Default.IsGameInstalled = false;
-                    Properties.Settings.Default.Save();
-                }
-                else
-                {
-                    Properties.Settings.Default.IsGameInstalled = true;
-                    Properties.Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                    Properties.Settings.Default.Save();
-                }
-                Application.Run(new BFME1());
+                Settings.Default.IsGameInstalled = true;
+                Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
+                Settings.Default.Save();
             }
+            Application.Run(new BFME1());
         }
     }
 }

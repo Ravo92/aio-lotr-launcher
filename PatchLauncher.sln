@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatchLauncherBFME1", "BFME1\PatchLauncherBFME1.csproj", "{80B8945F-2EB8-4D57-8419-EC5FE6ABDDFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatchLauncherBFME", "BFME1\PatchLauncherBFME.csproj", "{80B8945F-2EB8-4D57-8419-EC5FE6ABDDFE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Updater", "Updater\Updater.csproj", "{F2DB6ABD-831A-4B26-A9E2-83909A49A4D5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSelection", "GameSelection\GameSelection.csproj", "{B5C183C8-57C1-4966-95F7-71469F6CBA7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}"
 EndProject
@@ -25,10 +23,6 @@ Global
 		{F2DB6ABD-831A-4B26-A9E2-83909A49A4D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2DB6ABD-831A-4B26-A9E2-83909A49A4D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2DB6ABD-831A-4B26-A9E2-83909A49A4D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5C183C8-57C1-4966-95F7-71469F6CBA7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5C183C8-57C1-4966-95F7-71469F6CBA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5C183C8-57C1-4966-95F7-71469F6CBA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5C183C8-57C1-4966-95F7-71469F6CBA7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
