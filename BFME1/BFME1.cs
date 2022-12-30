@@ -298,10 +298,10 @@ namespace PatchLauncher
             AutoUpdater.UpdateFormSize = new Size(1280, 720);
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";
             AutoUpdater.AppTitle = Application.ProductName;
-            AutoUpdater.ReportErrors = true;
             AutoUpdater.RunUpdateAsAdmin = true;
             AutoUpdater.DownloadPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME);
             AutoUpdater.ClearAppDirectory = false;
+            AutoUpdater.ReportErrors = false;
 
             string jsonPath = Path.Combine(Environment.CurrentDirectory, "AutoUpdaterSettings.json");
             AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);

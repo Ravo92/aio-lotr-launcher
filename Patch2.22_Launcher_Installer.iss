@@ -10,7 +10,7 @@ AppVerName={#MyAppVerName}
 WizardStyle=modern
 DefaultDirName={userappdata}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-UninstallDisplayIcon={app}\{MyAppExeName}
+UninstallDisplayIcon={app}\{#MyAppExeName}
 VersionInfoDescription=Patch 2.22 Launcher Setup
 VersionInfoProductName=Patch 2.22 Launcher
 OutputDir=build
@@ -32,7 +32,7 @@ Source: "BFME_Launcher\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
 Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\Updater.exe"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcoName}"; Tasks: desktopicon
 
 [Tasks]
@@ -48,12 +48,12 @@ Filename: "{app}\{#MyAppExeName}"; Flags: postinstall nowait runasoriginaluser s
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\Images"
 Type: filesandordirs; Name: "{app}\Fonts"
-Type: files; Name: "Updater.exe"
-Type: files; Name: "GameSelection.exe"
-Type: files; Name: "GameSelection.dll"
-Type: files; Name: "Updater.dll"
-Type: files; Name: "PatchLauncherBFME1.exe"
-Type: files; Name: "PatchLauncherBFME1.dll"
+Type: files; Name: "{app}\Updater.exe"
+Type: files; Name: "{app}\GameSelection.exe"
+Type: files; Name: "{app}\GameSelection.dll"
+Type: files; Name: "{app}\Updater.dll"
+Type: files; Name: "{app}\PatchLauncherBFME1.exe"
+Type: files; Name: "{app}\PatchLauncherBFME1.dll"
 
 [Code]
 procedure CurPageChanged(CurPageID: Integer);
