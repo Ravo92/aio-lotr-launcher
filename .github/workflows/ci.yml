@@ -44,7 +44,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     # Create the app package by building and packaging the Windows Application Packaging project
-    - name: Create Release
+    - name: Create app package
       run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle
       env:
         Appx_Bundle: Always
@@ -81,5 +81,4 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
         asset_path: build\Release\net6.0-windows
         asset_content_type: application/zip
-        asset_name: PatchLauncher.zip
 
