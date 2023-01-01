@@ -81,10 +81,12 @@ jobs:
       with:
         # The name of the release to upload assets to
         tag_name: release-${{ github.run_number }}
-        # The path to the asset to upload
-        files: build\
+        # Upload everything
+        files: |
+          *
+        fail_on_missing: true
         # The name of the asset as it will appear in the release
-        name: PatchLauncher.zip
+        # name: PatchLauncher.zip
 
 
 
