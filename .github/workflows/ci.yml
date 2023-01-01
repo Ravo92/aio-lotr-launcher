@@ -82,7 +82,7 @@ jobs:
         # The name of the release to upload assets to
         tag_name: release-${{ github.run_number }}
         # The path to the asset to upload
-        files: build\Release\net6.0-windows\
+        files: build\Release\net6.0-windows
         # The name of the asset as it will appear in the release
         name: PatchLauncher.zip
 
