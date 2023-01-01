@@ -56,7 +56,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: Patch Launcher Files
+        name: PatchLauncher.zip
         path: build\Release\net6.0-windows
 
     # Recursively print all the files to debug
@@ -64,12 +64,12 @@ jobs:
       run: |
         ls -R
 
-    # Create a zip file with all the files in the build\Release\net6.0-windows folder, and move it to the root of the repo
-    - name: Create zip file
-      run: |
-        cd build\Release\net6.0-windows
-        zip -r PatchLauncher.zip *
-        mv PatchLauncher.zip ../../../../
+    # Download the build artifacts into the root folder
+    - name: Retrieve build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: PatchLauncher.zip
+        path: .
 
     # Recursively print all the files to debug
     - name: Print all files
