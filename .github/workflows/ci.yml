@@ -83,7 +83,7 @@ jobs:
 
     # Upload the build artifacts to the new Github Release
     - name: Upload Release Asset2
-      id: upload-release-asset
+      id: upload-release-asset2
       uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
