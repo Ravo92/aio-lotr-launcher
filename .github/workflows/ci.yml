@@ -64,13 +64,19 @@ jobs:
       run: |
         ls -R
 
-    # Move the artifacts to the root folder
-    - name: Move artifacts to root folder
+    # Create a zip file with all the files in the build\Release\net6.0-windows folder, and move it to the root of the repo
+    - name: Create zip file
       run: |
         cd build\Release\net6.0-windows
-        mv * ../../../../
+        zip -r PatchLauncher.zip *
+        mv PatchLauncher.zip ../../../../
 
-    # Create a new Github Release with the artifacts
+    # Recursively print all the files to debug
+    - name: Print all files
+      run: |
+        ls -R
+
+    # Create a new Github Release
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -78,7 +84,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
         tag_name: release-${{ github.run_number }}
-        # Set release name to the current date
         release_name: Release ${{ github.run_number }}
         draft: false
         prerelease: false
@@ -90,13 +95,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        # The name of the release to upload assets to
         tag_name: release-${{ github.run_number }}
-        # Upload everything
-        files: |
-          *
+        files: PatchLauncher.zip
         fail_on_unmatched_files: true
-        # The name of the asset as it will appear in the release
-        # name: PatchLauncher.zip
+        name: Patch Launcher Files - ${{ github.run_number }}
 
 
