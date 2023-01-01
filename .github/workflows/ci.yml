@@ -64,6 +64,12 @@ jobs:
       run: |
         ls -R
 
+    # Zip the build artifacts
+    - name: Zip build artifacts
+      run: |
+        cd build\Release\net6.0-windows
+        7z a -tzip ${{ github.workspace }}\PatchLauncher2.zip *
+
     # Download the build artifacts into the root folder
     - name: Retrieve build artifacts
       uses: actions/download-artifact@v2
