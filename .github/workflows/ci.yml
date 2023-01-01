@@ -59,21 +59,11 @@ jobs:
         name: PatchLauncher.zip
         path: build\Release\net6.0-windows
 
-    # Recursively print all the files to debug
-    - name: Print all files
-      run: |
-        ls -R
-
     # Zip the build artifacts
     - name: Zip build artifacts
       run: |
         cd build\Release\net6.0-windows
         7z a -tzip ${{ github.workspace }}\PatchLauncher.zip *
-
-    # Recursively print all the files to debug
-    - name: Print all files
-      run: |
-        ls -R
 
     # Create a new Github Release
     - name: Create Release
