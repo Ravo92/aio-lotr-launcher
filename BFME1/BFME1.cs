@@ -2009,10 +2009,10 @@ namespace PatchLauncher
             Task download4 = DownloadUpdate(ConstStrings.C_BASES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/rlshiuuiaalsu1t/_patch222bases.big");
             await download4;
 
-            Task download5 = DownloadUpdate(ConstStrings.C_LIBRARIES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/b4ubdfi8uuk181m/_patch222maps.big");
+            Task download5 = DownloadUpdate(ConstStrings.C_MAPS_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/b4ubdfi8uuk181m/_patch222maps.big");
             await download5;
 
-            Task download6 = DownloadUpdate(ConstStrings.C_MAPS_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
+            Task download6 = DownloadUpdate(ConstStrings.C_LIBRARIES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
             await download6;
 
             File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_MAIN_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE), true);
