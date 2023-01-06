@@ -16,6 +16,8 @@ namespace Helper
         public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
         public const string C_PATCHZIP31_NAME = "Patch_2.22v31.7z";
 
+        public const string C_PATCHZIPBETA_NAME = "Patch_2.22v30BETA.7z";
+
         //////////////////////////////////////////////////////////////////////////////
 
         // 222v29 and below

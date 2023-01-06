@@ -71,6 +71,8 @@
             this.ChkShowPatchesFirst = new System.Windows.Forms.Button();
             this.BtnApply = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.LblUseBetaChannel = new System.Windows.Forms.Label();
+            this.ChkUseBetaChannel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderGameOptions)).BeginInit();
@@ -693,12 +695,46 @@
             this.BtnCancel.MouseEnter += new System.EventHandler(this.BtnCancel_MouseEnter);
             this.BtnCancel.MouseLeave += new System.EventHandler(this.BtnCancel_MouseLeave);
             // 
+            // LblUseBetaChannel
+            // 
+            this.LblUseBetaChannel.AutoSize = true;
+            this.LblUseBetaChannel.Location = new System.Drawing.Point(75, 380);
+            this.LblUseBetaChannel.Name = "LblUseBetaChannel";
+            this.LblUseBetaChannel.Size = new System.Drawing.Size(43, 15);
+            this.LblUseBetaChannel.TabIndex = 49;
+            this.LblUseBetaChannel.Text = "Theme";
+            // 
+            // ChkUseBetaChannel
+            // 
+            this.ChkUseBetaChannel.BackColor = System.Drawing.Color.Black;
+            this.ChkUseBetaChannel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
+            this.ChkUseBetaChannel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ChkUseBetaChannel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ChkUseBetaChannel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkUseBetaChannel.ForeColor = System.Drawing.Color.Transparent;
+            this.ChkUseBetaChannel.Location = new System.Drawing.Point(35, 380);
+            this.ChkUseBetaChannel.Margin = new System.Windows.Forms.Padding(0);
+            this.ChkUseBetaChannel.Name = "ChkUseBetaChannel";
+            this.ChkUseBetaChannel.Size = new System.Drawing.Size(29, 29);
+            this.ChkUseBetaChannel.TabIndex = 48;
+            this.ChkUseBetaChannel.TabStop = false;
+            this.ChkUseBetaChannel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ChkUseBetaChannel.UseMnemonic = false;
+            this.ChkUseBetaChannel.UseVisualStyleBackColor = false;
+            this.ChkUseBetaChannel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ChkUseBetaChannel_MouseClick);
+            this.ChkUseBetaChannel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChkUseBetaChannel_MouseDown);
+            this.ChkUseBetaChannel.MouseEnter += new System.EventHandler(this.ChkUseBetaChannel_MouseEnter);
+            this.ChkUseBetaChannel.MouseLeave += new System.EventHandler(this.ChkUseBetaChannel_MouseLeave);
+            // 
             // OptionsBFME1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1152, 798);
+            this.Controls.Add(this.LblUseBetaChannel);
+            this.Controls.Add(this.ChkUseBetaChannel);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnApply);
             this.Controls.Add(this.LblShowPatchesFirst);
@@ -746,7 +782,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OptionsBFME1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OptionsBFME1";
+            this.Text = "Launcher and Game Settings";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OptionsBFME1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PibBorderLauncherOptions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PibHeader)).EndInit();
@@ -799,5 +835,7 @@
         private System.Windows.Forms.Button ChkShowPatchesFirst;
         private System.Windows.Forms.Button BtnApply;
         private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Label LblUseBetaChannel;
+        private System.Windows.Forms.Button ChkUseBetaChannel;
     }
 }

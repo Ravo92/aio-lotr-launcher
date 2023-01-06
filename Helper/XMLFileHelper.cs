@@ -6,34 +6,68 @@ namespace Helper
     public static class XMLFileHelper
     {
         public const string C_XMLFile = "PatchUpdate_BFME1.xml";
-       
-        public static void GetXMLFileData()
+        public const string C_XMLFileBeta = "PatchBetaUpdate_BFME1.xml";
+
+        public static void GetXMLFileData(bool beta)
         {
-            if (File.Exists(Path.Combine(Application.StartupPath, C_XMLFile)))
+            if (beta)
             {
-                File.Delete(Path.Combine(Application.StartupPath, C_XMLFile));
+                if (File.Exists(Path.Combine(Application.StartupPath, C_XMLFileBeta)))
+                {
+                    File.Delete(Path.Combine(Application.StartupPath, C_XMLFileBeta));
+                }
+
+                using var client = new HttpClient();
+                using var s = client.GetStreamAsync("https://dl.dropboxusercontent.com/s/3o12yb1lwf66sha/PatchBetaUpdate_BFME1.xml");
+
+                using var fs = new FileStream(C_XMLFileBeta, FileMode.CreateNew, FileAccess.ReadWrite);
+                s.Result.CopyTo(fs);
+
+                client.Dispose();
+                s.Dispose();
+                fs.Dispose();
             }
+            else
+            {
+                if (File.Exists(Path.Combine(Application.StartupPath, C_XMLFile)))
+                {
+                    File.Delete(Path.Combine(Application.StartupPath, C_XMLFile));
+                }
 
-            using var client = new HttpClient();
-            using var s = client.GetStreamAsync("https://ravo92.github.io/PatchUpdate_BFME1.xml");
+                using var client = new HttpClient();
+                using var s = client.GetStreamAsync("https://ravo92.github.io/PatchUpdate_BFME1.xml");
 
-            using var fs = new FileStream(C_XMLFile, FileMode.CreateNew, FileAccess.ReadWrite);
-            s.Result.CopyTo(fs);
+                using var fs = new FileStream(C_XMLFile, FileMode.CreateNew, FileAccess.ReadWrite);
+                s.Result.CopyTo(fs);
 
-            client.Dispose();
-            s.Dispose();
-            fs.Dispose();
+                client.Dispose();
+                s.Dispose();
+                fs.Dispose();
+            }
         }
 
-        public static int GetXMLFileVersion()
+        public static int GetXMLFileVersion(bool beta)
         {
-            GetXMLFileData();
-            XElement response = XElement.Load(C_XMLFile);
-            var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
+            if (beta)
+            {
+                GetXMLFileData(true);
+                XElement response = XElement.Load(C_XMLFileBeta);
+                var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
 
-            int version = Convert.ToInt32(status);
+                int version = Convert.ToInt32(status);
 
-            return version;
+                return version;
+            }
+            else
+            {
+                GetXMLFileData(false);
+                XElement response = XElement.Load(C_XMLFile);
+                var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
+
+                int version = Convert.ToInt32(status);
+
+                return version;
+            }
         }
     }
 }

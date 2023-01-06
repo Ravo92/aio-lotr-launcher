@@ -52,7 +52,10 @@ namespace PatchLauncher
             if (!File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
                 File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
 
-            XMLFileHelper.GetXMLFileData();
+            if (Settings.Default.UseBetaChannel)
+                XMLFileHelper.GetXMLFileData(true);
+            else
+                XMLFileHelper.GetXMLFileData(false);
 
             TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
             TmrPatchNotes.Interval = 2000;
@@ -94,17 +97,17 @@ namespace PatchLauncher
 
             // label-Styles
             LblDownloadSpeed.Text = "";
-            LblDownloadSpeed.Font = FontHelper.GetFont(0, 16);;
+            LblDownloadSpeed.Font = FontHelper.GetFont(0, 16); ;
             LblDownloadSpeed.ForeColor = Color.FromArgb(192, 145, 69);
             LblDownloadSpeed.BackColor = Color.Transparent;
 
             LblFileName.Text = "";
-            LblFileName.Font = FontHelper.GetFont(0, 16);;
+            LblFileName.Font = FontHelper.GetFont(0, 16); ;
             LblFileName.ForeColor = Color.FromArgb(192, 145, 69);
             LblFileName.BackColor = Color.Transparent;
 
             LblBytes.Text = "";
-            LblBytes.Font = FontHelper.GetFont(0, 16);;
+            LblBytes.Font = FontHelper.GetFont(0, 16); ;
             LblBytes.ForeColor = Color.FromArgb(192, 145, 69);
             LblBytes.BackColor = Color.Transparent;
 
@@ -142,28 +145,28 @@ namespace PatchLauncher
             BtnLaunch.FlatStyle = FlatStyle.Flat;
             BtnLaunch.BackColor = Color.Transparent;
             BtnLaunch.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnLaunch.Font = FontHelper.GetFont(0, 16);;
+            BtnLaunch.Font = FontHelper.GetFont(0, 16); ;
             BtnLaunch.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnOptions.FlatAppearance.BorderSize = 0;
             BtnOptions.FlatStyle = FlatStyle.Flat;
             BtnOptions.BackColor = Color.Transparent;
             BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnOptions.Font = FontHelper.GetFont(0, 16);;
+            BtnOptions.Font = FontHelper.GetFont(0, 16); ;
             BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnInstall.FlatAppearance.BorderSize = 0;
             BtnInstall.FlatStyle = FlatStyle.Flat;
             BtnInstall.BackColor = Color.Transparent;
             BtnInstall.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnInstall.Font = FontHelper.GetFont(0, 16);;
+            BtnInstall.Font = FontHelper.GetFont(0, 16); ;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnAdvanced.FlatAppearance.BorderSize = 0;
             BtnAdvanced.FlatStyle = FlatStyle.Flat;
             BtnAdvanced.BackColor = Color.Transparent;
             BtnAdvanced.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnAdvanced.Font = FontHelper.GetFont(0, 16);;
+            BtnAdvanced.Font = FontHelper.GetFont(0, 16); ;
             BtnAdvanced.ForeColor = Color.FromArgb(192, 145, 69);
 
             #endregion
@@ -183,7 +186,7 @@ namespace PatchLauncher
             PiBVersion103.Image = Helper.Properties.Resources.BtnPatchSelection_103;
 
             if (Settings.Default.IsPatch30Installed)
-                Settings.Default.PatchVersionInstalled = 30; 
+                Settings.Default.PatchVersionInstalled = 30;
 
             if (Settings.Default.PlayBackgroundMusic)
                 PibMute.Image = Helper.Properties.Resources.Unmute;
@@ -1805,7 +1808,7 @@ namespace PatchLauncher
         #region ToolTip System
         public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
         {
-            Font tooltipFont = FontHelper.GetFont(0, 16);;
+            Font tooltipFont = FontHelper.GetFont(0, 16); ;
             e.DrawBackground();
             e.DrawBorder();
             e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
@@ -1853,7 +1856,7 @@ namespace PatchLauncher
                     PatchModDetectionHelper.DeletePatch106();
                     await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
                 }
-                else if (XMLFileHelper.GetXMLFileVersion() > ConstStrings.C_UPDATE_VERSION)
+                else if (XMLFileHelper.GetXMLFileVersion(false) > ConstStrings.C_UPDATE_VERSION)
                 {
                     PBarActualFile.Show();
                     LblBytes.Show();
@@ -1864,6 +1867,17 @@ namespace PatchLauncher
                     PatchModDetectionHelper.DeletePatch106();
                     await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
                 }
+                else if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
+                {
+                    PBarActualFile.Show();
+                    LblBytes.Show();
+                    LblDownloadSpeed.Show();
+                    LblFileName.Show();
+
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    PatchModDetectionHelper.DeletePatch106();
+                    await UpdateRoutineBeta();
+                }
             }
             else
             {
@@ -1871,7 +1885,7 @@ namespace PatchLauncher
 
                 while (await timer.WaitForNextTickAsync())
                 {
-                    XMLFileHelper.GetXMLFileVersion();
+                    XMLFileHelper.GetXMLFileVersion(false);
 
                     if (File.Exists(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) == ConstStrings.C_UPDATEMD5_HASH)
                     {
@@ -1940,6 +1954,94 @@ namespace PatchLauncher
 
             BtnLaunch.Enabled = true;
             BtnAdvanced.Show();
+
+            PiBArrow.Enabled = true;
+
+            if (Settings.Default.IsPatchModsShown)
+            {
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
+                LblModExplanation.Show();
+            }
+            else
+            {
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
+                LblModExplanation.Hide();
+            }
+        }
+
+        public async Task UpdateRoutineBeta()
+        {
+            PiBArrow.Enabled = false;
+
+            if (Settings.Default.IsPatchModsShown)
+            {
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+            }
+            else
+            {
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+            }
+
+            LblBytes.Show();
+            LblDownloadSpeed.Show();
+            LblFileName.Show();
+
+            BtnInstall.Hide();
+            BtnLaunch.Show();
+
+            LblFileName.Text = "Preparing Beta Update...";
+            LblModExplanation.Hide();
+
+            BtnLaunch.Enabled = false;
+            BtnAdvanced.Hide();
+
+            PBarActualFile.Show();
+
+            Task download = DownloadUpdate(ConstStrings.C_MAIN_ASSET_FILE, "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
+            await download;
+
+            Task download2 = DownloadUpdate(ConstStrings.C_TEXTURES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/ok5a5507fpwmge3/_patch222textures.big");
+            await download2;
+
+            Task download3 = DownloadUpdate(ConstStrings.C_MAIN_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/ssq0d0y9d1lgc0k/_patch222.big");
+            await download3;
+
+            Task download4 = DownloadUpdate(ConstStrings.C_BASES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/rlshiuuiaalsu1t/_patch222bases.big");
+            await download4;
+
+            Task download5 = DownloadUpdate(ConstStrings.C_LIBRARIES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/b4ubdfi8uuk181m/_patch222maps.big");
+            await download5;
+
+            Task download6 = DownloadUpdate(ConstStrings.C_MAPS_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
+            await download6;
+
+            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_MAIN_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE), true);
+            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_TEXTURES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_TEXTURES_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_MAIN_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BASES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_BASES_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_LIBRARIES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_MAPS_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAPS_PATCH_V30_FILE), true);
+
+            LblBytes.Hide();
+            LblDownloadSpeed.Hide();
+            LblFileName.Hide();
+
+            BtnInstall.Hide();
+            BtnLaunch.Show();
+
+            PBarActualFile.Hide();
+
+            BtnLaunch.Text = "LAUNCH GAME";
+
+            BtnLaunch.Enabled = true;
+            BtnAdvanced.Show();
+
+            Settings.Default.BetaChannelVersion = XMLFileHelper.GetXMLFileVersion(true);
+            Settings.Default.IsPatch30Installed = false;
+            Settings.Default.IsPatch106Installed = false;
+            Settings.Default.Save();
+
+
 
             PiBArrow.Enabled = true;
 
@@ -2454,7 +2556,7 @@ namespace PatchLauncher
                 BtnOptions.Hide();
                 BtnLaunch.Hide();
             }
-            else if (XMLFileHelper.GetXMLFileVersion() > ConstStrings.C_UPDATE_VERSION)
+            else if (XMLFileHelper.GetXMLFileVersion(false) > ConstStrings.C_UPDATE_VERSION)
             {
                 LblFileName.Show();
                 LblFileName.Text = "Preparing Update...";
@@ -2513,6 +2615,67 @@ namespace PatchLauncher
                 CheckForUpdates(false);
             }
 
+            if (Settings.Default.UseBetaChannel)
+            {
+                PiBVersion103.Hide();
+                PiBVersion106.Hide();
+                PiBVersion222_1.Hide();
+                PiBVersion222_2.Hide();
+                PiBVersion222_3.Hide();
+                PiBVersion222_4.Hide();
+                PiBVersion222_5.Hide();
+                PiBVersion222_6.Hide();
+
+                LblModExplanation.Text = "Beta-Channel is activated! Deactivate in \"Options\" first and restart the Launcher to see Patches.";
+
+                if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
+                {
+                    LblFileName.Show();
+                    LblFileName.Text = "Preparing Beta Update...";
+                    BtnLaunch.Enabled = false;
+                    PiBArrow.Enabled = false;
+                    BtnAdvanced.Hide();
+
+                    if (Settings.Default.IsPatchModsShown)
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+                    else
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
+                    CheckForUpdates(true);
+                }
+            }
+            else
+            {
+                LblModExplanation.Hide();
+                PBarActualFile.Show();
+                LblBytes.Show();
+                LblDownloadSpeed.Show();
+                LblFileName.Show();
+
+                PiBArrow.Enabled = false;
+
+                if (Settings.Default.IsPatchModsShown)
+                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+                else
+                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
+                BtnAdvanced.Hide();
+                BtnLaunch.Enabled = false;
+                BtnLaunch.Text = "PATCHING...";
+
+                PatchModDetectionHelper.DeletePatch106();
+                PatchModDetectionHelper.DeletePatch222Files();
+
+                await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
+
+                Settings.Default.IsPatch30Downloaded = true;
+                Settings.Default.IsPatch30Installed = true;
+
+                Settings.Default.IsPatch106Installed = false;
+                Settings.Default.FirstTimeUse = false;
+
+                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
+            }
 
             if (!Settings.Default.IsPatch106Downloaded)
                 PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Download;

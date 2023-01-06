@@ -17,8 +17,8 @@ namespace PatchLauncher
         readonly bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + @"\dsound.dll");
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
-        bool IsSettingChanged = true;
         bool FlagShowPatchesFirst = Settings.Default.ShowPatchesFirst;
+        bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
 
         //Game Settings
         string FlagAnisotropicTextureFiltering = "yes";
@@ -115,6 +115,16 @@ namespace PatchLauncher
             LblShowPatchesFirst.Font = FontHelper.GetFont(0, 16);
             LblShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
             LblShowPatchesFirst.BackColor = Color.Transparent;
+
+            LblUseBetaChannel.Text = "Enable the latest Patch 2.22 Beta Version";
+            LblUseBetaChannel.Font = FontHelper.GetFont(0, 16);
+            LblUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
+            LblUseBetaChannel.BackColor = Color.Transparent;
+
+            if (FlagUseBetaChannel)
+            {
+                LblPatchVersion.Text = "Active Game Version: \n2.22v30 BETA " + Settings.Default.BetaChannelVersion.ToString();
+            }
 
             if (FlagBrutalAI)
             {
@@ -417,6 +427,16 @@ namespace PatchLauncher
             else
                 ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
 
+            ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
+            ChkUseBetaChannel.FlatStyle = FlatStyle.Flat;
+            ChkUseBetaChannel.BackColor = Color.Transparent;
+            ChkUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
+
+            if (FlagUseBetaChannel)
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelected;
+            else
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
+
             #endregion
         }
 
@@ -432,6 +452,7 @@ namespace PatchLauncher
             ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
             ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
             ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
+            ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
 
             FlagAnisotropicTextureFiltering = "yes";
             FlagTerrainLighting = "yes";
@@ -536,6 +557,7 @@ namespace PatchLauncher
             Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
             Settings.Default.ShowPatchesFirst = FlagShowPatchesFirst;
+            Settings.Default.UseBetaChannel = FlagUseBetaChannel;
             Settings.Default.Save();
 
             //Save Game-Settings
@@ -737,6 +759,45 @@ namespace PatchLauncher
                 ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
             else
                 ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
+        }
+
+        private void ChkUseBetaChannel_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (FlagUseBetaChannel == true)
+            {
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
+                FlagUseBetaChannel = false;
+                Settings.Default.BetaChannelVersion = 0;
+            }
+            else
+            {
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
+                FlagUseBetaChannel = true;
+            }
+        }
+
+        private void ChkUseBetaChannel_MouseEnter(object sender, EventArgs e)
+        {
+            if (FlagUseBetaChannel)
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
+            else
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
+        }
+
+        private void ChkUseBetaChannel_MouseLeave(object sender, EventArgs e)
+        {
+            if (FlagUseBetaChannel)
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelected;
+            else
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
+        }
+
+        private void ChkUseBetaChannel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (FlagUseBetaChannel)
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
+            else
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         #endregion

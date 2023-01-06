@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="img\lotrbfme.png" />
+    <None Remove="img\lotrbfme2.png" />
+    <None Remove="img\lotrbfme2ep1.png" />
+    <None Remove="MainIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\lotrbfme.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="img\lotrbfme2.png" />
+    <Resource Include="img\lotrbfme2ep1.png" />
+    <Resource Include="MainIcon.ico" />
+  </ItemGroup>
+
+</Project>

@@ -15,14 +15,15 @@ VersionInfoDescription=Patch 2.22 Launcher Setup
 VersionInfoProductName=Patch 2.22 Launcher
 OutputDir=build
 OutputBaseFilename=BFMELauncherSetup
-DisableWelcomePage=No
+DisableWelcomePage=no
+PrivilegesRequired=admin
 MissingMessagesWarning=yes
 NotRecognizedMessagesWarning=yes
 ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.9
+VersionInfoVersion=1.0.1.10
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
@@ -33,27 +34,17 @@ Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcoName}"; Tasks: desktopicon
+;Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcoName}"; Tasks: desktopicon
 
-[Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+;[Tasks]
+;Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [UninstallDelete]
 Type: filesandordirs; Name: "Download"
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "Launch Application after Install"; Flags: postinstall nowait unchecked runasoriginaluser
-Filename: "{app}\{#MyAppExeName}"; Flags: postinstall nowait runasoriginaluser skipifnotsilent
-
-[InstallDelete]
-Type: filesandordirs; Name: "{app}\Images"
-Type: filesandordirs; Name: "{app}\Fonts"
-Type: files; Name: "{app}\Updater.exe"
-Type: files; Name: "{app}\GameSelection.exe"
-Type: files; Name: "{app}\GameSelection.dll"
-Type: files; Name: "{app}\Updater.dll"
-Type: files; Name: "{app}\PatchLauncherBFME1.exe"
-Type: files; Name: "{app}\PatchLauncherBFME1.dll"
+Filename: {app}\{#MyAppExeName}; Description: "Launch Application after Install"; Flags: postinstall nowait unchecked
+Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent
 
 [Code]
 procedure CurPageChanged(CurPageID: Integer);

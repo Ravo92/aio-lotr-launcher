@@ -358,5 +358,29 @@ namespace PatchLauncher.Properties {
                 this["ShowPatchesFirst"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseBetaChannel {
+            get {
+                return ((bool)(this["UseBetaChannel"]));
+            }
+            set {
+                this["UseBetaChannel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int BetaChannelVersion {
+            get {
+                return ((int)(this["BetaChannelVersion"]));
+            }
+            set {
+                this["BetaChannelVersion"] = value;
+            }
+        }
     }
 }
