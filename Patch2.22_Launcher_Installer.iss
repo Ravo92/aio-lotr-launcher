@@ -13,7 +13,7 @@ DefaultGroupName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 VersionInfoDescription=Patch 2.22 Launcher Setup
 VersionInfoProductName=Patch 2.22 Launcher
-OutputDir=build
+OutputDir=setup
 OutputBaseFilename=BFMELauncherSetup
 DisableWelcomePage=no
 PrivilegesRequired=admin
@@ -23,7 +23,7 @@ ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.11
+VersionInfoVersion=1.0.1.12
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
