@@ -224,7 +224,7 @@ namespace PatchLauncher
             // 
             this.PBarActualFile.Location = new System.Drawing.Point(218, 661);
             this.PBarActualFile.Name = "PBarActualFile";
-            this.PBarActualFile.Size = new System.Drawing.Size(440, 51);
+            this.PBarActualFile.Size = new System.Drawing.Size(328, 51);
             this.PBarActualFile.TabIndex = 12;
             this.PBarActualFile.Visible = false;
             // 
@@ -232,7 +232,7 @@ namespace PatchLauncher
             // 
             this.LblDownloadSpeed.AutoSize = true;
             this.LblDownloadSpeed.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblDownloadSpeed.Location = new System.Drawing.Point(554, 633);
+            this.LblDownloadSpeed.Location = new System.Drawing.Point(522, 633);
             this.LblDownloadSpeed.Name = "LblDownloadSpeed";
             this.LblDownloadSpeed.Size = new System.Drawing.Size(103, 25);
             this.LblDownloadSpeed.TabIndex = 13;
@@ -242,7 +242,7 @@ namespace PatchLauncher
             // 
             this.LblBytes.AutoSize = true;
             this.LblBytes.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblBytes.Location = new System.Drawing.Point(668, 671);
+            this.LblBytes.Location = new System.Drawing.Point(554, 671);
             this.LblBytes.Name = "LblBytes";
             this.LblBytes.Size = new System.Drawing.Size(114, 25);
             this.LblBytes.TabIndex = 14;

@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
-using System.Net;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,12 +39,6 @@ namespace PatchLauncher
             CheckForUpdates();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
-
-            if (MD5Tools.CalculateMD5(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME)) == "d0e155d71fb19c44ca0c9460fd99f4ca")
-            {
-                Settings.Default.IsPatch30Downloaded = false;
-                File.Delete(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_PATCHZIP30_NAME));
-            }
 
             if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
                 Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
@@ -93,7 +87,6 @@ namespace PatchLauncher
 
             BtnLaunch.Text = "WORKING...";
             BtnLaunch.Enabled = false;
-            BtnAdvanced.Hide();
 
             // label-Styles
             LblDownloadSpeed.Text = "";
@@ -419,7 +412,6 @@ namespace PatchLauncher
                 LblFileName.Text = "Preparing Setup...";
 
                 BtnLaunch.Enabled = false;
-                BtnAdvanced.Hide();
 
                 await InstallRoutine();
 
@@ -435,7 +427,6 @@ namespace PatchLauncher
                 BtnLaunch.Text = "LAUNCH GAME";
 
                 BtnLaunch.Enabled = true;
-                BtnAdvanced.Show();
             }
         }
 
@@ -1826,12 +1817,11 @@ namespace PatchLauncher
         {
             if (manual)
             {
-                if (File.Exists(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) == ConstStrings.C_UPDATEMD5_HASH)
+                if (File.Exists(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) == ConstStrings.C_UPDATEMD5_HASH && !Settings.Default.UseBetaChannel)
                 {
                     Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION;
                     Settings.Default.Save();
                     BtnLaunch.Enabled = true;
-                    BtnAdvanced.Show();
                     BtnLaunch.Text = "PLAY GAME";
                     LblFileName.Hide();
                     PiBArrow.Enabled = true;
@@ -1931,7 +1921,6 @@ namespace PatchLauncher
             LblModExplanation.Hide();
 
             BtnLaunch.Enabled = false;
-            BtnAdvanced.Hide();
 
             PBarActualFile.Show();
 
@@ -1953,8 +1942,6 @@ namespace PatchLauncher
             BtnLaunch.Text = "LAUNCH GAME";
 
             BtnLaunch.Enabled = true;
-            BtnAdvanced.Show();
-
             PiBArrow.Enabled = true;
 
             if (Settings.Default.IsPatchModsShown)
@@ -1971,6 +1958,8 @@ namespace PatchLauncher
 
         public async Task UpdateRoutineBeta()
         {
+            int XmlVersion = XMLFileHelper.GetXMLFileVersion(true);
+
             PiBArrow.Enabled = false;
 
             if (Settings.Default.IsPatchModsShown)
@@ -1993,34 +1982,36 @@ namespace PatchLauncher
             LblModExplanation.Hide();
 
             BtnLaunch.Enabled = false;
-            BtnAdvanced.Hide();
 
             PBarActualFile.Show();
 
-            Task download = DownloadUpdate(ConstStrings.C_MAIN_ASSET_FILE, "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
+            Task download = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_ASSET_FILE), "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
             await download;
 
-            Task download2 = DownloadUpdate(ConstStrings.C_TEXTURES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/ok5a5507fpwmge3/_patch222textures.big");
+            Task download2 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_TEXTURES_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/ok5a5507fpwmge3/_patch222textures.big");
             await download2;
 
-            Task download3 = DownloadUpdate(ConstStrings.C_MAIN_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/ssq0d0y9d1lgc0k/_patch222.big");
+            Task download3 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/ssq0d0y9d1lgc0k/_patch222.big");
             await download3;
 
-            Task download4 = DownloadUpdate(ConstStrings.C_BASES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/rlshiuuiaalsu1t/_patch222bases.big");
+            Task download4 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_BASES_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/rlshiuuiaalsu1t/_patch222bases.big");
             await download4;
 
-            Task download5 = DownloadUpdate(ConstStrings.C_MAPS_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/b4ubdfi8uuk181m/_patch222maps.big");
+            Task download5 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAPS_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/b4ubdfi8uuk181m/_patch222maps.big");
             await download5;
 
-            Task download6 = DownloadUpdate(ConstStrings.C_LIBRARIES_PATCH_V30_FILE, "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
+            Task download6 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
             await download6;
 
-            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_MAIN_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE), true);
-            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_TEXTURES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_TEXTURES_PATCH_V30_FILE), true);
-            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_MAIN_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_PATCH_V30_FILE), true);
-            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BASES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_BASES_PATCH_V30_FILE), true);
-            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_LIBRARIES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), true);
-            File.Copy(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_MAPS_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAPS_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE), true);
+            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_TEXTURES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_TEXTURES_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_BASES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_BASES_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), true);
+            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAPS_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAPS_PATCH_V30_FILE), true);
+
+            if (XmlVersion > Settings.Default.BetaChannelVersion && Settings.Default.BetaChannelVersion > 0)
+                Directory.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString()), true);
 
             LblBytes.Hide();
             LblDownloadSpeed.Hide();
@@ -2031,19 +2022,10 @@ namespace PatchLauncher
 
             PBarActualFile.Hide();
 
-            BtnLaunch.Text = "LAUNCH GAME";
-
-            BtnLaunch.Enabled = true;
-            BtnAdvanced.Show();
-
             Settings.Default.BetaChannelVersion = XMLFileHelper.GetXMLFileVersion(true);
             Settings.Default.IsPatch30Installed = false;
             Settings.Default.IsPatch106Installed = false;
             Settings.Default.Save();
-
-
-
-            PiBArrow.Enabled = true;
 
             if (Settings.Default.IsPatchModsShown)
             {
@@ -2055,6 +2037,10 @@ namespace PatchLauncher
                 PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
                 LblModExplanation.Hide();
             }
+
+            PiBArrow.Enabled = true;
+            BtnLaunch.Text = "LAUNCH GAME";
+            BtnLaunch.Enabled = true;
         }
 
         public async Task DownloadUpdate(string ZIPFileName, string DownloadUrl)
@@ -2120,7 +2106,6 @@ namespace PatchLauncher
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
             Invoke((MethodInvoker)(() => BtnLaunch.Enabled = true));
-            Invoke((MethodInvoker)(() => BtnAdvanced.Show()));
 
             Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION;
             Settings.Default.Save();
@@ -2562,7 +2547,6 @@ namespace PatchLauncher
                 LblFileName.Text = "Preparing Update...";
                 BtnLaunch.Enabled = false;
                 PiBArrow.Enabled = false;
-                BtnAdvanced.Hide();
 
                 if (Settings.Default.IsPatchModsShown)
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
@@ -2587,7 +2571,6 @@ namespace PatchLauncher
                 else
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
 
-                BtnAdvanced.Hide();
                 BtnLaunch.Enabled = false;
                 BtnLaunch.Text = "PATCHING...";
 
@@ -2604,13 +2587,41 @@ namespace PatchLauncher
 
                 PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
             }
+            else if (Settings.Default.IsGameInstalled && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) != ConstStrings.C_UPDATEMD5_HASH && !Settings.Default.UseBetaChannel)
+            {
+                LblModExplanation.Hide();
+                PBarActualFile.Show();
+                LblBytes.Show();
+                LblDownloadSpeed.Show();
+                LblFileName.Show();
+
+                PiBArrow.Enabled = false;
+
+                if (Settings.Default.IsPatchModsShown)
+                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+                else
+                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
+                BtnLaunch.Enabled = false;
+                BtnLaunch.Text = "PATCHING...";
+
+                PatchModDetectionHelper.DeletePatch106();
+                PatchModDetectionHelper.DeletePatch222Files();
+
+                await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
+
+                Settings.Default.IsPatch30Downloaded = true;
+                Settings.Default.IsPatch30Installed = true;
+
+                Settings.Default.IsPatch106Installed = false;
+
+                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
+            }
             else
             {
                 PiBArrow.Enabled = true;
                 BtnLaunch.Enabled = true;
                 BtnLaunch.Text = "PLAY GAME";
-
-                BtnAdvanced.Show();
 
                 CheckForUpdates(false);
             }
@@ -2634,7 +2645,6 @@ namespace PatchLauncher
                     LblFileName.Text = "Preparing Beta Update...";
                     BtnLaunch.Enabled = false;
                     PiBArrow.Enabled = false;
-                    BtnAdvanced.Hide();
 
                     if (Settings.Default.IsPatchModsShown)
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
@@ -2643,38 +2653,6 @@ namespace PatchLauncher
 
                     CheckForUpdates(true);
                 }
-            }
-            else
-            {
-                LblModExplanation.Hide();
-                PBarActualFile.Show();
-                LblBytes.Show();
-                LblDownloadSpeed.Show();
-                LblFileName.Show();
-
-                PiBArrow.Enabled = false;
-
-                if (Settings.Default.IsPatchModsShown)
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                else
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
-                BtnAdvanced.Hide();
-                BtnLaunch.Enabled = false;
-                BtnLaunch.Text = "PATCHING...";
-
-                PatchModDetectionHelper.DeletePatch106();
-                PatchModDetectionHelper.DeletePatch222Files();
-
-                await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
-
-                Settings.Default.IsPatch30Downloaded = true;
-                Settings.Default.IsPatch30Installed = true;
-
-                Settings.Default.IsPatch106Installed = false;
-                Settings.Default.FirstTimeUse = false;
-
-                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
             }
 
             if (!Settings.Default.IsPatch106Downloaded)

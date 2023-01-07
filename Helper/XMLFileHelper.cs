@@ -50,7 +50,6 @@ namespace Helper
         {
             if (beta)
             {
-                GetXMLFileData(true);
                 XElement response = XElement.Load(C_XMLFileBeta);
                 var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
 
@@ -60,7 +59,6 @@ namespace Helper
             }
             else
             {
-                GetXMLFileData(false);
                 XElement response = XElement.Load(C_XMLFile);
                 var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
 

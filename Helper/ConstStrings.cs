@@ -44,7 +44,7 @@ namespace Helper
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
         public const int C_UPDATE_VERSION = 30;
-        public const string C_UPDATEMD5_HASH = "a007b2ea1f87a530c1e412255e1d7896";
+        public const string C_UPDATEMD5_HASH = "99f7c29c73a3f6909e3916fe2248f6b6";
         public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
         public const string C_MAIN_ASSET_FILE = "asset.dat";
         public const string C_103_ASSET_FILE = "asset.dat.103";
@@ -55,6 +55,7 @@ namespace Helper
         public const string C_TOOLFOLDER_NAME = "Tools";
         public const string C_PATCHFOLDER_NAME = "Patches";
         public const string C_DOWNLOADFOLDER_NAME = "Downloads";
+        public const string C_BETAFOLDER_NAME = "Beta";
 
         //////////////////////////////////////////////////////////////////////////////
 

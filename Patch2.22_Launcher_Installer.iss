@@ -23,7 +23,7 @@ ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.10
+VersionInfoVersion=1.0.1.11
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
