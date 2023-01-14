@@ -34,10 +34,10 @@ Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-;Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcoName}"; Tasks: desktopicon
+Name: "{userdesktop}\{#MyAppName}"; Filename:"{app}\{#MyAppExeName}"; Check: Not FileExists(ExpandConstant('{userdesktop}{#MyAppName}.lnk')) 
 
-;[Tasks]
-;Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [UninstallDelete]
 Type: filesandordirs; Name: "Download"
