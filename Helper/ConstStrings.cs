@@ -16,8 +16,6 @@ namespace Helper
         public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
         public const string C_PATCHZIP31_NAME = "Patch_2.22v31.7z";
 
-        public const string C_PATCHZIPBETA_NAME = "Patch_2.22v30BETA.7z";
-
         //////////////////////////////////////////////////////////////////////////////
 
         // 222v29 and below
@@ -43,8 +41,8 @@ namespace Helper
 
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
-        public const int C_UPDATE_VERSION = 30;
-        public const string C_UPDATEMD5_HASH = "99f7c29c73a3f6909e3916fe2248f6b6";
+        public const int C_UPDATE_VERSION = 31;
+        public const string C_UPDATEMD5_HASH = "76b0bdf5ae584169fdea257e1f89badc";
         public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
         public const string C_MAIN_ASSET_FILE = "asset.dat";
         public const string C_103_ASSET_FILE = "asset.dat.103";
