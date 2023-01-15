@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Battle for Middle-Earth Launcher" Height="720" Width="1280" MinHeight="720" MinWidth="1000" Icon="/MainIcon.ico" Background="#15171e" Foreground="#c1bcc8">
     <Window.Resources>
-        <Style x:Key="button_special_hover" TargetType="Button">
+        <Style x:Key="ButtonHovered" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -23,6 +23,10 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <Style x:Key="UnderlinedButton" TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="#2295ff"/>
+            <Setter Property="BorderThickness" Value="0 0 0 5"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -40,14 +44,29 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Style="{DynamicResource button_special_hover}" x:Name="GameBFME1" Grid.Column="0" Height="86" Width="135" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonGameBFME1_Click" Cursor="Hand">
+            <Button Style="{DynamicResource ButtonHovered}" x:Name="GameBFME1" Grid.Column="0" Height="86" Width="135" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonGameBFME1_Click" Cursor="Hand">
                 <Image Source="/LauncherGUI;component/img/lotrbfme.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="64" Height="64"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        The Battle for Middle-Earth
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
-            <Button Style="{DynamicResource button_special_hover}" x:Name="GameBFME2" Grid.Column="1" Height="86" VerticalAlignment="Center" Click="ButtonGameBFME2_Click" Cursor="Hand" HorizontalAlignment="Center" Width="130">
+            <Button Style="{DynamicResource ButtonHovered}" x:Name="GameBFME2" Grid.Column="1" Height="86" VerticalAlignment="Center" Click="ButtonGameBFME2_Click" Cursor="Hand" HorizontalAlignment="Center" Width="130">
                 <Image Source="/LauncherGUI;component/img/lotrbfme2.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="64" Height="64"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        The Battle for Middle-Earth II
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
-            <Button Style="{DynamicResource button_special_hover}" x:Name="GameBFME2EP1" Grid.Column="2" Height="86" Width="136" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonGameBFME2EP1_Click" Cursor="Hand">
+            <Button Style="{DynamicResource ButtonHovered}" x:Name="GameBFME2EP1" Grid.Column="2" Height="86" Width="136" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonGameBFME2EP1_Click" Cursor="Hand">
                 <Image Source="/LauncherGUI;component/img/lotrbfme2ep1.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="64" Height="64"/>
+                <Button.ToolTip>
+                    <ToolTip>
+                        The Battle for Middle-earth II: Rise of the Witch-king
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
         </Grid>
         <DataGrid Margin="340,180,140,140" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#00000000" Foreground="#c1bcc8" HorizontalGridLinesBrush="#c1bcc8" VerticalGridLinesBrush="#c1bcc8" ColumnHeaderHeight="50" RowHeaderWidth="0" HeadersVisibility="Column" RowHeight="60" RowBackground="#15171e">
