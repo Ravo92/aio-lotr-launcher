@@ -123,7 +123,7 @@ namespace PatchLauncher
 
             if (FlagUseBetaChannel)
             {
-                LblPatchVersion.Text = "Active Game Version: \n2.22v31 BETA " + Settings.Default.BetaChannelVersion.ToString();
+                LblPatchVersion.Text = "Active Game Version: \n" + (Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "") + (Settings.Default.PatchVersionInstalled + 1).ToString() + " BETA " + Settings.Default.BetaChannelVersion.ToString();
             }
 
             if (FlagBrutalAI)

@@ -1,7 +1,10 @@
 ﻿using Helper;
+using PatchLauncher.Properties;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -35,6 +38,13 @@ namespace PatchLauncher
             BtnLauncherFolder.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
             BtnLauncherFolder.Font = FontHelper.GetFont(0, 14);
             BtnLauncherFolder.ForeColor = Color.FromArgb(192, 145, 69);
+
+            BtnRepair.FlatAppearance.BorderSize = 0;
+            BtnRepair.FlatStyle = FlatStyle.Flat;
+            BtnRepair.BackColor = Color.Transparent;
+            BtnRepair.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnRepair.Font = FontHelper.GetFont(0, 14);
+            BtnRepair.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnOpenAppDataFolder_Click(object sender, EventArgs e)
@@ -118,6 +128,73 @@ namespace PatchLauncher
             {
                 Close();
             }
+        }
+
+        private async void BtnRepair_Click(object sender, EventArgs e)
+        {
+            try 
+            {
+                Hide();
+
+                Settings.Default.IsPatch31Downloaded = false;
+                Settings.Default.IsPatch31Installed = false;
+                Settings.Default.Save();
+
+                var _init = Application.OpenForms.OfType<BFME1>().FirstOrDefault();
+
+                if (Directory.Exists(ConstStrings.GameInstallPath()))
+                    Directory.Delete(ConstStrings.GameInstallPath(), true);
+
+                if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME)))
+                    Directory.Delete(ConstStrings.C_PATCHFOLDER_NAME, true);
+
+                if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_BETAFOLDER_NAME)))
+                    Directory.Delete(ConstStrings.C_BETAFOLDER_NAME, true);
+
+                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)))
+                {
+                    if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)) != ConstStrings.C_MAINGAMEFILE_MD5_HASH)
+                    {
+                        File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
+                    }
+                }
+
+                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_LANGPACK_EN_ZIP)))
+                {
+                    if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_LANGPACK_EN_ZIP)) != ConstStrings.C_LANGPACK_EN_MD5_HASH)
+                    {
+                        File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_LANGPACK_EN_ZIP));
+                    }
+                }
+
+                await _init!.InstallRoutine();
+                Close();
+            }
+            catch (Exception exception)
+            {
+                using StreamWriter file = new("Error.log", append: true);
+                await file.WriteLineAsync(exception.Message);
+            }
+        }
+
+        private void BtnRepair_MouseEnter(object sender, EventArgs e)
+        {
+            BtnRepair.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnRepair.ForeColor = Color.FromArgb(100, 53, 5);
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
+        }
+
+        private void BtnRepair_MouseLeave(object sender, EventArgs e)
+        {
+            BtnRepair.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnRepair.ForeColor = Color.FromArgb(192, 145, 69);
+        }
+
+        private void BtnRepair_MouseDown(object sender, MouseEventArgs e)
+        {
+            BtnRepair.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnRepair.ForeColor = Color.FromArgb(192, 145, 69);
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
     }
 }

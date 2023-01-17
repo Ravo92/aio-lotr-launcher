@@ -12,7 +12,6 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Color = System.Drawing.Color;
@@ -24,9 +23,6 @@ namespace PatchLauncher
     {
         int iconNumber = Settings.Default.BackgroundMusicIcon;
         SoundPlayerHelper _soundPlayerHelper = new();
-
-        System.Timers.Timer _ButtonFlashYellow = new();
-        System.Timers.Timer _ButtonFlashNormal = new();
 
         public BFME1()
         {
@@ -281,7 +277,7 @@ namespace PatchLauncher
             AutoUpdater.LetUserSelectRemindLater = false;
             AutoUpdater.RemindLaterTimeSpan = RemindLaterFormat.Minutes;
             AutoUpdater.RemindLaterAt = 10;
-            AutoUpdater.UpdateFormSize = new Size(1280, 720);
+            AutoUpdater.UpdateFormSize = new Size(1296, 759);
             AutoUpdater.HttpUserAgent = "BFME Launcher Update";
             AutoUpdater.AppTitle = Application.ProductName;
             AutoUpdater.RunUpdateAsAdmin = true;
@@ -358,12 +354,6 @@ namespace PatchLauncher
         }
         private void BtnOptions_Click(object sender, EventArgs e)
         {
-            if (_ButtonFlashYellow.Enabled && _ButtonFlashNormal.Enabled)
-            {
-                _ButtonFlashYellow.Stop();
-                _ButtonFlashNormal.Stop();
-            }
-
             OptionsBFME1 _options = new();
             _options.ShowDialog();
         }
@@ -392,17 +382,6 @@ namespace PatchLauncher
             DialogResult dr = _install.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                LblBytes.Show();
-                LblDownloadSpeed.Show();
-                LblFileName.Show();
-
-                BtnInstall.Hide();
-                BtnLaunch.Show();
-
-                LblFileName.Text = "Preparing Setup...";
-
-                BtnLaunch.Enabled = false;
-
                 await InstallRoutine();
 
                 LblBytes.Hide();
@@ -1564,7 +1543,7 @@ namespace PatchLauncher
                     PatchModDetectionHelper.DeletePatch106();
                     await UpdateRoutine(ConstStrings.C_PATCHZIP31_NAME, "https://dl.dropboxusercontent.com/s/ey7222uixxpj1oi/Patch_2.22v31.7z");
                 }
-                else if (XMLFileHelper.GetXMLFileVersion(false) >= ConstStrings.C_UPDATE_VERSION)
+                else if (XMLFileHelper.GetXMLFileVersion(false) > ConstStrings.C_UPDATE_VERSION)
                 {
                     PBarActualFile.Show();
                     LblBytes.Show();
@@ -1703,6 +1682,19 @@ namespace PatchLauncher
 
             PBarActualFile.Show();
 
+            if (XmlVersion > Settings.Default.BetaChannelVersion && Settings.Default.BetaChannelVersion > 0 && Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString())))
+                Directory.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString()), true);
+
+            else if (Settings.Default.BetaChannelVersion == 0)
+            {
+                var Directories = Directory.GetDirectories(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME), "Beta*");
+
+                foreach (var directory in Directories)
+                {
+                    Directory.Delete(directory, true);
+                }
+            }
+
             Task download = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_ASSET_FILE), "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
             await download;
 
@@ -1718,7 +1710,7 @@ namespace PatchLauncher
             Task download5 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAPS_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/b4ubdfi8uuk181m/_patch222maps.big");
             await download5;
 
-            Task download6 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
+            Task download6 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), "https://dl.dropboxusercontent.com/s/9027uabrxkx7z85/_patch222libraries.big");
             await download6;
 
             File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE), true);
@@ -1727,19 +1719,6 @@ namespace PatchLauncher
             File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_BASES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_BASES_PATCH_V30_FILE), true);
             File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE), true);
             File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAPS_PATCH_V30_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAPS_PATCH_V30_FILE), true);
-
-            if (XmlVersion > Settings.Default.BetaChannelVersion && Settings.Default.BetaChannelVersion > 0 && Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString())))
-                Directory.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString()), true);
-
-            else if (Settings.Default.BetaChannelVersion == 0)
-            {
-                var Directories = Directory.GetDirectories(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME), "Beta*");
-
-                foreach (var directory in Directories)
-                {
-                    Directory.Delete(directory, true);
-                }
-            }
 
             LblBytes.Hide();
             LblDownloadSpeed.Hide();
@@ -1861,6 +1840,17 @@ namespace PatchLauncher
 
         public async Task InstallRoutine()
         {
+            LblBytes.Show();
+            LblDownloadSpeed.Show();
+            LblFileName.Show();
+
+            BtnInstall.Hide();
+            BtnLaunch.Show();
+
+            LblFileName.Text = "Preparing Setup...";
+
+            BtnLaunch.Enabled = false;
+
             try
             {
                 PiBArrow.Enabled = false;
@@ -1877,21 +1867,19 @@ namespace PatchLauncher
 
                 await ExtractGame();
 
-                if (Settings.Default.IsPatch30Downloaded == false)
+                if (Settings.Default.UseBetaChannel == true)
                 {
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP30_NAME, "https://dl.dropboxusercontent.com/s/ie90sxlbx0mpm8s/Patch_2.22v30.7z");
+                    await UpdateRoutineBeta();
+                }
+                else
+                {
+                    if (Settings.Default.IsPatch31Downloaded == false)
+                    {
+                        await UpdateRoutine(ConstStrings.C_PATCHZIP31_NAME, "https://dl.dropboxusercontent.com/s/ey7222uixxpj1oi/Patch_2.22v31.7z");
+                    }
                 }
 
                 BtnOptions.Show();
-
-                _ButtonFlashYellow.Start();
-                _ButtonFlashYellow.Interval = 1000;
-                _ButtonFlashYellow.Elapsed += new ElapsedEventHandler(TimerFlashYellow);
-
-                _ButtonFlashNormal.Start();
-                _ButtonFlashNormal.Interval = 2000;
-                _ButtonFlashNormal.Elapsed += new ElapsedEventHandler(TimerFlashNormal);
-
                 PiBArrow.Enabled = true;
 
                 if (Settings.Default.IsPatchModsShown)
@@ -1905,26 +1893,16 @@ namespace PatchLauncher
                 }
 
                 Settings.Default.IsGameInstalled = true;
-                Settings.Default.IsPatch30Downloaded = true;
-                Settings.Default.IsPatch30Installed = true;
+                Settings.Default.IsPatch31Downloaded = true;
+                Settings.Default.IsPatch31Installed = true;
                 Settings.Default.Save();
-                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Selected;
+                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Selected;
             }
             catch (Exception e)
             {
                 using StreamWriter file = new("Error.log", append: true);
                 await file.WriteLineAsync(e.Message);
             }
-        }
-
-        private void TimerFlashYellow(object source, ElapsedEventArgs e)
-        {
-            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
-        }
-
-        private void TimerFlashNormal(object source, ElapsedEventArgs e)
-        {
-            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
         }
 
         public async Task DownloadGame()
@@ -2269,7 +2247,7 @@ namespace PatchLauncher
                 BtnOptions.Hide();
                 BtnLaunch.Hide();
             }
-            else if (XMLFileHelper.GetXMLFileVersion(false) >= ConstStrings.C_UPDATE_VERSION)
+            else if (XMLFileHelper.GetXMLFileVersion(false) > ConstStrings.C_UPDATE_VERSION)
             {
                 LblFileName.Show();
                 LblFileName.Text = "Preparing Update...";

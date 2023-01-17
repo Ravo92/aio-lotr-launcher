@@ -32,6 +32,7 @@
             this.BtnOpenAppDataFolder = new System.Windows.Forms.Button();
             this.BtnGameInstallFolder = new System.Windows.Forms.Button();
             this.BtnLauncherFolder = new System.Windows.Forms.Button();
+            this.BtnRepair = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnOpenAppDataFolder
@@ -100,12 +101,35 @@
             this.BtnLauncherFolder.MouseEnter += new System.EventHandler(this.BtnLauncherFolder_MouseEnter);
             this.BtnLauncherFolder.MouseLeave += new System.EventHandler(this.BtnLauncherFolder_MouseLeave);
             // 
+            // BtnRepair
+            // 
+            this.BtnRepair.BackColor = System.Drawing.Color.Black;
+            this.BtnRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnRepair.FlatAppearance.BorderSize = 0;
+            this.BtnRepair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRepair.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnRepair.Location = new System.Drawing.Point(12, 83);
+            this.BtnRepair.Name = "BtnRepair";
+            this.BtnRepair.Size = new System.Drawing.Size(230, 51);
+            this.BtnRepair.TabIndex = 46;
+            this.BtnRepair.TabStop = false;
+            this.BtnRepair.Text = "REPAIR GAME";
+            this.BtnRepair.UseMnemonic = false;
+            this.BtnRepair.UseVisualStyleBackColor = false;
+            this.BtnRepair.Click += new System.EventHandler(this.BtnRepair_Click);
+            this.BtnRepair.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnRepair_MouseDown);
+            this.BtnRepair.MouseEnter += new System.EventHandler(this.BtnRepair_MouseEnter);
+            this.BtnRepair.MouseLeave += new System.EventHandler(this.BtnRepair_MouseLeave);
+            // 
             // Advanced
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(746, 77);
+            this.ClientSize = new System.Drawing.Size(746, 153);
+            this.Controls.Add(this.BtnRepair);
             this.Controls.Add(this.BtnLauncherFolder);
             this.Controls.Add(this.BtnGameInstallFolder);
             this.Controls.Add(this.BtnOpenAppDataFolder);
@@ -123,5 +147,6 @@
         private System.Windows.Forms.Button BtnOpenAppDataFolder;
         private System.Windows.Forms.Button BtnGameInstallFolder;
         private System.Windows.Forms.Button BtnLauncherFolder;
+        private System.Windows.Forms.Button BtnRepair;
     }
 }

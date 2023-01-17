@@ -13,8 +13,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-    <AssemblyVersion>1.0.1.13</AssemblyVersion>
-    <FileVersion>1.0.1.13</FileVersion>
+    <AssemblyVersion>1.0.1.14</AssemblyVersion>
+    <FileVersion>1.0.1.14</FileVersion>
     <Copyright>BFME Patch 2.22 Team</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>

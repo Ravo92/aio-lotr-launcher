@@ -23,7 +23,7 @@ ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.13
+VersionInfoVersion=1.0.1.14
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
@@ -37,7 +37,7 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{userdesktop}\{#MyAppName}"; Filename:"{app}\{#MyAppExeName}"; Check: Not FileExists(ExpandConstant('{userdesktop}{#MyAppName}.lnk')) 
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; Check: Not FileExists(ExpandConstant('{userdesktop}{#MyAppName}.lnk')) 
 
 [UninstallDelete]
 Type: filesandordirs; Name: "Download"
