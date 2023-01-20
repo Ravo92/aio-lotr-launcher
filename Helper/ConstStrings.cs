@@ -9,16 +9,13 @@ namespace Helper
         public const string C_EAFOLDER_NAME = "EA Games";
 
         public const string C_PATCHZIP06_NAME = "Patch_1.06.7z";
-        public const string C_PATCHZIP26_NAME = "Patch_2.22v26.7z";
-        public const string C_PATCHZIP27_NAME = "Patch_2.22v27.7z";
-        public const string C_PATCHZIP28_NAME = "Patch_2.22v28.7z";
         public const string C_PATCHZIP29_NAME = "Patch_2.22v29.7z";
         public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
         public const string C_PATCHZIP31_NAME = "Patch_2.22v31.7z";
 
         //////////////////////////////////////////////////////////////////////////////
 
-        // 222v29 and below
+        // 222v29
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
         public const string C_TEXTURES_PATCH_FILE = "_patch222newtextures.big";
         public const string C_LIBRARIES_PATCH_FILE = "_patch222libraries.big";

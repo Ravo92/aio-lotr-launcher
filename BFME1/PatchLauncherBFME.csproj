@@ -13,9 +13,9 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-    <AssemblyVersion>1.0.1.14</AssemblyVersion>
-    <FileVersion>1.0.1.14</FileVersion>
-    <Copyright>BFME Patch 2.22 Team</Copyright>
+    <AssemblyVersion>1.0.1.15</AssemblyVersion>
+    <FileVersion>1.0.1.15</FileVersion>
+    <Copyright>Raphael Vogel</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>

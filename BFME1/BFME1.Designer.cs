@@ -55,17 +55,10 @@ namespace PatchLauncher
             this.TmrAnimation = new System.Windows.Forms.Timer(this.components);
             this.PnlPlaceholder = new System.Windows.Forms.Panel();
             this.PiBVersion222_5 = new System.Windows.Forms.PictureBox();
-            this.PiBMod_4 = new System.Windows.Forms.PictureBox();
-            this.PiBMod_3 = new System.Windows.Forms.PictureBox();
             this.PiBVersion222_6 = new System.Windows.Forms.PictureBox();
             this.PiBVersion222_4 = new System.Windows.Forms.PictureBox();
-            this.PiBVersion222_3 = new System.Windows.Forms.PictureBox();
-            this.PiBVersion222_2 = new System.Windows.Forms.PictureBox();
-            this.PiBMod_2 = new System.Windows.Forms.PictureBox();
-            this.PiBMod_1 = new System.Windows.Forms.PictureBox();
             this.PiBVersion106 = new System.Windows.Forms.PictureBox();
             this.PiBVersion103 = new System.Windows.Forms.PictureBox();
-            this.LblInstalledMods = new Helper.CustomLabel();
             this.LblInstalledPatches = new Helper.CustomLabel();
             this.LblModExplanation = new Helper.CustomLabel();
             this.SysTray = new System.Windows.Forms.NotifyIcon(this.components);
@@ -86,14 +79,8 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBArrow)).BeginInit();
             this.PnlPlaceholder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).BeginInit();
             this.NotifyContextMenu.SuspendLayout();
@@ -363,16 +350,12 @@ namespace PatchLauncher
             this.PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.PnlPlaceholder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PnlPlaceholder.Controls.Add(this.PiBVersion222_5);
-            this.PnlPlaceholder.Controls.Add(this.PiBMod_4);
-            this.PnlPlaceholder.Controls.Add(this.PiBMod_3);
             this.PnlPlaceholder.Controls.Add(this.PiBVersion222_6);
             this.PnlPlaceholder.Controls.Add(this.PiBVersion222_4);
-            this.PnlPlaceholder.Controls.Add(this.PiBVersion222_3);
-            this.PnlPlaceholder.Controls.Add(this.PiBVersion222_2);
-            this.PnlPlaceholder.Controls.Add(this.PiBMod_2);
-            this.PnlPlaceholder.Controls.Add(this.PiBMod_1);
             this.PnlPlaceholder.Controls.Add(this.PiBVersion106);
             this.PnlPlaceholder.Controls.Add(this.PiBVersion103);
+            this.PnlPlaceholder.Controls.Add(this.LblInstalledPatches);
+            this.PnlPlaceholder.Controls.Add(this.LblModExplanation);
             this.PnlPlaceholder.Location = new System.Drawing.Point(12, 110);
             this.PnlPlaceholder.Name = "PnlPlaceholder";
             this.PnlPlaceholder.Size = new System.Drawing.Size(1256, 514);
@@ -384,7 +367,7 @@ namespace PatchLauncher
             this.PiBVersion222_5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_5.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_5.Image")));
-            this.PiBVersion222_5.Location = new System.Drawing.Point(230, 270);
+            this.PiBVersion222_5.Location = new System.Drawing.Point(546, 155);
             this.PiBVersion222_5.Name = "PiBVersion222_5";
             this.PiBVersion222_5.Size = new System.Drawing.Size(150, 200);
             this.PiBVersion222_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -392,39 +375,13 @@ namespace PatchLauncher
             this.PiBVersion222_5.TabStop = false;
             this.PiBVersion222_5.Click += new System.EventHandler(this.PiBVersion222_5_Click);
             // 
-            // PiBMod_4
-            // 
-            this.PiBMod_4.BackColor = System.Drawing.Color.Black;
-            this.PiBMod_4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PiBMod_4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBMod_4.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_4.Image")));
-            this.PiBMod_4.Location = new System.Drawing.Point(1040, 270);
-            this.PiBMod_4.Name = "PiBMod_4";
-            this.PiBMod_4.Size = new System.Drawing.Size(150, 200);
-            this.PiBMod_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PiBMod_4.TabIndex = 39;
-            this.PiBMod_4.TabStop = false;
-            // 
-            // PiBMod_3
-            // 
-            this.PiBMod_3.BackColor = System.Drawing.Color.Black;
-            this.PiBMod_3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PiBMod_3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBMod_3.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_3.Image")));
-            this.PiBMod_3.Location = new System.Drawing.Point(861, 270);
-            this.PiBMod_3.Name = "PiBMod_3";
-            this.PiBMod_3.Size = new System.Drawing.Size(150, 200);
-            this.PiBMod_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PiBMod_3.TabIndex = 38;
-            this.PiBMod_3.TabStop = false;
-            // 
             // PiBVersion222_6
             // 
             this.PiBVersion222_6.BackColor = System.Drawing.Color.Black;
             this.PiBVersion222_6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_6.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_6.Image")));
-            this.PiBVersion222_6.Location = new System.Drawing.Point(400, 270);
+            this.PiBVersion222_6.Location = new System.Drawing.Point(716, 155);
             this.PiBVersion222_6.Name = "PiBVersion222_6";
             this.PiBVersion222_6.Size = new System.Drawing.Size(150, 200);
             this.PiBVersion222_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -438,7 +395,7 @@ namespace PatchLauncher
             this.PiBVersion222_4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion222_4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion222_4.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_4.Image")));
-            this.PiBVersion222_4.Location = new System.Drawing.Point(60, 270);
+            this.PiBVersion222_4.Location = new System.Drawing.Point(376, 155);
             this.PiBVersion222_4.Name = "PiBVersion222_4";
             this.PiBVersion222_4.Size = new System.Drawing.Size(150, 200);
             this.PiBVersion222_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -446,67 +403,13 @@ namespace PatchLauncher
             this.PiBVersion222_4.TabStop = false;
             this.PiBVersion222_4.Click += new System.EventHandler(this.PiBVersion222_4_Click);
             // 
-            // PiBVersion222_3
-            // 
-            this.PiBVersion222_3.BackColor = System.Drawing.Color.Black;
-            this.PiBVersion222_3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PiBVersion222_3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBVersion222_3.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_3.Image")));
-            this.PiBVersion222_3.Location = new System.Drawing.Point(570, 50);
-            this.PiBVersion222_3.Name = "PiBVersion222_3";
-            this.PiBVersion222_3.Size = new System.Drawing.Size(150, 200);
-            this.PiBVersion222_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PiBVersion222_3.TabIndex = 35;
-            this.PiBVersion222_3.TabStop = false;
-            this.PiBVersion222_3.Click += new System.EventHandler(this.PiBVersion222_3_Click);
-            // 
-            // PiBVersion222_2
-            // 
-            this.PiBVersion222_2.BackColor = System.Drawing.Color.Black;
-            this.PiBVersion222_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PiBVersion222_2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBVersion222_2.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion222_2.Image")));
-            this.PiBVersion222_2.Location = new System.Drawing.Point(400, 50);
-            this.PiBVersion222_2.Name = "PiBVersion222_2";
-            this.PiBVersion222_2.Size = new System.Drawing.Size(150, 200);
-            this.PiBVersion222_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PiBVersion222_2.TabIndex = 34;
-            this.PiBVersion222_2.TabStop = false;
-            this.PiBVersion222_2.Click += new System.EventHandler(this.PiBVersion222_2_Click);
-            // 
-            // PiBMod_2
-            // 
-            this.PiBMod_2.BackColor = System.Drawing.Color.Black;
-            this.PiBMod_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PiBMod_2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBMod_2.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_2.Image")));
-            this.PiBMod_2.Location = new System.Drawing.Point(1040, 50);
-            this.PiBMod_2.Name = "PiBMod_2";
-            this.PiBMod_2.Size = new System.Drawing.Size(150, 200);
-            this.PiBMod_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PiBMod_2.TabIndex = 33;
-            this.PiBMod_2.TabStop = false;
-            // 
-            // PiBMod_1
-            // 
-            this.PiBMod_1.BackColor = System.Drawing.Color.Black;
-            this.PiBMod_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PiBMod_1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PiBMod_1.Image = ((System.Drawing.Image)(resources.GetObject("PiBMod_1.Image")));
-            this.PiBMod_1.Location = new System.Drawing.Point(870, 50);
-            this.PiBMod_1.Name = "PiBMod_1";
-            this.PiBMod_1.Size = new System.Drawing.Size(150, 200);
-            this.PiBMod_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PiBMod_1.TabIndex = 31;
-            this.PiBMod_1.TabStop = false;
-            // 
             // PiBVersion106
             // 
             this.PiBVersion106.BackColor = System.Drawing.Color.Black;
             this.PiBVersion106.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion106.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion106.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion106.Image")));
-            this.PiBVersion106.Location = new System.Drawing.Point(230, 50);
+            this.PiBVersion106.Location = new System.Drawing.Point(206, 155);
             this.PiBVersion106.Name = "PiBVersion106";
             this.PiBVersion106.Size = new System.Drawing.Size(150, 200);
             this.PiBVersion106.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -520,7 +423,7 @@ namespace PatchLauncher
             this.PiBVersion103.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PiBVersion103.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PiBVersion103.Image = ((System.Drawing.Image)(resources.GetObject("PiBVersion103.Image")));
-            this.PiBVersion103.Location = new System.Drawing.Point(60, 50);
+            this.PiBVersion103.Location = new System.Drawing.Point(36, 155);
             this.PiBVersion103.Name = "PiBVersion103";
             this.PiBVersion103.Size = new System.Drawing.Size(150, 200);
             this.PiBVersion103.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -528,23 +431,11 @@ namespace PatchLauncher
             this.PiBVersion103.TabStop = false;
             this.PiBVersion103.Click += new System.EventHandler(this.PiBVersion103_Click);
             // 
-            // LblInstalledMods
-            // 
-            this.LblInstalledMods.AutoSize = true;
-            this.LblInstalledMods.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblInstalledMods.Location = new System.Drawing.Point(1030, 50);
-            this.LblInstalledMods.Name = "LblInstalledMods";
-            this.LblInstalledMods.OutlineForeColor = System.Drawing.Color.Black;
-            this.LblInstalledMods.OutlineWidth = 4F;
-            this.LblInstalledMods.Size = new System.Drawing.Size(108, 47);
-            this.LblInstalledMods.TabIndex = 41;
-            this.LblInstalledMods.Text = "Mods";
-            // 
             // LblInstalledPatches
             // 
             this.LblInstalledPatches.AutoSize = true;
             this.LblInstalledPatches.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblInstalledPatches.Location = new System.Drawing.Point(60, 50);
+            this.LblInstalledPatches.Location = new System.Drawing.Point(525, 35);
             this.LblInstalledPatches.Name = "LblInstalledPatches";
             this.LblInstalledPatches.OutlineForeColor = System.Drawing.Color.Black;
             this.LblInstalledPatches.OutlineWidth = 4F;
@@ -556,7 +447,7 @@ namespace PatchLauncher
             // 
             this.LblModExplanation.AutoSize = true;
             this.LblModExplanation.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblModExplanation.Location = new System.Drawing.Point(110, 612);
+            this.LblModExplanation.Location = new System.Drawing.Point(23, 425);
             this.LblModExplanation.Name = "LblModExplanation";
             this.LblModExplanation.OutlineForeColor = System.Drawing.Color.Black;
             this.LblModExplanation.OutlineWidth = 4F;
@@ -640,7 +531,6 @@ namespace PatchLauncher
             this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Controls.Add(this.PibMute);
             this.Controls.Add(this.BtnAdvanced);
-            this.Controls.Add(this.LblInstalledMods);
             this.Controls.Add(this.PiBArrow);
             this.Controls.Add(this.PiBTwitch);
             this.Controls.Add(this.LblPatchNotes);
@@ -650,8 +540,6 @@ namespace PatchLauncher
             this.Controls.Add(this.LblDownloadSpeed);
             this.Controls.Add(this.PBarActualFile);
             this.Controls.Add(this.BtnOptions);
-            this.Controls.Add(this.LblModExplanation);
-            this.Controls.Add(this.LblInstalledPatches);
             this.Controls.Add(this.BtnLaunch);
             this.Controls.Add(this.PiBThemeSwitcher);
             this.Controls.Add(this.PiBModDB);
@@ -685,15 +573,10 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)(this.PiBTwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBArrow)).EndInit();
             this.PnlPlaceholder.ResumeLayout(false);
+            this.PnlPlaceholder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBVersion222_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PiBMod_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion106)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PiBVersion103)).EndInit();
             this.NotifyContextMenu.ResumeLayout(false);
@@ -730,16 +613,9 @@ namespace PatchLauncher
         private PictureBox PiBVersion103;
         private Helper.CustomLabel LblInstalledPatches;
         private Helper.CustomLabel LblModExplanation;
-        private PictureBox PiBMod_1;
-        private PictureBox PiBMod_2;
-        private PictureBox PiBMod_4;
-        private PictureBox PiBMod_3;
         private PictureBox PiBVersion222_6;
         private PictureBox PiBVersion222_4;
-        private PictureBox PiBVersion222_3;
-        private PictureBox PiBVersion222_2;
         private PictureBox PiBVersion222_5;
-        private Helper.CustomLabel LblInstalledMods;
         private NotifyIcon SysTray;
         private ContextMenuStrip NotifyContextMenu;
         private ToolStripMenuItem MenuItemLaunchGame;

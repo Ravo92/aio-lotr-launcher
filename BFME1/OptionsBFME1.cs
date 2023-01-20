@@ -21,6 +21,7 @@ namespace PatchLauncher
         bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
 
         //Game Settings
+        string FlagStaticGameLOD = "UltraHigh";
         string FlagAnisotropicTextureFiltering = "yes";
         string FlagTerrainLighting = "yes";
         string Flag3DShadows = "yes";
@@ -29,7 +30,7 @@ namespace PatchLauncher
         string FlagShowProps = "yes";
         string FlagShowAnimations = "yes";
         string FlagHeatEffects = "yes";
-        string FlagDynamicLOD = "no";
+        string FlagDynamicLOD = "yes";
         string FlagResolution;
 
         public OptionsBFME1()
@@ -196,8 +197,22 @@ namespace PatchLauncher
             ///////////////////////////////////////////////////////////////////////////////////////////
 
             //Checkbox-Styles
-            if (Settings.Default.IsGameInstalled == true)
+            if (OptionIniParser.ReadKey("StaticGameLOD") == "UltraHigh")
             {
+                FlagAnisotropicTextureFiltering = "yes";
+                FlagTerrainLighting = "yes";
+                Flag3DShadows = "yes";
+                Flag2DShadows = "yes";
+                FlagSmoothWaterBorder = "yes";
+                FlagShowProps = "yes";
+                FlagShowAnimations = "yes";
+                FlagHeatEffects = "yes";
+                FlagDynamicLOD = "yes";
+                FlagResolution = OptionIniParser.ReadKey("Resolution");
+            }
+            else
+            {
+                FlagStaticGameLOD = OptionIniParser.ReadKey("StaticGameLOD");
                 FlagAnisotropicTextureFiltering = OptionIniParser.ReadKey("AnisotropicTextureFiltering");
                 FlagTerrainLighting = OptionIniParser.ReadKey("TerrainLighting");
                 Flag3DShadows = OptionIniParser.ReadKey("3DShadows");
@@ -345,17 +360,17 @@ namespace PatchLauncher
             ChkDynamicLOD.BackColor = Color.Transparent;
             ChkDynamicLOD.ForeColor = Color.FromArgb(192, 145, 69);
 
-            if (FlagDynamicLOD == "no")
+            if (FlagDynamicLOD == "yes")
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
             }
-            else if (FlagDynamicLOD == "yes")
+            else if (FlagDynamicLOD == "no")
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
-          
+
             ResolutionX.BackColor = Color.Black;
             ResolutionX.Font = FontHelper.GetFont(0, 14);
             ResolutionX.ForeColor = Color.FromArgb(192, 145, 69);
@@ -462,7 +477,7 @@ namespace PatchLauncher
             FlagShowProps = "yes";
             FlagShowAnimations = "yes";
             FlagHeatEffects = "yes";
-            FlagDynamicLOD = "no";
+            FlagDynamicLOD = "yes";
             FlagResolution = "yes";
 
             ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelected;
@@ -563,17 +578,41 @@ namespace PatchLauncher
             //Save Game-Settings
             if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
-                OptionIniParser.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
-                OptionIniParser.WriteKey("TerrainLighting", FlagTerrainLighting);
-                OptionIniParser.WriteKey("3DShadows", Flag3DShadows);
-                OptionIniParser.WriteKey("2DShadows", Flag2DShadows);
-                OptionIniParser.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder);
-                OptionIniParser.WriteKey("ShowProps", FlagShowProps);
-                OptionIniParser.WriteKey("ExtraAnimations", FlagShowAnimations);
-                OptionIniParser.WriteKey("HeatEffects", FlagHeatEffects);
-                OptionIniParser.WriteKey("DynamicLOD", FlagDynamicLOD);
-                OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
+                if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes" 
+                    && FlagShowProps == "yes" && FlagShowAnimations == "yes" && FlagHeatEffects == "yes" && FlagDynamicLOD == "yes")
+                {
+                    OptionIniParser.WriteKey("StaticGameLOD", FlagStaticGameLOD);
+                    OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
+
+                    OptionIniParser.DeleteKey("AnisotropicTextureFiltering");
+                    OptionIniParser.DeleteKey("TerrainLighting");
+                    OptionIniParser.DeleteKey("3DShadows");
+                    OptionIniParser.DeleteKey("2DShadows");
+                    OptionIniParser.DeleteKey("SmoothWaterBorder");
+                    OptionIniParser.DeleteKey("ShowProps");
+                    OptionIniParser.DeleteKey("ExtraAnimations");
+                    OptionIniParser.DeleteKey("HeatEffects");
+                    OptionIniParser.DeleteKey("DynamicLOD");
+                }
+                else
+                {
+                    OptionIniParser.WriteKey("StaticGameLOD", "Custom");
+                    OptionIniParser.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
+                    OptionIniParser.WriteKey("TerrainLighting", FlagTerrainLighting);
+                    OptionIniParser.WriteKey("3DShadows", Flag3DShadows);
+                    OptionIniParser.WriteKey("2DShadows", Flag2DShadows);
+                    OptionIniParser.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder);
+                    OptionIniParser.WriteKey("ShowProps", FlagShowProps);
+                    OptionIniParser.WriteKey("ExtraAnimations", FlagShowAnimations);
+                    OptionIniParser.WriteKey("HeatEffects", FlagHeatEffects);
+                    OptionIniParser.WriteKey("DynamicLOD", FlagDynamicLOD);
+                    OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
+                }
             }
+
+            OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh"); 
+            OptionIniParser.WriteKey("IdealStaticGameLOD", "UltraHigh");
+            OptionIniParser.ClearOptionsFile();
 
             //Settings-Valuations
 
@@ -626,7 +665,7 @@ namespace PatchLauncher
             if (FlagShowPatchesFirst)
                 ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
             else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover; 
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
         }
 
         private void ChkShowPatchesFirst_MouseLeave(object sender, EventArgs e)
@@ -1110,21 +1149,21 @@ namespace PatchLauncher
 
         private void ChkDynamicLOD_Click(object sender, EventArgs e)
         {
-            if (FlagDynamicLOD == "yes")
+            if (FlagDynamicLOD == "no")
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
-                FlagDynamicLOD = "no";
+                FlagDynamicLOD = "yes";
             }
             else
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
-                FlagDynamicLOD = "yes";
+                FlagDynamicLOD = "no";
             }
         }
 
         private void ChkDynamicLOD_MouseEnter(object sender, EventArgs e)
         {
-            if (FlagDynamicLOD == "yes")
+            if (FlagDynamicLOD == "no")
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
             else
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
@@ -1132,7 +1171,7 @@ namespace PatchLauncher
 
         private void ChkDynamicLOD_MouseLeave(object sender, EventArgs e)
         {
-            if (FlagDynamicLOD == "yes")
+            if (FlagDynamicLOD == "no")
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelected;
             else
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
@@ -1140,7 +1179,7 @@ namespace PatchLauncher
 
         private void ChkDynamicLOD_MouseDown(object sender, MouseEventArgs e)
         {
-            if (FlagDynamicLOD == "yes")
+            if (FlagDynamicLOD == "no")
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
             else
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;

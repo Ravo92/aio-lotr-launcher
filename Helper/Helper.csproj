@@ -5,9 +5,10 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.0.1.14</AssemblyVersion>
-    <FileVersion>1.0.1.14</FileVersion>
+    <AssemblyVersion>1.0.1.15</AssemblyVersion>
+    <FileVersion>1.0.1.15</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
+    <Copyright>Raphael Vogel</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

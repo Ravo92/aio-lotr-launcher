@@ -1,12 +1,10 @@
 #define MyAppName "Patch 2.22 Launcher"
-#define MyAppVerName "Patch 2.22 Launcher"
 #define MyAppExeName "PatchLauncherBFME.exe"
-#define MyAppIcoName "PatchLauncherBFME.exe"
 
 [Setup]
 AppName={#MyAppName}
 AppId=Patch 2.22 Launcher
-AppVerName={#MyAppVerName}
+AppVerName={#MyAppName}
 WizardStyle=modern
 DefaultDirName={userappdata}\{#MyAppName}
 DefaultGroupName={#MyAppName}
@@ -23,7 +21,10 @@ ShowLanguageDialog=no
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
 SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.14
+VersionInfoVersion=1.0.1.15
+AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
+AppPublisher=Raphael Vogel
+AppPublisherURL=https://github.com/Ravo92
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
@@ -34,21 +35,14 @@ Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{userdesktop}\{#MyAppName}"; Filename:"{app}\{#MyAppExeName}"; Check: Not FileExists(ExpandConstant('{userdesktop}{#MyAppName}.lnk')) 
+Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: Not FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk')) 
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; Check: Not FileExists(ExpandConstant('{userdesktop}{#MyAppName}.lnk')) 
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [UninstallDelete]
-Type: filesandordirs; Name: "Download"
+Type: filesandordirs; Name: "Downloads"
 
 [Run]
-Filename: {app}\{#MyAppExeName}; Description: "Launch Application after Install"; Flags: postinstall nowait unchecked
+Filename: {app}\{#MyAppExeName}; Description: "Launch Application after Install"; Flags: postinstall shellexec nowait unchecked skipifsilent;
 Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent
-
-[Code]
-procedure CurPageChanged(CurPageID: Integer);
-begin
-  if CurPageID = wpFinished then
-    WizardForm.RunList.Visible := False;
-end;

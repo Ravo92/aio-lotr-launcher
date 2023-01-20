@@ -158,42 +158,6 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch26Downloaded {
-            get {
-                return ((bool)(this["IsPatch26Downloaded"]));
-            }
-            set {
-                this["IsPatch26Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch27Downloaded {
-            get {
-                return ((bool)(this["IsPatch27Downloaded"]));
-            }
-            set {
-                this["IsPatch27Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch28Downloaded {
-            get {
-                return ((bool)(this["IsPatch28Downloaded"]));
-            }
-            set {
-                this["IsPatch28Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool IsPatch29Downloaded {
             get {
                 return ((bool)(this["IsPatch29Downloaded"]));
@@ -236,42 +200,6 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["SelectedOlderPatch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch26Installed {
-            get {
-                return ((bool)(this["IsPatch26Installed"]));
-            }
-            set {
-                this["IsPatch26Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch27Installed {
-            get {
-                return ((bool)(this["IsPatch27Installed"]));
-            }
-            set {
-                this["IsPatch27Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch28Installed {
-            get {
-                return ((bool)(this["IsPatch28Installed"]));
-            }
-            set {
-                this["IsPatch28Installed"] = value;
             }
         }
         

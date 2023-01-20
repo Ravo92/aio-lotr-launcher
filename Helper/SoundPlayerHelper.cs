@@ -1,7 +1,6 @@
 ﻿using SharpDX.Multimedia;
 using SharpDX.XAudio2;
 using System.Media;
-using System.Reflection;
 
 namespace Helper
 {
@@ -47,7 +46,7 @@ namespace Helper
 
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.5f);
+            _masteringVoice.SetVolume(0.2f);
             PlaySoundFile(_sound, _SoundClickFile);
             _masteringVoice.Dispose();
             _sound.Dispose();
@@ -59,7 +58,7 @@ namespace Helper
 
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.5f);
+            _masteringVoice.SetVolume(0.2f);
             PlaySoundFile(_sound, _SoundHoverFile);
             _masteringVoice.Dispose();
             _sound.Dispose();
