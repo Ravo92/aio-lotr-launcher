@@ -1256,6 +1256,7 @@ namespace PatchLauncher
             BtnLaunch.Enabled = true;
 
             Settings.Default.BetaChannelVersion = XMLFileHelper.GetXMLFileVersion(true);
+            Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION + 1;
             Settings.Default.IsPatch30Installed = false;
             Settings.Default.IsPatch106Installed = false;
             Settings.Default.Save();
