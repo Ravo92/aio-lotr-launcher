@@ -8,6 +8,9 @@ namespace Helper
         public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
         public const string C_EAFOLDER_NAME = "EA Games";
 
+        public const string C_REGISTRY_SERVICE_WRONG_PARAMETER = "WrongParameter";
+        public const string C_REGISTRY_SERVICE_NOT_FOUND = "ValueNotFound";
+
         public const string C_PATCHZIP06_NAME = "Patch_1.06.7z";
         public const string C_PATCHZIP29_NAME = "Patch_2.22v29.7z";
         public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
@@ -31,6 +34,14 @@ namespace Helper
         public const string C_BASES_PATCH_V30_FILE = "_patch222bases.big";
         public const string C_MAPS_PATCH_V30_FILE = "_patch222maps.big";
         public const string C_ASSET_PATCH_V30_FILE = "asset.dat.222V31";
+
+        // BFME 1 Patches
+        public const string C_BFME1_PATCH_101_FILE = "_patch101.big";
+        public const string C_BFME1_PATCH_101_MD5H = "c2be8f668a64dfa9f8b42fe4fd9ff77e";
+
+        // BFME 1 Mods
+        public const string C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE = "SaF1.1.big";
+        public const string C_BFME1_MOD_SHADOW_AND_FLAME_11_MD5H = "1c35d9ccfa922e9fb6ff0097effdef83";
 
         //////////////////////////////////////////////////////////////////////////////
 
@@ -92,7 +103,7 @@ namespace Helper
 
         public static string GameAppdataFolderPath()
         {
-            if (RegistryService.ReadRegKey("appData") != "ValueNotFound")
+            if (RegistryService.ReadRegKey("appData") != C_REGISTRY_SERVICE_NOT_FOUND)
             {
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), RegistryService.ReadRegKey("appData"));
             }

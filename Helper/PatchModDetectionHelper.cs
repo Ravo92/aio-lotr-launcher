@@ -1,9 +1,34 @@
-﻿using System.ComponentModel;
-
-namespace Helper
+﻿namespace Helper
 {
     public class PatchModDetectionHelper
     {
+        public static List<string> AllPatchesAndMods
+        {
+            get;
+            set;
+        }
+
+        static PatchModDetectionHelper()
+        {
+            AllPatchesAndMods = new();
+
+            if (ConstStrings.GameInstallPath() != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+            {
+                string filepath = ConstStrings.GameInstallPath();
+                DirectoryInfo _directoryInfo = new(filepath);
+
+                foreach (var file in _directoryInfo.GetFiles("_patch*.big"))
+                {
+                    AllPatchesAndMods.Add(file.Name);
+                }
+            }
+
+            if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE)) && MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE)) == ConstStrings.C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE)
+            {
+                AllPatchesAndMods.Add("Shadow and Flame 1.1");
+            }
+        }
+
         public static bool DetectPatch106()
         {
             if (File.Exists(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME)))
