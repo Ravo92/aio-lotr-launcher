@@ -69,7 +69,20 @@
                 </Button.ToolTip>
             </Button>
         </Grid>
-        <DataGrid Margin="340,180,140,140" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#00000000" Foreground="#c1bcc8" HorizontalGridLinesBrush="#c1bcc8" VerticalGridLinesBrush="#c1bcc8" ColumnHeaderHeight="50" RowHeaderWidth="0" HeadersVisibility="Column" RowHeight="60" RowBackground="#15171e">
+        <DataGrid x:Name="MainTable"
+                  Margin="162,164,140,136"
+                  ItemsSource="{Binding PatchesAndMods}"
+                  Background="#00000000"
+                  Foreground="#c1bcc8"
+                  CanUserAddRows="False"
+                  HorizontalGridLinesBrush="#c1bcc8"
+                  VerticalGridLinesBrush="#c1bcc8"
+                  ColumnHeaderHeight="50"
+                  RowHeaderWidth="0"
+                  HeadersVisibility="Column"
+                  RowHeight="60"
+                  RowBackground="#15171e"
+                  AutoGenerateColumns="False">
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#15171e"/>
@@ -77,6 +90,12 @@
                     <Setter Property="BorderThickness" Value="2,2,2,2"/>
                 </Style>
             </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Version" Binding="{Binding DataGridVerionNumber}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Kind of" Binding="{Binding DataGridKindOf}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding DataGridDescription}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Activated" Binding="{Binding DataGridActivated}"></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>

@@ -5,9 +5,6 @@ namespace Helper
 {
     public class RegistryService
     {
-        private const string C_WRONG_PARAMETER = "WrongParameter";
-        private const string C_NOT_FOUND = "ValueNotFound";
-
         public static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
 
         public static string ReadRegKey(string kindOf)
@@ -27,7 +24,7 @@ namespace Helper
                             }
                             else
                             {
-                                return C_NOT_FOUND;
+                                return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
                             }
 
                         case "appData":
@@ -38,7 +35,7 @@ namespace Helper
                             }
                             else
                             {
-                                return C_NOT_FOUND;
+                                return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
                             }
 
                         case "path":
@@ -49,21 +46,21 @@ namespace Helper
                             }
                             else
                             {
-                                return C_NOT_FOUND;
+                                return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
                             }
 
                         default:
-                            return C_WRONG_PARAMETER;
+                            return ConstStrings.C_REGISTRY_SERVICE_WRONG_PARAMETER;
                     }
                 }
                 else
                 {
-                    return C_NOT_FOUND;
+                    return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
                 }
             }
             else
             {
-                return C_WRONG_PARAMETER;
+                return ConstStrings.C_REGISTRY_SERVICE_WRONG_PARAMETER;
             }
         }
 
