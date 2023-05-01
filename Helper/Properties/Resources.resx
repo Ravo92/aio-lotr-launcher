@@ -199,33 +199,6 @@
   <data name="BtnPatchSelection_106_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnPatchSelection_106_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BtnPatchSelection_222V27" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V27.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V27_Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V27_Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V27_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V27_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V28" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V28_Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V28_Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V28_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V28_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V29" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V29.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V29_Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V29_Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V29_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V29_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="BtnPatchSelection_222V30" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnPatchSelection_222V30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -243,6 +216,15 @@
   </data>
   <data name="BtnPatchSelection_222V31_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnPatchSelection_222V31_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnPatchSelection_222V32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnPatchSelection_222V32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnPatchSelection_222V32_Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnPatchSelection_222V32_Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnPatchSelection_222V32_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BtnPatchSelection_222V32_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="chkSelected" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chkSelected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

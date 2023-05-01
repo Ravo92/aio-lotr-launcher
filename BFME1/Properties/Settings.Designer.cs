@@ -12,7 +12,7 @@ namespace PatchLauncher.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -158,18 +158,6 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch29Downloaded {
-            get {
-                return ((bool)(this["IsPatch29Downloaded"]));
-            }
-            set {
-                this["IsPatch29Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool IsPatch30Downloaded {
             get {
                 return ((bool)(this["IsPatch30Downloaded"]));
@@ -200,18 +188,6 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["SelectedOlderPatch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch29Installed {
-            get {
-                return ((bool)(this["IsPatch29Installed"]));
-            }
-            set {
-                this["IsPatch29Installed"] = value;
             }
         }
         
@@ -308,6 +284,30 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["BetaChannelVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPatch32Installed {
+            get {
+                return ((bool)(this["IsPatch32Installed"]));
+            }
+            set {
+                this["IsPatch32Installed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPatch32Downloaded {
+            get {
+                return ((bool)(this["IsPatch32Downloaded"]));
+            }
+            set {
+                this["IsPatch32Downloaded"] = value;
             }
         }
     }

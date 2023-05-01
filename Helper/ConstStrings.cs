@@ -12,28 +12,19 @@ namespace Helper
         public const string C_REGISTRY_SERVICE_NOT_FOUND = "ValueNotFound";
 
         public const string C_PATCHZIP06_NAME = "Patch_1.06.7z";
-        public const string C_PATCHZIP29_NAME = "Patch_2.22v29.7z";
         public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
         public const string C_PATCHZIP31_NAME = "Patch_2.22v31.7z";
+        public const string C_PATCHZIP32_NAME = "Patch_2.22v32.7z";
 
         //////////////////////////////////////////////////////////////////////////////
 
-        // 222v29
+        public const string C_ENGLISHPATCH_FILE = "_englishpatch222.big";
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
-        public const string C_TEXTURES_PATCH_FILE = "_patch222newtextures.big";
         public const string C_LIBRARIES_PATCH_FILE = "_patch222libraries.big";
+        public const string C_TEXTURES_PATCH_FILE = "_patch222textures.big";
         public const string C_BASES_PATCH_FILE = "_patch222bases.big";
-        public const string C_MAPS_PATCH_FILE = "_wsmaps222.big";
-        public const string C_ASSET_PATCH_FILE = "asset.dat.222V29";
-
-        // 3.0 and above
-        public const string C_ENGLISHPATCH_V30_FILE = "_englishpatch222.big";
-        public const string C_MAIN_PATCH_V30_FILE = "_patch222.big";
-        public const string C_LIBRARIES_PATCH_V30_FILE = "_patch222libraries.big";
-        public const string C_TEXTURES_PATCH_V30_FILE = "_patch222textures.big";
-        public const string C_BASES_PATCH_V30_FILE = "_patch222bases.big";
-        public const string C_MAPS_PATCH_V30_FILE = "_patch222maps.big";
-        public const string C_ASSET_PATCH_V30_FILE = "asset.dat.222V31";
+        public const string C_MAPS_PATCH_FILE = "_patch222maps.big";
+        public const string C_ASSET_PATCH_FILE = "asset.dat.222";
 
         // BFME 1 Patches
         public const string C_BFME1_PATCH_101_FILE = "_patch101.big";
@@ -49,10 +40,10 @@ namespace Helper
 
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
-        public const int C_UPDATE_VERSION = 31;
+        public const int C_UPDATE_VERSION = 32;
         
-        public const string C_UPDATEMD5_HASH = "802e9a19070f08550c57fe1121231fa2";
-        public const string C_MAINGAMEFILE_MD5_HASH = "97258f514dce6eb4d5d110dbb4d3cca3";
+        public const string C_UPDATEMD5_HASH = "235AC8344C0AA5675C5850D97336BFF3";
+        public const string C_MAINGAMEFILE_ZIP_MD5_HASH = "97258f514dce6eb4d5d110dbb4d3cca3";
         public const string C_LANGPACK_EN_MD5_HASH = "fde15ba61be8c1b321e13a4ba9d8c4a8";
 
         public const string C_MAINGAMEFILE_ZIP = "BFME1.7z";

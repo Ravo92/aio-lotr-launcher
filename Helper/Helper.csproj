@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.0.1.15</AssemblyVersion>
-    <FileVersion>1.0.1.15</FileVersion>
+    <AssemblyVersion>1.0.1.16</AssemblyVersion>
+    <FileVersion>1.0.1.16</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
     <Copyright>Raphael Vogel</Copyright>
   </PropertyGroup>

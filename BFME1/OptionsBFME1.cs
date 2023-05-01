@@ -107,10 +107,15 @@ namespace PatchLauncher
             LblBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
             LblBrutalAI.BackColor = Color.Transparent;
 
-            LblWarningAI.Text = "";
-            LblWarningAI.Font = FontHelper.GetFont(0, 16);
-            LblWarningAI.ForeColor = Color.Red;
-            LblWarningAI.BackColor = Color.Transparent;
+            LblWarning.Text = "";
+            LblWarning.Font = FontHelper.GetFont(0, 16);
+            LblWarning.ForeColor = Color.Red;
+            LblWarning.BackColor = Color.Transparent;
+
+            LblInfoLOD.Text = "Dynamic LOD in this game is bugged and should\ntherefore be disabled to have the best graphics-quality!";
+            LblInfoLOD.Font = FontHelper.GetFont(0, 16);
+            LblInfoLOD.ForeColor = Color.FromArgb(192, 145, 69);
+            LblInfoLOD.BackColor = Color.Transparent;
 
             LblShowPatchesFirst.Text = "Show Patch/Mod-Selection first at startup";
             LblShowPatchesFirst.Font = FontHelper.GetFont(0, 16);
@@ -129,12 +134,12 @@ namespace PatchLauncher
 
             if (FlagBrutalAI)
             {
-                LblWarningAI.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
-                LblWarningAI.Show();
+                LblWarning.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
+                LblWarning.Show();
             }
             else
             {
-                LblWarningAI.Hide();
+                LblWarning.Hide();
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -517,6 +522,12 @@ namespace PatchLauncher
         private void BtnApply_Click(object sender, EventArgs e)
         {
             SaveSettings();
+
+            if (FlagUseBetaChannel)
+            {
+                MessageBox.Show("Please restart the launcher now to activate the Beta-Channel!");
+            }
+
             Close();
         }
 
@@ -578,7 +589,7 @@ namespace PatchLauncher
             //Save Game-Settings
             if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
-                if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes" 
+                if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes"
                     && FlagShowProps == "yes" && FlagShowAnimations == "yes" && FlagHeatEffects == "yes" && FlagDynamicLOD == "yes")
                 {
                     OptionIniParser.WriteKey("StaticGameLOD", FlagStaticGameLOD);
@@ -610,7 +621,7 @@ namespace PatchLauncher
                 }
             }
 
-            OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh"); 
+            OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh");
             OptionIniParser.WriteKey("IdealStaticGameLOD", "UltraHigh");
             OptionIniParser.ClearOptionsFile();
 
@@ -765,13 +776,13 @@ namespace PatchLauncher
             if (FlagBrutalAI == true)
             {
                 ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
-                LblWarningAI.Hide();
+                LblWarning.Hide();
                 FlagBrutalAI = false;
             }
             else
             {
                 ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
-                LblWarningAI.Show();
+                LblWarning.Show();
                 FlagBrutalAI = true;
             }
         }
