@@ -302,12 +302,13 @@ namespace PatchLauncher
         {
             if (InvokeRequired)
             {
-                Invoke(new MethodInvoker(delegate { 
-                    Show(); 
-                    WindowState = FormWindowState.Normal; 
-                    SysTray.Visible = false; 
-                    BtnAdvanced.Show(); 
-                    BtnLaunch.Enabled = true; 
+                Invoke(new MethodInvoker(delegate
+                {
+                    Show();
+                    WindowState = FormWindowState.Normal;
+                    SysTray.Visible = false;
+                    BtnAdvanced.Show();
+                    BtnLaunch.Enabled = true;
                     BtnLaunch.Text = "PLAY GAME";
                     PiBVersion103.Enabled = true;
                     PiBVersion106.Enabled = true;
@@ -367,12 +368,28 @@ namespace PatchLauncher
 
         private async void BtnInstall_Click(object sender, EventArgs e)
         {
-            InstallPathDialog _install = new();
-
-            DialogResult dr = _install.ShowDialog();
-            if (dr == DialogResult.OK)
+            if (!UACHelper.UACHelper.IsElevated)
             {
-                await InstallRoutine();
+                ProcessStartInfo startInfo = new()
+                {
+                    FileName = Application.ExecutablePath,
+                    Verb = "runas",
+                    UseShellExecute = true,
+                    Arguments = "--install"
+                };
+
+                UACHelper.UACHelper.StartElevated(startInfo);
+                Application.Exit();
+            }
+            else
+            {
+                InstallPathDialog _install = new();
+
+                DialogResult dr = _install.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    await InstallRoutine();
+                }
             }
         }
 
@@ -1774,6 +1791,11 @@ namespace PatchLauncher
                 _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
             }
 
+            if (ProgramState.CurrentProgramState == ProgramState.ProgramStates.repair)
+            {
+                
+            }
+
             if (Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Settings.Default.GameInstallPath!, ConstStrings.C_MAIN_GAME_FILE)))
             {
                 Settings.Default.IsGameInstalled = false;
@@ -1786,8 +1808,10 @@ namespace PatchLauncher
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
 
                 BtnInstall.Show();
-                BtnOptions.Hide();
+
                 BtnLaunch.Hide();
+                BtnAdvanced.Hide();
+                BtnOptions.Hide();
             }
             else if (XMLFileHelper.GetXMLFileVersion(false) != ConstStrings.C_UPDATE_VERSION && !Settings.Default.SelectedOlderPatch)
             {
@@ -1913,6 +1937,11 @@ namespace PatchLauncher
 
             if (!Settings.Default.IsPatch31Downloaded)
                 PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
+
+            if (ProgramState.CurrentProgramState == ProgramState.ProgramStates.install)
+            {
+                BtnInstall.PerformClick();
+            }
 
             Settings.Default.Save();
         }

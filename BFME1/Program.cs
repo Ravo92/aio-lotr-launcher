@@ -15,7 +15,7 @@ namespace PatchLauncher
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             ApplicationConfiguration.Initialize();
 
@@ -45,6 +45,21 @@ namespace PatchLauncher
                 Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                 Settings.Default.Save();
             }
+
+
+            if (!ProgramState.IsArrayNullOrEmpty(args))
+            {
+                if (args[0] == "--install")
+                {
+                    ProgramState.CurrentProgramState = ProgramState.ProgramStates.install;
+                }
+
+                if (args[0] == "--repair")
+                {
+                    ProgramState.CurrentProgramState = ProgramState.ProgramStates.repair;
+                }
+            }
+
             Application.Run(new BFME1());
         }
     }
