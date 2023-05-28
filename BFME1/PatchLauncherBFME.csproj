@@ -42,9 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autoupdater.NET.Official" Version="1.7.6" />
-    <PackageReference Include="Downloader" Version="3.0.1" />
-    <PackageReference Include="microsoft.web.webview2" Version="1.0.1462.37" />
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.8.2" />
+    <PackageReference Include="Downloader" Version="3.0.4" />
+    <PackageReference Include="microsoft.web.webview2" Version="1.0.1774.30" />
   </ItemGroup>
 
   <ItemGroup>
