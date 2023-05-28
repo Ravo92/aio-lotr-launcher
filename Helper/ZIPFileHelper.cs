@@ -30,7 +30,7 @@ namespace Helper
             }
             catch (Exception e)
             {
-                using StreamWriter file = new("Error.log", append: true);
+                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 file.WriteLineAsync(e.Message);
                 return null;
             }

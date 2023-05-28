@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatchLauncherBFME", "BFME1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherGUI", "LauncherGUI\LauncherGUI.csproj", "{A9380525-60B3-4195-B172-E46F5880312D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9380525-60B3-4195-B172-E46F5880312D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9380525-60B3-4195-B172-E46F5880312D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9380525-60B3-4195-B172-E46F5880312D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9380525-60B3-4195-B172-E46F5880312D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

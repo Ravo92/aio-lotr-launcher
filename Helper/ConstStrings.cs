@@ -4,7 +4,7 @@ namespace Helper
 {
     public static class ConstStrings
     {
-        public const string C_GAMEFOLDER_NAME_EN = "The Battle for Middle-earth (tm)";
+        public const string C_GAMEFOLDER_NAME_BFME1 = "BFME1";
         public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
         public const string C_EAFOLDER_NAME = "EA Games";
 
@@ -54,12 +54,17 @@ namespace Helper
         public const string C_103_ASSET_FILE = "asset.dat.103";
         public const string C_ORIGINAL_ASSET_FILE = "asset.dat.BACKUP";
 
+        public const string C_ERRORLOGGING_FILE = "Errors.log";
+
         public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
 
         public const string C_TOOLFOLDER_NAME = "Tools";
         public const string C_PATCHFOLDER_NAME = "Patches";
         public const string C_DOWNLOADFOLDER_NAME = "Downloads";
         public const string C_BETAFOLDER_NAME = "Beta";
+        public const string C_GAMEINSTALLFOLDER_NAME = "Games";
+        public const string C_WEBVIEW2CACHEFOLDER_NAME = "PatchLauncherBFME.exe.WebView2";
+        public const string C_LOGFOLDER_NAME = "Logfiles";
 
         //////////////////////////////////////////////////////////////////////////////
 

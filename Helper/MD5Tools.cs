@@ -11,7 +11,9 @@ namespace Helper
             {
                 using var stream = File.OpenRead(filename);
                 var hash = md5.ComputeHash(stream);
-                return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+
+                string md5hash = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
+                return md5hash;
             }
             else
             {

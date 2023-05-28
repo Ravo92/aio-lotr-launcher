@@ -46,6 +46,12 @@ namespace Helper
             }
         }
 
+
+        /// <summary>
+        /// Returns the Patch version from the downloaded XML file
+        /// </summary>
+        /// <param name="beta"></param>
+        /// <returns></returns>
         public static int GetXMLFileVersion(bool beta)
         {
             if (beta)

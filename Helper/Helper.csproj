@@ -5,10 +5,19 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.0.1.16</AssemblyVersion>
-    <FileVersion>1.0.1.16</FileVersion>
+    <AssemblyVersion>1.0.1.17</AssemblyVersion>
+    <FileVersion>1.0.1.17</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
     <Copyright>Raphael Vogel</Copyright>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="CustomProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="CustomLabel.cs">
       <SubType>Component</SubType>
     </Compile>

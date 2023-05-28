@@ -45,7 +45,19 @@ namespace PatchLauncher
                 Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                 Settings.Default.Save();
             }
-            Application.Run(new BFME1());
+            Application.Run(new WinFormsMainGUI());
+
+            if (Directory.Exists(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME))
+            {
+                try
+                {
+                    Directory.Delete(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME, true);
+                }
+                catch (IOException ex)
+                {
+                    File.AppendAllText("webView2_Version.log", ex.Message);
+                }
+            }
         }
     }
 }
