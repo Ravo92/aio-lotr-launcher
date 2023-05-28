@@ -29,117 +29,92 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Advanced));
-            this.BtnOpenAppDataFolder = new System.Windows.Forms.Button();
-            this.BtnGameInstallFolder = new System.Windows.Forms.Button();
-            this.BtnLauncherFolder = new System.Windows.Forms.Button();
-            this.BtnRepair = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            BtnOpenAppDataFolder = new System.Windows.Forms.Button();
+            BtnGameInstallFolder = new System.Windows.Forms.Button();
+            BtnLauncherFolder = new System.Windows.Forms.Button();
+            BtnRepair = new System.Windows.Forms.Button();
+            SuspendLayout();
             // 
             // BtnOpenAppDataFolder
             // 
-            this.BtnOpenAppDataFolder.BackColor = System.Drawing.Color.Black;
-            this.BtnOpenAppDataFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnOpenAppDataFolder.FlatAppearance.BorderSize = 0;
-            this.BtnOpenAppDataFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnOpenAppDataFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnOpenAppDataFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOpenAppDataFolder.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnOpenAppDataFolder.Location = new System.Drawing.Point(12, 12);
-            this.BtnOpenAppDataFolder.Name = "BtnOpenAppDataFolder";
-            this.BtnOpenAppDataFolder.Size = new System.Drawing.Size(230, 51);
-            this.BtnOpenAppDataFolder.TabIndex = 43;
-            this.BtnOpenAppDataFolder.TabStop = false;
-            this.BtnOpenAppDataFolder.Text = "APPDATA FOLDER";
-            this.BtnOpenAppDataFolder.UseMnemonic = false;
-            this.BtnOpenAppDataFolder.UseVisualStyleBackColor = false;
-            this.BtnOpenAppDataFolder.Click += new System.EventHandler(this.BtnOpenAppDataFolder_Click);
-            this.BtnOpenAppDataFolder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnOpenAppDataFolder_MouseDown);
-            this.BtnOpenAppDataFolder.MouseEnter += new System.EventHandler(this.BtnOpenAppDataFolder_MouseEnter);
-            this.BtnOpenAppDataFolder.MouseLeave += new System.EventHandler(this.BtnOpenAppDataFolder_MouseLeave);
+            resources.ApplyResources(BtnOpenAppDataFolder, "BtnOpenAppDataFolder");
+            BtnOpenAppDataFolder.BackColor = System.Drawing.Color.Black;
+            BtnOpenAppDataFolder.FlatAppearance.BorderSize = 0;
+            BtnOpenAppDataFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            BtnOpenAppDataFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            BtnOpenAppDataFolder.ForeColor = System.Drawing.Color.Transparent;
+            BtnOpenAppDataFolder.Name = "BtnOpenAppDataFolder";
+            BtnOpenAppDataFolder.TabStop = false;
+            BtnOpenAppDataFolder.UseMnemonic = false;
+            BtnOpenAppDataFolder.UseVisualStyleBackColor = false;
+            BtnOpenAppDataFolder.Click += BtnOpenAppDataFolder_Click;
+            BtnOpenAppDataFolder.MouseDown += BtnOpenAppDataFolder_MouseDown;
+            BtnOpenAppDataFolder.MouseEnter += BtnOpenAppDataFolder_MouseEnter;
+            BtnOpenAppDataFolder.MouseLeave += BtnOpenAppDataFolder_MouseLeave;
             // 
             // BtnGameInstallFolder
             // 
-            this.BtnGameInstallFolder.BackColor = System.Drawing.Color.Black;
-            this.BtnGameInstallFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnGameInstallFolder.FlatAppearance.BorderSize = 0;
-            this.BtnGameInstallFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnGameInstallFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnGameInstallFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnGameInstallFolder.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnGameInstallFolder.Location = new System.Drawing.Point(258, 12);
-            this.BtnGameInstallFolder.Name = "BtnGameInstallFolder";
-            this.BtnGameInstallFolder.Size = new System.Drawing.Size(230, 51);
-            this.BtnGameInstallFolder.TabIndex = 44;
-            this.BtnGameInstallFolder.TabStop = false;
-            this.BtnGameInstallFolder.Text = "GAME FOLDER";
-            this.BtnGameInstallFolder.UseMnemonic = false;
-            this.BtnGameInstallFolder.UseVisualStyleBackColor = false;
-            this.BtnGameInstallFolder.Click += new System.EventHandler(this.BtnGameInstallFolder_Click);
-            this.BtnGameInstallFolder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnGameInstallFolder_MouseDown);
-            this.BtnGameInstallFolder.MouseEnter += new System.EventHandler(this.BtnGameInstallFolder_MouseEnter);
-            this.BtnGameInstallFolder.MouseLeave += new System.EventHandler(this.BtnGameInstallFolder_MouseLeave);
+            resources.ApplyResources(BtnGameInstallFolder, "BtnGameInstallFolder");
+            BtnGameInstallFolder.BackColor = System.Drawing.Color.Black;
+            BtnGameInstallFolder.FlatAppearance.BorderSize = 0;
+            BtnGameInstallFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            BtnGameInstallFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            BtnGameInstallFolder.ForeColor = System.Drawing.Color.Transparent;
+            BtnGameInstallFolder.Name = "BtnGameInstallFolder";
+            BtnGameInstallFolder.TabStop = false;
+            BtnGameInstallFolder.UseMnemonic = false;
+            BtnGameInstallFolder.UseVisualStyleBackColor = false;
+            BtnGameInstallFolder.Click += BtnGameInstallFolder_Click;
+            BtnGameInstallFolder.MouseDown += BtnGameInstallFolder_MouseDown;
+            BtnGameInstallFolder.MouseEnter += BtnGameInstallFolder_MouseEnter;
+            BtnGameInstallFolder.MouseLeave += BtnGameInstallFolder_MouseLeave;
             // 
             // BtnLauncherFolder
             // 
-            this.BtnLauncherFolder.BackColor = System.Drawing.Color.Black;
-            this.BtnLauncherFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnLauncherFolder.FlatAppearance.BorderSize = 0;
-            this.BtnLauncherFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnLauncherFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnLauncherFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLauncherFolder.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnLauncherFolder.Location = new System.Drawing.Point(504, 12);
-            this.BtnLauncherFolder.Name = "BtnLauncherFolder";
-            this.BtnLauncherFolder.Size = new System.Drawing.Size(230, 51);
-            this.BtnLauncherFolder.TabIndex = 45;
-            this.BtnLauncherFolder.TabStop = false;
-            this.BtnLauncherFolder.Text = "LAUNCHER FOLDER";
-            this.BtnLauncherFolder.UseMnemonic = false;
-            this.BtnLauncherFolder.UseVisualStyleBackColor = false;
-            this.BtnLauncherFolder.Click += new System.EventHandler(this.BtnLauncherFolder_Click);
-            this.BtnLauncherFolder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnLauncherFolder_MouseDown);
-            this.BtnLauncherFolder.MouseEnter += new System.EventHandler(this.BtnLauncherFolder_MouseEnter);
-            this.BtnLauncherFolder.MouseLeave += new System.EventHandler(this.BtnLauncherFolder_MouseLeave);
+            resources.ApplyResources(BtnLauncherFolder, "BtnLauncherFolder");
+            BtnLauncherFolder.BackColor = System.Drawing.Color.Black;
+            BtnLauncherFolder.FlatAppearance.BorderSize = 0;
+            BtnLauncherFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            BtnLauncherFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            BtnLauncherFolder.ForeColor = System.Drawing.Color.Transparent;
+            BtnLauncherFolder.Name = "BtnLauncherFolder";
+            BtnLauncherFolder.TabStop = false;
+            BtnLauncherFolder.UseMnemonic = false;
+            BtnLauncherFolder.UseVisualStyleBackColor = false;
+            BtnLauncherFolder.Click += BtnLauncherFolder_Click;
+            BtnLauncherFolder.MouseDown += BtnLauncherFolder_MouseDown;
+            BtnLauncherFolder.MouseEnter += BtnLauncherFolder_MouseEnter;
+            BtnLauncherFolder.MouseLeave += BtnLauncherFolder_MouseLeave;
             // 
             // BtnRepair
             // 
-            this.BtnRepair.BackColor = System.Drawing.Color.Black;
-            this.BtnRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnRepair.FlatAppearance.BorderSize = 0;
-            this.BtnRepair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRepair.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnRepair.Location = new System.Drawing.Point(12, 83);
-            this.BtnRepair.Name = "BtnRepair";
-            this.BtnRepair.Size = new System.Drawing.Size(230, 51);
-            this.BtnRepair.TabIndex = 46;
-            this.BtnRepair.TabStop = false;
-            this.BtnRepair.Text = "REPAIR GAME";
-            this.BtnRepair.UseMnemonic = false;
-            this.BtnRepair.UseVisualStyleBackColor = false;
-            this.BtnRepair.Click += new System.EventHandler(this.BtnRepair_Click);
-            this.BtnRepair.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnRepair_MouseDown);
-            this.BtnRepair.MouseEnter += new System.EventHandler(this.BtnRepair_MouseEnter);
-            this.BtnRepair.MouseLeave += new System.EventHandler(this.BtnRepair_MouseLeave);
+            resources.ApplyResources(BtnRepair, "BtnRepair");
+            BtnRepair.BackColor = System.Drawing.Color.Black;
+            BtnRepair.FlatAppearance.BorderSize = 0;
+            BtnRepair.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            BtnRepair.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            BtnRepair.ForeColor = System.Drawing.Color.Transparent;
+            BtnRepair.Name = "BtnRepair";
+            BtnRepair.TabStop = false;
+            BtnRepair.UseMnemonic = false;
+            BtnRepair.UseVisualStyleBackColor = false;
+            BtnRepair.Click += BtnRepair_Click;
+            BtnRepair.MouseDown += BtnRepair_MouseDown;
+            BtnRepair.MouseEnter += BtnRepair_MouseEnter;
+            BtnRepair.MouseLeave += BtnRepair_MouseLeave;
             // 
             // Advanced
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(746, 153);
-            this.Controls.Add(this.BtnRepair);
-            this.Controls.Add(this.BtnLauncherFolder);
-            this.Controls.Add(this.BtnGameInstallFolder);
-            this.Controls.Add(this.BtnOpenAppDataFolder);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Advanced";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Easy Access Options.";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Advanced_KeyDown);
-            this.ResumeLayout(false);
-
+            resources.ApplyResources(this, "$this");
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            Controls.Add(BtnRepair);
+            Controls.Add(BtnLauncherFolder);
+            Controls.Add(BtnGameInstallFolder);
+            Controls.Add(BtnOpenAppDataFolder);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            Name = "Advanced";
+            KeyDown += Advanced_KeyDown;
+            ResumeLayout(false);
         }
 
         #endregion

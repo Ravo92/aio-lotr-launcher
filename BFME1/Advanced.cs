@@ -132,7 +132,7 @@ namespace PatchLauncher
 
         private async void BtnRepair_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 Hide();
 
