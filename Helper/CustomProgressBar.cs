@@ -55,7 +55,7 @@ namespace Helper
             SizeF len = g.MeasureString(text, f);
             // Calculate the location of the text (the middle of progress bar)
             // Point location = new Point(Convert.ToInt32((rect.Width / 2) - (len.Width / 2)), Convert.ToInt32((rect.Height / 2) - (len.Height / 2)));
-            Point location = new(Convert.ToInt32((Width / 2) - len.Width / 2), Convert.ToInt32((Height / 2) - len.Height / 2));
+            Point location = new(Convert.ToInt32((Width / 2) - len.Width / 2), Convert.ToInt32((Height / 2) - len.Height / 2) + 4);
             // The commented-out code will centre the text into the highlighted area only. This will centre the text regardless of the highlighted area.
             // Draw the custom text
             g.DrawString(text, f, Brushes.Black, location);

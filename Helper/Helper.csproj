@@ -13,11 +13,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>none</DebugType>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,9 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CustomProgressBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="CustomProgressBar.cs" />
     <Compile Update="CustomLabel.cs">
       <SubType>Component</SubType>
     </Compile>
