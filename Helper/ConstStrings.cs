@@ -63,8 +63,9 @@ namespace Helper
         public const string C_DOWNLOADFOLDER_NAME = "Downloads";
         public const string C_BETAFOLDER_NAME = "Beta";
         public const string C_GAMEINSTALLFOLDER_NAME = "Games";
-        public const string C_WEBVIEW2CACHEFOLDER_NAME = "PatchLauncherBFME.exe.WebView2";
         public const string C_LOGFOLDER_NAME = "Logfiles";
+        public const string C_HTMLFOLDER_NAME = "Html";
+        public const string C_WEBVIEW2CACHEFOLDER_NAME = "PatchLauncherBFME.exe.WebView2";
 
         //////////////////////////////////////////////////////////////////////////////
 

@@ -1,26 +1,14 @@
 ﻿using Helper;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PatchLauncher.Properties;
-using System.Reflection;
 
 namespace PatchLauncher
 {
-    public partial class OptionsBFME1 : Form
+    public partial class GameOptionsForm : Form
     {
-        //Launcher Settings
-        bool FlagEAX = Settings.Default.EAXSupport;
-        readonly bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + @"\dsound.dll");
-        bool FlagWindowed = Settings.Default.StartGameWindowed;
-        bool FlagBrutalAI = Settings.Default.UseBrutalAI;
-        bool FlagShowPatchesFirst = Settings.Default.ShowPatchesFirst;
-        bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
-
-        //Game Settings
         string FlagStaticGameLOD = "UltraHigh";
         string FlagAnisotropicTextureFiltering = "yes";
         string FlagTerrainLighting = "yes";
@@ -33,7 +21,7 @@ namespace PatchLauncher
         string FlagDynamicLOD = "yes";
         string FlagResolution;
 
-        public OptionsBFME1()
+        public GameOptionsForm()
         {
             InitializeComponent();
 
@@ -67,134 +55,60 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
-            LblEAX.Text = "Activate support for EAX-Sound";
-            LblEAX.Font = FontHelper.GetFont(0, 16);
-            LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
-            LblEAX.BackColor = Color.Transparent;
-
-            LblLauncherSettings.Text = "Launcher Settings";
-            LblLauncherSettings.Font = FontHelper.GetFont(1, 16);
-            LblLauncherSettings.ForeColor = Color.FromArgb(192, 145, 69);
-            LblLauncherSettings.BackColor = Color.Transparent;
-
-            LblGameSettings.Text = "Game Settings";
             LblGameSettings.Font = FontHelper.GetFont(1, 16);
             LblGameSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblGameSettings.BackColor = Color.Transparent;
 
-            LblOptions.Text = "Settings";
             LblOptions.Font = FontHelper.GetFont(1, 20);
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblLauncherVersion.Text = "Active Launcher Version: \n" + Assembly.GetEntryAssembly()!.GetName().Version;
-            LblLauncherVersion.Font = FontHelper.GetFont(0, 12);
-            LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
-            LblLauncherVersion.BackColor = Color.Transparent;
-
-            LblPatchVersion.Text = "Active Game Version: \n" + (Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "") + Settings.Default.PatchVersionInstalled.ToString();
-            LblPatchVersion.Font = FontHelper.GetFont(0, 12);
-            LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
-            LblPatchVersion.BackColor = Color.Transparent;
-
-            LblWindowed.Text = "Launch game in windowed mode";
-            LblWindowed.Font = FontHelper.GetFont(0, 16);
-            LblWindowed.ForeColor = Color.FromArgb(192, 145, 69);
-            LblWindowed.BackColor = Color.Transparent;
-
-            LblBrutalAI.Text = "Use the experimental brutal AI";
-            LblBrutalAI.Font = FontHelper.GetFont(0, 16);
-            LblBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
-            LblBrutalAI.BackColor = Color.Transparent;
-
-            LblWarning.Text = "";
-            LblWarning.Font = FontHelper.GetFont(0, 16);
-            LblWarning.ForeColor = Color.Red;
-            LblWarning.BackColor = Color.Transparent;
-
-            LblInfoLOD.Text = "Dynamic LOD in this game is bugged and should\ntherefore be disabled to have the best graphics-quality!";
             LblInfoLOD.Font = FontHelper.GetFont(0, 16);
             LblInfoLOD.ForeColor = Color.FromArgb(192, 145, 69);
             LblInfoLOD.BackColor = Color.Transparent;
 
-            LblShowPatchesFirst.Text = "Show Patch/Mod-Selection first at startup";
-            LblShowPatchesFirst.Font = FontHelper.GetFont(0, 16);
-            LblShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
-            LblShowPatchesFirst.BackColor = Color.Transparent;
-
-            LblUseBetaChannel.Text = "Enable the latest Patch 2.22 Beta Version";
-            LblUseBetaChannel.Font = FontHelper.GetFont(0, 16);
-            LblUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
-            LblUseBetaChannel.BackColor = Color.Transparent;
-
-            if (FlagUseBetaChannel)
-            {
-                LblPatchVersion.Text = "Active Game Version: \n" + (Settings.Default.PatchVersionInstalled).ToString() + " BETA " + Settings.Default.BetaChannelVersion.ToString();
-            }
-
-            if (FlagBrutalAI)
-            {
-                LblWarning.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
-                LblWarning.Show();
-            }
-            else
-            {
-                LblWarning.Hide();
-            }
-
             ///////////////////////////////////////////////////////////////////////////////////////////
 
-            LblAniTextureFiltering.Text = "Anisotropic Texture Filtering";
             LblAniTextureFiltering.Font = FontHelper.GetFont(0, 16);
             LblAniTextureFiltering.ForeColor = Color.FromArgb(192, 145, 69);
             LblAniTextureFiltering.BackColor = Color.Transparent;
 
-            LblTerrainLighting.Text = "Terrain Lighting";
             LblTerrainLighting.Font = FontHelper.GetFont(0, 16);
             LblTerrainLighting.ForeColor = Color.FromArgb(192, 145, 69);
             LblTerrainLighting.BackColor = Color.Transparent;
 
-            Lbl3DShadows.Text = "3D Shadows";
-            Lbl3DShadows.Font = FontHelper.GetFont(0, 16);
-            Lbl3DShadows.ForeColor = Color.FromArgb(192, 145, 69);
-            Lbl3DShadows.BackColor = Color.Transparent;
-
-            Lbl2DShadows.Text = "2D Shadows";
             Lbl2DShadows.Font = FontHelper.GetFont(0, 16);
             Lbl2DShadows.ForeColor = Color.FromArgb(192, 145, 69);
             Lbl2DShadows.BackColor = Color.Transparent;
 
-            LblSmoothWaterBorder.Text = "Smooth Water Border";
+            Lbl3DShadows.Font = FontHelper.GetFont(0, 16);
+            Lbl3DShadows.ForeColor = Color.FromArgb(192, 145, 69);
+            Lbl3DShadows.BackColor = Color.Transparent;
+
             LblSmoothWaterBorder.Font = FontHelper.GetFont(0, 16);
             LblSmoothWaterBorder.ForeColor = Color.FromArgb(192, 145, 69);
             LblSmoothWaterBorder.BackColor = Color.Transparent;
 
-            LblShowProps.Text = "Show Props";
             LblShowProps.Font = FontHelper.GetFont(0, 16);
             LblShowProps.ForeColor = Color.FromArgb(192, 145, 69);
             LblShowProps.BackColor = Color.Transparent;
 
-            LblShowAnimations.Text = "Show Animations";
             LblShowAnimations.Font = FontHelper.GetFont(0, 16);
             LblShowAnimations.ForeColor = Color.FromArgb(192, 145, 69);
             LblShowAnimations.BackColor = Color.Transparent;
 
-            LblHeatEffects.Text = "Heat Effects";
             LblHeatEffects.Font = FontHelper.GetFont(0, 16);
             LblHeatEffects.ForeColor = Color.FromArgb(192, 145, 69);
             LblHeatEffects.BackColor = Color.Transparent;
 
-            LblDynamicLOD.Text = "Dynamic Level of Detail";
             LblDynamicLOD.Font = FontHelper.GetFont(0, 16);
             LblDynamicLOD.ForeColor = Color.FromArgb(192, 145, 69);
             LblDynamicLOD.BackColor = Color.Transparent;
 
-            LblResolutionX.Text = "X";
             LblResolutionX.Font = FontHelper.GetFont(0, 16);
             LblResolutionX.ForeColor = Color.FromArgb(192, 145, 69);
             LblResolutionX.BackColor = Color.Transparent;
 
-            LblResolution.Text = "Set Game Resolution";
             LblResolution.Font = FontHelper.GetFont(0, 16);
             LblResolution.ForeColor = Color.FromArgb(192, 145, 69);
             LblResolution.BackColor = Color.Transparent;
@@ -368,10 +282,12 @@ namespace PatchLauncher
             if (FlagDynamicLOD == "yes")
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
+                LblInfoLOD.Hide();
             }
             else if (FlagDynamicLOD == "no")
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelected;
+                LblInfoLOD.Show();
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -399,64 +315,6 @@ namespace PatchLauncher
                 ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
                 ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
             }
-
-            ///////////////////////////////////////////////////////////////////////////////////////////
-
-            ChkEAX.FlatAppearance.BorderSize = 0;
-            ChkEAX.FlatStyle = FlatStyle.Flat;
-            ChkEAX.BackColor = Color.Transparent;
-            ChkEAX.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagEAXFileExists)
-                FlagEAX = true;
-            else
-                FlagEAX = false;
-
-            if (FlagEAXFileExists && FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
-
-            ChkWindowed.FlatAppearance.BorderSize = 0;
-            ChkWindowed.FlatStyle = FlatStyle.Flat;
-            ChkWindowed.BackColor = Color.Transparent;
-            ChkWindowed.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
-
-            ChkBrutalAI.FlatAppearance.BorderSize = 0;
-            ChkBrutalAI.FlatStyle = FlatStyle.Flat;
-            ChkBrutalAI.BackColor = Color.Transparent;
-            ChkBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
-
-            ChkShowPatchesFirst.FlatAppearance.BorderSize = 0;
-            ChkShowPatchesFirst.FlatStyle = FlatStyle.Flat;
-            ChkShowPatchesFirst.BackColor = Color.Transparent;
-            ChkShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
-
-            ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
-            ChkUseBetaChannel.FlatStyle = FlatStyle.Flat;
-            ChkUseBetaChannel.BackColor = Color.Transparent;
-            ChkUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
-
             #endregion
         }
 
@@ -464,16 +322,6 @@ namespace PatchLauncher
 
         private void BtnDefault_Click(object sender, EventArgs e)
         {
-            FlagEAX = false;
-            FlagWindowed = false;
-            FlagBrutalAI = false;
-            FlagShowPatchesFirst = false;
-            ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
-            ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
-            ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
-            ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
-            ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
-
             FlagAnisotropicTextureFiltering = "yes";
             FlagTerrainLighting = "yes";
             Flag3DShadows = "yes";
@@ -522,12 +370,6 @@ namespace PatchLauncher
         private void BtnApply_Click(object sender, EventArgs e)
         {
             SaveSettings();
-
-            if (FlagUseBetaChannel)
-            {
-                MessageBox.Show("Please restart the launcher now to activate the Beta-Channel!");
-            }
-
             Close();
         }
 
@@ -578,15 +420,6 @@ namespace PatchLauncher
 
         private void SaveSettings()
         {
-            //Save Launcher-Settings
-            Settings.Default.EAXSupport = FlagEAX;
-            Settings.Default.StartGameWindowed = FlagWindowed;
-            Settings.Default.UseBrutalAI = FlagBrutalAI;
-            Settings.Default.ShowPatchesFirst = FlagShowPatchesFirst;
-            Settings.Default.UseBetaChannel = FlagUseBetaChannel;
-            Settings.Default.Save();
-
-            //Save Game-Settings
             if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
                 if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes"
@@ -624,232 +457,7 @@ namespace PatchLauncher
             OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh");
             OptionIniParser.WriteKey("IdealStaticGameLOD", "UltraHigh");
             OptionIniParser.ClearOptionsFile();
-
-            //Settings-Valuations
-
-            if (!FlagEAXFileExists && FlagEAX == true)
-            {
-                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                foreach (var file in _EAXFiles)
-                {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
-                }
-
-                OptionIniParser.WriteKey("UseEAX3", "yes");
-            }
-
-            if (FlagEAXFileExists && FlagEAX == false)
-            {
-                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                foreach (var file in _EAXFiles)
-                {
-                    File.Delete(Path.Combine(ConstStrings.GameInstallPath(), file));
-                }
-
-                OptionIniParser.WriteKey("UseEAX3", "no");
-            }
-
-            if (FlagBrutalAI && ConstStrings.GameInstallPath() != null)
-                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
-            else if (ConstStrings.GameInstallPath() != null && File.Exists(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big")))
-                File.Delete(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"));
         }
-
-        private void ChkShowPatchesFirst_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (FlagShowPatchesFirst == true)
-            {
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
-                FlagShowPatchesFirst = false;
-            }
-            else
-            {
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
-                FlagShowPatchesFirst = true;
-            }
-        }
-
-        private void ChkShowPatchesFirst_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkShowPatchesFirst_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
-        }
-
-        private void ChkShowPatchesFirst_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkEAX_Click(object sender, EventArgs e)
-        {
-            if (FlagShowPatchesFirst == true)
-            {
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
-                FlagEAX = false;
-            }
-            else
-            {
-                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
-                FlagEAX = true;
-            }
-        }
-
-        private void ChkEAX_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkEAX_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
-        }
-
-        private void ChkEAX_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkWindowed_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (FlagWindowed == true)
-            {
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
-                FlagWindowed = false;
-            }
-            else
-            {
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
-                FlagWindowed = true;
-            }
-        }
-
-        private void ChkWindowed_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkWindowed_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
-        }
-
-        private void ChkWindowed_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkBrutalAI_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (FlagBrutalAI == true)
-            {
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
-                LblWarning.Hide();
-                FlagBrutalAI = false;
-            }
-            else
-            {
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
-                LblWarning.Show();
-                FlagBrutalAI = true;
-            }
-        }
-
-        private void ChkBrutalAI_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkBrutalAI_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
-        }
-
-        private void ChkBrutalAI_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkUseBetaChannel_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (FlagUseBetaChannel == true)
-            {
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
-                FlagUseBetaChannel = false;
-                Settings.Default.BetaChannelVersion = 0;
-            }
-            else
-            {
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
-                FlagUseBetaChannel = true;
-            }
-        }
-
-        private void ChkUseBetaChannel_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
-        private void ChkUseBetaChannel_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelected;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
-        }
-
-        private void ChkUseBetaChannel_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
-        }
-
         #endregion
 
         #region Checkboxes for game specific settings
@@ -1164,11 +772,13 @@ namespace PatchLauncher
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagDynamicLOD = "yes";
+                LblInfoLOD.Hide();
             }
             else
             {
                 ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
                 FlagDynamicLOD = "no";
+                LblInfoLOD.Show();
             }
         }
 

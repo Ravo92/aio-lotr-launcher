@@ -12,7 +12,7 @@ namespace PatchLauncher
         public AboutForm()
         {
             InitializeComponent();
-            Uri _Wv2CreditsUri = new("file:///" + Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME) + "/credits.html");
+            Uri _Wv2CreditsUri = new("file:///" + Path.Combine(Application.StartupPath, ConstStrings.C_HTMLFOLDER_NAME) + "/credits.html");
             Wv2Credits.Source = _Wv2CreditsUri;
 
             BackColor = Color.FromArgb(18, 18, 18);

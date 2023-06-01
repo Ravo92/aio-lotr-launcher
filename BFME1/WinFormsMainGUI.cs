@@ -66,17 +66,14 @@ namespace PatchLauncher
             PiBVersion222_7.Show();
 
             // label-Styles
-            LblDownloadSpeed.Text = "";
             LblDownloadSpeed.Font = FontHelper.GetFont(0, 16); ;
             LblDownloadSpeed.ForeColor = Color.FromArgb(192, 145, 69);
             LblDownloadSpeed.BackColor = Color.Transparent;
 
-            LblFileName.Text = "";
             LblFileName.Font = FontHelper.GetFont(0, 16); ;
             LblFileName.ForeColor = Color.FromArgb(192, 145, 69);
             LblFileName.BackColor = Color.Transparent;
 
-            LblPatchNotes.Text = "Loading Patch-Notes...";
             LblPatchNotes.Font = FontHelper.GetFont(0, 16);
             LblPatchNotes.ForeColor = Color.FromArgb(192, 145, 69);
             LblPatchNotes.BackColor = Color.Transparent;
@@ -98,13 +95,6 @@ namespace PatchLauncher
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
             PBarActualFile.BackColor = Color.FromArgb(255, 100, 0);
-
-            BtnOptions.FlatAppearance.BorderSize = 0;
-            BtnOptions.FlatStyle = FlatStyle.Flat;
-            BtnOptions.BackColor = Color.Transparent;
-            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnOptions.Font = FontHelper.GetFont(0, 16); ;
-            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnInstall.FlatAppearance.BorderSize = 0;
             BtnInstall.FlatStyle = FlatStyle.Flat;
@@ -257,29 +247,6 @@ namespace PatchLauncher
             {
                 _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
             }
-        }
-
-        private void BtnOptions_Click(object sender, EventArgs e)
-        {
-            OptionsBFME1 _options = new();
-            _options.ShowDialog();
-        }
-        private void BtnOptions_MouseLeave(object sender, EventArgs e)
-        {
-            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
-            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
-        }
-        private void BtnOptions_MouseEnter(object sender, EventArgs e)
-        {
-            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
-            BtnOptions.ForeColor = Color.FromArgb(100, 53, 5);
-            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
-        }
-        private void BtnOptions_MouseDown(object sender, MouseEventArgs e)
-        {
-            BtnOptions.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
-            BtnOptions.ForeColor = Color.FromArgb(192, 145, 69);
-            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private async void BtnInstall_Click(object sender, EventArgs e)
@@ -1172,7 +1139,6 @@ namespace PatchLauncher
                     }
                 }
 
-                BtnOptions.Show();
                 PiBArrow.Enabled = true;
 
                 if (Settings.Default.IsPatchModsShown)
@@ -1556,7 +1522,6 @@ namespace PatchLauncher
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
 
                 BtnInstall.Show();
-                BtnOptions.Hide();
             }
 
             // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
@@ -1697,11 +1662,7 @@ namespace PatchLauncher
 
         private void CloseTheLauncherToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+            Wv2Patchnotes.Dispose();
             Application.Exit();
         }
 
@@ -1776,6 +1737,18 @@ namespace PatchLauncher
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 await file.WriteLineAsync(exception.Message);
             }
+        }
+
+        private void LauncherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LauncherOptionsForm _Launcheroptions = new();
+            _Launcheroptions.ShowDialog();
+        }
+
+        private void GameSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GameOptionsForm _Gameoptions = new();
+            _Gameoptions.ShowDialog();
         }
     }
 }

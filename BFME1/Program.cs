@@ -23,12 +23,24 @@ namespace PatchLauncher
             {
                 try
                 {
-                    Directory.CreateDirectory(Path.Combine(Application.StartupPath, ConstStrings.C_LOGFOLDER_NAME));
+                    Directory.CreateDirectory(ConstStrings.C_LOGFOLDER_NAME);
                 }
                 catch (Exception ex)
                 {
                     using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                     file.WriteLineAsync(ex.Message);
+                }
+            }
+
+            if (Directory.Exists(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME))
+            {
+                try
+                {
+                    Directory.Delete(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME, true);
+                }
+                catch (Exception ex)
+                {
+                    File.AppendAllText(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFOLDER_NAME, "webView2_error.log"), ex.Message);
                 }
             }
 

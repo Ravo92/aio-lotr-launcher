@@ -38,7 +38,6 @@ namespace PatchLauncher
             PiBModDB = new PictureBox();
             PiBThemeSwitcher = new PictureBox();
             ToolTip = new ToolTip(components);
-            BtnOptions = new Button();
             TmrPatchNotes = new Timer(components);
             LblDownloadSpeed = new Label();
             BtnInstall = new Button();
@@ -173,28 +172,6 @@ namespace PatchLauncher
             ToolTip.Draw += Tooltip_Draw;
             ToolTip.Popup += TooltipPopup;
             // 
-            // BtnOptions
-            // 
-            BtnOptions.BackColor = System.Drawing.Color.Black;
-            BtnOptions.BackgroundImageLayout = ImageLayout.Stretch;
-            BtnOptions.FlatAppearance.BorderSize = 0;
-            BtnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            BtnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            BtnOptions.FlatStyle = FlatStyle.Flat;
-            BtnOptions.ForeColor = System.Drawing.Color.Transparent;
-            BtnOptions.Location = new System.Drawing.Point(1068, 685);
-            BtnOptions.Name = "BtnOptions";
-            BtnOptions.Size = new System.Drawing.Size(200, 51);
-            BtnOptions.TabIndex = 10;
-            BtnOptions.TabStop = false;
-            BtnOptions.Text = "OPTIONS";
-            BtnOptions.UseMnemonic = false;
-            BtnOptions.UseVisualStyleBackColor = false;
-            BtnOptions.Click += BtnOptions_Click;
-            BtnOptions.MouseDown += BtnOptions_MouseDown;
-            BtnOptions.MouseEnter += BtnOptions_MouseEnter;
-            BtnOptions.MouseLeave += BtnOptions_MouseLeave;
-            // 
             // TmrPatchNotes
             // 
             TmrPatchNotes.Enabled = true;
@@ -208,6 +185,7 @@ namespace PatchLauncher
             LblDownloadSpeed.Size = new System.Drawing.Size(103, 25);
             LblDownloadSpeed.TabIndex = 13;
             LblDownloadSpeed.Text = "@ 32 MB/s";
+            LblDownloadSpeed.Visible = false;
             // 
             // BtnInstall
             // 
@@ -240,6 +218,7 @@ namespace PatchLauncher
             LblFileName.Size = new System.Drawing.Size(88, 25);
             LblFileName.TabIndex = 17;
             LblFileName.Text = "Filename";
+            LblFileName.Visible = false;
             // 
             // PibLoadingRing
             // 
@@ -503,9 +482,9 @@ namespace PatchLauncher
             // ExitToolStripMenuItem
             // 
             ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            ExitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             ExitToolStripMenuItem.Text = "Exit";
-            ExitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
+            ExitToolStripMenuItem.Click += CloseTheLauncherToolStripMenuItem_Click;
             // 
             // OptionsToolStripMenuItem
             // 
@@ -607,7 +586,6 @@ namespace PatchLauncher
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.ActiveBorder;
-            BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(1280, 744);
             Controls.Add(PBarActualFile);
@@ -619,7 +597,6 @@ namespace PatchLauncher
             Controls.Add(LblPatchNotes);
             Controls.Add(LblFileName);
             Controls.Add(LblDownloadSpeed);
-            Controls.Add(BtnOptions);
             Controls.Add(PiBThemeSwitcher);
             Controls.Add(PiBModDB);
             Controls.Add(PiBDiscord);
@@ -673,7 +650,6 @@ namespace PatchLauncher
         private PictureBox PiBModDB;
         private PictureBox PiBThemeSwitcher;
         private ToolTip ToolTip;
-        private Button BtnOptions;
         private Timer TmrPatchNotes;
         private Label LblDownloadSpeed;
         private Button BtnInstall;
