@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -117,6 +118,11 @@ namespace PatchLauncher
             PiBModDB.Image = Helper.Properties.Resources.moddb;
             PiBTwitch.Image = Helper.Properties.Resources.twitch;
             PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
+
+            PibHeader.Image = Helper.Properties.Resources.header;
+            PibLoadingBorder.Image = Helper.Properties.Resources.loadingBorder;
+            PibLoadingRing.Image = Helper.Properties.Resources.loadingRing;
+
             PiBVersion103.Image = Helper.Properties.Resources.BtnPatchSelection_103;
 
             if (Settings.Default.IsPatch32Installed)

@@ -395,11 +395,13 @@ namespace PatchLauncher
             // 
             resources.ApplyResources(LauncherSettingsToolStripMenuItem, "LauncherSettingsToolStripMenuItem");
             LauncherSettingsToolStripMenuItem.Name = "LauncherSettingsToolStripMenuItem";
+            LauncherSettingsToolStripMenuItem.Click += LauncherSettingsToolStripMenuItem_Click;
             // 
             // GameSettingsToolStripMenuItem
             // 
             resources.ApplyResources(GameSettingsToolStripMenuItem, "GameSettingsToolStripMenuItem");
             GameSettingsToolStripMenuItem.Name = "GameSettingsToolStripMenuItem";
+            GameSettingsToolStripMenuItem.Click += GameSettingsToolStripMenuItem_Click;
             // 
             // AdvancedToolStripMenuItem
             // 
