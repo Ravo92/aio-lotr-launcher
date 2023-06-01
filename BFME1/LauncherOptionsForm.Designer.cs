@@ -55,8 +55,8 @@
             // 
             // BtnDefault
             // 
-            resources.ApplyResources(BtnDefault, "BtnDefault");
             BtnDefault.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnDefault, "BtnDefault");
             BtnDefault.FlatAppearance.BorderSize = 0;
             BtnDefault.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -77,8 +77,8 @@
             // 
             // ChkEAX
             // 
-            resources.ApplyResources(ChkEAX, "ChkEAX");
             ChkEAX.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkEAX, "ChkEAX");
             ChkEAX.FlatAppearance.BorderSize = 0;
             ChkEAX.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -94,8 +94,8 @@
             // 
             // PibBorderLauncherOptions
             // 
-            resources.ApplyResources(PibBorderLauncherOptions, "PibBorderLauncherOptions");
             PibBorderLauncherOptions.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibBorderLauncherOptions, "PibBorderLauncherOptions");
             PibBorderLauncherOptions.Name = "PibBorderLauncherOptions";
             PibBorderLauncherOptions.TabStop = false;
             // 
@@ -106,8 +106,8 @@
             // 
             // PibHeader
             // 
-            resources.ApplyResources(PibHeader, "PibHeader");
             PibHeader.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibHeader, "PibHeader");
             PibHeader.Name = "PibHeader";
             PibHeader.TabStop = false;
             // 
@@ -128,8 +128,8 @@
             // 
             // ChkWindowed
             // 
-            resources.ApplyResources(ChkWindowed, "ChkWindowed");
             ChkWindowed.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkWindowed, "ChkWindowed");
             ChkWindowed.FlatAppearance.BorderSize = 0;
             ChkWindowed.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkWindowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -150,8 +150,8 @@
             // 
             // ChkBrutalAI
             // 
-            resources.ApplyResources(ChkBrutalAI, "ChkBrutalAI");
             ChkBrutalAI.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkBrutalAI, "ChkBrutalAI");
             ChkBrutalAI.FlatAppearance.BorderSize = 0;
             ChkBrutalAI.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkBrutalAI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -182,8 +182,8 @@
             // 
             // ChkShowPatchesFirst
             // 
-            resources.ApplyResources(ChkShowPatchesFirst, "ChkShowPatchesFirst");
             ChkShowPatchesFirst.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkShowPatchesFirst, "ChkShowPatchesFirst");
             ChkShowPatchesFirst.FlatAppearance.BorderSize = 0;
             ChkShowPatchesFirst.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkShowPatchesFirst.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -199,8 +199,8 @@
             // 
             // BtnApply
             // 
-            resources.ApplyResources(BtnApply, "BtnApply");
             BtnApply.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnApply, "BtnApply");
             BtnApply.FlatAppearance.BorderSize = 0;
             BtnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -216,8 +216,8 @@
             // 
             // BtnCancel
             // 
-            resources.ApplyResources(BtnCancel, "BtnCancel");
             BtnCancel.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnCancel, "BtnCancel");
             BtnCancel.FlatAppearance.BorderSize = 0;
             BtnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -238,8 +238,8 @@
             // 
             // ChkUseBetaChannel
             // 
-            resources.ApplyResources(ChkUseBetaChannel, "ChkUseBetaChannel");
             ChkUseBetaChannel.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkUseBetaChannel, "ChkUseBetaChannel");
             ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
             ChkUseBetaChannel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkUseBetaChannel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -255,8 +255,8 @@
             // 
             // LauncherOptionsForm
             // 
-            resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            resources.ApplyResources(this, "$this");
             Controls.Add(LblUseBetaChannel);
             Controls.Add(ChkUseBetaChannel);
             Controls.Add(BtnCancel);

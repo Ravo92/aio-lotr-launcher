@@ -73,6 +73,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             TopMost = true;
+            KeyDown += AboutForm_KeyDown;
             ((System.ComponentModel.ISupportInitialize)Wv2Credits).EndInit();
             ResumeLayout(false);
         }

@@ -28,7 +28,7 @@ namespace PatchLauncher
             switch (_language)
             {
                 case SelectLanguage.Language.English:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
                     break;
                 case SelectLanguage.Language.German:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
@@ -69,64 +69,55 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
-            LblEAX.Text = "Activate support for EAX-Sound";
             LblEAX.Font = FontHelper.GetFont(0, 16);
             LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
             LblEAX.BackColor = Color.Transparent;
 
-            LblLauncherSettings.Text = "Launcher Settings";
             LblLauncherSettings.Font = FontHelper.GetFont(1, 16);
             LblLauncherSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblLauncherSettings.BackColor = Color.Transparent;
 
-            LblOptions.Text = "Settings";
             LblOptions.Font = FontHelper.GetFont(1, 20);
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblLauncherVersion.Text = "Active Launcher Version: \n" + Assembly.GetEntryAssembly()!.GetName().Version;
+            LblLauncherVersion.Text += Assembly.GetEntryAssembly()!.GetName().Version;
             LblLauncherVersion.Font = FontHelper.GetFont(0, 12);
             LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblLauncherVersion.BackColor = Color.Transparent;
 
-            LblPatchVersion.Text = "Active Game Version: \n" + (Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "") + Settings.Default.PatchVersionInstalled.ToString();
+            LblPatchVersion.Text += Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "" + Settings.Default.PatchVersionInstalled.ToString();
             LblPatchVersion.Font = FontHelper.GetFont(0, 12);
             LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblPatchVersion.BackColor = Color.Transparent;
 
-            LblWindowed.Text = "Launch game in windowed mode";
             LblWindowed.Font = FontHelper.GetFont(0, 16);
             LblWindowed.ForeColor = Color.FromArgb(192, 145, 69);
             LblWindowed.BackColor = Color.Transparent;
 
-            LblBrutalAI.Text = "Use the experimental brutal AI";
             LblBrutalAI.Font = FontHelper.GetFont(0, 16);
             LblBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
             LblBrutalAI.BackColor = Color.Transparent;
 
-            LblWarning.Text = "";
             LblWarning.Font = FontHelper.GetFont(0, 16);
             LblWarning.ForeColor = Color.Red;
             LblWarning.BackColor = Color.Transparent;
 
-            LblShowPatchesFirst.Text = "Show Patch/Mod-Selection first at startup";
             LblShowPatchesFirst.Font = FontHelper.GetFont(0, 16);
             LblShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
             LblShowPatchesFirst.BackColor = Color.Transparent;
 
-            LblUseBetaChannel.Text = "Enable the latest Patch 2.22 Beta Version";
             LblUseBetaChannel.Font = FontHelper.GetFont(0, 16);
             LblUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
             LblUseBetaChannel.BackColor = Color.Transparent;
 
             if (FlagUseBetaChannel)
             {
-                LblPatchVersion.Text = "Active Game Version: \n" + (Settings.Default.PatchVersionInstalled).ToString() + " BETA " + Settings.Default.BetaChannelVersion.ToString();
+                LblPatchVersion.Text += Settings.Default.PatchVersionInstalled.ToString() + " BETA " + Settings.Default.BetaChannelVersion.ToString();
             }
 
             if (FlagBrutalAI)
             {
-                LblWarning.Text = "WARNING: Brutal AI is activated. \n You may not be able to play online";
                 LblWarning.Show();
             }
             else

@@ -118,6 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="BtnDefault.Location" type="System.Drawing.Point, System.Drawing">
+    <value>566, 251</value>
+  </data>
+  <data name="BtnDefault.Text" xml:space="preserve">
+    <value>STANDARD</value>
+  </data>
+  <data name="LblEAX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 15</value>
+  </data>
+  <data name="LblEAX.Text" xml:space="preserve">
+    <value>EAX Support aktivieren</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PibBorderLauncherOptions.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
   <data name="PibBorderLauncherOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAYAAAByNR6YAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -248,6 +264,21 @@
         L64WlyL70TsVWL//Nsw5Zs4xc46Zc+y15vj3OmbOMXP2Pff6l/r53yfz00iXkNqNq1/+9Mc/+H8XcuUv
         8qxDawAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="PibBorderLauncherOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 115</value>
+  </data>
+  <data name="PibBorderLauncherOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>775, 400</value>
+  </data>
+  <data name="PibBorderLauncherOptions.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="LblLauncherSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 15</value>
+  </data>
+  <data name="LblLauncherSettings.Text" xml:space="preserve">
+    <value>Launcher-Einstellungen</value>
   </data>
   <data name="PibHeader.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1507,6 +1538,83 @@
         PyV9f/QSTJvqo0j6qfe5inO9r54Ntp0Jj6ZwpZflAu76/3IyD5OeK6k6iF4i0VfliYpzwbopXyHxlylc
         S99X/yHVh0hvU4ttsf05bH/hL/z/3+QzuiudCwcAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="PibHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 0</value>
+  </data>
+  <data name="LblOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 9</value>
+  </data>
+  <data name="LblOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 15</value>
+  </data>
+  <data name="LblOptions.Text" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="LblPatchVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>580, 450</value>
+  </data>
+  <data name="LblPatchVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 21</value>
+  </data>
+  <data name="LblPatchVersion.Text" xml:space="preserve">
+    <value>Patch-Version: </value>
+  </data>
+  <data name="LblWindowed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 15</value>
+  </data>
+  <data name="LblWindowed.Text" xml:space="preserve">
+    <value>Starte das Spiel im Fenstermodus</value>
+  </data>
+  <data name="LblBrutalAI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 15</value>
+  </data>
+  <data name="LblBrutalAI.Text" xml:space="preserve">
+    <value>Aktiviere die Brutale KI (Beta)</value>
+  </data>
+  <data name="LblWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 425</value>
+  </data>
+  <data name="LblWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>351, 75</value>
+  </data>
+  <data name="LblWarning.Text" xml:space="preserve">
+    <value>Warnung! Brutale KI ist aktiviert worden!
+Du wirst unter Umständen
+nicht online spielen können!</value>
+  </data>
+  <data name="LblLauncherVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>580, 480</value>
+  </data>
+  <data name="LblLauncherVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 21</value>
+  </data>
+  <data name="LblLauncherVersion.Text" xml:space="preserve">
+    <value>Launcher-Version: </value>
+  </data>
+  <data name="LblShowPatchesFirst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 15</value>
+  </data>
+  <data name="LblShowPatchesFirst.Text" xml:space="preserve">
+    <value>Zeige zuerst Patches Anstelle von Patchnotes</value>
+  </data>
+  <data name="BtnApply.Location" type="System.Drawing.Point, System.Drawing">
+    <value>566, 134</value>
+  </data>
+  <data name="BtnApply.Text" xml:space="preserve">
+    <value>BESTÄTIGEN</value>
+  </data>
+  <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>566, 194</value>
+  </data>
+  <data name="BtnCancel.Text" xml:space="preserve">
+    <value>ABBRECHEN</value>
+  </data>
+  <data name="LblUseBetaChannel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 15</value>
+  </data>
+  <data name="LblUseBetaChannel.Text" xml:space="preserve">
+    <value>Benutze den Beta-Channel von 2.22 (Benötigt Neustart)</value>
   </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -17612,6 +17720,9 @@
         /wkAhg39JwCYQrcw02kM/ScA6GXi8YUaqqXC7+ZwG6X/53/9v7AKxb4zPRxRAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>784, 521</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIAAoIAQAFgAAACgAAAAAAQAAAAIAAAEAIAAAAAAAACAEAAAAAAAAAAAAAAAAAAAA
@@ -22122,5 +22233,8 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////8=
 </value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Launcher spezifische Einstellungen</value>
   </data>
 </root>

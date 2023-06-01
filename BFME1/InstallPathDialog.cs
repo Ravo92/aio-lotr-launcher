@@ -18,7 +18,7 @@ namespace PatchLauncher
             switch (_language)
             {
                 case SelectLanguage.Language.English:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
                     break;
                 case SelectLanguage.Language.German:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");

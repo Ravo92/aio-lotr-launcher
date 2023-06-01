@@ -18,7 +18,7 @@ namespace PatchLauncher
             switch (_language)
             {
                 case SelectLanguage.Language.English:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
                     break;
                 case SelectLanguage.Language.German:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
@@ -28,6 +28,9 @@ namespace PatchLauncher
             }
 
             InitializeComponent();
+
+            KeyPreview = true;
+
             Uri _Wv2CreditsUri = new("file:///" + Path.Combine(Application.StartupPath, ConstStrings.C_HTMLFOLDER_NAME) + "/credits.html");
             Wv2Credits.Source = _Wv2CreditsUri;
 
@@ -65,6 +68,14 @@ namespace PatchLauncher
             BtnClose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
             BtnClose.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
+        }
+
+        private void AboutForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
         }
     }
 }
