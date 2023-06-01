@@ -11,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -27,6 +28,20 @@ namespace PatchLauncher
         public WinFormsMainGUI()
         {
             #region logic
+
+            SelectLanguage.Language _language = (SelectLanguage.Language)Settings.Default.Language;
+
+            switch (_language)
+            {
+                case SelectLanguage.Language.English:
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                    break;
+                case SelectLanguage.Language.German:
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                    break;
+                default:
+                    break;
+            }
 
             InitializeComponent();
 
@@ -80,14 +95,12 @@ namespace PatchLauncher
             LblPatchNotes.BackColor = Color.Transparent;
             LblPatchNotes.BorderStyle = BorderStyle.None;
 
-            LblInstalledPatches.Text = "Patches";
             LblInstalledPatches.Font = FontHelper.GetFont(1, 24);
             LblInstalledPatches.ForeColor = Color.FromArgb(192, 145, 69);
             LblInstalledPatches.BackColor = Color.Transparent;
             LblInstalledPatches.BorderStyle = BorderStyle.None;
             LblInstalledPatches.OutlineWidth = 6;
 
-            LblModExplanation.Text = "Here you can choose which patch you want to play. The active one will get a star symbol in bottom right.";
             LblModExplanation.Font = FontHelper.GetFont(0, 20);
             LblModExplanation.ForeColor = Color.FromArgb(192, 145, 69);
             LblModExplanation.BackColor = Color.Transparent;
