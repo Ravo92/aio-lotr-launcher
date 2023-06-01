@@ -240,7 +240,7 @@ namespace PatchLauncher
             // PiBArrow
             // 
             resources.ApplyResources(PiBArrow, "PiBArrow");
-            PiBArrow.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
+            PiBArrow.BackColor = System.Drawing.Color.Red;
             PiBArrow.Cursor = Cursors.Hand;
             PiBArrow.Name = "PiBArrow";
             PiBArrow.TabStop = false;
