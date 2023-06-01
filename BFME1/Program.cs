@@ -19,6 +19,19 @@ namespace PatchLauncher
         {
             ApplicationConfiguration.Initialize();
 
+            if (!Directory.Exists(ConstStrings.C_LOGFOLDER_NAME))
+            {
+                try
+                {
+                    Directory.CreateDirectory(Path.Combine(Application.StartupPath, ConstStrings.C_LOGFOLDER_NAME));
+                }
+                catch (Exception ex)
+                {
+                    using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
+                    file.WriteLineAsync(ex.Message);
+                }
+            }
+
             string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
             if (!File.Exists(configPath))
             {
@@ -45,19 +58,8 @@ namespace PatchLauncher
                 Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                 Settings.Default.Save();
             }
-            Application.Run(new WinFormsMainGUI());
 
-            if (Directory.Exists(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME))
-            {
-                try
-                {
-                    Directory.Delete(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME, true);
-                }
-                catch (IOException ex)
-                {
-                    File.AppendAllText("webView2_Version.log", ex.Message);
-                }
-            }
+            Application.Run(new WinFormsMainGUI());
         }
     }
 }

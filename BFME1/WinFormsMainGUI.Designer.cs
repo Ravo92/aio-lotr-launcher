@@ -451,7 +451,6 @@ namespace PatchLauncher
             MenuItemLaunchGame.Name = "MenuItemLaunchGame";
             MenuItemLaunchGame.Size = new System.Drawing.Size(175, 22);
             MenuItemLaunchGame.Text = "Launch the Game";
-            MenuItemLaunchGame.Click += MenuItemLaunchGame_Click;
             // 
             // closeTheLauncherToolStripMenuItem
             // 
@@ -589,6 +588,7 @@ namespace PatchLauncher
             AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
             AboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             AboutToolStripMenuItem.Text = "About";
+            AboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             // 
             // PBarActualFile
             // 

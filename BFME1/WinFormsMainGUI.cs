@@ -197,13 +197,11 @@ namespace PatchLauncher
         {
             try
             {
-                string _version = CoreWebView2Environment.GetAvailableBrowserVersionString();
-                File.WriteAllText("webView2_Version.log", _version);
+                File.WriteAllText(Path.Combine(Application.StartupPath, ConstStrings.C_LOGFOLDER_NAME, "webView2_Version.log"), CoreWebView2Environment.GetAvailableBrowserVersionString());
             }
             catch (WebView2RuntimeNotFoundException)
             {
-                string fileName = Path.Combine(Application.StartupPath, "Tools", "MicrosoftEdgeWebview2Setup.exe");
-                await RunWebViewSilentSetupAsync(fileName);
+                await RunWebViewSilentSetupAsync(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, "MicrosoftEdgeWebview2Setup.exe"));
             }
         }
 
@@ -1666,30 +1664,6 @@ namespace PatchLauncher
             }
         }
 
-        private void MenuItemLaunchGame_Click(object sender, EventArgs e)
-        {
-            PiBVersion103.Enabled = false;
-            PiBVersion106.Enabled = false;
-            PiBVersion222_5.Enabled = false;
-            PiBVersion222_6.Enabled = false;
-            PiBVersion222_7.Enabled = false;
-
-            Process _process = new();
-            _process.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_GAME_FILE);
-
-            // Start game windowed
-            if (Settings.Default.StartGameWindowed)
-            {
-                _process.StartInfo.Arguments = "-win";
-            }
-
-            _process.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
-            _process.Start();
-
-            _process.WaitForExitAsync();
-            _process.Exited += GameisClosed;
-        }
-
         private void LaunchGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PiBVersion103.Enabled = false;
@@ -1749,6 +1723,17 @@ namespace PatchLauncher
         private void OpenLauncherDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", Application.StartupPath);
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm _about = new();
+
+            DialogResult dr = _about.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                _about.Close();
+            }
         }
 
         private async void RepairGameToolStripMenuItem_Click(object sender, EventArgs e)
