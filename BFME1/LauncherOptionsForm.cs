@@ -44,6 +44,8 @@ namespace PatchLauncher
             #region Styles
             //Main Form style behaviour
 
+            PibHeader.Image = Helper.Properties.Resources.header;
+            PibBorderLauncherOptions.Image = Helper.Properties.Resources.borderRectangle;
             BackgroundImage = Helper.Properties.Resources.bgMap;
 
             // Button-Styles
