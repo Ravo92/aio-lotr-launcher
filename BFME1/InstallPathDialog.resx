@@ -117,125 +117,131 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnAccept.Text" xml:space="preserve">
+    <value>ACCEPT</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TxtInstallPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 48</value>
+  <data name="BtnChoose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 84</value>
   </data>
-  <data name="TxtInstallPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 16</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TxtInstallPath.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="TxtInstallPath.WordWrap" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;TxtInstallPath.Name" xml:space="preserve">
-    <value>TxtInstallPath</value>
-  </data>
-  <data name="&gt;&gt;TxtInstallPath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TxtInstallPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TxtInstallPath.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="LblChooseDir.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LblChooseDir.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
-  </data>
-  <data name="LblChooseDir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 15</value>
-  </data>
-  <data name="LblChooseDir.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="LblChooseDir.Text" xml:space="preserve">
-    <value>Where do you want to install the game \"The Battle for Middle-earth\"?</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>724, 151</value>
   </data>
   <data name="&gt;&gt;LblChooseDir.Name" xml:space="preserve">
     <value>LblChooseDir</value>
   </data>
-  <data name="&gt;&gt;LblChooseDir.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LblChooseDir.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LblChooseDir.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BtnChoose.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="BtnChoose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="BtnChoose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 84</value>
-  </data>
-  <data name="BtnChoose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 51</value>
-  </data>
-  <data name="BtnChoose.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="BtnChoose.Text" xml:space="preserve">
-    <value>CHOOSE...</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.Name" xml:space="preserve">
-    <value>BtnChoose</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="BtnAccept.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="BtnAccept.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="BtnAccept.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 84</value>
-  </data>
-  <data name="BtnAccept.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 51</value>
-  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="BtnAccept.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
-  </data>
-  <data name="BtnAccept.Text" xml:space="preserve">
-    <value>ACCEPT</value>
-  </data>
-  <data name="&gt;&gt;BtnAccept.Name" xml:space="preserve">
-    <value>BtnAccept</value>
-  </data>
-  <data name="&gt;&gt;BtnAccept.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BtnAccept.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;BtnAccept.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="BtnChoose.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnAccept.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;BtnAccept.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnAccept.Name" xml:space="preserve">
+    <value>BtnAccept</value>
+  </data>
+  <data name="LblChooseDir.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>722, 151</value>
+  </data>
+  <data name="&gt;&gt;LblChooseDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LblChooseDir.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;TxtInstallPath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>InstallPathDialog</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.Name" xml:space="preserve">
+    <value>BtnChoose</value>
+  </data>
+  <data name="LblChooseDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 15</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TxtInstallPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>697, 16</value>
+  </data>
+  <data name="BtnChoose.Text" xml:space="preserve">
+    <value>CHOOSE...</value>
+  </data>
+  <data name="BtnChoose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="LblChooseDir.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Installation Directory</value>
+  </data>
+  <data name="BtnChoose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 51</value>
+  </data>
+  <data name="&gt;&gt;TxtInstallPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BtnAccept.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 51</value>
+  </data>
+  <data name="TxtInstallPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 48</value>
+  </data>
+  <data name="LblChooseDir.Text" xml:space="preserve">
+    <value>Where do you want to install the game \"The Battle for Middle-earth\"?</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblChooseDir.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="BtnChoose.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="&gt;&gt;BtnAccept.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="BtnAccept.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 84</value>
+  </data>
+  <data name="&gt;&gt;LblChooseDir.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="BtnAccept.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="TxtInstallPath.WordWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TxtInstallPath.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TxtInstallPath.Name" xml:space="preserve">
+    <value>TxtInstallPath</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4748,16 +4754,10 @@
         //////////////////////////////////////////////////8=
 </value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+  <data name="&gt;&gt;TxtInstallPath.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Installation Directory</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>InstallPathDialog</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

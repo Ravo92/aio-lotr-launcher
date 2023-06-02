@@ -139,6 +139,9 @@
   <data name="LblModExplanation.Text" xml:space="preserve">
     <value>Hier kannst du auswählen, welchen Patch du spielen möchtest.</value>
   </data>
+  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 48</value>
+  </data>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
   </data>
@@ -151,8 +154,11 @@
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Beenden</value>
   </data>
-  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 48</value>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Datei</value>
   </data>
   <data name="LaunchGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
@@ -169,11 +175,11 @@
   <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
     <value>Beenden</value>
   </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
+  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 20</value>
   </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Datei</value>
+  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Optionen</value>
   </data>
   <data name="LauncherSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 22</value>
@@ -187,11 +193,11 @@
   <data name="GameSettingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Spieleinstellungen</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
+  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Optionen</value>
+  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
+    <value>Erweitert</value>
   </data>
   <data name="OpenLauncherDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 22</value>
@@ -231,12 +237,6 @@
   </data>
   <data name="RepairGameToolStripMenuItem.Text" xml:space="preserve">
     <value>Spieldateien überprüfen und reparieren</value>
-  </data>
-  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
-  </data>
-  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
-    <value>Erweitert</value>
   </data>
   <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 20</value>

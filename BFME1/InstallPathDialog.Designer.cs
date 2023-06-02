@@ -37,8 +37,8 @@
             // 
             // TxtInstallPath
             // 
-            TxtInstallPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(TxtInstallPath, "TxtInstallPath");
+            TxtInstallPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
             TxtInstallPath.Name = "TxtInstallPath";
             // 
             // LblChooseDir
@@ -49,8 +49,8 @@
             // 
             // BtnChoose
             // 
-            BtnChoose.BackColor = System.Drawing.SystemColors.ActiveCaption;
             resources.ApplyResources(BtnChoose, "BtnChoose");
+            BtnChoose.BackColor = System.Drawing.SystemColors.ActiveCaption;
             BtnChoose.FlatAppearance.BorderSize = 0;
             BtnChoose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnChoose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -66,8 +66,8 @@
             // 
             // BtnAccept
             // 
-            BtnAccept.BackColor = System.Drawing.SystemColors.ActiveCaption;
             resources.ApplyResources(BtnAccept, "BtnAccept");
+            BtnAccept.BackColor = System.Drawing.SystemColors.ActiveCaption;
             BtnAccept.FlatAppearance.BorderSize = 0;
             BtnAccept.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnAccept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -83,9 +83,9 @@
             // 
             // InstallPathDialog
             // 
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            resources.ApplyResources(this, "$this");
             Controls.Add(BtnAccept);
             Controls.Add(BtnChoose);
             Controls.Add(LblChooseDir);

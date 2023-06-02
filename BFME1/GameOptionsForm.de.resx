@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnDefault.Text" xml:space="preserve">
+    <value>STANDARD</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PibBorderLauncherOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1508,6 +1511,28 @@
         S99X/yHVh0hvU4ttsf05bH/hL/z/3+QzuiudCwcAAAAASUVORK5CYII=
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PibHeader.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PibHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 0</value>
+  </data>
+  <data name="PibHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1130, 105</value>
+  </data>
+  <data name="PibHeader.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Normal</value>
+  </data>
+  <data name="LblOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 10</value>
+  </data>
+  <data name="LblOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 15</value>
+  </data>
+  <data name="LblOptions.Text" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
   <data name="PibBorderGameOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAggAAAKeCAYAAADAw+M9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -1709,6 +1734,85 @@
         9Hd8lL/Le/3+H5bxs1phvpA4S0G7Vg6m50bxg2+1mP75d2Gc24xzm3Fue69x3sq/522f2jjtkf6Oj/J3
         ea/f/0MyfjL+uQhcLQd/8xc//JP/D+Bt7w4vJHRSAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="LblGameSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 15</value>
+  </data>
+  <data name="LblGameSettings.Text" xml:space="preserve">
+    <value>Grafik-Einstellungen</value>
+  </data>
+  <data name="LblAniTextureFiltering.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 15</value>
+  </data>
+  <data name="LblAniTextureFiltering.Text" xml:space="preserve">
+    <value>Anisotropische Texturenfilterung aktivieren</value>
+  </data>
+  <data name="LblTerrainLighting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 15</value>
+  </data>
+  <data name="LblTerrainLighting.Text" xml:space="preserve">
+    <value>Geländebeleuchtung aktivieren</value>
+  </data>
+  <data name="Lbl2DShadows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 15</value>
+  </data>
+  <data name="Lbl2DShadows.Text" xml:space="preserve">
+    <value>2D Schatten anzeigen</value>
+  </data>
+  <data name="Lbl3DShadows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 15</value>
+  </data>
+  <data name="Lbl3DShadows.Text" xml:space="preserve">
+    <value>3D-Schatten anzeigen</value>
+  </data>
+  <data name="LblShowProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 15</value>
+  </data>
+  <data name="LblShowProps.Text" xml:space="preserve">
+    <value>Mehr Gegenstanddetails</value>
+  </data>
+  <data name="LblSmoothWaterBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 15</value>
+  </data>
+  <data name="LblSmoothWaterBorder.Text" xml:space="preserve">
+    <value>Wasserkanten glätten</value>
+  </data>
+  <data name="LblDynamicLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 15</value>
+  </data>
+  <data name="LblDynamicLOD.Text" xml:space="preserve">
+    <value>Dynamisches Level of Detail (LoD)</value>
+  </data>
+  <data name="LblHeatEffects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 15</value>
+  </data>
+  <data name="LblHeatEffects.Text" xml:space="preserve">
+    <value>Hitze-Effekte anzeigen</value>
+  </data>
+  <data name="LblShowAnimations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 15</value>
+  </data>
+  <data name="LblShowAnimations.Text" xml:space="preserve">
+    <value>Zeige mehr Animationen</value>
+  </data>
+  <data name="LblResolution.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 15</value>
+  </data>
+  <data name="LblResolution.Text" xml:space="preserve">
+    <value>Bestimme die Spielauflösung</value>
+  </data>
+  <data name="BtnApply.Text" xml:space="preserve">
+    <value>ÜBERNEHMEN</value>
+  </data>
+  <data name="BtnCancel.Text" xml:space="preserve">
+    <value>ABBRECHEN</value>
+  </data>
+  <data name="LblInfoLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 50</value>
+  </data>
+  <data name="LblInfoLOD.Text" xml:space="preserve">
+    <value>Dynamisches Level of Detail (LoD) ist in diesem Spiel
+verbuggt und sollte daher nicht verwendet werden!</value>
   </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -22324,5 +22428,8 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////8=
 </value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Spiele-Einstellungen anpassen</value>
   </data>
 </root>
