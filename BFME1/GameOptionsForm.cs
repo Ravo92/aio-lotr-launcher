@@ -25,14 +25,12 @@ namespace PatchLauncher
 
         public GameOptionsForm()
         {
-            SelectLanguage.Language _language = (SelectLanguage.Language)Settings.Default.Language;
-
-            switch (_language)
+            switch (Settings.Default.Language)
             {
-                case SelectLanguage.Language.English:
+                case 0:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
                     break;
-                case SelectLanguage.Language.German:
+                case 1:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
                     break;
                 default:

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using PatchLauncher.Properties;
 using System.Reflection;
 using System.Threading;
+using System.Diagnostics;
 
 namespace PatchLauncher
 {
@@ -20,17 +21,19 @@ namespace PatchLauncher
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
         bool FlagShowPatchesFirst = Settings.Default.ShowPatchesFirst;
         bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
+        int FlagLanguageIndex = Settings.Default.Language;
+
+        bool FlagIsLanguageChanged = false;
+        bool FlagIsBetaChannelChanged = false;
 
         public LauncherOptionsForm()
         {
-            SelectLanguage.Language _language = (SelectLanguage.Language)Settings.Default.Language;
-
-            switch (_language)
+            switch (FlagLanguageIndex)
             {
-                case SelectLanguage.Language.English:
+                case 0:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
                     break;
-                case SelectLanguage.Language.German:
+                case 1:
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
                     break;
                 default:
@@ -47,6 +50,8 @@ namespace PatchLauncher
             PibHeader.Image = Helper.Properties.Resources.header;
             PibBorderLauncherOptions.Image = Helper.Properties.Resources.borderRectangle;
             BackgroundImage = Helper.Properties.Resources.bgMap;
+
+            CmBLanguage.SelectedIndex = FlagLanguageIndex;
 
             // Button-Styles
             BtnApply.FlatAppearance.BorderSize = 0;
@@ -112,6 +117,10 @@ namespace PatchLauncher
             LblUseBetaChannel.Font = FontHelper.GetFont(0, 16);
             LblUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
             LblUseBetaChannel.BackColor = Color.Transparent;
+
+            LblLanguage.Font = FontHelper.GetFont(0, 16);
+            LblLanguage.ForeColor = Color.FromArgb(192, 145, 69);
+            LblLanguage.BackColor = Color.Transparent;
 
             if (FlagUseBetaChannel)
             {
@@ -226,11 +235,24 @@ namespace PatchLauncher
         {
             SaveSettings();
 
-            if (FlagUseBetaChannel)
+            if (FlagIsLanguageChanged || FlagIsBetaChannelChanged)
             {
-                MessageBox.Show("Please restart the launcher now to activate the Beta-Channel!");
+                DialogResult _dialogResult = MessageBox.Show(Strings.Msg_Restart_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);
+                if (_dialogResult == DialogResult.Yes)
+                {
+                    Process _restarterProcess = new();
+                    _restarterProcess.StartInfo.FileName = ConstStrings.C_RESTARTEREXE_FILENAME;
+                    _restarterProcess.StartInfo.Arguments = "--restart --BFME1Launcher";
+                    _restarterProcess.StartInfo.WorkingDirectory = Application.StartupPath;
+                    _restarterProcess.StartInfo.UseShellExecute = true;
+                    _restarterProcess.Start();
+                    Application.Exit();
+                }
+                else if (_dialogResult == DialogResult.No)
+                {
+                    Close();
+                }
             }
-
             Close();
         }
 
@@ -286,6 +308,19 @@ namespace PatchLauncher
             Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
             Settings.Default.ShowPatchesFirst = FlagShowPatchesFirst;
+
+            if (FlagLanguageIndex != Settings.Default.Language)
+            {
+                FlagIsLanguageChanged = true;
+            }
+
+            if (FlagUseBetaChannel != Settings.Default.UseBetaChannel)
+            {
+                FlagIsBetaChannelChanged = true;
+                Settings.Default.BetaChannelVersion = 0;
+            }
+
+            Settings.Default.Language = FlagLanguageIndex;
             Settings.Default.UseBetaChannel = FlagUseBetaChannel;
             Settings.Default.Save();
 
@@ -481,7 +516,7 @@ namespace PatchLauncher
             {
                 ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
                 FlagUseBetaChannel = false;
-                Settings.Default.BetaChannelVersion = 0;
+
             }
             else
             {
@@ -521,6 +556,21 @@ namespace PatchLauncher
             if (e.KeyCode == Keys.Escape)
             {
                 Close();
+            }
+        }
+
+        private void CmBLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (CmBLanguage.SelectedIndex)
+            {
+                case 0:
+                    FlagLanguageIndex = 0;
+                    break;
+                case 1:
+                    FlagLanguageIndex = 1;
+                    break;
+                default:
+                    break;
             }
         }
     }

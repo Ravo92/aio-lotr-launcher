@@ -40,6 +40,9 @@ namespace Helper
 
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
+        public const string C_RESTARTEREXE_FILENAME = "Restarter.exe";
+        public const string C_LAUNCHEREXE_BFME1_FILENAME = "PatchLauncherBFME.exe";
+
         public const int C_UPDATE_VERSION = 32;
         
         public const string C_UPDATEMD5_HASH = "235AC8344C0AA5675C5850D97336BFF3";
