@@ -89,12 +89,12 @@ namespace PatchLauncher
             LblOptions.BackColor = Color.Black;
 
             LblLauncherVersion.Text += Assembly.GetEntryAssembly()!.GetName().Version;
-            LblLauncherVersion.Font = FontHelper.GetFont(0, 12);
+            LblLauncherVersion.Font = FontHelper.GetFont(0, 16);
             LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblLauncherVersion.BackColor = Color.Transparent;
 
-            LblPatchVersion.Text += Settings.Default.PatchVersionInstalled < 103 ? "2.22v" : "" + Settings.Default.PatchVersionInstalled.ToString();
-            LblPatchVersion.Font = FontHelper.GetFont(0, 12);
+            LblPatchVersion.Text += Settings.Default.PatchVersionInstalled < 103 ? "2.22v" + Settings.Default.PatchVersionInstalled.ToString() : "";
+            LblPatchVersion.Font = FontHelper.GetFont(0, 16);
             LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblPatchVersion.BackColor = Color.Transparent;
 

@@ -10,13 +10,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
-using System.Reflection.PortableExecutable;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Color = System.Drawing.Color;
-using DownloadProgressChangedEventArgs = Downloader.DownloadProgressChangedEventArgs;
 
 namespace PatchLauncher
 {
@@ -56,10 +52,6 @@ namespace PatchLauncher
 
             XMLFileHelper.GetXMLFileData(true);
             XMLFileHelper.GetXMLFileData(false);
-
-            TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
-            TmrPatchNotes.Interval = 2000;
-            TmrPatchNotes.Start();
 
             BtnInstall.Hide();
 
@@ -128,7 +120,9 @@ namespace PatchLauncher
             PiBDiscord.Image = Helper.Properties.Resources.discord;
             PiBModDB.Image = Helper.Properties.Resources.moddb;
             PiBTwitch.Image = Helper.Properties.Resources.twitch;
-            PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
+
+            if (Settings.Default.IsPatchModsShown)
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
 
             PibHeader.Image = Helper.Properties.Resources.header;
             PibLoadingBorder.Image = Helper.Properties.Resources.loadingBorder;
@@ -196,6 +190,10 @@ namespace PatchLauncher
                 BackgroundImage = Helper.Properties.Resources.bgMordor;
             }
             #endregion
+
+            TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
+            TmrPatchNotes.Interval = 2000;
+            TmrPatchNotes.Start();
         }
 
         #region Launcher Auto-Updater
@@ -890,6 +888,10 @@ namespace PatchLauncher
         {
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
 
+            LaunchGameToolStripMenuItem.Enabled = false;
+            OptionsToolStripMenuItem.Enabled = false;
+            AdvancedToolStripMenuItem.Enabled = false;
+
             PiBArrow.Enabled = false;
 
             if (Settings.Default.IsPatchModsShown)
@@ -940,6 +942,10 @@ namespace PatchLauncher
             }
 
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
+
+            LaunchGameToolStripMenuItem.Enabled = true;
+            OptionsToolStripMenuItem.Enabled = true;
+            AdvancedToolStripMenuItem.Enabled = true;
         }
 
         public async Task UpdateRoutineBeta()
@@ -1133,16 +1139,27 @@ namespace PatchLauncher
 
             try
             {
-                RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath);
+                RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, GameLanguageHelper.RegistrySelectedLocale, GameLanguageHelper.RegistrySelectedLanguageName, GameLanguageHelper.RegistrySelectedLanguage, Settings.Default.GameLanguage);
 
                 if (!Directory.Exists(Settings.Default.GameInstallPath))
                 {
                     Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                await DownloadGame();
+                await DownloadGame(Settings.Default.InstalledLanguagePackName);
 
-                await ExtractGame();
+                await ExtractGame(Settings.Default.InstalledLanguagePackName);
+
+                if (Settings.Default.CreateDesktopShortcut)
+                {
+                    StartMenuHelper.CreateGameShortcutToDesktop(ConstStrings.C_GAMETITLE_NAME_EN);
+                }
+
+                if (Settings.Default.CreateStartMenuShortcut)
+                {
+                    StartMenuHelper.CreateGameShortcutToStartMenu(ConstStrings.C_GAMETITLE_NAME_EN, ConstStrings.C_MAIN_GAME_FILE);
+                    StartMenuHelper.CreateGameShortcutToStartMenu(ConstStrings.C_GAMETITLE_NAME_EN + " Worldbuilder", ConstStrings.C_WORLDBUILDER_FILE);
+                }
 
                 if (Settings.Default.UseBetaChannel == true)
                 {
@@ -1153,27 +1170,15 @@ namespace PatchLauncher
                     if (Settings.Default.IsPatch32Downloaded == false)
                     {
                         await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
+
+                        Settings.Default.IsGameInstalled = true;
+                        Settings.Default.IsPatch32Downloaded = true;
+                        Settings.Default.IsPatch32Installed = true;
+                        Settings.Default.Save();
+
+                        PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
                     }
                 }
-
-                PiBArrow.Enabled = true;
-
-                if (Settings.Default.IsPatchModsShown)
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-
-                }
-                else
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
-                }
-
-                Settings.Default.IsGameInstalled = true;
-                Settings.Default.IsPatch32Downloaded = true;
-                Settings.Default.IsPatch32Installed = true;
-                Settings.Default.Save();
-
-                PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
             }
             catch (Exception e)
             {
@@ -1183,15 +1188,29 @@ namespace PatchLauncher
 
             LblDownloadSpeed.Hide();
             LblFileName.Hide();
-
             BtnInstall.Hide();
-
             PBarActualFile.Hide();
 
+            PiBArrow.Enabled = true;
+
+            if (Settings.Default.IsPatchModsShown)
+            {
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
+
+            }
+            else
+            {
+                PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
+            }
+
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
+
+            LaunchGameToolStripMenuItem.Enabled = true;
+            OptionsToolStripMenuItem.Enabled = true;
+            AdvancedToolStripMenuItem.Enabled = true;
         }
 
-        public async Task DownloadGame()
+        public async Task DownloadGame(string languagePack)
         {
             try
             {
@@ -1216,9 +1235,39 @@ namespace PatchLauncher
                     await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/9sn0e8w8w834ywi/BFME1.7z", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "BFME1.7z"));
                 }
 
-                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "LangPack_EN.7z")))
+                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack)))
                 {
-                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/ek7fuypqh8oysvn/LangPack_EN.7z", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "LangPack_EN.7z"));
+                    switch (languagePack)
+                    {
+                        case "LangPack_EN.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/wbsgmnk0srey634crsjlw/LangPack_EN.7z?dl=1&rlkey=97nn16xud3dej836dom4kt8me", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_DE.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/p1nrdmy1h3xuivkdxf8n0/LangPack_DE.7z?dl=1&rlkey=32wucn1px2em8v9e88nhh8ozx", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_ES.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/30m1eb0j0v97klorhqsxg/LangPack_ES.7z?dl=1&rlkey=qbs6ra5dpcstiz8zpwr7w59hh", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_FR.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/1k7szue1fzy6am0bd67d5/LangPack_FR.7z?dl=1&rlkey=eek0cudp1xs0m61ljw1r2tq3h", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_IT.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/qk3oswkhjpqnkayvqdkfv/LangPack_IT.7z?dl=1&rlkey=a3rhxrf93kl9b15fwxiegyg02", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_NL.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/9qklup5oa2jrdsbxtj8rt/LangPack_NL.7z?dl=1&rlkey=gb3m0f6009vn32evh2cnaaojd", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_NO.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/6ij6zwoijumhwbfqz5ago/LangPack_NO.7z?dl=1&rlkey=namt4two5wezni4bwavfpt4zw", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_PL.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/rnupv7afzzazgmzfdafkp/LangPack_PL.7z?dl=1&rlkey=fyvmgckvs5k55ljeklutk0v4q", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+                        case "LangPack_SV.7z":
+                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/634mtb3za9vhl5v1v83k7/LangPack_SV.7z?dl=1&rlkey=sg5wytduij46vd91u0jif3q7k", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
+                            break;
+
+                    }
                 }
             }
             catch (Exception e)
@@ -1228,7 +1277,7 @@ namespace PatchLauncher
             }
         }
 
-        public async Task ExtractGame()
+        public async Task ExtractGame(string languagePack)
         {
             try
             {
@@ -1246,7 +1295,7 @@ namespace PatchLauncher
                 var archiveFileNames = new List<string>()
                 {
                     "BFME1.7z",
-                    "LangPack_EN.7z"
+                    languagePack
                 };
 
                 for (int i = 0; i < archiveFileNames.Count; i++)
@@ -1531,14 +1580,18 @@ namespace PatchLauncher
             {
                 Settings.Default.IsGameInstalled = false;
 
-                PiBArrow.Enabled = false;
-
                 if (Settings.Default.IsPatchModsShown)
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
                 else
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
 
+                PiBArrow.Enabled = false;
+
                 BtnInstall.Show();
+
+                LaunchGameToolStripMenuItem.Enabled = false;
+                OptionsToolStripMenuItem.Enabled = false;
+                AdvancedToolStripMenuItem.Enabled = false;
             }
 
             // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
@@ -1577,12 +1630,12 @@ namespace PatchLauncher
 
                 if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
                 {
-                    PiBArrow.Enabled = false;
-
                     if (Settings.Default.IsPatchModsShown)
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
                     else
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
+                    PiBArrow.Enabled = false;
 
                     await UpdateRoutineBeta();
                 }

@@ -6,6 +6,7 @@ namespace Helper
     {
         public const string C_GAMEFOLDER_NAME_BFME1 = "BFME1";
         public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
+        public const string C_GAMETITLE_NAME_EN = "The Battle for Middle-earth";
         public const string C_EAFOLDER_NAME = "EA Games";
 
         public const string C_REGISTRY_SERVICE_WRONG_PARAMETER = "WrongParameter";
@@ -53,6 +54,7 @@ namespace Helper
         public const string C_LANGPACK_EN_ZIP = "LangPack_EN.7z";
 
         public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
+        public const string C_WORLDBUILDER_FILE = "worldbuilder.exe";
         public const string C_MAIN_ASSET_FILE = "asset.dat";
         public const string C_103_ASSET_FILE = "asset.dat.103";
         public const string C_ORIGINAL_ASSET_FILE = "asset.dat.BACKUP";

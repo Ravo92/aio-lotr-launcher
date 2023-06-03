@@ -117,131 +117,381 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BtnAccept.Text" xml:space="preserve">
-    <value>ACCEPT</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="BtnChoose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 84</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>724, 151</value>
-  </data>
-  <data name="&gt;&gt;LblChooseDir.Name" xml:space="preserve">
-    <value>LblChooseDir</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BtnAccept.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;BtnAccept.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="BtnChoose.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BtnAccept.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="&gt;&gt;BtnAccept.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BtnAccept.Name" xml:space="preserve">
-    <value>BtnAccept</value>
-  </data>
-  <data name="LblChooseDir.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;LblChooseDir.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LblChooseDir.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;TxtInstallPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>InstallPathDialog</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.Name" xml:space="preserve">
-    <value>BtnChoose</value>
-  </data>
-  <data name="LblChooseDir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 15</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TxtInstallPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 34</value>
   </data>
   <data name="TxtInstallPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 16</value>
+    <value>547, 16</value>
   </data>
-  <data name="BtnChoose.Text" xml:space="preserve">
-    <value>CHOOSE...</value>
-  </data>
-  <data name="BtnChoose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="LblChooseDir.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Installation Directory</value>
-  </data>
-  <data name="BtnChoose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 51</value>
-  </data>
-  <data name="&gt;&gt;TxtInstallPath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BtnAccept.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 51</value>
-  </data>
-  <data name="TxtInstallPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 48</value>
-  </data>
-  <data name="LblChooseDir.Text" xml:space="preserve">
-    <value>Where do you want to install the game \"The Battle for Middle-earth\"?</value>
-  </data>
-  <data name="&gt;&gt;BtnChoose.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LblChooseDir.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="BtnChoose.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;BtnAccept.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="BtnAccept.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 84</value>
-  </data>
-  <data name="&gt;&gt;LblChooseDir.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="BtnAccept.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TxtInstallPath.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="TxtInstallPath.WordWrap" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="TxtInstallPath.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;TxtInstallPath.Name" xml:space="preserve">
     <value>TxtInstallPath</value>
+  </data>
+  <data name="&gt;&gt;TxtInstallPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TxtInstallPath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TxtInstallPath.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="LblChooseDir.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblChooseDir.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
+  <data name="LblChooseDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 15</value>
+  </data>
+  <data name="LblChooseDir.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="LblChooseDir.Text" xml:space="preserve">
+    <value>Where do you want to install the game "The Battle for Middle-earth"?</value>
+  </data>
+  <data name="&gt;&gt;LblChooseDir.Name" xml:space="preserve">
+    <value>LblChooseDir</value>
+  </data>
+  <data name="&gt;&gt;LblChooseDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblChooseDir.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblChooseDir.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnChoose.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="BtnChoose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="BtnChoose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 73</value>
+  </data>
+  <data name="BtnChoose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 51</value>
+  </data>
+  <data name="BtnChoose.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="BtnChoose.Text" xml:space="preserve">
+    <value>CHOOSE...</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.Name" xml:space="preserve">
+    <value>BtnChoose</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnChoose.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="BtnAccept.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="BtnAccept.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="BtnAccept.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 292</value>
+  </data>
+  <data name="BtnAccept.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 51</value>
+  </data>
+  <data name="BtnAccept.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="BtnAccept.Text" xml:space="preserve">
+    <value>ACCEPT</value>
+  </data>
+  <data name="&gt;&gt;BtnAccept.Name" xml:space="preserve">
+    <value>BtnAccept</value>
+  </data>
+  <data name="&gt;&gt;BtnAccept.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnAccept.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnAccept.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="CmbSelectGameLanguage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items1" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items2" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items3" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items4" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items5" xml:space="preserve">
+    <value>Svenska</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items6" xml:space="preserve">
+    <value>Nederlands</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items7" xml:space="preserve">
+    <value>Polski</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Items8" xml:space="preserve">
+    <value>Norsk</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>349, 167</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 23</value>
+  </data>
+  <data name="CmbSelectGameLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.Name" xml:space="preserve">
+    <value>CmbSelectGameLanguage</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="LblSelectGameLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblSelectGameLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblSelectGameLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 137</value>
+  </data>
+  <data name="LblSelectGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 15</value>
+  </data>
+  <data name="LblSelectGameLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="LblSelectGameLanguage.Text" xml:space="preserve">
+    <value>Select the game Language:</value>
+  </data>
+  <data name="&gt;&gt;LblSelectGameLanguage.Name" xml:space="preserve">
+    <value>LblSelectGameLanguage</value>
+  </data>
+  <data name="&gt;&gt;LblSelectGameLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblSelectGameLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblSelectGameLanguage.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="PibLanguageSupport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 73</value>
+  </data>
+  <data name="PibLanguageSupport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 270</value>
+  </data>
+  <data name="PibLanguageSupport.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;PibLanguageSupport.Name" xml:space="preserve">
+    <value>PibLanguageSupport</value>
+  </data>
+  <data name="&gt;&gt;PibLanguageSupport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibLanguageSupport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibLanguageSupport.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="PibPathBorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 27</value>
+  </data>
+  <data name="PibPathBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 40</value>
+  </data>
+  <data name="PibPathBorder.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;PibPathBorder.Name" xml:space="preserve">
+    <value>PibPathBorder</value>
+  </data>
+  <data name="&gt;&gt;PibPathBorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibPathBorder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibPathBorder.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="LblDesktopShortCut.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblDesktopShortCut.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblDesktopShortCut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 205</value>
+  </data>
+  <data name="LblDesktopShortCut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 15</value>
+  </data>
+  <data name="LblDesktopShortCut.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="LblDesktopShortCut.Text" xml:space="preserve">
+    <value>Desktop Icon</value>
+  </data>
+  <data name="&gt;&gt;LblDesktopShortCut.Name" xml:space="preserve">
+    <value>LblDesktopShortCut</value>
+  </data>
+  <data name="&gt;&gt;LblDesktopShortCut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblDesktopShortCut.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblDesktopShortCut.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ChkDesktopShortcut.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="ChkDesktopShortcut.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="ChkDesktopShortcut.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ChkDesktopShortcut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 205</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ChkDesktopShortcut.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ChkDesktopShortcut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 29</value>
+  </data>
+  <data name="ChkDesktopShortcut.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="ChkDesktopShortcut.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
+  <data name="&gt;&gt;ChkDesktopShortcut.Name" xml:space="preserve">
+    <value>ChkDesktopShortcut</value>
+  </data>
+  <data name="&gt;&gt;ChkDesktopShortcut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ChkDesktopShortcut.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ChkDesktopShortcut.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="LblStartMenuShortCut.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblStartMenuShortCut.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblStartMenuShortCut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 249</value>
+  </data>
+  <data name="LblStartMenuShortCut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 15</value>
+  </data>
+  <data name="LblStartMenuShortCut.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="LblStartMenuShortCut.Text" xml:space="preserve">
+    <value>Startmenu entry</value>
+  </data>
+  <data name="&gt;&gt;LblStartMenuShortCut.Name" xml:space="preserve">
+    <value>LblStartMenuShortCut</value>
+  </data>
+  <data name="&gt;&gt;LblStartMenuShortCut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblStartMenuShortCut.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblStartMenuShortCut.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ChkStartMenuShortcut.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="ChkStartMenuShortcut.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="ChkStartMenuShortcut.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ChkStartMenuShortcut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 249</value>
+  </data>
+  <data name="ChkStartMenuShortcut.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ChkStartMenuShortcut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 29</value>
+  </data>
+  <data name="ChkStartMenuShortcut.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="ChkStartMenuShortcut.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
+  <data name="&gt;&gt;ChkStartMenuShortcut.Name" xml:space="preserve">
+    <value>ChkStartMenuShortcut</value>
+  </data>
+  <data name="&gt;&gt;ChkStartMenuShortcut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ChkStartMenuShortcut.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ChkStartMenuShortcut.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>583, 357</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4754,10 +5004,16 @@
         //////////////////////////////////////////////////8=
 </value>
   </data>
-  <data name="&gt;&gt;TxtInstallPath.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Installation Directory</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>InstallPathDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

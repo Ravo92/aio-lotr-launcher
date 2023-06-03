@@ -130,6 +130,24 @@
   <data name="BtnAccept.Text" xml:space="preserve">
     <value>BESTÄTIGEN</value>
   </data>
+  <data name="LblSelectGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 15</value>
+  </data>
+  <data name="LblSelectGameLanguage.Text" xml:space="preserve">
+    <value>Wähle die Spielsprache aus:</value>
+  </data>
+  <data name="LblDesktopShortCut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 15</value>
+  </data>
+  <data name="LblDesktopShortCut.Text" xml:space="preserve">
+    <value>Desktopverknüpfung</value>
+  </data>
+  <data name="LblStartMenuShortCut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 15</value>
+  </data>
+  <data name="LblStartMenuShortCut.Text" xml:space="preserve">
+    <value>Startmenü Eintrag</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIAAoIAQAFgAAACgAAAAAAQAAAAIAAAEAIAAAAAAAACAEAAAAAAAAAAAAAAAAAAAA

@@ -72,19 +72,19 @@ namespace Helper
                 .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
 
-        public static void WriteRegKeysInstallation(string installpath)
+        public static void WriteRegKeysInstallation(string installpath, string locale, string strLanguageName, string strLanguage, int intLanguage)
         {
             RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games");
 
             RegistryKey keyFolder2 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth");
             keyFolder2.SetValue("CacheSize", "3351006208");
             keyFolder2.SetValue("CD Drive", @"I:\");
-            keyFolder2.SetValue("DisplayName", "The Battle for Middle-earth (tm)");
-            keyFolder2.SetValue("Folder", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\EA GAMES\The Battle for Middle-earth (tm)\");
+            keyFolder2.SetValue("DisplayName", "The Battle for Middle-earth");
+            keyFolder2.SetValue("Folder", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\EA GAMES\The Battle for Middle-earth\");
             keyFolder2.SetValue("Install Dir", installpath);
             keyFolder2.SetValue("Installed From", @"I:\");
-            keyFolder2.SetValue("Language", "English US");
-            keyFolder2.SetValue("Locale", "en_us");
+            keyFolder2.SetValue("Language", strLanguageName);
+            keyFolder2.SetValue("Locale", locale);
             keyFolder2.SetValue("Patch URL", @"http://transtest.ea.com/Electronic Arts/The Battle for Middle-earth/Europe");
             keyFolder2.SetValue("Product GUID", "{3F290582-3F4E-4B96-009C-E0BABAA40C42}");
             keyFolder2.SetValue("Region", "EUROPE");
@@ -93,16 +93,16 @@ namespace Helper
             keyFolder2.SetValue("SwapSize", "0");
 
             RegistryKey keyFolder3 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\1.0");
-            keyFolder3.SetValue("DisplayName", "The Battle for Middle-earth (tm)");
-            keyFolder3.SetValue("Language", "1", RegistryValueKind.DWord);
-            keyFolder3.SetValue("LanguageName", "English US");
+            keyFolder3.SetValue("DisplayName", "The Battle for Middle-earth");
+            keyFolder3.SetValue("Language", intLanguage, RegistryValueKind.DWord);
+            keyFolder3.SetValue("LanguageName", strLanguageName);
 
             RegistryKey keyFolder4 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts");
             RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games");
 
             RegistryKey keyFolder6 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth");
             keyFolder6.SetValue("InstallPath", installpath);
-            keyFolder6.SetValue("Language", "english");
+            keyFolder6.SetValue("Language", strLanguage);
             keyFolder6.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder6.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
             keyFolder6.SetValue("UserDataLeafName", "My Battle for Middle-earth Files");

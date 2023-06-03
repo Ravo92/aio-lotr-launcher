@@ -321,5 +321,65 @@ namespace PatchLauncher.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int GameLanguage {
+            get {
+                return ((int)(this["GameLanguage"]));
+            }
+            set {
+                this["GameLanguage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int GameLanguageIndex {
+            get {
+                return ((int)(this["GameLanguageIndex"]));
+            }
+            set {
+                this["GameLanguageIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LangPack_EN.7z")]
+        public string InstalledLanguagePackName {
+            get {
+                return ((string)(this["InstalledLanguagePackName"]));
+            }
+            set {
+                this["InstalledLanguagePackName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateStartMenuShortcut {
+            get {
+                return ((bool)(this["CreateStartMenuShortcut"]));
+            }
+            set {
+                this["CreateStartMenuShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateDesktopShortcut {
+            get {
+                return ((bool)(this["CreateDesktopShortcut"]));
+            }
+            set {
+                this["CreateDesktopShortcut"] = value;
+            }
+        }
     }
 }

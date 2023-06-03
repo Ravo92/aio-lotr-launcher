@@ -184,9 +184,6 @@ nicht online spielen können!</value>
   <data name="LblUseBetaChannel.Text" xml:space="preserve">
     <value>Benutze den Beta-Channel von 2.22 für Insider-Builds</value>
   </data>
-  <data name="LblLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 420</value>
-  </data>
   <data name="LblLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 21</value>
   </data>
