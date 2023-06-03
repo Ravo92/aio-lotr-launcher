@@ -93,7 +93,6 @@ namespace PatchLauncher
             LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblLauncherVersion.BackColor = Color.Transparent;
 
-            LblPatchVersion.Text += Settings.Default.PatchVersionInstalled < 103 ? "2.22v" + Settings.Default.PatchVersionInstalled.ToString() : "";
             LblPatchVersion.Font = FontHelper.GetFont(0, 16);
             LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblPatchVersion.BackColor = Color.Transparent;
@@ -122,9 +121,13 @@ namespace PatchLauncher
             LblLanguage.ForeColor = Color.FromArgb(192, 145, 69);
             LblLanguage.BackColor = Color.Transparent;
 
-            if (FlagUseBetaChannel)
+            if (Settings.Default.PatchVersionInstalled < 103 && !FlagUseBetaChannel)
             {
-                LblPatchVersion.Text += Settings.Default.PatchVersionInstalled.ToString() + " BETA " + Settings.Default.BetaChannelVersion.ToString();
+                LblPatchVersion.Text += "2.22v" + Settings.Default.PatchVersionInstalled.ToString();
+            }
+            else if (FlagUseBetaChannel)
+            {
+                LblPatchVersion.Text += "2.22v" + (Settings.Default.PatchVersionInstalled + 1).ToString() + " BETA " + Settings.Default.BetaChannelVersion.ToString();
             }
 
             if (FlagBrutalAI)

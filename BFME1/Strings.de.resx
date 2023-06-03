@@ -117,10 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnInstall.TextInstall" xml:space="preserve">
+    <value>SPIEL INSTALLIEREN</value>
+  </data>
+  <data name="BtnInstall.TextLaunch" xml:space="preserve">
+    <value>SPIEL STARTEN</value>
+  </data>
+  <data name="Info.BetaActivated" xml:space="preserve">
+    <value>Um die Versionen zu wechseln, erst den Beta-Modus in den launcher-Einstellungen deaktivieren!</value>
+  </data>
+  <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
+    <value>Spiel patchen und aufräumen...</value>
+  </data>
+  <data name="Info.PleaseWait" xml:space="preserve">
+    <value>Suche Ring...</value>
+  </data>
+  <data name="Info.PreparingSetup" xml:space="preserve">
+    <value>Bereite Setup vor...</value>
+  </data>
+  <data name="Info.PreparingUpdate" xml:space="preserve">
+    <value>Bereite Update vor...</value>
+  </data>
+  <data name="Info.PreparingUpdateBeta" xml:space="preserve">
+    <value>Bereite Beta-Update vor...</value>
+  </data>
   <data name="Msg.Restart.Text" xml:space="preserve">
-    <value>Ein Launcher Neustart wird benötigt um die Einstellungen zu übernehmen. \n Soll der Launcher jetzt neu gestartet werden?</value>
+    <value>Ein Launcher Neustart wird benötigt um die Einstellungen zu übernehmen. Soll der Launcher jetzt neu gestartet werden?</value>
   </data>
   <data name="Msg.Restart.Title" xml:space="preserve">
     <value>Programm Neustart benötigt</value>
+  </data>
+  <data name="ToolTip.MusicSwitcher" xml:space="preserve">
+    <value>Wechsle zwischen Fraktionsabhängiger Musik und dem Launcher-Default um</value>
+  </data>
+  <data name="Warning.AlreadyRunning" xml:space="preserve">
+    <value>Eine zweite Instanz des Launchers ist nicht zulässig.
+Bitte Taskmanager oder Tray-Icons (Taskbar) prüfen.</value>
+  </data>
+  <data name="Warning.AlreadyRunningTitle" xml:space="preserve">
+    <value>Der Launcher läuft bereits</value>
+  </data>
+  <data name="Warning.CantStopNow" xml:space="preserve">
+    <value>Es ist noch ein Download oder Patchvorgang aktiv. Der Launcher kann momentan nicht beendet werden.
+Bitte versuche es später erneut.</value>
+  </data>
+  <data name="Warning.CantStopNowTitle" xml:space="preserve">
+    <value>Geht gerade leider nicht...</value>
   </data>
 </root>

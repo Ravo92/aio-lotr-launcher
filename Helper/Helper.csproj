@@ -102,6 +102,9 @@
     <None Update="Tools\_patch222LibrariesBrutalAI.big">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Tools\_patch222translation_ger.big">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

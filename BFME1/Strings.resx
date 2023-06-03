@@ -117,10 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnInstall.TextInstall" xml:space="preserve">
+    <value>INSTALL GAME</value>
+  </data>
+  <data name="BtnInstall.TextLaunch" xml:space="preserve">
+    <value>LAUNCH GAME</value>
+  </data>
+  <data name="Info.BetaActivated" xml:space="preserve">
+    <value>Beta-Channel is activated! Deactivate in "Launcher Options" first and restart the Launcher to see Patches!</value>
+  </data>
+  <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
+    <value>Copy files and apply patch...</value>
+  </data>
+  <data name="Info.PleaseWait" xml:space="preserve">
+    <value>Searching for the one ring...</value>
+  </data>
+  <data name="Info.PreparingSetup" xml:space="preserve">
+    <value>Preparing Setup...</value>
+  </data>
+  <data name="Info.PreparingUpdate" xml:space="preserve">
+    <value>Preparing Update...</value>
+  </data>
+  <data name="Info.PreparingUpdateBeta" xml:space="preserve">
+    <value>Preparing Beta Update...</value>
+  </data>
   <data name="Msg.Restart.Text" xml:space="preserve">
     <value>A Launcher restart is required for the settings to be applied. Do you want to restart now?</value>
   </data>
   <data name="Msg.Restart.Title" xml:space="preserve">
     <value>Launcher Restart required</value>
+  </data>
+  <data name="ToolTip.MusicSwitcher" xml:space="preserve">
+    <value>Switch between faction music and default theme music</value>
+  </data>
+  <data name="Warning.AlreadyRunning" xml:space="preserve">
+    <value>Launcher is already running! Please Check TrayIcon or Taskmanager first.</value>
+  </data>
+  <data name="Warning.AlreadyRunningTitle" xml:space="preserve">
+    <value>Launcher already running!</value>
+  </data>
+  <data name="Warning.CantStopNow" xml:space="preserve">
+    <value>There is still some download or install active!
+Closing the Launcher now would damage the files or the game itself.
+Please try again, after the launcher finished its work!</value>
+  </data>
+  <data name="Warning.CantStopNowTitle" xml:space="preserve">
+    <value>Sadly, you cant close now!</value>
   </data>
 </root>

@@ -27,6 +27,8 @@ namespace Helper
         public const string C_MAPS_PATCH_FILE = "_patch222maps.big";
         public const string C_ASSET_PATCH_FILE = "asset.dat.222";
 
+        public const string C_GERMANLANGUAGE_PATCH_FILE = "_patch222translation_ger.big";
+
         // BFME 1 Patches
         public const string C_BFME1_PATCH_101_FILE = "_patch101.big";
         public const string C_BFME1_PATCH_101_MD5H = "c2be8f668a64dfa9f8b42fe4fd9ff77e";
@@ -47,7 +49,7 @@ namespace Helper
         public const int C_UPDATE_VERSION = 32;
         
         public const string C_UPDATEMD5_HASH = "235AC8344C0AA5675C5850D97336BFF3";
-        public const string C_MAINGAMEFILE_ZIP_MD5_HASH = "97258f514dce6eb4d5d110dbb4d3cca3";
+        public const string C_MAINGAMEFILE_ZIP_MD5_HASH = "97258F514DCE6EB4D5D110DBB4D3CCA3";
         public const string C_LANGPACK_EN_MD5_HASH = "fde15ba61be8c1b321e13a4ba9d8c4a8";
 
         public const string C_MAINGAMEFILE_ZIP = "BFME1.7z";

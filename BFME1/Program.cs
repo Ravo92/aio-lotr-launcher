@@ -19,6 +19,13 @@ namespace PatchLauncher
         {
             ApplicationConfiguration.Initialize();
 
+            using Mutex mutex = new(false, Process.GetCurrentProcess().ProcessName);
+            if (!mutex.WaitOne(0, false))
+            {
+                MessageBox.Show(Strings.Warning_AlreadyRunning, Strings.Warning_AlreadyRunningTitle);
+                return;
+            }
+
             if (!Directory.Exists(ConstStrings.C_LOGFOLDER_NAME))
             {
                 try
@@ -52,23 +59,16 @@ namespace PatchLauncher
                 Settings.Default.Save();
             }
 
-            using Mutex mutex = new(false, Process.GetCurrentProcess().ProcessName);
-            if (!mutex.WaitOne(0, false))
+            switch (Settings.Default.Language)
             {
-                MessageBox.Show("Launcher is already running! Please Check TrayIcon or Taskmanager first.", "Launcher already running!");
-                return;
-            }
-
-            if (RegistryService.ReadRegKey("path") == "ValueNotFound" || !Directory.Exists(RegistryService.ReadRegKey("path")))
-            {
-                Settings.Default.IsGameInstalled = false;
-                Settings.Default.Save();
-            }
-            else
-            {
-                Settings.Default.IsGameInstalled = true;
-                Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                Settings.Default.Save();
+                case 0:
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+                    break;
+                case 1:
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                    break;
+                default:
+                    break;
             }
 
             Application.Run(new WinFormsMainGUI());

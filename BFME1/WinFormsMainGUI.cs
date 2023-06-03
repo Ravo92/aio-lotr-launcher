@@ -53,7 +53,7 @@ namespace PatchLauncher
             XMLFileHelper.GetXMLFileData(true);
             XMLFileHelper.GetXMLFileData(false);
 
-            BtnInstall.Hide();
+            BtnInstall.Text = Strings.BtnInstall_TextLaunch;
 
             #endregion
 
@@ -111,7 +111,7 @@ namespace PatchLauncher
 
             #region Tooltips
             //Tooltips
-            ToolTip.SetToolTip(PiBThemeSwitcher, "Switch between faction music and default theme music");
+            ToolTip.SetToolTip(PiBThemeSwitcher, Strings.ToolTip_MusicSwitcher);
             #endregion
 
             #region HUD Elements
@@ -266,12 +266,19 @@ namespace PatchLauncher
 
         private async void BtnInstall_Click(object sender, EventArgs e)
         {
-            InstallPathDialog _install = new();
-
-            DialogResult dr = _install.ShowDialog();
-            if (dr == DialogResult.OK)
+            if (Settings.Default.IsGameInstalled == false)
             {
-                await InstallRoutine();
+                InstallPathDialog _install = new();
+
+                DialogResult dr = _install.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    await InstallRoutine();
+                }
+            }
+            else
+            {
+                LaunchGameToolStripMenuItem.PerformClick();
             }
         }
 
@@ -788,6 +795,11 @@ namespace PatchLauncher
                 PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
                 PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
+                if (Settings.Default.GameLanguage == 3)
+                {
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                }
+
                 Settings.Default.PatchVersionInstalled = 32;
                 Settings.Default.IsPatch32Downloaded = true;
                 Settings.Default.IsPatch32Installed = true;
@@ -908,9 +920,9 @@ namespace PatchLauncher
             LblDownloadSpeed.Show();
             LblFileName.Show();
 
-            BtnInstall.Hide();
+            BtnInstall.Enabled = false;
 
-            LblFileName.Text = "Preparing Update...";
+            LblFileName.Text = Strings.Info_PreparingUpdate;
 
             PatchModDetectionHelper.DeletePatch222Files();
             PatchModDetectionHelper.DeletePatch106();
@@ -926,7 +938,7 @@ namespace PatchLauncher
             LblDownloadSpeed.Hide();
             LblFileName.Hide();
 
-            BtnInstall.Hide();
+            BtnInstall.Enabled = true;
 
             PiBArrow.Enabled = true;
 
@@ -970,9 +982,9 @@ namespace PatchLauncher
             LblDownloadSpeed.Show();
             LblFileName.Show();
 
-            BtnInstall.Hide();
+            BtnInstall.Enabled = false;
 
-            LblFileName.Text = "Preparing Beta Update...";
+            LblFileName.Text = Strings.Info_PreparingUpdateBeta;
 
             if (XmlVersion > Settings.Default.BetaChannelVersion && Settings.Default.BetaChannelVersion > 0 && Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString())))
                 Directory.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString()), true);
@@ -1017,7 +1029,7 @@ namespace PatchLauncher
             LblDownloadSpeed.Hide();
             LblFileName.Hide();
 
-            BtnInstall.Hide();
+            BtnInstall.Enabled = true;
 
             Settings.Default.BetaChannelVersion = XMLFileHelper.GetXMLFileVersion(true);
             Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION + 1;
@@ -1052,8 +1064,7 @@ namespace PatchLauncher
                     ChunkCount = 1,
                     ParallelDownload = false,
                     ReserveStorageSpaceBeforeStartingDownload = true,
-                    BufferBlockSize = 8000,
-                    MaximumBytesPerSecond = 9223372036854775800,
+                    //BufferBlockSize = 8000,
                     ClearPackageOnCompletionWithFailure = true
                 };
 
@@ -1077,7 +1088,7 @@ namespace PatchLauncher
 
         public async Task ExtractUpdate(string ZIPFileName)
         {
-            Invoke((MethodInvoker)(() => LblFileName.Text = "Copy files and apply patch..."));
+            Invoke((MethodInvoker)(() => LblFileName.Text = Strings.Info_CopyFilesAndApplyPatch));
 
             var progressHandler = new Progress<ProgressHelper>(progress =>
             {
@@ -1125,14 +1136,15 @@ namespace PatchLauncher
         {
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
 
+            BtnInstall.Text = Strings.BtnInstall_TextLaunch;
+            BtnInstall.Enabled = false;
+
             PBarActualFile.Show();
 
             LblDownloadSpeed.Show();
             LblFileName.Show();
 
-            BtnInstall.Hide();
-
-            LblFileName.Text = "Preparing Setup...";
+            LblFileName.Text = Strings.Info_PreparingSetup;
 
             PiBArrow.Enabled = false;
             PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
@@ -1167,17 +1179,19 @@ namespace PatchLauncher
                 }
                 else
                 {
-                    if (Settings.Default.IsPatch32Downloaded == false)
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
+
+                    Settings.Default.IsGameInstalled = true;
+                    Settings.Default.IsPatch32Downloaded = true;
+                    Settings.Default.IsPatch32Installed = true;
+                    Settings.Default.Save();
+
+                    if (Settings.Default.GameLanguage == 3)
                     {
-                        await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
-
-                        Settings.Default.IsGameInstalled = true;
-                        Settings.Default.IsPatch32Downloaded = true;
-                        Settings.Default.IsPatch32Installed = true;
-                        Settings.Default.Save();
-
-                        PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
+                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
                     }
+
+                    PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
                 }
             }
             catch (Exception e)
@@ -1188,7 +1202,7 @@ namespace PatchLauncher
 
             LblDownloadSpeed.Hide();
             LblFileName.Hide();
-            BtnInstall.Hide();
+            BtnInstall.Enabled = true;
             PBarActualFile.Hide();
 
             PiBArrow.Enabled = true;
@@ -1230,9 +1244,9 @@ namespace PatchLauncher
                 downloader.DownloadProgressChanged += OnDownloadProgressChanged;
                 downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "BFME1.7z")))
+                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)))
                 {
-                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/9sn0e8w8w834ywi/BFME1.7z", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, "BFME1.7z"));
+                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/9sn0e8w8w834ywi/BFME1.7z", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
                 }
 
                 if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack)))
@@ -1266,7 +1280,6 @@ namespace PatchLauncher
                         case "LangPack_SV.7z":
                             await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/634mtb3za9vhl5v1v83k7/LangPack_SV.7z?dl=1&rlkey=sg5wytduij46vd91u0jif3q7k", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
                             break;
-
                     }
                 }
             }
@@ -1294,7 +1307,7 @@ namespace PatchLauncher
 
                 var archiveFileNames = new List<string>()
                 {
-                    "BFME1.7z",
+                    ConstStrings.C_MAINGAMEFILE_ZIP,
                     languagePack
                 };
 
@@ -1327,7 +1340,7 @@ namespace PatchLauncher
 
         private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            SetTextFileName("Working...");
+            SetTextFileName(Strings.Info_PleaseWait);
 
             if (e.Error != null)
             {
@@ -1340,7 +1353,7 @@ namespace PatchLauncher
             }
             else
             {
-                SetTextFileName("Configuring...");
+                SetTextFileName(Strings.Info_PleaseWait);
                 SetPBarFiles(100);
             }
         }
@@ -1576,9 +1589,10 @@ namespace PatchLauncher
             Settings.Default.LatestPatchVersion = XMLFileHelper.GetXMLFileVersion(false);
 
             // Check if Game is installed, if not show install button
-            if (Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Settings.Default.GameInstallPath!, ConstStrings.C_MAIN_GAME_FILE)))
+            if (Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Settings.Default.GameInstallPath!, ConstStrings.C_MAIN_GAME_FILE)) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !Directory.Exists(RegistryService.ReadRegKey("path")))
             {
                 Settings.Default.IsGameInstalled = false;
+                BtnInstall.Text = Strings.BtnInstall_TextInstall;
 
                 if (Settings.Default.IsPatchModsShown)
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
@@ -1587,7 +1601,7 @@ namespace PatchLauncher
 
                 PiBArrow.Enabled = false;
 
-                BtnInstall.Show();
+                BtnInstall.Enabled = true;
 
                 LaunchGameToolStripMenuItem.Enabled = false;
                 OptionsToolStripMenuItem.Enabled = false;
@@ -1608,6 +1622,11 @@ namespace PatchLauncher
 
                 await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
 
+                if (Settings.Default.GameLanguage == 3)
+                {
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                }
+
                 Settings.Default.IsPatch32Downloaded = true;
                 Settings.Default.IsPatch32Installed = true;
 
@@ -1615,6 +1634,8 @@ namespace PatchLauncher
             }
             else
             {
+                Settings.Default.IsGameInstalled = true;
+                Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                 PiBArrow.Enabled = true;
             }
 
@@ -1626,7 +1647,7 @@ namespace PatchLauncher
                 PiBVersion222_6.Hide();
                 PiBVersion222_7.Hide();
 
-                LblModExplanation.Text = "Beta-Channel is activated! Deactivate in \"Options\" first and restart the Launcher to see Patches.";
+                LblModExplanation.Text = Strings.Info_BetaActivated;
 
                 if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
                 {
@@ -1660,7 +1681,7 @@ namespace PatchLauncher
         {
             if (IsCurrentlyWorkingState.IsLauncherCurrentlyWorking)
             {
-                MessageBox.Show("There is still some download or install active! \nClosing the Launcher now would damage the files or the game itself. \nPlease try again, after the launcher finished its work!", "Sadly, you cant close now properly.");
+                MessageBox.Show(Strings.Warning_CantStopNow, Strings.Warning_CantStopNowTitle);
                 e.Cancel = true;
             }
 
@@ -1771,6 +1792,8 @@ namespace PatchLauncher
         {
             try
             {
+                BtnInstall.Enabled = false;
+
                 Settings.Default.IsPatch32Downloaded = false;
                 Settings.Default.IsPatch32Installed = false;
                 Settings.Default.Save();
@@ -1792,12 +1815,9 @@ namespace PatchLauncher
                     }
                 }
 
-                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_LANGPACK_EN_ZIP)))
+                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguagePackName)))
                 {
-                    if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_LANGPACK_EN_ZIP)) != ConstStrings.C_LANGPACK_EN_MD5_HASH)
-                    {
-                        File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_LANGPACK_EN_ZIP));
-                    }
+                    File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguagePackName));
                 }
 
                 await InstallRoutine();
@@ -1819,6 +1839,17 @@ namespace PatchLauncher
         {
             GameOptionsForm _Gameoptions = new();
             _Gameoptions.ShowDialog();
+        }
+
+        private void CreateDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartMenuHelper.CreateGameShortcutToDesktop(ConstStrings.C_GAMETITLE_NAME_EN);
+        }
+
+        private void CreateStartmenuShortcutsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartMenuHelper.CreateGameShortcutToStartMenu(ConstStrings.C_GAMETITLE_NAME_EN, ConstStrings.C_MAIN_GAME_FILE);
+            StartMenuHelper.CreateGameShortcutToStartMenu(ConstStrings.C_GAMETITLE_NAME_EN + " Worldbuilder", ConstStrings.C_WORLDBUILDER_FILE);
         }
     }
 }

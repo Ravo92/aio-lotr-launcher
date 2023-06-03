@@ -153,10 +153,10 @@
     <value>Starte das Spiel im Fenstermodus</value>
   </data>
   <data name="LblBrutalAI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 15</value>
+    <value>208, 15</value>
   </data>
   <data name="LblBrutalAI.Text" xml:space="preserve">
-    <value>Aktiviere die Brutale KI (Beta)</value>
+    <value>Aktiviere die Brutale KI (Experimentell)</value>
   </data>
   <data name="LblWarning.Size" type="System.Drawing.Size, System.Drawing">
     <value>351, 75</value>

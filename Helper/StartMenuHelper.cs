@@ -19,8 +19,12 @@
         {
             string startMenuFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu);
             string startMenuFolderPathGameDirectory = "Programs\\Electronic Arts";
+            string gameFolderName = ConstStrings.C_GAMETITLE_NAME_EN;
+            string combinedPath = Path.Combine(startMenuFolderPath, startMenuFolderPathGameDirectory, gameFolderName);
 
-            using StreamWriter writer = new(Path.Combine(startMenuFolderPath, startMenuFolderPathGameDirectory, ConstStrings.C_GAMETITLE_NAME_EN) + "\\" + linkName + ".url");
+            Directory.CreateDirectory(combinedPath);
+
+            using StreamWriter writer = new(combinedPath + "\\" + linkName + ".url");
             string app = Path.Combine(ConstStrings.GameInstallPath(), exeFile);
             writer.WriteLine("[InternetShortcut]");
             writer.WriteLine("URL=file:///" + app);
