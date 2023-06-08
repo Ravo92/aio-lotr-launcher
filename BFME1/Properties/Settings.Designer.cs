@@ -324,37 +324,13 @@ namespace PatchLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int GameLanguage {
+        [global::System.Configuration.DefaultSettingValueAttribute("en_us")]
+        public string InstalledLanguageISOCode {
             get {
-                return ((int)(this["GameLanguage"]));
+                return ((string)(this["InstalledLanguageISOCode"]));
             }
             set {
-                this["GameLanguage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int GameLanguageIndex {
-            get {
-                return ((int)(this["GameLanguageIndex"]));
-            }
-            set {
-                this["GameLanguageIndex"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("LangPack_EN.7z")]
-        public string InstalledLanguagePackName {
-            get {
-                return ((string)(this["InstalledLanguagePackName"]));
-            }
-            set {
-                this["InstalledLanguagePackName"] = value;
+                this["InstalledLanguageISOCode"] = value;
             }
         }
         

@@ -234,33 +234,6 @@
   <data name="CmbSelectGameLanguage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="CmbSelectGameLanguage.Items" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items1" xml:space="preserve">
-    <value>Français</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items2" xml:space="preserve">
-    <value>Deutsch</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items3" xml:space="preserve">
-    <value>Italiano</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items4" xml:space="preserve">
-    <value>Español</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items5" xml:space="preserve">
-    <value>Svenska</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items6" xml:space="preserve">
-    <value>Nederlands</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items7" xml:space="preserve">
-    <value>Polski</value>
-  </data>
-  <data name="CmbSelectGameLanguage.Items8" xml:space="preserve">
-    <value>Norsk</value>
-  </data>
   <data name="CmbSelectGameLanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>349, 167</value>
   </data>

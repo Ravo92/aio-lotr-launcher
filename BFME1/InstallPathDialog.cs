@@ -1,8 +1,11 @@
 ﻿using Helper;
 using PatchLauncher.Properties;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,9 +14,12 @@ namespace PatchLauncher
 {
     public partial class InstallPathDialog : Form
     {
-        int FlagSelectedGameLanguage = 1;
         bool FlagCreateDesktopShortcut = true;
         bool FlagCreateStartMenuShortcut = true;
+        string FlagSelectedIsoCode = "en_us";
+
+        readonly Dictionary<string, string> _selectedLanguageDictionary = InstallLanguageList._DictionarylanguageSettings
+            .ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
 
         public InstallPathDialog()
         {
@@ -95,7 +101,6 @@ namespace PatchLauncher
                 ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkUnselected;
             }
 
-            CmbSelectGameLanguage.SelectedIndex = Settings.Default.GameLanguageIndex;
             PibLanguageSupport.Image = Helper.Properties.Resources.languageSupportTransparent;
             PibPathBorder.Image = Helper.Properties.Resources.borderRectangleSmallest;
             PibLanguageSupport.BackColor = Color.Transparent;
@@ -113,6 +118,10 @@ namespace PatchLauncher
             {
                 TxtInstallPath.Text = Path.Combine(Application.StartupPath, ConstStrings.C_GAMEINSTALLFOLDER_NAME, ConstStrings.C_GAMEFOLDER_NAME_BFME1);
             }
+
+            CmbSelectGameLanguage.DisplayMember = "Value";
+            CmbSelectGameLanguage.ValueMember = "Key";
+            CmbSelectGameLanguage.DataSource = new BindingSource(_selectedLanguageDictionary, null);
         }
 
         private void BtnChoose_Click(object sender, EventArgs e)
@@ -152,9 +161,7 @@ namespace PatchLauncher
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             Settings.Default.GameInstallPath = TxtInstallPath.Text;
-            Settings.Default.GameLanguage = FlagSelectedGameLanguage;
-            Settings.Default.GameLanguageIndex = CmbSelectGameLanguage.SelectedIndex;
-            Settings.Default.InstalledLanguagePackName = GameLanguageHelper.LanguagPackName;
+            Settings.Default.InstalledLanguageISOCode = FlagSelectedIsoCode;
             Settings.Default.CreateDesktopShortcut = FlagCreateDesktopShortcut;
             Settings.Default.CreateStartMenuShortcut = FlagCreateStartMenuShortcut;
             Settings.Default.Save();
@@ -260,90 +267,10 @@ namespace PatchLauncher
 
         private void CmbSelectGameLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Index List of Languages -> CmbSelectGameLanguage.SelectedIndex
-            //   1 = English | Registry "LanguageName" = English US | "Language" = English | "Locale" = en_us
-            //   2 = Français | Registry "LanguageName" = French | "Language" = French | "Locale" = fr_fr
-            //   3 = Deutsch | Registry "LanguageName" = German | "Language" = German | "Locale" = de
-            //   4 = Italiano | Registry "LanguageName" = Italian | "Language" = Italian | "Locale" = it
-            //   5 = Español | Registry "LanguageName" = Spanish | "Language" = English | "Locale" = es
-            //   6 = Svenska | Registry "LanguageName" = Swedish | "Language" = Swedish | "Locale" = sv
-            //   8 = Nederlands | Registry "LanguageName" = Dutch | "Language" = Dutch | "Locale" = nl
-            //   14 = Polski | Registry "LanguageName" = Polish | "Language" = Polish | "Locale" = pl
-            //   16 = Norsk | Registry "LanguageName" = Norwegian | "Language" = Norwegian | "Locale" = no
-
-            switch (CmbSelectGameLanguage.SelectedIndex)
-            {
-                case 0:
-                    FlagSelectedGameLanguage = 1;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "English US";
-                    GameLanguageHelper.RegistrySelectedLanguage = "English";
-                    GameLanguageHelper.RegistrySelectedLocale = "en_us";
-                    GameLanguageHelper.LanguagPackName = "LangPack_EN.7z";
-                    break;
-                case 1:
-                    FlagSelectedGameLanguage = 2;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "French";
-                    GameLanguageHelper.RegistrySelectedLanguage = "French";
-                    GameLanguageHelper.RegistrySelectedLocale = "fr_fr";
-                    GameLanguageHelper.LanguagPackName = "LangPack_FR.7z";
-                    break;
-                case 2:
-                    FlagSelectedGameLanguage = 3;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "German";
-                    GameLanguageHelper.RegistrySelectedLanguage = "German";
-                    GameLanguageHelper.RegistrySelectedLocale = "de";
-                    GameLanguageHelper.LanguagPackName = "LangPack_DE.7z";
-                    break;
-                case 3:
-                    FlagSelectedGameLanguage = 4;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "Italian";
-                    GameLanguageHelper.RegistrySelectedLanguage = "Italian";
-                    GameLanguageHelper.RegistrySelectedLocale = "it";
-                    GameLanguageHelper.LanguagPackName = "LangPack_IT.7z";
-                    break;
-                case 4:
-                    FlagSelectedGameLanguage = 5;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "Spanish";
-                    GameLanguageHelper.RegistrySelectedLanguage = "Spanish";
-                    GameLanguageHelper.RegistrySelectedLocale = "es";
-                    GameLanguageHelper.LanguagPackName = "LangPack_ES.7z";
-                    break;
-                case 5:
-                    FlagSelectedGameLanguage = 6;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "Swedish";
-                    GameLanguageHelper.RegistrySelectedLanguage = "Swedish";
-                    GameLanguageHelper.RegistrySelectedLocale = "sv";
-                    GameLanguageHelper.LanguagPackName = "LangPack_SV.7z";
-                    break;
-                case 6:
-                    FlagSelectedGameLanguage = 8;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "Dutch";
-                    GameLanguageHelper.RegistrySelectedLanguage = "Dutch";
-                    GameLanguageHelper.RegistrySelectedLocale = "nl";
-                    GameLanguageHelper.LanguagPackName = "LangPack_NL.7z";
-                    break;
-                case 7:
-                    FlagSelectedGameLanguage = 14;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "Polish";
-                    GameLanguageHelper.RegistrySelectedLanguage = "Polish";
-                    GameLanguageHelper.RegistrySelectedLocale = "pl";
-                    GameLanguageHelper.LanguagPackName = "LangPack_PL.7z";
-                    break;
-                case 8:
-                    FlagSelectedGameLanguage = 16;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "Norwegian";
-                    GameLanguageHelper.RegistrySelectedLanguage = "Norwegian";
-                    GameLanguageHelper.RegistrySelectedLocale = "no";
-                    GameLanguageHelper.LanguagPackName = "LangPack_NO.7z";
-                    break;
-                default:
-                    FlagSelectedGameLanguage = 1;
-                    GameLanguageHelper.RegistrySelectedLanguageName = "English US";
-                    GameLanguageHelper.RegistrySelectedLanguage = "English";
-                    GameLanguageHelper.RegistrySelectedLocale = "en_us";
-                    GameLanguageHelper.LanguagPackName = "LangPack_EN.7z";
-                    break;
-            }
+            var control = (ComboBox)sender;
+            string isoCode = (string)control.SelectedValue;
+            var settings = InstallLanguageList._DictionarylanguageSettings[isoCode];
+            FlagSelectedIsoCode = settings.RegistrySelectedLocale;
         }
     }
 }

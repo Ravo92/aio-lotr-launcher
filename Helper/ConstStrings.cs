@@ -50,7 +50,6 @@ namespace Helper
         
         public const string C_UPDATEMD5_HASH = "235AC8344C0AA5675C5850D97336BFF3";
         public const string C_MAINGAMEFILE_ZIP_MD5_HASH = "97258F514DCE6EB4D5D110DBB4D3CCA3";
-        public const string C_LANGPACK_EN_MD5_HASH = "fde15ba61be8c1b321e13a4ba9d8c4a8";
 
         public const string C_MAINGAMEFILE_ZIP = "BFME1.7z";
         public const string C_LANGPACK_EN_ZIP = "LangPack_EN.7z";
@@ -97,7 +96,7 @@ namespace Helper
 
         public static string GameLanguage()
         {
-            return RegistryService.ReadRegKey("lang");
+            return RegistryService.ReadRegKey("locale");
         }
 
         public static string GameInstallPath()

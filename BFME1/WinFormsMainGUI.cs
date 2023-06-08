@@ -21,6 +21,9 @@ namespace PatchLauncher
         int iconNumber = Settings.Default.BackgroundMusicIcon;
         SoundPlayerHelper _soundPlayerHelper = new();
 
+        readonly string gameISOPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP);
+        LanguageSettings _languageSettings = InstallLanguageList._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+
         public WinFormsMainGUI()
         {
             #region logic
@@ -40,7 +43,6 @@ namespace PatchLauncher
             InitializeComponent();
 
             InitializeWebView2Settings();
-            CheckForUpdates();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
 
@@ -50,8 +52,8 @@ namespace PatchLauncher
             if (!File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
                 File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
 
-            XMLFileHelper.GetXMLFileData(true);
-            XMLFileHelper.GetXMLFileData(false);
+            //XMLFileHelper.GetXMLFileData(true);
+            //XMLFileHelper.GetXMLFileData(false);
 
             BtnInstall.Text = Strings.BtnInstall_TextLaunch;
 
@@ -795,7 +797,7 @@ namespace PatchLauncher
                 PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
                 PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
-                if (Settings.Default.GameLanguage == 3)
+                if (Settings.Default.InstalledLanguageISOCode == "de")
                 {
                     File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
                 }
@@ -1136,6 +1138,8 @@ namespace PatchLauncher
         {
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
 
+            _languageSettings = InstallLanguageList._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+
             BtnInstall.Text = Strings.BtnInstall_TextLaunch;
             BtnInstall.Enabled = false;
 
@@ -1144,23 +1148,20 @@ namespace PatchLauncher
             LblDownloadSpeed.Show();
             LblFileName.Show();
 
-            LblFileName.Text = Strings.Info_PreparingSetup;
-
             PiBArrow.Enabled = false;
             PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
 
             try
             {
-                RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, GameLanguageHelper.RegistrySelectedLocale, GameLanguageHelper.RegistrySelectedLanguageName, GameLanguageHelper.RegistrySelectedLanguage, Settings.Default.GameLanguage);
+                RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, _languageSettings.RegistrySelectedLocale, _languageSettings.RegistrySelectedLanguageName, _languageSettings.RegistrySelectedLanguage);
 
                 if (!Directory.Exists(Settings.Default.GameInstallPath))
                 {
                     Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                await DownloadGame(Settings.Default.InstalledLanguagePackName);
-
-                await ExtractGame(Settings.Default.InstalledLanguagePackName);
+                await DownloadGame(_languageSettings.RegistrySelectedLocale);
+                await ExtractGame();
 
                 if (Settings.Default.CreateDesktopShortcut)
                 {
@@ -1186,7 +1187,7 @@ namespace PatchLauncher
                     Settings.Default.IsPatch32Installed = true;
                     Settings.Default.Save();
 
-                    if (Settings.Default.GameLanguage == 3)
+                    if (Settings.Default.InstalledLanguageISOCode == "de")
                     {
                         File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
                     }
@@ -1210,7 +1211,6 @@ namespace PatchLauncher
             if (Settings.Default.IsPatchModsShown)
             {
                 PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-
             }
             else
             {
@@ -1224,17 +1224,19 @@ namespace PatchLauncher
             AdvancedToolStripMenuItem.Enabled = true;
         }
 
-        public async Task DownloadGame(string languagePack)
+        public async Task DownloadGame(string isoLanguage)
         {
             try
             {
+                string langPackPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName);
+
                 var downloadOpt = new DownloadConfiguration()
                 {
                     ChunkCount = 1,
                     ParallelDownload = false,
                     ReserveStorageSpaceBeforeStartingDownload = true,
                     BufferBlockSize = 8000,
-                    MaximumBytesPerSecond = 0,
+                    MaximumBytesPerSecond = 131072000,
                     ClearPackageOnCompletionWithFailure = true
                 };
 
@@ -1244,43 +1246,27 @@ namespace PatchLauncher
                 downloader.DownloadProgressChanged += OnDownloadProgressChanged;
                 downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)))
+                if (!File.Exists(gameISOPath))
                 {
-                    await downloader.DownloadFileTaskAsync(@"https://dl.dropboxusercontent.com/s/9sn0e8w8w834ywi/BFME1.7z", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
+                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameMainPackageURL(), gameISOPath);
+                }
+                else if (MD5Tools.CalculateMD5(gameISOPath) != ConstStrings.C_MAINGAMEFILE_ZIP_MD5_HASH)
+                {
+                    File.Delete(gameISOPath);
+                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameMainPackageURL(), gameISOPath);
                 }
 
-                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack)))
+                if (!File.Exists(langPackPath))
                 {
-                    switch (languagePack)
-                    {
-                        case "LangPack_EN.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/wbsgmnk0srey634crsjlw/LangPack_EN.7z?dl=1&rlkey=97nn16xud3dej836dom4kt8me", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_DE.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/p1nrdmy1h3xuivkdxf8n0/LangPack_DE.7z?dl=1&rlkey=32wucn1px2em8v9e88nhh8ozx", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_ES.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/30m1eb0j0v97klorhqsxg/LangPack_ES.7z?dl=1&rlkey=qbs6ra5dpcstiz8zpwr7w59hh", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_FR.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/1k7szue1fzy6am0bd67d5/LangPack_FR.7z?dl=1&rlkey=eek0cudp1xs0m61ljw1r2tq3h", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_IT.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/qk3oswkhjpqnkayvqdkfv/LangPack_IT.7z?dl=1&rlkey=a3rhxrf93kl9b15fwxiegyg02", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_NL.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/9qklup5oa2jrdsbxtj8rt/LangPack_NL.7z?dl=1&rlkey=gb3m0f6009vn32evh2cnaaojd", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_NO.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/6ij6zwoijumhwbfqz5ago/LangPack_NO.7z?dl=1&rlkey=namt4two5wezni4bwavfpt4zw", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_PL.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/rnupv7afzzazgmzfdafkp/LangPack_PL.7z?dl=1&rlkey=fyvmgckvs5k55ljeklutk0v4q", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                        case "LangPack_SV.7z":
-                            await downloader.DownloadFileTaskAsync(@"https://www.dropbox.com/scl/fi/634mtb3za9vhl5v1v83k7/LangPack_SV.7z?dl=1&rlkey=sg5wytduij46vd91u0jif3q7k", Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, languagePack));
-                            break;
-                    }
+                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameLanguagePackURL(isoLanguage), langPackPath);
+                }
+                else if (MD5Tools.CalculateMD5(langPackPath) != XMLFileHelper.GetXMLGameLanguageMD5Hash(isoLanguage))
+                {
+                    Debug.WriteLine(MD5Tools.CalculateMD5(langPackPath));
+                    Debug.WriteLine(XMLFileHelper.GetXMLGameLanguageMD5Hash(isoLanguage));
+
+                    File.Delete(langPackPath);
+                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameLanguagePackURL(isoLanguage), langPackPath);
                 }
             }
             catch (Exception e)
@@ -1290,7 +1276,7 @@ namespace PatchLauncher
             }
         }
 
-        public async Task ExtractGame(string languagePack)
+        public async Task ExtractGame()
         {
             try
             {
@@ -1308,7 +1294,7 @@ namespace PatchLauncher
                 var archiveFileNames = new List<string>()
                 {
                     ConstStrings.C_MAINGAMEFILE_ZIP,
-                    languagePack
+                    _languageSettings.LanguagPackName
                 };
 
                 for (int i = 0; i < archiveFileNames.Count; i++)
@@ -1622,7 +1608,7 @@ namespace PatchLauncher
 
                 await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
 
-                if (Settings.Default.GameLanguage == 3)
+                if (Settings.Default.InstalledLanguageISOCode == "de")
                 {
                     File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
                 }
@@ -1636,6 +1622,7 @@ namespace PatchLauncher
             {
                 Settings.Default.IsGameInstalled = true;
                 Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
+                Settings.Default.InstalledLanguageISOCode = ConstStrings.GameLanguage();
                 PiBArrow.Enabled = true;
             }
 
@@ -1675,6 +1662,11 @@ namespace PatchLauncher
                 PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
 
             Settings.Default.Save();
+
+            if (!IsCurrentlyWorkingState.IsLauncherCurrentlyWorking)
+            {
+                CheckForUpdates();
+            }
         }
 
         private void BFME1_FormClosing(object sender, FormClosingEventArgs e)
@@ -1767,6 +1759,11 @@ namespace PatchLauncher
             Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath() + "\\Maps");
         }
 
+        private void openReplayDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath() + "\\Replays");
+        }
+
         private void OpenGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", ConstStrings.GameInstallPath());
@@ -1815,9 +1812,9 @@ namespace PatchLauncher
                     }
                 }
 
-                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguagePackName)))
+                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguageISOCode)))
                 {
-                    File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguagePackName));
+                    File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguageISOCode));
                 }
 
                 await InstallRoutine();

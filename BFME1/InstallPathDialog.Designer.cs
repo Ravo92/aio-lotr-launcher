@@ -96,7 +96,6 @@
             CmbSelectGameLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(CmbSelectGameLanguage, "CmbSelectGameLanguage");
             CmbSelectGameLanguage.FormattingEnabled = true;
-            CmbSelectGameLanguage.Items.AddRange(new object[] { resources.GetString("CmbSelectGameLanguage.Items"), resources.GetString("CmbSelectGameLanguage.Items1"), resources.GetString("CmbSelectGameLanguage.Items2"), resources.GetString("CmbSelectGameLanguage.Items3"), resources.GetString("CmbSelectGameLanguage.Items4"), resources.GetString("CmbSelectGameLanguage.Items5"), resources.GetString("CmbSelectGameLanguage.Items6"), resources.GetString("CmbSelectGameLanguage.Items7"), resources.GetString("CmbSelectGameLanguage.Items8") });
             CmbSelectGameLanguage.Name = "CmbSelectGameLanguage";
             CmbSelectGameLanguage.SelectedIndexChanged += CmbSelectGameLanguage_SelectedIndexChanged;
             // 

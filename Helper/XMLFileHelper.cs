@@ -1,5 +1,8 @@
 ﻿using System.Data;
+using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Xml.Linq;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Helper
 {
@@ -46,7 +49,6 @@ namespace Helper
             }
         }
 
-
         /// <summary>
         /// Returns the Patch version from the downloaded XML file
         /// </summary>
@@ -72,6 +74,50 @@ namespace Helper
 
                 return version;
             }
+        }
+
+        /// <summary>
+        /// Returns the main game-package URL from the downloaded XML file
+        /// </summary>
+        /// <param name="gameMainPackageURL"></param>
+        /// <returns>The correct MD5 Hash Code corresponding to the <paramref name="gameMainPackageURL"/>.</returns>
+        public static string GetXMLGameMainPackageURL()
+        {
+            XElement response = XElement.Load(C_XMLFile);
+            var status = response.Elements().Where(e => e.Name.LocalName == "gameMainPackageURL").Single().Value;
+            return status;
+        }
+
+        /// <summary>
+        /// Returns the game language packageURL from the downloaded XML file
+        /// </summary>
+        /// <param name="languageIsoCode"></param>
+        /// <returns>The correct download URI corresponding to the <paramref name="languageIsoCode"/>.</returns>
+        public static string GetXMLGameLanguagePackURL(string languageIsoCode)
+        {
+            //XElement response = XElement.Load(C_XMLFile);
+            //var status = response.Elements().Where(e => e.Name.LocalName == "languagePacks" + languageIsoCode + "url").Single().Value;
+            //return status;
+
+            XDocument systemXML = XDocument.Load(C_XMLFile);
+            string result = (string)systemXML.Descendants("languagePacks").Descendants(languageIsoCode).Elements("url").FirstOrDefault()!;
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the game language package MD5 from the downloaded XML file
+        /// </summary>
+        /// <param name="languageIsoCode"></param>
+        /// <returns>The correct MD5 Hash Code corresponding to the <paramref name="languageIsoCode"/>.</returns>
+        public static string GetXMLGameLanguageMD5Hash(string languageIsoCode)
+        {
+            //XElement response = XElement.Load(C_XMLFile);
+            //var status = response.Elements().Where(e => e.Name.LocalName == "languagePacks" + languageIsoCode + "md5").Single().Value;
+            //return status;
+
+            XDocument systemXML = XDocument.Load(C_XMLFile);
+            string result = (string)systemXML.Descendants("languagePacks").Descendants(languageIsoCode).Elements("md5").FirstOrDefault()!;
+            return result;
         }
     }
 }

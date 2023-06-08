@@ -11,15 +11,17 @@ namespace Helper
         {
             if (IsNotNull(kindOf))
             {
-                RegistryKey ?localKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
-                if (IsNotNull(localKey))
+                RegistryKey? mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\");
+                RegistryKey? secondPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
+
+                if (IsNotNull(secondPath))
                 {
                     switch (kindOf)
                     {
-                        case "lang":
-                            if (IsNotNull(localKey.GetValue("Language")))
+                        case "locale":
+                            if (IsNotNull(mainPath.GetValue("Locale")))
                             {
-                                string? lang = localKey.GetValue("Language")!.ToString()!;
+                                string? lang = mainPath.GetValue("Locale")!.ToString()!;
                                 return lang;
                             }
                             else
@@ -28,9 +30,9 @@ namespace Helper
                             }
 
                         case "appData":
-                            if (IsNotNull(localKey.GetValue("UserDataLeafName")))
+                            if (IsNotNull(secondPath.GetValue("UserDataLeafName")))
                             {
-                                string? appData = localKey.GetValue("UserDataLeafName")!.ToString()!;
+                                string? appData = secondPath.GetValue("UserDataLeafName")!.ToString()!;
                                 return appData;
                             }
                             else
@@ -39,9 +41,9 @@ namespace Helper
                             }
 
                         case "path":
-                            if (IsNotNull(localKey.GetValue("InstallPath")))
+                            if (IsNotNull(secondPath.GetValue("InstallPath")))
                             {
-                                string? path = localKey.GetValue("InstallPath")!.ToString()!;
+                                string? path = secondPath.GetValue("InstallPath")!.ToString()!;
                                 return path;
                             }
                             else
@@ -66,13 +68,12 @@ namespace Helper
 
         public static string RandomCDKeyGenerator(int length)
         {
-            Random _random = new();
+            Random _random = new(Guid.NewGuid().GetHashCode());
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[_random.Next(s.Length)]).ToArray());
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[_random.Next(s.Length)]).ToArray());
         }
 
-        public static void WriteRegKeysInstallation(string installpath, string locale, string strLanguageName, string strLanguage, int intLanguage)
+        public static void WriteRegKeysInstallation(string installpath, string locale, string strLanguageName, string strLanguage)
         {
             RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games");
 
@@ -92,11 +93,6 @@ namespace Helper
             keyFolder2.SetValue("Suppression Exe", "rtsi.exe");
             keyFolder2.SetValue("SwapSize", "0");
 
-            RegistryKey keyFolder3 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\1.0");
-            keyFolder3.SetValue("DisplayName", "The Battle for Middle-earth");
-            keyFolder3.SetValue("Language", intLanguage, RegistryValueKind.DWord);
-            keyFolder3.SetValue("LanguageName", strLanguageName);
-
             RegistryKey keyFolder4 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts");
             RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games");
 
@@ -113,7 +109,6 @@ namespace Helper
 
             keyFolder1.Close();
             keyFolder2.Close();
-            keyFolder3.Close();
 
             keyFolder4.Close();
             keyFolder5.Close();

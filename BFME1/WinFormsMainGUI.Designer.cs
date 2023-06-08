@@ -77,6 +77,7 @@ namespace PatchLauncher
             toolStripSeparator3 = new ToolStripSeparator();
             OpenMapDirectoryToolStripMenuItem = new ToolStripMenuItem();
             OpenSaveDirectoryToolStripMenuItem = new ToolStripMenuItem();
+            openReplayDirectoryToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             RepairGameToolStripMenuItem = new ToolStripMenuItem();
             AboutToolStripMenuItem = new ToolStripMenuItem();
@@ -107,45 +108,50 @@ namespace PatchLauncher
             // 
             // PibHeader
             // 
-            PibHeader.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(PibHeader, "PibHeader");
+            PibHeader.BackColor = System.Drawing.Color.Transparent;
             PibHeader.Name = "PibHeader";
             PibHeader.TabStop = false;
+            ToolTip.SetToolTip(PibHeader, resources.GetString("PibHeader.ToolTip"));
             // 
             // PiBYoutube
             // 
+            resources.ApplyResources(PiBYoutube, "PiBYoutube");
             PiBYoutube.BackColor = System.Drawing.Color.Black;
             PiBYoutube.Cursor = Cursors.Hand;
-            resources.ApplyResources(PiBYoutube, "PiBYoutube");
             PiBYoutube.Name = "PiBYoutube";
             PiBYoutube.TabStop = false;
+            ToolTip.SetToolTip(PiBYoutube, resources.GetString("PiBYoutube.ToolTip"));
             PiBYoutube.Click += PiBYoutube_Click;
             // 
             // PiBDiscord
             // 
+            resources.ApplyResources(PiBDiscord, "PiBDiscord");
             PiBDiscord.BackColor = System.Drawing.Color.Black;
             PiBDiscord.Cursor = Cursors.Hand;
-            resources.ApplyResources(PiBDiscord, "PiBDiscord");
             PiBDiscord.Name = "PiBDiscord";
             PiBDiscord.TabStop = false;
+            ToolTip.SetToolTip(PiBDiscord, resources.GetString("PiBDiscord.ToolTip"));
             PiBDiscord.Click += PiBDiscord_Click;
             // 
             // PiBModDB
             // 
+            resources.ApplyResources(PiBModDB, "PiBModDB");
             PiBModDB.BackColor = System.Drawing.Color.Black;
             PiBModDB.Cursor = Cursors.Hand;
-            resources.ApplyResources(PiBModDB, "PiBModDB");
             PiBModDB.Name = "PiBModDB";
             PiBModDB.TabStop = false;
+            ToolTip.SetToolTip(PiBModDB, resources.GetString("PiBModDB.ToolTip"));
             PiBModDB.Click += PiBModDB_Click;
             // 
             // PiBThemeSwitcher
             // 
+            resources.ApplyResources(PiBThemeSwitcher, "PiBThemeSwitcher");
             PiBThemeSwitcher.BackColor = System.Drawing.Color.Black;
             PiBThemeSwitcher.Cursor = Cursors.Hand;
-            resources.ApplyResources(PiBThemeSwitcher, "PiBThemeSwitcher");
             PiBThemeSwitcher.Name = "PiBThemeSwitcher";
             PiBThemeSwitcher.TabStop = false;
+            ToolTip.SetToolTip(PiBThemeSwitcher, resources.GetString("PiBThemeSwitcher.ToolTip"));
             PiBThemeSwitcher.Click += PiBThemeSwitcher_Click;
             // 
             // ToolTip
@@ -160,17 +166,19 @@ namespace PatchLauncher
             // 
             resources.ApplyResources(LblDownloadSpeed, "LblDownloadSpeed");
             LblDownloadSpeed.Name = "LblDownloadSpeed";
+            ToolTip.SetToolTip(LblDownloadSpeed, resources.GetString("LblDownloadSpeed.ToolTip"));
             // 
             // BtnInstall
             // 
-            BtnInstall.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(BtnInstall, "BtnInstall");
+            BtnInstall.BackColor = System.Drawing.Color.Black;
             BtnInstall.FlatAppearance.BorderSize = 0;
             BtnInstall.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnInstall.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             BtnInstall.ForeColor = System.Drawing.Color.Transparent;
             BtnInstall.Name = "BtnInstall";
             BtnInstall.TabStop = false;
+            ToolTip.SetToolTip(BtnInstall, resources.GetString("BtnInstall.ToolTip"));
             BtnInstall.UseMnemonic = false;
             BtnInstall.UseVisualStyleBackColor = false;
             BtnInstall.Click += BtnInstall_Click;
@@ -182,13 +190,15 @@ namespace PatchLauncher
             // 
             resources.ApplyResources(LblFileName, "LblFileName");
             LblFileName.Name = "LblFileName";
+            ToolTip.SetToolTip(LblFileName, resources.GetString("LblFileName.ToolTip"));
             // 
             // PibLoadingRing
             // 
-            PibLoadingRing.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(PibLoadingRing, "PibLoadingRing");
+            PibLoadingRing.BackColor = System.Drawing.Color.Black;
             PibLoadingRing.Name = "PibLoadingRing";
             PibLoadingRing.TabStop = false;
+            ToolTip.SetToolTip(PibLoadingRing, resources.GetString("PibLoadingRing.ToolTip"));
             // 
             // LblPatchNotes
             // 
@@ -199,47 +209,52 @@ namespace PatchLauncher
             LblPatchNotes.Name = "LblPatchNotes";
             LblPatchNotes.OutlineForeColor = System.Drawing.Color.Black;
             LblPatchNotes.OutlineWidth = 4F;
+            ToolTip.SetToolTip(LblPatchNotes, resources.GetString("LblPatchNotes.ToolTip"));
             // 
             // PibLoadingBorder
             // 
-            PibLoadingBorder.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(PibLoadingBorder, "PibLoadingBorder");
+            PibLoadingBorder.BackColor = System.Drawing.Color.Transparent;
             PibLoadingBorder.Name = "PibLoadingBorder";
             PibLoadingBorder.TabStop = false;
+            ToolTip.SetToolTip(PibLoadingBorder, resources.GetString("PibLoadingBorder.ToolTip"));
             // 
             // Wv2Patchnotes
             // 
+            resources.ApplyResources(Wv2Patchnotes, "Wv2Patchnotes");
             Wv2Patchnotes.AllowExternalDrop = true;
             Wv2Patchnotes.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
             Wv2Patchnotes.CreationProperties = null;
             Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
-            resources.ApplyResources(Wv2Patchnotes, "Wv2Patchnotes");
             Wv2Patchnotes.Name = "Wv2Patchnotes";
             Wv2Patchnotes.Source = new System.Uri("https://ravo92.github.io/changelogpage/index.html", System.UriKind.Absolute);
+            ToolTip.SetToolTip(Wv2Patchnotes, resources.GetString("Wv2Patchnotes.ToolTip"));
             Wv2Patchnotes.ZoomFactor = 1D;
             // 
             // PiBTwitch
             // 
+            resources.ApplyResources(PiBTwitch, "PiBTwitch");
             PiBTwitch.BackColor = System.Drawing.Color.Black;
             PiBTwitch.Cursor = Cursors.Hand;
-            resources.ApplyResources(PiBTwitch, "PiBTwitch");
             PiBTwitch.Name = "PiBTwitch";
             PiBTwitch.TabStop = false;
+            ToolTip.SetToolTip(PiBTwitch, resources.GetString("PiBTwitch.ToolTip"));
             PiBTwitch.Click += PiBTwitch_Click;
             // 
             // PiBArrow
             // 
-            PiBArrow.BackColor = System.Drawing.Color.Red;
             resources.ApplyResources(PiBArrow, "PiBArrow");
+            PiBArrow.BackColor = System.Drawing.Color.Red;
             PiBArrow.Cursor = Cursors.Hand;
             PiBArrow.Name = "PiBArrow";
             PiBArrow.TabStop = false;
+            ToolTip.SetToolTip(PiBArrow, resources.GetString("PiBArrow.ToolTip"));
             PiBArrow.Click += PiBArrow_Click;
             // 
             // PnlPlaceholder
             // 
-            PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
             resources.ApplyResources(PnlPlaceholder, "PnlPlaceholder");
+            PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
             PnlPlaceholder.Controls.Add(PiBVersion222_7);
             PnlPlaceholder.Controls.Add(PiBVersion222_5);
             PnlPlaceholder.Controls.Add(PiBVersion222_6);
@@ -248,50 +263,56 @@ namespace PatchLauncher
             PnlPlaceholder.Controls.Add(LblInstalledPatches);
             PnlPlaceholder.Controls.Add(LblModExplanation);
             PnlPlaceholder.Name = "PnlPlaceholder";
+            ToolTip.SetToolTip(PnlPlaceholder, resources.GetString("PnlPlaceholder.ToolTip"));
             // 
             // PiBVersion222_7
             // 
-            PiBVersion222_7.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(PiBVersion222_7, "PiBVersion222_7");
+            PiBVersion222_7.BackColor = System.Drawing.Color.Black;
             PiBVersion222_7.Cursor = Cursors.Hand;
             PiBVersion222_7.Name = "PiBVersion222_7";
             PiBVersion222_7.TabStop = false;
+            ToolTip.SetToolTip(PiBVersion222_7, resources.GetString("PiBVersion222_7.ToolTip"));
             PiBVersion222_7.Click += PiBVersion222_7_Click;
             // 
             // PiBVersion222_5
             // 
-            PiBVersion222_5.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(PiBVersion222_5, "PiBVersion222_5");
+            PiBVersion222_5.BackColor = System.Drawing.Color.Black;
             PiBVersion222_5.Cursor = Cursors.Hand;
             PiBVersion222_5.Name = "PiBVersion222_5";
             PiBVersion222_5.TabStop = false;
+            ToolTip.SetToolTip(PiBVersion222_5, resources.GetString("PiBVersion222_5.ToolTip"));
             PiBVersion222_5.Click += PiBVersion222_5_Click;
             // 
             // PiBVersion222_6
             // 
-            PiBVersion222_6.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(PiBVersion222_6, "PiBVersion222_6");
+            PiBVersion222_6.BackColor = System.Drawing.Color.Black;
             PiBVersion222_6.Cursor = Cursors.Hand;
             PiBVersion222_6.Name = "PiBVersion222_6";
             PiBVersion222_6.TabStop = false;
+            ToolTip.SetToolTip(PiBVersion222_6, resources.GetString("PiBVersion222_6.ToolTip"));
             PiBVersion222_6.Click += PiBVersion222_6_Click;
             // 
             // PiBVersion106
             // 
-            PiBVersion106.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(PiBVersion106, "PiBVersion106");
+            PiBVersion106.BackColor = System.Drawing.Color.Black;
             PiBVersion106.Cursor = Cursors.Hand;
             PiBVersion106.Name = "PiBVersion106";
             PiBVersion106.TabStop = false;
+            ToolTip.SetToolTip(PiBVersion106, resources.GetString("PiBVersion106.ToolTip"));
             PiBVersion106.Click += PiBVersion106_Click;
             // 
             // PiBVersion103
             // 
-            PiBVersion103.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(PiBVersion103, "PiBVersion103");
+            PiBVersion103.BackColor = System.Drawing.Color.Black;
             PiBVersion103.Cursor = Cursors.Hand;
             PiBVersion103.Name = "PiBVersion103";
             PiBVersion103.TabStop = false;
+            ToolTip.SetToolTip(PiBVersion103, resources.GetString("PiBVersion103.ToolTip"));
             PiBVersion103.Click += PiBVersion103_Click;
             // 
             // LblInstalledPatches
@@ -300,6 +321,7 @@ namespace PatchLauncher
             LblInstalledPatches.Name = "LblInstalledPatches";
             LblInstalledPatches.OutlineForeColor = System.Drawing.Color.Black;
             LblInstalledPatches.OutlineWidth = 4F;
+            ToolTip.SetToolTip(LblInstalledPatches, resources.GetString("LblInstalledPatches.ToolTip"));
             // 
             // LblModExplanation
             // 
@@ -307,141 +329,151 @@ namespace PatchLauncher
             LblModExplanation.Name = "LblModExplanation";
             LblModExplanation.OutlineForeColor = System.Drawing.Color.Black;
             LblModExplanation.OutlineWidth = 4F;
+            ToolTip.SetToolTip(LblModExplanation, resources.GetString("LblModExplanation.ToolTip"));
             // 
             // NotifyContextMenu
             // 
+            resources.ApplyResources(NotifyContextMenu, "NotifyContextMenu");
             NotifyContextMenu.Items.AddRange(new ToolStripItem[] { MenuItemLaunchGame, closeTheLauncherToolStripMenuItem });
             NotifyContextMenu.Name = "NotifyContextMenu";
-            resources.ApplyResources(NotifyContextMenu, "NotifyContextMenu");
+            ToolTip.SetToolTip(NotifyContextMenu, resources.GetString("NotifyContextMenu.ToolTip"));
             // 
             // MenuItemLaunchGame
             // 
-            MenuItemLaunchGame.Name = "MenuItemLaunchGame";
             resources.ApplyResources(MenuItemLaunchGame, "MenuItemLaunchGame");
+            MenuItemLaunchGame.Name = "MenuItemLaunchGame";
             // 
             // closeTheLauncherToolStripMenuItem
             // 
-            closeTheLauncherToolStripMenuItem.Name = "closeTheLauncherToolStripMenuItem";
             resources.ApplyResources(closeTheLauncherToolStripMenuItem, "closeTheLauncherToolStripMenuItem");
+            closeTheLauncherToolStripMenuItem.Name = "closeTheLauncherToolStripMenuItem";
             closeTheLauncherToolStripMenuItem.Click += CloseTheLauncherToolStripMenuItem_Click;
             // 
             // PibMute
             // 
+            resources.ApplyResources(PibMute, "PibMute");
             PibMute.BackColor = System.Drawing.Color.Transparent;
             PibMute.Cursor = Cursors.Hand;
-            resources.ApplyResources(PibMute, "PibMute");
             PibMute.Name = "PibMute";
             PibMute.TabStop = false;
+            ToolTip.SetToolTip(PibMute, resources.GetString("PibMute.ToolTip"));
             PibMute.Click += PibMute_Click;
             // 
             // WinFormsMainMenuStrip
             // 
-            WinFormsMainMenuStrip.Items.AddRange(new ToolStripItem[] { FileToolStripMenuItem, OptionsToolStripMenuItem, AdvancedToolStripMenuItem, AboutToolStripMenuItem });
             resources.ApplyResources(WinFormsMainMenuStrip, "WinFormsMainMenuStrip");
+            WinFormsMainMenuStrip.Items.AddRange(new ToolStripItem[] { FileToolStripMenuItem, OptionsToolStripMenuItem, AdvancedToolStripMenuItem, AboutToolStripMenuItem });
             WinFormsMainMenuStrip.Name = "WinFormsMainMenuStrip";
+            ToolTip.SetToolTip(WinFormsMainMenuStrip, resources.GetString("WinFormsMainMenuStrip.ToolTip"));
             // 
             // FileToolStripMenuItem
             // 
+            resources.ApplyResources(FileToolStripMenuItem, "FileToolStripMenuItem");
             FileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { LaunchGameToolStripMenuItem, toolStripSeparator1, ExitToolStripMenuItem });
             FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            resources.ApplyResources(FileToolStripMenuItem, "FileToolStripMenuItem");
             // 
             // LaunchGameToolStripMenuItem
             // 
-            LaunchGameToolStripMenuItem.Name = "LaunchGameToolStripMenuItem";
             resources.ApplyResources(LaunchGameToolStripMenuItem, "LaunchGameToolStripMenuItem");
+            LaunchGameToolStripMenuItem.Name = "LaunchGameToolStripMenuItem";
             LaunchGameToolStripMenuItem.Click += LaunchGameToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // ExitToolStripMenuItem
             // 
-            ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             resources.ApplyResources(ExitToolStripMenuItem, "ExitToolStripMenuItem");
+            ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             ExitToolStripMenuItem.Click += CloseTheLauncherToolStripMenuItem_Click;
             // 
             // OptionsToolStripMenuItem
             // 
+            resources.ApplyResources(OptionsToolStripMenuItem, "OptionsToolStripMenuItem");
             OptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { LauncherSettingsToolStripMenuItem, GameSettingsToolStripMenuItem, toolStripSeparator5, createDesktopShortcutToolStripMenuItem, createStartmenuShortcutsToolStripMenuItem });
             OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem";
-            resources.ApplyResources(OptionsToolStripMenuItem, "OptionsToolStripMenuItem");
             // 
             // LauncherSettingsToolStripMenuItem
             // 
-            LauncherSettingsToolStripMenuItem.Name = "LauncherSettingsToolStripMenuItem";
             resources.ApplyResources(LauncherSettingsToolStripMenuItem, "LauncherSettingsToolStripMenuItem");
+            LauncherSettingsToolStripMenuItem.Name = "LauncherSettingsToolStripMenuItem";
             LauncherSettingsToolStripMenuItem.Click += LauncherSettingsToolStripMenuItem_Click;
             // 
             // GameSettingsToolStripMenuItem
             // 
-            GameSettingsToolStripMenuItem.Name = "GameSettingsToolStripMenuItem";
             resources.ApplyResources(GameSettingsToolStripMenuItem, "GameSettingsToolStripMenuItem");
+            GameSettingsToolStripMenuItem.Name = "GameSettingsToolStripMenuItem";
             GameSettingsToolStripMenuItem.Click += GameSettingsToolStripMenuItem_Click;
             // 
             // toolStripSeparator5
             // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
             resources.ApplyResources(toolStripSeparator5, "toolStripSeparator5");
+            toolStripSeparator5.Name = "toolStripSeparator5";
             // 
             // createDesktopShortcutToolStripMenuItem
             // 
-            createDesktopShortcutToolStripMenuItem.Name = "createDesktopShortcutToolStripMenuItem";
             resources.ApplyResources(createDesktopShortcutToolStripMenuItem, "createDesktopShortcutToolStripMenuItem");
+            createDesktopShortcutToolStripMenuItem.Name = "createDesktopShortcutToolStripMenuItem";
             createDesktopShortcutToolStripMenuItem.Click += CreateDesktopShortcutToolStripMenuItem_Click;
             // 
             // createStartmenuShortcutsToolStripMenuItem
             // 
-            createStartmenuShortcutsToolStripMenuItem.Name = "createStartmenuShortcutsToolStripMenuItem";
             resources.ApplyResources(createStartmenuShortcutsToolStripMenuItem, "createStartmenuShortcutsToolStripMenuItem");
+            createStartmenuShortcutsToolStripMenuItem.Name = "createStartmenuShortcutsToolStripMenuItem";
             createStartmenuShortcutsToolStripMenuItem.Click += CreateStartmenuShortcutsToolStripMenuItem_Click;
             // 
             // AdvancedToolStripMenuItem
             // 
-            AdvancedToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLauncherDirectoryToolStripMenuItem, toolStripSeparator2, OpenGameDirectoryToolStripMenuItem, toolStripSeparator3, OpenMapDirectoryToolStripMenuItem, OpenSaveDirectoryToolStripMenuItem, toolStripSeparator4, RepairGameToolStripMenuItem });
-            AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem";
             resources.ApplyResources(AdvancedToolStripMenuItem, "AdvancedToolStripMenuItem");
+            AdvancedToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLauncherDirectoryToolStripMenuItem, toolStripSeparator2, OpenGameDirectoryToolStripMenuItem, toolStripSeparator3, OpenMapDirectoryToolStripMenuItem, OpenSaveDirectoryToolStripMenuItem, openReplayDirectoryToolStripMenuItem, toolStripSeparator4, RepairGameToolStripMenuItem });
+            AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem";
             // 
             // OpenLauncherDirectoryToolStripMenuItem
             // 
-            OpenLauncherDirectoryToolStripMenuItem.Name = "OpenLauncherDirectoryToolStripMenuItem";
             resources.ApplyResources(OpenLauncherDirectoryToolStripMenuItem, "OpenLauncherDirectoryToolStripMenuItem");
+            OpenLauncherDirectoryToolStripMenuItem.Name = "OpenLauncherDirectoryToolStripMenuItem";
             OpenLauncherDirectoryToolStripMenuItem.Click += OpenLauncherDirectoryToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
+            toolStripSeparator2.Name = "toolStripSeparator2";
             // 
             // OpenGameDirectoryToolStripMenuItem
             // 
-            OpenGameDirectoryToolStripMenuItem.Name = "OpenGameDirectoryToolStripMenuItem";
             resources.ApplyResources(OpenGameDirectoryToolStripMenuItem, "OpenGameDirectoryToolStripMenuItem");
+            OpenGameDirectoryToolStripMenuItem.Name = "OpenGameDirectoryToolStripMenuItem";
             OpenGameDirectoryToolStripMenuItem.Click += OpenGameDirectoryToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
+            toolStripSeparator3.Name = "toolStripSeparator3";
             // 
             // OpenMapDirectoryToolStripMenuItem
             // 
-            OpenMapDirectoryToolStripMenuItem.Name = "OpenMapDirectoryToolStripMenuItem";
             resources.ApplyResources(OpenMapDirectoryToolStripMenuItem, "OpenMapDirectoryToolStripMenuItem");
+            OpenMapDirectoryToolStripMenuItem.Name = "OpenMapDirectoryToolStripMenuItem";
             OpenMapDirectoryToolStripMenuItem.Click += OpenMapDirectoryToolStripMenuItem_Click;
             // 
             // OpenSaveDirectoryToolStripMenuItem
             // 
-            OpenSaveDirectoryToolStripMenuItem.Name = "OpenSaveDirectoryToolStripMenuItem";
             resources.ApplyResources(OpenSaveDirectoryToolStripMenuItem, "OpenSaveDirectoryToolStripMenuItem");
+            OpenSaveDirectoryToolStripMenuItem.Name = "OpenSaveDirectoryToolStripMenuItem";
             OpenSaveDirectoryToolStripMenuItem.Click += OpenSaveDirectoryToolStripMenuItem_Click;
+            // 
+            // openReplayDirectoryToolStripMenuItem
+            // 
+            resources.ApplyResources(openReplayDirectoryToolStripMenuItem, "openReplayDirectoryToolStripMenuItem");
+            openReplayDirectoryToolStripMenuItem.Name = "openReplayDirectoryToolStripMenuItem";
+            openReplayDirectoryToolStripMenuItem.Click += openReplayDirectoryToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(toolStripSeparator4, "toolStripSeparator4");
+            toolStripSeparator4.Name = "toolStripSeparator4";
             // 
             // RepairGameToolStripMenuItem
             // 
@@ -451,19 +483,20 @@ namespace PatchLauncher
             // 
             // AboutToolStripMenuItem
             // 
-            AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
             resources.ApplyResources(AboutToolStripMenuItem, "AboutToolStripMenuItem");
+            AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
             AboutToolStripMenuItem.Click += AboutToolStripMenuItem_Click;
             // 
             // PBarActualFile
             // 
+            resources.ApplyResources(PBarActualFile, "PBarActualFile");
             PBarActualFile.BackColor = System.Drawing.Color.Black;
             PBarActualFile.CustomText = null;
             PBarActualFile.DisplayStyle = Helper.ProgressBarDisplayText.Percentage;
             PBarActualFile.ForeColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(PBarActualFile, "PBarActualFile");
             PBarActualFile.Name = "PBarActualFile";
             PBarActualFile.Style = ProgressBarStyle.Continuous;
+            ToolTip.SetToolTip(PBarActualFile, resources.GetString("PBarActualFile.ToolTip"));
             // 
             // TmrPatchNotes
             // 
@@ -482,9 +515,9 @@ namespace PatchLauncher
             // 
             // WinFormsMainGUI
             // 
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.ActiveBorder;
-            resources.ApplyResources(this, "$this");
             Controls.Add(PBarActualFile);
             Controls.Add(BtnInstall);
             Controls.Add(WinFormsMainMenuStrip);
@@ -509,6 +542,7 @@ namespace PatchLauncher
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "WinFormsMainGUI";
+            ToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             FormClosing += BFME1_FormClosing;
             Shown += BFME1_Shown;
             Resize += BFME1_Resize;
@@ -590,5 +624,6 @@ namespace PatchLauncher
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem createDesktopShortcutToolStripMenuItem;
         private ToolStripMenuItem createStartmenuShortcutsToolStripMenuItem;
+        private ToolStripMenuItem openReplayDirectoryToolStripMenuItem;
     }
 }
