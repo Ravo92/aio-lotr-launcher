@@ -1,8 +1,4 @@
-﻿using System.Data;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Xml.Linq;
-using static System.Collections.Specialized.BitVector32;
+﻿using System.Xml.Linq;
 
 namespace Helper
 {
@@ -58,20 +54,16 @@ namespace Helper
         {
             if (beta)
             {
-                XElement response = XElement.Load(C_XMLFileBeta);
-                var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
-
-                int version = Convert.ToInt32(status);
-
+                XDocument _XDocument = XDocument.Load(C_XMLFileBeta);
+                string result = (string)_XDocument.Descendants("patch222Pack").Elements("version").FirstOrDefault()!;
+                int version = Convert.ToInt32(result);
                 return version;
             }
             else
             {
-                XElement response = XElement.Load(C_XMLFile);
-                var status = response.Elements().Where(e => e.Name.LocalName == "version").Single().Value;
-
-                int version = Convert.ToInt32(status);
-
+                XDocument _XDocument = XDocument.Load(C_XMLFile);
+                string result = (string)_XDocument.Descendants("patch222Pack").Elements("version").FirstOrDefault()!;
+                int version = Convert.ToInt32(result);
                 return version;
             }
         }
@@ -83,9 +75,9 @@ namespace Helper
         /// <returns>The correct MD5 Hash Code corresponding to the <paramref name="gameMainPackageURL"/>.</returns>
         public static string GetXMLGameMainPackageURL()
         {
-            XElement response = XElement.Load(C_XMLFile);
-            var status = response.Elements().Where(e => e.Name.LocalName == "gameMainPackageURL").Single().Value;
-            return status;
+            XDocument _XDocument = XDocument.Load(C_XMLFile);
+            string result = (string)_XDocument.Descendants("mainPack").Elements("gameMainPackageURL").FirstOrDefault()!;
+            return result;
         }
 
         /// <summary>
@@ -95,12 +87,8 @@ namespace Helper
         /// <returns>The correct download URI corresponding to the <paramref name="languageIsoCode"/>.</returns>
         public static string GetXMLGameLanguagePackURL(string languageIsoCode)
         {
-            //XElement response = XElement.Load(C_XMLFile);
-            //var status = response.Elements().Where(e => e.Name.LocalName == "languagePacks" + languageIsoCode + "url").Single().Value;
-            //return status;
-
-            XDocument systemXML = XDocument.Load(C_XMLFile);
-            string result = (string)systemXML.Descendants("languagePacks").Descendants(languageIsoCode).Elements("url").FirstOrDefault()!;
+            XDocument _XDocument = XDocument.Load(C_XMLFile);
+            string result = (string)_XDocument.Descendants("languagePacks").Descendants(languageIsoCode).Elements("url").FirstOrDefault()!;
             return result;
         }
 
@@ -111,12 +99,8 @@ namespace Helper
         /// <returns>The correct MD5 Hash Code corresponding to the <paramref name="languageIsoCode"/>.</returns>
         public static string GetXMLGameLanguageMD5Hash(string languageIsoCode)
         {
-            //XElement response = XElement.Load(C_XMLFile);
-            //var status = response.Elements().Where(e => e.Name.LocalName == "languagePacks" + languageIsoCode + "md5").Single().Value;
-            //return status;
-
-            XDocument systemXML = XDocument.Load(C_XMLFile);
-            string result = (string)systemXML.Descendants("languagePacks").Descendants(languageIsoCode).Elements("md5").FirstOrDefault()!;
+            XDocument _XDocument = XDocument.Load(C_XMLFile);
+            string result = (string)_XDocument.Descendants("languagePacks").Descendants(languageIsoCode).Elements("md5").FirstOrDefault()!;
             return result;
         }
     }

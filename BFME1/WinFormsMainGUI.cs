@@ -52,8 +52,8 @@ namespace PatchLauncher
             if (!File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
                 File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
 
-            //XMLFileHelper.GetXMLFileData(true);
-            //XMLFileHelper.GetXMLFileData(false);
+            XMLFileHelper.GetXMLFileData(true);
+            XMLFileHelper.GetXMLFileData(false);
 
             BtnInstall.Text = Strings.BtnInstall_TextLaunch;
 
