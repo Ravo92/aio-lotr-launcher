@@ -6,6 +6,7 @@ using PatchLauncher.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -46,14 +47,22 @@ namespace PatchLauncher
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
 
-            if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
-                Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
+            try
+            {
+                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
+                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
 
-            if (!File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
-                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
+                if (!File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
 
-            XMLFileHelper.GetXMLFileData(true);
-            XMLFileHelper.GetXMLFileData(false);
+                XMLFileHelper.GetXMLFileData(true);
+                XMLFileHelper.GetXMLFileData(false);
+            }
+            catch (Exception exception)
+            {
+                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
+                file.WriteLine(exception.Message);
+            }
 
             BtnInstall.Text = Strings.BtnInstall_TextLaunch;
 
