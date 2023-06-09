@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "PatchLauncherBFME.exe"
-#define MyAppExeVersion "1.0.1.18"
+#define MyAppExeVersion "1.0.2.0"
 
 [Setup]
 AppName={#MyAppName}

@@ -272,6 +272,7 @@ namespace PatchLauncher
                     PiBVersion222_5.Enabled = true;
                     PiBVersion222_6.Enabled = true;
                     PiBVersion222_7.Enabled = true;
+                    PiBVersion222_8.Enabled = true;
                 }));
             }
 
@@ -1794,7 +1795,7 @@ namespace PatchLauncher
             }
 
             // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
-            else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch || Settings.Default.IsGameInstalled && MD5Tools.CalculateMD5(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE)) != ConstStrings.C_UPDATEMD5_HASH && !Settings.Default.UseBetaChannel && !Settings.Default.SelectedOlderPatch)
+            else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch || Settings.Default.IsGameInstalled && !Settings.Default.UseBetaChannel && !Settings.Default.SelectedOlderPatch)
             {
                 if (Settings.Default.IsPatchModsShown)
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
@@ -1804,18 +1805,19 @@ namespace PatchLauncher
                 Settings.Default.IsPatch106Installed = false;
                 Settings.Default.IsPatch30Installed = false;
                 Settings.Default.IsPatch31Installed = false;
+                Settings.Default.IsPatch32Installed = false;
 
-                await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
+                await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/qjkwmakxh2trtsptzn6ej/Patch222v33.7z?dl=1&rlkey=ck9rjbn10465zrsstfv4kjg0h");
 
                 if (Settings.Default.InstalledLanguageISOCode == "de")
                 {
                     File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
                 }
 
-                Settings.Default.IsPatch32Downloaded = true;
-                Settings.Default.IsPatch32Installed = true;
+                Settings.Default.IsPatch33Downloaded = true;
+                Settings.Default.IsPatch33Installed = true;
 
-                PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
+                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
             }
             else
             {
@@ -1832,6 +1834,7 @@ namespace PatchLauncher
                 PiBVersion222_5.Hide();
                 PiBVersion222_6.Hide();
                 PiBVersion222_7.Hide();
+                PiBVersion222_8.Hide();
 
                 LblModExplanation.Text = Strings.Info_BetaActivated;
 
@@ -1859,6 +1862,9 @@ namespace PatchLauncher
 
             if (!Settings.Default.IsPatch32Downloaded)
                 PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+            if (!Settings.Default.IsPatch33Downloaded)
+                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
 
             Settings.Default.Save();
 
@@ -1918,6 +1924,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = false;
             PiBVersion222_6.Enabled = false;
             PiBVersion222_7.Enabled = false;
+            PiBVersion222_8.Enabled = false;
 
             Process _process = new();
             _process.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_GAME_FILE);
