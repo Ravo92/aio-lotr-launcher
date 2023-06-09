@@ -1775,7 +1775,7 @@ namespace PatchLauncher
             Settings.Default.LatestPatchVersion = XMLFileHelper.GetXMLFileVersion(false);
 
             // Check if Game is installed, if not show install button
-            if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || !File.Exists(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_GAME_FILE)) || RegistryService.ReadRegKey("path") == "ValueNotFound")
+            if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound")
             {
                 Settings.Default.IsGameInstalled = false;
                 BtnInstall.Text = Strings.BtnInstall_TextInstall;
