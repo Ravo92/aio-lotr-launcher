@@ -133,6 +133,24 @@ namespace PatchLauncher {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Repair finished. A protocol has been saved under &quot;Logfiles&quot;..
+        /// </summary>
+        internal static string Msg_RepairDone_Text {
+            get {
+                return ResourceManager.GetString("Msg.RepairDone.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repair finished!.
+        /// </summary>
+        internal static string Msg_RepairDone_Title {
+            get {
+                return ResourceManager.GetString("Msg.RepairDone.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A Launcher restart is required for the settings to be applied. Do you want to restart now?.
         /// </summary>
         internal static string Msg_Restart_Text {

@@ -72,6 +72,7 @@ namespace PatchLauncher
             createStartmenuShortcutsToolStripMenuItem = new ToolStripMenuItem();
             AdvancedToolStripMenuItem = new ToolStripMenuItem();
             OpenLauncherDirectoryToolStripMenuItem = new ToolStripMenuItem();
+            openLauncherLogfileDirectoryToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             OpenGameDirectoryToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -87,6 +88,7 @@ namespace PatchLauncher
             TmrPatchNotes = new Timer(components);
             TmrAnimation = new Timer(components);
             SysTray = new NotifyIcon(components);
+            PiBVersion222_8 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)PibHeader).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBYoutube).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBDiscord).BeginInit();
@@ -106,6 +108,7 @@ namespace PatchLauncher
             NotifyContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PibMute).BeginInit();
             WinFormsMainMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion222_8).BeginInit();
             SuspendLayout();
             // 
             // PibHeader
@@ -243,6 +246,7 @@ namespace PatchLauncher
             // 
             PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
             resources.ApplyResources(PnlPlaceholder, "PnlPlaceholder");
+            PnlPlaceholder.Controls.Add(PiBVersion222_8);
             PnlPlaceholder.Controls.Add(PiBVersion222_7);
             PnlPlaceholder.Controls.Add(PiBVersion222_5);
             PnlPlaceholder.Controls.Add(PiBVersion222_6);
@@ -403,7 +407,7 @@ namespace PatchLauncher
             // 
             // AdvancedToolStripMenuItem
             // 
-            AdvancedToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLauncherDirectoryToolStripMenuItem, toolStripSeparator2, OpenGameDirectoryToolStripMenuItem, toolStripSeparator3, OpenMapDirectoryToolStripMenuItem, OpenSaveDirectoryToolStripMenuItem, openReplayDirectoryToolStripMenuItem, toolStripSeparator4, RepairGameToolStripMenuItem });
+            AdvancedToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLauncherDirectoryToolStripMenuItem, openLauncherLogfileDirectoryToolStripMenuItem, toolStripSeparator2, OpenGameDirectoryToolStripMenuItem, toolStripSeparator3, OpenMapDirectoryToolStripMenuItem, OpenSaveDirectoryToolStripMenuItem, openReplayDirectoryToolStripMenuItem, toolStripSeparator4, RepairGameToolStripMenuItem });
             AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem";
             resources.ApplyResources(AdvancedToolStripMenuItem, "AdvancedToolStripMenuItem");
             // 
@@ -412,6 +416,12 @@ namespace PatchLauncher
             OpenLauncherDirectoryToolStripMenuItem.Name = "OpenLauncherDirectoryToolStripMenuItem";
             resources.ApplyResources(OpenLauncherDirectoryToolStripMenuItem, "OpenLauncherDirectoryToolStripMenuItem");
             OpenLauncherDirectoryToolStripMenuItem.Click += OpenLauncherDirectoryToolStripMenuItem_Click;
+            // 
+            // openLauncherLogfileDirectoryToolStripMenuItem
+            // 
+            openLauncherLogfileDirectoryToolStripMenuItem.Name = "openLauncherLogfileDirectoryToolStripMenuItem";
+            resources.ApplyResources(openLauncherLogfileDirectoryToolStripMenuItem, "openLauncherLogfileDirectoryToolStripMenuItem");
+            openLauncherLogfileDirectoryToolStripMenuItem.Click += OpenLauncherLogfileDirectoryToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
@@ -445,7 +455,7 @@ namespace PatchLauncher
             // 
             openReplayDirectoryToolStripMenuItem.Name = "openReplayDirectoryToolStripMenuItem";
             resources.ApplyResources(openReplayDirectoryToolStripMenuItem, "openReplayDirectoryToolStripMenuItem");
-            openReplayDirectoryToolStripMenuItem.Click += openReplayDirectoryToolStripMenuItem_Click;
+            openReplayDirectoryToolStripMenuItem.Click += OpenReplayDirectoryToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
@@ -454,8 +464,8 @@ namespace PatchLauncher
             // 
             // RepairGameToolStripMenuItem
             // 
-            resources.ApplyResources(RepairGameToolStripMenuItem, "RepairGameToolStripMenuItem");
             RepairGameToolStripMenuItem.Name = "RepairGameToolStripMenuItem";
+            resources.ApplyResources(RepairGameToolStripMenuItem, "RepairGameToolStripMenuItem");
             RepairGameToolStripMenuItem.Click += RepairGameToolStripMenuItem_Click;
             // 
             // AboutToolStripMenuItem
@@ -500,6 +510,15 @@ namespace PatchLauncher
             SysTray.BalloonTipIcon = ToolTipIcon.Info;
             resources.ApplyResources(SysTray, "SysTray");
             SysTray.MouseDoubleClick += SysTray_MouseDoubleClick;
+            // 
+            // PiBVersion222_8
+            // 
+            PiBVersion222_8.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(PiBVersion222_8, "PiBVersion222_8");
+            PiBVersion222_8.Cursor = Cursors.Hand;
+            PiBVersion222_8.Name = "PiBVersion222_8";
+            PiBVersion222_8.TabStop = false;
+            PiBVersion222_8.Click += PiBVersion222_8_Click;
             // 
             // WinFormsMainGUI
             // 
@@ -554,6 +573,7 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PibMute).EndInit();
             WinFormsMainMenuStrip.ResumeLayout(false);
             WinFormsMainMenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion222_8).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -614,5 +634,7 @@ namespace PatchLauncher
         private ToolStripMenuItem openReplayDirectoryToolStripMenuItem;
         private ToolStripMenuItem CreditsToolStripMenuItem;
         private ToolStripMenuItem MessagesFromTheTeamToolStripMenuItem;
+        private ToolStripMenuItem openLauncherLogfileDirectoryToolStripMenuItem;
+        private PictureBox PiBVersion222_8;
     }
 }

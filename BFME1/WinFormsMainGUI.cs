@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace PatchLauncher
@@ -163,6 +164,11 @@ namespace PatchLauncher
             else
                 PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
 
+            if (Settings.Default.IsPatch33Installed)
+                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
+            else
+                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -275,7 +281,7 @@ namespace PatchLauncher
                 DialogResult dr = _install.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    await InstallRoutine();
+                    await InstallRoutine(false);
                 }
             }
             else
@@ -434,6 +440,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = false;
             PiBVersion222_6.Enabled = false;
             PiBVersion222_7.Enabled = false;
+            PiBVersion222_8.Enabled = false;
 
             if (PatchModDetectionHelper.DetectPatch106())
             {
@@ -449,6 +456,8 @@ namespace PatchLauncher
             Settings.Default.IsPatch30Installed = false;
             Settings.Default.IsPatch31Installed = false;
             Settings.Default.IsPatch32Installed = false;
+            Settings.Default.IsPatch33Installed = false;
+
 
             if (Settings.Default.IsPatch106Downloaded)
                 PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
@@ -467,10 +476,17 @@ namespace PatchLauncher
             else
                 PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
 
+
             if (Settings.Default.IsPatch32Downloaded)
                 PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
             else
                 PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+
+            if (Settings.Default.IsPatch33Downloaded)
+                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+            else
+                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
 
             PiBVersion103.Enabled = true;
             PiBVersion106.Enabled = true;
@@ -478,6 +494,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = true;
             PiBVersion222_6.Enabled = true;
             PiBVersion222_7.Enabled = true;
+            PiBVersion222_8.Enabled = true;
 
             Settings.Default.Save();
 
@@ -494,6 +511,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = false;
             PiBVersion222_6.Enabled = false;
             PiBVersion222_7.Enabled = false;
+            PiBVersion222_8.Enabled = false;
 
             if (!Settings.Default.IsPatch106Downloaded)
             {
@@ -512,6 +530,7 @@ namespace PatchLauncher
                 Settings.Default.IsPatch30Installed = false;
                 Settings.Default.IsPatch31Installed = false;
                 Settings.Default.IsPatch32Installed = false;
+                Settings.Default.IsPatch33Installed = false;
 
 
                 if (Settings.Default.IsPatch30Downloaded)
@@ -529,6 +548,12 @@ namespace PatchLauncher
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
                 else
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+
+                if (Settings.Default.IsPatch33Downloaded)
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                else
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
             }
             else
             {
@@ -537,6 +562,8 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch106Installed = false;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    PatchModDetectionHelper.DeletePatch106();
                 }
                 else
                 {
@@ -555,6 +582,7 @@ namespace PatchLauncher
                     Settings.Default.IsPatch30Installed = false;
                     Settings.Default.IsPatch31Installed = false;
                     Settings.Default.IsPatch32Installed = false;
+                    Settings.Default.IsPatch33Installed = false;
 
 
                     if (Settings.Default.IsPatch30Downloaded)
@@ -573,6 +601,12 @@ namespace PatchLauncher
                         PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
                     else
                         PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+
+                    if (Settings.Default.IsPatch33Downloaded)
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                    else
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
                 }
             }
 
@@ -582,6 +616,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = true;
             PiBVersion222_6.Enabled = true;
             PiBVersion222_7.Enabled = true;
+            PiBVersion222_8.Enabled = true;
 
             Settings.Default.Save();
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
@@ -597,6 +632,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = false;
             PiBVersion222_6.Enabled = false;
             PiBVersion222_7.Enabled = false;
+            PiBVersion222_8.Enabled = false;
 
             if (!Settings.Default.IsPatch30Downloaded)
             {
@@ -616,6 +652,7 @@ namespace PatchLauncher
                 Settings.Default.IsPatch106Installed = false;
                 Settings.Default.IsPatch31Installed = false;
                 Settings.Default.IsPatch32Installed = false;
+                Settings.Default.IsPatch33Installed = false;
 
 
                 if (Settings.Default.IsPatch31Downloaded)
@@ -623,10 +660,17 @@ namespace PatchLauncher
                 else
                     PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
 
+
                 if (Settings.Default.IsPatch32Downloaded)
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
                 else
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+
+                if (Settings.Default.IsPatch33Downloaded)
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                else
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
             }
             else
             {
@@ -635,6 +679,8 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch30Installed = false;
                     PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30;
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    PatchModDetectionHelper.DeletePatch106();
                 }
                 else
                 {
@@ -654,6 +700,7 @@ namespace PatchLauncher
                     Settings.Default.IsPatch106Installed = false;
                     Settings.Default.IsPatch31Installed = false;
                     Settings.Default.IsPatch32Installed = false;
+                    Settings.Default.IsPatch33Installed = false;
 
 
                     if (Settings.Default.IsPatch31Downloaded)
@@ -666,6 +713,12 @@ namespace PatchLauncher
                         PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
                     else
                         PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+
+                    if (Settings.Default.IsPatch33Downloaded)
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                    else
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
                 }
             }
 
@@ -675,6 +728,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = true;
             PiBVersion222_6.Enabled = true;
             PiBVersion222_7.Enabled = true;
+            PiBVersion222_8.Enabled = true;
 
             Settings.Default.Save();
 
@@ -710,6 +764,7 @@ namespace PatchLauncher
                 Settings.Default.IsPatch106Installed = false;
                 Settings.Default.IsPatch30Installed = false;
                 Settings.Default.IsPatch32Installed = false;
+                Settings.Default.IsPatch33Installed = false;
 
 
                 if (Settings.Default.IsPatch30Downloaded)
@@ -722,6 +777,12 @@ namespace PatchLauncher
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
                 else
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+
+                if (Settings.Default.IsPatch33Downloaded)
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                else
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
             }
             else
             {
@@ -730,6 +791,8 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch31Installed = false;
                     PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31;
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    PatchModDetectionHelper.DeletePatch106();
                 }
                 else
                 {
@@ -749,6 +812,7 @@ namespace PatchLauncher
                     Settings.Default.IsPatch106Installed = false;
                     Settings.Default.IsPatch30Installed = false;
                     Settings.Default.IsPatch32Installed = false;
+                    Settings.Default.IsPatch33Installed = false;
 
 
                     if (Settings.Default.IsPatch30Downloaded)
@@ -761,6 +825,12 @@ namespace PatchLauncher
                         PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
                     else
                         PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+
+                    if (Settings.Default.IsPatch33Downloaded)
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                    else
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
                 }
             }
 
@@ -770,6 +840,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = true;
             PiBVersion222_6.Enabled = true;
             PiBVersion222_7.Enabled = true;
+            PiBVersion222_8.Enabled = true;
 
             Settings.Default.Save();
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
@@ -785,6 +856,7 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = false;
             PiBVersion222_6.Enabled = false;
             PiBVersion222_7.Enabled = false;
+            PiBVersion222_8.Enabled = false;
 
             if (!Settings.Default.IsPatch32Downloaded)
             {
@@ -809,6 +881,7 @@ namespace PatchLauncher
                 Settings.Default.IsPatch106Installed = false;
                 Settings.Default.IsPatch30Installed = false;
                 Settings.Default.IsPatch31Installed = false;
+                Settings.Default.IsPatch33Installed = false;
 
 
                 if (Settings.Default.IsPatch30Downloaded)
@@ -821,6 +894,12 @@ namespace PatchLauncher
                     PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31;
                 else
                     PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
+
+
+                if (Settings.Default.IsPatch33Downloaded)
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                else
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
             }
             else
             {
@@ -829,6 +908,8 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = 103;
                     Settings.Default.IsPatch32Installed = false;
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    PatchModDetectionHelper.DeletePatch106();
                 }
                 else
                 {
@@ -837,6 +918,11 @@ namespace PatchLauncher
                     LblFileName.Show();
 
                     await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
+
+                    if (Settings.Default.InstalledLanguageISOCode == "de")
+                    {
+                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                    }
 
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
@@ -848,6 +934,7 @@ namespace PatchLauncher
                     Settings.Default.IsPatch106Installed = false;
                     Settings.Default.IsPatch30Installed = false;
                     Settings.Default.IsPatch31Installed = false;
+                    Settings.Default.IsPatch33Installed = false;
 
 
                     if (Settings.Default.IsPatch30Downloaded)
@@ -860,6 +947,12 @@ namespace PatchLauncher
                         PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31;
                     else
                         PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
+
+
+                    if (Settings.Default.IsPatch33Downloaded)
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                    else
+                        PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
                 }
             }
 
@@ -869,6 +962,128 @@ namespace PatchLauncher
             PiBVersion222_5.Enabled = true;
             PiBVersion222_6.Enabled = true;
             PiBVersion222_7.Enabled = true;
+            PiBVersion222_8.Enabled = true;
+
+            Settings.Default.Save();
+            IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
+        }
+
+        private async void PiBVersion222_8_Click(object sender, EventArgs e)
+        {
+            IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
+
+            PiBVersion103.Enabled = false;
+            PiBVersion106.Enabled = false;
+
+            PiBVersion222_5.Enabled = false;
+            PiBVersion222_6.Enabled = false;
+            PiBVersion222_7.Enabled = false;
+            PiBVersion222_8.Enabled = false;
+
+            if (!Settings.Default.IsPatch33Downloaded)
+            {
+                PBarActualFile.Show();
+                LblDownloadSpeed.Show();
+                LblFileName.Show();
+
+                await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/qjkwmakxh2trtsptzn6ej/Patch222v33.7z?dl=1&rlkey=ck9rjbn10465zrsstfv4kjg0h");
+
+                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
+                PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
+
+                if (Settings.Default.InstalledLanguageISOCode == "de")
+                {
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                }
+
+                Settings.Default.PatchVersionInstalled = 33;
+                Settings.Default.IsPatch33Downloaded = true;
+                Settings.Default.IsPatch33Installed = true;
+
+                Settings.Default.IsPatch106Installed = false;
+                Settings.Default.IsPatch30Installed = false;
+                Settings.Default.IsPatch31Installed = false;
+                Settings.Default.IsPatch32Installed = false;
+
+
+                if (Settings.Default.IsPatch30Downloaded)
+                    PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30;
+                else
+                    PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Download;
+
+
+                if (Settings.Default.IsPatch31Downloaded)
+                    PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31;
+                else
+                    PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
+
+                if (Settings.Default.IsPatch32Downloaded)
+                    PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
+                else
+                    PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+            }
+            else
+            {
+                if (Settings.Default.IsPatch33Installed)
+                {
+                    Settings.Default.PatchVersionInstalled = 103;
+                    Settings.Default.IsPatch33Installed = false;
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33;
+                    PatchModDetectionHelper.DeletePatch222Files();
+                    PatchModDetectionHelper.DeletePatch106();
+                }
+                else
+                {
+                    PBarActualFile.Show();
+                    LblDownloadSpeed.Show();
+                    LblFileName.Show();
+
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/qjkwmakxh2trtsptzn6ej/Patch222v33.7z?dl=1&rlkey=ck9rjbn10465zrsstfv4kjg0h");
+
+                    if (Settings.Default.InstalledLanguageISOCode == "de")
+                    {
+                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                    }
+
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
+                    PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
+
+                    Settings.Default.PatchVersionInstalled = 33;
+                    Settings.Default.IsPatch33Downloaded = true;
+                    Settings.Default.IsPatch33Installed = true;
+
+                    Settings.Default.IsPatch106Installed = false;
+                    Settings.Default.IsPatch30Installed = false;
+                    Settings.Default.IsPatch31Installed = false;
+                    Settings.Default.IsPatch32Installed = false;
+
+
+                    if (Settings.Default.IsPatch30Downloaded)
+                        PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30;
+                    else
+                        PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Download;
+
+
+                    if (Settings.Default.IsPatch31Downloaded)
+                        PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31;
+                    else
+                        PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
+
+
+                    if (Settings.Default.IsPatch32Downloaded)
+                        PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32;
+                    else
+                        PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+                }
+            }
+
+            PiBVersion103.Enabled = true;
+            PiBVersion106.Enabled = true;
+
+            PiBVersion222_5.Enabled = true;
+            PiBVersion222_6.Enabled = true;
+            PiBVersion222_7.Enabled = true;
+            PiBVersion222_8.Enabled = true;
 
             Settings.Default.Save();
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
@@ -955,6 +1170,9 @@ namespace PatchLauncher
                 LblModExplanation.Hide();
             }
 
+            Settings.Default.PatchVersionInstalled = XMLFileHelper.GetXMLFileVersion(false);
+            Settings.Default.Save();
+
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
 
             LaunchGameToolStripMenuItem.Enabled = true;
@@ -991,16 +1209,6 @@ namespace PatchLauncher
             if (XmlVersion > Settings.Default.BetaChannelVersion && Settings.Default.BetaChannelVersion > 0 && Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString())))
                 Directory.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString()), true);
 
-            //else if (Settings.Default.BetaChannelVersion == 0)
-            //{
-            //    var Directories = Directory.GetDirectories(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME), "Beta*");
-
-            //    foreach (var directory in Directories)
-            //    {
-            //        Directory.Delete(directory, true);
-            //    }
-            //}
-
             Task download = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_ASSET_FILE), "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
             await download;
 
@@ -1034,7 +1242,7 @@ namespace PatchLauncher
             BtnInstall.Enabled = true;
 
             Settings.Default.BetaChannelVersion = XMLFileHelper.GetXMLFileVersion(true);
-            Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION + 1;
+            Settings.Default.PatchVersionInstalled = XmlVersion + 1;
             Settings.Default.IsPatch30Installed = false;
             Settings.Default.IsPatch106Installed = false;
             Settings.Default.Save();
@@ -1066,7 +1274,8 @@ namespace PatchLauncher
                     ChunkCount = 1,
                     ParallelDownload = false,
                     ReserveStorageSpaceBeforeStartingDownload = true,
-                    //BufferBlockSize = 8000,
+                    BufferBlockSize = 8000,
+                    MaximumBytesPerSecond = 131072000,
                     ClearPackageOnCompletionWithFailure = true
                 };
 
@@ -1103,38 +1312,16 @@ namespace PatchLauncher
             ZIPFileHelper _ZIPFileHelper = new();
             await _ZIPFileHelper.ExtractArchive(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName), Settings.Default.GameInstallPath, progressHandler)!;
 
-            FinishingGameUpdate();
-        }
-
-        private void FinishingGameUpdate()
-        {
             Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
             Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
             Invoke((MethodInvoker)(() => LblFileName.Hide()));
-
-            Settings.Default.PatchVersionInstalled = ConstStrings.C_UPDATE_VERSION;
-            Settings.Default.Save();
-
-            //if (!Directory.Exists(RegistryFunctions.ReadStartMenuFolder()))
-            //{
-            //    Directory.CreateDirectory(RegistryFunctions.ReadStartMenuFolder()!);
-            //
-            //    object shDesktop = "Desktop";
-            //    WshShell shell = new();
-            //    string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\The Battle for Middle-earth (tm).lnk";
-            //    IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
-            //    shortcut.Description = "Play The Battle for Middle-earth (tm)";
-            //    shortcut.Hotkey = "Ctrl+Shift+N";
-            //    shortcut.TargetPath = Path.Combine(Properties.Settings.Default.GameInstallPath, @"\lotrbfme.exe");
-            //    shortcut.Save();
-            //}
         }
 
         #endregion
 
         #region GameInstall
 
-        public async Task InstallRoutine()
+        public async Task InstallRoutine(bool onlyLanguagePack)
         {
             IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
 
@@ -1160,8 +1347,11 @@ namespace PatchLauncher
                     Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                await DownloadGame(_languageSettings.RegistrySelectedLocale);
-                await ExtractGame();
+                if (onlyLanguagePack)
+                {
+                    await DownloadGame(_languageSettings.RegistrySelectedLocale);
+                    await ExtractGame(onlyLanguagePack);
+                }
 
                 if (Settings.Default.CreateDesktopShortcut)
                 {
@@ -1195,10 +1385,10 @@ namespace PatchLauncher
                     PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(e.Message);
+                await file.WriteLineAsync(ex.Message);
             }
 
             LblDownloadSpeed.Hide();
@@ -1262,9 +1452,6 @@ namespace PatchLauncher
                 }
                 else if (MD5Tools.CalculateMD5(langPackPath) != XMLFileHelper.GetXMLGameLanguageMD5Hash(isoLanguage))
                 {
-                    Debug.WriteLine(MD5Tools.CalculateMD5(langPackPath));
-                    Debug.WriteLine(XMLFileHelper.GetXMLGameLanguageMD5Hash(isoLanguage));
-
                     File.Delete(langPackPath);
                     await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameLanguagePackURL(isoLanguage), langPackPath);
                 }
@@ -1276,7 +1463,7 @@ namespace PatchLauncher
             }
         }
 
-        public async Task ExtractGame()
+        public async Task ExtractGame(bool onlyLanguagePack)
         {
             try
             {
@@ -1291,11 +1478,14 @@ namespace PatchLauncher
                     SetTextDlSpeed(string.Concat(progress.Count, "/", progress.Max));
                 });
 
-                var archiveFileNames = new List<string>()
+                var archiveFileNames = new List<string>();
+
+                if (!onlyLanguagePack)
                 {
-                    ConstStrings.C_MAINGAMEFILE_ZIP,
-                    _languageSettings.LanguagPackName
-                };
+                    archiveFileNames.Add(ConstStrings.C_MAINGAMEFILE_ZIP);
+                }
+
+                archiveFileNames.Add(_languageSettings.LanguagPackName);
 
                 for (int i = 0; i < archiveFileNames.Count; i++)
                 {
@@ -1759,7 +1949,7 @@ namespace PatchLauncher
             Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath() + "\\Maps");
         }
 
-        private void openReplayDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenReplayDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath() + "\\Replays");
         }
@@ -1772,6 +1962,11 @@ namespace PatchLauncher
         private void OpenLauncherDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", Application.StartupPath);
+        }
+
+        private void OpenLauncherLogfileDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", Path.Combine(Application.StartupPath, ConstStrings.C_LOGFOLDER_NAME));
         }
 
         private void CreditsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1798,43 +1993,167 @@ namespace PatchLauncher
 
         private async void RepairGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
+
             try
             {
+                LaunchGameToolStripMenuItem.Enabled = false;
+                OptionsToolStripMenuItem.Enabled = false;
+                AdvancedToolStripMenuItem.Enabled = false;
+
+                RepairLogConsole repairLogConsole = new();
+
+                bool FlagIsCorrupt = false;
+
                 BtnInstall.Enabled = false;
+                var locationInForm = repairLogConsole.Location;
+                var locationOnScreen = PointToScreen(locationInForm);
 
-                Settings.Default.IsPatch32Downloaded = false;
-                Settings.Default.IsPatch32Installed = false;
-                Settings.Default.Save();
+                repairLogConsole.StartPosition = FormStartPosition.Manual;
+                repairLogConsole.Location = new Point(locationOnScreen.X + 1275, locationOnScreen.Y - 31);
+                repairLogConsole.Show();
 
-                if (Directory.Exists(ConstStrings.GameInstallPath()))
-                    Directory.Delete(ConstStrings.GameInstallPath(), true);
+                repairLogConsole.TxtConsole.Text = "Checking game integrity...";
+                repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
 
-                if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME)))
-                    Directory.Delete(ConstStrings.C_PATCHFOLDER_NAME, true);
-
-                if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_BETAFOLDER_NAME)))
-                    Directory.Delete(ConstStrings.C_BETAFOLDER_NAME, true);
-
-                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)))
+                foreach (var fileName in RepairFileList._DictionaryRepairFileList)
                 {
-                    if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)) != ConstStrings.C_MAINGAMEFILE_ZIP_MD5_HASH)
+                    string isMD5Value = MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), fileName.Key));
+                    string shouldMD5Value = fileName.Value;
+
+                    if (isMD5Value == shouldMD5Value)
                     {
-                        File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
+                        repairLogConsole.TxtConsole.AppendText(string.Format("File {0} has the correct value: {1}", fileName.Key, shouldMD5Value));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    }
+                    else
+                    {
+                        repairLogConsole.TxtConsole.AppendText(string.Format("File {0} ist corrupted and will be reaquired... Value: {1}", fileName.Key, isMD5Value));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        FlagIsCorrupt = true;
+                        break;
                     }
                 }
 
-                if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguageISOCode)))
+                repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+
+                if (FlagIsCorrupt)
                 {
-                    File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, Settings.Default.InstalledLanguageISOCode));
+                    Settings.Default.IsPatch32Downloaded = false;
+                    Settings.Default.IsPatch32Installed = false;
+                    Settings.Default.Save();
+
+                    if (Directory.Exists(ConstStrings.GameInstallPath()))
+                    {
+                        Directory.Delete(ConstStrings.GameInstallPath(), true);
+
+                        if (!Directory.Exists(ConstStrings.GameInstallPath()))
+                        {
+                            repairLogConsole.TxtConsole.AppendText(string.Format("Deleted the game folder \"{0}\" sucessfully", ConstStrings.GameInstallPath()));
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        }
+                        else
+                        {
+                            repairLogConsole.TxtConsole.AppendText(string.Format("Was not able to delete the folder \"{0}\". Please check \"{1}\" for details.", ConstStrings.GameInstallPath(), ConstStrings.C_ERRORLOGGING_FILE));
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        }
+                    }
+
+                    // if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME)))
+                    //     Directory.Delete(ConstStrings.C_PATCHFOLDER_NAME, true);
+                    //
+                    // if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_BETAFOLDER_NAME)))
+                    //     Directory.Delete(ConstStrings.C_BETAFOLDER_NAME, true);
+
+                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)))
+                    {
+                        repairLogConsole.TxtConsole.AppendText(string.Format("Checking file \"{0}\"...", ConstStrings.C_MAINGAMEFILE_ZIP));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)) != ConstStrings.C_MAINGAMEFILE_ZIP_MD5_HASH)
+                        {
+                            File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
+                            repairLogConsole.TxtConsole.AppendText(string.Format("The file \"{0}\" was corrupted and will be reaquired...", ConstStrings.C_MAINGAMEFILE_ZIP));
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        }
+                        repairLogConsole.TxtConsole.AppendText(string.Format("File \"{0}\" is okay. No action needed.", ConstStrings.C_MAINGAMEFILE_ZIP));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    }
+
+                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)))
+                    {
+                        repairLogConsole.TxtConsole.AppendText(string.Format("Checking file \"{0}\"...", _languageSettings.LanguagPackName));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)) != XMLFileHelper.GetXMLGameLanguageMD5Hash(_languageSettings.RegistrySelectedLocale))
+                        {
+                            File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
+                            repairLogConsole.TxtConsole.AppendText(string.Format("The file \"{0}\" was corrupted and will be reaquired...", _languageSettings.LanguagPackName));
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        }
+                        repairLogConsole.TxtConsole.AppendText(string.Format("File \"{0}\" is okay. No action needed.", _languageSettings.LanguagPackName));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    }
+
+                    repairLogConsole.TxtConsole.AppendText("We are now renewing every file...");
+                    await InstallRoutine(false);
+                }
+                else
+                {
+                    repairLogConsole.TxtConsole.AppendText(string.Format("Detected game language: \"{0}\"", _languageSettings.RegistrySelectedLanguage));
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    repairLogConsole.TxtConsole.AppendText(string.Format("Reinstalling installed language: \"{0}\" ...", _languageSettings.RegistrySelectedLanguage));
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+
+                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)))
+                    {
+                        repairLogConsole.TxtConsole.AppendText(string.Format("Checking file \"{0}\"...", _languageSettings.LanguagPackName));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)) != XMLFileHelper.GetXMLGameLanguageMD5Hash(_languageSettings.RegistrySelectedLocale))
+                        {
+                            File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
+                            repairLogConsole.TxtConsole.AppendText(string.Format("The file \"{0}\" was corrupted and will be reaquired...", _languageSettings.LanguagPackName));
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        }
+                        repairLogConsole.TxtConsole.AppendText(string.Format("File \"{0}\" is okay. No action needed.", _languageSettings.LanguagPackName));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    }
+
+                    await InstallRoutine(true);
                 }
 
-                await InstallRoutine();
+                if (Settings.Default.InstalledLanguageISOCode == "de")
+                {
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                    repairLogConsole.TxtConsole.AppendText(string.Format("Copied German translation for 2.22 \"{0}\" into \"{1}\"", ConstStrings.C_GERMANLANGUAGE_PATCH_FILE, ConstStrings.GameInstallPath()));
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                }
+
+                await File.WriteAllTextAsync(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, "Repair_" + DateTime.Now.ToString("yyyy'_'MM'_'ddTHH'_'mm'_'ss") + ".log"), repairLogConsole.TxtConsole.Text);
+
+                Thread.Sleep(1500);
+
+                MessageBox.Show(Strings.Msg_RepairDone_Text, Strings.Msg_RepairDone_Title, MessageBoxButtons.OK);
+
+                repairLogConsole.Hide();
+                repairLogConsole.Dispose();
+
+                BtnInstall.Enabled = true;
+
+                LaunchGameToolStripMenuItem.Enabled = true;
+                OptionsToolStripMenuItem.Enabled = true;
+                AdvancedToolStripMenuItem.Enabled = true;
             }
             catch (Exception exception)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 await file.WriteLineAsync(exception.Message);
             }
+
+            IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
         }
 
         private void LauncherSettingsToolStripMenuItem_Click(object sender, EventArgs e)

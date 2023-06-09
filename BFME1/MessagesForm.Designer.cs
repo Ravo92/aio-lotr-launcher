@@ -35,18 +35,18 @@
             // 
             // Wv2Messages
             // 
-            resources.ApplyResources(Wv2Messages, "Wv2Messages");
             Wv2Messages.AllowExternalDrop = true;
             Wv2Messages.CreationProperties = null;
             Wv2Messages.DefaultBackgroundColor = System.Drawing.Color.White;
+            resources.ApplyResources(Wv2Messages, "Wv2Messages");
             Wv2Messages.Name = "Wv2Messages";
             Wv2Messages.Source = new System.Uri("https://ravo92.github.io/messagespage/index.html", System.UriKind.Absolute);
             Wv2Messages.ZoomFactor = 1D;
             // 
             // BtnClose
             // 
-            resources.ApplyResources(BtnClose, "BtnClose");
             BtnClose.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnClose, "BtnClose");
             BtnClose.FlatAppearance.BorderSize = 0;
             BtnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -66,6 +66,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(BtnClose);
             Controls.Add(Wv2Messages);
+            DoubleBuffered = true;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;

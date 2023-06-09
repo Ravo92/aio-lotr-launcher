@@ -433,6 +433,36 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_222V33 {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_222V33", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_222V33_Download {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_222V33_Download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_222V33_Selected {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_222V33_Selected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap chkSelected {
             get {
                 object obj = ResourceManager.GetObject("chkSelected", resourceCulture);
