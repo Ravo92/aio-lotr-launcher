@@ -1357,11 +1357,8 @@ namespace PatchLauncher
                     Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                if (onlyLanguagePack)
-                {
-                    await DownloadGame(_languageSettings.RegistrySelectedLocale);
-                    await ExtractGame(onlyLanguagePack);
-                }
+                await DownloadGame(_languageSettings.RegistrySelectedLocale);
+                await ExtractGame(onlyLanguagePack);
 
                 if (Settings.Default.CreateDesktopShortcut)
                 {
@@ -1380,11 +1377,11 @@ namespace PatchLauncher
                 }
                 else
                 {
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP32_NAME, "https://dl.dropboxusercontent.com/s/gwgzayu7x7h0qc6/Patch_2.22v32.7z");
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/qjkwmakxh2trtsptzn6ej/Patch222v33.7z?dl=1&rlkey=ck9rjbn10465zrsstfv4kjg0h");
 
                     Settings.Default.IsGameInstalled = true;
-                    Settings.Default.IsPatch32Downloaded = true;
-                    Settings.Default.IsPatch32Installed = true;
+                    Settings.Default.IsPatch33Downloaded = true;
+                    Settings.Default.IsPatch33Installed = true;
                     Settings.Default.Save();
 
                     if (Settings.Default.InstalledLanguageISOCode == "de")
@@ -1392,7 +1389,7 @@ namespace PatchLauncher
                         File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
                     }
 
-                    PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Selected;
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
                 }
             }
             catch (Exception ex)
@@ -1484,7 +1481,6 @@ namespace PatchLauncher
                     SetPBarFiles(progress.Count);
                     SetPBarFilesMax(progress.Max);
                     SetPBarPercentages(progress.Filename!);
-                    //SetTextPercentages(progress.Filename!);
                     SetTextDlSpeed(string.Concat(progress.Count, "/", progress.Max));
                 });
 
@@ -1775,7 +1771,7 @@ namespace PatchLauncher
             Settings.Default.LatestPatchVersion = XMLFileHelper.GetXMLFileVersion(false);
 
             // Check if Game is installed, if not show install button
-            if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound")
+            if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
             {
                 Settings.Default.IsGameInstalled = false;
                 BtnInstall.Text = Strings.BtnInstall_TextInstall;
@@ -1803,6 +1799,7 @@ namespace PatchLauncher
                 Settings.Default.IsPatch30Installed = false;
                 Settings.Default.IsPatch31Installed = false;
                 Settings.Default.IsPatch32Installed = false;
+                Settings.Default.IsPatch33Installed = false;
 
                 await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/qjkwmakxh2trtsptzn6ej/Patch222v33.7z?dl=1&rlkey=ck9rjbn10465zrsstfv4kjg0h");
 
@@ -1879,7 +1876,7 @@ namespace PatchLauncher
                 e.Cancel = true;
             }
 
-            if (Settings.Default.IsPatch106Installed || Settings.Default.IsPatch30Installed || Settings.Default.IsPatch31Installed)
+            if (Settings.Default.IsPatch106Installed || Settings.Default.IsPatch30Installed || Settings.Default.IsPatch31Installed || Settings.Default.IsPatch32Installed)
             {
                 Settings.Default.SelectedOlderPatch = true;
             }
@@ -2111,6 +2108,7 @@ namespace PatchLauncher
                     }
 
                     repairLogConsole.TxtConsole.AppendText("We are now renewing every file...");
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     await InstallRoutine(false);
                 }
                 else
