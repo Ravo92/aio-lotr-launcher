@@ -357,5 +357,29 @@ namespace PatchLauncher.Properties {
                 this["CreateDesktopShortcut"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPatch33Downloaded {
+            get {
+                return ((bool)(this["IsPatch33Downloaded"]));
+            }
+            set {
+                this["IsPatch33Downloaded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsPatch33Installed {
+            get {
+                return ((bool)(this["IsPatch33Installed"]));
+            }
+            set {
+                this["IsPatch33Installed"] = value;
+            }
+        }
     }
 }

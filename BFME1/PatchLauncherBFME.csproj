@@ -13,8 +13,8 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-    <AssemblyVersion>1.0.1.18</AssemblyVersion>
-    <FileVersion>1.0.1.18</FileVersion>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
     <Copyright>Raphael Vogel</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
@@ -38,6 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="MessagesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="LauncherOptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>

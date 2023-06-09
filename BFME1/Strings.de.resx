@@ -141,6 +141,12 @@
   <data name="Info.PreparingUpdateBeta" xml:space="preserve">
     <value>Bereite Beta-Update vor...</value>
   </data>
+  <data name="Msg.RepairDone.Text" xml:space="preserve">
+    <value>Der Reparaturvorgang wurde beendet und ein Log wurde unter "Logfiles" gespeichert.</value>
+  </data>
+  <data name="Msg.RepairDone.Title" xml:space="preserve">
+    <value>Reparatur beendet!</value>
+  </data>
   <data name="Msg.Restart.Text" xml:space="preserve">
     <value>Ein Launcher Neustart wird benötigt um die Einstellungen zu übernehmen. Soll der Launcher jetzt neu gestartet werden?</value>
   </data>
