@@ -1775,7 +1775,7 @@ namespace PatchLauncher
             Settings.Default.LatestPatchVersion = XMLFileHelper.GetXMLFileVersion(false);
 
             // Check if Game is installed, if not show install button
-            if (Settings.Default.GameInstallPath == "" || !File.Exists(Path.Combine(Settings.Default.GameInstallPath!, ConstStrings.C_MAIN_GAME_FILE)) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !Directory.Exists(RegistryService.ReadRegKey("path")))
+            if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || !File.Exists(Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_GAME_FILE)) || RegistryService.ReadRegKey("path") == "ValueNotFound")
             {
                 Settings.Default.IsGameInstalled = false;
                 BtnInstall.Text = Strings.BtnInstall_TextInstall;
@@ -1787,13 +1787,10 @@ namespace PatchLauncher
 
                 PiBArrow.Enabled = false;
 
-                BtnInstall.Enabled = true;
-
                 LaunchGameToolStripMenuItem.Enabled = false;
                 OptionsToolStripMenuItem.Enabled = false;
                 AdvancedToolStripMenuItem.Enabled = false;
             }
-
             // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
             else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch || Settings.Default.IsGameInstalled && !Settings.Default.UseBetaChannel && !Settings.Default.SelectedOlderPatch)
             {
