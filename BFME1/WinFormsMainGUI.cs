@@ -1792,7 +1792,7 @@ namespace PatchLauncher
                 AdvancedToolStripMenuItem.Enabled = false;
             }
             // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
-            else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch || Settings.Default.IsGameInstalled && !Settings.Default.UseBetaChannel && !Settings.Default.SelectedOlderPatch)
+            else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && Settings.Default.IsGameInstalled && !Settings.Default.UseBetaChannel)
             {
                 if (Settings.Default.IsPatchModsShown)
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
