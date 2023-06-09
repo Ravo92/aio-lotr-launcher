@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace PatchLauncher
 {
-    partial class AboutForm : Form
+    partial class CreditsForm : Form
     {
-        public AboutForm()
+        public CreditsForm()
         {
             switch (Settings.Default.Language)
             {

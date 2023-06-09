@@ -1774,14 +1774,25 @@ namespace PatchLauncher
             Process.Start("explorer.exe", Application.StartupPath);
         }
 
-        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreditsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm _about = new();
+            CreditsForm _about = new();
 
             DialogResult dr = _about.ShowDialog();
             if (dr == DialogResult.OK)
             {
                 _about.Close();
+            }
+        }
+
+        private void MessagesFromTheTeamToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessagesForm _message = new();
+
+            DialogResult dr = _message.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                _message.Close();
             }
         }
 

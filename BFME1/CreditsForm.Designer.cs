@@ -1,6 +1,6 @@
 ﻿namespace PatchLauncher
 {
-    partial class AboutForm
+    partial class CreditsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -27,7 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreditsForm));
             Wv2Credits = new Microsoft.Web.WebView2.WinForms.WebView2();
             BtnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)Wv2Credits).BeginInit();
@@ -60,7 +60,7 @@
             BtnClose.MouseEnter += BtnClose_MouseEnter;
             BtnClose.MouseLeave += BtnClose_MouseLeave;
             // 
-            // AboutForm
+            // CreditsForm
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,7 +69,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "AboutForm";
+            Name = "CreditsForm";
             ShowIcon = false;
             ShowInTaskbar = false;
             TopMost = true;
