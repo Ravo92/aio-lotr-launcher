@@ -141,6 +141,13 @@
   <data name="Info.PreparingUpdateBeta" xml:space="preserve">
     <value>Bereite Beta-Update vor...</value>
   </data>
+  <data name="Msg.InstallFolderNotEmpty.Text" xml:space="preserve">
+    <value>Der Zielpfad enthält bereits Dateien. Bist du sicher, dass du die Installation fortsetzen möchtest?
+Bereits vorhandene Dateien in diesem Verzeichnis werden ohne Sicherung gelöscht!</value>
+  </data>
+  <data name="Msg.InstallFolderNotEmpty.Title" xml:space="preserve">
+    <value>Zielpfad ist nicht leer</value>
+  </data>
   <data name="Msg.RepairDone.Text" xml:space="preserve">
     <value>Der Reparaturvorgang wurde beendet und ein Log wurde unter "Logfiles" gespeichert.</value>
   </data>

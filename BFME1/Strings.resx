@@ -141,6 +141,13 @@
   <data name="Info.PreparingUpdateBeta" xml:space="preserve">
     <value>Preparing Beta Update...</value>
   </data>
+  <data name="Msg.InstallFolderNotEmpty.Text" xml:space="preserve">
+    <value>The target directory is not empty. Continue installing the game?
+Exisiting files will be deleted!</value>
+  </data>
+  <data name="Msg.InstallFolderNotEmpty.Title" xml:space="preserve">
+    <value>Found files in target directory</value>
+  </data>
   <data name="Msg.RepairDone.Text" xml:space="preserve">
     <value>Repair finished. A protocol has been saved under "Logfiles".</value>
   </data>

@@ -28,10 +28,10 @@ namespace Helper
                     }
                 });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(e.Message);
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
                 return null;
             }
         }

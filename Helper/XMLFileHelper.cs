@@ -49,7 +49,7 @@ namespace Helper
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ex.Message);
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
         }
 

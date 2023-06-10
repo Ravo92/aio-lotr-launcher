@@ -133,6 +133,25 @@ namespace PatchLauncher {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The target directory is not empty. Continue installing the game?
+        ///Exisiting files will be deleted!.
+        /// </summary>
+        internal static string Msg_InstallFolderNotEmpty_Text {
+            get {
+                return ResourceManager.GetString("Msg.InstallFolderNotEmpty.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found files in target directory.
+        /// </summary>
+        internal static string Msg_InstallFolderNotEmpty_Title {
+            get {
+                return ResourceManager.GetString("Msg.InstallFolderNotEmpty.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Repair finished. A protocol has been saved under &quot;Logfiles&quot;..
         /// </summary>
         internal static string Msg_RepairDone_Text {

@@ -144,6 +144,8 @@ namespace Helper
             return RegistryService.ReadRegKey("locale");
         }
 
+        public static readonly string LogTime = Environment.NewLine + Environment.NewLine + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + Environment.NewLine;
+
         public static string GameInstallPath()
         {
             return RegistryService.ReadRegKey("path");

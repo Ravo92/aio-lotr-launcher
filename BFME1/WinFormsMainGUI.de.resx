@@ -117,27 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PibHeader.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBYoutube.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBDiscord.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBModDB.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBThemeSwitcher.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="LblDownloadSpeed.Location" type="System.Drawing.Point, System.Drawing">
     <value>617, 684</value>
-  </data>
-  <data name="LblDownloadSpeed.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="BtnInstall.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 51</value>
@@ -145,17 +127,8 @@
   <data name="BtnInstall.Text" xml:space="preserve">
     <value>SPIEL INSTALLIEREN</value>
   </data>
-  <data name="BtnInstall.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="LblFileName.Location" type="System.Drawing.Point, System.Drawing">
     <value>617, 712</value>
-  </data>
-  <data name="LblFileName.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PibLoadingRing.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="LblPatchNotes.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 512</value>
@@ -166,56 +139,14 @@
   <data name="LblPatchNotes.Text" xml:space="preserve">
     <value>Lade Änderungsvermerke...</value>
   </data>
-  <data name="LblPatchNotes.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PibLoadingBorder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Wv2Patchnotes.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBTwitch.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBArrow.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PnlPlaceholder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion222_7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion222_5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion222_6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion106.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion103.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LblInstalledPatches.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="LblModExplanation.Size" type="System.Drawing.Size, System.Drawing">
     <value>987, 47</value>
   </data>
   <data name="LblModExplanation.Text" xml:space="preserve">
     <value>Hier kannst du auswählen, welchen Patch du spielen möchtest.</value>
   </data>
-  <data name="LblModExplanation.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 48</value>
-  </data>
-  <data name="NotifyContextMenu.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
@@ -228,12 +159,6 @@
   </data>
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Beenden</value>
-  </data>
-  <data name="PibMute.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WinFormsMainMenuStrip.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
@@ -301,6 +226,12 @@
   <data name="OpenLauncherDirectoryToolStripMenuItem.Text" xml:space="preserve">
     <value>Launcherverzeichnis öffnen</value>
   </data>
+  <data name="openLauncherLogfileDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>280, 22</value>
+  </data>
+  <data name="openLauncherLogfileDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Launcher-Log-Verzeichnis öffnen</value>
+  </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 6</value>
   </data>
@@ -347,22 +278,19 @@
     <value>Über</value>
   </data>
   <data name="CreditsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 22</value>
+    <value>213, 22</value>
   </data>
   <data name="CreditsToolStripMenuItem.Text" xml:space="preserve">
     <value>Mitwirkende</value>
   </data>
   <data name="MessagesFromTheTeamToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 22</value>
+    <value>213, 22</value>
   </data>
   <data name="MessagesFromTheTeamToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nachrichten aus der Entwicklung</value>
+    <value>Allgemeine Informationen</value>
   </data>
   <data name="PBarActualFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 684</value>
-  </data>
-  <data name="PBarActualFile.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="SysTray.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -9385,8 +9313,5 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////8=
 </value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

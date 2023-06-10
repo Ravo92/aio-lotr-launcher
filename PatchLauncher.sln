@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatchLauncherBFME", "BFME1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restarter", "Restarter\Restarter.csproj", "{07EE3FFD-908D-4D53-A40D-681199244D95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restarter", "Restarter\Restarter.csproj", "{07EE3FFD-908D-4D53-A40D-681199244D95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
