@@ -57,6 +57,10 @@ namespace PatchLauncher
                     default:
                         break;
                 }
+
+                if (Settings.Default.InstalledLanguageISOCode == "")
+                    Settings.Default.InstalledLanguageISOCode = "en_us";
+
             }
             catch (Exception ex)
             {

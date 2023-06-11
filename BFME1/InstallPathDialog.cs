@@ -2,11 +2,9 @@
 using PatchLauncher.Properties;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,18 +21,6 @@ namespace PatchLauncher
 
         public InstallPathDialog()
         {
-            switch (Settings.Default.Language)
-            {
-                case 0:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                    break;
-                case 1:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-                    break;
-                default:
-                    break;
-            }
-
             InitializeComponent();
 
             LblChooseDir.Font = FontHelper.GetFont(0, 12);

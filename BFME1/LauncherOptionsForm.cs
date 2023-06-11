@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PatchLauncher.Properties;
 using System.Reflection;
-using System.Threading;
 using System.Diagnostics;
 
 namespace PatchLauncher
@@ -28,18 +27,6 @@ namespace PatchLauncher
 
         public LauncherOptionsForm()
         {
-            switch (FlagLanguageIndex)
-            {
-                case 0:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                    break;
-                case 1:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-                    break;
-                default:
-                    break;
-            }
-
             InitializeComponent();
 
             KeyPreview = true;

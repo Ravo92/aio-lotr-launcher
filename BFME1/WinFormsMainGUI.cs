@@ -20,29 +20,17 @@ namespace PatchLauncher
     public partial class WinFormsMainGUI : Form
     {
         int iconNumber = Settings.Default.BackgroundMusicIcon;
-        SoundPlayerHelper _soundPlayerHelper = new();
+        readonly SoundPlayerHelper _soundPlayerHelper = new();
 
         readonly string gameISOPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP);
+
         LanguageSettings _languageSettings = InstallLanguageList._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
 
         public WinFormsMainGUI()
         {
             #region logic
 
-            switch (Settings.Default.Language)
-            {
-                case 0:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                    break;
-                case 1:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-                    break;
-                default:
-                    break;
-            }
-
             InitializeComponent();
-
             InitializeWebView2Settings();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
@@ -266,7 +254,7 @@ namespace PatchLauncher
 
         #region Button Behaviours
 
-        public void GameisClosed(object sender, EventArgs e)
+        public void GameisClosed(object? sender, EventArgs e)
         {
             if (InvokeRequired)
             {
@@ -1612,20 +1600,20 @@ namespace PatchLauncher
             }
         }
 
-        private void OnDownloadStarted(object sender, DownloadStartedEventArgs e)
+        private void OnDownloadStarted(object? sender, DownloadStartedEventArgs e)
         {
             SetPBarFiles(0);
             SetTextFileName("Downloading: " + Path.GetFileName(e.FileName));
         }
 
-        private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
         {
             SetPBarFiles((int)e.ProgressPercentage);
             SetTextDlSpeed("@ " + Math.Round(e.AverageBytesPerSecondSpeed / 1024000).ToString() + " MB/s");
             SetPBarPercentages(Math.Round(e.ProgressPercentage).ToString() + " %");
         }
 
-        private void OnDownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        private void OnDownloadFileCompleted(object? sender, AsyncCompletedEventArgs e)
         {
             SetTextFileName(Strings.Info_PleaseWait);
 
@@ -1733,7 +1721,7 @@ namespace PatchLauncher
         }
         #endregion
 
-        private void TmrPatchNotes_Tick(object sender, EventArgs e)
+        private void TmrPatchNotes_Tick(object? sender, EventArgs e)
         {
             TmrPatchNotes.Stop();
             PibLoadingRing.Hide();
@@ -1863,79 +1851,23 @@ namespace PatchLauncher
 
         private async void BFME1_Shown(object sender, EventArgs e)
         {
-            // Check Music Settings
-            if (Settings.Default.PlayBackgroundMusic)
+            try
             {
-                _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
-            }
-
-            // Get Latest 2.22 Patch Version to the Launcher Settings. Save comes at the end of this function
-            Settings.Default.LatestPatchVersion = XMLFileHelper.GetXMLFileVersion(false);
-
-            // Check if Game is installed, if not show install button
-            if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
-            {
-                Settings.Default.IsGameInstalled = false;
-                BtnInstall.Text = Strings.BtnInstall_TextInstall;
-
-                if (Settings.Default.IsPatchModsShown)
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                else
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
-                PiBArrow.Enabled = false;
-
-                LaunchGameToolStripMenuItem.Enabled = false;
-                OptionsToolStripMenuItem.Enabled = false;
-                RepairGameToolStripMenuItem.Enabled = false;
-            }
-            // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
-            else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && Settings.Default.IsGameInstalled && !Settings.Default.UseBetaChannel)
-            {
-                if (Settings.Default.IsPatchModsShown)
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                else
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
-                Settings.Default.IsPatch106Installed = false;
-                Settings.Default.IsPatch30Installed = false;
-                Settings.Default.IsPatch31Installed = false;
-                Settings.Default.IsPatch32Installed = false;
-                Settings.Default.IsPatch33Installed = false;
-
-                await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/qjkwmakxh2trtsptzn6ej/Patch222v33.7z?dl=1&rlkey=ck9rjbn10465zrsstfv4kjg0h");
-
-                if (Settings.Default.InstalledLanguageISOCode == "de")
+                // Check Music Settings
+                if (Settings.Default.PlayBackgroundMusic)
                 {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                    _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
                 }
 
-                Settings.Default.IsPatch33Downloaded = true;
-                Settings.Default.IsPatch33Installed = true;
+                // Get Latest 2.22 Patch Version to the Launcher Settings. Save comes at the end of this function
+                Settings.Default.LatestPatchVersion = XMLFileHelper.GetXMLFileVersion(false);
 
-                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
-            }
-            else
-            {
-                Settings.Default.IsGameInstalled = true;
-                Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                Settings.Default.InstalledLanguageISOCode = ConstStrings.GameLanguage();
-                PiBArrow.Enabled = true;
-            }
-
-            if (Settings.Default.UseBetaChannel)
-            {
-                PiBVersion103.Hide();
-                PiBVersion106.Hide();
-                PiBVersion222_5.Hide();
-                PiBVersion222_6.Hide();
-                PiBVersion222_7.Hide();
-                PiBVersion222_8.Hide();
-
-                LblModExplanation.Text = Strings.Info_BetaActivated;
-
-                if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
+                // Check if Game is installed, if not show install button
+                if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
                 {
+                    Settings.Default.IsGameInstalled = false;
+                    BtnInstall.Text = Strings.BtnInstall_TextInstall;
+
                     if (Settings.Default.IsPatchModsShown)
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
                     else
@@ -1943,30 +1875,95 @@ namespace PatchLauncher
 
                     PiBArrow.Enabled = false;
 
-                    await UpdateRoutineBeta();
+                    LaunchGameToolStripMenuItem.Enabled = false;
+                    OptionsToolStripMenuItem.Enabled = false;
+                    RepairGameToolStripMenuItem.Enabled = false;
                 }
+                // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
+                else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && Settings.Default.IsGameInstalled && !Settings.Default.UseBetaChannel)
+                {
+                    if (Settings.Default.IsPatchModsShown)
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+                    else
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
+                    Settings.Default.IsPatch106Installed = false;
+                    Settings.Default.IsPatch30Installed = false;
+                    Settings.Default.IsPatch31Installed = false;
+                    Settings.Default.IsPatch32Installed = false;
+                    Settings.Default.IsPatch33Installed = false;
+
+                    await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/qjkwmakxh2trtsptzn6ej/Patch222v33.7z?dl=1&rlkey=ck9rjbn10465zrsstfv4kjg0h");
+
+                    if (Settings.Default.InstalledLanguageISOCode == "de")
+                    {
+                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                    }
+
+                    Settings.Default.IsPatch33Downloaded = true;
+                    Settings.Default.IsPatch33Installed = true;
+
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
+                }
+                else
+                {
+                    Settings.Default.IsGameInstalled = true;
+                    Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
+                    Settings.Default.InstalledLanguageISOCode = ConstStrings.GameLanguage();
+                    PiBArrow.Enabled = true;
+                }
+
+                if (Settings.Default.UseBetaChannel)
+                {
+                    PiBVersion103.Hide();
+                    PiBVersion106.Hide();
+                    PiBVersion222_5.Hide();
+                    PiBVersion222_6.Hide();
+                    PiBVersion222_7.Hide();
+                    PiBVersion222_8.Hide();
+
+                    LblModExplanation.Text = Strings.Info_BetaActivated;
+
+                    if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
+                    {
+                        if (Settings.Default.IsPatchModsShown)
+                            PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+                        else
+                            PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
+                        PiBArrow.Enabled = false;
+
+                        await UpdateRoutineBeta();
+                    }
+                }
+
+                if (!Settings.Default.IsPatch106Downloaded)
+                    PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Download;
+
+                if (!Settings.Default.IsPatch30Downloaded)
+                    PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Download;
+
+                if (!Settings.Default.IsPatch31Downloaded)
+                    PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
+
+                if (!Settings.Default.IsPatch32Downloaded)
+                    PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
+
+                if (!Settings.Default.IsPatch33Downloaded)
+                    PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
+
+                Settings.Default.Save();
+
+                if (!IsCurrentlyWorkingState.IsLauncherCurrentlyWorking)
+                {
+                    CheckForUpdates();
+                }
+
             }
-
-            if (!Settings.Default.IsPatch106Downloaded)
-                PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Download;
-
-            if (!Settings.Default.IsPatch30Downloaded)
-                PiBVersion222_5.Image = Helper.Properties.Resources.BtnPatchSelection_222V30_Download;
-
-            if (!Settings.Default.IsPatch31Downloaded)
-                PiBVersion222_6.Image = Helper.Properties.Resources.BtnPatchSelection_222V31_Download;
-
-            if (!Settings.Default.IsPatch32Downloaded)
-                PiBVersion222_7.Image = Helper.Properties.Resources.BtnPatchSelection_222V32_Download;
-
-            if (!Settings.Default.IsPatch33Downloaded)
-                PiBVersion222_8.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
-
-            Settings.Default.Save();
-
-            if (!IsCurrentlyWorkingState.IsLauncherCurrentlyWorking)
+            catch (Exception ex)
             {
-                CheckForUpdates();
+                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
+                await file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
             }
         }
 

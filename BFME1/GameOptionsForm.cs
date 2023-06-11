@@ -1,9 +1,7 @@
 ﻿using Helper;
-using PatchLauncher.Properties;
 using System;
 using System.Drawing;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,18 +23,6 @@ namespace PatchLauncher
 
         public GameOptionsForm()
         {
-            switch (Settings.Default.Language)
-            {
-                case 0:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                    break;
-                case 1:
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-                    break;
-                default:
-                    break;
-            }
-
             InitializeComponent();
 
             KeyPreview = true;
