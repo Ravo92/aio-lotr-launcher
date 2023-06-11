@@ -46,7 +46,8 @@ jobs:
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Create app package
       #run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle
-      run: dotnet publish -c Release -o $env:Wap_Project_Path -r win-x64 --self-contained true /p:UseAppHost=true
+      #run: dotnet publish -c Release -o $env:Wap_Project_Path -r win-x64 --self-contained true /p:UseAppHost=true
+      run: dotnet publish -c Release -r win-x64 --self-contained true /p:UseAppHost=true
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64
