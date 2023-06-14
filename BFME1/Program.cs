@@ -11,31 +11,21 @@ namespace PatchLauncher
 {
     internal static class Program
     {
+        static readonly Mutex _mutex = new(true, Process.GetCurrentProcess().ProcessName);
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
+
         static void Main()
         {
             ApplicationConfiguration.Initialize();
 
             try
             {
-                using Mutex mutex = new(false, Process.GetCurrentProcess().ProcessName);
-                if (!mutex.WaitOne(0, false))
-                {
-                    MessageBox.Show(Strings.Warning_AlreadyRunning, Strings.Warning_AlreadyRunningTitle);
-                    return;
-                }
-
                 if (!Directory.Exists(ConstStrings.C_LOGFOLDER_NAME))
                 {
                     Directory.CreateDirectory(ConstStrings.C_LOGFOLDER_NAME);
-                }
-
-                if (Directory.Exists(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME))
-                {
-                    Directory.Delete(ConstStrings.C_WEBVIEW2CACHEFOLDER_NAME, true);
                 }
 
                 string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
@@ -68,7 +58,17 @@ namespace PatchLauncher
                 file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
             }
 
-            Application.Run(new WinFormsMainGUI());
+            if (_mutex.WaitOne(TimeSpan.Zero, true))
+            {
+                Application.Run(new WinFormsMainGUI());
+                _mutex.ReleaseMutex();
+                _mutex.Dispose();
+            }
+            else
+            {
+                MessageBox.Show(Strings.Warning_AlreadyRunning, Strings.Warning_AlreadyRunningTitle);
+                Application.Exit();
+            }
         }
     }
 }
