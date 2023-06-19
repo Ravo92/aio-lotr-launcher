@@ -39,8 +39,14 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     # Create the app package by building and packaging the Windows Application Packaging project
+    - name: Test directory
+      run: |
+        dir
+        ls
+
+    # Create the app package by building and packaging the Windows Application Packaging project
     - name: Create Main App
-      run: dotnet publish -c Release -o PatchLauncher Patch-2.22-Launcher\Patch-2.22-Launcher\BFME1\PatchLauncherBFME1.csproj --self-contained true /p:UseAppHost=true
+      run: dotnet publish -c Release -o PatchLauncher "\Patch-2.22-Launcher\BFME1\PatchLauncherBFME1.csproj" --self-contained true /p:UseAppHost=true
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64
@@ -49,7 +55,7 @@ jobs:
 
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Create Restarter
-      run: dotnet publish -c Release -o PatchLauncher Patch-2.22-Launcher\Patch-2.22-Launcher\Restarter\Restarter.csproj --self-contained true /p:UseAppHost=true
+      run: dotnet publish -c Release -o PatchLauncher "\Patch-2.22-Launcher\Restarter\Restarter.csproj" --self-contained true /p:UseAppHost=true
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64
