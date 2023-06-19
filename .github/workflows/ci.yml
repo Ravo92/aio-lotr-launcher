@@ -42,7 +42,7 @@ jobs:
     - name: Create Main App
       run: |
         dir
-        dotnet publish -c Release -o PatchLauncher "\BFME1\PatchLauncherBFME1.csproj" --self-contained true /p:UseAppHost=true
+        dotnet publish -c Release -o PatchLauncher "\BFME1\BFME1.csproj" --self-contained true /p:UseAppHost=true
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64
