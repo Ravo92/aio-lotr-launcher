@@ -39,18 +39,27 @@ namespace PatchLauncher
                 switch (Settings.Default.Language)
                 {
                     case 0:
+
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+                        if (Settings.Default.InstalledLanguageISOCode == "" || Settings.Default.InstalledLanguageISOCode is null)
+                            Settings.Default.InstalledLanguageISOCode = "en_us";
                         break;
+
                     case 1:
+
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                        if (Settings.Default.InstalledLanguageISOCode == "" || Settings.Default.InstalledLanguageISOCode is null)
+                            Settings.Default.InstalledLanguageISOCode = "de";
                         break;
+
                     default:
+                        Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+                        if (Settings.Default.InstalledLanguageISOCode == "" || Settings.Default.InstalledLanguageISOCode is null)
+                            Settings.Default.InstalledLanguageISOCode = "en_us";
                         break;
                 }
 
-                if (Settings.Default.InstalledLanguageISOCode == "")
-                    Settings.Default.InstalledLanguageISOCode = "en_us";
-
+                Settings.Default.Save();
             }
             catch (Exception ex)
             {
