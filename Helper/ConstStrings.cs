@@ -41,8 +41,10 @@ namespace Helper
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
         public const string C_RESTARTEREXE_FILENAME = "Restarter.exe";
-        public const string C_LAUNCHEREXE_BFME1_FILENAME = "PatchLauncherBFME.exe";
-        
+        public const string C_LAUNCHEREXE_BFME1_FILENAME = "BFME1.exe";
+        public const string C_LAUNCHEREXE_BFME2_FILENAME = "BFME2.exe";
+        public const string C_LAUNCHEREXE_BFME25_FILENAME = "BFME25.exe";
+
         public const string C_UPDATEMD5_HASH = "235AC8344C0AA5675C5850D97336BFF3";
         public const string C_MAINGAMEFILE_ZIP_MD5_HASH = "97258F514DCE6EB4D5D110DBB4D3CCA3";
 
@@ -56,6 +58,7 @@ namespace Helper
         public const string C_ORIGINAL_ASSET_FILE = "asset.dat.BACKUP";
 
         public const string C_ERRORLOGGING_FILE = "Errors.log";
+        public const string C_LAUNCHERSELECTEDINFOFILE = "selectedGameLauncher.txt";
 
         public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
 
@@ -66,7 +69,7 @@ namespace Helper
         public const string C_GAMEINSTALLFOLDER_NAME = "Games";
         public const string C_LOGFOLDER_NAME = "Logfiles";
         public const string C_HTMLFOLDER_NAME = "Html";
-        public const string C_WEBVIEW2CACHEFOLDER_NAME = "PatchLauncherBFME.exe.WebView2";
+        public const string C_WEBVIEW2CACHEFOLDER_NAME = "BFME1.exe.WebView2";
 
         //////////////////////////////////////////////////////////////////////////////
 

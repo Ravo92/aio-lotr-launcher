@@ -9,6 +9,9 @@
     <FileVersion>1.0.2.2</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
     <Copyright>Raphael Vogel</Copyright>
+    <PackageId>2.22 Launcher Helper Library</PackageId>
+    <Authors>Patch 2.22 Team</Authors>
+    <Product>2.22 Launcher Helper Library</Product>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

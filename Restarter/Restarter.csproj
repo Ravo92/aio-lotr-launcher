@@ -8,6 +8,9 @@
     <BaseOutputPath>..\build</BaseOutputPath>
     <AssemblyVersion>1.0.2.2</AssemblyVersion>
     <FileVersion>1.0.2.2</FileVersion>
+    <PackageId>2.22 Restarter Slave</PackageId>
+    <Authors>Patch 2.22 Team</Authors>
+    <Product>2.22 Restarter</Product>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

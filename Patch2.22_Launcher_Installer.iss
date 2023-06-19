@@ -1,6 +1,7 @@
 #define MyAppName "Patch 2.22 Launcher"
-#define MyAppExeName "PatchLauncherBFME.exe"
-#define MyAppExeVersion "1.0.2.2"
+#define MyAppExeName "BFME1.exe"
+#define MyAppExeVersion "1.0.2.3"
+#define MyAppPublishFolder "PatchLauncher"
 
 [Setup]
 AppName={#MyAppName}
@@ -42,8 +43,8 @@ en.BeveledLabel=English
 de.BeveledLabel=Deutsch
 
 [Files]
-Source: "BFME_Launcher\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
-Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
+Source: "{#MyAppPublishFolder}\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
+Source: "{#MyAppPublishFolder}\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -52,8 +53,16 @@ Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilen
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
+[InstallDelete]
+Type: files; Name: "{app}\PatchLauncherBFME.exe"
+Type: files; Name: "{app}\PatchLauncherBFME.dll"
+Type: files; Name: "{app}\PatchLauncherBFME.dll.config"
+Type: files; Name: "{app}\PatchLauncherBFME.deps.json"
+Type: files; Name: "{app}\PatchLauncherBFME.runtimeconfig.json"
+Type: filesandordirs; Name: "{app}\PatchLauncherBFME.exe.WebView2"
+
 [UninstallDelete]
-Type: filesandordirs; Name: "Downloads"
+Type: filesandordirs; Name: "{app}\Downloads"
 
 [Run]
 Filename: {app}\{#MyAppExeName}; Description: "Launch Application after Install"; Flags: postinstall shellexec nowait unchecked skipifsilent;

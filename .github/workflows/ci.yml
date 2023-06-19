@@ -42,7 +42,7 @@ jobs:
     - name: Create Main App
       run: |
         dir
-        dotnet publish -c Release -o PatchLauncher "\BFME1\BFME1.csproj" --self-contained true /p:UseAppHost=true
+        dotnet publish -c Release -o PatchLauncher "BFME1\BFME1.csproj" --self-contained true /p:UseAppHost=true
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64
@@ -51,7 +51,7 @@ jobs:
 
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Create Restarter
-      run: dotnet publish -c Release -o PatchLauncher "\Restarter\Restarter.csproj" --self-contained true /p:UseAppHost=true
+      run: dotnet publish -c Release -o PatchLauncher "Restarter\Restarter.csproj" --self-contained true /p:UseAppHost=true
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64

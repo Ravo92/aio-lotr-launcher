@@ -20,6 +20,9 @@
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <NeutralLanguage>en</NeutralLanguage>
+    <Authors>Patch 2.22 Team</Authors>
+    <Product>BFME1 Launcher </Product>
+    <PackageId>BFME1 Launcher</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
