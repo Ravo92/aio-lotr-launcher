@@ -2,7 +2,6 @@ using Helper;
 using PatchLauncher.Properties;
 using System;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -11,7 +10,7 @@ namespace PatchLauncher
 {
     internal static class Program
     {
-        static readonly Mutex _mutex = new(true, Process.GetCurrentProcess().ProcessName);
+        static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Configuration;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using Helper;
@@ -7,7 +8,7 @@ namespace Restarter
 {
     internal class Program
     {
-        static readonly string applicationStartupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+        static readonly string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
         static void Main(string[] args)
         {
             try
@@ -16,19 +17,22 @@ namespace Restarter
                 {
                     case "--restart":
 
-                        if (args[1] == "--BFME1Launcher")
+                        if (args[1] is not null)
                         {
-                            StartBFME1Launcher();
-                        }
+                            if (args[1] == "--BFME1Launcher")
+                            {
+                                StartBFME1Launcher();
+                            }
 
-                        if (args[1] == "--BFME2Launcher")
-                        {
-                            StartBFME2Launcher();
-                        }
+                            if (args[1] == "--BFME2Launcher")
+                            {
+                                StartBFME2Launcher();
+                            }
 
-                        if (args[1] == "--BFME25Launcher")
-                        {
-                            StartBFME25Launcher();
+                            if (args[1] == "--BFME25Launcher")
+                            {
+                                StartBFME25Launcher();
+                            }
                         }
                         break;
 
@@ -68,7 +72,7 @@ namespace Restarter
                 Thread.Sleep(1000);
                 Process _restarterProcess = new();
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME1_FILENAME;
-                _restarterProcess.StartInfo.WorkingDirectory = applicationStartupPath;
+                _restarterProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
                 _restarterProcess.StartInfo.UseShellExecute = true;
                 _restarterProcess.Start();
             }
@@ -86,7 +90,7 @@ namespace Restarter
                 Thread.Sleep(1000);
                 Process _restarterProcess = new();
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME2_FILENAME;
-                _restarterProcess.StartInfo.WorkingDirectory = applicationStartupPath;
+                _restarterProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
                 _restarterProcess.StartInfo.UseShellExecute = true;
                 _restarterProcess.Start();
             }
@@ -104,7 +108,7 @@ namespace Restarter
                 Thread.Sleep(1000);
                 Process _restarterProcess = new();
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME25_FILENAME;
-                _restarterProcess.StartInfo.WorkingDirectory = applicationStartupPath;
+                _restarterProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
                 _restarterProcess.StartInfo.UseShellExecute = true;
                 _restarterProcess.Start();
             }
@@ -130,13 +134,13 @@ namespace Restarter
             {
                 byte[] selectedGameAsByteArray = new UTF8Encoding(true).GetBytes(selectedGame.ToString());
 
-                if (File.Exists(Path.Combine(applicationStartupPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE)))
+                if (File.Exists(Path.Combine(configPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE)))
                 {
-                    selectedGame = Convert.ToInt32(File.ReadAllText(@Path.Combine(applicationStartupPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE), Encoding.UTF8));
+                    selectedGame = Convert.ToInt32(File.ReadAllText(@Path.Combine(configPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE), Encoding.UTF8));
                 }
                 else
                 {
-                    using FileStream _fileStream = File.Create(Path.Combine(applicationStartupPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE));
+                    using FileStream _fileStream = File.Create(Path.Combine(configPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE));
                     _fileStream.Write(selectedGameAsByteArray);
                 }
             }

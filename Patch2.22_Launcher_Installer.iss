@@ -1,5 +1,5 @@
 #define MyAppName "Patch 2.22 Launcher"
-#define MyAppExeName "BFME1.exe"
+#define MyAppExeName "Restarter.exe"
 #define MyAppExeVersion "1.0.2.3"
 #define MyAppPublishFolder "PatchLauncher"
 
@@ -48,7 +48,8 @@ Source: "{#MyAppPublishFolder}\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: Not FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk')) 
+Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Parameters: "--startLauncher"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+;Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: Not FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk'))
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

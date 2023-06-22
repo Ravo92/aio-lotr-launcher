@@ -1,36 +1,46 @@
-﻿namespace Helper
+﻿using IWshRuntimeLibrary;
+
+namespace Helper
 {
     public class StartMenuHelper
     {
-        public static void CreateGameShortcutToDesktop(string linkName)
+        public static void CreateShortcutToDesktop(string path, string linkName, string arguments = "", string description = "")
         {
-            string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            object shDesktop = "Desktop";
+            WshShell shell = new();
+            string shortcutAddress = Path.Combine((string)shell.SpecialFolders.Item(ref shDesktop), linkName + ".lnk");
 
-            using StreamWriter writer = new(deskDir + "\\" + linkName + ".url");
-            string app = Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE);
-            writer.WriteLine("[InternetShortcut]");
-            writer.WriteLine("URL=file:///" + app);
-            writer.WriteLine("IconIndex=0");
-            string icon = app.Replace('\\', '/');
-            writer.WriteLine("IconFile=" + icon);
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
+            shortcut.Description = description;
+            shortcut.TargetPath = path;
+            shortcut.Arguments = arguments;
+            shortcut.WorkingDirectory = Path.GetDirectoryName(path);
+            shortcut.Save();
         }
 
-        public static void CreateGameShortcutToStartMenu(string linkName, string exeFile)
+        public static bool DoesTheShortCutExist(string path, string shortcutName)
         {
-            string startMenuFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu);
-            string startMenuFolderPathGameDirectory = "Programs\\Electronic Arts";
-            string gameFolderName = ConstStrings.C_GAMETITLE_NAME_EN;
-            string combinedPath = Path.Combine(startMenuFolderPath, startMenuFolderPathGameDirectory, gameFolderName);
+            if (System.IO.File.Exists(Path.Combine(path, shortcutName + ".lnk")))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-            Directory.CreateDirectory(combinedPath);
+        public static void CreateShortcutToStartMenu(string path, string linkName, string optionalSubPath = "", string arguments = "", string description = "")
+        {
+            WshShell shell = new();
+            string shortcutAddress = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), optionalSubPath, linkName + ".lnk");
 
-            using StreamWriter writer = new(combinedPath + "\\" + linkName + ".url");
-            string app = Path.Combine(ConstStrings.GameInstallPath(), exeFile);
-            writer.WriteLine("[InternetShortcut]");
-            writer.WriteLine("URL=file:///" + app);
-            writer.WriteLine("IconIndex=0");
-            string icon = app.Replace('\\', '/');
-            writer.WriteLine("IconFile=" + icon);
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutAddress);
+            shortcut.Description = description;
+            shortcut.TargetPath = path;
+            shortcut.Arguments = arguments;
+            shortcut.WorkingDirectory = Path.GetDirectoryName(path);
+            shortcut.Save();
         }
     }
 }

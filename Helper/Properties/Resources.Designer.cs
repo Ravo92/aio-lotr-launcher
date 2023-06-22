@@ -343,96 +343,6 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V30 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V30", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V30_Download {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V30_Download", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V30_Selected {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V30_Selected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V31 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V31", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V31_Download {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V31_Download", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V31_Selected {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V31_Selected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V32 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V32_Download {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V32_Download", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V32_Selected {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V32_Selected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap BtnPatchSelection_222V33 {
             get {
                 object obj = ResourceManager.GetObject("BtnPatchSelection_222V33", resourceCulture);
@@ -456,6 +366,36 @@ namespace Helper.Properties {
         public static System.Drawing.Bitmap BtnPatchSelection_222V33_Selected {
             get {
                 object obj = ResourceManager.GetObject("BtnPatchSelection_222V33_Selected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_222V34 {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_222V34", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_222V34_Download {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_222V34_Download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_222V34_Selected {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_222V34_Selected", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

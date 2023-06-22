@@ -48,10 +48,8 @@ namespace PatchLauncher
             PiBTwitch = new PictureBox();
             PiBArrow = new PictureBox();
             PnlPlaceholder = new Panel();
-            PiBVersion222_8 = new PictureBox();
-            PiBVersion222_7 = new PictureBox();
-            PiBVersion222_5 = new PictureBox();
-            PiBVersion222_6 = new PictureBox();
+            PiBVersion222_33 = new PictureBox();
+            PiBVersion222_34 = new PictureBox();
             PiBVersion106 = new PictureBox();
             PiBVersion103 = new PictureBox();
             LblInstalledPatches = new Helper.CustomLabel();
@@ -69,8 +67,11 @@ namespace PatchLauncher
             LauncherSettingsToolStripMenuItem = new ToolStripMenuItem();
             GameSettingsToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
-            createDesktopShortcutToolStripMenuItem = new ToolStripMenuItem();
-            createStartmenuShortcutsToolStripMenuItem = new ToolStripMenuItem();
+            GameDesktopShortcutToolStripMenuItem = new ToolStripMenuItem();
+            GameStartmenuShortcutsToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
+            LauncherDesktopShortcutToolStripMenuItem = new ToolStripMenuItem();
+            LauncherStartmenuShortcutToolStripMenuItem = new ToolStripMenuItem();
             AdvancedToolStripMenuItem = new ToolStripMenuItem();
             OpenLauncherDirectoryToolStripMenuItem = new ToolStripMenuItem();
             openLauncherLogfileDirectoryToolStripMenuItem = new ToolStripMenuItem();
@@ -100,10 +101,8 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBTwitch).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBArrow).BeginInit();
             PnlPlaceholder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion222_33).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion222_34).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion106).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion103).BeginInit();
             NotifyContextMenu.SuspendLayout();
@@ -260,10 +259,8 @@ namespace PatchLauncher
             // 
             resources.ApplyResources(PnlPlaceholder, "PnlPlaceholder");
             PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
-            PnlPlaceholder.Controls.Add(PiBVersion222_8);
-            PnlPlaceholder.Controls.Add(PiBVersion222_7);
-            PnlPlaceholder.Controls.Add(PiBVersion222_5);
-            PnlPlaceholder.Controls.Add(PiBVersion222_6);
+            PnlPlaceholder.Controls.Add(PiBVersion222_33);
+            PnlPlaceholder.Controls.Add(PiBVersion222_34);
             PnlPlaceholder.Controls.Add(PiBVersion106);
             PnlPlaceholder.Controls.Add(PiBVersion103);
             PnlPlaceholder.Controls.Add(LblInstalledPatches);
@@ -271,45 +268,25 @@ namespace PatchLauncher
             PnlPlaceholder.Name = "PnlPlaceholder";
             ToolTip.SetToolTip(PnlPlaceholder, resources.GetString("PnlPlaceholder.ToolTip"));
             // 
-            // PiBVersion222_8
+            // PiBVersion222_33
             // 
-            resources.ApplyResources(PiBVersion222_8, "PiBVersion222_8");
-            PiBVersion222_8.BackColor = System.Drawing.Color.Black;
-            PiBVersion222_8.Cursor = Cursors.Hand;
-            PiBVersion222_8.Name = "PiBVersion222_8";
-            PiBVersion222_8.TabStop = false;
-            ToolTip.SetToolTip(PiBVersion222_8, resources.GetString("PiBVersion222_8.ToolTip"));
-            PiBVersion222_8.Click += PiBVersion222_8_Click;
+            resources.ApplyResources(PiBVersion222_33, "PiBVersion222_33");
+            PiBVersion222_33.BackColor = System.Drawing.Color.Black;
+            PiBVersion222_33.Cursor = Cursors.Hand;
+            PiBVersion222_33.Name = "PiBVersion222_33";
+            PiBVersion222_33.TabStop = false;
+            ToolTip.SetToolTip(PiBVersion222_33, resources.GetString("PiBVersion222_33.ToolTip"));
+            PiBVersion222_33.Click += PiBVersion222_33_Click;
             // 
-            // PiBVersion222_7
+            // PiBVersion222_34
             // 
-            resources.ApplyResources(PiBVersion222_7, "PiBVersion222_7");
-            PiBVersion222_7.BackColor = System.Drawing.Color.Black;
-            PiBVersion222_7.Cursor = Cursors.Hand;
-            PiBVersion222_7.Name = "PiBVersion222_7";
-            PiBVersion222_7.TabStop = false;
-            ToolTip.SetToolTip(PiBVersion222_7, resources.GetString("PiBVersion222_7.ToolTip"));
-            PiBVersion222_7.Click += PiBVersion222_7_Click;
-            // 
-            // PiBVersion222_5
-            // 
-            resources.ApplyResources(PiBVersion222_5, "PiBVersion222_5");
-            PiBVersion222_5.BackColor = System.Drawing.Color.Black;
-            PiBVersion222_5.Cursor = Cursors.Hand;
-            PiBVersion222_5.Name = "PiBVersion222_5";
-            PiBVersion222_5.TabStop = false;
-            ToolTip.SetToolTip(PiBVersion222_5, resources.GetString("PiBVersion222_5.ToolTip"));
-            PiBVersion222_5.Click += PiBVersion222_5_Click;
-            // 
-            // PiBVersion222_6
-            // 
-            resources.ApplyResources(PiBVersion222_6, "PiBVersion222_6");
-            PiBVersion222_6.BackColor = System.Drawing.Color.Black;
-            PiBVersion222_6.Cursor = Cursors.Hand;
-            PiBVersion222_6.Name = "PiBVersion222_6";
-            PiBVersion222_6.TabStop = false;
-            ToolTip.SetToolTip(PiBVersion222_6, resources.GetString("PiBVersion222_6.ToolTip"));
-            PiBVersion222_6.Click += PiBVersion222_6_Click;
+            resources.ApplyResources(PiBVersion222_34, "PiBVersion222_34");
+            PiBVersion222_34.BackColor = System.Drawing.Color.Black;
+            PiBVersion222_34.Cursor = Cursors.Hand;
+            PiBVersion222_34.Name = "PiBVersion222_34";
+            PiBVersion222_34.TabStop = false;
+            ToolTip.SetToolTip(PiBVersion222_34, resources.GetString("PiBVersion222_34.ToolTip"));
+            PiBVersion222_34.Click += PiBVersion222_34_Click;
             // 
             // PiBVersion106
             // 
@@ -408,7 +385,7 @@ namespace PatchLauncher
             // OptionsToolStripMenuItem
             // 
             resources.ApplyResources(OptionsToolStripMenuItem, "OptionsToolStripMenuItem");
-            OptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { LauncherSettingsToolStripMenuItem, GameSettingsToolStripMenuItem, toolStripSeparator5, createDesktopShortcutToolStripMenuItem, createStartmenuShortcutsToolStripMenuItem });
+            OptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { LauncherSettingsToolStripMenuItem, GameSettingsToolStripMenuItem, toolStripSeparator5, GameDesktopShortcutToolStripMenuItem, GameStartmenuShortcutsToolStripMenuItem, toolStripSeparator6, LauncherDesktopShortcutToolStripMenuItem, LauncherStartmenuShortcutToolStripMenuItem });
             OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem";
             // 
             // LauncherSettingsToolStripMenuItem
@@ -428,17 +405,38 @@ namespace PatchLauncher
             resources.ApplyResources(toolStripSeparator5, "toolStripSeparator5");
             toolStripSeparator5.Name = "toolStripSeparator5";
             // 
-            // createDesktopShortcutToolStripMenuItem
+            // GameDesktopShortcutToolStripMenuItem
             // 
-            resources.ApplyResources(createDesktopShortcutToolStripMenuItem, "createDesktopShortcutToolStripMenuItem");
-            createDesktopShortcutToolStripMenuItem.Name = "createDesktopShortcutToolStripMenuItem";
-            createDesktopShortcutToolStripMenuItem.Click += CreateDesktopShortcutToolStripMenuItem_Click;
+            resources.ApplyResources(GameDesktopShortcutToolStripMenuItem, "GameDesktopShortcutToolStripMenuItem");
+            GameDesktopShortcutToolStripMenuItem.CheckOnClick = true;
+            GameDesktopShortcutToolStripMenuItem.Name = "GameDesktopShortcutToolStripMenuItem";
+            GameDesktopShortcutToolStripMenuItem.Click += GameDesktopShortcutToolStripMenuItem_Click;
             // 
-            // createStartmenuShortcutsToolStripMenuItem
+            // GameStartmenuShortcutsToolStripMenuItem
             // 
-            resources.ApplyResources(createStartmenuShortcutsToolStripMenuItem, "createStartmenuShortcutsToolStripMenuItem");
-            createStartmenuShortcutsToolStripMenuItem.Name = "createStartmenuShortcutsToolStripMenuItem";
-            createStartmenuShortcutsToolStripMenuItem.Click += CreateStartmenuShortcutsToolStripMenuItem_Click;
+            resources.ApplyResources(GameStartmenuShortcutsToolStripMenuItem, "GameStartmenuShortcutsToolStripMenuItem");
+            GameStartmenuShortcutsToolStripMenuItem.CheckOnClick = true;
+            GameStartmenuShortcutsToolStripMenuItem.Name = "GameStartmenuShortcutsToolStripMenuItem";
+            GameStartmenuShortcutsToolStripMenuItem.Click += GameStartmenuShortcutsToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator6
+            // 
+            resources.ApplyResources(toolStripSeparator6, "toolStripSeparator6");
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            // 
+            // LauncherDesktopShortcutToolStripMenuItem
+            // 
+            resources.ApplyResources(LauncherDesktopShortcutToolStripMenuItem, "LauncherDesktopShortcutToolStripMenuItem");
+            LauncherDesktopShortcutToolStripMenuItem.CheckOnClick = true;
+            LauncherDesktopShortcutToolStripMenuItem.Name = "LauncherDesktopShortcutToolStripMenuItem";
+            LauncherDesktopShortcutToolStripMenuItem.Click += LauncherDesktopShortcutToolStripMenuItem_Click;
+            // 
+            // LauncherStartmenuShortcutToolStripMenuItem
+            // 
+            resources.ApplyResources(LauncherStartmenuShortcutToolStripMenuItem, "LauncherStartmenuShortcutToolStripMenuItem");
+            LauncherStartmenuShortcutToolStripMenuItem.CheckOnClick = true;
+            LauncherStartmenuShortcutToolStripMenuItem.Name = "LauncherStartmenuShortcutToolStripMenuItem";
+            LauncherStartmenuShortcutToolStripMenuItem.Click += LauncherStartmenuShortcutToolStripMenuItem_Click;
             // 
             // AdvancedToolStripMenuItem
             // 
@@ -592,10 +590,8 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBArrow).EndInit();
             PnlPlaceholder.ResumeLayout(false);
             PnlPlaceholder.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion222_33).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion222_34).EndInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion106).EndInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion103).EndInit();
             NotifyContextMenu.ResumeLayout(false);
@@ -612,31 +608,26 @@ namespace PatchLauncher
         private PictureBox PiBDiscord;
         private PictureBox PiBModDB;
         private PictureBox PiBThemeSwitcher;
+        private PictureBox PibLoadingRing;
+        private PictureBox PibLoadingBorder;
+        private PictureBox PiBTwitch;
+        private PictureBox PiBArrow;
+        private PictureBox PiBVersion106;
+        private PictureBox PiBVersion103;
+        private PictureBox PiBVersion222_33;
+        private PictureBox PiBVersion222_34;
+        private PictureBox PibMute;
         private ToolTip ToolTip;
         private Timer TmrPatchNotes;
         private Label LblDownloadSpeed;
         private Button BtnInstall;
         private Label LblFileName;
-        private PictureBox PibLoadingRing;
-        private Helper.CustomLabel LblPatchNotes;
-        private PictureBox PibLoadingBorder;
-        private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
-        private PictureBox PiBTwitch;
-        private PictureBox PiBArrow;
         private Timer TmrAnimation;
         private Panel PnlPlaceholder;
-        private PictureBox PiBVersion106;
-        private PictureBox PiBVersion103;
-        private Helper.CustomLabel LblInstalledPatches;
-        private Helper.CustomLabel LblModExplanation;
-        private PictureBox PiBVersion222_6;
-        private PictureBox PiBVersion222_5;
         private NotifyIcon SysTray;
         private ContextMenuStrip NotifyContextMenu;
         private ToolStripMenuItem MenuItemLaunchGame;
         private ToolStripMenuItem closeTheLauncherToolStripMenuItem;
-        private PictureBox PibMute;
-        private PictureBox PiBVersion222_7;
         private MenuStrip WinFormsMainMenuStrip;
         private ToolStripMenuItem FileToolStripMenuItem;
         private ToolStripMenuItem LaunchGameToolStripMenuItem;
@@ -655,14 +646,20 @@ namespace PatchLauncher
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripSeparator toolStripSeparator4;
-        private Helper.CustomProgressBar PBarActualFile;
         private ToolStripSeparator toolStripSeparator5;
-        private ToolStripMenuItem createDesktopShortcutToolStripMenuItem;
-        private ToolStripMenuItem createStartmenuShortcutsToolStripMenuItem;
+        private ToolStripMenuItem GameDesktopShortcutToolStripMenuItem;
+        private ToolStripMenuItem GameStartmenuShortcutsToolStripMenuItem;
         private ToolStripMenuItem openReplayDirectoryToolStripMenuItem;
         private ToolStripMenuItem CreditsToolStripMenuItem;
         private ToolStripMenuItem MessagesFromTheTeamToolStripMenuItem;
         private ToolStripMenuItem openLauncherLogfileDirectoryToolStripMenuItem;
-        private PictureBox PiBVersion222_8;
+        private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
+        private Helper.CustomLabel LblPatchNotes;
+        private Helper.CustomLabel LblInstalledPatches;
+        private Helper.CustomLabel LblModExplanation;
+        private Helper.CustomProgressBar PBarActualFile;
+        private ToolStripMenuItem LauncherDesktopShortcutToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripMenuItem LauncherStartmenuShortcutToolStripMenuItem;
     }
 }

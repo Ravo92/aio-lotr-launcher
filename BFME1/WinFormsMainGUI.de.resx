@@ -188,31 +188,46 @@
     <value>Optionen</value>
   </data>
   <data name="LauncherSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="LauncherSettingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Launchereinstellungen</value>
   </data>
   <data name="GameSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 22</value>
+    <value>332, 22</value>
   </data>
   <data name="GameSettingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Spieleinstellungen</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 6</value>
+    <value>329, 6</value>
   </data>
-  <data name="createDesktopShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 22</value>
+  <data name="GameDesktopShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 22</value>
   </data>
-  <data name="createDesktopShortcutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Erstelle Desktopverknüpfung</value>
+  <data name="GameDesktopShortcutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verwende Spiel-Verknüpfung am Desktop</value>
   </data>
-  <data name="createStartmenuShortcutsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 22</value>
+  <data name="GameStartmenuShortcutsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 22</value>
   </data>
-  <data name="createStartmenuShortcutsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Erstelle Startmenü-Einträge</value>
+  <data name="GameStartmenuShortcutsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verwende Spiel-Verknüpfung im Startmenü</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 6</value>
+  </data>
+  <data name="LauncherDesktopShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 22</value>
+  </data>
+  <data name="LauncherDesktopShortcutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verwende Launcher-Verknüpfung am Desktop</value>
+  </data>
+  <data name="LauncherStartmenuShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 22</value>
+  </data>
+  <data name="LauncherStartmenuShortcutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verwende Launcher-Verknüpfung im Startnmenü</value>
   </data>
   <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 20</value>

@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PibHeader.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBYoutube.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBDiscord.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBModDB.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBThemeSwitcher.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LblDownloadSpeed.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BtnInstall.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LblFileName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PibLoadingRing.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="LblPatchNotes.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 25</value>
@@ -124,8 +151,47 @@
   <data name="LblPatchNotes.Text" xml:space="preserve">
     <value>Loading Changelog...</value>
   </data>
+  <data name="LblPatchNotes.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PibLoadingBorder.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Wv2Patchnotes.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBTwitch.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBArrow.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PnlPlaceholder.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBVersion222_33.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBVersion222_34.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBVersion106.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PiBVersion103.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LblInstalledPatches.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LblModExplanation.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 48</value>
+  </data>
+  <data name="NotifyContextMenu.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 22</value>
@@ -139,8 +205,17 @@
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="PibMute.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WinFormsMainMenuStrip.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="PBarActualFile.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="SysTray.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -9163,5 +9238,8 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////8=
 </value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

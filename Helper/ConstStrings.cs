@@ -9,14 +9,15 @@ namespace Helper
         public const string C_GAMETITLE_NAME_EN = "The Battle for Middle-earth";
         public const string C_EAFOLDER_NAME = "EA Games";
 
+        public const string C_MUTEX_NAME = "Patch Launcher 2.22 Ravo92";
+        public const string C_LAUNCHER_SHORTCUT_NAME = "Patch 2.22 Launcher";
+
         public const string C_REGISTRY_SERVICE_WRONG_PARAMETER = "WrongParameter";
         public const string C_REGISTRY_SERVICE_NOT_FOUND = "ValueNotFound";
 
         public const string C_PATCHZIP06_NAME = "Patch_1.06.7z";
-        public const string C_PATCHZIP30_NAME = "Patch_2.22v30.7z";
-        public const string C_PATCHZIP31_NAME = "Patch_2.22v31.7z";
-        public const string C_PATCHZIP32_NAME = "Patch_2.22v32.7z";
         public const string C_PATCHZIP33_NAME = "Patch_2.22v33.7z";
+        public const string C_PATCHZIP34_NAME = "Patch_2.22v34.7z";
 
         //////////////////////////////////////////////////////////////////////////////
 
@@ -45,7 +46,6 @@ namespace Helper
         public const string C_LAUNCHEREXE_BFME2_FILENAME = "BFME2.exe";
         public const string C_LAUNCHEREXE_BFME25_FILENAME = "BFME25.exe";
 
-        public const string C_UPDATEMD5_HASH = "235AC8344C0AA5675C5850D97336BFF3";
         public const string C_MAINGAMEFILE_ZIP_MD5_HASH = "97258F514DCE6EB4D5D110DBB4D3CCA3";
 
         public const string C_MAINGAMEFILE_ZIP = "BFME1.7z";

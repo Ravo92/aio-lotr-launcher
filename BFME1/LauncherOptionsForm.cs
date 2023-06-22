@@ -24,6 +24,7 @@ namespace PatchLauncher
 
         bool FlagIsLanguageChanged = false;
         bool FlagIsBetaChannelChanged = false;
+        bool FlagIsWindowedChanged = false;
 
         public LauncherOptionsForm()
         {
@@ -225,6 +226,36 @@ namespace PatchLauncher
         {
             SaveSettings();
 
+            if (Settings.Default.CreateDesktopShortcut && FlagIsWindowedChanged)
+            {
+                try
+                {
+                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Settings.Default.StartGameWindowed == true ? "-win" : "");
+                }
+                catch (Exception ex)
+                {
+                    using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
+                    file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                }
+            }
+
+            if (Settings.Default.CreateStartMenuShortcut && FlagIsWindowedChanged)
+            {
+                try
+                {
+                    if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN)))
+                        Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
+
+                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), Settings.Default.StartGameWindowed == true ? "-win" : "");
+                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder", Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
+                }
+                catch (Exception ex)
+                {
+                    using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
+                    file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                }
+            }
+
             if (FlagIsLanguageChanged || FlagIsBetaChannelChanged)
             {
                 DialogResult _dialogResult = MessageBox.Show(Strings.Msg_Restart_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);
@@ -295,7 +326,6 @@ namespace PatchLauncher
         {
             //Save Launcher-Settings
             Settings.Default.EAXSupport = FlagEAX;
-            Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
             Settings.Default.ShowPatchesFirst = FlagShowPatchesFirst;
 
@@ -310,8 +340,14 @@ namespace PatchLauncher
                 Settings.Default.BetaChannelVersion = 0;
             }
 
+            if (FlagWindowed != Settings.Default.StartGameWindowed)
+            {
+                FlagIsWindowedChanged = true;
+            }
+
             Settings.Default.Language = FlagLanguageIndex;
             Settings.Default.UseBetaChannel = FlagUseBetaChannel;
+            Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.Save();
 
             //Settings-Valuations
