@@ -12,6 +12,8 @@
     <Authors>Patch 2.22 Team</Authors>
     <Product>2.22 Restarter</Product>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
