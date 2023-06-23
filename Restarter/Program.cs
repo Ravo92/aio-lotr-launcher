@@ -8,11 +8,16 @@ namespace Restarter
 {
     internal class Program
     {
-        static readonly string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+        static readonly string programPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
         static void Main(string[] args)
         {
             try
             {
+                if (args.Length < 1)
+                {
+                    return;
+                }
+
                 switch (args[0])
                 {
                     case "--restart":
@@ -55,7 +60,7 @@ namespace Restarter
                         break;
 
                     default:
-                        break;
+                        return;
                 }
             }
             catch (Exception ex)
@@ -72,8 +77,9 @@ namespace Restarter
                 Thread.Sleep(1000);
                 Process _restarterProcess = new();
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME1_FILENAME;
-                _restarterProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+                _restarterProcess.StartInfo.WorkingDirectory = programPath;
                 _restarterProcess.StartInfo.UseShellExecute = true;
+                _restarterProcess.StartInfo.Arguments = "--official";
                 _restarterProcess.Start();
             }
             catch (Exception ex)
@@ -90,8 +96,9 @@ namespace Restarter
                 Thread.Sleep(1000);
                 Process _restarterProcess = new();
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME2_FILENAME;
-                _restarterProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+                _restarterProcess.StartInfo.WorkingDirectory = programPath;
                 _restarterProcess.StartInfo.UseShellExecute = true;
+                _restarterProcess.StartInfo.Arguments = "--official";
                 _restarterProcess.Start();
             }
             catch (Exception ex)
@@ -108,8 +115,9 @@ namespace Restarter
                 Thread.Sleep(1000);
                 Process _restarterProcess = new();
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME25_FILENAME;
-                _restarterProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+                _restarterProcess.StartInfo.WorkingDirectory = programPath;
                 _restarterProcess.StartInfo.UseShellExecute = true;
+                _restarterProcess.StartInfo.Arguments = "--official";
                 _restarterProcess.Start();
             }
             catch (Exception ex)
@@ -134,13 +142,13 @@ namespace Restarter
             {
                 byte[] selectedGameAsByteArray = new UTF8Encoding(true).GetBytes(selectedGame.ToString());
 
-                if (File.Exists(Path.Combine(configPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE)))
+                if (File.Exists(Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE)))
                 {
-                    selectedGame = Convert.ToInt32(File.ReadAllText(@Path.Combine(configPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE), Encoding.UTF8));
+                    selectedGame = Convert.ToInt32(File.ReadAllText(@Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE), Encoding.UTF8));
                 }
                 else
                 {
-                    using FileStream _fileStream = File.Create(Path.Combine(configPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE));
+                    using FileStream _fileStream = File.Create(Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE));
                     _fileStream.Write(selectedGameAsByteArray);
                 }
             }

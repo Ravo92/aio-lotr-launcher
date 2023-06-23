@@ -16,8 +16,25 @@ namespace PatchLauncher
         /// </summary>
         [STAThread]
 
-        static void Main()
+        static void Main(string[] args)
         {
+            try
+            {
+                if (args.Length < 1)
+                {
+                    return;
+                }
+                else if (args[0] != "--official")
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
+                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+            }
+
             ApplicationConfiguration.Initialize();
 
             try

@@ -41,7 +41,7 @@ namespace Helper
                 Description = description
             };
 
-            _windowsShortcut.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), linkName + ".lnk"));
+            _windowsShortcut.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), optionalSubPath, linkName + ".lnk"));
         }
     }
 }

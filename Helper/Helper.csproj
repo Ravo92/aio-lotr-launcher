@@ -12,6 +12,7 @@
     <PackageId>2.22 Launcher Helper Library</PackageId>
     <Authors>Patch 2.22 Team</Authors>
     <Product>2.22 Launcher Helper Library</Product>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

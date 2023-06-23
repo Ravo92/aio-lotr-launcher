@@ -1050,7 +1050,7 @@ namespace PatchLauncher
                     Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0)
+                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0 && !onlyLanguagePack)
                 {
                     DialogResult _dialogResult = MessageBox.Show(Strings.Msg_InstallFolderNotEmpty_Text, Strings.Msg_InstallFolderNotEmpty_Title, MessageBoxButtons.OKCancel);
                     if (_dialogResult == DialogResult.OK)
@@ -1083,15 +1083,17 @@ namespace PatchLauncher
                 await DownloadGame(_languageSettings.RegistrySelectedLocale);
                 await ExtractGame(onlyLanguagePack);
 
-                if (Settings.Default.CreateDesktopShortcut)
+                if (!onlyLanguagePack)
                 {
+                    if (Settings.Default.CreateDesktopShortcut && !StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                    {
+                        GameDesktopShortcutToolStripMenuItem.PerformClick();
+                    }
 
-                    GameDesktopShortcutToolStripMenuItem.PerformClick();
-                }
-
-                if (Settings.Default.CreateStartMenuShortcut)
-                {
-                    GameStartmenuShortcutsToolStripMenuItem.PerformClick();
+                    if (Settings.Default.CreateStartMenuShortcut && !StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                    {
+                        GameStartmenuShortcutsToolStripMenuItem.PerformClick();
+                    }
                 }
 
                 if (Settings.Default.UseBetaChannel == true)
@@ -1485,6 +1487,18 @@ namespace PatchLauncher
         {
             try
             {
+                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
+
+                PiBArrow.Enabled = false;
+                LaunchGameToolStripMenuItem.Enabled = false;
+                OptionsToolStripMenuItem.Enabled = false;
+                RepairGameToolStripMenuItem.Enabled = false;
+
+                if (Settings.Default.IsPatchModsShown)
+                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+                else
+                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
                 // Check Music Settings
                 if (Settings.Default.PlayBackgroundMusic)
                 {
@@ -1499,29 +1513,17 @@ namespace PatchLauncher
                 {
                     Settings.Default.IsGameInstalled = false;
                     BtnInstall.Text = Strings.BtnInstall_TextInstall;
-
-                    if (Settings.Default.IsPatchModsShown)
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                    else
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
-                    PiBArrow.Enabled = false;
-
-                    LaunchGameToolStripMenuItem.Enabled = false;
-                    OptionsToolStripMenuItem.Enabled = false;
-                    RepairGameToolStripMenuItem.Enabled = false;
                 }
                 // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
-                else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && Settings.Default.IsGameInstalled && !Settings.Default.UseBetaChannel)
+                else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
                 {
-                    if (Settings.Default.IsPatchModsShown)
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                    else
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
                     Settings.Default.IsPatch106Installed = false;
                     Settings.Default.IsPatch33Installed = false;
                     Settings.Default.IsPatch34Installed = false;
+
+                    Settings.Default.IsGameInstalled = true;
+                    Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
+                    Settings.Default.InstalledLanguageISOCode = ConstStrings.GameLanguage();
 
                     await UpdateRoutine(ConstStrings.C_PATCHZIP34_NAME, "https://www.dropbox.com/scl/fi/uyuh8jl936z7t9l6vf4jb/Patch_2.22v34.7z?dl=1&rlkey=94y4ifn40pb78djvihmewoib3");
 
@@ -1554,13 +1556,6 @@ namespace PatchLauncher
 
                     if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
                     {
-                        if (Settings.Default.IsPatchModsShown)
-                            PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                        else
-                            PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
-                        PiBArrow.Enabled = false;
-
                         await UpdateRoutineBeta();
                     }
                 }
@@ -1602,6 +1597,12 @@ namespace PatchLauncher
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
 
 
+                PiBArrow.Enabled = true;
+                LaunchGameToolStripMenuItem.Enabled = true;
+                OptionsToolStripMenuItem.Enabled = true;
+                RepairGameToolStripMenuItem.Enabled = true;
+
+                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
 
                 Settings.Default.Save();
 
@@ -1855,6 +1856,29 @@ namespace PatchLauncher
                         repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     }
 
+                    repairLogConsole.TxtConsole.AppendText("Check for EAX-Support...");
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+
+                    if (Settings.Default.EAXSupport)
+                    {
+                        repairLogConsole.TxtConsole.AppendText("EAX-Support is active... Installing neccessary files...");
+                        List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                        foreach (var file in _EAXFiles)
+                        {
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                            repairLogConsole.TxtConsole.AppendText("Installed file: " + file);
+                            File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
+                        }
+                    }
+                    else
+                    {
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        repairLogConsole.TxtConsole.AppendText("EAX support disabled via launcher... no action needed.");
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    }
+
                     repairLogConsole.TxtConsole.AppendText("We are now renewing every file...");
                     repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     await InstallRoutine(false);
@@ -1878,6 +1902,29 @@ namespace PatchLauncher
                             repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                         }
                         repairLogConsole.TxtConsole.AppendText(string.Format("File \"{0}\" is okay. No action needed.", _languageSettings.LanguagPackName));
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                    }
+
+                    repairLogConsole.TxtConsole.AppendText("Check for EAX-Support...");
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+
+                    if (Settings.Default.EAXSupport)
+                    {
+                        repairLogConsole.TxtConsole.AppendText("EAX-Support is active... Installing neccessary files...");
+                        List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                        foreach (var file in _EAXFiles)
+                        {
+                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                            repairLogConsole.TxtConsole.AppendText("Installed file: " + file);
+                            File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
+                        }
+                    }
+                    else
+                    {
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
+                        repairLogConsole.TxtConsole.AppendText("EAX support disabled via launcher... no action needed.");
                         repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     }
 

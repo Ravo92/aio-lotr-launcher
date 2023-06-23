@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BFME1", "BFME1\BFME1.csproj", "{80B8945F-2EB8-4D57-8419-EC5FE6ABDDFE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{07EE3FFD-908D-4D53-A40D-681199244D95} = {07EE3FFD-908D-4D53-A40D-681199244D95}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{CF16109E-6D9B-4237-BAB8-EF6C5179BC39}"
 EndProject

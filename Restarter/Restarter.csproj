@@ -8,12 +8,14 @@
     <BaseOutputPath>..\build</BaseOutputPath>
     <AssemblyVersion>1.0.2.3</AssemblyVersion>
     <FileVersion>1.0.2.3</FileVersion>
-    <PackageId>2.22 Restarter Slave</PackageId>
+    <PackageId>2.22 Restarter</PackageId>
     <Authors>Patch 2.22 Team</Authors>
     <Product>2.22 Restarter</Product>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>Restarter.Program</StartupObject>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -62,6 +62,11 @@
                 File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_OPTIONAL_PATCH_FILE));
             }
 
+            if (File.Exists(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE)))
+            {
+                File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE));
+            }
+
             File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_103_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE));
         }
     }

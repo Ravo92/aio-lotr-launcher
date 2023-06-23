@@ -42,17 +42,25 @@ Name: de; MessagesFile: "compiler:Languages\German.isl"
 en.BeveledLabel=English
 de.BeveledLabel=Deutsch
 
+[CustomMessages]
+en.CreateStartMenuIcon=Create start menu entries
+en.LaunchAfterInstall=Launch Application after Install
+
+de.CreateStartMenuIcon=Erstelle Verknüpfungen im Startmenü
+de.LaunchAfterInstall=Starte die Anwendung nach der Installation
+
 [Files]
 Source: "{#MyAppPublishFolder}\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
 Source: "{#MyAppPublishFolder}\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Parameters: "--startLauncher"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: startmenuicon
 Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Parameters: "--startLauncher"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 ;Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: Not FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk'))
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "startmenuicon"; Description: "{cm:CreateStartMenuIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [InstallDelete]
 Type: files; Name: "{app}\PatchLauncherBFME.exe"
@@ -66,5 +74,5 @@ Type: filesandordirs; Name: "{app}\PatchLauncherBFME.exe.WebView2"
 Type: filesandordirs; Name: "{app}\Downloads"
 
 [Run]
-Filename: {app}\{#MyAppExeName}; Description: "Launch Application after Install"; Flags: postinstall shellexec nowait unchecked skipifsilent;
-Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent
+Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--startLauncher"
+Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent; Parameters: "--startLauncher"

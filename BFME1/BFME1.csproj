@@ -23,6 +23,7 @@
     <Authors>Patch 2.22 Team</Authors>
     <Product>BFME1 Launcher </Product>
     <PackageId>BFME1 Launcher</PackageId>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

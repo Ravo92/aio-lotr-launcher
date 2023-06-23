@@ -19,7 +19,7 @@ namespace Helper
                     switch (kindOf)
                     {
                         case "locale":
-                            if (IsNotNull(mainPath.GetValue("Locale")))
+                            if (IsNotNull(mainPath?.GetValue("Locale")))
                             {
                                 string? lang = mainPath.GetValue("Locale")!.ToString()!;
                                 return lang;
