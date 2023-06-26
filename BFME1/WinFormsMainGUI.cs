@@ -1578,7 +1578,7 @@ namespace PatchLauncher
                 else
                     GameDesktopShortcutToolStripMenuItem.Checked = false;
 
-                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
                     GameStartmenuShortcutsToolStripMenuItem.Checked = true;
                 else
                     GameStartmenuShortcutsToolStripMenuItem.Checked = false;
@@ -1591,7 +1591,7 @@ namespace PatchLauncher
                 else
                     LauncherDesktopShortcutToolStripMenuItem.Checked = false;
 
-                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Patch 2.22 Launcher"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
                 else
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
@@ -1856,6 +1856,7 @@ namespace PatchLauncher
                         repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     }
 
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     repairLogConsole.TxtConsole.AppendText("Check for EAX-Support...");
                     repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
 
@@ -1905,6 +1906,7 @@ namespace PatchLauncher
                         repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     }
 
+                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
                     repairLogConsole.TxtConsole.AppendText("Check for EAX-Support...");
                     repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
 
