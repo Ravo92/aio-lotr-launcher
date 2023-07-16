@@ -1,16 +1,13 @@
 using AutoUpdaterDotNET;
-using Downloader;
 using Helper;
 using Microsoft.Web.WebView2.Core;
 using PatchLauncher.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -22,9 +19,67 @@ namespace PatchLauncher
         int iconNumber = Settings.Default.BackgroundMusicIcon;
         readonly SoundPlayerHelper _soundPlayerHelper = new();
 
-        readonly string gameISOPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP);
+        readonly LanguagePacks _languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+        readonly MainPacks _mainPack = JSONDataListHelper._MainPackSettings;
 
-        LanguageSettings _languageSettings = InstallLanguageList._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+        private static bool _IsLauncherCurrentlyWorking = false;
+
+        private bool IsLauncherCurrentlyWorking
+        {
+            get { return _IsLauncherCurrentlyWorking; }
+            set
+            {
+                _IsLauncherCurrentlyWorking = value;
+                if (value)
+                {
+                    PiBVersion103.Enabled = false;
+                    PiBVersion106.Enabled = false;
+
+                    PiBVersion222_33.Enabled = false;
+                    PiBVersion222_34.Enabled = false;
+
+                    PiBArrow.Enabled = false;
+
+                    if (Settings.Default.IsPatchModsShown)
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
+                    else
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
+
+                    PBarActualFile.Show();
+                    LblDownloadSpeed.Show();
+                    LblFileName.Show();
+
+                    PiBArrow.Enabled = true;
+                    BtnInstall.Enabled = false;
+
+                    LaunchGameToolStripMenuItem.Enabled = false;
+                    RepairGameToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    PiBVersion103.Enabled = true;
+                    PiBVersion106.Enabled = true;
+
+                    PiBVersion222_33.Enabled = true;
+                    PiBVersion222_34.Enabled = true;
+
+                    PBarActualFile.Hide();
+                    LblDownloadSpeed.Hide();
+                    LblFileName.Hide();
+
+                    PiBArrow.Enabled = true;
+                    BtnInstall.Enabled = true;
+
+                    if (Settings.Default.IsPatchModsShown)
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
+                    else
+                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
+
+                    LaunchGameToolStripMenuItem.Enabled = true;
+                    RepairGameToolStripMenuItem.Enabled = true;
+                }
+            }
+        }
 
         public WinFormsMainGUI()
         {
@@ -33,19 +88,17 @@ namespace PatchLauncher
             InitializeComponent();
             InitializeWebView2Settings();
 
+            var test = JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max();
+
             SysTray.ContextMenuStrip = NotifyContextMenu;
 
             try
             {
-                if (!Directory.Exists(ConstStrings.GameAppdataFolderPath()))
-                    Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath());
+                if (!Directory.Exists(RegistryService.GameAppdataFolderPath()))
+                    Directory.CreateDirectory(RegistryService.GameAppdataFolderPath());
 
-                if (!File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
-
-                XMLFileHelper.GetXMLFileData(true);
-                XMLFileHelper.GetXMLFileData(false);
-
+                if (!File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
             }
             catch (Exception ex)
             {
@@ -251,11 +304,15 @@ namespace PatchLauncher
                     Show();
                     WindowState = FormWindowState.Normal;
                     SysTray.Visible = false;
-                    PiBVersion103.Enabled = true;
-                    PiBVersion106.Enabled = true;
-                    PiBVersion222_33.Enabled = true;
-                    PiBVersion222_34.Enabled = true;
+                    IsLauncherCurrentlyWorking = false;
                 }));
+            }
+            else
+            {
+                Show();
+                WindowState = FormWindowState.Normal;
+                SysTray.Visible = false;
+                IsLauncherCurrentlyWorking = false;
             }
 
             if (Settings.Default.PlayBackgroundMusic)
@@ -273,7 +330,7 @@ namespace PatchLauncher
                 DialogResult dr = _install.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    await InstallRoutine(false);
+                    await InstallUpdatRepairRoutine(ConstStrings.C_MAINGAMEFILE_ZIP, _mainPack.URL, _mainPack.MD5, true);
                 }
             }
             else
@@ -424,26 +481,16 @@ namespace PatchLauncher
 
         private void PiBVersion103_Click(object sender, EventArgs e)
         {
+            IsLauncherCurrentlyWorking = true;
+
             try
             {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                PiBVersion103.Enabled = false;
-                PiBVersion106.Enabled = false;
-
-                PiBVersion222_33.Enabled = false;
-                PiBVersion222_34.Enabled = false;
-
-                if (PatchModDetectionHelper.DetectPatch106())
-                {
-                    PatchModDetectionHelper.DeletePatch106();
-                    PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
-                }
-
+                PatchModDetectionHelper.DeletePatch106();
                 PatchModDetectionHelper.DeletePatch222Files();
 
-                Settings.Default.PatchVersionInstalled = 103;
+                PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
 
+                Settings.Default.PatchVersionInstalled = 103;
                 Settings.Default.IsPatch106Installed = false;
                 Settings.Default.IsPatch33Installed = false;
                 Settings.Default.IsPatch34Installed = false;
@@ -466,43 +513,35 @@ namespace PatchLauncher
                 else
                     PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Download;
 
-                PiBVersion103.Enabled = true;
-                PiBVersion106.Enabled = true;
-
-                PiBVersion222_33.Enabled = true;
-                PiBVersion222_34.Enabled = true;
-
                 Settings.Default.Save();
-
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
-
             }
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 file.WriteLine(ConstStrings.LogTime + ex.ToString());
             }
+
+            IsLauncherCurrentlyWorking = false;
         }
 
         private async void PiBVersion106_Click(object sender, EventArgs e)
         {
+            IsLauncherCurrentlyWorking = true;
+            PatchPacks _patchpack106 = JSONDataListHelper._DictionaryPatchPacksSettings[106];
+            LanguageFiles patchPackLanguages = _patchpack106.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+
+            IsLauncherCurrentlyWorking = true;
+
             try
             {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                PiBVersion103.Enabled = false;
-                PiBVersion106.Enabled = false;
-
-                PiBVersion222_33.Enabled = false;
-                PiBVersion222_34.Enabled = false;
-
                 if (!Settings.Default.IsPatch106Downloaded)
                 {
-                    PBarActualFile.Show();
-                    LblDownloadSpeed.Show();
-                    LblFileName.Show();
+                    await InstallUpdatRepairRoutine(_patchpack106.FileName, _patchpack106.URL, _patchpack106.MD5, false);
 
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP06_NAME, "https://dl.dropboxusercontent.com/s/0j4u35hetr3if5j/Patch_1.06.7z");
+                    if (_patchpack106.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
+                    {
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                    }
 
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Selected;
 
@@ -537,11 +576,12 @@ namespace PatchLauncher
                     }
                     else
                     {
-                        PBarActualFile.Show();
-                        LblDownloadSpeed.Show();
-                        LblFileName.Show();
+                        await InstallUpdatRepairRoutine(_patchpack106.FileName, _patchpack106.URL, _patchpack106.MD5, false);
 
-                        await UpdateRoutine(ConstStrings.C_PATCHZIP06_NAME, "https://dl.dropboxusercontent.com/s/0j4u35hetr3if5j/Patch_1.06.7z");
+                        if (_patchpack106.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
+                        {
+                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                        }
 
                         PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Selected;
 
@@ -566,14 +606,7 @@ namespace PatchLauncher
                     }
                 }
 
-                PiBVersion103.Enabled = true;
-                PiBVersion106.Enabled = true;
-
-                PiBVersion222_33.Enabled = true;
-                PiBVersion222_34.Enabled = true;
-
                 Settings.Default.Save();
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
 
             }
             catch (Exception ex)
@@ -581,35 +614,31 @@ namespace PatchLauncher
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 file.WriteLine(ConstStrings.LogTime + ex.ToString());
             }
+
+            IsLauncherCurrentlyWorking = false;
         }
 
         private async void PiBVersion222_33_Click(object sender, EventArgs e)
         {
+            IsLauncherCurrentlyWorking = true;
+            PatchPacks _patchpack22233 = JSONDataListHelper._DictionaryPatchPacksSettings[22233];
+            LanguageFiles patchPackLanguages = _patchpack22233.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+
             try
             {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                PiBVersion103.Enabled = false;
-                PiBVersion106.Enabled = false;
-
-                PiBVersion222_33.Enabled = false;
-                PiBVersion222_34.Enabled = false;
-
                 if (!Settings.Default.IsPatch33Downloaded)
                 {
-                    PBarActualFile.Show();
-                    LblDownloadSpeed.Show();
-                    LblFileName.Show();
+                    await InstallUpdatRepairRoutine(_patchpack22233.FileName, _patchpack22233.URL, _patchpack22233.MD5, false);
 
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/0oc0ebbqk2ps1cb3qws46/Patch_2.22v33.7z?dl=1&rlkey=0zcwxhphd8smtvjobsgh0rbs9");
+                    if (_patchpack22233.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
+                    {
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                    }
+
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
 
                     PiBVersion222_33.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
-
-                    if (Settings.Default.InstalledLanguageISOCode == "de")
-                    {
-                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
-                    }
 
                     Settings.Default.PatchVersionInstalled = 33;
                     Settings.Default.IsPatch33Downloaded = true;
@@ -640,11 +669,11 @@ namespace PatchLauncher
                         LblDownloadSpeed.Show();
                         LblFileName.Show();
 
-                        await UpdateRoutine(ConstStrings.C_PATCHZIP33_NAME, "https://www.dropbox.com/scl/fi/0oc0ebbqk2ps1cb3qws46/Patch_2.22v33.7z?dl=1&rlkey=0zcwxhphd8smtvjobsgh0rbs9");
+                        await InstallUpdatRepairRoutine(_patchpack22233.FileName, _patchpack22233.URL, _patchpack22233.MD5, false);
 
-                        if (Settings.Default.InstalledLanguageISOCode == "de")
+                        if (_patchpack22233.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                         {
-                            File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
                         }
 
                         PiBVersion222_33.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
@@ -665,14 +694,7 @@ namespace PatchLauncher
                     }
                 }
 
-                PiBVersion103.Enabled = true;
-                PiBVersion106.Enabled = true;
-
-                PiBVersion222_33.Enabled = true;
-                PiBVersion222_34.Enabled = true;
-
                 Settings.Default.Save();
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
 
             }
             catch (Exception ex)
@@ -680,35 +702,33 @@ namespace PatchLauncher
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 file.WriteLine(ConstStrings.LogTime + ex.ToString());
             }
+
+            IsLauncherCurrentlyWorking = false;
         }
 
-        private async void PiBVersion222_34_Click(object sender, EventArgs e)
+        private async void PiBVersion222_34_Click(object sender, EventArgs? e)
         {
+            IsLauncherCurrentlyWorking = true;
+            PatchPacks _patchpack22234 = JSONDataListHelper._DictionaryPatchPacksSettings[22234];
+            LanguageFiles patchPackLanguages = _patchpack22234.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+
             try
             {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                PiBVersion103.Enabled = false;
-                PiBVersion106.Enabled = false;
-
-                PiBVersion222_33.Enabled = false;
-                PiBVersion222_34.Enabled = false;
-
                 if (!Settings.Default.IsPatch34Downloaded)
                 {
                     PBarActualFile.Show();
                     LblDownloadSpeed.Show();
                     LblFileName.Show();
 
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP34_NAME, "https://www.dropbox.com/scl/fi/uyuh8jl936z7t9l6vf4jb/Patch_2.22v34.7z?dl=1&rlkey=94y4ifn40pb78djvihmewoib3");
+                    await InstallUpdatRepairRoutine(_patchpack22234.FileName, _patchpack22234.URL, _patchpack22234.MD5, false);
+
+                    if (_patchpack22234.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
+                    {
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                    }
 
                     PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Selected;
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106;
-
-                    if (Settings.Default.InstalledLanguageISOCode == "de")
-                    {
-                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
-                    }
 
                     Settings.Default.PatchVersionInstalled = 34;
                     Settings.Default.IsPatch34Downloaded = true;
@@ -739,11 +759,11 @@ namespace PatchLauncher
                         LblDownloadSpeed.Show();
                         LblFileName.Show();
 
-                        await UpdateRoutine(ConstStrings.C_PATCHZIP34_NAME, "https://www.dropbox.com/scl/fi/uyuh8jl936z7t9l6vf4jb/Patch_2.22v34.7z?dl=1&rlkey=94y4ifn40pb78djvihmewoib3");
+                        await InstallUpdatRepairRoutine(_patchpack22234.FileName, _patchpack22234.URL, _patchpack22234.MD5, false);
 
-                        if (Settings.Default.InstalledLanguageISOCode == "de")
+                        if (_patchpack22234.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                         {
-                            File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
                         }
 
                         PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Selected;
@@ -763,15 +783,7 @@ namespace PatchLauncher
                             PiBVersion222_33.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
                     }
                 }
-
-                PiBVersion103.Enabled = true;
-                PiBVersion106.Enabled = true;
-
-                PiBVersion222_33.Enabled = true;
-                PiBVersion222_34.Enabled = true;
-
                 Settings.Default.Save();
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
 
             }
             catch (Exception ex)
@@ -779,6 +791,8 @@ namespace PatchLauncher
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 file.WriteLine(ConstStrings.LogTime + ex.ToString());
             }
+
+            IsLauncherCurrentlyWorking = false;
         }
 
         private void PiBArrow_Click(object sender, EventArgs e)
@@ -803,287 +817,30 @@ namespace PatchLauncher
         }
         #endregion
 
-        #region Update
-
-        public async Task UpdateRoutine(string ZIPFileName, string DownloadUrl)
-        {
-            try
-            {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                LaunchGameToolStripMenuItem.Enabled = false;
-                OptionsToolStripMenuItem.Enabled = false;
-                RepairGameToolStripMenuItem.Enabled = false;
-
-                PiBArrow.Enabled = false;
-
-                if (Settings.Default.IsPatchModsShown)
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                }
-                else
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-                }
-
-                PBarActualFile.Show();
-
-                LblDownloadSpeed.Show();
-                LblFileName.Show();
-
-                BtnInstall.Enabled = false;
-
-                LblFileName.Text = Strings.Info_PreparingUpdate;
-
-                PatchModDetectionHelper.DeletePatch222Files();
-                PatchModDetectionHelper.DeletePatch106();
-
-                Task download = DownloadUpdate(ZIPFileName, DownloadUrl);
-                await download;
-
-                Task extract = ExtractUpdate(ZIPFileName);
-                await extract;
-
-                PBarActualFile.Hide();
-
-                LblDownloadSpeed.Hide();
-                LblFileName.Hide();
-
-                BtnInstall.Enabled = true;
-
-                PiBArrow.Enabled = true;
-
-                if (Settings.Default.IsPatchModsShown)
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-                    LblModExplanation.Show();
-                }
-                else
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
-                    LblModExplanation.Hide();
-                }
-
-                Settings.Default.PatchVersionInstalled = XMLFileHelper.GetXMLFileVersion(false);
-                Settings.Default.Save();
-
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
-
-                LaunchGameToolStripMenuItem.Enabled = true;
-                OptionsToolStripMenuItem.Enabled = true;
-                RepairGameToolStripMenuItem.Enabled = true;
-
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
-            }
-        }
-
-        public async Task UpdateRoutineBeta()
-        {
-            try
-            {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                int XmlVersion = XMLFileHelper.GetXMLFileVersion(true);
-
-                PiBArrow.Enabled = false;
-
-                if (Settings.Default.IsPatchModsShown)
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                }
-                else
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-                }
-
-                PBarActualFile.Show();
-
-                LblDownloadSpeed.Show();
-                LblFileName.Show();
-
-                BtnInstall.Enabled = false;
-
-                LblFileName.Text = Strings.Info_PreparingUpdateBeta;
-
-                if (XmlVersion > Settings.Default.BetaChannelVersion && Settings.Default.BetaChannelVersion > 0 && Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString())))
-                    Directory.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + Settings.Default.BetaChannelVersion.ToString()), true);
-
-                Task download = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_ASSET_FILE), "https://dl.dropboxusercontent.com/s/zmze7c5asdlq44u/asset.dat");
-                await download;
-
-                Task download2 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_TEXTURES_PATCH_FILE), "https://dl.dropboxusercontent.com/s/ok5a5507fpwmge3/_patch222textures.big");
-                await download2;
-
-                Task download3 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_PATCH_FILE), "https://dl.dropboxusercontent.com/s/gi431h0gnqgjfh3/_patch222.big");
-                await download3;
-
-                Task download4 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_BASES_PATCH_FILE), "https://dl.dropboxusercontent.com/s/rlshiuuiaalsu1t/_patch222bases.big");
-                await download4;
-
-                Task download5 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAPS_PATCH_FILE), "https://dl.dropboxusercontent.com/s/b4ubdfi8uuk181m/_patch222maps.big");
-                await download5;
-
-                Task download6 = DownloadUpdate(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_LIBRARIES_PATCH_FILE), "https://dl.dropboxusercontent.com/s/9027uabrxkx7z85/_patch222libraries.big");
-                await download6;
-
-                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE), true);
-                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_TEXTURES_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_TEXTURES_PATCH_FILE), true);
-                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAIN_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_PATCH_FILE), true);
-                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_BASES_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_BASES_PATCH_FILE), true);
-                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_LIBRARIES_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_LIBRARIES_PATCH_FILE), true);
-                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ConstStrings.C_BETAFOLDER_NAME + XmlVersion.ToString(), ConstStrings.C_MAPS_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAPS_PATCH_FILE), true);
-
-                PBarActualFile.Hide();
-
-                LblDownloadSpeed.Hide();
-                LblFileName.Hide();
-
-                BtnInstall.Enabled = true;
-
-                Settings.Default.BetaChannelVersion = XMLFileHelper.GetXMLFileVersion(true);
-                Settings.Default.PatchVersionInstalled = XmlVersion + 1;
-                Settings.Default.IsPatch34Installed = false;
-                Settings.Default.IsPatch106Installed = false;
-                Settings.Default.Save();
-
-                if (Settings.Default.IsPatchModsShown)
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-                    LblModExplanation.Show();
-                }
-                else
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
-                    LblModExplanation.Hide();
-                }
-
-                PiBArrow.Enabled = true;
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
-
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
-            }
-        }
-
-        public async Task DownloadUpdate(string ZIPFileName, string DownloadUrl)
-        {
-            try
-            {
-                SetPBarFiles(0);
-                SetPBarFilesMax(100);
-
-                var downloadOpt = new DownloadConfiguration()
-                {
-                    ChunkCount = 1,
-                    ParallelDownload = false,
-                    ReserveStorageSpaceBeforeStartingDownload = true,
-                    BufferBlockSize = 8000,
-                    MaximumBytesPerSecond = 131072000,
-                    ClearPackageOnCompletionWithFailure = true
-                };
-
-                var downloader = new DownloadService(downloadOpt);
-
-                downloader.DownloadStarted += OnDownloadStarted;
-                downloader.DownloadProgressChanged += OnDownloadProgressChanged;
-                downloader.DownloadFileCompleted += OnDownloadFileCompleted;
-
-                if (!File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName)))
-                {
-                    await downloader.DownloadFileTaskAsync(DownloadUrl, Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName));
-                }
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
-            }
-        }
-
-        public async Task ExtractUpdate(string ZIPFileName)
-        {
-            try
-            {
-                Invoke((MethodInvoker)(() => LblFileName.Text = Strings.Info_CopyFilesAndApplyPatch));
-
-                var progressHandler = new Progress<ProgressHelper>(progress =>
-                {
-                    SetPBarFiles(progress.Count);
-                    SetPBarFilesMax(progress.Max);
-                    SetTextFileName(string.Concat(progress.Count, "/", progress.Max));
-                    SetTextDlSpeed(progress.Filename!);
-                });
-
-                ZIPFileHelper _ZIPFileHelper = new();
-                await _ZIPFileHelper.ExtractArchive(Path.Combine(ConstStrings.C_PATCHFOLDER_NAME, ZIPFileName), Settings.Default.GameInstallPath, progressHandler)!;
-
-                Invoke((MethodInvoker)(() => PBarActualFile.Hide()));
-                Invoke((MethodInvoker)(() => LblDownloadSpeed.Hide()));
-                Invoke((MethodInvoker)(() => LblFileName.Hide()));
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
-            }
-        }
-
-        #endregion
-
         #region GameInstall
-
-        public async Task InstallRoutine(bool onlyLanguagePack)
+        public async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string md5hash, bool isFreshInstall)
         {
+            IsLauncherCurrentlyWorking = true;
+
             try
             {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                if (!Directory.Exists(Settings.Default.GameInstallPath))
+                if (!await PrepareInstallFolder())
                 {
-                    Directory.CreateDirectory(Settings.Default.GameInstallPath);
+                    return;
                 }
-
-                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0 && !onlyLanguagePack)
-                {
-                    DialogResult _dialogResult = MessageBox.Show(Strings.Msg_InstallFolderNotEmpty_Text, Strings.Msg_InstallFolderNotEmpty_Title, MessageBoxButtons.OKCancel);
-                    if (_dialogResult == DialogResult.OK)
-                    {
-                        Directory.Delete(Settings.Default.GameInstallPath, true);
-                    }
-                    else if (_dialogResult == DialogResult.Cancel)
-                    {
-                        IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
-                        return;
-                    }
-                }
-
-                _languageSettings = InstallLanguageList._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
 
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
-                BtnInstall.Enabled = false;
 
-                PBarActualFile.Show();
+                if (isFreshInstall)
+                {
+                    RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, _languagePackSettings.RegistrySelectedLocale, _languagePackSettings.RegistrySelectedLanguageName, _languagePackSettings.RegistrySelectedLanguage);
+                }
 
-                LblDownloadSpeed.Show();
-                LblFileName.Show();
+                GameFileTools _gameFileTools = new();
+                await _gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, DownloadUrl);
+                await _gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, DownloadUrl);
 
-                PiBArrow.Enabled = false;
-                PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
-
-                RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, _languageSettings.RegistrySelectedLocale, _languageSettings.RegistrySelectedLanguageName, _languageSettings.RegistrySelectedLanguage);
-
-                await DownloadGame(_languageSettings.RegistrySelectedLocale);
-                await ExtractGame(onlyLanguagePack);
-
-                if (!onlyLanguagePack)
+                if (isFreshInstall)
                 {
                     if (Settings.Default.CreateDesktopShortcut && !StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                     {
@@ -1094,36 +851,9 @@ namespace PatchLauncher
                     {
                         GameStartmenuShortcutsToolStripMenuItem.PerformClick();
                     }
+
+                    PiBVersion222_34_Click(PiBVersion222_34, null);
                 }
-
-                if (Settings.Default.UseBetaChannel == true)
-                {
-                    await UpdateRoutineBeta();
-                }
-                else
-                {
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP34_NAME, "https://www.dropbox.com/scl/fi/uyuh8jl936z7t9l6vf4jb/Patch_2.22v34.7z?dl=1&rlkey=94y4ifn40pb78djvihmewoib3");
-
-                    Settings.Default.IsGameInstalled = true;
-                    Settings.Default.IsPatch34Downloaded = true;
-                    Settings.Default.IsPatch34Installed = true;
-                    Settings.Default.Save();
-
-                    if (Settings.Default.InstalledLanguageISOCode == "de")
-                    {
-                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
-                    }
-
-                    PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Selected;
-                }
-
-
-                LblDownloadSpeed.Hide();
-                LblFileName.Hide();
-                BtnInstall.Enabled = true;
-                PBarActualFile.Hide();
-
-                PiBArrow.Enabled = true;
 
                 if (Settings.Default.IsPatchModsShown)
                 {
@@ -1133,224 +863,48 @@ namespace PatchLauncher
                 {
                     PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
                 }
-
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
-
-                LaunchGameToolStripMenuItem.Enabled = true;
-                OptionsToolStripMenuItem.Enabled = true;
-                RepairGameToolStripMenuItem.Enabled = true;
-
             }
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
+
+            IsLauncherCurrentlyWorking = false;
         }
 
-        public async Task DownloadGame(string isoLanguage)
+        private static async Task<bool> PrepareInstallFolder()
         {
+            _IsLauncherCurrentlyWorking = true;
+
             try
             {
-                string langPackPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName);
-
-                var downloadOpt = new DownloadConfiguration()
+                if (!Directory.Exists(Settings.Default.GameInstallPath))
                 {
-                    ChunkCount = 1,
-                    ParallelDownload = false,
-                    ReserveStorageSpaceBeforeStartingDownload = true,
-                    BufferBlockSize = 8000,
-                    MaximumBytesPerSecond = 131072000,
-                    ClearPackageOnCompletionWithFailure = true
-                };
-
-                var downloader = new DownloadService(downloadOpt);
-
-                downloader.DownloadStarted += OnDownloadStarted;
-                downloader.DownloadProgressChanged += OnDownloadProgressChanged;
-                downloader.DownloadFileCompleted += OnDownloadFileCompleted;
-
-                if (!File.Exists(gameISOPath))
-                {
-                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameMainPackageURL(), gameISOPath);
-                }
-                else if (MD5Tools.CalculateMD5(gameISOPath) != ConstStrings.C_MAINGAMEFILE_ZIP_MD5_HASH)
-                {
-                    File.Delete(gameISOPath);
-                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameMainPackageURL(), gameISOPath);
+                    Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                if (!File.Exists(langPackPath))
+                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0)
                 {
-                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameLanguagePackURL(isoLanguage), langPackPath);
+                    DialogResult _dialogResult = MessageBox.Show(Strings.Msg_InstallFolderNotEmpty_Text, Strings.Msg_InstallFolderNotEmpty_Title, MessageBoxButtons.OKCancel);
+                    if (_dialogResult == DialogResult.OK)
+                    {
+                        Directory.Delete(Settings.Default.GameInstallPath, true);
+                    }
+                    else if (_dialogResult == DialogResult.Cancel)
+                    {
+                        _IsLauncherCurrentlyWorking = false;
+                        return false;
+                    }
                 }
-                else if (MD5Tools.CalculateMD5(langPackPath) != XMLFileHelper.GetXMLGameLanguageMD5Hash(isoLanguage))
-                {
-                    File.Delete(langPackPath);
-                    await downloader.DownloadFileTaskAsync(XMLFileHelper.GetXMLGameLanguagePackURL(isoLanguage), langPackPath);
-                }
+                return true;
             }
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
                 await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
-            }
-        }
-
-        public async Task ExtractGame(bool onlyLanguagePack)
-        {
-            try
-            {
-                SetPBarFilesMax(100);
-
-                var progressHandler = new Progress<ProgressHelper>(progress =>
-                {
-                    SetPBarFiles(progress.Count);
-                    SetPBarFilesMax(progress.Max);
-                    SetPBarPercentages(progress.Filename!);
-                    SetTextDlSpeed(string.Concat(progress.Count, "/", progress.Max));
-                });
-
-                var archiveFileNames = new List<string>();
-
-                if (!onlyLanguagePack)
-                {
-                    archiveFileNames.Add(ConstStrings.C_MAINGAMEFILE_ZIP);
-                }
-
-                archiveFileNames.Add(_languageSettings.LanguagPackName);
-
-                for (int i = 0; i < archiveFileNames.Count; i++)
-                {
-                    SetTextFileName($"Extracting {i + 1}/{archiveFileNames.Count}: {archiveFileNames[i]}");
-                    ZIPFileHelper _ZIPFileHelper = new();
-                    await _ZIPFileHelper.ExtractArchive(Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME, archiveFileNames[i]), Settings.Default.GameInstallPath, progressHandler)!;
-                }
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
-            }
-        }
-
-        private void OnDownloadStarted(object? sender, DownloadStartedEventArgs e)
-        {
-            SetPBarFiles(0);
-            SetTextFileName("Downloading: " + Path.GetFileName(e.FileName));
-        }
-
-        private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
-        {
-            SetPBarFiles((int)e.ProgressPercentage);
-            SetTextDlSpeed("@ " + Math.Round(e.AverageBytesPerSecondSpeed / 1024000).ToString() + " MB/s");
-            SetPBarPercentages(Math.Round(e.ProgressPercentage).ToString() + " %");
-        }
-
-        private void OnDownloadFileCompleted(object? sender, AsyncCompletedEventArgs e)
-        {
-            SetTextFileName(Strings.Info_PleaseWait);
-
-            if (e.Error != null)
-            {
-                if (PBarActualFile is null)
-                {
-                    SetTextFileName(e.Error.Message);
-                    using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                    file.WriteLineAsync(e.Error.Message);
-                }
-            }
-            else
-            {
-                SetTextFileName(Strings.Info_PleaseWait);
-                SetPBarFiles(100);
-            }
-        }
-        #endregion
-
-        #region Delegates
-        delegate void SetTextDLSpeedCallback(string text);
-        private void SetTextDlSpeed(string text)
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (LblDownloadSpeed.InvokeRequired)
-            {
-                SetTextDLSpeedCallback d = new(SetTextDlSpeed);
-                Invoke(d, new object[] { text });
-            }
-            else
-            {
-                LblDownloadSpeed.Text = text;
-            }
-        }
-
-        delegate void SetTextFileNameCallback(string text);
-        private void SetTextFileName(string text)
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (LblFileName.InvokeRequired)
-            {
-                SetTextFileNameCallback d = new(SetTextFileName);
-                Invoke(d, new object[] { text });
-            }
-            else
-            {
-                LblFileName.Text = text;
-            }
-        }
-
-        delegate void SetPBarFilesCallback(int value);
-        public void SetPBarFiles(int value)
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (PBarActualFile.InvokeRequired)
-            {
-                SetPBarFilesCallback d = new(SetPBarFiles);
-                Invoke(d, new object[] { value });
-            }
-            else
-            {
-                PBarActualFile.Value = value;
-            }
-        }
-
-        delegate void SetPBarFilesMaxCallback(int value);
-        private void SetPBarFilesMax(int value)
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (PBarActualFile.InvokeRequired)
-            {
-                SetPBarFilesMaxCallback d = new(SetPBarFilesMax);
-                Invoke(d, new object[] { value });
-            }
-            else
-            {
-                PBarActualFile.Maximum = value;
-            }
-        }
-
-        delegate void SetPBarPercentagesCallback(string value);
-        private void SetPBarPercentages(string value)
-        {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (PBarActualFile.InvokeRequired)
-            {
-                SetPBarPercentagesCallback d = new(SetPBarPercentages);
-                Invoke(d, new object[] { value });
-            }
-            else
-            {
-                PBarActualFile.CustomText = value;
+                _IsLauncherCurrentlyWorking = false;
+                return false;
             }
         }
         #endregion
@@ -1485,28 +1039,17 @@ namespace PatchLauncher
 
         private async void BFME1_Shown(object sender, EventArgs e)
         {
+            IsLauncherCurrentlyWorking = true;
+            PatchPacks _patchpack222 = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
+            LanguageFiles patchPackLanguages = _patchpack222.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+
             try
             {
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
-
-                PiBArrow.Enabled = false;
-                LaunchGameToolStripMenuItem.Enabled = false;
-                OptionsToolStripMenuItem.Enabled = false;
-                RepairGameToolStripMenuItem.Enabled = false;
-
-                if (Settings.Default.IsPatchModsShown)
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                else
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
-
                 // Check Music Settings
                 if (Settings.Default.PlayBackgroundMusic)
                 {
                     _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
                 }
-
-                // Get Latest 2.22 Patch Version to the Launcher Settings. Save comes at the end of this function
-                Settings.Default.LatestPatchVersion = XMLFileHelper.GetXMLFileVersion(false);
 
                 // Check if Game is installed, if not show install button
                 if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
@@ -1514,8 +1057,11 @@ namespace PatchLauncher
                     Settings.Default.IsGameInstalled = false;
                     BtnInstall.Text = Strings.BtnInstall_TextInstall;
                 }
-                // Check if new Update is available via XML file and Update to latest 2.22 Patch version OR Check if MD5 Hash matches the installed patch 2.22 version, if not -> Update; If Older patch is selected manually, dont Update!
-                else if (XMLFileHelper.GetXMLFileVersion(false) > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
+
+                // Check if new Update is available and Update to latest 2.22 Patch version if not -> Update;
+                // If Older patch is selected manually, dont Update!
+                // If BetaChannel is selected, dont Update either!
+                else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
                 {
                     Settings.Default.IsPatch106Installed = false;
                     Settings.Default.IsPatch33Installed = false;
@@ -1523,13 +1069,13 @@ namespace PatchLauncher
 
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                    Settings.Default.InstalledLanguageISOCode = ConstStrings.GameLanguage();
+                    Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
 
-                    await UpdateRoutine(ConstStrings.C_PATCHZIP34_NAME, "https://www.dropbox.com/scl/fi/uyuh8jl936z7t9l6vf4jb/Patch_2.22v34.7z?dl=1&rlkey=94y4ifn40pb78djvihmewoib3");
+                    await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
 
-                    if (Settings.Default.InstalledLanguageISOCode == "de")
+                    if (_patchpack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
-                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
                     }
 
                     Settings.Default.IsPatch34Downloaded = true;
@@ -1541,7 +1087,7 @@ namespace PatchLauncher
                 {
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                    Settings.Default.InstalledLanguageISOCode = ConstStrings.GameLanguage();
+                    Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
                     PiBArrow.Enabled = true;
                 }
 
@@ -1554,12 +1100,11 @@ namespace PatchLauncher
 
                     LblModExplanation.Text = Strings.Info_BetaActivated;
 
-                    if (XMLFileHelper.GetXMLFileVersion(true) > Settings.Default.BetaChannelVersion)
+                    if (Settings.Default.LatestBetaPatchVersion > Settings.Default.BetaChannelVersion)
                     {
-                        await UpdateRoutineBeta();
+                        await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
                     }
                 }
-
 
                 if (!Settings.Default.IsPatch106Downloaded)
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Download;
@@ -1569,7 +1114,6 @@ namespace PatchLauncher
 
                 if (!Settings.Default.IsPatch34Downloaded)
                     PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Download;
-
 
 
 
@@ -1585,7 +1129,6 @@ namespace PatchLauncher
 
 
 
-
                 if (StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                     LauncherDesktopShortcutToolStripMenuItem.Checked = true;
                 else
@@ -1595,33 +1138,24 @@ namespace PatchLauncher
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
                 else
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
-
-
-                PiBArrow.Enabled = true;
-                LaunchGameToolStripMenuItem.Enabled = true;
-                OptionsToolStripMenuItem.Enabled = true;
-                RepairGameToolStripMenuItem.Enabled = true;
-
-                IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
-
-                Settings.Default.Save();
-
-                if (!IsCurrentlyWorkingState.IsLauncherCurrentlyWorking)
-                {
-                    CheckForUpdates();
-                }
-
             }
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+            }
+
+            IsLauncherCurrentlyWorking = false;
+
+            if (!IsLauncherCurrentlyWorking)
+            {
+                CheckForUpdates();
             }
         }
 
         private void BFME1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (IsCurrentlyWorkingState.IsLauncherCurrentlyWorking)
+            if (IsLauncherCurrentlyWorking)
             {
                 MessageBox.Show(Strings.Warning_CantStopNow, Strings.Warning_CantStopNowTitle);
                 e.Cancel = true;
@@ -1664,10 +1198,7 @@ namespace PatchLauncher
 
         private void LaunchGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PiBVersion103.Enabled = false;
-            PiBVersion106.Enabled = false;
-            PiBVersion222_33.Enabled = false;
-            PiBVersion222_34.Enabled = false;
+            IsLauncherCurrentlyWorking = true;
 
             Process _process = new();
             _process.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_GAME_FILE);
@@ -1700,22 +1231,22 @@ namespace PatchLauncher
 
         private void OpenSaveDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath() + "\\Save");
+            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath() + "\\Save");
         }
 
         private void OpenMapDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath() + "\\Maps");
+            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath() + "\\Maps");
         }
 
         private void OpenReplayDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", ConstStrings.GameAppdataFolderPath() + "\\Replays");
+            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath() + "\\Replays");
         }
 
         private void OpenGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", ConstStrings.GameInstallPath());
+            Process.Start("explorer.exe", RegistryService.GameInstallPath());
         }
 
         private void OpenLauncherDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1752,216 +1283,11 @@ namespace PatchLauncher
 
         private async void RepairGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = true;
+            IsLauncherCurrentlyWorking = true;
 
-            try
-            {
-                LaunchGameToolStripMenuItem.Enabled = false;
-                OptionsToolStripMenuItem.Enabled = false;
-                RepairGameToolStripMenuItem.Enabled = false;
+            //await RepairFileHelper.RepairFeature();
 
-                RepairLogConsole repairLogConsole = new();
-
-                bool FlagIsCorrupt = false;
-
-                BtnInstall.Enabled = false;
-                var locationInForm = repairLogConsole.Location;
-                var locationOnScreen = PointToScreen(locationInForm);
-
-                repairLogConsole.StartPosition = FormStartPosition.Manual;
-                repairLogConsole.Location = new Point(locationOnScreen.X + 1275, locationOnScreen.Y - 31);
-                repairLogConsole.Show();
-
-                repairLogConsole.TxtConsole.Text = "Checking game integrity...";
-                repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-
-                foreach (var fileName in RepairFileList._DictionaryRepairFileList)
-                {
-                    string isMD5Value = MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameInstallPath(), fileName.Key));
-                    string shouldMD5Value = fileName.Value;
-
-                    if (isMD5Value == shouldMD5Value)
-                    {
-                        repairLogConsole.TxtConsole.AppendText(string.Format("File {0} has the correct value: {1}", fileName.Key, shouldMD5Value));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    }
-                    else
-                    {
-                        repairLogConsole.TxtConsole.AppendText(string.Format("File {0} ist corrupted and will be reaquired... Value: {1}", fileName.Key, isMD5Value));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        FlagIsCorrupt = true;
-                        break;
-                    }
-                }
-
-                repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-
-                if (FlagIsCorrupt)
-                {
-                    Settings.Default.IsPatch34Downloaded = false;
-                    Settings.Default.IsPatch34Installed = false;
-                    Settings.Default.Save();
-
-                    if (Directory.Exists(ConstStrings.GameInstallPath()))
-                    {
-                        Directory.Delete(ConstStrings.GameInstallPath(), true);
-
-                        if (!Directory.Exists(ConstStrings.GameInstallPath()))
-                        {
-                            repairLogConsole.TxtConsole.AppendText(string.Format("Deleted the game folder \"{0}\" sucessfully", ConstStrings.GameInstallPath()));
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        }
-                        else
-                        {
-                            repairLogConsole.TxtConsole.AppendText(string.Format("Was not able to delete the folder \"{0}\". Please check \"{1}\" for details.", ConstStrings.GameInstallPath(), ConstStrings.C_ERRORLOGGING_FILE));
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        }
-                    }
-
-                    // if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_PATCHFOLDER_NAME)))
-                    //     Directory.Delete(ConstStrings.C_PATCHFOLDER_NAME, true);
-                    //
-                    // if (Directory.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_BETAFOLDER_NAME)))
-                    //     Directory.Delete(ConstStrings.C_BETAFOLDER_NAME, true);
-
-                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)))
-                    {
-                        repairLogConsole.TxtConsole.AppendText(string.Format("Checking file \"{0}\"...", ConstStrings.C_MAINGAMEFILE_ZIP));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP)) != ConstStrings.C_MAINGAMEFILE_ZIP_MD5_HASH)
-                        {
-                            File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
-                            repairLogConsole.TxtConsole.AppendText(string.Format("The file \"{0}\" was corrupted and will be reaquired...", ConstStrings.C_MAINGAMEFILE_ZIP));
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        }
-                        repairLogConsole.TxtConsole.AppendText(string.Format("File \"{0}\" is okay. No action needed.", ConstStrings.C_MAINGAMEFILE_ZIP));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    }
-
-                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)))
-                    {
-                        repairLogConsole.TxtConsole.AppendText(string.Format("Checking file \"{0}\"...", _languageSettings.LanguagPackName));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)) != XMLFileHelper.GetXMLGameLanguageMD5Hash(_languageSettings.RegistrySelectedLocale))
-                        {
-                            File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
-                            repairLogConsole.TxtConsole.AppendText(string.Format("The file \"{0}\" was corrupted and will be reaquired...", _languageSettings.LanguagPackName));
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        }
-                        repairLogConsole.TxtConsole.AppendText(string.Format("File \"{0}\" is okay. No action needed.", _languageSettings.LanguagPackName));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    }
-
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    repairLogConsole.TxtConsole.AppendText("Check for EAX-Support...");
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-
-                    if (Settings.Default.EAXSupport)
-                    {
-                        repairLogConsole.TxtConsole.AppendText("EAX-Support is active... Installing neccessary files...");
-                        List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                        foreach (var file in _EAXFiles)
-                        {
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                            repairLogConsole.TxtConsole.AppendText("Installed file: " + file);
-                            File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
-                        }
-                    }
-                    else
-                    {
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        repairLogConsole.TxtConsole.AppendText("EAX support disabled via launcher... no action needed.");
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    }
-
-                    repairLogConsole.TxtConsole.AppendText("We are now renewing every file...");
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    await InstallRoutine(false);
-                }
-                else
-                {
-                    repairLogConsole.TxtConsole.AppendText(string.Format("Detected game language: \"{0}\"", _languageSettings.RegistrySelectedLanguage));
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    repairLogConsole.TxtConsole.AppendText(string.Format("Reinstalling installed language: \"{0}\" ...", _languageSettings.RegistrySelectedLanguage));
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-
-                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)))
-                    {
-                        repairLogConsole.TxtConsole.AppendText(string.Format("Checking file \"{0}\"...", _languageSettings.LanguagPackName));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        if (MD5Tools.CalculateMD5(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, _languageSettings.LanguagPackName)) != XMLFileHelper.GetXMLGameLanguageMD5Hash(_languageSettings.RegistrySelectedLocale))
-                        {
-                            File.Delete(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME, ConstStrings.C_MAINGAMEFILE_ZIP));
-                            repairLogConsole.TxtConsole.AppendText(string.Format("The file \"{0}\" was corrupted and will be reaquired...", _languageSettings.LanguagPackName));
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        }
-                        repairLogConsole.TxtConsole.AppendText(string.Format("File \"{0}\" is okay. No action needed.", _languageSettings.LanguagPackName));
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    }
-
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    repairLogConsole.TxtConsole.AppendText("Check for EAX-Support...");
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-
-                    if (Settings.Default.EAXSupport)
-                    {
-                        repairLogConsole.TxtConsole.AppendText("EAX-Support is active... Installing neccessary files...");
-                        List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                        foreach (var file in _EAXFiles)
-                        {
-                            repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                            repairLogConsole.TxtConsole.AppendText("Installed file: " + file);
-                            File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
-                        }
-                    }
-                    else
-                    {
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                        repairLogConsole.TxtConsole.AppendText("EAX support disabled via launcher... no action needed.");
-                        repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                    }
-
-                    await InstallRoutine(true);
-                }
-
-                if (Settings.Default.InstalledLanguageISOCode == "de")
-                {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
-                    repairLogConsole.TxtConsole.AppendText(string.Format("Copied German translation for 2.22 \"{0}\" into \"{1}\"", ConstStrings.C_GERMANLANGUAGE_PATCH_FILE, ConstStrings.GameInstallPath()));
-                    repairLogConsole.TxtConsole.AppendText(Environment.NewLine);
-                }
-
-                await File.WriteAllTextAsync(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, "Repair_" + DateTime.Now.ToString("yyyy'_'MM'_'ddTHH'_'mm'_'ss") + ".log"), repairLogConsole.TxtConsole.Text);
-
-                Thread.Sleep(1500);
-
-                MessageBox.Show(Strings.Msg_RepairDone_Text, Strings.Msg_RepairDone_Title, MessageBoxButtons.OK);
-
-                repairLogConsole.Hide();
-                repairLogConsole.Dispose();
-
-                BtnInstall.Enabled = true;
-
-                LaunchGameToolStripMenuItem.Enabled = true;
-                OptionsToolStripMenuItem.Enabled = true;
-                RepairGameToolStripMenuItem.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
-            }
-
-            IsCurrentlyWorkingState.IsLauncherCurrentlyWorking = false;
+            IsLauncherCurrentlyWorking = false;
         }
 
         private void LauncherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1997,7 +1323,7 @@ namespace PatchLauncher
                 }
                 else
                 {
-                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Settings.Default.StartGameWindowed == true ? "-win" : "");
+                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Settings.Default.StartGameWindowed == true ? "-win" : "");
                     GameDesktopShortcutToolStripMenuItem.Checked = true;
                 }
             }
@@ -2027,8 +1353,8 @@ namespace PatchLauncher
                     if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN)))
                         Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
 
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), Settings.Default.StartGameWindowed == true ? "-win" : "");
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder", Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
+                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), Settings.Default.StartGameWindowed == true ? "-win" : "");
+                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder", Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
                     GameStartmenuShortcutsToolStripMenuItem.Checked = true;
                 }
             }

@@ -13,9 +13,11 @@ namespace PatchLauncher
 {
     public partial class LauncherOptionsForm : Form
     {
+        readonly static string GameInstallPath = RegistryService.GameInstallPath();
+        readonly bool FlagEAXFileExists = File.Exists(GameInstallPath + @"\dsound.dll");
+
         //Launcher Settings
         bool FlagEAX = Settings.Default.EAXSupport;
-        readonly bool FlagEAXFileExists = File.Exists(ConstStrings.GameInstallPath() + @"\dsound.dll");
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
         bool FlagShowPatchesFirst = Settings.Default.ShowPatchesFirst;
@@ -25,6 +27,8 @@ namespace PatchLauncher
         bool FlagIsLanguageChanged = false;
         bool FlagIsBetaChannelChanged = false;
         bool FlagIsWindowedChanged = false;
+
+        readonly PatchPacksBeta _patchPacksBeta = JSONDataListHelper._PatchBetaSettings;//[Settings.Default.LatestBetaPatchVersion];
 
         public LauncherOptionsForm()
         {
@@ -115,7 +119,7 @@ namespace PatchLauncher
             }
             else if (FlagUseBetaChannel)
             {
-                LblPatchVersion.Text += "2.22v" + (Settings.Default.PatchVersionInstalled + 1).ToString() + " BETA " + Settings.Default.BetaChannelVersion.ToString();
+                LblPatchVersion.Text += _patchPacksBeta.MajorVersion.ToString() + "v" + _patchPacksBeta.MinorVersion.ToString() + " BETA " + _patchPacksBeta.Version.ToString();
             }
 
             if (FlagBrutalAI)
@@ -230,7 +234,7 @@ namespace PatchLauncher
             {
                 try
                 {
-                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Settings.Default.StartGameWindowed == true ? "-win" : "");
+                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Settings.Default.StartGameWindowed == true ? "-win" : "");
                 }
                 catch (Exception ex)
                 {
@@ -246,8 +250,8 @@ namespace PatchLauncher
                     if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN)))
                         Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
 
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), Settings.Default.StartGameWindowed == true ? "-win" : "");
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder", Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
+                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), Settings.Default.StartGameWindowed == true ? "-win" : "");
+                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(GameInstallPath, ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder", Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
                 }
                 catch (Exception ex)
                 {
@@ -358,7 +362,7 @@ namespace PatchLauncher
 
                 foreach (var file in _EAXFiles)
                 {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(ConstStrings.GameInstallPath(), file), true);
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
                 }
 
                 OptionIniParser.WriteKey("UseEAX3", "yes");
@@ -370,16 +374,16 @@ namespace PatchLauncher
 
                 foreach (var file in _EAXFiles)
                 {
-                    File.Delete(Path.Combine(ConstStrings.GameInstallPath(), file));
+                    File.Delete(Path.Combine(GameInstallPath, file));
                 }
 
                 OptionIniParser.WriteKey("UseEAX3", "no");
             }
 
-            if (FlagBrutalAI && ConstStrings.GameInstallPath() != null)
-                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"), true);
-            else if (ConstStrings.GameInstallPath() != null && File.Exists(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big")))
-                File.Delete(Path.Combine(ConstStrings.GameInstallPath(), "_patch222LibrariesBrutalAI.big"));
+            if (FlagBrutalAI && GameInstallPath != null)
+                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"), true);
+            else if (GameInstallPath != null && File.Exists(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big")))
+                File.Delete(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"));
         }
 
         private void ChkShowPatchesFirst_MouseClick(object sender, MouseEventArgs e)

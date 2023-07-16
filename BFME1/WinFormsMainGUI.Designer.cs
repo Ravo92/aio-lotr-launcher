@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Helper.UserControls;
 
 namespace PatchLauncher
 {
@@ -42,7 +43,7 @@ namespace PatchLauncher
             BtnInstall = new Button();
             LblFileName = new Label();
             PibLoadingRing = new PictureBox();
-            LblPatchNotes = new Helper.CustomLabel();
+            LblPatchNotes = new CustomLabel();
             PibLoadingBorder = new PictureBox();
             Wv2Patchnotes = new Microsoft.Web.WebView2.WinForms.WebView2();
             PiBTwitch = new PictureBox();
@@ -52,8 +53,8 @@ namespace PatchLauncher
             PiBVersion222_34 = new PictureBox();
             PiBVersion106 = new PictureBox();
             PiBVersion103 = new PictureBox();
-            LblInstalledPatches = new Helper.CustomLabel();
-            LblModExplanation = new Helper.CustomLabel();
+            LblInstalledPatches = new CustomLabel();
+            LblModExplanation = new CustomLabel();
             NotifyContextMenu = new ContextMenuStrip(components);
             MenuItemLaunchGame = new ToolStripMenuItem();
             closeTheLauncherToolStripMenuItem = new ToolStripMenuItem();
@@ -86,7 +87,7 @@ namespace PatchLauncher
             AboutToolStripMenuItem = new ToolStripMenuItem();
             CreditsToolStripMenuItem = new ToolStripMenuItem();
             MessagesFromTheTeamToolStripMenuItem = new ToolStripMenuItem();
-            PBarActualFile = new Helper.CustomProgressBar();
+            PBarActualFile = new CustomProgressBar();
             TmrPatchNotes = new Timer(components);
             TmrAnimation = new Timer(components);
             SysTray = new NotifyIcon(components);
@@ -524,7 +525,7 @@ namespace PatchLauncher
             resources.ApplyResources(PBarActualFile, "PBarActualFile");
             PBarActualFile.BackColor = System.Drawing.Color.Black;
             PBarActualFile.CustomText = null;
-            PBarActualFile.DisplayStyle = Helper.ProgressBarDisplayText.Percentage;
+            PBarActualFile.DisplayStyle = ProgressBarDisplayText.Percentage;
             PBarActualFile.ForeColor = System.Drawing.Color.Transparent;
             PBarActualFile.Name = "PBarActualFile";
             PBarActualFile.Style = ProgressBarStyle.Continuous;
@@ -654,10 +655,10 @@ namespace PatchLauncher
         private ToolStripMenuItem MessagesFromTheTeamToolStripMenuItem;
         private ToolStripMenuItem openLauncherLogfileDirectoryToolStripMenuItem;
         private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
-        private Helper.CustomLabel LblPatchNotes;
-        private Helper.CustomLabel LblInstalledPatches;
-        private Helper.CustomLabel LblModExplanation;
-        private Helper.CustomProgressBar PBarActualFile;
+        private CustomLabel LblPatchNotes;
+        private CustomLabel LblInstalledPatches;
+        private CustomLabel LblModExplanation;
+        private CustomProgressBar PBarActualFile;
         private ToolStripMenuItem LauncherDesktopShortcutToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator6;
         private ToolStripMenuItem LauncherStartmenuShortcutToolStripMenuItem;

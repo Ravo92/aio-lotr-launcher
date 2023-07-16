@@ -5,7 +5,7 @@ namespace Helper
     public class OptionIniParser
     {
         // TODO: Change the Game Directory detection Behaviours when game isnt installed yet, so every key defaults to "noValue"...
-        public static readonly string fullPathOptionIniFile = Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath()).ToString();
+        public static readonly string fullPathOptionIniFile = Directory.CreateDirectory(RegistryService.GameAppdataFolderPath()).ToString();
 
         public static string ReadKey(string keyName)
         {

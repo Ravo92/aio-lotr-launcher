@@ -16,8 +16,7 @@ namespace PatchLauncher
         bool FlagCreateStartMenuShortcut = true;
         string FlagSelectedIsoCode = "en_us";
 
-        readonly Dictionary<string, string> _selectedLanguageDictionary = InstallLanguageList._DictionarylanguageSettings
-            .ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
+        Dictionary<string, string> _selectedLanguageDictionary = JSONDataListHelper._DictionarylanguageSettings.ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
 
         public InstallPathDialog()
         {
@@ -255,7 +254,7 @@ namespace PatchLauncher
         {
             var control = (ComboBox)sender;
             string isoCode = (string)control.SelectedValue;
-            var settings = InstallLanguageList._DictionarylanguageSettings[isoCode];
+            var settings = JSONDataListHelper._DictionarylanguageSettings[isoCode];
             FlagSelectedIsoCode = settings.RegistrySelectedLocale;
         }
     }

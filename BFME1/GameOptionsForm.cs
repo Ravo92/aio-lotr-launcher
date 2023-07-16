@@ -9,7 +9,7 @@ namespace PatchLauncher
 {
     public partial class GameOptionsForm : Form
     {
-        string FlagStaticGameLOD = "UltraHigh";
+        readonly string FlagStaticGameLOD = "UltraHigh";
         string FlagAnisotropicTextureFiltering = "yes";
         string FlagTerrainLighting = "yes";
         string Flag3DShadows = "yes";
@@ -424,7 +424,7 @@ namespace PatchLauncher
 
         private void SaveSettings()
         {
-            if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
+            if (File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
                 if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes"
                     && FlagShowProps == "yes" && FlagShowAnimations == "yes" && FlagHeatEffects == "yes" && FlagDynamicLOD == "yes")

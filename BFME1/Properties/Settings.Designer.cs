@@ -333,5 +333,17 @@ namespace PatchLauncher.Properties {
                 this["IsPatch34Installed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LatestBetaPatchVersion {
+            get {
+                return ((int)(this["LatestBetaPatchVersion"]));
+            }
+            set {
+                this["LatestBetaPatchVersion"] = value;
+            }
+        }
     }
 }

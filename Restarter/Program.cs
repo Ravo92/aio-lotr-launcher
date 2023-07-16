@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using Helper;
@@ -66,7 +65,7 @@ namespace Restarter
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
         }
 
@@ -85,7 +84,7 @@ namespace Restarter
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
         }
 
@@ -104,7 +103,7 @@ namespace Restarter
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
         }
 
@@ -123,7 +122,7 @@ namespace Restarter
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
         }
 
@@ -155,7 +154,7 @@ namespace Restarter
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
 
             return selectedGame;

@@ -33,14 +33,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Downloader" Version="3.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SevenZipExtractor" Version="1.0.17" />
     <PackageReference Include="SharpDX.XAudio2" Version="4.2.0" />
     <PackageReference Include="WindowsShortcutFactory" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CustomProgressBar.cs" />
-    <Compile Update="CustomLabel.cs" />
+    <Compile Update="UserControls\CustomProgressBar.cs" />
+    <Compile Update="UserControls\CustomLabel.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -97,13 +99,7 @@
     <None Update="Tools\Options.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Tools\_patch106german.big">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Tools\_patch222LibrariesBrutalAI.big">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tools\_patch222translation_ger.big">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

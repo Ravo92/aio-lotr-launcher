@@ -73,36 +73,6 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap BFME1 {
-            get {
-                object obj = ResourceManager.GetObject("BFME1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BFME2 {
-            get {
-                object obj = ResourceManager.GetObject("BFME2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BFME2EP1 {
-            get {
-                object obj = ResourceManager.GetObject("BFME2EP1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap bgDefault {
             get {
                 object obj = ResourceManager.GetObject("bgDefault", resourceCulture);
@@ -343,6 +313,16 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BtnPatchSelection_222 {
+            get {
+                object obj = ResourceManager.GetObject("BtnPatchSelection_222", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BtnPatchSelection_222V33 {
             get {
                 object obj = ResourceManager.GetObject("BtnPatchSelection_222V33", resourceCulture);
@@ -536,16 +516,6 @@ namespace Helper.Properties {
         public static System.Drawing.Bitmap languageSupportTransparent {
             get {
                 object obj = ResourceManager.GetObject("languageSupportTransparent", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap launcher {
-            get {
-                object obj = ResourceManager.GetObject("launcher", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -3,6 +3,8 @@ using PatchLauncher.Properties;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -32,7 +34,7 @@ namespace PatchLauncher
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
 
             ApplicationConfiguration.Initialize();
@@ -74,17 +76,32 @@ namespace PatchLauncher
                             Settings.Default.InstalledLanguageISOCode = "en_us";
                         break;
                 }
-
-                Settings.Default.Save();
             }
             catch (Exception ex)
             {
                 using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ConstStrings.LogTime + ex.ToString());
+                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
             }
 
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
+                GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
+                string assemblyName = AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Name!;
+
+                JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[assemblyName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
+                JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[assemblyName];
+                JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[assemblyName].ToDictionary(x => x.Version, x => x);
+
+                PatchPacks _latestPatchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
+                PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[assemblyName];
+
+                Settings.Default.LatestBetaPatchVersion = _betaPatchFiles.Version;
+                Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
+                Settings.Default.Save();
+
+                //InstallLanguageList._DictionarylanguageSettings = gameFileDictionary.LanguagePacks["BFME1"]
+                //  .ToDictionary(x => x.RegistrySelectedLocale, x => new LanguageSettings { RegistrySelectedLanguageName = x.RegistrySelectedLanguageName, RegistrySelectedLanguage = x.RegistrySelectedLanguage, RegistrySelectedLocale = x.RegistrySelectedLocale, LanguagPackName = x.LanguagePackName });
+
                 Application.Run(new WinFormsMainGUI());
                 _mutex.ReleaseMutex();
                 _mutex.Dispose();

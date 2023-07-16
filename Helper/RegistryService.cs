@@ -1,69 +1,22 @@
 ﻿using Microsoft.Win32;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Helper
 {
     public class RegistryService
     {
-        public static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
-
+        private static readonly string AppDataFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static string ReadRegKey(string kindOf)
         {
-            if (IsNotNull(kindOf))
+            using RegistryKey? mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\");
+            using RegistryKey? secondPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
+
+            return kindOf switch
             {
-                RegistryKey? mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\");
-                RegistryKey? secondPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
-
-                if (IsNotNull(secondPath))
-                {
-                    switch (kindOf)
-                    {
-                        case "locale":
-                            if (IsNotNull(mainPath?.GetValue("Locale")))
-                            {
-                                string? lang = mainPath.GetValue("Locale")!.ToString()!;
-                                return lang;
-                            }
-                            else
-                            {
-                                return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
-                            }
-
-                        case "appData":
-                            if (IsNotNull(secondPath.GetValue("UserDataLeafName")))
-                            {
-                                string? appData = secondPath.GetValue("UserDataLeafName")!.ToString()!;
-                                return appData;
-                            }
-                            else
-                            {
-                                return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
-                            }
-
-                        case "path":
-                            if (IsNotNull(secondPath.GetValue("InstallPath")))
-                            {
-                                string? path = secondPath.GetValue("InstallPath")!.ToString()!;
-                                return path;
-                            }
-                            else
-                            {
-                                return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
-                            }
-
-                        default:
-                            return ConstStrings.C_REGISTRY_SERVICE_WRONG_PARAMETER;
-                    }
-                }
-                else
-                {
-                    return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
-                }
-            }
-            else
-            {
-                return ConstStrings.C_REGISTRY_SERVICE_WRONG_PARAMETER;
-            }
+                "locale" => mainPath?.GetValue("Locale")?.ToString() ?? ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND,
+                "appData" => secondPath?.GetValue("UserDataLeafName")?.ToString() ?? ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND,
+                "path" => secondPath?.GetValue("InstallPath")?.ToString() ?? ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND,
+                _ => ConstStrings.C_REGISTRY_SERVICE_WRONG_PARAMETER,
+            };
         }
 
         public static string RandomCDKeyGenerator(int length)
@@ -75,9 +28,9 @@ namespace Helper
 
         public static void WriteRegKeysInstallation(string installpath, string locale, string strLanguageName, string strLanguage)
         {
-            RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games");
+            using RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games");
 
-            RegistryKey keyFolder2 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth");
+            using RegistryKey keyFolder2 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth");
             keyFolder2.SetValue("CacheSize", "3351006208");
             keyFolder2.SetValue("CD Drive", @"I:\");
             keyFolder2.SetValue("DisplayName", "The Battle for Middle-earth");
@@ -93,27 +46,37 @@ namespace Helper
             keyFolder2.SetValue("Suppression Exe", "rtsi.exe");
             keyFolder2.SetValue("SwapSize", "0");
 
-            RegistryKey keyFolder4 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts");
-            RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games");
+            using RegistryKey keyFolder3 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts");
+            using RegistryKey keyFolder4 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games");
 
-            RegistryKey keyFolder6 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth");
-            keyFolder6.SetValue("InstallPath", installpath);
-            keyFolder6.SetValue("Language", strLanguage);
-            keyFolder6.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
-            keyFolder6.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyFolder6.SetValue("UserDataLeafName", "My Battle for Middle-earth Files");
-            keyFolder6.SetValue("Version", "65539", RegistryValueKind.DWord);
+            using RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth");
+            keyFolder5.SetValue("InstallPath", installpath);
+            keyFolder5.SetValue("Language", strLanguage);
+            keyFolder5.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
+            keyFolder5.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
+            keyFolder5.SetValue("UserDataLeafName", "My Battle for Middle-earth Files");
+            keyFolder5.SetValue("Version", "65539", RegistryValueKind.DWord);
 
-            RegistryKey keyFolder7 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\ergc");
-            keyFolder7.SetValue("", RandomCDKeyGenerator(20));
+            using RegistryKey keyFolder6 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\ergc");
+            keyFolder6.SetValue("", RandomCDKeyGenerator(20));
+        }
 
-            keyFolder1.Close();
-            keyFolder2.Close();
+        public static string GameLanguage()
+        {
+            return ReadRegKey("locale");
+        }
 
-            keyFolder4.Close();
-            keyFolder5.Close();
-            keyFolder6.Close();
-            keyFolder7.Close();
+        public static string GameInstallPath()
+        {
+            return ReadRegKey("path");
+        }
+
+        public static string GameAppdataFolderPath()
+        {
+            if (ReadRegKey("appData") != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                return Path.Combine(AppDataFolderPath, ReadRegKey("appData"));
+            else
+                return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_NAME_EN);
         }
     }
 }
