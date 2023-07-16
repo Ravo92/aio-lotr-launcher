@@ -28,31 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            BtnPatchVersion = new PictureBox();
             LblPatchVersion = new CustomLabel();
-            ((System.ComponentModel.ISupportInitialize)BtnPatchVersion).BeginInit();
             SuspendLayout();
-            // 
-            // BtnPatchVersion
-            // 
-            BtnPatchVersion.BackColor = Color.Black;
-            BtnPatchVersion.BackgroundImageLayout = ImageLayout.Stretch;
-            BtnPatchVersion.Cursor = Cursors.Hand;
-            BtnPatchVersion.Image = Properties.Resources.BtnPatchSelection_222;
-            BtnPatchVersion.ImeMode = ImeMode.NoControl;
-            BtnPatchVersion.Location = new Point(0, 0);
-            BtnPatchVersion.Name = "BtnPatchVersion";
-            BtnPatchVersion.Size = new Size(150, 200);
-            BtnPatchVersion.SizeMode = PictureBoxSizeMode.StretchImage;
-            BtnPatchVersion.TabIndex = 26;
-            BtnPatchVersion.TabStop = false;
             // 
             // LblPatchVersion
             // 
             LblPatchVersion.AutoSize = true;
             LblPatchVersion.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             LblPatchVersion.ImeMode = ImeMode.NoControl;
-            LblPatchVersion.Location = new Point(3, 127);
+            LblPatchVersion.Location = new Point(8, 143);
             LblPatchVersion.Name = "LblPatchVersion";
             LblPatchVersion.OutlineForeColor = Color.Black;
             LblPatchVersion.OutlineWidth = 4F;
@@ -62,13 +46,13 @@
             // 
             // Patch222Buttons
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
+            BackgroundImage = Properties.Resources.BtnPatchSelection_222;
+            BackgroundImageLayout = ImageLayout.Stretch;
             Controls.Add(LblPatchVersion);
-            Controls.Add(BtnPatchVersion);
+            DoubleBuffered = true;
             Name = "Patch222Buttons";
             Size = new Size(150, 200);
-            ((System.ComponentModel.ISupportInitialize)BtnPatchVersion).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

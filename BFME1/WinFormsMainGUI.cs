@@ -1,5 +1,6 @@
 using AutoUpdaterDotNET;
 using Helper;
+using Helper.UserControls;
 using Microsoft.Web.WebView2.Core;
 using PatchLauncher.Properties;
 using System;
@@ -35,9 +36,6 @@ namespace PatchLauncher
                     PiBVersion103.Enabled = false;
                     PiBVersion106.Enabled = false;
 
-                    PiBVersion222_33.Enabled = false;
-                    PiBVersion222_34.Enabled = false;
-
                     PiBArrow.Enabled = false;
 
                     if (Settings.Default.IsPatchModsShown)
@@ -59,9 +57,6 @@ namespace PatchLauncher
                 {
                     PiBVersion103.Enabled = true;
                     PiBVersion106.Enabled = true;
-
-                    PiBVersion222_33.Enabled = true;
-                    PiBVersion222_34.Enabled = true;
 
                     PBarActualFile.Hide();
                     LblDownloadSpeed.Hide();
@@ -137,17 +132,11 @@ namespace PatchLauncher
             LblPatchNotes.BackColor = Color.Transparent;
             LblPatchNotes.BorderStyle = BorderStyle.None;
 
-            LblInstalledPatches.Font = FontHelper.GetFont(1, 24);
-            LblInstalledPatches.ForeColor = Color.FromArgb(192, 145, 69);
-            LblInstalledPatches.BackColor = Color.Transparent;
-            LblInstalledPatches.BorderStyle = BorderStyle.None;
-            LblInstalledPatches.OutlineWidth = 6;
-
-            LblModExplanation.Font = FontHelper.GetFont(0, 20);
+            LblModExplanation.Font = FontHelper.GetFont(0, 21);
             LblModExplanation.ForeColor = Color.FromArgb(192, 145, 69);
             LblModExplanation.BackColor = Color.Transparent;
             LblModExplanation.BorderStyle = BorderStyle.None;
-            LblModExplanation.OutlineWidth = 6;
+            LblModExplanation.OutlineWidth = 10;
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
             PBarActualFile.BackColor = Color.FromArgb(255, 100, 0);
@@ -928,10 +917,8 @@ namespace PatchLauncher
                 PiBArrow.BackColor = Color.Transparent;
                 PnlPlaceholder.BackgroundImage = Helper.Properties.Resources.borderRectangleModPanel;
                 PnlPlaceholder.BackColor = Color.Transparent;
-                LblInstalledPatches.BackColor = Color.Transparent;
                 LblModExplanation.BackColor = Color.Transparent;
                 LblModExplanation.Show();
-                LblInstalledPatches.Show();
 
                 PiBArrow.Left = 1212;
                 Wv2Patchnotes.Left = 1300;
@@ -946,7 +933,6 @@ namespace PatchLauncher
                 PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
                 PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
                 LblModExplanation.Hide();
-                LblInstalledPatches.Hide();
 
                 PiBArrow.Left = 14;
                 Wv2Patchnotes.Left = 12;
@@ -992,10 +978,8 @@ namespace PatchLauncher
                 PiBArrow.BackColor = Color.Transparent;
                 PnlPlaceholder.BackgroundImage = Helper.Properties.Resources.borderRectangleModPanel;
                 PnlPlaceholder.BackColor = Color.Transparent;
-                LblInstalledPatches.BackColor = Color.Transparent;
                 LblModExplanation.BackColor = Color.Transparent;
                 LblModExplanation.Show();
-                LblInstalledPatches.Show();
 
                 Wv2Patchnotes.Hide();
 
@@ -1009,7 +993,6 @@ namespace PatchLauncher
                 PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
                 PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
                 LblModExplanation.Hide();
-                LblInstalledPatches.Hide();
                 Wv2Patchnotes.Show();
 
                 Settings.Default.IsPatchModsShown = false;
@@ -1051,13 +1034,27 @@ namespace PatchLauncher
                     _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
                 }
 
+                PnlPlaceholder.Padding = new Padding(50);
+                PnlPlaceholder.Margin = new Padding(50);
+
+                foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key != 106))
+                {
+                    string patch222Version = version.Value.Version.ToString().Substring(3);
+                    Patch222Buttons item = new()
+                    {
+                        LabelTextPatchVersion = "Version " + patch222Version,
+                        Tag = version.Key
+                    };
+                    item.Click += PatchButtonClicked;
+                    PnlPlaceholder.Controls.Add(item);
+                }
+
                 // Check if Game is installed, if not show install button
                 if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
                 {
                     Settings.Default.IsGameInstalled = false;
                     BtnInstall.Text = Strings.BtnInstall_TextInstall;
                 }
-
                 // Check if new Update is available and Update to latest 2.22 Patch version if not -> Update;
                 // If Older patch is selected manually, dont Update!
                 // If BetaChannel is selected, dont Update either!
@@ -1151,6 +1148,12 @@ namespace PatchLauncher
             {
                 CheckForUpdates();
             }
+        }
+
+        private void PatchButtonClicked(object? sender, EventArgs e)
+        {
+            var control = (Patch222Buttons)sender!;
+            MessageBox.Show(control.Tag.ToString());
         }
 
         private void BFME1_FormClosing(object sender, FormClosingEventArgs e)

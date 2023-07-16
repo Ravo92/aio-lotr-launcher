@@ -117,401 +117,830 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;PBarActualFile.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PibHeader.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
   </data>
-  <data name="&gt;&gt;OpenLauncherDirectoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PiBTwitch.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;LblFileName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PibMute.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <data name="&gt;&gt;ExitToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GameStartmenuShortcutsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TmrAnimation.Name" xml:space="preserve">
-    <value>TmrAnimation</value>
-  </data>
-  <data name="&gt;&gt;PibMute.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="PibMute.ToolTip" xml:space="preserve">
+  <data name="PibHeader.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="&gt;&gt;PiBVersion103.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OptionsToolStripMenuItem.Name" xml:space="preserve">
-    <value>OptionsToolStripMenuItem</value>
+  <data name="PibHeader.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="LaunchGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PibLoadingBorder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;PiBVersion222_34.Name" xml:space="preserve">
-    <value>PiBVersion222_34</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
-    <value>toolStripSeparator5</value>
-  </data>
-  <data name="&gt;&gt;ToolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LblDownloadSpeed.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 14.25pt</value>
-  </data>
-  <data name="PiBVersion106.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 155</value>
-  </data>
-  <data name="Wv2Patchnotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1256, 538</value>
-  </data>
-  <data name="BtnInstall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 51</value>
-  </data>
-  <data name="&gt;&gt;OpenMapDirectoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>OpenMapDirectoryToolStripMenuItem</value>
-  </data>
-  <data name="PibLoadingRing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 128</value>
-  </data>
-  <data name="&gt;&gt;PnlPlaceholder.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;PBarActualFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TmrPatchNotes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
-    <value>toolStripSeparator4</value>
-  </data>
-  <data name="&gt;&gt;LblPatchNotes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PiBVersion222_33.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="&gt;&gt;LblPatchNotes.Type" xml:space="preserve">
-    <value>Helper.CustomLabel, Helper, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="LblDownloadSpeed.Text" xml:space="preserve">
-    <value>@ 32 MB/s</value>
-  </data>
-  <data name="openLauncherLogfileDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Launcher Logfile Directory</value>
+  <data name="PibHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 23</value>
   </data>
   <data name="PibHeader.Size" type="System.Drawing.Size, System.Drawing">
     <value>792, 105</value>
   </data>
-  <data name="&gt;&gt;OpenMapDirectoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PibHeader.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
-  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exit</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PibHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="OpenLauncherDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
+  <data name="&gt;&gt;PibHeader.Name" xml:space="preserve">
+    <value>PibHeader</value>
   </data>
-  <data name="&gt;&gt;PiBThemeSwitcher.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="&gt;&gt;PibHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PiBVersion103.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 200</value>
+  <data name="&gt;&gt;PibHeader.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="BtnInstall.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 685</value>
+  <data name="&gt;&gt;PibHeader.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
-  <data name="LauncherStartmenuShortcutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Use Launcher Shortcut in Startmenu</value>
+  <data name="PiBYoutube.Location" type="System.Drawing.Point, System.Drawing">
+    <value>491, 35</value>
+  </data>
+  <data name="PiBYoutube.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 55</value>
   </data>
   <data name="PiBYoutube.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="&gt;&gt;PiBVersion222_33.Name" xml:space="preserve">
-    <value>PiBVersion222_33</value>
+  <data name="PiBYoutube.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>About</value>
+  <data name="&gt;&gt;PiBYoutube.Name" xml:space="preserve">
+    <value>PiBYoutube</value>
   </data>
-  <data name="BtnInstall.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="&gt;&gt;PiBYoutube.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PiBVersion103.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion222_33.Parent" xml:space="preserve">
-    <value>PnlPlaceholder</value>
-  </data>
-  <data name="&gt;&gt;LblDownloadSpeed.Name" xml:space="preserve">
-    <value>LblDownloadSpeed</value>
-  </data>
-  <data name="&gt;&gt;openLauncherLogfileDirectoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LblModExplanation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 26.25pt</value>
-  </data>
-  <data name="&gt;&gt;PBarActualFile.Name" xml:space="preserve">
-    <value>PBarActualFile</value>
-  </data>
-  <data name="PiBVersion103.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 155</value>
-  </data>
-  <data name="&gt;&gt;LblModExplanation.Type" xml:space="preserve">
-    <value>Helper.CustomLabel, Helper, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="PnlPlaceholder.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="GameSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 22</value>
-  </data>
-  <data name="MessagesFromTheTeamToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 22</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Name" xml:space="preserve">
-    <value>WinFormsMainMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;GameSettingsToolStripMenuItem.Name" xml:space="preserve">
-    <value>GameSettingsToolStripMenuItem</value>
-  </data>
-  <data name="LblFileName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PibHeader.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
-    <value>toolStripSeparator6</value>
-  </data>
-  <data name="&gt;&gt;OpenSaveDirectoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>OpenSaveDirectoryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;PiBTwitch.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PiBYoutube.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;MessagesFromTheTeamToolStripMenuItem.Name" xml:space="preserve">
-    <value>MessagesFromTheTeamToolStripMenuItem</value>
+  <data name="&gt;&gt;PiBYoutube.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
-  <data name="&gt;&gt;PiBVersion103.Name" xml:space="preserve">
-    <value>PiBVersion103</value>
+  <data name="PiBDiscord.Location" type="System.Drawing.Point, System.Drawing">
+    <value>552, 35</value>
   </data>
-  <data name="PiBThemeSwitcher.ToolTip" xml:space="preserve">
-    <value />
+  <data name="PiBDiscord.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 55</value>
   </data>
-  <data name="PiBVersion222_34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="PiBDiscord.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
-  <data name="&gt;&gt;OpenGameDirectoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PiBDiscord.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;CreditsToolStripMenuItem.Name" xml:space="preserve">
-    <value>CreditsToolStripMenuItem</value>
+  <data name="&gt;&gt;PiBDiscord.Name" xml:space="preserve">
+    <value>PiBDiscord</value>
   </data>
-  <data name="&gt;&gt;Wv2Patchnotes.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PiBDiscord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBDiscord.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="PiBVersion222_34.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+  <data name="&gt;&gt;PiBDiscord.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="PiBModDB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 35</value>
+  </data>
+  <data name="PiBModDB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 55</value>
+  </data>
+  <data name="PiBModDB.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBModDB.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;PiBModDB.Name" xml:space="preserve">
+    <value>PiBModDB</value>
   </data>
   <data name="&gt;&gt;PiBModDB.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NotifyContextMenu.Name" xml:space="preserve">
-    <value>NotifyContextMenu</value>
+  <data name="&gt;&gt;PiBModDB.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PiBModDB.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="PiBThemeSwitcher.Location" type="System.Drawing.Point, System.Drawing">
+    <value>735, 35</value>
+  </data>
+  <data name="PiBThemeSwitcher.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 55</value>
+  </data>
+  <data name="PiBThemeSwitcher.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBThemeSwitcher.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;PiBThemeSwitcher.Name" xml:space="preserve">
+    <value>PiBThemeSwitcher</value>
+  </data>
+  <data name="&gt;&gt;PiBThemeSwitcher.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBThemeSwitcher.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PiBThemeSwitcher.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <metadata name="ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="LblDownloadSpeed.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblDownloadSpeed.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 14.25pt</value>
+  </data>
+  <data name="LblDownloadSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>606, 684</value>
+  </data>
+  <data name="LblDownloadSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 25</value>
+  </data>
+  <data name="LblDownloadSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="LblDownloadSpeed.Text" xml:space="preserve">
+    <value>@ 32 MB/s</value>
+  </data>
+  <data name="LblDownloadSpeed.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;LblDownloadSpeed.Name" xml:space="preserve">
+    <value>LblDownloadSpeed</value>
+  </data>
+  <data name="&gt;&gt;LblDownloadSpeed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblDownloadSpeed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblDownloadSpeed.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="BtnInstall.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="BtnInstall.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="BtnInstall.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 685</value>
+  </data>
+  <data name="BtnInstall.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 51</value>
+  </data>
+  <data name="BtnInstall.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="BtnInstall.Text" xml:space="preserve">
+    <value>INSTALL GAME</value>
+  </data>
+  <data name="&gt;&gt;BtnInstall.Name" xml:space="preserve">
+    <value>BtnInstall</value>
+  </data>
+  <data name="&gt;&gt;BtnInstall.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnInstall.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnInstall.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="LblFileName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblFileName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 14.25pt</value>
+  </data>
+  <data name="LblFileName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>606, 712</value>
+  </data>
+  <data name="LblFileName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 25</value>
+  </data>
+  <data name="LblFileName.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="LblFileName.Text" xml:space="preserve">
+    <value>Filename</value>
+  </data>
+  <data name="LblFileName.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;LblFileName.Name" xml:space="preserve">
+    <value>LblFileName</value>
+  </data>
+  <data name="&gt;&gt;LblFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblFileName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblFileName.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="PibLoadingRing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>587, 316</value>
+  </data>
+  <data name="PibLoadingRing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 128</value>
+  </data>
+  <data name="PibLoadingRing.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PibLoadingRing.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingRing.Name" xml:space="preserve">
+    <value>PibLoadingRing</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingRing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingRing.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingRing.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="LblPatchNotes.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblPatchNotes.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 15.75pt</value>
+  </data>
+  <data name="LblPatchNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>544, 512</value>
+  </data>
+  <data name="LblPatchNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 25</value>
+  </data>
+  <data name="LblPatchNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="LblPatchNotes.Text" xml:space="preserve">
+    <value>Loading Patch-Notes...</value>
+  </data>
+  <data name="&gt;&gt;LblPatchNotes.Name" xml:space="preserve">
+    <value>LblPatchNotes</value>
+  </data>
+  <data name="&gt;&gt;LblPatchNotes.Type" xml:space="preserve">
+    <value>Helper.UserControls.CustomLabel, Helper, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;LblPatchNotes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblPatchNotes.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="PibLoadingBorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>527, 259</value>
+  </data>
+  <data name="PibLoadingBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 250</value>
+  </data>
+  <data name="PibLoadingBorder.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingBorder.Name" xml:space="preserve">
+    <value>PibLoadingBorder</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingBorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingBorder.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibLoadingBorder.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="Wv2Patchnotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 134</value>
+  </data>
+  <data name="Wv2Patchnotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1256, 538</value>
+  </data>
+  <data name="Wv2Patchnotes.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Wv2Patchnotes.Name" xml:space="preserve">
+    <value>Wv2Patchnotes</value>
+  </data>
+  <data name="&gt;&gt;Wv2Patchnotes.Type" xml:space="preserve">
+    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
+  </data>
+  <data name="&gt;&gt;Wv2Patchnotes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Wv2Patchnotes.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="PiBTwitch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>674, 35</value>
+  </data>
+  <data name="PiBTwitch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 55</value>
+  </data>
+  <data name="PiBTwitch.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBTwitch.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;PiBTwitch.Name" xml:space="preserve">
+    <value>PiBTwitch</value>
+  </data>
+  <data name="&gt;&gt;PiBTwitch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBTwitch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PiBTwitch.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="PiBArrow.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBArrow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 134</value>
+  </data>
+  <data name="PiBArrow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 55</value>
+  </data>
+  <data name="PiBArrow.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBArrow.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;PiBArrow.Name" xml:space="preserve">
+    <value>PiBArrow</value>
+  </data>
+  <data name="&gt;&gt;PiBArrow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBArrow.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PiBArrow.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="PnlPlaceholder.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PnlPlaceholder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PnlPlaceholder.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBVersion103.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBVersion103.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="PiBVersion103.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 200</value>
+  </data>
+  <data name="PiBVersion103.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBVersion103.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.Name" xml:space="preserve">
+    <value>PiBVersion103</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.Parent" xml:space="preserve">
+    <value>PnlPlaceholder</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="PiBVersion106.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBVersion106.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PiBVersion106.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 3</value>
+  </data>
+  <data name="PiBVersion106.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 200</value>
+  </data>
+  <data name="PiBVersion106.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBVersion106.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.Name" xml:space="preserve">
+    <value>PiBVersion106</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.Parent" xml:space="preserve">
+    <value>PnlPlaceholder</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PiBVersion222_33.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBVersion222_33.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PiBVersion222_33.Location" type="System.Drawing.Point, System.Drawing">
+    <value>315, 3</value>
+  </data>
+  <data name="PiBVersion222_33.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 200</value>
+  </data>
+  <data name="PiBVersion222_33.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBVersion222_33.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="PiBVersion222_33.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion222_33.Name" xml:space="preserve">
+    <value>PiBVersion222_33</value>
   </data>
   <data name="&gt;&gt;PiBVersion222_33.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SysTray.BalloonTipText" xml:space="preserve">
-    <value>Launcher is minimized to SysTray. If you want to Close, press "X" in the App or rightclick on the Icon in SysTray.</value>
+  <data name="&gt;&gt;PiBVersion222_33.Parent" xml:space="preserve">
+    <value>PnlPlaceholder</value>
   </data>
-  <data name="PiBVersion222_33.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;PiBVersion222_33.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="PiBVersion222_34.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBVersion222_34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PiBVersion222_34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>471, 3</value>
+  </data>
+  <data name="PiBVersion222_34.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 200</value>
   </data>
   <data name="PiBVersion222_34.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="PiBArrow.ToolTip" xml:space="preserve">
-    <value />
+  <data name="PiBVersion222_34.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
-  <data name="PibHeader.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
+  <data name="PiBVersion222_34.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="PibLoadingBorder.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="&gt;&gt;PiBVersion222_34.Name" xml:space="preserve">
+    <value>PiBVersion222_34</value>
   </data>
-  <data name="LblPatchNotes.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;MenuItemLaunchGame.Name" xml:space="preserve">
-    <value>MenuItemLaunchGame</value>
-  </data>
-  <data name="PibLoadingRing.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBArrow.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="RepairGameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Analyze Game Files and Repair Game</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion106.Type" xml:space="preserve">
+  <data name="&gt;&gt;PiBVersion222_34.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LblDownloadSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="BtnInstall.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="PibLoadingRing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>587, 316</value>
-  </data>
-  <data name="&gt;&gt;PiBDiscord.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;LauncherSettingsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Wv2Patchnotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 134</value>
-  </data>
-  <data name="PibMute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 55</value>
-  </data>
-  <data name="CreditsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 22</value>
-  </data>
-  <data name="&gt;&gt;LauncherDesktopShortcutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PibLoadingRing.Name" xml:space="preserve">
-    <value>PibLoadingRing</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion106.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PiBVersion222_34.Parent" xml:space="preserve">
     <value>PnlPlaceholder</value>
   </data>
-  <data name="&gt;&gt;BtnInstall.Name" xml:space="preserve">
-    <value>BtnInstall</value>
+  <data name="&gt;&gt;PiBVersion222_34.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;PibHeader.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="PnlPlaceholder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 134</value>
   </data>
-  <data name="&gt;&gt;GameDesktopShortcutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PnlPlaceholder.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1256, 538</value>
   </data>
-  <data name="LblInstalledPatches.Text" xml:space="preserve">
-    <value>Patches</value>
+  <data name="PnlPlaceholder.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>1256, 538</value>
+  </data>
+  <data name="PnlPlaceholder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1256, 538</value>
+  </data>
+  <data name="PnlPlaceholder.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
   <data name="&gt;&gt;PnlPlaceholder.Name" xml:space="preserve">
     <value>PnlPlaceholder</value>
   </data>
-  <data name="Wv2Patchnotes.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;PnlPlaceholder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LauncherStartmenuShortcutToolStripMenuItem.Name" xml:space="preserve">
-    <value>LauncherStartmenuShortcutToolStripMenuItem</value>
-  </data>
-  <data name="OpenLauncherDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Launcher Directory</value>
-  </data>
-  <data name="&gt;&gt;LblInstalledPatches.Name" xml:space="preserve">
-    <value>LblInstalledPatches</value>
-  </data>
-  <data name="PiBVersion103.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;PiBYoutube.Parent" xml:space="preserve">
+  <data name="&gt;&gt;PnlPlaceholder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Wv2Patchnotes.Name" xml:space="preserve">
-    <value>Wv2Patchnotes</value>
+  <data name="&gt;&gt;PnlPlaceholder.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
-  <data name="&gt;&gt;PiBThemeSwitcher.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LblModExplanation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="PBarActualFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 684</value>
+  <data name="LblModExplanation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 26.25pt</value>
   </data>
-  <data name="OpenMapDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
+  <data name="LblModExplanation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 695</value>
   </data>
-  <data name="PiBModDB.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="LblModExplanation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>945, 47</value>
+  </data>
+  <data name="LblModExplanation.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="LblModExplanation.Text" xml:space="preserve">
+    <value>Here you can choose which mod or patch you want to play.</value>
+  </data>
+  <data name="&gt;&gt;LblModExplanation.Name" xml:space="preserve">
+    <value>LblModExplanation</value>
+  </data>
+  <data name="&gt;&gt;LblModExplanation.Type" xml:space="preserve">
+    <value>Helper.UserControls.CustomLabel, Helper, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;LblModExplanation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblModExplanation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="NotifyContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>465, 17</value>
+  </metadata>
+  <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="MenuItemLaunchGame.Text" xml:space="preserve">
+    <value>Launch the Game</value>
+  </data>
+  <data name="closeTheLauncherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
+    <value>Close the Launcher</value>
+  </data>
+  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 48</value>
+  </data>
+  <data name="&gt;&gt;NotifyContextMenu.Name" xml:space="preserve">
+    <value>NotifyContextMenu</value>
+  </data>
+  <data name="&gt;&gt;NotifyContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PibMute.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1213, 35</value>
+  </data>
+  <data name="PibMute.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 55</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PibMute.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
-  <data name="LblFileName.Text" xml:space="preserve">
-    <value>Filename</value>
+  <data name="PibMute.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;PibMute.Name" xml:space="preserve">
+    <value>PibMute</value>
+  </data>
+  <data name="&gt;&gt;PibMute.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibMute.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibMute.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="WinFormsMainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>624, 17</value>
+  </metadata>
+  <data name="LaunchGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="LaunchGameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Launch Game</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 6</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
   </data>
   <data name="FileToolStripMenuItem.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="&gt;&gt;LblFileName.Name" xml:space="preserve">
-    <value>LblFileName</value>
+  <data name="LauncherSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
   </data>
-  <data name="&gt;&gt;AdvancedToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LauncherSettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Launcher Settings</value>
   </data>
-  <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+  <data name="GameSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
   </data>
-  <data name="&gt;&gt;OptionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GameSettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Game Settings</value>
   </data>
-  <data name="LblFileName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>606, 712</value>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
   </data>
-  <data name="&gt;&gt;LblModExplanation.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="GameDesktopShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
   </data>
-  <data name="&gt;&gt;AboutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GameDesktopShortcutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Use Game Shortcut on Desktop</value>
   </data>
   <data name="GameStartmenuShortcutsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
   </data>
-  <data name="PiBDiscord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 55</value>
+  <data name="GameStartmenuShortcutsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Use Game Shortcuts in Startmenu</value>
   </data>
-  <data name="&gt;&gt;LblFileName.Parent" xml:space="preserve">
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="LauncherDesktopShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="LauncherDesktopShortcutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Use Launcher Shortcut on Desktop</value>
+  </data>
+  <data name="LauncherStartmenuShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="LauncherStartmenuShortcutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Use Launcher Shortcut in Startmenu</value>
+  </data>
+  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="OpenLauncherDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 22</value>
+  </data>
+  <data name="OpenLauncherDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Launcher Directory</value>
+  </data>
+  <data name="openLauncherLogfileDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 22</value>
+  </data>
+  <data name="openLauncherLogfileDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Launcher Logfile Directory</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 6</value>
+  </data>
+  <data name="OpenGameDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 22</value>
+  </data>
+  <data name="OpenGameDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Game Directory</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 6</value>
+  </data>
+  <data name="OpenMapDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 22</value>
+  </data>
+  <data name="OpenMapDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Custom Map Directory</value>
+  </data>
+  <data name="OpenSaveDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 22</value>
+  </data>
+  <data name="OpenSaveDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Save Directory</value>
+  </data>
+  <data name="openReplayDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 22</value>
+  </data>
+  <data name="openReplayDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Replay Directory</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 6</value>
+  </data>
+  <data name="RepairGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 22</value>
+  </data>
+  <data name="RepairGameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Analyze Game Files and Repair Game</value>
+  </data>
+  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 20</value>
+  </data>
+  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="CreditsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 22</value>
+  </data>
+  <data name="CreditsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="MessagesFromTheTeamToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 22</value>
+  </data>
+  <data name="MessagesFromTheTeamToolStripMenuItem.Text" xml:space="preserve">
+    <value>Messages from the team</value>
+  </data>
+  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1280, 24</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Name" xml:space="preserve">
+    <value>WinFormsMainMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="PiBYoutube.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 35</value>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;RepairGameToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PBarActualFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 684</value>
   </data>
-  <data name="&gt;&gt;RepairGameToolStripMenuItem.Name" xml:space="preserve">
-    <value>RepairGameToolStripMenuItem</value>
+  <data name="PBarActualFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 52</value>
   </data>
-  <data name="&gt;&gt;PiBArrow.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="PBarActualFile.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
   </data>
-  <data name="PibHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="PBarActualFile.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;PBarActualFile.Name" xml:space="preserve">
+    <value>PBarActualFile</value>
+  </data>
+  <data name="&gt;&gt;PBarActualFile.Type" xml:space="preserve">
+    <value>Helper.UserControls.CustomProgressBar, Helper, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;PBarActualFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PBarActualFile.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="TmrPatchNotes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>109, 17</value>
+  </metadata>
+  <metadata name="TmrAnimation.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>244, 17</value>
+  </metadata>
+  <metadata name="SysTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>373, 17</value>
+  </metadata>
+  <data name="SysTray.BalloonTipText" xml:space="preserve">
+    <value>Launcher is minimized to SysTray. If you want to Close, press "X" in the App or rightclick on the Icon in SysTray.</value>
+  </data>
+  <data name="SysTray.BalloonTipTitle" xml:space="preserve">
+    <value>Launcher is still running.</value>
   </data>
   <data name="SysTray.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5024,599 +5453,20 @@
         //////////////////////////////////////////////////8=
 </value>
   </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 6</value>
-  </data>
-  <data name="LblPatchNotes.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="GameSettingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Game Settings</value>
-  </data>
-  <data name="&gt;&gt;BtnInstall.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion106.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;openLauncherLogfileDirectoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>openLauncherLogfileDirectoryToolStripMenuItem</value>
-  </data>
   <data name="SysTray.Text" xml:space="preserve">
     <value>BFME 2.22 Launcher</value>
   </data>
-  <data name="PiBModDB.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 6</value>
-  </data>
-  <data name="&gt;&gt;LblDownloadSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LblFileName.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;PiBArrow.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="openLauncherLogfileDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
-  </data>
-  <data name="BtnInstall.Text" xml:space="preserve">
-    <value>INSTALL GAME</value>
-  </data>
-  <data name="&gt;&gt;PibHeader.Name" xml:space="preserve">
-    <value>PibHeader</value>
-  </data>
-  <data name="&gt;&gt;CreditsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SysTray.BalloonTipTitle" xml:space="preserve">
-    <value>Launcher is still running.</value>
-  </data>
-  <data name="&gt;&gt;PibMute.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PiBArrow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MenuItemLaunchGame.Text" xml:space="preserve">
-    <value>Launch the Game</value>
-  </data>
-  <data name="&gt;&gt;PiBTwitch.Name" xml:space="preserve">
-    <value>PiBTwitch</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;LaunchGameToolStripMenuItem.Name" xml:space="preserve">
-    <value>LaunchGameToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
-  </data>
-  <data name="&gt;&gt;PiBDiscord.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BtnInstall.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LblFileName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 25</value>
-  </data>
-  <data name="&gt;&gt;SysTray.Name" xml:space="preserve">
-    <value>SysTray</value>
-  </data>
-  <data name="PiBModDB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>613, 35</value>
-  </data>
-  <data name="PibMute.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="LblInstalledPatches.AutoSize" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="PibHeader.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 744</value>
-  </data>
-  <data name="&gt;&gt;PiBModDB.Name" xml:space="preserve">
-    <value>PiBModDB</value>
-  </data>
-  <data name="OpenGameDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
-  </data>
-  <data name="LblInstalledPatches.Location" type="System.Drawing.Point, System.Drawing">
-    <value>525, 35</value>
-  </data>
-  <data name="PiBVersion222_33.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;PiBYoutube.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PnlPlaceholder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1256, 538</value>
-  </data>
-  <data name="PiBVersion106.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="&gt;&gt;GameSettingsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PibHeader.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;openReplayDirectoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 6</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion222_33.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;LblDownloadSpeed.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion222_34.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="LblFileName.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LaunchGameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Launch Game</value>
-  </data>
-  <data name="LblPatchNotes.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 15.75pt</value>
-  </data>
-  <data name="&gt;&gt;PibLoadingRing.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;PiBTwitch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CreditsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Credits</value>
-  </data>
-  <data name="PiBVersion222_34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>546, 155</value>
-  </data>
-  <data name="NotifyContextMenu.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
-  </data>
-  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 6</value>
-  </data>
-  <data name="PiBVersion222_33.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
-  <data name="MessagesFromTheTeamToolStripMenuItem.Text" xml:space="preserve">
-    <value>Messages from the team</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LauncherSettingsToolStripMenuItem.Name" xml:space="preserve">
-    <value>LauncherSettingsToolStripMenuItem</value>
-  </data>
-  <data name="PiBArrow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 134</value>
-  </data>
-  <data name="PiBTwitch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>674, 35</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PiBArrow.Name" xml:space="preserve">
-    <value>PiBArrow</value>
-  </data>
-  <data name="LauncherDesktopShortcutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Use Launcher Shortcut on Desktop</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
-    <value>toolStripSeparator3</value>
-  </data>
-  <data name="&gt;&gt;AdvancedToolStripMenuItem.Name" xml:space="preserve">
-    <value>AdvancedToolStripMenuItem</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="Wv2Patchnotes.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="LauncherStartmenuShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 22</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;PiBThemeSwitcher.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;MessagesFromTheTeamToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PiBYoutube.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="LblModExplanation.Text" xml:space="preserve">
-    <value>Here you can choose which mod or patch you want to play.</value>
-  </data>
-  <data name="PiBTwitch.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;PBarActualFile.Type" xml:space="preserve">
-    <value>Helper.CustomProgressBar, Helper, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PibLoadingRing.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;PibLoadingBorder.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="BtnInstall.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>52</value>
+  </metadata>
   <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
-  <data name="&gt;&gt;PibLoadingBorder.Name" xml:space="preserve">
-    <value>PibLoadingBorder</value>
-  </data>
-  <data name="PiBVersion222_33.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 155</value>
-  </data>
-  <data name="LauncherDesktopShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 22</value>
-  </data>
-  <data name="PiBVersion106.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="PiBVersion103.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion222_34.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LblPatchNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;PiBDiscord.Name" xml:space="preserve">
-    <value>PiBDiscord</value>
-  </data>
-  <data name="&gt;&gt;LauncherStartmenuShortcutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 6</value>
-  </data>
-  <data name="&gt;&gt;PiBThemeSwitcher.Name" xml:space="preserve">
-    <value>PiBThemeSwitcher</value>
-  </data>
-  <data name="LauncherSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 22</value>
-  </data>
-  <data name="PBarActualFile.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;PibHeader.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="PBarActualFile.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;PibHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PibLoadingBorder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 259</value>
-  </data>
-  <data name="&gt;&gt;PibLoadingRing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PibMute.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="LblModExplanation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>945, 47</value>
-  </data>
-  <data name="PiBYoutube.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="closeTheLauncherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="&gt;&gt;PiBVersion103.Parent" xml:space="preserve">
-    <value>PnlPlaceholder</value>
-  </data>
-  <data name="LblPatchNotes.Text" xml:space="preserve">
-    <value>Loading Patch-Notes...</value>
-  </data>
-  <data name="LblModExplanation.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;OpenLauncherDirectoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>OpenLauncherDirectoryToolStripMenuItem</value>
-  </data>
-  <data name="LblFileName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 14.25pt</value>
-  </data>
-  <data name="&gt;&gt;PnlPlaceholder.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="PBarActualFile.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>WinFormsMainGUI</value>
-  </data>
-  <data name="PiBDiscord.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="PibLoadingBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 250</value>
-  </data>
-  <data name="LblDownloadSpeed.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="PiBThemeSwitcher.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;LauncherDesktopShortcutToolStripMenuItem.Name" xml:space="preserve">
-    <value>LauncherDesktopShortcutToolStripMenuItem</value>
-  </data>
-  <data name="PiBThemeSwitcher.Location" type="System.Drawing.Point, System.Drawing">
-    <value>735, 35</value>
-  </data>
-  <data name="PiBVersion103.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;OpenGameDirectoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>OpenGameDirectoryToolStripMenuItem</value>
-  </data>
-  <data name="GameDesktopShortcutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 22</value>
-  </data>
-  <data name="LblModExplanation.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;LblPatchNotes.Name" xml:space="preserve">
-    <value>LblPatchNotes</value>
-  </data>
-  <data name="PiBDiscord.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion103.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="&gt;&gt;TmrPatchNotes.Name" xml:space="preserve">
-    <value>TmrPatchNotes</value>
-  </data>
-  <data name="&gt;&gt;GameDesktopShortcutToolStripMenuItem.Name" xml:space="preserve">
-    <value>GameDesktopShortcutToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;PibMute.Name" xml:space="preserve">
-    <value>PibMute</value>
-  </data>
-  <data name="&gt;&gt;PiBDiscord.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;closeTheLauncherToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PibLoadingRing.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;PiBYoutube.Name" xml:space="preserve">
-    <value>PiBYoutube</value>
-  </data>
-  <data name="PiBTwitch.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 24</value>
-  </data>
-  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 48</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Bfme 2.22 Launcher</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PibMute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1213, 35</value>
-  </data>
-  <data name="PiBVersion106.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LblDownloadSpeed.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;LblInstalledPatches.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="PiBDiscord.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="&gt;&gt;AboutToolStripMenuItem.Name" xml:space="preserve">
-    <value>AboutToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;OpenSaveDirectoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PiBArrow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 55</value>
-  </data>
-  <data name="RepairGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
-  </data>
-  <data name="&gt;&gt;PnlPlaceholder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MenuItemLaunchGame.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="openReplayDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
-  </data>
-  <data name="LblInstalledPatches.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 47</value>
-  </data>
-  <data name="PiBThemeSwitcher.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="&gt;&gt;FileToolStripMenuItem.Name" xml:space="preserve">
-    <value>FileToolStripMenuItem</value>
-  </data>
-  <data name="GameStartmenuShortcutsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Use Game Shortcuts in Startmenu</value>
-  </data>
-  <data name="PiBVersion106.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="PiBTwitch.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion222_33.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
-    <value>Close the Launcher</value>
-  </data>
-  <data name="LblDownloadSpeed.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LblDownloadSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>606, 684</value>
-  </data>
-  <data name="&gt;&gt;Wv2Patchnotes.Type" xml:space="preserve">
-    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
-  </data>
-  <data name="&gt;&gt;BtnInstall.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;closeTheLauncherToolStripMenuItem.Name" xml:space="preserve">
-    <value>closeTheLauncherToolStripMenuItem</value>
-  </data>
-  <data name="OpenGameDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Game Directory</value>
-  </data>
-  <data name="PiBVersion222_34.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="LblModExplanation.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;LblModExplanation.Name" xml:space="preserve">
-    <value>LblModExplanation</value>
-  </data>
-  <data name="openReplayDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Replay Directory</value>
-  </data>
-  <data name="PibHeader.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="&gt;&gt;GameStartmenuShortcutsToolStripMenuItem.Name" xml:space="preserve">
-    <value>GameStartmenuShortcutsToolStripMenuItem</value>
-  </data>
-  <data name="OpenMapDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Custom Map Directory</value>
-  </data>
-  <data name="PnlPlaceholder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 134</value>
-  </data>
-  <data name="LauncherSettingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Launcher Settings</value>
-  </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="LblPatchNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 25</value>
-  </data>
-  <data name="PiBArrow.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="&gt;&gt;LaunchGameToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LblModExplanation.Parent" xml:space="preserve">
-    <value>PnlPlaceholder</value>
-  </data>
-  <data name="PiBArrow.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="PBarActualFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 52</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="PiBVersion222_34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 200</value>
-  </data>
-  <data name="&gt;&gt;openReplayDirectoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>openReplayDirectoryToolStripMenuItem</value>
-  </data>
-  <data name="PiBThemeSwitcher.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 55</value>
-  </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 6</value>
-  </data>
-  <data name="&gt;&gt;SysTray.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NotifyIcon, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PnlPlaceholder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;LblInstalledPatches.Type" xml:space="preserve">
-    <value>Helper.CustomLabel, Helper, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="&gt;&gt;FileToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LblInstalledPatches.Parent" xml:space="preserve">
-    <value>PnlPlaceholder</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1280, 744</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -10129,145 +9979,211 @@
         //////////////////////////////////////////////////8=
 </value>
   </data>
-  <data name="GameDesktopShortcutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Use Game Shortcut on Desktop</value>
-  </data>
-  <data name="LblDownloadSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 25</value>
-  </data>
-  <data name="OpenSaveDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 22</value>
-  </data>
-  <data name="PiBDiscord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>552, 35</value>
-  </data>
-  <data name="LblInstalledPatches.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;ExitToolStripMenuItem.Name" xml:space="preserve">
-    <value>ExitToolStripMenuItem</value>
-  </data>
-  <data name="LblFileName.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="PibLoadingRing.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 20</value>
-  </data>
-  <data name="LblFileName.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion106.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 200</value>
-  </data>
-  <data name="LblInstalledPatches.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 26.25pt</value>
-  </data>
-  <data name="&gt;&gt;NotifyContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TmrAnimation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PibLoadingBorder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PiBYoutube.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 55</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LblInstalledPatches.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Bfme 2.22 Launcher</value>
   </data>
   <data name="&gt;&gt;ToolTip.Name" xml:space="preserve">
     <value>ToolTip</value>
   </data>
-  <data name="PnlPlaceholder.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
+  <data name="&gt;&gt;ToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BtnInstall.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;MenuItemLaunchGame.Name" xml:space="preserve">
+    <value>MenuItemLaunchGame</value>
   </data>
-  <data name="OpenSaveDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Save Directory</value>
+  <data name="&gt;&gt;MenuItemLaunchGame.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PiBTwitch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 55</value>
+  <data name="&gt;&gt;closeTheLauncherToolStripMenuItem.Name" xml:space="preserve">
+    <value>closeTheLauncherToolStripMenuItem</value>
   </data>
-  <data name="PibHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 23</value>
+  <data name="&gt;&gt;closeTheLauncherToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PiBModDB.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="&gt;&gt;FileToolStripMenuItem.Name" xml:space="preserve">
+    <value>FileToolStripMenuItem</value>
   </data>
-  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+  <data name="&gt;&gt;FileToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PiBVersion106.Name" xml:space="preserve">
-    <value>PiBVersion106</value>
+  <data name="&gt;&gt;LaunchGameToolStripMenuItem.Name" xml:space="preserve">
+    <value>LaunchGameToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;LblPatchNotes.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;LaunchGameToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LblPatchNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>544, 512</value>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
   </data>
-  <data name="&gt;&gt;LblDownloadSpeed.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PiBModDB.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;ExitToolStripMenuItem.Name" xml:space="preserve">
+    <value>ExitToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;Wv2Patchnotes.ZOrder" xml:space="preserve">
-    <value>18</value>
+  <data name="&gt;&gt;ExitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PiBVersion222_34.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;OptionsToolStripMenuItem.Name" xml:space="preserve">
+    <value>OptionsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;PibLoadingBorder.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;OptionsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PiBModDB.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="&gt;&gt;LauncherSettingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>LauncherSettingsToolStripMenuItem</value>
   </data>
-  <data name="LblModExplanation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 425</value>
+  <data name="&gt;&gt;LauncherSettingsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PiBYoutube.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;GameSettingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>GameSettingsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;PiBVersion222_34.Parent" xml:space="preserve">
-    <value>PnlPlaceholder</value>
+  <data name="&gt;&gt;GameSettingsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PiBModDB.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+    <value>toolStripSeparator5</value>
   </data>
-  <metadata name="TmrAnimation.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>244, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="WinFormsMainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>624, 17</value>
-  </metadata>
-  <metadata name="ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>52</value>
-  </metadata>
-  <metadata name="SysTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>373, 17</value>
-  </metadata>
-  <metadata name="TmrPatchNotes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>109, 17</value>
-  </metadata>
-  <metadata name="NotifyContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>465, 17</value>
-  </metadata>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GameDesktopShortcutToolStripMenuItem.Name" xml:space="preserve">
+    <value>GameDesktopShortcutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;GameDesktopShortcutToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GameStartmenuShortcutsToolStripMenuItem.Name" xml:space="preserve">
+    <value>GameStartmenuShortcutsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;GameStartmenuShortcutsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
+    <value>toolStripSeparator6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LauncherDesktopShortcutToolStripMenuItem.Name" xml:space="preserve">
+    <value>LauncherDesktopShortcutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;LauncherDesktopShortcutToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LauncherStartmenuShortcutToolStripMenuItem.Name" xml:space="preserve">
+    <value>LauncherStartmenuShortcutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;LauncherStartmenuShortcutToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AdvancedToolStripMenuItem.Name" xml:space="preserve">
+    <value>AdvancedToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;AdvancedToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenLauncherDirectoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>OpenLauncherDirectoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OpenLauncherDirectoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openLauncherLogfileDirectoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>openLauncherLogfileDirectoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openLauncherLogfileDirectoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenGameDirectoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>OpenGameDirectoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OpenGameDirectoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenMapDirectoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>OpenMapDirectoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OpenMapDirectoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenSaveDirectoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>OpenSaveDirectoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OpenSaveDirectoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openReplayDirectoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>openReplayDirectoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openReplayDirectoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RepairGameToolStripMenuItem.Name" xml:space="preserve">
+    <value>RepairGameToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;RepairGameToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AboutToolStripMenuItem.Name" xml:space="preserve">
+    <value>AboutToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;AboutToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CreditsToolStripMenuItem.Name" xml:space="preserve">
+    <value>CreditsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;CreditsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MessagesFromTheTeamToolStripMenuItem.Name" xml:space="preserve">
+    <value>MessagesFromTheTeamToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;MessagesFromTheTeamToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TmrPatchNotes.Name" xml:space="preserve">
+    <value>TmrPatchNotes</value>
+  </data>
+  <data name="&gt;&gt;TmrPatchNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TmrAnimation.Name" xml:space="preserve">
+    <value>TmrAnimation</value>
+  </data>
+  <data name="&gt;&gt;TmrAnimation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SysTray.Name" xml:space="preserve">
+    <value>SysTray</value>
+  </data>
+  <data name="&gt;&gt;SysTray.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NotifyIcon, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>WinFormsMainGUI</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

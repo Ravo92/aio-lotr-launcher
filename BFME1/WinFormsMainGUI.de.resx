@@ -143,7 +143,7 @@
     <value>987, 47</value>
   </data>
   <data name="LblModExplanation.Text" xml:space="preserve">
-    <value>Hier kannst du auswählen, welchen Patch du spielen möchtest.</value>
+    <value>Hier kannst du auswählen, welche Mod oder welchen Patch du spielen möchtest.</value>
   </data>
   <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 48</value>
