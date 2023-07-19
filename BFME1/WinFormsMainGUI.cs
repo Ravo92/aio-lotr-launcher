@@ -50,6 +50,8 @@ namespace PatchLauncher
                     PiBArrow.Enabled = true;
                     BtnInstall.Enabled = false;
 
+                    LblModExplanation.Visible = false;
+
                     LaunchGameToolStripMenuItem.Enabled = false;
                     RepairGameToolStripMenuItem.Enabled = false;
                 }
@@ -64,6 +66,8 @@ namespace PatchLauncher
 
                     PiBArrow.Enabled = true;
                     BtnInstall.Enabled = true;
+
+                    LblModExplanation.Visible = true;
 
                     if (Settings.Default.IsPatchModsShown)
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
@@ -1039,7 +1043,7 @@ namespace PatchLauncher
 
                 foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key != 106))
                 {
-                    string patch222Version = version.Value.Version.ToString().Substring(3);
+                    string patch222Version = version.Value.Version.ToString()[3..];
                     Patch222Buttons item = new()
                     {
                         LabelTextPatchVersion = "Version " + patch222Version,
