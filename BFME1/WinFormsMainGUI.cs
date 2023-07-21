@@ -211,6 +211,135 @@ namespace PatchLauncher
             TmrPatchNotes.Start();
         }
 
+        private async void BFME1_Shown(object sender, EventArgs e)
+        {
+            IsLauncherCurrentlyWorking = true;
+            PatchPacks _patchpack222 = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
+            LanguageFiles patchPackLanguages = _patchpack222.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+
+            try
+            {
+                // Check Music Settings
+                if (Settings.Default.PlayBackgroundMusic)
+                {
+                    _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
+                }
+
+                PnlPlaceholder.Padding = new Padding(50);
+                PnlPlaceholder.Margin = new Padding(50);
+
+                foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key != 106))
+                {
+                    string patch222Version = version.Value.Version.ToString()[3..];
+                    Patch222Buttons item = new()
+                    {
+                        LabelTextPatchVersion = "Version " + patch222Version,
+                        Tag = version.Key
+                    };
+                    item.Click += PatchButtonClicked;
+                    PnlPlaceholder.Controls.Add(item);
+                }
+
+                // Check if Game is installed, if not show install button
+                if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
+                {
+                    Settings.Default.IsGameInstalled = false;
+                    BtnInstall.Text = Strings.BtnInstall_TextInstall;
+                }
+                // Check if new Update is available and Update to latest 2.22 Patch version if not -> Update;
+                // If Older patch is selected manually, dont Update!
+                // If BetaChannel is selected, dont Update either!
+                else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
+                {
+                    Settings.Default.IsPatch106Installed = false;
+                    Settings.Default.IsPatch33Installed = false;
+                    Settings.Default.IsPatch34Installed = false;
+
+                    Settings.Default.IsGameInstalled = true;
+                    Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
+                    Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
+
+                    await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
+
+                    if (_patchpack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
+                    {
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                    }
+
+                    Settings.Default.IsPatch34Downloaded = true;
+                    Settings.Default.IsPatch34Installed = true;
+
+                    PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Selected;
+                }
+                else
+                {
+                    Settings.Default.IsGameInstalled = true;
+                    Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
+                    Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
+                    PiBArrow.Enabled = true;
+                }
+
+                if (Settings.Default.UseBetaChannel)
+                {
+                    PiBVersion103.Hide();
+                    PiBVersion106.Hide();
+                    PiBVersion222_33.Hide();
+                    PiBVersion222_34.Hide();
+
+                    LblModExplanation.Text = Strings.Info_BetaActivated;
+
+                    if (Settings.Default.LatestBetaPatchVersion > Settings.Default.BetaChannelVersion)
+                    {
+                        await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
+                    }
+                }
+
+                if (!Settings.Default.IsPatch106Downloaded)
+                    PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Download;
+
+                if (!Settings.Default.IsPatch33Downloaded)
+                    PiBVersion222_33.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
+
+                if (!Settings.Default.IsPatch34Downloaded)
+                    PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Download;
+
+
+
+                if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
+                    GameDesktopShortcutToolStripMenuItem.Checked = true;
+                else
+                    GameDesktopShortcutToolStripMenuItem.Checked = false;
+
+                if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                    GameStartmenuShortcutsToolStripMenuItem.Checked = true;
+                else
+                    GameStartmenuShortcutsToolStripMenuItem.Checked = false;
+
+
+
+                if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                    LauncherDesktopShortcutToolStripMenuItem.Checked = true;
+                else
+                    LauncherDesktopShortcutToolStripMenuItem.Checked = false;
+
+                if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                    LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
+                else
+                    LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+            }
+
+            IsLauncherCurrentlyWorking = false;
+
+            if (!IsLauncherCurrentlyWorking)
+            {
+                CheckForUpdates();
+            }
+        }
+
         public void GameisClosed(object? sender, EventArgs e)
         {
             if (InvokeRequired)
@@ -736,12 +865,12 @@ namespace PatchLauncher
 
                 if (isFreshInstall)
                 {
-                    if (Settings.Default.CreateDesktopShortcut && !ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                    if (Settings.Default.CreateDesktopShortcut && !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                     {
                         GameDesktopShortcutToolStripMenuItem.PerformClick();
                     }
 
-                    if (Settings.Default.CreateStartMenuShortcut && !ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                    if (Settings.Default.CreateStartMenuShortcut && !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
                     {
                         GameStartmenuShortcutsToolStripMenuItem.PerformClick();
                     }
@@ -963,135 +1092,6 @@ namespace PatchLauncher
             }
         }
 
-        private async void BFME1_Shown(object sender, EventArgs e)
-        {
-            IsLauncherCurrentlyWorking = true;
-            PatchPacks _patchpack222 = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
-            LanguageFiles patchPackLanguages = _patchpack222.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-
-            try
-            {
-                // Check Music Settings
-                if (Settings.Default.PlayBackgroundMusic)
-                {
-                    _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
-                }
-
-                PnlPlaceholder.Padding = new Padding(50);
-                PnlPlaceholder.Margin = new Padding(50);
-
-                foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key != 106))
-                {
-                    string patch222Version = version.Value.Version.ToString()[3..];
-                    Patch222Buttons item = new()
-                    {
-                        LabelTextPatchVersion = "Version " + patch222Version,
-                        Tag = version.Key
-                    };
-                    item.Click += PatchButtonClicked;
-                    PnlPlaceholder.Controls.Add(item);
-                }
-
-                // Check if Game is installed, if not show install button
-                if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
-                {
-                    Settings.Default.IsGameInstalled = false;
-                    BtnInstall.Text = Strings.BtnInstall_TextInstall;
-                }
-                // Check if new Update is available and Update to latest 2.22 Patch version if not -> Update;
-                // If Older patch is selected manually, dont Update!
-                // If BetaChannel is selected, dont Update either!
-                else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
-                {
-                    Settings.Default.IsPatch106Installed = false;
-                    Settings.Default.IsPatch33Installed = false;
-                    Settings.Default.IsPatch34Installed = false;
-
-                    Settings.Default.IsGameInstalled = true;
-                    Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                    Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
-
-                    await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
-
-                    if (_patchpack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
-                    {
-                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
-                    }
-
-                    Settings.Default.IsPatch34Downloaded = true;
-                    Settings.Default.IsPatch34Installed = true;
-
-                    PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Selected;
-                }
-                else
-                {
-                    Settings.Default.IsGameInstalled = true;
-                    Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                    Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
-                    PiBArrow.Enabled = true;
-                }
-
-                if (Settings.Default.UseBetaChannel)
-                {
-                    PiBVersion103.Hide();
-                    PiBVersion106.Hide();
-                    PiBVersion222_33.Hide();
-                    PiBVersion222_34.Hide();
-
-                    LblModExplanation.Text = Strings.Info_BetaActivated;
-
-                    if (Settings.Default.LatestBetaPatchVersion > Settings.Default.BetaChannelVersion)
-                    {
-                        await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
-                    }
-                }
-
-                if (!Settings.Default.IsPatch106Downloaded)
-                    PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Download;
-
-                if (!Settings.Default.IsPatch33Downloaded)
-                    PiBVersion222_33.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Download;
-
-                if (!Settings.Default.IsPatch34Downloaded)
-                    PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Download;
-
-
-
-                if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
-                    GameDesktopShortcutToolStripMenuItem.Checked = true;
-                else
-                    GameDesktopShortcutToolStripMenuItem.Checked = false;
-
-                if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
-                    GameStartmenuShortcutsToolStripMenuItem.Checked = true;
-                else
-                    GameStartmenuShortcutsToolStripMenuItem.Checked = false;
-
-
-
-                if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
-                    LauncherDesktopShortcutToolStripMenuItem.Checked = true;
-                else
-                    LauncherDesktopShortcutToolStripMenuItem.Checked = false;
-
-                if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
-                    LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
-                else
-                    LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.ToString());
-            }
-
-            IsLauncherCurrentlyWorking = false;
-
-            if (!IsLauncherCurrentlyWorking)
-            {
-                CheckForUpdates();
-            }
-        }
-
         private void PatchButtonClicked(object? sender, EventArgs e)
         {
             var control = (Patch222Buttons)sender!;
@@ -1249,9 +1249,9 @@ namespace PatchLauncher
 
         private void GameDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutsHelper _shortCutHelper = new();
+            ShortCutHelper _shortCutHelper = new();
 
-            if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
+            if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
             {
                 _shortCutHelper.DeleteGameShortcutFromDesktop();
                 GameDesktopShortcutToolStripMenuItem.Checked = false;
@@ -1268,9 +1268,9 @@ namespace PatchLauncher
 
         private void GameStartmenuShortcutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutsHelper _shortCutHelper = new();
+            ShortCutHelper _shortCutHelper = new();
 
-            if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN),
+            if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN),
                 ConstStrings.C_GAMETITLE_NAME_EN))
             {
                 _shortCutHelper.DeleteGameShortcutsFromStartMenu();
@@ -1294,9 +1294,9 @@ namespace PatchLauncher
 
         private void LauncherDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutsHelper _shortCutHelper = new();
+            ShortCutHelper _shortCutHelper = new();
 
-            if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+            if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
             {
                 _shortCutHelper.DeleteLauncherShortcutFromDesktop();
                 LauncherDesktopShortcutToolStripMenuItem.Checked = false;
@@ -1310,9 +1310,9 @@ namespace PatchLauncher
 
         private void LauncherStartmenuShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutsHelper _shortCutHelper = new();
+            ShortCutHelper _shortCutHelper = new();
 
-            if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"),
+            if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"),
                 ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
             {
                 _shortCutHelper.DeleteLauncherShortcutsFromStartMenu();

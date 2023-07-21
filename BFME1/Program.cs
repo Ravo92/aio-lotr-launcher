@@ -21,7 +21,7 @@ namespace PatchLauncher
 
         static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_GAMEFILETOOLS_NAME)).CreateLogger();
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_BFME1LAUNCHER_NAME)).CreateLogger();
 
             try
             {
@@ -43,11 +43,6 @@ namespace PatchLauncher
 
             try
             {
-                if (!Directory.Exists(ConstStrings.C_LOGFOLDER_NAME))
-                {
-                    Directory.CreateDirectory(ConstStrings.C_LOGFOLDER_NAME);
-                }
-
                 string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
                 if (!File.Exists(configPath))
                 {

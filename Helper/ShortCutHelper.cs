@@ -4,7 +4,7 @@ using WindowsShortcutFactory;
 
 namespace Helper
 {
-    public class ShortCutsHelper
+    public class ShortCutHelper
     {
         readonly Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_SHORTCUTS_NAME)).CreateLogger();
 
@@ -43,6 +43,8 @@ namespace Helper
 
         public void CreateShortcutToStartMenu(string path, string linkName, string optionalSubPath = "", string arguments = "", string description = "")
         {
+            string shortcutTargetDirectory = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), optionalSubPath));
+
             using WindowsShortcut _windowsShortcut = new()
             {
                 Path = path,
@@ -54,10 +56,10 @@ namespace Helper
 
             try
             {
-                if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), optionalSubPath)))
-                    Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), optionalSubPath));
+                if (!Directory.Exists(shortcutTargetDirectory))
+                    Directory.CreateDirectory(shortcutTargetDirectory);
 
-                _windowsShortcut.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), optionalSubPath, linkName + ".lnk"));
+                _windowsShortcut.Save(Path.Combine(shortcutTargetDirectory, linkName + ".lnk"));
             }
             catch (Exception ex)
             {
