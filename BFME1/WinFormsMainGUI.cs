@@ -1,8 +1,8 @@
 using AutoUpdaterDotNET;
 using Helper;
 using Helper.UserControls;
-using Microsoft.Web.WebView2.Core;
 using PatchLauncher.Properties;
+using Serilog;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -23,7 +23,7 @@ namespace PatchLauncher
         readonly LanguagePacks _languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
         readonly MainPacks _mainPack = JSONDataListHelper._MainPackSettings;
 
-        private static bool _IsLauncherCurrentlyWorking = false;
+        public static bool _IsLauncherCurrentlyWorking = false;
 
         private bool IsLauncherCurrentlyWorking
         {
@@ -82,34 +82,16 @@ namespace PatchLauncher
 
         public WinFormsMainGUI()
         {
-            #region logic
 
             InitializeComponent();
-            InitializeWebView2Settings();
+            WebView2Helper.InitializeWebView2Settings();
 
             var test = JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
 
-            try
-            {
-                if (!Directory.Exists(RegistryService.GameAppdataFolderPath()))
-                    Directory.CreateDirectory(RegistryService.GameAppdataFolderPath());
-
-                if (!File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
-            }
-
             BtnInstall.Text = Strings.BtnInstall_TextLaunch;
 
-            #endregion
-
-            #region Styles
             //Main Form style behaviour
 
             PibLoadingRing.Show();
@@ -152,14 +134,9 @@ namespace PatchLauncher
             BtnInstall.Font = FontHelper.GetFont(0, 16); ;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
 
-            #endregion
-
-            #region Tooltips
             //Tooltips
             ToolTip.SetToolTip(PiBThemeSwitcher, Strings.ToolTip_MusicSwitcher);
-            #endregion
 
-            #region HUD Elements
             PibHeader.Image = Helper.Properties.Resources.header;
             PiBYoutube.Image = Helper.Properties.Resources.youtube;
             PiBDiscord.Image = Helper.Properties.Resources.discord;
@@ -228,65 +205,11 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Helper.Properties.Resources.icoMordor;
                 BackgroundImage = Helper.Properties.Resources.bgMordor;
             }
-            #endregion
 
             TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
             TmrPatchNotes.Interval = 2000;
             TmrPatchNotes.Start();
         }
-
-        #region Launcher Auto-Updater
-
-        private static async void InitializeWebView2Settings()
-        {
-            try
-            {
-                File.WriteAllText(Path.Combine(Application.StartupPath, ConstStrings.C_LOGFOLDER_NAME, "webView2_Version.log"), CoreWebView2Environment.GetAvailableBrowserVersionString());
-            }
-            catch (WebView2RuntimeNotFoundException)
-            {
-                await RunWebViewSilentSetupAsync(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, "MicrosoftEdgeWebview2Setup.exe"));
-            }
-        }
-
-        public static async Task RunWebViewSilentSetupAsync(string fileName)
-        {
-            Process _p = Process.Start(fileName, new[] { "/silent", "/install" });
-            await _p.WaitForExitAsync().ConfigureAwait(false);
-        }
-
-        public static void CheckForUpdates()
-        {
-            try
-            {
-                AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
-                AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly()!.GetName().Version;
-                AutoUpdater.ShowSkipButton = false;
-                AutoUpdater.ShowRemindLaterButton = true;
-                AutoUpdater.LetUserSelectRemindLater = false;
-                AutoUpdater.RemindLaterTimeSpan = RemindLaterFormat.Minutes;
-                AutoUpdater.RemindLaterAt = 10;
-                AutoUpdater.UpdateFormSize = new Size(1296, 759);
-                AutoUpdater.HttpUserAgent = "BFME Launcher Update";
-                AutoUpdater.AppTitle = Application.ProductName;
-                AutoUpdater.RunUpdateAsAdmin = true;
-                AutoUpdater.DownloadPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME);
-                AutoUpdater.ClearAppDirectory = false;
-                AutoUpdater.ReportErrors = false;
-
-                string jsonPath = Path.Combine(Environment.CurrentDirectory, "AutoUpdaterSettings.json");
-                AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
-            }
-            catch (Exception ex)
-            {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
-            }
-        }
-
-        #endregion
-
-        #region Button Behaviours
 
         public void GameisClosed(object? sender, EventArgs e)
         {
@@ -510,8 +433,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -604,8 +526,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -692,8 +613,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -781,8 +701,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLine(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -793,24 +712,6 @@ namespace PatchLauncher
             TmrAnimation.Enabled = true;
         }
 
-        #endregion
-
-        #region ToolTip System
-        public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
-        {
-            Font tooltipFont = FontHelper.GetFont(0, 16); ;
-            e.DrawBackground();
-            e.DrawBorder();
-            e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
-        }
-
-        public void TooltipPopup(object sender, PopupEventArgs e)
-        {
-            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), FontHelper.GetFont(0, 16));
-        }
-        #endregion
-
-        #region GameInstall
         public async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string md5hash, bool isFreshInstall)
         {
             IsLauncherCurrentlyWorking = true;
@@ -835,12 +736,12 @@ namespace PatchLauncher
 
                 if (isFreshInstall)
                 {
-                    if (Settings.Default.CreateDesktopShortcut && !StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                    if (Settings.Default.CreateDesktopShortcut && !ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                     {
                         GameDesktopShortcutToolStripMenuItem.PerformClick();
                     }
 
-                    if (Settings.Default.CreateStartMenuShortcut && !StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                    if (Settings.Default.CreateStartMenuShortcut && !ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
                     {
                         GameStartmenuShortcutsToolStripMenuItem.PerformClick();
                     }
@@ -859,14 +760,13 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
         }
 
-        private static async Task<bool> PrepareInstallFolder()
+        private static Task<bool> PrepareInstallFolder()
         {
             _IsLauncherCurrentlyWorking = true;
 
@@ -887,20 +787,59 @@ namespace PatchLauncher
                     else if (_dialogResult == DialogResult.Cancel)
                     {
                         _IsLauncherCurrentlyWorking = false;
-                        return false;
+                        return Task.FromResult(false);
                     }
                 }
-                return true;
+                return Task.FromResult(true);
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
                 _IsLauncherCurrentlyWorking = false;
-                return false;
+                return Task.FromResult(false);
             }
         }
-        #endregion
+
+        public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
+        {
+            Font tooltipFont = FontHelper.GetFont(0, 16); ;
+            e.DrawBackground();
+            e.DrawBorder();
+            e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
+        }
+
+        public void TooltipPopup(object sender, PopupEventArgs e)
+        {
+            e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), FontHelper.GetFont(0, 16));
+        }
+
+        public static void CheckForUpdates()
+        {
+            try
+            {
+                AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
+                AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly()!.GetName().Version;
+                AutoUpdater.ShowSkipButton = false;
+                AutoUpdater.ShowRemindLaterButton = true;
+                AutoUpdater.LetUserSelectRemindLater = false;
+                AutoUpdater.RemindLaterTimeSpan = RemindLaterFormat.Minutes;
+                AutoUpdater.RemindLaterAt = 10;
+                AutoUpdater.UpdateFormSize = new Size(1296, 759);
+                AutoUpdater.HttpUserAgent = "BFME Launcher Update";
+                AutoUpdater.AppTitle = Application.ProductName;
+                AutoUpdater.RunUpdateAsAdmin = true;
+                AutoUpdater.DownloadPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME);
+                AutoUpdater.ClearAppDirectory = false;
+                AutoUpdater.ReportErrors = false;
+
+                string jsonPath = Path.Combine(Environment.CurrentDirectory, "AutoUpdaterSettings.json");
+                AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+            }
+        }
 
         private void TmrPatchNotes_Tick(object? sender, EventArgs e)
         {
@@ -1118,32 +1057,31 @@ namespace PatchLauncher
 
 
 
-                if (StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
+                if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
                     GameDesktopShortcutToolStripMenuItem.Checked = true;
                 else
                     GameDesktopShortcutToolStripMenuItem.Checked = false;
 
-                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
                     GameStartmenuShortcutsToolStripMenuItem.Checked = true;
                 else
                     GameStartmenuShortcutsToolStripMenuItem.Checked = false;
 
 
 
-                if (StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                     LauncherDesktopShortcutToolStripMenuItem.Checked = true;
                 else
                     LauncherDesktopShortcutToolStripMenuItem.Checked = false;
 
-                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
                 else
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -1301,16 +1239,6 @@ namespace PatchLauncher
         {
             LauncherOptionsForm _Launcheroptions = new();
             _Launcheroptions.ShowDialog();
-
-            if (StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
-                GameDesktopShortcutToolStripMenuItem.Checked = true;
-            else
-                GameDesktopShortcutToolStripMenuItem.Checked = false;
-
-            if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
-                GameStartmenuShortcutsToolStripMenuItem.Checked = true;
-            else
-                GameStartmenuShortcutsToolStripMenuItem.Checked = false;
         }
 
         private void GameSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1321,103 +1249,83 @@ namespace PatchLauncher
 
         private void GameDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            ShortCutsHelper _shortCutHelper = new();
+
+            if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
             {
-                if (StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
-                {
-                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN + ".lnk"));
-                    GameDesktopShortcutToolStripMenuItem.Checked = false;
-                }
-                else
-                {
-                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Settings.Default.StartGameWindowed == true ? "-win" : "");
-                    GameDesktopShortcutToolStripMenuItem.Checked = true;
-                }
+                _shortCutHelper.DeleteGameShortcutFromDesktop();
+                GameDesktopShortcutToolStripMenuItem.Checked = false;
             }
-            catch (Exception ex)
+            else
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                _shortCutHelper.CreateShortcutToDesktop(Path.Combine(RegistryService.GameInstallPath(),
+                    ConstStrings.C_MAIN_GAME_FILE),
+                    ConstStrings.C_GAMETITLE_NAME_EN,
+                    Settings.Default.StartGameWindowed == true ? "-win" : "");
+                GameDesktopShortcutToolStripMenuItem.Checked = true;
             }
         }
 
         private void GameStartmenuShortcutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            ShortCutsHelper _shortCutHelper = new();
+
+            if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN),
+                ConstStrings.C_GAMETITLE_NAME_EN))
             {
-                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
-                {
-                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN, ConstStrings.C_GAMETITLE_NAME_EN + ".lnk"));
-                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN, "Worldbuilder" + ".lnk"));
-
-                    if (Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN)))
-                        Directory.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
-
-                    GameStartmenuShortcutsToolStripMenuItem.Checked = false;
-                }
-                else
-                {
-                    if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN)))
-                        Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
-
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), Settings.Default.StartGameWindowed == true ? "-win" : "");
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder", Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
-                    GameStartmenuShortcutsToolStripMenuItem.Checked = true;
-                }
+                _shortCutHelper.DeleteGameShortcutsFromStartMenu();
+                GameStartmenuShortcutsToolStripMenuItem.Checked = false;
             }
-            catch (Exception ex)
+            else
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                _shortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN,
+                    Path.Combine("Programs", "Electronic Arts",
+                    ConstStrings.C_GAMETITLE_NAME_EN),
+                    Settings.Default.StartGameWindowed == true ? "-win" : "");
+
+                _shortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder",
+                    Path.Combine("Programs",
+                    "Electronic Arts",
+                    ConstStrings.C_GAMETITLE_NAME_EN));
+
+                GameStartmenuShortcutsToolStripMenuItem.Checked = true;
             }
         }
 
         private void LauncherDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            ShortCutsHelper _shortCutHelper = new();
+
+            if (ShortCutsHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
             {
-                if (StartMenuHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
-                {
-                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME + ".lnk"));
-                    LauncherDesktopShortcutToolStripMenuItem.Checked = false;
-                }
-                else
-                {
-                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(Application.StartupPath, "Restarter.exe"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME, "--startLauncher");
-                    LauncherDesktopShortcutToolStripMenuItem.Checked = true;
-                }
+                _shortCutHelper.DeleteLauncherShortcutFromDesktop();
+                LauncherDesktopShortcutToolStripMenuItem.Checked = false;
             }
-            catch (Exception ex)
+            else
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                _shortCutHelper.CreateShortcutToDesktop(Path.Combine(Application.StartupPath, "Restarter.exe"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME, "--startLauncher");
+                LauncherDesktopShortcutToolStripMenuItem.Checked = true;
             }
         }
 
         private void LauncherStartmenuShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            ShortCutsHelper _shortCutHelper = new();
+
+            if (ShortCutsHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"),
+                ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
             {
-                if (StartMenuHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), Path.Combine("Programs", "Patch 2.22 Launcher")), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
-                {
-                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), Path.Combine("Programs", "Patch 2.22 Launcher"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME + ".lnk"));
-                    LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
-                }
-                else
-                {
-                    if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), Path.Combine("Programs", "Patch 2.22 Launcher"))))
-                        Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), Path.Combine("Programs", "Patch 2.22 Launcher")));
-
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(Application.StartupPath, "Restarter.exe"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME, Path.Combine("Programs", "Patch 2.22 Launcher"), "--startLauncher");
-
-                    LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
-                }
+                _shortCutHelper.DeleteLauncherShortcutsFromStartMenu();
+                GameStartmenuShortcutsToolStripMenuItem.Checked = false;
             }
-
-            catch (Exception ex)
+            else
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                _shortCutHelper.CreateShortcutToStartMenu(Path.Combine(Application.StartupPath, "Restarter.exe"),
+                    ConstStrings.C_LAUNCHER_SHORTCUT_NAME,
+                    Path.Combine("Programs", "Patch 2.22 Launcher"),
+                    "--startLauncher");
+
+                LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
             }
         }
     }

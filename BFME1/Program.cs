@@ -1,5 +1,6 @@
 using Helper;
 using PatchLauncher.Properties;
+using Serilog;
 using System;
 using System.Configuration;
 using System.IO;
@@ -20,6 +21,8 @@ namespace PatchLauncher
 
         static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_GAMEFILETOOLS_NAME)).CreateLogger();
+
             try
             {
                 if (args.Length < 1)
@@ -33,8 +36,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             ApplicationConfiguration.Initialize();
@@ -79,13 +81,13 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                Log.Error(ex.ToString());
             }
 
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
-                GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
+                GameFileTools _gameFileTools = new();
+                GameFileDictionary gameFileDictionary = _gameFileTools.LoadGameFileDictionary().Result;
                 string assemblyName = AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Name!;
 
                 JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[assemblyName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
@@ -98,6 +100,9 @@ namespace PatchLauncher
                 Settings.Default.LatestBetaPatchVersion = _betaPatchFiles.Version;
                 Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
                 Settings.Default.Save();
+
+                _gameFileTools.EnsureBFMEAppdataFolderExists();
+                _gameFileTools.EnsureBFMEOptionsIniFileExists();
 
                 //InstallLanguageList._DictionarylanguageSettings = gameFileDictionary.LanguagePacks["BFME1"]
                 //  .ToDictionary(x => x.RegistrySelectedLocale, x => new LanguageSettings { RegistrySelectedLanguageName = x.RegistrySelectedLanguageName, RegistrySelectedLanguage = x.RegistrySelectedLanguage, RegistrySelectedLocale = x.RegistrySelectedLocale, LanguagPackName = x.LanguagePackName });

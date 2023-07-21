@@ -1,4 +1,6 @@
-﻿using SevenZipExtractor;
+﻿using Serilog.Core;
+using Serilog;
+using SevenZipExtractor;
 
 namespace Helper
 {
@@ -30,8 +32,8 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_ZIPFILE_NAME)).CreateLogger();
+                _log.Error(ex.ToString());
                 return null;
             }
         }

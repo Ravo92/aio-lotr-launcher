@@ -1,6 +1,8 @@
 ﻿using Downloader;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using Serilog;
+using Serilog.Core;
 
 namespace Helper
 {
@@ -20,9 +22,11 @@ namespace Helper
         public event SetTextDLSpeedCallback SetTextDLSpeedCallbackEvent;
         public event SetTextFileNameCallback SetTextFileNameCallbackEvent;
 
+        private readonly Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_GAMEFILETOOLS_NAME)).CreateLogger();
+
         private int _DownloadProgressChangedLimiter = 0;
 
-        public static async Task<GameFileDictionary> LoadGameFileDictionary()
+        public async Task<GameFileDictionary> LoadGameFileDictionary()
         {
             GameFileDictionary _gameFileDictionary = new();
             string json = "noInternet";
@@ -35,8 +39,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                _log.Error(ex.ToString());
             }
 
             // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
@@ -98,8 +101,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                _log.Error(ex.ToString());
             }
         }
 
@@ -122,8 +124,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                _log.Error(ex.ToString());
             }
         }
 
@@ -160,6 +161,48 @@ namespace Helper
             else
             {
                 SetPBarFilesCallbackEvent(100);
+            }
+        }
+
+        public bool EnsureBFMEAppdataFolderExists()
+        {
+            try
+            {
+                if (!Directory.Exists(RegistryService.GameAppdataFolderPath()))
+                {
+                    CreateBFMEAppdataFolder();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.ToString());
+                return false;
+            }
+        }
+
+        private void CreateBFMEAppdataFolder()
+        {
+            try
+            {
+                Directory.CreateDirectory(RegistryService.GameAppdataFolderPath());
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.ToString());
+            }
+        }
+
+        public void EnsureBFMEOptionsIniFileExists()
+        {
+            try
+            {
+                if (!File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.ToString());
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿namespace Helper
+﻿using Serilog.Core;
+using Serilog;
+
+namespace Helper
 {
     public class RepairFileHelper
     {
@@ -13,8 +16,8 @@
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                await file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_REPAIRFILE_NAME)).CreateLogger();
+                _log.Error(ex.ToString());
             }
             return false;
         }

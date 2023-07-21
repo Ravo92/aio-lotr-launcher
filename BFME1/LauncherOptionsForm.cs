@@ -230,36 +230,6 @@ namespace PatchLauncher
         {
             SaveSettings();
 
-            if (Settings.Default.CreateDesktopShortcut && FlagIsWindowedChanged)
-            {
-                try
-                {
-                    StartMenuHelper.CreateShortcutToDesktop(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Settings.Default.StartGameWindowed == true ? "-win" : "");
-                }
-                catch (Exception ex)
-                {
-                    using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                    file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
-                }
-            }
-
-            if (Settings.Default.CreateStartMenuShortcut && FlagIsWindowedChanged)
-            {
-                try
-                {
-                    if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN)))
-                        Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
-
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN, Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN), Settings.Default.StartGameWindowed == true ? "-win" : "");
-                    StartMenuHelper.CreateShortcutToStartMenu(Path.Combine(GameInstallPath, ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder", Path.Combine("Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN));
-                }
-                catch (Exception ex)
-                {
-                    using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                    file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
-                }
-            }
-
             if (FlagIsLanguageChanged || FlagIsBetaChannelChanged)
             {
                 DialogResult _dialogResult = MessageBox.Show(Strings.Msg_Restart_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);

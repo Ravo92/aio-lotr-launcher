@@ -55,7 +55,14 @@ namespace Helper
         public const string C_103_ASSET_FILE = "asset.dat.103";
         public const string C_ORIGINAL_ASSET_FILE = "asset.dat.BACKUP";
 
-        public const string C_ERRORLOGGING_FILE = "Errors.log";
+        public const string C_ERRORLOGGING_FILE = "PLEASE_REPORT_TO_DEVELOPER_UnassignedErrors.log";
+        public const string C_LOGFILE_GAMEFILETOOLS_NAME = "GameFileTools.log";
+        public const string C_LOGFILE_PATCHMODDETECTION_NAME = "PatchModDetection.log";
+        public const string C_LOGFILE_REPAIRFILE_NAME = "RepairFile.log";
+        public const string C_LOGFILE_SHORTCUTS_NAME = "RepairFile.log";
+        public const string C_LOGFILE_ZIPFILE_NAME = "ZIPFile.log";
+        public const string C_LOGFILE_BFME1LAUNCHER_NAME = "BFME1Launcher.log";
+
         public const string C_LAUNCHERSELECTEDINFOFILE = "selectedGameLauncher.txt";
         public const string C_JSON_GAMEDICTIONARY_FILE = "GameFileDictionary.json";
 

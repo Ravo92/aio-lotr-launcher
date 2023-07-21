@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Helper
+﻿namespace Helper
 {
     public class OptionIniParser
     {
