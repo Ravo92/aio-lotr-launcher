@@ -3,28 +3,22 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using Serilog;
 using Serilog.Core;
+using SevenZipExtractor;
 
 namespace Helper
 {
     public class GameFileTools
     {
-        public delegate void SetTextDLSpeedCallback(string text);
-        public delegate void SetTextFileNameCallback(string text);
-
-        public delegate void SetPBarFilesCallback(int value);
-        public delegate void SetPBarFilesMaxCallback(int value);
-        public delegate void SetPBarPercentagesCallback(string value);
-
-        public event SetPBarFilesCallback SetPBarFilesCallbackEvent;
-        public event SetPBarFilesMaxCallback SetPBarFilesMaxCallbackEvent;
-        public event SetPBarPercentagesCallback SetPBarPercentagesCallbackEvent;
-
-        public event SetTextDLSpeedCallback SetTextDLSpeedCallbackEvent;
-        public event SetTextFileNameCallback SetTextFileNameCallbackEvent;
+        public ulong EntrySize = 0;
+        public string EntryFilename = "";
+        public int counter = 0;
+        public int Percentage = 0;
 
         private readonly Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_GAMEFILETOOLS_NAME)).CreateLogger();
 
         private int _DownloadProgressChangedLimiter = 0;
+
+        IProgress<ProgressHelper> _overallProgress;
 
         public async Task<GameFileDictionary> LoadGameFileDictionary()
         {
@@ -72,7 +66,7 @@ namespace Helper
             }
         }
 
-        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, string DownloadUrl)
+        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, string DownloadUrl, IProgress<ProgressHelper> downloadProgress)
         {
             try
             {
@@ -88,6 +82,8 @@ namespace Helper
                     ClearPackageOnCompletionWithFailure = true
                 };
 
+                _overallProgress = downloadProgress;
+
                 var downloader = new DownloadService(downloadOpt);
 
                 downloader.DownloadStarted += OnDownloadStarted;
@@ -96,7 +92,7 @@ namespace Helper
 
                 if (!File.Exists(fullPathwithFileName))
                 {
-                    await downloader.DownloadFileTaskAsync(DownloadUrl, Path.Combine(fullPathwithFileName, ZIPFileName));
+                    await downloader.DownloadFileTaskAsync(DownloadUrl, fullPathwithFileName);
                 }
             }
             catch (Exception ex)
@@ -105,46 +101,60 @@ namespace Helper
             }
         }
 
-        public async Task ExtractFile(string pathtoZIPFile, string ZIPFileName, string gameInstallPath)
+        public Task ExtractFile(string pathtoZIPFile, string ZIPFileName, string gameInstallPath, IProgress<ProgressHelper> extractProgress)
         {
             try
             {
                 string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
 
-                var progressHandler = new Progress<ProgressHelper>(progress =>
+                if (Path.GetExtension(ZIPFileName) != ".7z")
                 {
-                    SetPBarFilesCallbackEvent(progress.Count);
-                    SetPBarFilesMaxCallbackEvent(progress.Max);
-                    SetTextFileNameCallbackEvent(string.Concat(progress.Count, "/", progress.Max));
-                    SetTextDLSpeedCallbackEvent(progress.Filename!);
-                });
+                    File.Copy(fullPathwithFileName, Path.Combine(gameInstallPath, ZIPFileName), true);
+                    return Task.CompletedTask;
+                }
+                else
+                {
+                    return Task.Run(() =>
+                    {
+                        using ArchiveFile archiveFile = new(fullPathwithFileName);
 
-                ZIPFileHelper _ZIPFileHelper = new();
-                await _ZIPFileHelper.ExtractArchive(fullPathwithFileName, gameInstallPath, progressHandler)!;
+                        foreach (Entry entry in archiveFile.Entries)
+                        {
+                            counter++;
+                            EntrySize = entry.Size;
+                            EntryFilename = entry.FileName;
+                            extractProgress.Report(new ProgressHelper() { CurrentFileName = EntryFilename, CurrentlyExtractedFileCount = counter, TotalArchiveFileCount = archiveFile.Entries.Count });
+                            entry.Extract(Path.Combine(gameInstallPath, entry.FileName));
+                        }
+                    });
+                }
             }
             catch (Exception ex)
             {
                 _log.Error(ex.ToString());
+                return Task.FromException(ex);
             }
         }
 
         private void OnDownloadStarted(object? sender, DownloadStartedEventArgs e)
         {
-            SetPBarFilesCallbackEvent(0);
-            SetTextFileNameCallbackEvent("Downloading: " + Path.GetFileName(e.FileName));
+            _overallProgress.Report(new ProgressHelper() { CurrentFileName = EntryFilename, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
         }
 
         private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
         {
-            if (_DownloadProgressChangedLimiter < 64)
+            if (_DownloadProgressChangedLimiter < 32)
             {
                 _DownloadProgressChangedLimiter++;
             }
             else
             {
-                SetPBarFilesCallbackEvent((int)e.ProgressPercentage);
-                SetTextDLSpeedCallbackEvent("@ " + Math.Round(e.AverageBytesPerSecondSpeed / 1024000).ToString() + " MB/s");
-                SetPBarPercentagesCallbackEvent(Math.Round(e.ProgressPercentage).ToString() + " %");
+                _overallProgress.Report(new ProgressHelper() {
+                    PercentageValue = e.ProgressPercentage,
+                    DownloadSpeedSizeInBytes = e.BytesPerSecondSpeed,
+                    TotalDownloadSizeInBytes = e.TotalBytesToReceive,
+                    ProgressedDownloadSizeInBytes = e.ReceivedBytesSize
+                });
 
                 _DownloadProgressChangedLimiter = 0;
             }
@@ -154,13 +164,8 @@ namespace Helper
         {
             if (e.Error != null)
             {
-                SetTextFileNameCallbackEvent(e.Error.Message);
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(e.Error.Message);
-            }
-            else
-            {
-                SetPBarFilesCallbackEvent(100);
+                _overallProgress.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
+                _log.Error(e.Error.Message);
             }
         }
 

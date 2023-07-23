@@ -26,7 +26,6 @@ namespace PatchLauncher
 
         bool FlagIsLanguageChanged = false;
         bool FlagIsBetaChannelChanged = false;
-        bool FlagIsWindowedChanged = false;
 
         readonly PatchPacksBeta _patchPacksBeta = JSONDataListHelper._PatchBetaSettings;//[Settings.Default.LatestBetaPatchVersion];
 
@@ -312,11 +311,6 @@ namespace PatchLauncher
             {
                 FlagIsBetaChannelChanged = true;
                 Settings.Default.BetaChannelVersion = 0;
-            }
-
-            if (FlagWindowed != Settings.Default.StartGameWindowed)
-            {
-                FlagIsWindowedChanged = true;
             }
 
             Settings.Default.Language = FlagLanguageIndex;

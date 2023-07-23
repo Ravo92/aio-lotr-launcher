@@ -23,7 +23,7 @@ namespace PatchLauncher
         readonly LanguagePacks _languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
         readonly MainPacks _mainPack = JSONDataListHelper._MainPackSettings;
 
-        public static bool _IsLauncherCurrentlyWorking = false;
+        static bool _IsLauncherCurrentlyWorking = false;
 
         private bool IsLauncherCurrentlyWorking
         {
@@ -36,6 +36,12 @@ namespace PatchLauncher
                     PiBVersion103.Enabled = false;
                     PiBVersion106.Enabled = false;
 
+                    LblModExplanation.Visible = false;
+
+                    PBarActualFile.Visible = true;
+                    LblWorkerFileName.Visible = true;
+                    LblWorkerIOTask.Visible = true;
+
                     PiBArrow.Enabled = false;
 
                     if (Settings.Default.IsPatchModsShown)
@@ -43,14 +49,7 @@ namespace PatchLauncher
                     else
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
 
-                    PBarActualFile.Show();
-                    LblDownloadSpeed.Show();
-                    LblFileName.Show();
-
-                    PiBArrow.Enabled = true;
                     BtnInstall.Enabled = false;
-
-                    LblModExplanation.Visible = false;
 
                     LaunchGameToolStripMenuItem.Enabled = false;
                     RepairGameToolStripMenuItem.Enabled = false;
@@ -60,19 +59,20 @@ namespace PatchLauncher
                     PiBVersion103.Enabled = true;
                     PiBVersion106.Enabled = true;
 
-                    PBarActualFile.Hide();
-                    LblDownloadSpeed.Hide();
-                    LblFileName.Hide();
+                    LblModExplanation.Visible = false;
+
+                    PBarActualFile.Visible = false;
+                    LblWorkerFileName.Visible = false;
+                    LblWorkerIOTask.Visible = false;
 
                     PiBArrow.Enabled = true;
-                    BtnInstall.Enabled = true;
-
-                    LblModExplanation.Visible = true;
 
                     if (Settings.Default.IsPatchModsShown)
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
                     else
                         PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
+
+                    BtnInstall.Enabled = true;
 
                     LaunchGameToolStripMenuItem.Enabled = true;
                     RepairGameToolStripMenuItem.Enabled = true;
@@ -82,11 +82,10 @@ namespace PatchLauncher
 
         public WinFormsMainGUI()
         {
-
             InitializeComponent();
             WebView2Helper.InitializeWebView2Settings();
 
-            var test = JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max();
+            //var test = JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
 
@@ -94,24 +93,24 @@ namespace PatchLauncher
 
             //Main Form style behaviour
 
-            PibLoadingRing.Show();
-            PibLoadingBorder.Show();
-            PiBArrow.Hide();
-            LblPatchNotes.Show();
-            PnlPlaceholder.Hide();
-            Wv2Patchnotes.Hide();
+            PibLoadingRing.Visible = true;
+            PibLoadingBorder.Visible = true;
+            PiBArrow.Visible = false;
+            LblPatchNotes.Visible = true;
+            PnlPlaceholder.Visible = false;
+            Wv2Patchnotes.Visible = false;
 
-            PiBVersion222_33.Show();
-            PiBVersion222_34.Show();
+            PiBVersion222_33.Visible = true;
+            PiBVersion222_34.Visible = true;
 
             // label-Styles
-            LblDownloadSpeed.Font = FontHelper.GetFont(0, 16); ;
-            LblDownloadSpeed.ForeColor = Color.FromArgb(192, 145, 69);
-            LblDownloadSpeed.BackColor = Color.Transparent;
+            LblWorkerFileName.Font = FontHelper.GetFont(0, 16); ;
+            LblWorkerFileName.ForeColor = Color.FromArgb(192, 145, 69);
+            LblWorkerFileName.BackColor = Color.Transparent;
 
-            LblFileName.Font = FontHelper.GetFont(0, 16); ;
-            LblFileName.ForeColor = Color.FromArgb(192, 145, 69);
-            LblFileName.BackColor = Color.Transparent;
+            LblWorkerIOTask.Font = FontHelper.GetFont(0, 16); ;
+            LblWorkerIOTask.ForeColor = Color.FromArgb(192, 145, 69);
+            LblWorkerIOTask.BackColor = Color.Transparent;
 
             LblPatchNotes.Font = FontHelper.GetFont(0, 16);
             LblPatchNotes.ForeColor = Color.FromArgb(192, 145, 69);
@@ -207,7 +206,7 @@ namespace PatchLauncher
             }
 
             TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
-            TmrPatchNotes.Interval = 2000;
+            TmrPatchNotes.Interval = 1;
             TmrPatchNotes.Start();
         }
 
@@ -228,16 +227,19 @@ namespace PatchLauncher
                 PnlPlaceholder.Padding = new Padding(50);
                 PnlPlaceholder.Margin = new Padding(50);
 
-                foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key != 106))
+                if (!Settings.Default.UseBetaChannel)
                 {
-                    string patch222Version = version.Value.Version.ToString()[3..];
-                    Patch222Buttons item = new()
+                    foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key != 106))
                     {
-                        LabelTextPatchVersion = "Version " + patch222Version,
-                        Tag = version.Key
-                    };
-                    item.Click += PatchButtonClicked;
-                    PnlPlaceholder.Controls.Add(item);
+                        string patch222Version = version.Value.Version.ToString()[3..];
+                        Patch222Buttons item = new()
+                        {
+                            LabelTextPatchVersion = "Version " + patch222Version,
+                            Tag = version.Key
+                        };
+                        item.Click += PatchButtonClicked;
+                        PnlPlaceholder.Controls.Add(item);
+                    }
                 }
 
                 // Check if Game is installed, if not show install button
@@ -259,11 +261,11 @@ namespace PatchLauncher
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
 
-                    await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
+                    await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5);
 
                     if (_patchpack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
-                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                     }
 
                     Settings.Default.IsPatch34Downloaded = true;
@@ -276,21 +278,15 @@ namespace PatchLauncher
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
-                    PiBArrow.Enabled = true;
                 }
 
                 if (Settings.Default.UseBetaChannel)
                 {
-                    PiBVersion103.Hide();
-                    PiBVersion106.Hide();
-                    PiBVersion222_33.Hide();
-                    PiBVersion222_34.Hide();
-
                     LblModExplanation.Text = Strings.Info_BetaActivated;
 
                     if (Settings.Default.LatestBetaPatchVersion > Settings.Default.BetaChannelVersion)
                     {
-                        await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5, false);
+                        await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5);
                     }
                 }
 
@@ -368,19 +364,53 @@ namespace PatchLauncher
 
         private async void BtnInstall_Click(object sender, EventArgs e)
         {
-            if (Settings.Default.IsGameInstalled == false)
+            try
             {
-                InstallPathDialog _install = new();
-
-                DialogResult dr = _install.ShowDialog();
-                if (dr == DialogResult.OK)
+                if (Settings.Default.IsGameInstalled == false)
                 {
-                    await InstallUpdatRepairRoutine(ConstStrings.C_MAINGAMEFILE_ZIP, _mainPack.URL, _mainPack.MD5, true);
+                    InstallPathDialog _install = new();
+
+                    DialogResult dr = _install.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        IsLauncherCurrentlyWorking = true;
+
+                        Task<bool> _taskPrepareInstallFolder = PrepareInstallFolder();
+                        _taskPrepareInstallFolder.Wait();
+
+                        if (!_taskPrepareInstallFolder.Result)
+                        {
+                            throw new Exception("Question for cleaning target install folder answered with no");
+                        }
+
+                        RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, _languagePackSettings.RegistrySelectedLocale, _languagePackSettings.RegistrySelectedLanguageName, _languagePackSettings.RegistrySelectedLanguage);
+
+                        await InstallUpdatRepairRoutine(ConstStrings.C_MAINGAMEFILE_ZIP, _mainPack.URL, _mainPack.MD5);
+                        await InstallUpdatRepairRoutine(_languagePackSettings.LanguagePackName, _languagePackSettings.URL, _languagePackSettings.MD5);
+
+                        if (Settings.Default.CreateDesktopShortcut) //&& !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                        {
+                            GameDesktopShortcutToolStripMenuItem.PerformClick();
+                        }
+
+                        if (Settings.Default.CreateStartMenuShortcut) //&& !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                        {
+                            GameStartmenuShortcutsToolStripMenuItem.PerformClick();
+                        }
+
+                        _taskPrepareInstallFolder.Dispose();
+
+                        IsLauncherCurrentlyWorking = false;
+                    }
+                }
+                else
+                {
+                    LaunchGameToolStripMenuItem.PerformClick();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                LaunchGameToolStripMenuItem.PerformClick();
+                Log.Error(ex.ToString());
             }
         }
 
@@ -580,11 +610,11 @@ namespace PatchLauncher
             {
                 if (!Settings.Default.IsPatch106Downloaded)
                 {
-                    await InstallUpdatRepairRoutine(_patchpack106.FileName, _patchpack106.URL, _patchpack106.MD5, false);
+                    await InstallUpdatRepairRoutine(_patchpack106.FileName, _patchpack106.URL, _patchpack106.MD5);
 
                     if (_patchpack106.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
-                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                     }
 
                     PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Selected;
@@ -620,11 +650,11 @@ namespace PatchLauncher
                     }
                     else
                     {
-                        await InstallUpdatRepairRoutine(_patchpack106.FileName, _patchpack106.URL, _patchpack106.MD5, false);
+                        await InstallUpdatRepairRoutine(_patchpack106.FileName, _patchpack106.URL, _patchpack106.MD5);
 
                         if (_patchpack106.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                         {
-                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                         }
 
                         PiBVersion106.Image = Helper.Properties.Resources.BtnPatchSelection_106_Selected;
@@ -671,11 +701,11 @@ namespace PatchLauncher
             {
                 if (!Settings.Default.IsPatch33Downloaded)
                 {
-                    await InstallUpdatRepairRoutine(_patchpack22233.FileName, _patchpack22233.URL, _patchpack22233.MD5, false);
+                    await InstallUpdatRepairRoutine(_patchpack22233.FileName, _patchpack22233.URL, _patchpack22233.MD5);
 
                     if (_patchpack22233.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
-                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                     }
 
                     File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE), true);
@@ -708,15 +738,11 @@ namespace PatchLauncher
                     }
                     else
                     {
-                        PBarActualFile.Show();
-                        LblDownloadSpeed.Show();
-                        LblFileName.Show();
-
-                        await InstallUpdatRepairRoutine(_patchpack22233.FileName, _patchpack22233.URL, _patchpack22233.MD5, false);
+                        await InstallUpdatRepairRoutine(_patchpack22233.FileName, _patchpack22233.URL, _patchpack22233.MD5);
 
                         if (_patchpack22233.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                         {
-                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                         }
 
                         PiBVersion222_33.Image = Helper.Properties.Resources.BtnPatchSelection_222V33_Selected;
@@ -758,15 +784,11 @@ namespace PatchLauncher
             {
                 if (!Settings.Default.IsPatch34Downloaded)
                 {
-                    PBarActualFile.Show();
-                    LblDownloadSpeed.Show();
-                    LblFileName.Show();
-
-                    await InstallUpdatRepairRoutine(_patchpack22234.FileName, _patchpack22234.URL, _patchpack22234.MD5, false);
+                    await InstallUpdatRepairRoutine(_patchpack22234.FileName, _patchpack22234.URL, _patchpack22234.MD5);
 
                     if (_patchpack22234.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
-                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                     }
 
                     PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Selected;
@@ -797,15 +819,11 @@ namespace PatchLauncher
                     }
                     else
                     {
-                        PBarActualFile.Show();
-                        LblDownloadSpeed.Show();
-                        LblFileName.Show();
-
-                        await InstallUpdatRepairRoutine(_patchpack22234.FileName, _patchpack22234.URL, _patchpack22234.MD5, false);
+                        await InstallUpdatRepairRoutine(_patchpack22234.FileName, _patchpack22234.URL, _patchpack22234.MD5);
 
                         if (_patchpack22234.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                         {
-                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5, false);
+                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                         }
 
                         PiBVersion222_34.Image = Helper.Properties.Resources.BtnPatchSelection_222V34_Selected;
@@ -841,42 +859,34 @@ namespace PatchLauncher
             TmrAnimation.Enabled = true;
         }
 
-        public async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string md5hash, bool isFreshInstall)
+        public async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string md5hash)
         {
-            IsLauncherCurrentlyWorking = true;
+            PBarActualFile.Value = 0;
+            PBarActualFile.Maximum = 100;
+
+            var progressHandlerDownload = new Progress<ProgressHelper>(progress =>
+            {
+                PBarActualFile.Value = (int)progress.PercentageValue;
+                LblWorkerFileName.Text = Path.GetFileNameWithoutExtension(ZIPFileName);
+                LblWorkerIOTask.Text = string.Concat(progress.ProgressedDownloadSizeInBytes / 1024000, " / ", progress.TotalDownloadSizeInBytes / 1024000, " MB @ ", Math.Round(progress.DownloadSpeedSizeInBytes / 1024000), " MB/s");
+            });
+
+            var progressHandlerExtraction = new Progress<ProgressHelper>(progress =>
+            {
+                PBarActualFile.Value = progress.CurrentlyExtractedFileCount;
+                PBarActualFile.Maximum = progress.TotalArchiveFileCount;
+                LblWorkerFileName.Text = progress.CurrentFileName;
+                LblWorkerIOTask.Text = string.Concat(progress.CurrentlyExtractedFileCount, " / ", progress.TotalArchiveFileCount);
+            });
 
             try
             {
-                if (!await PrepareInstallFolder())
-                {
-                    return;
-                }
-
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
 
-                if (isFreshInstall)
-                {
-                    RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, _languagePackSettings.RegistrySelectedLocale, _languagePackSettings.RegistrySelectedLanguageName, _languagePackSettings.RegistrySelectedLanguage);
-                }
-
                 GameFileTools _gameFileTools = new();
-                await _gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, DownloadUrl);
-                await _gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, DownloadUrl);
 
-                if (isFreshInstall)
-                {
-                    if (Settings.Default.CreateDesktopShortcut && !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
-                    {
-                        GameDesktopShortcutToolStripMenuItem.PerformClick();
-                    }
-
-                    if (Settings.Default.CreateStartMenuShortcut && !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
-                    {
-                        GameStartmenuShortcutsToolStripMenuItem.PerformClick();
-                    }
-
-                    PiBVersion222_34_Click(PiBVersion222_34, null);
-                }
+                await _gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, DownloadUrl, progressHandlerDownload);
+                await _gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction);
 
                 if (Settings.Default.IsPatchModsShown)
                 {
@@ -891,14 +901,10 @@ namespace PatchLauncher
             {
                 Log.Error(ex.ToString());
             }
-
-            IsLauncherCurrentlyWorking = false;
         }
 
         private static Task<bool> PrepareInstallFolder()
         {
-            _IsLauncherCurrentlyWorking = true;
-
             try
             {
                 if (!Directory.Exists(Settings.Default.GameInstallPath))
@@ -924,7 +930,6 @@ namespace PatchLauncher
             catch (Exception ex)
             {
                 Log.Error(ex.ToString());
-                _IsLauncherCurrentlyWorking = false;
                 return Task.FromResult(false);
             }
         }
@@ -973,15 +978,15 @@ namespace PatchLauncher
         private void TmrPatchNotes_Tick(object? sender, EventArgs e)
         {
             TmrPatchNotes.Stop();
-            PibLoadingRing.Hide();
-            PibLoadingBorder.Hide();
-            LblPatchNotes.Hide();
+            PibLoadingRing.Visible = false;
+            PibLoadingBorder.Visible = false;
+            LblPatchNotes.Visible = false;
 
             PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
-            PiBArrow.Show();
+            PiBArrow.Visible = true;
 
-            Wv2Patchnotes.Show();
-            PnlPlaceholder.Show();
+            Wv2Patchnotes.Visible = true;
+            PnlPlaceholder.Visible = true;
 
             if (Settings.Default.ShowPatchesFirst)
             {
@@ -990,7 +995,7 @@ namespace PatchLauncher
                 PnlPlaceholder.BackgroundImage = Helper.Properties.Resources.borderRectangleModPanel;
                 PnlPlaceholder.BackColor = Color.Transparent;
                 LblModExplanation.BackColor = Color.Transparent;
-                LblModExplanation.Show();
+                LblModExplanation.Visible = true;
 
                 PiBArrow.Left = 1212;
                 Wv2Patchnotes.Left = 1300;
@@ -1004,7 +1009,7 @@ namespace PatchLauncher
                 PnlPlaceholder.BackgroundImage = null;
                 PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
                 PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
-                LblModExplanation.Hide();
+                LblModExplanation.Visible = false;
 
                 PiBArrow.Left = 14;
                 Wv2Patchnotes.Left = 12;
@@ -1051,9 +1056,8 @@ namespace PatchLauncher
                 PnlPlaceholder.BackgroundImage = Helper.Properties.Resources.borderRectangleModPanel;
                 PnlPlaceholder.BackColor = Color.Transparent;
                 LblModExplanation.BackColor = Color.Transparent;
-                LblModExplanation.Show();
-
-                Wv2Patchnotes.Hide();
+                LblModExplanation.Visible = true;
+                Wv2Patchnotes.Visible = false;
 
                 Settings.Default.IsPatchModsShown = true;
                 Settings.Default.Save();
@@ -1064,8 +1068,8 @@ namespace PatchLauncher
                 PnlPlaceholder.BackgroundImage = null;
                 PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
                 PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
-                LblModExplanation.Hide();
-                Wv2Patchnotes.Show();
+                LblModExplanation.Visible = false;
+                Wv2Patchnotes.Visible = true;
 
                 Settings.Default.IsPatchModsShown = false;
                 Settings.Default.Save();

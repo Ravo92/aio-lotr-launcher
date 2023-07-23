@@ -39,9 +39,9 @@ namespace PatchLauncher
             PiBModDB = new PictureBox();
             PiBThemeSwitcher = new PictureBox();
             ToolTip = new ToolTip(components);
-            LblDownloadSpeed = new Label();
+            LblWorkerFileName = new Label();
             BtnInstall = new Button();
-            LblFileName = new Label();
+            LblWorkerIOTask = new Label();
             PibLoadingRing = new PictureBox();
             LblPatchNotes = new CustomLabel();
             PibLoadingBorder = new PictureBox();
@@ -49,10 +49,10 @@ namespace PatchLauncher
             PiBTwitch = new PictureBox();
             PiBArrow = new PictureBox();
             PnlPlaceholder = new FlowLayoutPanel();
+            PiBVersion103 = new PictureBox();
+            PiBVersion106 = new PictureBox();
             PiBVersion222_33 = new PictureBox();
             PiBVersion222_34 = new PictureBox();
-            PiBVersion106 = new PictureBox();
-            PiBVersion103 = new PictureBox();
             LblModExplanation = new CustomLabel();
             NotifyContextMenu = new ContextMenuStrip(components);
             MenuItemLaunchGame = new ToolStripMenuItem();
@@ -101,10 +101,10 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBTwitch).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBArrow).BeginInit();
             PnlPlaceholder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion103).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion106).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion222_33).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion222_34).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion106).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion103).BeginInit();
             NotifyContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PibMute).BeginInit();
             WinFormsMainMenuStrip.SuspendLayout();
@@ -161,10 +161,10 @@ namespace PatchLauncher
             ToolTip.Draw += Tooltip_Draw;
             ToolTip.Popup += TooltipPopup;
             // 
-            // LblDownloadSpeed
+            // LblWorkerFileName
             // 
-            resources.ApplyResources(LblDownloadSpeed, "LblDownloadSpeed");
-            LblDownloadSpeed.Name = "LblDownloadSpeed";
+            resources.ApplyResources(LblWorkerFileName, "LblWorkerFileName");
+            LblWorkerFileName.Name = "LblWorkerFileName";
             // 
             // BtnInstall
             // 
@@ -183,10 +183,10 @@ namespace PatchLauncher
             BtnInstall.MouseEnter += BtnInstall_MouseEnter;
             BtnInstall.MouseLeave += BtnInstall_MouseLeave;
             // 
-            // LblFileName
+            // LblWorkerIOTask
             // 
-            resources.ApplyResources(LblFileName, "LblFileName");
-            LblFileName.Name = "LblFileName";
+            resources.ApplyResources(LblWorkerIOTask, "LblWorkerIOTask");
+            LblWorkerIOTask.Name = "LblWorkerIOTask";
             // 
             // PibLoadingRing
             // 
@@ -251,6 +251,24 @@ namespace PatchLauncher
             PnlPlaceholder.Controls.Add(PiBVersion222_34);
             PnlPlaceholder.Name = "PnlPlaceholder";
             // 
+            // PiBVersion103
+            // 
+            PiBVersion103.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(PiBVersion103, "PiBVersion103");
+            PiBVersion103.Cursor = Cursors.Hand;
+            PiBVersion103.Name = "PiBVersion103";
+            PiBVersion103.TabStop = false;
+            PiBVersion103.Click += PiBVersion103_Click;
+            // 
+            // PiBVersion106
+            // 
+            PiBVersion106.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(PiBVersion106, "PiBVersion106");
+            PiBVersion106.Cursor = Cursors.Hand;
+            PiBVersion106.Name = "PiBVersion106";
+            PiBVersion106.TabStop = false;
+            PiBVersion106.Click += PiBVersion106_Click;
+            // 
             // PiBVersion222_33
             // 
             PiBVersion222_33.BackColor = System.Drawing.Color.Black;
@@ -268,24 +286,6 @@ namespace PatchLauncher
             PiBVersion222_34.Name = "PiBVersion222_34";
             PiBVersion222_34.TabStop = false;
             PiBVersion222_34.Click += PiBVersion222_34_Click;
-            // 
-            // PiBVersion106
-            // 
-            PiBVersion106.BackColor = System.Drawing.Color.Black;
-            resources.ApplyResources(PiBVersion106, "PiBVersion106");
-            PiBVersion106.Cursor = Cursors.Hand;
-            PiBVersion106.Name = "PiBVersion106";
-            PiBVersion106.TabStop = false;
-            PiBVersion106.Click += PiBVersion106_Click;
-            // 
-            // PiBVersion103
-            // 
-            PiBVersion103.BackColor = System.Drawing.Color.Black;
-            resources.ApplyResources(PiBVersion103, "PiBVersion103");
-            PiBVersion103.Cursor = Cursors.Hand;
-            PiBVersion103.Name = "PiBVersion103";
-            PiBVersion103.TabStop = false;
-            PiBVersion103.Click += PiBVersion103_Click;
             // 
             // LblModExplanation
             // 
@@ -524,8 +524,8 @@ namespace PatchLauncher
             Controls.Add(PiBArrow);
             Controls.Add(PiBTwitch);
             Controls.Add(LblPatchNotes);
-            Controls.Add(LblFileName);
-            Controls.Add(LblDownloadSpeed);
+            Controls.Add(LblWorkerIOTask);
+            Controls.Add(LblWorkerFileName);
             Controls.Add(PiBThemeSwitcher);
             Controls.Add(PiBModDB);
             Controls.Add(PiBDiscord);
@@ -555,10 +555,10 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBTwitch).EndInit();
             ((System.ComponentModel.ISupportInitialize)PiBArrow).EndInit();
             PnlPlaceholder.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)PiBVersion103).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PiBVersion106).EndInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion222_33).EndInit();
             ((System.ComponentModel.ISupportInitialize)PiBVersion222_34).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion106).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion103).EndInit();
             NotifyContextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PibMute).EndInit();
             WinFormsMainMenuStrip.ResumeLayout(false);
@@ -581,9 +581,9 @@ namespace PatchLauncher
         private PictureBox PibMute;
         private ToolTip ToolTip;
         private Timer TmrPatchNotes;
-        private Label LblDownloadSpeed;
+        private Label LblWorkerFileName;
         private Button BtnInstall;
-        private Label LblFileName;
+        private Label LblWorkerIOTask;
         private Timer TmrAnimation;
         private FlowLayoutPanel PnlPlaceholder;
         private NotifyIcon SysTray;

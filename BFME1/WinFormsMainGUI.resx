@@ -252,37 +252,37 @@
   <metadata name="ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="LblDownloadSpeed.AutoSize" type="System.Boolean, mscorlib">
+  <data name="LblWorkerFileName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="LblDownloadSpeed.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="LblWorkerFileName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14.25pt</value>
   </data>
-  <data name="LblDownloadSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>606, 684</value>
+  <data name="LblWorkerFileName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>620, 684</value>
   </data>
-  <data name="LblDownloadSpeed.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="LblWorkerFileName.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 25</value>
   </data>
-  <data name="LblDownloadSpeed.TabIndex" type="System.Int32, mscorlib">
+  <data name="LblWorkerFileName.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="LblDownloadSpeed.Text" xml:space="preserve">
+  <data name="LblWorkerFileName.Text" xml:space="preserve">
     <value>@ 32 MB/s</value>
   </data>
-  <data name="LblDownloadSpeed.Visible" type="System.Boolean, mscorlib">
+  <data name="LblWorkerFileName.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;LblDownloadSpeed.Name" xml:space="preserve">
-    <value>LblDownloadSpeed</value>
+  <data name="&gt;&gt;LblWorkerFileName.Name" xml:space="preserve">
+    <value>LblWorkerFileName</value>
   </data>
-  <data name="&gt;&gt;LblDownloadSpeed.Type" xml:space="preserve">
+  <data name="&gt;&gt;LblWorkerFileName.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LblDownloadSpeed.Parent" xml:space="preserve">
+  <data name="&gt;&gt;LblWorkerFileName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;LblDownloadSpeed.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;LblWorkerFileName.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="BtnInstall.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
@@ -315,37 +315,37 @@
   <data name="&gt;&gt;BtnInstall.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="LblFileName.AutoSize" type="System.Boolean, mscorlib">
+  <data name="LblWorkerIOTask.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="LblFileName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="LblWorkerIOTask.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 14.25pt</value>
   </data>
-  <data name="LblFileName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>606, 712</value>
+  <data name="LblWorkerIOTask.Location" type="System.Drawing.Point, System.Drawing">
+    <value>620, 712</value>
   </data>
-  <data name="LblFileName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="LblWorkerIOTask.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 25</value>
   </data>
-  <data name="LblFileName.TabIndex" type="System.Int32, mscorlib">
+  <data name="LblWorkerIOTask.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="LblFileName.Text" xml:space="preserve">
+  <data name="LblWorkerIOTask.Text" xml:space="preserve">
     <value>Filename</value>
   </data>
-  <data name="LblFileName.Visible" type="System.Boolean, mscorlib">
+  <data name="LblWorkerIOTask.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;LblFileName.Name" xml:space="preserve">
-    <value>LblFileName</value>
+  <data name="&gt;&gt;LblWorkerIOTask.Name" xml:space="preserve">
+    <value>LblWorkerIOTask</value>
   </data>
-  <data name="&gt;&gt;LblFileName.Type" xml:space="preserve">
+  <data name="&gt;&gt;LblWorkerIOTask.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LblFileName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;LblWorkerIOTask.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;LblFileName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;LblWorkerIOTask.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="PibLoadingRing.Location" type="System.Drawing.Point, System.Drawing">
