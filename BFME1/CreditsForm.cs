@@ -15,6 +15,7 @@ namespace PatchLauncher
 
             KeyPreview = true;
 
+#warning C) CHANGE THIS ONE LOCAL FILE TO A REMOTE FILE!!!
             Uri _Wv2CreditsUri = new("file:///" + Path.Combine(Application.StartupPath, ConstStrings.C_HTMLFOLDER_NAME) + "/credits.html");
             Wv2Credits.Source = _Wv2CreditsUri;
 

@@ -13,11 +13,12 @@ namespace PatchLauncher
         {
             try
             {
-                File.WriteAllText(Path.Combine(Application.StartupPath, ConstStrings.C_LOGFOLDER_NAME, "webView2_Version.log"), CoreWebView2Environment.GetAvailableBrowserVersionString());
+                LogHelper.LoggerWebView2.Information("Webview2 Runtime Version: {0}", CoreWebView2Environment.GetAvailableBrowserVersionString());
             }
             catch (WebView2RuntimeNotFoundException)
             {
                 await RunWebViewSilentSetupAsync(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, "MicrosoftEdgeWebview2Setup.exe"));
+                LogHelper.LoggerWebView2.Information("Did not find WebView2 Runtime, so I installed it!");
             }
         }
 

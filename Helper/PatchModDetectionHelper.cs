@@ -1,7 +1,4 @@
-﻿using Serilog.Core;
-using Serilog;
-
-namespace Helper
+﻿namespace Helper
 {
     public class PatchModDetectionHelper
     {
@@ -46,8 +43,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_PATCHMODDETECTION_NAME)).CreateLogger();
-                _log.Error(ex.ToString());
+                LogHelper.LoggerPatchModDectection.Error(ex, "");
             }
         }
 

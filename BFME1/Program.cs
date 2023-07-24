@@ -1,6 +1,5 @@
 using Helper;
 using PatchLauncher.Properties;
-using Serilog;
 using System;
 using System.Configuration;
 using System.IO;
@@ -11,9 +10,11 @@ using System.Windows.Forms;
 
 namespace PatchLauncher
 {
-    internal static class Program
+    internal class Program
     {
         static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
+        readonly static string assemblyName = AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Name!;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -21,8 +22,6 @@ namespace PatchLauncher
 
         static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_BFME1LAUNCHER_NAME)).CreateLogger();
-
             try
             {
                 if (args.Length < 1)
@@ -31,12 +30,15 @@ namespace PatchLauncher
                 }
                 else if (args[0] != "--official")
                 {
+                    LogHelper.LoggerBFME1GUI.Warning("Parameter > {0} < not the expected one at void Main() args in {1}", args[0], assemblyName);
+                    File.Copy("lol", "lol2");
                     return;
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex, "");
+                return;
             }
 
             ApplicationConfiguration.Initialize();
@@ -76,14 +78,13 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex, "");
             }
 
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
                 GameFileTools _gameFileTools = new();
-                GameFileDictionary gameFileDictionary = _gameFileTools.LoadGameFileDictionary().Result;
-                string assemblyName = AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Name!;
+                GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
 
                 JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[assemblyName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
                 JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[assemblyName];
@@ -96,8 +97,8 @@ namespace PatchLauncher
                 Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
                 Settings.Default.Save();
 
-                _gameFileTools.EnsureBFMEAppdataFolderExists();
-                _gameFileTools.EnsureBFMEOptionsIniFileExists();
+                GameFileTools.EnsureBFMEAppdataFolderExists();
+                GameFileTools.EnsureBFMEOptionsIniFileExists();
 
                 //InstallLanguageList._DictionarylanguageSettings = gameFileDictionary.LanguagePacks["BFME1"]
                 //  .ToDictionary(x => x.RegistrySelectedLocale, x => new LanguageSettings { RegistrySelectedLanguageName = x.RegistrySelectedLanguageName, RegistrySelectedLanguage = x.RegistrySelectedLanguage, RegistrySelectedLocale = x.RegistrySelectedLocale, LanguagPackName = x.LanguagePackName });

@@ -1,13 +1,9 @@
-﻿using Serilog.Core;
-using Serilog;
-using WindowsShortcutFactory;
+﻿using WindowsShortcutFactory;
 
 namespace Helper
 {
     public class ShortCutHelper
     {
-        readonly Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_SHORTCUTS_NAME)).CreateLogger();
-
         public static bool DoesTheShortCutExist(string path, string shortcutName)
         {
             if (File.Exists(Path.Combine(path, shortcutName + ".lnk")))
@@ -20,7 +16,7 @@ namespace Helper
             }
         }
 
-        public void CreateShortcutToDesktop(string path, string linkName, string arguments = "", string description = "")
+        public static void CreateShortcutToDesktop(string path, string linkName, string arguments = "", string description = "")
         {
             using WindowsShortcut _windowsShortcut = new()
             {
@@ -37,11 +33,11 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerShortcuts.Error(ex, "");
             }
         }
 
-        public void CreateShortcutToStartMenu(string path, string linkName, string optionalSubPath = "", string arguments = "", string description = "")
+        public static void CreateShortcutToStartMenu(string path, string linkName, string optionalSubPath = "", string arguments = "", string description = "")
         {
             string shortcutTargetDirectory = (Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), optionalSubPath));
 
@@ -63,11 +59,11 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerShortcuts.Error(ex, "");
             }
         }
 
-        public void DeleteGameShortcutFromDesktop()
+        public static void DeleteGameShortcutFromDesktop()
         {
             try
             {
@@ -75,11 +71,11 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerShortcuts.Error(ex, "");
             }
         }
 
-        public void DeleteGameShortcutsFromStartMenu()
+        public static void DeleteGameShortcutsFromStartMenu()
         {
             try
             {
@@ -90,11 +86,11 @@ namespace Helper
             catch (Exception ex)
             {
 
-                _log.Error(ex.ToString());
+                LogHelper.LoggerShortcuts.Error(ex, "");
             }
         }
 
-        public void DeleteLauncherShortcutFromDesktop()
+        public static void DeleteLauncherShortcutFromDesktop()
         {
             try
             {
@@ -102,11 +98,11 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerShortcuts.Error(ex, "");
             }
         }
 
-        public void DeleteLauncherShortcutsFromStartMenu()
+        public static void DeleteLauncherShortcutsFromStartMenu()
         {
             try
             {
@@ -116,7 +112,7 @@ namespace Helper
             catch (Exception ex)
             {
 
-                _log.Error(ex.ToString());
+                LogHelper.LoggerShortcuts.Error(ex, "");
             }
         }
     }

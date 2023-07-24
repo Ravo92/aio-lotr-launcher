@@ -1,16 +1,12 @@
-using AutoUpdaterDotNET;
 using Helper;
 using Helper.UserControls;
 using PatchLauncher.Properties;
-using Serilog;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace PatchLauncher
@@ -20,8 +16,10 @@ namespace PatchLauncher
         int iconNumber = Settings.Default.BackgroundMusicIcon;
         readonly SoundPlayerHelper _soundPlayerHelper = new();
 
-        readonly LanguagePacks _languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+        LanguagePacks _languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
         readonly MainPacks _mainPack = JSONDataListHelper._MainPackSettings;
+        readonly PatchPacks _patchPack = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
+        LanguageFiles? _patchPackLanguages;
 
         static bool _IsLauncherCurrentlyWorking = false;
 
@@ -82,17 +80,15 @@ namespace PatchLauncher
 
         public WinFormsMainGUI()
         {
-            InitializeComponent();
             WebView2Helper.InitializeWebView2Settings();
+            InitializeComponent();
 
             //var test = JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
-
             BtnInstall.Text = Strings.BtnInstall_TextLaunch;
 
             //Main Form style behaviour
-
             PibLoadingRing.Visible = true;
             PibLoadingBorder.Visible = true;
             PiBArrow.Visible = false;
@@ -213,8 +209,7 @@ namespace PatchLauncher
         private async void BFME1_Shown(object sender, EventArgs e)
         {
             IsLauncherCurrentlyWorking = true;
-            PatchPacks _patchpack222 = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
-            LanguageFiles patchPackLanguages = _patchpack222.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+            LanguageFiles patchPackLanguages = _patchPack.LanguageFiles["de"];
 
             try
             {
@@ -261,9 +256,9 @@ namespace PatchLauncher
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
 
-                    await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5);
+                    await InstallUpdatRepairRoutine(_patchPack.FileName, _patchPack.URL, _patchPack.MD5);
 
-                    if (_patchpack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
+                    if (_patchPack.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
                         await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                     }
@@ -286,7 +281,7 @@ namespace PatchLauncher
 
                     if (Settings.Default.LatestBetaPatchVersion > Settings.Default.BetaChannelVersion)
                     {
-                        await InstallUpdatRepairRoutine(_patchpack222.FileName, _patchpack222.URL, _patchpack222.MD5);
+                        await InstallUpdatRepairRoutine(_patchPack.FileName, _patchPack.URL, _patchPack.MD5);
                     }
                 }
 
@@ -325,18 +320,13 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex, "");
             }
 
             IsLauncherCurrentlyWorking = false;
-
-            if (!IsLauncherCurrentlyWorking)
-            {
-                CheckForUpdates();
-            }
         }
 
-        public void GameisClosed(object? sender, EventArgs e)
+        public void GameisClosedEvent(object? sender, EventArgs e)
         {
             if (InvokeRequired)
             {
@@ -359,58 +349,6 @@ namespace PatchLauncher
             if (Settings.Default.PlayBackgroundMusic)
             {
                 _soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
-            }
-        }
-
-        private async void BtnInstall_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Settings.Default.IsGameInstalled == false)
-                {
-                    InstallPathDialog _install = new();
-
-                    DialogResult dr = _install.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        IsLauncherCurrentlyWorking = true;
-
-                        Task<bool> _taskPrepareInstallFolder = PrepareInstallFolder();
-                        _taskPrepareInstallFolder.Wait();
-
-                        if (!_taskPrepareInstallFolder.Result)
-                        {
-                            throw new Exception("Question for cleaning target install folder answered with no");
-                        }
-
-                        RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, _languagePackSettings.RegistrySelectedLocale, _languagePackSettings.RegistrySelectedLanguageName, _languagePackSettings.RegistrySelectedLanguage);
-
-                        await InstallUpdatRepairRoutine(ConstStrings.C_MAINGAMEFILE_ZIP, _mainPack.URL, _mainPack.MD5);
-                        await InstallUpdatRepairRoutine(_languagePackSettings.LanguagePackName, _languagePackSettings.URL, _languagePackSettings.MD5);
-
-                        if (Settings.Default.CreateDesktopShortcut) //&& !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
-                        {
-                            GameDesktopShortcutToolStripMenuItem.PerformClick();
-                        }
-
-                        if (Settings.Default.CreateStartMenuShortcut) //&& !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
-                        {
-                            GameStartmenuShortcutsToolStripMenuItem.PerformClick();
-                        }
-
-                        _taskPrepareInstallFolder.Dispose();
-
-                        IsLauncherCurrentlyWorking = false;
-                    }
-                }
-                else
-                {
-                    LaunchGameToolStripMenuItem.PerformClick();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.ToString());
             }
         }
 
@@ -592,7 +530,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -685,7 +623,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -768,7 +706,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -848,7 +786,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
             }
 
             IsLauncherCurrentlyWorking = false;
@@ -859,7 +797,7 @@ namespace PatchLauncher
             TmrAnimation.Enabled = true;
         }
 
-        public async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string md5hash)
+        public async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string CorrectMD5HashValue)
         {
             PBarActualFile.Value = 0;
             PBarActualFile.Maximum = 100;
@@ -886,7 +824,20 @@ namespace PatchLauncher
                 GameFileTools _gameFileTools = new();
 
                 await _gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, DownloadUrl, progressHandlerDownload);
-                await _gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction);
+
+                string calculatedMD5Value = MD5Tools.CalculateMD5(ZIPFileName);
+
+                if (calculatedMD5Value == CorrectMD5HashValue)
+                {
+                    await _gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction);
+                }
+                else
+                {
+                    LogHelper.LoggerBFME1GUI.Error(string.Format("MD5 HashSum check failed. Should be: {0} was: {1}", CorrectMD5HashValue, calculatedMD5Value));
+                    LogHelper.LoggerBFME1GUI.Information(string.Format("Deleting file > {0} < and retry Download...", ZIPFileName));
+                    File.Delete(ZIPFileName);
+                    await _gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, DownloadUrl, progressHandlerDownload);
+                }
 
                 if (Settings.Default.IsPatchModsShown)
                 {
@@ -899,7 +850,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
             }
         }
 
@@ -929,7 +880,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                Log.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
                 return Task.FromResult(false);
             }
         }
@@ -945,34 +896,6 @@ namespace PatchLauncher
         public void TooltipPopup(object sender, PopupEventArgs e)
         {
             e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), FontHelper.GetFont(0, 16));
-        }
-
-        public static void CheckForUpdates()
-        {
-            try
-            {
-                AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
-                AutoUpdater.InstalledVersion = Assembly.GetEntryAssembly()!.GetName().Version;
-                AutoUpdater.ShowSkipButton = false;
-                AutoUpdater.ShowRemindLaterButton = true;
-                AutoUpdater.LetUserSelectRemindLater = false;
-                AutoUpdater.RemindLaterTimeSpan = RemindLaterFormat.Minutes;
-                AutoUpdater.RemindLaterAt = 10;
-                AutoUpdater.UpdateFormSize = new Size(1296, 759);
-                AutoUpdater.HttpUserAgent = "BFME Launcher Update";
-                AutoUpdater.AppTitle = Application.ProductName;
-                AutoUpdater.RunUpdateAsAdmin = true;
-                AutoUpdater.DownloadPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME);
-                AutoUpdater.ClearAppDirectory = false;
-                AutoUpdater.ReportErrors = false;
-
-                string jsonPath = Path.Combine(Environment.CurrentDirectory, "AutoUpdaterSettings.json");
-                AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(jsonPath);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.ToString());
-            }
         }
 
         private void TmrPatchNotes_Tick(object? sender, EventArgs e)
@@ -1119,6 +1042,7 @@ namespace PatchLauncher
                 Settings.Default.SelectedOlderPatch = false;
             }
 
+            Wv2Patchnotes.Dispose();
             Settings.Default.Save();
         }
 
@@ -1169,12 +1093,11 @@ namespace PatchLauncher
             _soundPlayerHelper.StopTheme();
 
             _process.WaitForExitAsync();
-            _process.Exited += GameisClosed;
+            _process.Exited += GameisClosedEvent;
         }
 
         private void CloseTheLauncherToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Wv2Patchnotes.Dispose();
             Application.Exit();
         }
 
@@ -1230,15 +1153,6 @@ namespace PatchLauncher
             }
         }
 
-        private async void RepairGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            IsLauncherCurrentlyWorking = true;
-
-            //await RepairFileHelper.RepairFeature();
-
-            IsLauncherCurrentlyWorking = false;
-        }
-
         private void LauncherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LauncherOptionsForm _Launcheroptions = new();
@@ -1253,16 +1167,14 @@ namespace PatchLauncher
 
         private void GameDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutHelper _shortCutHelper = new();
-
             if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
             {
-                _shortCutHelper.DeleteGameShortcutFromDesktop();
+                ShortCutHelper.DeleteGameShortcutFromDesktop();
                 GameDesktopShortcutToolStripMenuItem.Checked = false;
             }
             else
             {
-                _shortCutHelper.CreateShortcutToDesktop(Path.Combine(RegistryService.GameInstallPath(),
+                ShortCutHelper.CreateShortcutToDesktop(Path.Combine(RegistryService.GameInstallPath(),
                     ConstStrings.C_MAIN_GAME_FILE),
                     ConstStrings.C_GAMETITLE_NAME_EN,
                     Settings.Default.StartGameWindowed == true ? "-win" : "");
@@ -1272,22 +1184,20 @@ namespace PatchLauncher
 
         private void GameStartmenuShortcutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutHelper _shortCutHelper = new();
-
             if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", ConstStrings.C_GAMETITLE_NAME_EN),
                 ConstStrings.C_GAMETITLE_NAME_EN))
             {
-                _shortCutHelper.DeleteGameShortcutsFromStartMenu();
+                ShortCutHelper.DeleteGameShortcutsFromStartMenu();
                 GameStartmenuShortcutsToolStripMenuItem.Checked = false;
             }
             else
             {
-                _shortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN,
+                ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_MAIN_GAME_FILE), ConstStrings.C_GAMETITLE_NAME_EN,
                     Path.Combine("Programs", "Electronic Arts",
                     ConstStrings.C_GAMETITLE_NAME_EN),
                     Settings.Default.StartGameWindowed == true ? "-win" : "");
 
-                _shortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder",
+                ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder",
                     Path.Combine("Programs",
                     "Electronic Arts",
                     ConstStrings.C_GAMETITLE_NAME_EN));
@@ -1298,38 +1208,104 @@ namespace PatchLauncher
 
         private void LauncherDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutHelper _shortCutHelper = new();
-
             if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
             {
-                _shortCutHelper.DeleteLauncherShortcutFromDesktop();
+                ShortCutHelper.DeleteLauncherShortcutFromDesktop();
                 LauncherDesktopShortcutToolStripMenuItem.Checked = false;
             }
             else
             {
-                _shortCutHelper.CreateShortcutToDesktop(Path.Combine(Application.StartupPath, "Restarter.exe"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME, "--startLauncher");
+                ShortCutHelper.CreateShortcutToDesktop(Path.Combine(Application.StartupPath, "Restarter.exe"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME, "--startLauncher");
                 LauncherDesktopShortcutToolStripMenuItem.Checked = true;
             }
         }
 
         private void LauncherStartmenuShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShortCutHelper _shortCutHelper = new();
-
             if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher"),
                 ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
             {
-                _shortCutHelper.DeleteLauncherShortcutsFromStartMenu();
+                ShortCutHelper.DeleteLauncherShortcutsFromStartMenu();
                 GameStartmenuShortcutsToolStripMenuItem.Checked = false;
             }
             else
             {
-                _shortCutHelper.CreateShortcutToStartMenu(Path.Combine(Application.StartupPath, "Restarter.exe"),
+                ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(Application.StartupPath, "Restarter.exe"),
                     ConstStrings.C_LAUNCHER_SHORTCUT_NAME,
                     Path.Combine("Programs", "Patch 2.22 Launcher"),
                     "--startLauncher");
 
                 LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
+            }
+        }
+
+        private async void RepairGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IsLauncherCurrentlyWorking = true;
+
+            //await RepairFileHelper.RepairFeature();
+
+            IsLauncherCurrentlyWorking = false;
+        }
+
+        private async void BtnInstall_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Settings.Default.IsGameInstalled == false)
+                {
+                    InstallPathDialog _install = new();
+
+                    DialogResult dr = _install.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        IsLauncherCurrentlyWorking = true;
+
+                        Task<bool> _taskPrepareInstallFolder = PrepareInstallFolder();
+                        _taskPrepareInstallFolder.Wait();
+
+                        if (!_taskPrepareInstallFolder.Result)
+                        {
+                            throw new Exception("Question for cleaning target install folder answered with no");
+                        }
+
+                        _languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+
+                        RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, _languagePackSettings.RegistrySelectedLocale, _languagePackSettings.RegistrySelectedLanguageName, _languagePackSettings.RegistrySelectedLanguage);
+
+                        await InstallUpdatRepairRoutine(ConstStrings.C_MAINGAMEFILE_ZIP, _mainPack.URL, _mainPack.MD5);
+                        await InstallUpdatRepairRoutine(_languagePackSettings.LanguagePackName, _languagePackSettings.URL, _languagePackSettings.MD5);
+                        await InstallUpdatRepairRoutine(_patchPack.FileName, _patchPack.URL, _patchPack.MD5);
+
+                        if (_patchPack.LanguageFiles.ContainsKey(_languagePackSettings.RegistrySelectedLocale))
+                        {
+                            _patchPackLanguages = _patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+                            await InstallUpdatRepairRoutine(_patchPackLanguages.FileName, _patchPackLanguages.URL, _patchPackLanguages.MD5);
+                        }
+
+                        if (Settings.Default.CreateDesktopShortcut) //&& !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                        {
+                            GameDesktopShortcutToolStripMenuItem.PerformClick();
+                        }
+
+                        if (Settings.Default.CreateStartMenuShortcut) //&& !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs\\Electronic Arts" + ConstStrings.C_GAMETITLE_NAME_EN), ConstStrings.C_GAMETITLE_NAME_EN))
+                        {
+                            GameStartmenuShortcutsToolStripMenuItem.PerformClick();
+                        }
+
+                        _taskPrepareInstallFolder.Dispose();
+
+                        IsLauncherCurrentlyWorking = false;
+                    }
+                }
+                else
+                {
+                    LaunchGameToolStripMenuItem.PerformClick();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
             }
         }
     }

@@ -2,12 +2,14 @@
 using System.Reflection;
 using System.Text;
 using Helper;
+using Serilog;
 
 namespace Restarter
 {
     internal class Program
     {
         static readonly string programPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+
         static void Main(string[] args)
         {
             try
@@ -16,6 +18,9 @@ namespace Restarter
                 {
                     return;
                 }
+
+                Task LauncherUpdateCheck = new(LauncherUpdater.CheckForUpdates);
+                LauncherUpdateCheck.Wait();
 
                 switch (args[0])
                 {
@@ -64,8 +69,7 @@ namespace Restarter
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                LogHelper.LoggerRestarter.Error(ex, "");
             }
         }
 
@@ -83,8 +87,7 @@ namespace Restarter
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                LogHelper.LoggerRestarter.Error(ex, "");
             }
         }
 
@@ -102,8 +105,7 @@ namespace Restarter
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                LogHelper.LoggerRestarter.Error(ex, "");
             }
         }
 
@@ -121,8 +123,7 @@ namespace Restarter
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                LogHelper.LoggerRestarter.Error(ex, "");
             }
         }
 
@@ -153,8 +154,7 @@ namespace Restarter
             }
             catch (Exception ex)
             {
-                using StreamWriter file = new(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_ERRORLOGGING_FILE), append: true);
-                file.WriteLineAsync(ConstStrings.LogTime + ex.ToString());
+                LogHelper.LoggerRestarter.Error(ex, "");
             }
 
             return selectedGame;

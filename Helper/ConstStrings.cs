@@ -59,9 +59,13 @@ namespace Helper
         public const string C_LOGFILE_GAMEFILETOOLS_NAME = "GameFileTools.log";
         public const string C_LOGFILE_PATCHMODDETECTION_NAME = "PatchModDetection.log";
         public const string C_LOGFILE_REPAIRFILE_NAME = "RepairFile.log";
-        public const string C_LOGFILE_SHORTCUTS_NAME = "RepairFile.log";
+        public const string C_LOGFILE_SHORTCUTS_NAME = "ShortCuts.log";
         public const string C_LOGFILE_ZIPFILE_NAME = "ZIPFile.log";
+        public const string C_LOGFILE_RESTARTER_NAME = "Restarter.log";
+        public const string C_LOGFILE_WEBVIEW2_NAME = "WebView2.log";
         public const string C_LOGFILE_BFME1LAUNCHER_NAME = "BFME1Launcher.log";
+        public const string C_LOGFILE_BFME2LAUNCHER_NAME = "BFME2Launcher.log";
+        public const string C_LOGFILE_BFME25LAUNCHER_NAME = "BFME25Launcher.log";
 
         public const string C_LAUNCHERSELECTEDINFOFILE = "selectedGameLauncher.txt";
         public const string C_JSON_GAMEDICTIONARY_FILE = "GameFileDictionary.json";
@@ -95,9 +99,5 @@ namespace Helper
         public static readonly Image C_BUTTONIMAGE_HOVER = Resources.btnHover;
         public static readonly Image C_BUTTONIMAGE_CLICK = Resources.btnClick;
         public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Resources.btnClickgr;
-
-        //////////////////////////////////////////////////////////////////////////////
-
-        public static readonly string LogTime = Environment.NewLine + Environment.NewLine + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + Environment.NewLine;
     }
 }

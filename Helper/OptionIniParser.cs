@@ -2,18 +2,17 @@
 {
     public class OptionIniParser
     {
-        // TODO: Change the Game Directory detection Behaviours when game isnt installed yet, so every key defaults to "noValue"...
         public static readonly string fullPathOptionIniFile = Directory.CreateDirectory(RegistryService.GameAppdataFolderPath()).ToString();
 
         public static string ReadKey(string keyName)
         {
             StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
             {
-                string? keyValue = null;
+                string keyValue = ConstStrings.C_REGISTRY_SERVICE_WRONG_PARAMETER;
                 using (_streamReader)
                 {
                     string importedOptionsFileText;
-                    while ((importedOptionsFileText = _streamReader.ReadLine()) != null)
+                    while ((importedOptionsFileText = _streamReader.ReadLine()!) != null)
                     {
                         string[] parts = importedOptionsFileText.Split(" = ");
                         if ((parts.Length == 2) && (parts[0] == keyName))

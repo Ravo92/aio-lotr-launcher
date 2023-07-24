@@ -1,7 +1,4 @@
-﻿using Serilog.Core;
-using Serilog;
-
-namespace Helper
+﻿namespace Helper
 {
     public class RepairFileHelper
     {

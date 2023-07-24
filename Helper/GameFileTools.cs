@@ -1,8 +1,6 @@
 ﻿using Downloader;
 using Newtonsoft.Json;
 using System.ComponentModel;
-using Serilog;
-using Serilog.Core;
 using SevenZipExtractor;
 
 namespace Helper
@@ -14,13 +12,10 @@ namespace Helper
         public int counter = 0;
         public int Percentage = 0;
 
-        private readonly Logger _log = new LoggerConfiguration().MinimumLevel.Error().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_GAMEFILETOOLS_NAME)).CreateLogger();
-
         private int _DownloadProgressChangedLimiter = 0;
+        private IProgress<ProgressHelper>? OverallProgress;
 
-        IProgress<ProgressHelper> _overallProgress;
-
-        public async Task<GameFileDictionary> LoadGameFileDictionary()
+        public static async Task<GameFileDictionary> LoadGameFileDictionary()
         {
             GameFileDictionary _gameFileDictionary = new();
             string json = "noInternet";
@@ -33,7 +28,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerGameFileTools.Error(ex, "");
             }
 
             // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
@@ -62,6 +57,7 @@ namespace Helper
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
             {
+                LogHelper.LoggerGameFileTools.Error(ex, "");
                 return "noInternet";
             }
         }
@@ -82,7 +78,7 @@ namespace Helper
                     ClearPackageOnCompletionWithFailure = true
                 };
 
-                _overallProgress = downloadProgress;
+                OverallProgress = downloadProgress;
 
                 var downloader = new DownloadService(downloadOpt);
 
@@ -97,7 +93,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerGameFileTools.Error(ex, "");
             }
         }
 
@@ -131,14 +127,14 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerGameFileTools.Error(ex, "");
                 return Task.FromException(ex);
             }
         }
 
         private void OnDownloadStarted(object? sender, DownloadStartedEventArgs e)
         {
-            _overallProgress.Report(new ProgressHelper() { CurrentFileName = EntryFilename, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
+            OverallProgress!.Report(new ProgressHelper() { CurrentFileName = EntryFilename, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
         }
 
         private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
@@ -149,7 +145,8 @@ namespace Helper
             }
             else
             {
-                _overallProgress.Report(new ProgressHelper() {
+                OverallProgress!.Report(new ProgressHelper()
+                {
                     PercentageValue = e.ProgressPercentage,
                     DownloadSpeedSizeInBytes = e.BytesPerSecondSpeed,
                     TotalDownloadSizeInBytes = e.TotalBytesToReceive,
@@ -164,12 +161,12 @@ namespace Helper
         {
             if (e.Error != null)
             {
-                _overallProgress.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
-                _log.Error(e.Error.Message);
+                OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
+                LogHelper.LoggerGameFileTools.Error(e.Error.Message);
             }
         }
 
-        public bool EnsureBFMEAppdataFolderExists()
+        public static bool EnsureBFMEAppdataFolderExists()
         {
             try
             {
@@ -181,12 +178,12 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerGameFileTools.Error(ex, "");
                 return false;
             }
         }
 
-        private void CreateBFMEAppdataFolder()
+        private static void CreateBFMEAppdataFolder()
         {
             try
             {
@@ -194,11 +191,11 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerGameFileTools.Error(ex, "");
             }
         }
 
-        public void EnsureBFMEOptionsIniFileExists()
+        public static void EnsureBFMEOptionsIniFileExists()
         {
             try
             {
@@ -207,7 +204,7 @@ namespace Helper
             }
             catch (Exception ex)
             {
-                _log.Error(ex.ToString());
+                LogHelper.LoggerGameFileTools.Error(ex, "");
             }
         }
     }
