@@ -134,18 +134,6 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch106Installed {
-            get {
-                return ((bool)(this["IsPatch106Installed"]));
-            }
-            set {
-                this["IsPatch106Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SelectedOlderPatch {
             get {
                 return ((bool)(this["SelectedOlderPatch"]));
@@ -176,18 +164,6 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["IsPatchModsShown"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch106Downloaded {
-            get {
-                return ((bool)(this["IsPatch106Downloaded"]));
-            }
-            set {
-                this["IsPatch106Downloaded"] = value;
             }
         }
         
@@ -283,54 +259,6 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["CreateDesktopShortcut"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch33Downloaded {
-            get {
-                return ((bool)(this["IsPatch33Downloaded"]));
-            }
-            set {
-                this["IsPatch33Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch33Installed {
-            get {
-                return ((bool)(this["IsPatch33Installed"]));
-            }
-            set {
-                this["IsPatch33Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch34Downloaded {
-            get {
-                return ((bool)(this["IsPatch34Downloaded"]));
-            }
-            set {
-                this["IsPatch34Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch34Installed {
-            get {
-                return ((bool)(this["IsPatch34Installed"]));
-            }
-            set {
-                this["IsPatch34Installed"] = value;
             }
         }
         

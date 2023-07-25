@@ -38,9 +38,9 @@ namespace PatchLauncher
             #region Styles
             //Main Form style behaviour
 
-            PibHeader.Image = Helper.Properties.Resources.header;
+            PibHeader.Image = Helper.Properties.Resources.BFME1_Header;
             PibBorderLauncherOptions.Image = Helper.Properties.Resources.borderRectangle;
-            BackgroundImage = Helper.Properties.Resources.bgMap;
+            BackgroundImage = Helper.Properties.Resources.BGMap;
 
             CmBLanguage.SelectedIndex = FlagLanguageIndex;
 
@@ -48,21 +48,21 @@ namespace PatchLauncher
             BtnApply.FlatAppearance.BorderSize = 0;
             BtnApply.FlatStyle = FlatStyle.Flat;
             BtnApply.BackColor = Color.Transparent;
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnApply.Font = FontHelper.GetFont(0, 16);
             BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnCancel.FlatAppearance.BorderSize = 0;
             BtnCancel.FlatStyle = FlatStyle.Flat;
             BtnCancel.BackColor = Color.Transparent;
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnCancel.Font = FontHelper.GetFont(0, 16);
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnDefault.FlatAppearance.BorderSize = 0;
             BtnDefault.FlatStyle = FlatStyle.Flat;
             BtnDefault.BackColor = Color.Transparent;
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnDefault.Font = FontHelper.GetFont(0, 16);
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
@@ -143,9 +143,9 @@ namespace PatchLauncher
                 FlagEAX = false;
 
             if (FlagEAXFileExists && FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
             ChkWindowed.FlatAppearance.BorderSize = 0;
             ChkWindowed.FlatStyle = FlatStyle.Flat;
@@ -153,9 +153,9 @@ namespace PatchLauncher
             ChkWindowed.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
             ChkBrutalAI.FlatAppearance.BorderSize = 0;
             ChkBrutalAI.FlatStyle = FlatStyle.Flat;
@@ -163,9 +163,9 @@ namespace PatchLauncher
             ChkBrutalAI.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
             ChkShowPatchesFirst.FlatAppearance.BorderSize = 0;
             ChkShowPatchesFirst.FlatStyle = FlatStyle.Flat;
@@ -173,9 +173,9 @@ namespace PatchLauncher
             ChkShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
             ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
             ChkUseBetaChannel.FlatStyle = FlatStyle.Flat;
@@ -183,9 +183,9 @@ namespace PatchLauncher
             ChkUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
 
             if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelected;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
             #endregion
         }
@@ -198,29 +198,29 @@ namespace PatchLauncher
             FlagWindowed = false;
             FlagBrutalAI = false;
             FlagShowPatchesFirst = false;
-            ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
-            ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
-            ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
-            ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
-            ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
+            ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+            ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+            ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+            ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+            ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
         {
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnDefault_MouseEnter(object sender, EventArgs e)
         {
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnDefault.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnDefault_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
@@ -252,20 +252,20 @@ namespace PatchLauncher
 
         private void BtnApply_MouseLeave(object sender, EventArgs e)
         {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnApply_MouseEnter(object sender, EventArgs e)
         {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnApply.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnApply_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
@@ -277,20 +277,20 @@ namespace PatchLauncher
 
         private void BtnCancel_MouseLeave(object sender, EventArgs e)
         {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnCancel_MouseEnter(object sender, EventArgs e)
         {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnCancel.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnCancel_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
@@ -354,12 +354,12 @@ namespace PatchLauncher
         {
             if (FlagShowPatchesFirst == true)
             {
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagShowPatchesFirst = false;
             }
             else
             {
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagShowPatchesFirst = true;
             }
         }
@@ -367,37 +367,37 @@ namespace PatchLauncher
         private void ChkShowPatchesFirst_MouseEnter(object sender, EventArgs e)
         {
             if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkShowPatchesFirst_MouseLeave(object sender, EventArgs e)
         {
             if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelected;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselected;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkShowPatchesFirst_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkEAX_Click(object sender, EventArgs e)
         {
             if (FlagShowPatchesFirst == true)
             {
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagEAX = false;
             }
             else
             {
-                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagEAX = true;
             }
         }
@@ -405,37 +405,37 @@ namespace PatchLauncher
         private void ChkEAX_MouseEnter(object sender, EventArgs e)
         {
             if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkEAX_MouseLeave(object sender, EventArgs e)
         {
             if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelected;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselected;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkEAX_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkEAX.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkWindowed_MouseClick(object sender, MouseEventArgs e)
         {
             if (FlagWindowed == true)
             {
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagWindowed = false;
             }
             else
             {
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagWindowed = true;
             }
         }
@@ -443,38 +443,38 @@ namespace PatchLauncher
         private void ChkWindowed_MouseEnter(object sender, EventArgs e)
         {
             if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkWindowed_MouseLeave(object sender, EventArgs e)
         {
             if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelected;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselected;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkWindowed_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagWindowed)
-                ChkWindowed.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkWindowed.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkBrutalAI_MouseClick(object sender, MouseEventArgs e)
         {
             if (FlagBrutalAI == true)
             {
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 LblWarning.Hide();
                 FlagBrutalAI = false;
             }
             else
             {
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 LblWarning.Show();
                 FlagBrutalAI = true;
             }
@@ -483,38 +483,38 @@ namespace PatchLauncher
         private void ChkBrutalAI_MouseEnter(object sender, EventArgs e)
         {
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkBrutalAI_MouseLeave(object sender, EventArgs e)
         {
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelected;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselected;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkBrutalAI_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagBrutalAI)
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkBrutalAI.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkUseBetaChannel_MouseClick(object sender, MouseEventArgs e)
         {
             if (FlagUseBetaChannel == true)
             {
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagUseBetaChannel = false;
 
             }
             else
             {
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagUseBetaChannel = true;
             }
         }
@@ -522,25 +522,25 @@ namespace PatchLauncher
         private void ChkUseBetaChannel_MouseEnter(object sender, EventArgs e)
         {
             if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkUseBetaChannel_MouseLeave(object sender, EventArgs e)
         {
             if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelected;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselected;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkUseBetaChannel_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿namespace Helper.UserControls
 {
-    partial class Patch222Buttons
+    partial class Patch106Button
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,23 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            LblPatchVersion = new CustomLabel();
             PibSelectedIcon = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)PibSelectedIcon).BeginInit();
             SuspendLayout();
-            // 
-            // LblPatchVersion
-            // 
-            LblPatchVersion.AutoSize = true;
-            LblPatchVersion.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            LblPatchVersion.ImeMode = ImeMode.NoControl;
-            LblPatchVersion.Location = new Point(0, 172);
-            LblPatchVersion.Name = "LblPatchVersion";
-            LblPatchVersion.OutlineForeColor = Color.Black;
-            LblPatchVersion.OutlineWidth = 4F;
-            LblPatchVersion.Size = new Size(100, 25);
-            LblPatchVersion.TabIndex = 29;
-            LblPatchVersion.Text = "Version 35";
             // 
             // PibSelectedIcon
             // 
@@ -58,25 +44,22 @@
             PibSelectedIcon.TabIndex = 30;
             PibSelectedIcon.TabStop = false;
             // 
-            // Patch222Buttons
+            // Patch106Button
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BackgroundImage = Properties.Resources.BFME1PatchModBG222;
+            BackgroundImage = Properties.Resources.BFME1PatchModBG106;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(LblPatchVersion);
             Controls.Add(PibSelectedIcon);
             Cursor = Cursors.Hand;
             DoubleBuffered = true;
-            Name = "Patch222Buttons";
+            Name = "Patch106Button";
             Size = new Size(150, 200);
             ((System.ComponentModel.ISupportInitialize)PibSelectedIcon).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private CustomLabel LblPatchVersion;
         private PictureBox PibSelectedIcon;
     }
 }

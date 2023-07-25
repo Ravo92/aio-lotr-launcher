@@ -41,14 +41,14 @@ namespace PatchLauncher
             BtnChoose.FlatAppearance.BorderSize = 0;
             BtnChoose.FlatStyle = FlatStyle.Flat;
             BtnChoose.BackColor = Color.Transparent;
-            BtnChoose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnChoose.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnChoose.Font = FontHelper.GetFont(0, 14);
             BtnChoose.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnAccept.FlatAppearance.BorderSize = 0;
             BtnAccept.FlatStyle = FlatStyle.Flat;
             BtnAccept.BackColor = Color.Transparent;
-            BtnAccept.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnAccept.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnAccept.Font = FontHelper.GetFont(0, 14);
             BtnAccept.ForeColor = Color.FromArgb(192, 145, 69);
 
@@ -63,11 +63,11 @@ namespace PatchLauncher
 
             if (FlagCreateDesktopShortcut)
             {
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkSelected;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
             else
             {
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkUnselected;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
 
             ChkStartMenuShortcut.FlatAppearance.BorderSize = 0;
@@ -78,18 +78,18 @@ namespace PatchLauncher
             if (FlagCreateStartMenuShortcut)
             {
                 Settings.Default.CreateStartMenuShortcut = true;
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkSelected;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
             else
             {
                 Settings.Default.CreateStartMenuShortcut = false;
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkUnselected;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
 
             PibLanguageSupport.Image = Helper.Properties.Resources.languageSupportTransparent;
             PibPathBorder.Image = Helper.Properties.Resources.borderRectangleSmallest;
             PibLanguageSupport.BackColor = Color.Transparent;
-            BackgroundImage = Helper.Properties.Resources.bgMap;
+            BackgroundImage = Helper.Properties.Resources.BGMap;
 
             if (Settings.Default.GameInstallPath != "")
             {
@@ -125,21 +125,21 @@ namespace PatchLauncher
 
         private void BtnChoose_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnChoose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnChoose.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnChoose.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private void BtnChoose_MouseEnter(object sender, EventArgs e)
         {
-            BtnChoose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnChoose.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnChoose.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnChoose_MouseLeave(object sender, EventArgs e)
         {
-            BtnChoose.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnChoose.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnChoose.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
@@ -156,21 +156,21 @@ namespace PatchLauncher
 
         private void BtnAccept_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnAccept.BackgroundImage = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnAccept.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnAccept.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
         private void BtnAccept_MouseEnter(object sender, EventArgs e)
         {
-            BtnAccept.BackgroundImage = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnAccept.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnAccept.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnAccept_MouseLeave(object sender, EventArgs e)
         {
-            BtnAccept.BackgroundImage = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnAccept.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnAccept.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
@@ -178,12 +178,12 @@ namespace PatchLauncher
         {
             if (FlagCreateDesktopShortcut == true)
             {
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagCreateDesktopShortcut = false;
             }
             else
             {
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagCreateDesktopShortcut = true;
             }
         }
@@ -191,37 +191,37 @@ namespace PatchLauncher
         private void ChkDesktopShortcut_MouseLeave(object sender, EventArgs e)
         {
             if (FlagCreateDesktopShortcut)
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkSelected;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkUnselected;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkDesktopShortcut_MouseEnter(object sender, EventArgs e)
         {
             if (FlagCreateDesktopShortcut)
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkDesktopShortcut_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagCreateDesktopShortcut)
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkDesktopShortcut.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkDesktopShortcut.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkStartMenuShortcut_Click(object sender, EventArgs e)
         {
             if (FlagCreateStartMenuShortcut == true)
             {
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagCreateStartMenuShortcut = false;
             }
             else
             {
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagCreateStartMenuShortcut = true;
             }
         }
@@ -229,25 +229,25 @@ namespace PatchLauncher
         private void ChkStartMenuShortcut_MouseLeave(object sender, EventArgs e)
         {
             if (FlagCreateStartMenuShortcut)
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkSelected;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkUnselected;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkStartMenuShortcut_MouseEnter(object sender, EventArgs e)
         {
             if (FlagCreateStartMenuShortcut)
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkStartMenuShortcut_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagCreateStartMenuShortcut)
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkStartMenuShortcut.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void CmbSelectGameLanguage_SelectedIndexChanged(object sender, EventArgs e)

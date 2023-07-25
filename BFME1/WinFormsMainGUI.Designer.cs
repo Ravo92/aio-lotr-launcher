@@ -50,9 +50,6 @@ namespace PatchLauncher
             PiBArrow = new PictureBox();
             PnlPlaceholder = new FlowLayoutPanel();
             PiBVersion103 = new PictureBox();
-            PiBVersion106 = new PictureBox();
-            PiBVersion222_33 = new PictureBox();
-            PiBVersion222_34 = new PictureBox();
             LblModExplanation = new CustomLabel();
             NotifyContextMenu = new ContextMenuStrip(components);
             MenuItemLaunchGame = new ToolStripMenuItem();
@@ -102,9 +99,6 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBArrow).BeginInit();
             PnlPlaceholder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PiBVersion103).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion106).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_33).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_34).BeginInit();
             NotifyContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PibMute).BeginInit();
             WinFormsMainMenuStrip.SuspendLayout();
@@ -246,9 +240,6 @@ namespace PatchLauncher
             resources.ApplyResources(PnlPlaceholder, "PnlPlaceholder");
             PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
             PnlPlaceholder.Controls.Add(PiBVersion103);
-            PnlPlaceholder.Controls.Add(PiBVersion106);
-            PnlPlaceholder.Controls.Add(PiBVersion222_33);
-            PnlPlaceholder.Controls.Add(PiBVersion222_34);
             PnlPlaceholder.Name = "PnlPlaceholder";
             // 
             // PiBVersion103
@@ -259,33 +250,6 @@ namespace PatchLauncher
             PiBVersion103.Name = "PiBVersion103";
             PiBVersion103.TabStop = false;
             PiBVersion103.Click += PiBVersion103_Click;
-            // 
-            // PiBVersion106
-            // 
-            PiBVersion106.BackColor = System.Drawing.Color.Black;
-            resources.ApplyResources(PiBVersion106, "PiBVersion106");
-            PiBVersion106.Cursor = Cursors.Hand;
-            PiBVersion106.Name = "PiBVersion106";
-            PiBVersion106.TabStop = false;
-            PiBVersion106.Click += PiBVersion106_Click;
-            // 
-            // PiBVersion222_33
-            // 
-            PiBVersion222_33.BackColor = System.Drawing.Color.Black;
-            resources.ApplyResources(PiBVersion222_33, "PiBVersion222_33");
-            PiBVersion222_33.Cursor = Cursors.Hand;
-            PiBVersion222_33.Name = "PiBVersion222_33";
-            PiBVersion222_33.TabStop = false;
-            PiBVersion222_33.Click += PiBVersion222_33_Click;
-            // 
-            // PiBVersion222_34
-            // 
-            PiBVersion222_34.BackColor = System.Drawing.Color.Black;
-            resources.ApplyResources(PiBVersion222_34, "PiBVersion222_34");
-            PiBVersion222_34.Cursor = Cursors.Hand;
-            PiBVersion222_34.Name = "PiBVersion222_34";
-            PiBVersion222_34.TabStop = false;
-            PiBVersion222_34.Click += PiBVersion222_34_Click;
             // 
             // LblModExplanation
             // 
@@ -556,9 +520,6 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBArrow).EndInit();
             PnlPlaceholder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PiBVersion103).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion106).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_33).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBVersion222_34).EndInit();
             NotifyContextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PibMute).EndInit();
             WinFormsMainMenuStrip.ResumeLayout(false);
@@ -622,8 +583,5 @@ namespace PatchLauncher
         private ToolStripMenuItem LauncherDesktopShortcutToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator6;
         private ToolStripMenuItem LauncherStartmenuShortcutToolStripMenuItem;
-        private PictureBox PiBVersion222_33;
-        private PictureBox PiBVersion222_34;
-        private PictureBox PiBVersion106;
     }
 }

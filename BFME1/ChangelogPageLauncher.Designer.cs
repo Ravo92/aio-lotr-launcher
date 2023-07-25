@@ -1,6 +1,6 @@
 ﻿namespace PatchLauncher
 {
-    partial class MessagesForm
+    partial class ChangelogPageLauncher
     {
         /// <summary>
         /// Required designer variable.
@@ -27,7 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessagesForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangelogPageLauncher));
             Wv2Messages = new Microsoft.Web.WebView2.WinForms.WebView2();
             BtnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)Wv2Messages).BeginInit();

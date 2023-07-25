@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="MessagesForm.cs">
+    <Compile Update="ChangelogPageLauncher.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LauncherOptionsForm.cs">

@@ -29,9 +29,6 @@
     <Setting Name="IsGameInstalled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="IsPatch106Installed" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="SelectedOlderPatch" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -39,9 +36,6 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="IsPatchModsShown" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="IsPatch106Downloaded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ShowPatchesFirst" Type="System.Boolean" Scope="User">
@@ -67,18 +61,6 @@
     </Setting>
     <Setting Name="CreateDesktopShortcut" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="IsPatch33Downloaded" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="IsPatch33Installed" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="IsPatch34Downloaded" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="IsPatch34Installed" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LatestBetaPatchVersion" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

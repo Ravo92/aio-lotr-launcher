@@ -73,9 +73,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bgDefault {
+        public static System.Drawing.Bitmap BFME1_Header {
             get {
-                object obj = ResourceManager.GetObject("bgDefault", resourceCulture);
+                object obj = ResourceManager.GetObject("BFME1_Header", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bgGondor {
+        public static System.Drawing.Bitmap BFME1BGDefault {
             get {
-                object obj = ResourceManager.GetObject("bgGondor", resourceCulture);
+                object obj = ResourceManager.GetObject("BFME1BGDefault", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bgIsengard {
+        public static System.Drawing.Bitmap BFME1BGGondor {
             get {
-                object obj = ResourceManager.GetObject("bgIsengard", resourceCulture);
+                object obj = ResourceManager.GetObject("BFME1BGGondor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bgMap {
+        public static System.Drawing.Bitmap BFME1BGIsengard {
             get {
-                object obj = ResourceManager.GetObject("bgMap", resourceCulture);
+                object obj = ResourceManager.GetObject("BFME1BGIsengard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bgMordor {
+        public static System.Drawing.Bitmap BFME1BGMordor {
             get {
-                object obj = ResourceManager.GetObject("bgMordor", resourceCulture);
+                object obj = ResourceManager.GetObject("BFME1BGMordor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,119 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bgRohan {
+        public static System.Drawing.Bitmap BFME1BGRohan {
             get {
-                object obj = ResourceManager.GetObject("bgRohan", resourceCulture);
+                object obj = ResourceManager.GetObject("BFME1BGRohan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1BTN_Click {
+            get {
+                object obj = ResourceManager.GetObject("BFME1BTN_Click", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1BTN_Hover {
+            get {
+                object obj = ResourceManager.GetObject("BFME1BTN_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1BTN_Neutral {
+            get {
+                object obj = ResourceManager.GetObject("BFME1BTN_Neutral", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1CHK_Selected {
+            get {
+                object obj = ResourceManager.GetObject("BFME1CHK_Selected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1CHK_SelectedHover {
+            get {
+                object obj = ResourceManager.GetObject("BFME1CHK_SelectedHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1CHK_Unselected {
+            get {
+                object obj = ResourceManager.GetObject("BFME1CHK_Unselected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1CHK_UnselectedHover {
+            get {
+                object obj = ResourceManager.GetObject("BFME1CHK_UnselectedHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1PatchModBG103 {
+            get {
+                object obj = ResourceManager.GetObject("BFME1PatchModBG103", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1PatchModBG106 {
+            get {
+                object obj = ResourceManager.GetObject("BFME1PatchModBG106", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1PatchModBG222 {
+            get {
+                object obj = ResourceManager.GetObject("BFME1PatchModBG222", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BGMap {
+            get {
+                object obj = ResourceManager.GetObject("BGMap", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +263,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap borderRectangleModPanel {
+        public static System.Drawing.Bitmap BorderRectangleModPanel {
             get {
-                object obj = ResourceManager.GetObject("borderRectangleModPanel", resourceCulture);
+                object obj = ResourceManager.GetObject("BorderRectangleModPanel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,219 +333,9 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap btnClick {
-            get {
-                object obj = ResourceManager.GetObject("btnClick", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap btnClickgr {
-            get {
-                object obj = ResourceManager.GetObject("btnClickgr", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap btnClickgrgr {
-            get {
-                object obj = ResourceManager.GetObject("btnClickgrgr", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap btnHover {
-            get {
-                object obj = ResourceManager.GetObject("btnHover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap btnNeutral {
-            get {
-                object obj = ResourceManager.GetObject("btnNeutral", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_103 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_103", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_106 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_106", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_106_Download {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_106_Download", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_106_Selected {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_106_Selected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V33 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V33", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V33_Download {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V33_Download", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V33_Selected {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V33_Selected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V34 {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V34", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V34_Download {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V34_Download", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap BtnPatchSelection_222V34_Selected {
-            get {
-                object obj = ResourceManager.GetObject("BtnPatchSelection_222V34_Selected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap chkSelected {
-            get {
-                object obj = ResourceManager.GetObject("chkSelected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap chkSelectedHover {
-            get {
-                object obj = ResourceManager.GetObject("chkSelectedHover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap chkUnselected {
-            get {
-                object obj = ResourceManager.GetObject("chkUnselected", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap chkUnselectedHover {
-            get {
-                object obj = ResourceManager.GetObject("chkUnselectedHover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap discord {
             get {
                 object obj = ResourceManager.GetObject("discord", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap header {
-            get {
-                object obj = ResourceManager.GetObject("header", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -601,6 +501,16 @@ namespace Helper.Properties {
         public static System.Drawing.Bitmap Mute {
             get {
                 object obj = ResourceManager.GetObject("Mute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap PatchModSelected {
+            get {
+                object obj = ResourceManager.GetObject("PatchModSelected", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

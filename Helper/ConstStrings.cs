@@ -21,15 +21,13 @@ namespace Helper
 
         //////////////////////////////////////////////////////////////////////////////
 
-        public const string C_ENGLISHPATCH_FILE = "_englishpatch222.big";
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
         public const string C_LIBRARIES_PATCH_FILE = "_patch222libraries.big";
         public const string C_TEXTURES_PATCH_FILE = "_patch222textures.big";
         public const string C_BASES_PATCH_FILE = "_patch222bases.big";
         public const string C_MAPS_PATCH_FILE = "_patch222maps.big";
-        public const string C_ASSET_PATCH_FILE = "asset.dat.222";
 
-        public const string C_GERMANLANGUAGE_PATCH_FILE = "_patch222translation_ger.big";
+        public const string C_GERMANLANGUAGE_PATCH_FILE = "_patch222german.big";
 
         // BFME 1 Mods
         public const string C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE = "SaF1.1.big";
@@ -95,9 +93,8 @@ namespace Helper
         public const string C_THEMESOUND_ISENGARD = "Isengard";
         public const string C_THEMESOUND_MORDOR = "Mordor";
 
-        public static readonly Image C_BUTTONIMAGE_NEUTR = Resources.btnNeutral;
-        public static readonly Image C_BUTTONIMAGE_HOVER = Resources.btnHover;
-        public static readonly Image C_BUTTONIMAGE_CLICK = Resources.btnClick;
-        public static readonly Image C_BUTTONIMAGE_CLICK_GREEN = Resources.btnClickgr;
+        public static readonly Image C_BFME1_BUTTONIMAGE_NEUTR = Resources.BFME1BTN_Neutral;
+        public static readonly Image C_BFME1_BUTTONIMAGE_HOVER = Resources.BFME1BTN_Hover;
+        public static readonly Image C_BFME1_BUTTONIMAGE_CLICK = Resources.BFME1BTN_Click;
     }
 }

@@ -121,23 +121,56 @@
   <data name="AlbertusMT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AlbertusMT.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="bgDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BFME1BGDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BGDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bgGondor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgGondor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BFME1BGGondor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BGGondor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bgIsengard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgIsengard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BFME1BGIsengard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BGIsengard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bgMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgMap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BFME1BGMordor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BGMordor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bgMordor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgMordor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BFME1BGRohan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BGRohan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bgRohan" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgRohan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BFME1BTN_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BTN_Click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1BTN_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BTN_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1BTN_Neutral" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1BTN_Neutral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1CHK_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1CHK_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1CHK_SelectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1CHK_SelectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1CHK_Unselected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1CHK_Unselected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1CHK_UnselectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1CHK_UnselectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1PatchModBG103" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1PatchModBG103.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1PatchModBG106" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1PatchModBG106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1PatchModBG222" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1PatchModBG222.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME1_Header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1_Header.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BGMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BGMap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="borderRectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\borderRectangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,8 +178,8 @@
   <data name="borderRectangleLong" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\borderRectangleLong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="borderRectangleModPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\borderRectangleModPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BorderRectangleModPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BorderRectangleModPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="borderRectangleSmallest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\borderRectangleSmallest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,71 +199,8 @@
   <data name="btnArrowRight_Disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btnArrowRight_Disabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btnClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnClickgr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnClickgr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnClickgrgr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnClickgrgr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="btnNeutral" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btnNeutral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_103" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_103.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_106" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_106_Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_106_Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_106_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_106_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V33" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V33.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V33_Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V33_Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V33_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V33_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V34" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V34.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V34_Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V34_Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BtnPatchSelection_222V34_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BtnPatchSelection_222V34_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="chkSelected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chkSelected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="chkSelectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chkSelectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="chkUnselected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chkUnselected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="chkUnselectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chkUnselectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\discord.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="header" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\header.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icoDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icoDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -282,6 +252,9 @@
   </data>
   <data name="Mute" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Mute.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PatchModSelected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PatchModSelected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sachwt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sachwt.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -32,29 +32,29 @@ namespace PatchLauncher
 
             PibBorderLauncherOptions.Image = Helper.Properties.Resources.borderRectangle;
             PibBorderGameOptions.Image = Helper.Properties.Resources.borderRectangleLong;
-            PibHeader.Image = Helper.Properties.Resources.header;
+            PibHeader.Image = Helper.Properties.Resources.BFME1_Header;
 
-            BackgroundImage = Helper.Properties.Resources.bgMap;
+            BackgroundImage = Helper.Properties.Resources.BGMap;
 
             // Button-Styles
             BtnApply.FlatAppearance.BorderSize = 0;
             BtnApply.FlatStyle = FlatStyle.Flat;
             BtnApply.BackColor = Color.Transparent;
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnApply.Font = FontHelper.GetFont(0, 16);
             BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnCancel.FlatAppearance.BorderSize = 0;
             BtnCancel.FlatStyle = FlatStyle.Flat;
             BtnCancel.BackColor = Color.Transparent;
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnCancel.Font = FontHelper.GetFont(0, 16);
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
 
             BtnDefault.FlatAppearance.BorderSize = 0;
             BtnDefault.FlatStyle = FlatStyle.Flat;
             BtnDefault.BackColor = Color.Transparent;
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnDefault.Font = FontHelper.GetFont(0, 16);
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
@@ -157,11 +157,11 @@ namespace PatchLauncher
 
             if (FlagAnisotropicTextureFiltering == "no")
             {
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselected;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (FlagAnisotropicTextureFiltering == "yes")
             {
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelected;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -173,11 +173,11 @@ namespace PatchLauncher
 
             if (FlagTerrainLighting == "no")
             {
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselected;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (FlagTerrainLighting == "yes")
             {
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelected;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -189,11 +189,11 @@ namespace PatchLauncher
 
             if (Flag3DShadows == "no")
             {
-                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselected;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (Flag3DShadows == "yes")
             {
-                Chk3DShadows.Image = Helper.Properties.Resources.chkSelected;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -205,11 +205,11 @@ namespace PatchLauncher
 
             if (Flag2DShadows == "no")
             {
-                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselected;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (Flag2DShadows == "yes")
             {
-                Chk2DShadows.Image = Helper.Properties.Resources.chkSelected;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -221,11 +221,11 @@ namespace PatchLauncher
 
             if (FlagSmoothWaterBorder == "no")
             {
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselected;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (FlagSmoothWaterBorder == "yes")
             {
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelected;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -237,11 +237,11 @@ namespace PatchLauncher
 
             if (FlagShowProps == "no")
             {
-                ChkShowProps.Image = Helper.Properties.Resources.chkUnselected;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (FlagShowProps == "yes")
             {
-                ChkShowProps.Image = Helper.Properties.Resources.chkSelected;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -253,11 +253,11 @@ namespace PatchLauncher
 
             if (FlagShowAnimations == "no")
             {
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselected;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (FlagShowAnimations == "yes")
             {
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelected;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -269,11 +269,11 @@ namespace PatchLauncher
 
             if (FlagHeatEffects == "no")
             {
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselected;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
             else if (FlagHeatEffects == "yes")
             {
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelected;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -285,12 +285,12 @@ namespace PatchLauncher
 
             if (FlagDynamicLOD == "yes")
             {
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
                 LblInfoLOD.Hide();
             }
             else if (FlagDynamicLOD == "no")
             {
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelected;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_Selected;
                 LblInfoLOD.Show();
             }
 
@@ -337,15 +337,15 @@ namespace PatchLauncher
             FlagDynamicLOD = "yes";
             FlagResolution = "yes";
 
-            ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelected;
-            ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelected;
-            Chk3DShadows.Image = Helper.Properties.Resources.chkSelected;
-            Chk2DShadows.Image = Helper.Properties.Resources.chkSelected;
-            ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelected;
-            ChkShowProps.Image = Helper.Properties.Resources.chkSelected;
-            ChkShowAnimations.Image = Helper.Properties.Resources.chkSelected;
-            ChkHeatEffects.Image = Helper.Properties.Resources.chkSelected;
-            ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
+            ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
             ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
             ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
@@ -353,20 +353,20 @@ namespace PatchLauncher
 
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
         {
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnDefault_MouseEnter(object sender, EventArgs e)
         {
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnDefault.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnDefault_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnDefault.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnDefault.Image = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
@@ -379,20 +379,20 @@ namespace PatchLauncher
 
         private void BtnApply_MouseLeave(object sender, EventArgs e)
         {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnApply_MouseEnter(object sender, EventArgs e)
         {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnApply.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnApply_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnApply.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnApply.Image = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnApply.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
@@ -404,20 +404,20 @@ namespace PatchLauncher
 
         private void BtnCancel_MouseLeave(object sender, EventArgs e)
         {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_NEUTR;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
         }
 
         private void BtnCancel_MouseEnter(object sender, EventArgs e)
         {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_HOVER;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
             BtnCancel.ForeColor = Color.FromArgb(100, 53, 5);
             Task.Run(() => SoundPlayerHelper.PlaySoundHover());
         }
 
         private void BtnCancel_MouseDown(object sender, MouseEventArgs e)
         {
-            BtnCancel.Image = ConstStrings.C_BUTTONIMAGE_CLICK;
+            BtnCancel.Image = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
             BtnCancel.ForeColor = Color.FromArgb(192, 145, 69);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
@@ -470,12 +470,12 @@ namespace PatchLauncher
         {
             if (FlagAnisotropicTextureFiltering == "yes")
             {
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagAnisotropicTextureFiltering = "no";
             }
             else
             {
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagAnisotropicTextureFiltering = "yes";
             }
         }
@@ -483,37 +483,37 @@ namespace PatchLauncher
         private void ChkAniTextureFiltering_MouseEnter(object sender, EventArgs e)
         {
             if (FlagAnisotropicTextureFiltering == "yes")
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkAniTextureFiltering_MouseLeave(object sender, EventArgs e)
         {
             if (FlagAnisotropicTextureFiltering == "yes")
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelected;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselected;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkAniTextureFiltering_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagAnisotropicTextureFiltering == "yes")
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkAniTextureFiltering.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkTerrainLighting_Click(object sender, EventArgs e)
         {
             if (FlagTerrainLighting == "yes")
             {
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagTerrainLighting = "no";
             }
             else
             {
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagTerrainLighting = "yes";
             }
         }
@@ -521,37 +521,37 @@ namespace PatchLauncher
         private void ChkTerrainLighting_MouseEnter(object sender, EventArgs e)
         {
             if (FlagTerrainLighting == "yes")
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkTerrainLighting_MouseLeave(object sender, EventArgs e)
         {
             if (FlagTerrainLighting == "yes")
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelected;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselected;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkTerrainLighting_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagTerrainLighting == "yes")
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkTerrainLighting.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void Chk3DShadows_Click(object sender, EventArgs e)
         {
             if (Flag3DShadows == "yes")
             {
-                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 Flag3DShadows = "no";
             }
             else
             {
-                Chk3DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 Flag3DShadows = "yes";
             }
         }
@@ -559,37 +559,37 @@ namespace PatchLauncher
         private void Chk3DShadows_MouseEnter(object sender, EventArgs e)
         {
             if (Flag3DShadows == "yes")
-                Chk3DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void Chk3DShadows_MouseLeave(object sender, EventArgs e)
         {
             if (Flag3DShadows == "yes")
-                Chk3DShadows.Image = Helper.Properties.Resources.chkSelected;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselected;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void Chk3DShadows_MouseDown(object sender, MouseEventArgs e)
         {
             if (Flag3DShadows == "yes")
-                Chk3DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                Chk3DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
+                Chk3DShadows.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void Chk2DShadows_Click(object sender, EventArgs e)
         {
             if (Flag2DShadows == "yes")
             {
-                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 Flag2DShadows = "no";
             }
             else
             {
-                Chk2DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 Flag2DShadows = "yes";
             }
         }
@@ -597,37 +597,37 @@ namespace PatchLauncher
         private void Chk2DShadows_MouseEnter(object sender, EventArgs e)
         {
             if (Flag2DShadows == "yes")
-                Chk2DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void Chk2DShadows_MouseLeave(object sender, EventArgs e)
         {
             if (Flag2DShadows == "yes")
-                Chk2DShadows.Image = Helper.Properties.Resources.chkSelected;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselected;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void Chk2DShadows_MouseDown(object sender, MouseEventArgs e)
         {
             if (Flag2DShadows == "yes")
-                Chk2DShadows.Image = Helper.Properties.Resources.chkSelectedHover;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                Chk2DShadows.Image = Helper.Properties.Resources.chkUnselectedHover;
+                Chk2DShadows.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkSmoothWaterBorder_Click(object sender, EventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
             {
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagSmoothWaterBorder = "no";
             }
             else
             {
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagSmoothWaterBorder = "yes";
             }
         }
@@ -635,37 +635,37 @@ namespace PatchLauncher
         private void ChkSmoothWaterBorder_MouseEnter(object sender, EventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkSmoothWaterBorder_MouseLeave(object sender, EventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelected;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselected;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkSmoothWaterBorder_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagSmoothWaterBorder == "yes")
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkSmoothWaterBorder.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkShowProps_Click(object sender, EventArgs e)
         {
             if (FlagShowProps == "yes")
             {
-                ChkShowProps.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagShowProps = "no";
             }
             else
             {
-                ChkShowProps.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagShowProps = "yes";
             }
         }
@@ -673,37 +673,37 @@ namespace PatchLauncher
         private void ChkShowProps_MouseEnter(object sender, EventArgs e)
         {
             if (FlagShowProps == "yes")
-                ChkShowProps.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkShowProps.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkShowProps_MouseLeave(object sender, EventArgs e)
         {
             if (FlagShowProps == "yes")
-                ChkShowProps.Image = Helper.Properties.Resources.chkSelected;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkShowProps.Image = Helper.Properties.Resources.chkUnselected;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkShowProps_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagShowProps == "yes")
-                ChkShowProps.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkShowProps.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowProps.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkShowAnimations_Click(object sender, EventArgs e)
         {
             if (FlagShowAnimations == "yes")
             {
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagShowAnimations = "no";
             }
             else
             {
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagShowAnimations = "yes";
             }
         }
@@ -711,37 +711,37 @@ namespace PatchLauncher
         private void ChkShowAnimations_MouseEnter(object sender, EventArgs e)
         {
             if (FlagShowAnimations == "yes")
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkShowAnimations_MouseLeave(object sender, EventArgs e)
         {
             if (FlagShowAnimations == "yes")
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelected;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselected;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkShowAnimations_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagShowAnimations == "yes")
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkShowAnimations.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkShowAnimations.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkHeatEffects_Click(object sender, EventArgs e)
         {
             if (FlagHeatEffects == "yes")
             {
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagHeatEffects = "no";
             }
             else
             {
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagHeatEffects = "yes";
             }
         }
@@ -749,38 +749,38 @@ namespace PatchLauncher
         private void ChkHeatEffects_MouseEnter(object sender, EventArgs e)
         {
             if (FlagHeatEffects == "yes")
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkHeatEffects_MouseLeave(object sender, EventArgs e)
         {
             if (FlagHeatEffects == "yes")
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelected;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselected;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkHeatEffects_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagHeatEffects == "yes")
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkHeatEffects.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkHeatEffects.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkDynamicLOD_Click(object sender, EventArgs e)
         {
             if (FlagDynamicLOD == "no")
             {
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagDynamicLOD = "yes";
                 LblInfoLOD.Hide();
             }
             else
             {
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
                 FlagDynamicLOD = "no";
                 LblInfoLOD.Show();
             }
@@ -789,25 +789,25 @@ namespace PatchLauncher
         private void ChkDynamicLOD_MouseEnter(object sender, EventArgs e)
         {
             if (FlagDynamicLOD == "no")
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkDynamicLOD_MouseLeave(object sender, EventArgs e)
         {
             if (FlagDynamicLOD == "no")
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelected;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             else
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselected;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
         private void ChkDynamicLOD_MouseDown(object sender, MouseEventArgs e)
         {
             if (FlagDynamicLOD == "no")
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkSelectedHover;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
             else
-                ChkDynamicLOD.Image = Helper.Properties.Resources.chkUnselectedHover;
+                ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
         #endregion
 

@@ -31,7 +31,7 @@
             }
         }
 
-        public static void DeletePatch106()
+        public static Task DeletePatch106()
         {
             try
             {
@@ -45,28 +45,34 @@
             {
                 LogHelper.LoggerPatchModDectection.Error(ex, "");
             }
+
+            return Task.CompletedTask;
         }
 
-        public static void DeletePatch222Files()
+        public static Task DeletePatch222Files()
         {
-            File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE));
-            File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_TEXTURES_PATCH_FILE));
-            File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_LIBRARIES_PATCH_FILE));
-            File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_BASES_PATCH_FILE));
-            File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_MAPS_PATCH_FILE));
-            File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_ASSET_FILE));
-
-            if (File.Exists(Path.Combine(GameInstallPath, ConstStrings.C_OPTIONAL_PATCH_FILE)))
+            try
             {
-                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_OPTIONAL_PATCH_FILE));
+                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_PATCH_FILE));
+                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_TEXTURES_PATCH_FILE));
+                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_LIBRARIES_PATCH_FILE));
+                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_BASES_PATCH_FILE));
+                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_MAPS_PATCH_FILE));
+                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_MAIN_ASSET_FILE));
+
+                if (File.Exists(Path.Combine(GameInstallPath, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE)))
+                {
+                    File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE));
+                }
+
+                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_103_ASSET_FILE), Path.Combine(GameInstallPath, ConstStrings.C_MAIN_ASSET_FILE));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerPatchModDectection.Error(ex, "");
             }
 
-            if (File.Exists(Path.Combine(GameInstallPath, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE)))
-            {
-                File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_GERMANLANGUAGE_PATCH_FILE));
-            }
-
-            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_103_ASSET_FILE), Path.Combine(GameInstallPath, ConstStrings.C_MAIN_ASSET_FILE));
+            return Task.CompletedTask;
         }
     }
 }
