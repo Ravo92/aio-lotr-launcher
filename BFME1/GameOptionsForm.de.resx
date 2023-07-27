@@ -128,7 +128,7 @@
     <value>1130, 105</value>
   </data>
   <data name="LblOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 10</value>
+    <value>410, 8</value>
   </data>
   <data name="LblOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 15</value>

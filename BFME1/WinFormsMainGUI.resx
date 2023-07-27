@@ -592,19 +592,19 @@
     <value>465, 17</value>
   </metadata>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="MenuItemLaunchGame.Text" xml:space="preserve">
     <value>Launch the Game</value>
   </data>
   <data name="closeTheLauncherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Close the Launcher</value>
   </data>
   <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 48</value>
+    <value>181, 70</value>
   </data>
   <data name="&gt;&gt;NotifyContextMenu.Name" xml:space="preserve">
     <value>NotifyContextMenu</value>

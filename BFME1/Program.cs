@@ -31,7 +31,6 @@ namespace PatchLauncher
                 else if (args[0] != "--official")
                 {
                     LogHelper.LoggerBFME1GUI.Warning("Parameter > {0} < not the expected one at void Main() args in {1}", args[0], assemblyName);
-                    File.Copy("lol", "lol2");
                     return;
                 }
             }
@@ -53,26 +52,18 @@ namespace PatchLauncher
                     Settings.Default.Save();
                 }
 
-                switch (Settings.Default.Language)
+                switch (Settings.Default.LauncherLanguage)
                 {
-                    case 0:
-
-                        Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                        if (Settings.Default.InstalledLanguageISOCode == "" || Settings.Default.InstalledLanguageISOCode is null)
-                            Settings.Default.InstalledLanguageISOCode = "en_us";
-                        break;
-
-                    case 1:
-
+                    case "de":
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-                        if (Settings.Default.InstalledLanguageISOCode == "" || Settings.Default.InstalledLanguageISOCode is null)
-                            Settings.Default.InstalledLanguageISOCode = "de";
+                        Settings.Default.InstalledLanguageISOCode = "de";
+                        Settings.Default.Save();
                         break;
 
                     default:
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                        if (Settings.Default.InstalledLanguageISOCode == "" || Settings.Default.InstalledLanguageISOCode is null)
-                            Settings.Default.InstalledLanguageISOCode = "en_us";
+                        Settings.Default.InstalledLanguageISOCode = "en_us";
+                        Settings.Default.Save();
                         break;
                 }
             }

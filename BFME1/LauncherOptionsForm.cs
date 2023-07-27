@@ -22,7 +22,7 @@ namespace PatchLauncher
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
         bool FlagShowPatchesFirst = Settings.Default.ShowPatchesFirst;
         bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
-        int FlagLanguageIndex = Settings.Default.Language;
+        string FlagLauncherLanguageIndex = Settings.Default.LauncherLanguage;
 
         bool FlagIsLanguageChanged = false;
         bool FlagIsBetaChannelChanged = false;
@@ -41,8 +41,6 @@ namespace PatchLauncher
             PibHeader.Image = Helper.Properties.Resources.BFME1_Header;
             PibBorderLauncherOptions.Image = Helper.Properties.Resources.borderRectangle;
             BackgroundImage = Helper.Properties.Resources.BGMap;
-
-            CmBLanguage.SelectedIndex = FlagLanguageIndex;
 
             // Button-Styles
             BtnApply.FlatAppearance.BorderSize = 0;
@@ -123,12 +121,26 @@ namespace PatchLauncher
 
             if (FlagBrutalAI)
             {
-                LblWarning.Show();
+                LblWarning.Text = Strings.Warning_BrutalAI;
             }
             else
             {
-                LblWarning.Hide();
+                LblWarning.Text = "";
             }
+
+            if (!Settings.Default.IsGameInstalled)
+            {
+                ChkEAX.Enabled = false;
+                ChkBrutalAI.Enabled = false;
+                ChkUseBetaChannel.Enabled = false;
+                LblWarning.Text = Strings.Warning_GameNotInstalled;
+            }
+
+            CmBLanguage.SelectedIndex = Settings.Default.LauncherLanguage switch
+            {
+                "de" => 1,
+                _ => 0,
+            };
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -302,7 +314,7 @@ namespace PatchLauncher
             Settings.Default.UseBrutalAI = FlagBrutalAI;
             Settings.Default.ShowPatchesFirst = FlagShowPatchesFirst;
 
-            if (FlagLanguageIndex != Settings.Default.Language)
+            if (FlagLauncherLanguageIndex != Settings.Default.LauncherLanguage)
             {
                 FlagIsLanguageChanged = true;
             }
@@ -313,7 +325,7 @@ namespace PatchLauncher
                 Settings.Default.BetaChannelVersion = 0;
             }
 
-            Settings.Default.Language = FlagLanguageIndex;
+            Settings.Default.LauncherLanguage = FlagLauncherLanguageIndex;
             Settings.Default.UseBetaChannel = FlagUseBetaChannel;
             Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.Save();
@@ -469,13 +481,13 @@ namespace PatchLauncher
             if (FlagBrutalAI == true)
             {
                 ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
-                LblWarning.Hide();
+                LblWarning.Text = "";
                 FlagBrutalAI = false;
             }
             else
             {
                 ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
-                LblWarning.Show();
+                LblWarning.Text = Strings.Warning_BrutalAI;
                 FlagBrutalAI = true;
             }
         }
@@ -558,10 +570,10 @@ namespace PatchLauncher
             switch (CmBLanguage.SelectedIndex)
             {
                 case 0:
-                    FlagLanguageIndex = 0;
+                    FlagLauncherLanguageIndex = "en_us";
                     break;
                 case 1:
-                    FlagLanguageIndex = 1;
+                    FlagLauncherLanguageIndex = "de";
                     break;
                 default:
                     break;

@@ -15,10 +15,6 @@ namespace Helper
         public const string C_REGISTRY_SERVICE_WRONG_PARAMETER = "WrongParameter";
         public const string C_REGISTRY_SERVICE_NOT_FOUND = "ValueNotFound";
 
-        public const string C_PATCHZIP06_NAME = "Patch_1.06.7z";
-        public const string C_PATCHZIP33_NAME = "Patch_2.22v33.7z";
-        public const string C_PATCHZIP34_NAME = "Patch_2.22v34.7z";
-
         //////////////////////////////////////////////////////////////////////////////
 
         public const string C_MAIN_PATCH_FILE = "_patch222.big";
@@ -35,7 +31,11 @@ namespace Helper
 
         //////////////////////////////////////////////////////////////////////////////
 
-        public const string C_OPTIONAL_PATCH_FILE = "_patch222optional.big";
+        public const string C_PATCH106APT_FILENAME = "_aptpatch.big";
+        public const string C_PATCH106WSMAPS_FILENAME = "_WSMaps.big";
+        public const string C_PATCH105MAIN_FILENAME = "_patch105.big";
+        public const string C_PATCH106MAIN_FILENAME = "_patch106.big";
+        public const string C_PATCH106TEXTURES_FILENAME = "_patch106textures.big";
 
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
@@ -43,9 +43,6 @@ namespace Helper
         public const string C_LAUNCHEREXE_BFME1_FILENAME = "BFME1.exe";
         public const string C_LAUNCHEREXE_BFME2_FILENAME = "BFME2.exe";
         public const string C_LAUNCHEREXE_BFME25_FILENAME = "BFME25.exe";
-
-        public const string C_MAINGAMEFILE_ZIP = "BFME1.7z";
-        public const string C_LANGPACK_EN_ZIP = "LangPack_EN.7z";
 
         public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
         public const string C_WORLDBUILDER_FILE = "worldbuilder.exe";
@@ -77,15 +74,8 @@ namespace Helper
         public const string C_GAMEINSTALLFOLDER_NAME = "Games";
         public const string C_LOGFOLDER_NAME = "Logfiles";
         public const string C_HTMLFOLDER_NAME = "Html";
-        public const string C_WEBVIEW2CACHEFOLDER_NAME = "BFME1.exe.WebView2";
 
         //////////////////////////////////////////////////////////////////////////////
-
-        public const string C_PATCH105MAIN_FILENAME = "_patch105.big";
-        public const string C_PATCH106MAIN_FILENAME = "_patch106.big";
-        public const string C_PATCH106TEXTURES_FILENAME = "_patch106textures.big";
-        public const string C_PATCH106APT_FILENAME = "_aptpatch.big";
-        public const string C_PATCH106WSMAPS_FILENAME = "_WSMaps.big";
 
         public const string C_THEMESOUND_DEFAULT = "Default";
         public const string C_THEMESOUND_GONDOR = "Gondor";

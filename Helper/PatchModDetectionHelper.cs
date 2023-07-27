@@ -35,11 +35,21 @@
         {
             try
             {
+                string get106LanguageFileForDelete = "";
+
                 File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_PATCH105MAIN_FILENAME));
                 File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_PATCH106MAIN_FILENAME));
                 File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_PATCH106TEXTURES_FILENAME));
                 File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_PATCH106WSMAPS_FILENAME));
                 File.Delete(Path.Combine(GameInstallPath, ConstStrings.C_PATCH106APT_FILENAME));
+
+                IEnumerable<string> get106LanguageFile = Directory.EnumerateFiles(GameInstallPath, "*106*.*");
+
+                if (get106LanguageFile.Any())
+                {
+                    get106LanguageFileForDelete = get106LanguageFile.First();
+                    File.Delete(Path.Combine(get106LanguageFileForDelete));
+                }
             }
             catch (Exception ex)
             {

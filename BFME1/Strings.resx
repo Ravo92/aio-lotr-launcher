@@ -169,6 +169,10 @@ Exisiting files will be deleted!</value>
   <data name="Warning.AlreadyRunningTitle" xml:space="preserve">
     <value>Launcher already running!</value>
   </data>
+  <data name="Warning.BrutalAI" xml:space="preserve">
+    <value>WARNING: Brutal AI is activated.
+You may not be able to play online</value>
+  </data>
   <data name="Warning.CantStopNow" xml:space="preserve">
     <value>There is still some download or install active!
 Closing the Launcher now would damage the files or the game itself.
@@ -176,5 +180,9 @@ Please try again, after the launcher finished its work!</value>
   </data>
   <data name="Warning.CantStopNowTitle" xml:space="preserve">
     <value>Sadly, you cant close now!</value>
+  </data>
+  <data name="Warning.GameNotInstalled" xml:space="preserve">
+    <value>Some settings are disabled until
+game ist installed!</value>
   </data>
 </root>

@@ -57,6 +57,7 @@
             PibSelectedIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             PibSelectedIcon.TabIndex = 30;
             PibSelectedIcon.TabStop = false;
+            PibSelectedIcon.Visible = false;
             // 
             // Patch222Buttons
             // 

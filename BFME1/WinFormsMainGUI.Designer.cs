@@ -268,6 +268,7 @@ namespace PatchLauncher
             // 
             MenuItemLaunchGame.Name = "MenuItemLaunchGame";
             resources.ApplyResources(MenuItemLaunchGame, "MenuItemLaunchGame");
+            MenuItemLaunchGame.Click += MenuItemLaunchGame_Click;
             // 
             // closeTheLauncherToolStripMenuItem
             // 

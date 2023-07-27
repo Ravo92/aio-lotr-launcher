@@ -170,11 +170,20 @@ Bitte Taskmanager oder Tray-Icons (Taskbar) prüfen.</value>
   <data name="Warning.AlreadyRunningTitle" xml:space="preserve">
     <value>Der Launcher läuft bereits</value>
   </data>
+  <data name="Warning.BrutalAI" xml:space="preserve">
+    <value>Warnung! Brutale KI ist aktiviert worden!
+Du wirst unter Umständen
+nicht online spielen können!</value>
+  </data>
   <data name="Warning.CantStopNow" xml:space="preserve">
     <value>Es ist noch ein Download oder Patchvorgang aktiv. Der Launcher kann momentan nicht beendet werden.
 Bitte versuche es später erneut.</value>
   </data>
   <data name="Warning.CantStopNowTitle" xml:space="preserve">
     <value>Geht gerade leider nicht...</value>
+  </data>
+  <data name="Warning.GameNotInstalled" xml:space="preserve">
+    <value>Manche Optionen werden erst frei-
+geschaltet, wenn das Spiel installiert wurde!</value>
   </data>
 </root>

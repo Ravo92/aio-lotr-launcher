@@ -215,6 +215,16 @@ namespace PatchLauncher {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to WARNING: Brutal AI is activated.
+        ///You may not be able to play online.
+        /// </summary>
+        internal static string Warning_BrutalAI {
+            get {
+                return ResourceManager.GetString("Warning.BrutalAI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is still some download or install active!
         ///Closing the Launcher now would damage the files or the game itself.
         ///Please try again, after the launcher finished its work!.
@@ -231,6 +241,16 @@ namespace PatchLauncher {
         internal static string Warning_CantStopNowTitle {
             get {
                 return ResourceManager.GetString("Warning.CantStopNowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some settings are disabled until
+        ///game ist installed!.
+        /// </summary>
+        internal static string Warning_GameNotInstalled {
+            get {
+                return ResourceManager.GetString("Warning.GameNotInstalled", resourceCulture);
             }
         }
     }
