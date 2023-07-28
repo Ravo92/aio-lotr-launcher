@@ -50,7 +50,8 @@ namespace Restarter
                     {
                         if (AutoUpdater.DownloadUpdate(args))
                         {
-                            Application.Exit();
+                            UpdateIsDownloaded.LauncherUpdateIsDownloaded = true;
+                            Close();
                         }
                     }
                     catch (Exception exception)

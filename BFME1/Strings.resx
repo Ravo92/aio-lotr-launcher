@@ -161,6 +161,11 @@ Exisiting files will be deleted!</value>
   <data name="Msg.Restart.Title" xml:space="preserve">
     <value>Launcher Restart required</value>
   </data>
+  <data name="Msg.RestartForUpdate.Text" xml:space="preserve">
+    <value>A new official Patch 2.22 update is available!
+It seems, you are using the Beta-Channel or a older patch from the list.
+Do you wish to restart the launcher now and apply the new patch?</value>
+  </data>
   <data name="ToolTip.MusicSwitcher" xml:space="preserve">
     <value>Switch between faction music and default theme music</value>
   </data>

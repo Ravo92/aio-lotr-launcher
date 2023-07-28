@@ -80,7 +80,8 @@ namespace PatchLauncher
             RepairGameToolStripMenuItem = new ToolStripMenuItem();
             AboutToolStripMenuItem = new ToolStripMenuItem();
             CreditsToolStripMenuItem = new ToolStripMenuItem();
-            MessagesFromTheTeamToolStripMenuItem = new ToolStripMenuItem();
+            ChangelogLauncherToolStripMenuItem = new ToolStripMenuItem();
+            ChangelogPatchToolStripMenuItem = new ToolStripMenuItem();
             PBarActualFile = new CustomProgressBar();
             SysTray = new NotifyIcon(components);
             ((System.ComponentModel.ISupportInitialize)PibHeader).BeginInit();
@@ -409,7 +410,7 @@ namespace PatchLauncher
             // 
             // AboutToolStripMenuItem
             // 
-            AboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { CreditsToolStripMenuItem, MessagesFromTheTeamToolStripMenuItem });
+            AboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { CreditsToolStripMenuItem, ChangelogLauncherToolStripMenuItem, ChangelogPatchToolStripMenuItem });
             AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
             resources.ApplyResources(AboutToolStripMenuItem, "AboutToolStripMenuItem");
             // 
@@ -419,11 +420,17 @@ namespace PatchLauncher
             resources.ApplyResources(CreditsToolStripMenuItem, "CreditsToolStripMenuItem");
             CreditsToolStripMenuItem.Click += CreditsToolStripMenuItem_Click;
             // 
-            // MessagesFromTheTeamToolStripMenuItem
+            // ChangelogLauncherToolStripMenuItem
             // 
-            MessagesFromTheTeamToolStripMenuItem.Name = "MessagesFromTheTeamToolStripMenuItem";
-            resources.ApplyResources(MessagesFromTheTeamToolStripMenuItem, "MessagesFromTheTeamToolStripMenuItem");
-            MessagesFromTheTeamToolStripMenuItem.Click += MessagesFromTheTeamToolStripMenuItem_Click;
+            ChangelogLauncherToolStripMenuItem.Name = "ChangelogLauncherToolStripMenuItem";
+            resources.ApplyResources(ChangelogLauncherToolStripMenuItem, "ChangelogLauncherToolStripMenuItem");
+            ChangelogLauncherToolStripMenuItem.Click += ChangelogLauncherToolStripMenuItem_Click;
+            // 
+            // ChangelogPatchToolStripMenuItem
+            // 
+            ChangelogPatchToolStripMenuItem.Name = "ChangelogPatchToolStripMenuItem";
+            resources.ApplyResources(ChangelogPatchToolStripMenuItem, "ChangelogPatchToolStripMenuItem");
+            ChangelogPatchToolStripMenuItem.Click += ChangelogPatchToolStripMenuItem_Click;
             // 
             // PBarActualFile
             // 
@@ -534,7 +541,7 @@ namespace PatchLauncher
         private ToolStripMenuItem GameStartmenuShortcutsToolStripMenuItem;
         private ToolStripMenuItem openReplayDirectoryToolStripMenuItem;
         private ToolStripMenuItem CreditsToolStripMenuItem;
-        private ToolStripMenuItem MessagesFromTheTeamToolStripMenuItem;
+        private ToolStripMenuItem ChangelogLauncherToolStripMenuItem;
         private ToolStripMenuItem openLauncherLogfileDirectoryToolStripMenuItem;
         private CustomLabel LabelLoadingPanel;
         private CustomLabel LblModExplanation;
@@ -542,5 +549,6 @@ namespace PatchLauncher
         private ToolStripMenuItem LauncherDesktopShortcutToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator6;
         private ToolStripMenuItem LauncherStartmenuShortcutToolStripMenuItem;
+        private ToolStripMenuItem ChangelogPatchToolStripMenuItem;
     }
 }

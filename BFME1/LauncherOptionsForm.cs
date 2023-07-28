@@ -26,7 +26,7 @@ namespace PatchLauncher
         bool FlagIsLanguageChanged = false;
         bool FlagIsBetaChannelChanged = false;
 
-        readonly PatchPacksBeta _patchPacksBeta = JSONDataListHelper._PatchBetaSettings;//[Settings.Default.LatestBetaPatchVersion];
+        readonly PatchPacksBeta _patchPacksBeta = JSONDataListHelper._PatchBetaSettings;
 
         public LauncherOptionsForm()
         {
@@ -85,11 +85,11 @@ namespace PatchLauncher
             LblPatchVersionTitle.BackColor = Color.Transparent;
 
             LblLauncherVersion.Text = Assembly.GetEntryAssembly()!.GetName().Version!.ToString();
-            LblLauncherVersion.Font = FontHelper.GetFont(0, 16);
+            LblLauncherVersion.Font = FontHelper.GetFont(0, 14);
             LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblLauncherVersion.BackColor = Color.Transparent;
 
-            LblPatchVersion.Font = FontHelper.GetFont(0, 16);
+            LblPatchVersion.Font = FontHelper.GetFont(0, 14);
             LblPatchVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblPatchVersion.BackColor = Color.Transparent;
 

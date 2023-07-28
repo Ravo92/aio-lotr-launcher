@@ -28,9 +28,15 @@ namespace PatchLauncher
                 {
                     return;
                 }
+                else if (args[0] == "--showLauncherUpdateLog")
+                {
+                    LogHelper.LoggerBFME1GUI.Information(string.Format("Launched after LauncherUpdate now with version: > {0} <", Assembly.GetEntryAssembly()!.GetName().Version));
+                    Settings.Default.OpenLauncherChangelogPageAfterUpdate = true;
+                    Settings.Default.Save();
+                }
                 else if (args[0] != "--official")
                 {
-                    LogHelper.LoggerBFME1GUI.Warning("Parameter > {0} < not the expected one at void Main() args in {1}", args[0], assemblyName);
+                    LogHelper.LoggerBFME1GUI.Warning(string.Format("Parameter > {0} < not the expected one at void Main() args in {1}", args[0], assemblyName));
                     return;
                 }
             }
@@ -90,9 +96,6 @@ namespace PatchLauncher
 
                 GameFileTools.EnsureBFMEAppdataFolderExists();
                 GameFileTools.EnsureBFMEOptionsIniFileExists();
-
-                //InstallLanguageList._DictionarylanguageSettings = gameFileDictionary.LanguagePacks["BFME1"]
-                //  .ToDictionary(x => x.RegistrySelectedLocale, x => new LanguageSettings { RegistrySelectedLanguageName = x.RegistrySelectedLanguageName, RegistrySelectedLanguage = x.RegistrySelectedLanguage, RegistrySelectedLocale = x.RegistrySelectedLocale, LanguagPackName = x.LanguagePackName });
 
                 Application.Run(new WinFormsMainGUI());
                 _mutex.ReleaseMutex();

@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "Restarter.exe"
-#define MyAppExeVersion "1.0.2.3"
+#define MyAppExeVersion "1.0.4.0"
 #define MyAppPublishFolder "PatchLauncher"
 
 [Setup]
@@ -75,4 +75,4 @@ Type: filesandordirs; Name: "{app}\Downloads"
 
 [Run]
 Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--startLauncher"
-Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent; Parameters: "--startLauncher"
+Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent; Parameters: "--showLauncherUpdateLog"

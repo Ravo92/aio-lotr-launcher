@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace PatchLauncher
 {
-    partial class ChangelogPageLauncher : Form
+    partial class ChangelogPagePatch : Form
     {
-        public ChangelogPageLauncher()
+        public ChangelogPagePatch()
         {
             InitializeComponent();
             KeyPreview = true;

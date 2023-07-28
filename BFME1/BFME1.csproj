@@ -13,13 +13,12 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-    <AssemblyVersion>1.0.2.3</AssemblyVersion>
-    <FileVersion>1.0.2.3</FileVersion>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
     <Copyright>Raphael Vogel</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <NeutralLanguage>en</NeutralLanguage>
     <Authors>Patch 2.22 Team</Authors>
     <Product>BFME1 Launcher </Product>
     <PackageId>BFME1 Launcher</PackageId>
@@ -41,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ChangelogPagePatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ChangelogPageLauncher.cs">
       <SubType>Form</SubType>
     </Compile>

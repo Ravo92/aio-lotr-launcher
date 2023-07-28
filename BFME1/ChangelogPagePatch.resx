@@ -112,32 +112,32 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Wv2ChangelogLauncher.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="Wv2ChangelogPatch.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 5</value>
   </data>
-  <data name="Wv2ChangelogLauncher.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1240, 495</value>
+  <data name="Wv2ChangelogPatch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1240, 535</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Wv2ChangelogLauncher.TabIndex" type="System.Int32, mscorlib">
+  <data name="Wv2ChangelogPatch.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Wv2ChangelogLauncher.Name" xml:space="preserve">
-    <value>Wv2ChangelogLauncher</value>
+  <data name="&gt;&gt;Wv2ChangelogPatch.Name" xml:space="preserve">
+    <value>Wv2ChangelogPatch</value>
   </data>
-  <data name="&gt;&gt;Wv2ChangelogLauncher.Type" xml:space="preserve">
+  <data name="&gt;&gt;Wv2ChangelogPatch.Type" xml:space="preserve">
     <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
   </data>
-  <data name="&gt;&gt;Wv2ChangelogLauncher.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Wv2ChangelogPatch.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Wv2ChangelogLauncher.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Wv2ChangelogPatch.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -147,7 +147,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1259, 511</value>
+    <value>1259, 553</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -161,10 +161,10 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Changelog Launcher</value>
+    <value>Changelog for Patch 2.22</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ChangelogPageLauncher</value>
+    <value>ChangelogPagePatch</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

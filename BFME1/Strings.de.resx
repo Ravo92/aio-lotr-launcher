@@ -161,6 +161,11 @@ Bereits vorhandene Dateien in diesem Verzeichnis werden ohne Sicherung gelöscht
   <data name="Msg.Restart.Title" xml:space="preserve">
     <value>Programm Neustart benötigt</value>
   </data>
+  <data name="Msg.RestartForUpdate.Text" xml:space="preserve">
+    <value>Es wurde eine neue offizielle Version von Patch 2.22 veröffentlicht.
+Zum installieren muss der Beta-Channel oder die ältere Patch-Auswahl verworfen werden.
+Soll der Launcher nun für das Update neu gestartet werden?</value>
+  </data>
   <data name="ToolTip.MusicSwitcher" xml:space="preserve">
     <value>Hier kannst du die Musik umschalten. Es gibt 5 verschiedene Themes.</value>
   </data>

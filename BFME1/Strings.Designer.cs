@@ -189,6 +189,17 @@ namespace PatchLauncher {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new official Patch 2.22 update is available!
+        ///It seems, you are using the Beta-Channel or a older patch from the list.
+        ///Do you wish to restart the launcher now and apply the new patch?.
+        /// </summary>
+        internal static string Msg_RestartForUpdate_Text {
+            get {
+                return ResourceManager.GetString("Msg.RestartForUpdate.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Switch between faction music and default theme music.
         /// </summary>
         internal static string ToolTip_MusicSwitcher {

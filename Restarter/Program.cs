@@ -20,6 +20,9 @@ namespace Restarter
 
                 Application.Run(new UpdaterDialog());
 
+                if (UpdateIsDownloaded.LauncherUpdateIsDownloaded)
+                    return;
+
                 switch (args[0])
                 {
                     case "--restart":
@@ -28,17 +31,17 @@ namespace Restarter
                         {
                             if (args[1] == "--BFME1Launcher")
                             {
-                                StartBFME1Launcher();
+                                StartBFME1Launcher("--official");
                             }
 
                             if (args[1] == "--BFME2Launcher")
                             {
-                                StartBFME2Launcher();
+                                StartBFME2Launcher("--official");
                             }
 
                             if (args[1] == "--BFME25Launcher")
                             {
-                                StartBFME25Launcher();
+                                StartBFME25Launcher("--official");
                             }
                         }
                         break;
@@ -47,17 +50,35 @@ namespace Restarter
 
                         if (GetLastSelectedGameLauncher() == 1)
                         {
-                            StartBFME1Launcher();
+                            StartBFME1Launcher("--official");
                         }
 
                         else if (GetLastSelectedGameLauncher() == 2)
                         {
-                            StartBFME2Launcher();
+                            StartBFME2Launcher("--official");
                         }
 
                         else if (GetLastSelectedGameLauncher() == 25)
                         {
-                            StartBFME25Launcher();
+                            StartBFME25Launcher("--official");
+                        }
+                        break;
+
+                    case "--showLauncherUpdateLog":
+
+                        if (GetLastSelectedGameLauncher() == 1)
+                        {
+                            StartBFME1Launcher("--showLauncherUpdateLog");
+                        }
+
+                        else if (GetLastSelectedGameLauncher() == 2)
+                        {
+                            StartBFME2Launcher("--showLauncherUpdateLog");
+                        }
+
+                        else if (GetLastSelectedGameLauncher() == 25)
+                        {
+                            StartBFME25Launcher("--showLauncherUpdateLog");
                         }
                         break;
 
@@ -71,7 +92,7 @@ namespace Restarter
             }
         }
 
-        private static void StartBFME1Launcher()
+        private static void StartBFME1Launcher(string argument)
         {
             try
             {
@@ -80,7 +101,7 @@ namespace Restarter
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME1_FILENAME;
                 _restarterProcess.StartInfo.WorkingDirectory = programPath;
                 _restarterProcess.StartInfo.UseShellExecute = true;
-                _restarterProcess.StartInfo.Arguments = "--official";
+                _restarterProcess.StartInfo.Arguments = argument;
                 _restarterProcess.Start();
             }
             catch (Exception ex)
@@ -89,7 +110,7 @@ namespace Restarter
             }
         }
 
-        private static void StartBFME2Launcher()
+        private static void StartBFME2Launcher(string argument)
         {
             try
             {
@@ -98,7 +119,7 @@ namespace Restarter
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME2_FILENAME;
                 _restarterProcess.StartInfo.WorkingDirectory = programPath;
                 _restarterProcess.StartInfo.UseShellExecute = true;
-                _restarterProcess.StartInfo.Arguments = "--official";
+                _restarterProcess.StartInfo.Arguments = argument;
                 _restarterProcess.Start();
             }
             catch (Exception ex)
@@ -107,7 +128,7 @@ namespace Restarter
             }
         }
 
-        private static void StartBFME25Launcher()
+        private static void StartBFME25Launcher(string argument)
         {
             try
             {
@@ -116,7 +137,7 @@ namespace Restarter
                 _restarterProcess.StartInfo.FileName = ConstStrings.C_LAUNCHEREXE_BFME25_FILENAME;
                 _restarterProcess.StartInfo.WorkingDirectory = programPath;
                 _restarterProcess.StartInfo.UseShellExecute = true;
-                _restarterProcess.StartInfo.Arguments = "--official";
+                _restarterProcess.StartInfo.Arguments = argument;
                 _restarterProcess.Start();
             }
             catch (Exception ex)
