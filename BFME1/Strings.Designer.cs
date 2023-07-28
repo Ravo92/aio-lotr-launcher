@@ -79,7 +79,8 @@ namespace PatchLauncher {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beta-Channel is activated! Deactivate in &quot;Launcher Options&quot; first and restart the Launcher to see Patches!.
+        ///   Looks up a localized string similar to Beta-Channel is activated and needs to be disabled in Launcher-
+        ///options first in order to see the patch- and mod-selection!.
         /// </summary>
         internal static string Info_BetaActivated {
             get {

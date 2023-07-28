@@ -32,33 +32,33 @@
             BtnDefault = new System.Windows.Forms.Button();
             LblEAX = new System.Windows.Forms.Label();
             ChkEAX = new System.Windows.Forms.Button();
-            PibBorderLauncherOptions = new System.Windows.Forms.PictureBox();
             LblLauncherSettings = new System.Windows.Forms.Label();
             PibHeader = new System.Windows.Forms.PictureBox();
             LblOptions = new System.Windows.Forms.Label();
-            LblPatchVersion = new System.Windows.Forms.Label();
+            LblPatchVersionTitle = new System.Windows.Forms.Label();
             LblWindowed = new System.Windows.Forms.Label();
             ChkWindowed = new System.Windows.Forms.Button();
             LblBrutalAI = new System.Windows.Forms.Label();
             ChkBrutalAI = new System.Windows.Forms.Button();
             LblWarning = new System.Windows.Forms.Label();
-            LblLauncherVersion = new System.Windows.Forms.Label();
-            LblShowPatchesFirst = new System.Windows.Forms.Label();
-            ChkShowPatchesFirst = new System.Windows.Forms.Button();
+            LblLauncherVersionTitle = new System.Windows.Forms.Label();
             BtnApply = new System.Windows.Forms.Button();
             BtnCancel = new System.Windows.Forms.Button();
             LblUseBetaChannel = new System.Windows.Forms.Label();
             ChkUseBetaChannel = new System.Windows.Forms.Button();
             CmBLanguage = new System.Windows.Forms.ComboBox();
             LblLanguage = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)PibBorderLauncherOptions).BeginInit();
+            PibBorderLauncherOptions = new System.Windows.Forms.PictureBox();
+            LblPatchVersion = new System.Windows.Forms.Label();
+            LblLauncherVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)PibHeader).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PibBorderLauncherOptions).BeginInit();
             SuspendLayout();
             // 
             // BtnDefault
             // 
-            resources.ApplyResources(BtnDefault, "BtnDefault");
             BtnDefault.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnDefault, "BtnDefault");
             BtnDefault.FlatAppearance.BorderSize = 0;
             BtnDefault.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -79,8 +79,8 @@
             // 
             // ChkEAX
             // 
-            resources.ApplyResources(ChkEAX, "ChkEAX");
             ChkEAX.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkEAX, "ChkEAX");
             ChkEAX.FlatAppearance.BorderSize = 0;
             ChkEAX.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -94,13 +94,6 @@
             ChkEAX.MouseEnter += ChkEAX_MouseEnter;
             ChkEAX.MouseLeave += ChkEAX_MouseLeave;
             // 
-            // PibBorderLauncherOptions
-            // 
-            resources.ApplyResources(PibBorderLauncherOptions, "PibBorderLauncherOptions");
-            PibBorderLauncherOptions.BackColor = System.Drawing.Color.Transparent;
-            PibBorderLauncherOptions.Name = "PibBorderLauncherOptions";
-            PibBorderLauncherOptions.TabStop = false;
-            // 
             // LblLauncherSettings
             // 
             resources.ApplyResources(LblLauncherSettings, "LblLauncherSettings");
@@ -108,8 +101,8 @@
             // 
             // PibHeader
             // 
-            resources.ApplyResources(PibHeader, "PibHeader");
             PibHeader.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibHeader, "PibHeader");
             PibHeader.Name = "PibHeader";
             PibHeader.TabStop = false;
             // 
@@ -118,10 +111,10 @@
             resources.ApplyResources(LblOptions, "LblOptions");
             LblOptions.Name = "LblOptions";
             // 
-            // LblPatchVersion
+            // LblPatchVersionTitle
             // 
-            resources.ApplyResources(LblPatchVersion, "LblPatchVersion");
-            LblPatchVersion.Name = "LblPatchVersion";
+            resources.ApplyResources(LblPatchVersionTitle, "LblPatchVersionTitle");
+            LblPatchVersionTitle.Name = "LblPatchVersionTitle";
             // 
             // LblWindowed
             // 
@@ -130,8 +123,8 @@
             // 
             // ChkWindowed
             // 
-            resources.ApplyResources(ChkWindowed, "ChkWindowed");
             ChkWindowed.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkWindowed, "ChkWindowed");
             ChkWindowed.FlatAppearance.BorderSize = 0;
             ChkWindowed.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkWindowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -152,8 +145,8 @@
             // 
             // ChkBrutalAI
             // 
-            resources.ApplyResources(ChkBrutalAI, "ChkBrutalAI");
             ChkBrutalAI.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkBrutalAI, "ChkBrutalAI");
             ChkBrutalAI.FlatAppearance.BorderSize = 0;
             ChkBrutalAI.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkBrutalAI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -172,37 +165,15 @@
             resources.ApplyResources(LblWarning, "LblWarning");
             LblWarning.Name = "LblWarning";
             // 
-            // LblLauncherVersion
+            // LblLauncherVersionTitle
             // 
-            resources.ApplyResources(LblLauncherVersion, "LblLauncherVersion");
-            LblLauncherVersion.Name = "LblLauncherVersion";
-            // 
-            // LblShowPatchesFirst
-            // 
-            resources.ApplyResources(LblShowPatchesFirst, "LblShowPatchesFirst");
-            LblShowPatchesFirst.Name = "LblShowPatchesFirst";
-            // 
-            // ChkShowPatchesFirst
-            // 
-            resources.ApplyResources(ChkShowPatchesFirst, "ChkShowPatchesFirst");
-            ChkShowPatchesFirst.BackColor = System.Drawing.Color.Black;
-            ChkShowPatchesFirst.FlatAppearance.BorderSize = 0;
-            ChkShowPatchesFirst.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            ChkShowPatchesFirst.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            ChkShowPatchesFirst.ForeColor = System.Drawing.Color.Transparent;
-            ChkShowPatchesFirst.Name = "ChkShowPatchesFirst";
-            ChkShowPatchesFirst.TabStop = false;
-            ChkShowPatchesFirst.UseMnemonic = false;
-            ChkShowPatchesFirst.UseVisualStyleBackColor = false;
-            ChkShowPatchesFirst.MouseClick += ChkShowPatchesFirst_MouseClick;
-            ChkShowPatchesFirst.MouseDown += ChkShowPatchesFirst_MouseDown;
-            ChkShowPatchesFirst.MouseEnter += ChkShowPatchesFirst_MouseEnter;
-            ChkShowPatchesFirst.MouseLeave += ChkShowPatchesFirst_MouseLeave;
+            resources.ApplyResources(LblLauncherVersionTitle, "LblLauncherVersionTitle");
+            LblLauncherVersionTitle.Name = "LblLauncherVersionTitle";
             // 
             // BtnApply
             // 
-            resources.ApplyResources(BtnApply, "BtnApply");
             BtnApply.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnApply, "BtnApply");
             BtnApply.FlatAppearance.BorderSize = 0;
             BtnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -218,8 +189,8 @@
             // 
             // BtnCancel
             // 
-            resources.ApplyResources(BtnCancel, "BtnCancel");
             BtnCancel.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnCancel, "BtnCancel");
             BtnCancel.FlatAppearance.BorderSize = 0;
             BtnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -240,8 +211,8 @@
             // 
             // ChkUseBetaChannel
             // 
-            resources.ApplyResources(ChkUseBetaChannel, "ChkUseBetaChannel");
             ChkUseBetaChannel.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkUseBetaChannel, "ChkUseBetaChannel");
             ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
             ChkUseBetaChannel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkUseBetaChannel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -257,8 +228,8 @@
             // 
             // CmBLanguage
             // 
-            resources.ApplyResources(CmBLanguage, "CmBLanguage");
             CmBLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(CmBLanguage, "CmBLanguage");
             CmBLanguage.FormattingEnabled = true;
             CmBLanguage.Items.AddRange(new object[] { resources.GetString("CmBLanguage.Items"), resources.GetString("CmBLanguage.Items1") });
             CmBLanguage.Name = "CmBLanguage";
@@ -269,26 +240,43 @@
             resources.ApplyResources(LblLanguage, "LblLanguage");
             LblLanguage.Name = "LblLanguage";
             // 
+            // PibBorderLauncherOptions
+            // 
+            PibBorderLauncherOptions.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibBorderLauncherOptions, "PibBorderLauncherOptions");
+            PibBorderLauncherOptions.Name = "PibBorderLauncherOptions";
+            PibBorderLauncherOptions.TabStop = false;
+            // 
+            // LblPatchVersion
+            // 
+            resources.ApplyResources(LblPatchVersion, "LblPatchVersion");
+            LblPatchVersion.Name = "LblPatchVersion";
+            // 
+            // LblLauncherVersion
+            // 
+            resources.ApplyResources(LblLauncherVersion, "LblLauncherVersion");
+            LblLauncherVersion.Name = "LblLauncherVersion";
+            // 
             // LauncherOptionsForm
             // 
-            resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            resources.ApplyResources(this, "$this");
+            Controls.Add(LblLauncherVersion);
+            Controls.Add(LblPatchVersion);
             Controls.Add(LblLanguage);
             Controls.Add(CmBLanguage);
             Controls.Add(LblUseBetaChannel);
             Controls.Add(ChkUseBetaChannel);
             Controls.Add(BtnCancel);
             Controls.Add(BtnApply);
-            Controls.Add(LblShowPatchesFirst);
-            Controls.Add(ChkShowPatchesFirst);
-            Controls.Add(LblLauncherVersion);
+            Controls.Add(LblLauncherVersionTitle);
             Controls.Add(BtnDefault);
             Controls.Add(LblWarning);
             Controls.Add(LblBrutalAI);
             Controls.Add(ChkBrutalAI);
             Controls.Add(LblWindowed);
             Controls.Add(ChkWindowed);
-            Controls.Add(LblPatchVersion);
+            Controls.Add(LblPatchVersionTitle);
             Controls.Add(LblOptions);
             Controls.Add(PibHeader);
             Controls.Add(LblLauncherSettings);
@@ -299,8 +287,8 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             Name = "LauncherOptionsForm";
             KeyDown += OptionsBFME1_KeyDown;
-            ((System.ComponentModel.ISupportInitialize)PibBorderLauncherOptions).EndInit();
             ((System.ComponentModel.ISupportInitialize)PibHeader).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PibBorderLauncherOptions).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -309,24 +297,24 @@
         private System.Windows.Forms.Button BtnDefault;
         private System.Windows.Forms.Label LblEAX;
         private System.Windows.Forms.Button ChkEAX;
-        private System.Windows.Forms.PictureBox PibBorderLauncherOptions;
         private System.Windows.Forms.Label LblLauncherSettings;
         private System.Windows.Forms.PictureBox PibHeader;
         private System.Windows.Forms.Label LblOptions;
-        private System.Windows.Forms.Label LblPatchVersion;
+        private System.Windows.Forms.Label LblPatchVersionTitle;
         private System.Windows.Forms.Label LblWindowed;
         private System.Windows.Forms.Button ChkWindowed;
         private System.Windows.Forms.Label LblBrutalAI;
         private System.Windows.Forms.Button ChkBrutalAI;
         private System.Windows.Forms.Label LblWarning;
-        private System.Windows.Forms.Label LblLauncherVersion;
-        private System.Windows.Forms.Label LblShowPatchesFirst;
-        private System.Windows.Forms.Button ChkShowPatchesFirst;
+        private System.Windows.Forms.Label LblLauncherVersionTitle;
         private System.Windows.Forms.Button BtnApply;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Label LblUseBetaChannel;
         private System.Windows.Forms.Button ChkUseBetaChannel;
         private System.Windows.Forms.ComboBox CmBLanguage;
         private System.Windows.Forms.Label LblLanguage;
+        private System.Windows.Forms.PictureBox PibBorderLauncherOptions;
+        private System.Windows.Forms.Label LblPatchVersion;
+        private System.Windows.Forms.Label LblLauncherVersion;
     }
 }

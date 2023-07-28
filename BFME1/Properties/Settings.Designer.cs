@@ -158,30 +158,6 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatchModsShown {
-            get {
-                return ((bool)(this["IsPatchModsShown"]));
-            }
-            set {
-                this["IsPatchModsShown"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ShowPatchesFirst {
-            get {
-                return ((bool)(this["ShowPatchesFirst"]));
-            }
-            set {
-                this["ShowPatchesFirst"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UseBetaChannel {
             get {
                 return ((bool)(this["UseBetaChannel"]));
@@ -264,13 +240,13 @@ namespace PatchLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int LatestBetaPatchVersion {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OpenLauncherChangelogPageAfterUpdate {
             get {
-                return ((int)(this["LatestBetaPatchVersion"]));
+                return ((bool)(this["OpenLauncherChangelogPageAfterUpdate"]));
             }
             set {
-                this["LatestBetaPatchVersion"] = value;
+                this["OpenLauncherChangelogPageAfterUpdate"] = value;
             }
         }
     }

@@ -43,12 +43,10 @@ namespace PatchLauncher
             BtnInstall = new Button();
             LblWorkerIOTask = new Label();
             PibLoadingRing = new PictureBox();
-            LblPatchNotes = new CustomLabel();
+            LabelLoadingPanel = new CustomLabel();
             PibLoadingBorder = new PictureBox();
-            Wv2Patchnotes = new Microsoft.Web.WebView2.WinForms.WebView2();
             PiBTwitch = new PictureBox();
-            PiBArrow = new PictureBox();
-            PnlPlaceholder = new FlowLayoutPanel();
+            PanelPlaceholder = new FlowLayoutPanel();
             PiBVersion103 = new PictureBox();
             LblModExplanation = new CustomLabel();
             NotifyContextMenu = new ContextMenuStrip(components);
@@ -84,8 +82,6 @@ namespace PatchLauncher
             CreditsToolStripMenuItem = new ToolStripMenuItem();
             MessagesFromTheTeamToolStripMenuItem = new ToolStripMenuItem();
             PBarActualFile = new CustomProgressBar();
-            TmrPatchNotes = new Timer(components);
-            TmrAnimation = new Timer(components);
             SysTray = new NotifyIcon(components);
             ((System.ComponentModel.ISupportInitialize)PibHeader).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBYoutube).BeginInit();
@@ -94,10 +90,8 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBThemeSwitcher).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PibLoadingRing).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PibLoadingBorder).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Wv2Patchnotes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBTwitch).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)PiBArrow).BeginInit();
-            PnlPlaceholder.SuspendLayout();
+            PanelPlaceholder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PiBVersion103).BeginInit();
             NotifyContextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PibMute).BeginInit();
@@ -189,15 +183,15 @@ namespace PatchLauncher
             PibLoadingRing.Name = "PibLoadingRing";
             PibLoadingRing.TabStop = false;
             // 
-            // LblPatchNotes
+            // LabelLoadingPanel
             // 
-            resources.ApplyResources(LblPatchNotes, "LblPatchNotes");
-            LblPatchNotes.BackColor = System.Drawing.Color.Transparent;
-            LblPatchNotes.Cursor = Cursors.WaitCursor;
-            LblPatchNotes.ForeColor = System.Drawing.SystemColors.Control;
-            LblPatchNotes.Name = "LblPatchNotes";
-            LblPatchNotes.OutlineForeColor = System.Drawing.Color.Black;
-            LblPatchNotes.OutlineWidth = 4F;
+            resources.ApplyResources(LabelLoadingPanel, "LabelLoadingPanel");
+            LabelLoadingPanel.BackColor = System.Drawing.Color.Transparent;
+            LabelLoadingPanel.Cursor = Cursors.WaitCursor;
+            LabelLoadingPanel.ForeColor = System.Drawing.SystemColors.Control;
+            LabelLoadingPanel.Name = "LabelLoadingPanel";
+            LabelLoadingPanel.OutlineForeColor = System.Drawing.Color.Black;
+            LabelLoadingPanel.OutlineWidth = 4F;
             // 
             // PibLoadingBorder
             // 
@@ -205,17 +199,6 @@ namespace PatchLauncher
             resources.ApplyResources(PibLoadingBorder, "PibLoadingBorder");
             PibLoadingBorder.Name = "PibLoadingBorder";
             PibLoadingBorder.TabStop = false;
-            // 
-            // Wv2Patchnotes
-            // 
-            Wv2Patchnotes.AllowExternalDrop = true;
-            Wv2Patchnotes.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
-            Wv2Patchnotes.CreationProperties = null;
-            Wv2Patchnotes.DefaultBackgroundColor = System.Drawing.Color.White;
-            resources.ApplyResources(Wv2Patchnotes, "Wv2Patchnotes");
-            Wv2Patchnotes.Name = "Wv2Patchnotes";
-            Wv2Patchnotes.Source = new System.Uri("https://ravo92.github.io/changelogpage/index.html", System.UriKind.Absolute);
-            Wv2Patchnotes.ZoomFactor = 1D;
             // 
             // PiBTwitch
             // 
@@ -226,21 +209,12 @@ namespace PatchLauncher
             PiBTwitch.TabStop = false;
             PiBTwitch.Click += PiBTwitch_Click;
             // 
-            // PiBArrow
+            // PanelPlaceholder
             // 
-            PiBArrow.BackColor = System.Drawing.Color.Red;
-            resources.ApplyResources(PiBArrow, "PiBArrow");
-            PiBArrow.Cursor = Cursors.Hand;
-            PiBArrow.Name = "PiBArrow";
-            PiBArrow.TabStop = false;
-            PiBArrow.Click += PiBArrow_Click;
-            // 
-            // PnlPlaceholder
-            // 
-            resources.ApplyResources(PnlPlaceholder, "PnlPlaceholder");
-            PnlPlaceholder.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
-            PnlPlaceholder.Controls.Add(PiBVersion103);
-            PnlPlaceholder.Name = "PnlPlaceholder";
+            resources.ApplyResources(PanelPlaceholder, "PanelPlaceholder");
+            PanelPlaceholder.BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
+            PanelPlaceholder.Controls.Add(PiBVersion103);
+            PanelPlaceholder.Name = "PanelPlaceholder";
             // 
             // PiBVersion103
             // 
@@ -461,15 +435,6 @@ namespace PatchLauncher
             PBarActualFile.Name = "PBarActualFile";
             PBarActualFile.Style = ProgressBarStyle.Continuous;
             // 
-            // TmrPatchNotes
-            // 
-            TmrPatchNotes.Enabled = true;
-            // 
-            // TmrAnimation
-            // 
-            TmrAnimation.Interval = 10;
-            TmrAnimation.Tick += TmrAnimation_Tick;
-            // 
             // SysTray
             // 
             SysTray.BalloonTipIcon = ToolTipIcon.Info;
@@ -486,9 +451,8 @@ namespace PatchLauncher
             Controls.Add(BtnInstall);
             Controls.Add(WinFormsMainMenuStrip);
             Controls.Add(PibMute);
-            Controls.Add(PiBArrow);
             Controls.Add(PiBTwitch);
-            Controls.Add(LblPatchNotes);
+            Controls.Add(LabelLoadingPanel);
             Controls.Add(LblWorkerIOTask);
             Controls.Add(LblWorkerFileName);
             Controls.Add(PiBThemeSwitcher);
@@ -498,8 +462,7 @@ namespace PatchLauncher
             Controls.Add(PibHeader);
             Controls.Add(PibLoadingRing);
             Controls.Add(PibLoadingBorder);
-            Controls.Add(PnlPlaceholder);
-            Controls.Add(Wv2Patchnotes);
+            Controls.Add(PanelPlaceholder);
             DoubleBuffered = true;
             ForeColor = System.Drawing.SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -507,6 +470,7 @@ namespace PatchLauncher
             MdiChildrenMinimizedAnchorBottom = false;
             Name = "WinFormsMainGUI";
             FormClosing += BFME1_FormClosing;
+            Load += WinFormsMainGUI_Load;
             Shown += BFME1_Shown;
             Resize += BFME1_Resize;
             ((System.ComponentModel.ISupportInitialize)PibHeader).EndInit();
@@ -516,10 +480,8 @@ namespace PatchLauncher
             ((System.ComponentModel.ISupportInitialize)PiBThemeSwitcher).EndInit();
             ((System.ComponentModel.ISupportInitialize)PibLoadingRing).EndInit();
             ((System.ComponentModel.ISupportInitialize)PibLoadingBorder).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Wv2Patchnotes).EndInit();
             ((System.ComponentModel.ISupportInitialize)PiBTwitch).EndInit();
-            ((System.ComponentModel.ISupportInitialize)PiBArrow).EndInit();
-            PnlPlaceholder.ResumeLayout(false);
+            PanelPlaceholder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PiBVersion103).EndInit();
             NotifyContextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PibMute).EndInit();
@@ -538,16 +500,13 @@ namespace PatchLauncher
         private PictureBox PibLoadingRing;
         private PictureBox PibLoadingBorder;
         private PictureBox PiBTwitch;
-        private PictureBox PiBArrow;
         private PictureBox PiBVersion103;
         private PictureBox PibMute;
         private ToolTip ToolTip;
-        private Timer TmrPatchNotes;
         private Label LblWorkerFileName;
         private Button BtnInstall;
         private Label LblWorkerIOTask;
-        private Timer TmrAnimation;
-        private FlowLayoutPanel PnlPlaceholder;
+        private FlowLayoutPanel PanelPlaceholder;
         private NotifyIcon SysTray;
         private ContextMenuStrip NotifyContextMenu;
         private ToolStripMenuItem MenuItemLaunchGame;
@@ -577,8 +536,7 @@ namespace PatchLauncher
         private ToolStripMenuItem CreditsToolStripMenuItem;
         private ToolStripMenuItem MessagesFromTheTeamToolStripMenuItem;
         private ToolStripMenuItem openLauncherLogfileDirectoryToolStripMenuItem;
-        private Microsoft.Web.WebView2.WinForms.WebView2 Wv2Patchnotes;
-        private CustomLabel LblPatchNotes;
+        private CustomLabel LabelLoadingPanel;
         private CustomLabel LblModExplanation;
         private CustomProgressBar PBarActualFile;
         private ToolStripMenuItem LauncherDesktopShortcutToolStripMenuItem;

@@ -20,7 +20,6 @@ namespace PatchLauncher
         bool FlagEAX = Settings.Default.EAXSupport;
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
-        bool FlagShowPatchesFirst = Settings.Default.ShowPatchesFirst;
         bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
         string FlagLauncherLanguageIndex = Settings.Default.LauncherLanguage;
 
@@ -77,7 +76,15 @@ namespace PatchLauncher
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
             LblOptions.BackColor = Color.Black;
 
-            LblLauncherVersion.Text += Assembly.GetEntryAssembly()!.GetName().Version;
+            LblLauncherVersionTitle.Font = FontHelper.GetFont(0, 16);
+            LblLauncherVersionTitle.ForeColor = Color.FromArgb(136, 82, 46);
+            LblLauncherVersionTitle.BackColor = Color.Transparent;
+
+            LblPatchVersionTitle.Font = FontHelper.GetFont(0, 16);
+            LblPatchVersionTitle.ForeColor = Color.FromArgb(136, 82, 46);
+            LblPatchVersionTitle.BackColor = Color.Transparent;
+
+            LblLauncherVersion.Text = Assembly.GetEntryAssembly()!.GetName().Version!.ToString();
             LblLauncherVersion.Font = FontHelper.GetFont(0, 16);
             LblLauncherVersion.ForeColor = Color.FromArgb(136, 82, 46);
             LblLauncherVersion.BackColor = Color.Transparent;
@@ -98,10 +105,6 @@ namespace PatchLauncher
             LblWarning.ForeColor = Color.Red;
             LblWarning.BackColor = Color.Transparent;
 
-            LblShowPatchesFirst.Font = FontHelper.GetFont(0, 16);
-            LblShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
-            LblShowPatchesFirst.BackColor = Color.Transparent;
-
             LblUseBetaChannel.Font = FontHelper.GetFont(0, 16);
             LblUseBetaChannel.ForeColor = Color.FromArgb(192, 145, 69);
             LblUseBetaChannel.BackColor = Color.Transparent;
@@ -110,13 +113,17 @@ namespace PatchLauncher
             LblLanguage.ForeColor = Color.FromArgb(192, 145, 69);
             LblLanguage.BackColor = Color.Transparent;
 
-            if (Settings.Default.PatchVersionInstalled < 103 && !FlagUseBetaChannel)
+            if (Settings.Default.PatchVersionInstalled > 106 && !FlagUseBetaChannel)
             {
-                LblPatchVersion.Text += "2.22v" + Settings.Default.PatchVersionInstalled.ToString();
+                LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[3..];
+            }
+            else if (Settings.Default.PatchVersionInstalled >= 103 && !FlagUseBetaChannel)
+            {
+                LblPatchVersion.Text = Settings.Default.PatchVersionInstalled.ToString();
             }
             else if (FlagUseBetaChannel)
             {
-                LblPatchVersion.Text += _patchPacksBeta.MajorVersion.ToString() + "v" + _patchPacksBeta.MinorVersion.ToString() + " BETA " + _patchPacksBeta.Version.ToString();
+                LblPatchVersion.Text = _patchPacksBeta.MajorVersion.ToString() + "v" + _patchPacksBeta.MinorVersion.ToString() + " BETA " + _patchPacksBeta.Version.ToString();
             }
 
             if (FlagBrutalAI)
@@ -179,16 +186,6 @@ namespace PatchLauncher
             else
                 ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
-            ChkShowPatchesFirst.FlatAppearance.BorderSize = 0;
-            ChkShowPatchesFirst.FlatStyle = FlatStyle.Flat;
-            ChkShowPatchesFirst.BackColor = Color.Transparent;
-            ChkShowPatchesFirst.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Selected;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
-
             ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
             ChkUseBetaChannel.FlatStyle = FlatStyle.Flat;
             ChkUseBetaChannel.BackColor = Color.Transparent;
@@ -209,11 +206,10 @@ namespace PatchLauncher
             FlagEAX = false;
             FlagWindowed = false;
             FlagBrutalAI = false;
-            FlagShowPatchesFirst = false;
+
             ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
-            ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
         }
 
@@ -312,7 +308,6 @@ namespace PatchLauncher
             //Save Launcher-Settings
             Settings.Default.EAXSupport = FlagEAX;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
-            Settings.Default.ShowPatchesFirst = FlagShowPatchesFirst;
 
             if (FlagLauncherLanguageIndex != Settings.Default.LauncherLanguage)
             {
@@ -362,47 +357,9 @@ namespace PatchLauncher
                 File.Delete(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"));
         }
 
-        private void ChkShowPatchesFirst_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (FlagShowPatchesFirst == true)
-            {
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
-                FlagShowPatchesFirst = false;
-            }
-            else
-            {
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
-                FlagShowPatchesFirst = true;
-            }
-        }
-
-        private void ChkShowPatchesFirst_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
-        }
-
-        private void ChkShowPatchesFirst_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Selected;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
-        }
-
-        private void ChkShowPatchesFirst_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagShowPatchesFirst)
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
-            else
-                ChkShowPatchesFirst.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
-        }
-
         private void ChkEAX_Click(object sender, EventArgs e)
         {
-            if (FlagShowPatchesFirst == true)
+            if (FlagEAX == true)
             {
                 ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
                 FlagEAX = false;

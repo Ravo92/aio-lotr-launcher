@@ -124,7 +124,8 @@
     <value>LAUNCH GAME</value>
   </data>
   <data name="Info.BetaActivated" xml:space="preserve">
-    <value>Beta-Channel is activated! Deactivate in "Launcher Options" first and restart the Launcher to see Patches!</value>
+    <value>Beta-Channel is activated and needs to be disabled in Launcher-
+options first in order to see the patch- and mod-selection!</value>
   </data>
   <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
     <value>Copy files and apply patch...</value>

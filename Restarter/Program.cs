@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Text;
 using Helper;
-using Serilog;
 
 namespace Restarter
 {
@@ -19,8 +18,7 @@ namespace Restarter
                     return;
                 }
 
-                Task LauncherUpdateCheck = new(LauncherUpdater.CheckForUpdates);
-                LauncherUpdateCheck.Wait();
+                Application.Run(new UpdaterDialog());
 
                 switch (args[0])
                 {

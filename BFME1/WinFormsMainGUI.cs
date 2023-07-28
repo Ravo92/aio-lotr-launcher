@@ -16,10 +16,11 @@ namespace PatchLauncher
         int iconNumber = Settings.Default.BackgroundMusicIcon;
         readonly SoundPlayerHelper soundPlayerHelper = new();
 
+        LanguageFiles? patchPackLanguages;
         LanguagePacks languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
         readonly MainPacks mainPack = JSONDataListHelper._MainPackSettings;
         readonly PatchPacks patchPack = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
-        LanguageFiles? patchPackLanguages;
+        readonly PatchPacksBeta patchPacksBeta = JSONDataListHelper._PatchBetaSettings;
 
         static bool _IsLauncherCurrentlyWorking = false;
 
@@ -31,18 +32,11 @@ namespace PatchLauncher
                 _IsLauncherCurrentlyWorking = value;
                 if (value)
                 {
-                    LblModExplanation.Visible = false;
+                    TurnPatchesAndModsViewOff();
 
                     PBarActualFile.Visible = true;
                     LblWorkerFileName.Visible = true;
                     LblWorkerIOTask.Visible = true;
-
-                    PiBArrow.Enabled = false;
-
-                    if (Settings.Default.IsPatchModsShown)
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft_Disabled;
-                    else
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight_Disabled;
 
                     BtnInstall.Enabled = false;
 
@@ -51,18 +45,11 @@ namespace PatchLauncher
                 }
                 else
                 {
-                    LblModExplanation.Visible = false;
+                    TurnPatchesAndModsViewOn();
 
                     PBarActualFile.Visible = false;
                     LblWorkerFileName.Visible = false;
                     LblWorkerIOTask.Visible = false;
-
-                    PiBArrow.Enabled = true;
-
-                    if (Settings.Default.IsPatchModsShown)
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-                    else
-                        PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
 
                     BtnInstall.Enabled = true;
 
@@ -74,19 +61,11 @@ namespace PatchLauncher
 
         public WinFormsMainGUI()
         {
-            WebView2Helper.InitializeWebView2Settings();
+            //WebView2Helper.InitializeWebView2Settings();
             InitializeComponent();
 
             SysTray.ContextMenuStrip = NotifyContextMenu;
             BtnInstall.Text = Strings.BtnInstall_TextLaunch;
-
-            //Main Form style behaviour
-            PibLoadingRing.Visible = true;
-            PibLoadingBorder.Visible = true;
-            PiBArrow.Visible = false;
-            LblPatchNotes.Visible = true;
-            PnlPlaceholder.Visible = false;
-            Wv2Patchnotes.Visible = false;
 
             // label-Styles
             LblWorkerFileName.Font = FontHelper.GetFont(0, 16); ;
@@ -97,16 +76,17 @@ namespace PatchLauncher
             LblWorkerIOTask.ForeColor = Color.FromArgb(192, 145, 69);
             LblWorkerIOTask.BackColor = Color.Transparent;
 
-            LblPatchNotes.Font = FontHelper.GetFont(0, 16);
-            LblPatchNotes.ForeColor = Color.FromArgb(192, 145, 69);
-            LblPatchNotes.BackColor = Color.Transparent;
-            LblPatchNotes.BorderStyle = BorderStyle.None;
+            LabelLoadingPanel.Font = FontHelper.GetFont(0, 20);
+            LabelLoadingPanel.ForeColor = Color.FromArgb(192, 145, 69);
+            LabelLoadingPanel.BackColor = Color.Transparent;
+            LabelLoadingPanel.BorderStyle = BorderStyle.None;
+            LabelLoadingPanel.Text = Strings.Info_PleaseWait;
 
-            LblModExplanation.Font = FontHelper.GetFont(0, 21);
+            LblModExplanation.Font = FontHelper.GetFont(0, 30);
             LblModExplanation.ForeColor = Color.FromArgb(192, 145, 69);
             LblModExplanation.BackColor = Color.Transparent;
             LblModExplanation.BorderStyle = BorderStyle.None;
-            LblModExplanation.OutlineWidth = 10;
+            LblModExplanation.OutlineWidth = 4;
 
             PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
             PBarActualFile.BackColor = Color.FromArgb(255, 100, 0);
@@ -118,6 +98,9 @@ namespace PatchLauncher
             BtnInstall.Font = FontHelper.GetFont(0, 16); ;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
 
+            PanelPlaceholder.BackgroundImage = Helper.Properties.Resources.BorderRectangleModPanel;
+            PanelPlaceholder.BackColor = Color.Transparent;
+
             //Tooltips
             ToolTip.SetToolTip(PiBThemeSwitcher, Strings.ToolTip_MusicSwitcher);
 
@@ -126,9 +109,6 @@ namespace PatchLauncher
             PiBDiscord.Image = Helper.Properties.Resources.discord;
             PiBModDB.Image = Helper.Properties.Resources.moddb;
             PiBTwitch.Image = Helper.Properties.Resources.twitch;
-
-            if (Settings.Default.IsPatchModsShown)
-                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
 
             PibHeader.Image = Helper.Properties.Resources.BFME1_Header;
             PibLoadingBorder.Image = Helper.Properties.Resources.loadingBorder;
@@ -168,15 +148,10 @@ namespace PatchLauncher
                 PiBThemeSwitcher.Image = Helper.Properties.Resources.icoMordor;
                 BackgroundImage = Helper.Properties.Resources.BFME1BGMordor;
             }
-
-            TmrPatchNotes.Tick += new EventHandler(TmrPatchNotes_Tick);
-            TmrPatchNotes.Interval = 1;
-            TmrPatchNotes.Start();
         }
 
-        private async void BFME1_Shown(object sender, EventArgs e)
+        private async void WinFormsMainGUI_Load(object sender, EventArgs e)
         {
-            IsLauncherCurrentlyWorking = true;
             LanguageFiles patchPackLanguages = patchPack.LanguageFiles["de"];
 
             try
@@ -187,7 +162,7 @@ namespace PatchLauncher
                     soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
                 }
 
-                PnlPlaceholder.Padding = new Padding(80, 60, 80, 60);
+                PanelPlaceholder.Padding = new Padding(80, 60, 80, 60);
                 //PnlPlaceholder.Margin = new Padding(80);
 
                 if (!Settings.Default.UseBetaChannel)
@@ -195,7 +170,7 @@ namespace PatchLauncher
                     if (JSONDataListHelper._DictionaryPatchPacksSettings.ContainsKey(106))
                     {
                         Patch106Button patch106Button = new();
-                        PnlPlaceholder.Controls.Add(patch106Button);
+                        PanelPlaceholder.Controls.Add(patch106Button);
                         patch106Button.Tag = 106;
                         patch106Button.Click += PatchButton106Clicked;
 
@@ -222,7 +197,7 @@ namespace PatchLauncher
                         UpdatePanelButtonActiveState();
 
                         patch222Buttons.Click += PatchButton222Clicked;
-                        PnlPlaceholder.Controls.Add(patch222Buttons);
+                        PanelPlaceholder.Controls.Add(patch222Buttons);
                     }
                 }
 
@@ -237,10 +212,6 @@ namespace PatchLauncher
                 // If BetaChannel is selected, dont Update either!
                 else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
                 {
-                    //Settings.Default.IsPatch106Installed = false;
-                    //Settings.Default.IsPatch33Installed = false;
-                    //Settings.Default.IsPatch34Installed = false;
-
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
@@ -251,9 +222,6 @@ namespace PatchLauncher
                     {
                         await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                     }
-
-                    //Settings.Default.IsPatch34Downloaded = true;
-                    //Settings.Default.IsPatch34Installed = true;
                 }
                 else
                 {
@@ -264,12 +232,21 @@ namespace PatchLauncher
 
                 if (Settings.Default.UseBetaChannel)
                 {
-                    LblModExplanation.Text = Strings.Info_BetaActivated;
+                    IsLauncherCurrentlyWorking = true;
 
-                    if (Settings.Default.LatestBetaPatchVersion > Settings.Default.BetaChannelVersion)
+                    PanelPlaceholder.Visible = false;
+
+                    LblModExplanation.Location = new Point(130, 300);
+                    LblModExplanation.Text = Strings.Info_BetaActivated;
+                    LblModExplanation.BringToFront();
+
+                    if (patchPacksBeta.Version > Settings.Default.BetaChannelVersion)
                     {
-                        await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
+                        await InstallUpdatRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URL, patchPacksBeta.MD5);
                     }
+
+                    IsLauncherCurrentlyWorking = false;
+                    PanelPlaceholder.Visible = false;
                 }
 
                 if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_GAMETITLE_NAME_EN))
@@ -298,13 +275,19 @@ namespace PatchLauncher
             {
                 LogHelper.LoggerBFME1GUI.Error(ex, "");
             }
+        }
 
-            IsLauncherCurrentlyWorking = false;
+        private void BFME1_Shown(object sender, EventArgs e)
+        {
+
         }
 
         private async void PiBVersion103_Click(object sender, EventArgs e)
         {
-            IsLauncherCurrentlyWorking = true;
+            if (IsLauncherCurrentlyWorking)
+                return;
+            else
+                IsLauncherCurrentlyWorking = true;
 
             try
             {
@@ -417,7 +400,7 @@ namespace PatchLauncher
             IsLauncherCurrentlyWorking = false;
         }
 
-        public void GameisClosedEvent(object? sender, EventArgs e)
+        private void GameisClosedEvent(object? sender, EventArgs e)
         {
             if (InvokeRequired)
             {
@@ -583,12 +566,7 @@ namespace PatchLauncher
             }
         }
 
-        private void PiBArrow_Click(object sender, EventArgs e)
-        {
-            TmrAnimation.Enabled = true;
-        }
-
-        public async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string CorrectMD5HashValue)
+        private async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string CorrectMD5HashValue)
         {
             PBarActualFile.Value = 0;
             PBarActualFile.Maximum = 100;
@@ -631,15 +609,6 @@ namespace PatchLauncher
                     LogHelper.LoggerBFME1GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
                     await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction);
                 }
-
-                if (Settings.Default.IsPatchModsShown)
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-                }
-                else
-                {
-                    PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
-                }
             }
             catch (Exception ex)
             {
@@ -678,7 +647,7 @@ namespace PatchLauncher
             }
         }
 
-        public void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
+        private void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
         {
             Font tooltipFont = FontHelper.GetFont(0, 16); ;
             e.DrawBackground();
@@ -686,130 +655,9 @@ namespace PatchLauncher
             e.Graphics.DrawString(e.ToolTipText, tooltipFont, Brushes.SandyBrown, new PointF(2, 2));
         }
 
-        public void TooltipPopup(object sender, PopupEventArgs e)
+        private void TooltipPopup(object sender, PopupEventArgs e)
         {
             e.ToolTipSize = TextRenderer.MeasureText(ToolTip.GetToolTip(e.AssociatedControl), FontHelper.GetFont(0, 16));
-        }
-
-        private void TmrPatchNotes_Tick(object? sender, EventArgs e)
-        {
-            TmrPatchNotes.Stop();
-            PibLoadingRing.Visible = false;
-            PibLoadingBorder.Visible = false;
-            LblPatchNotes.Visible = false;
-
-            PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
-            PiBArrow.Visible = true;
-
-            Wv2Patchnotes.Visible = true;
-            PnlPlaceholder.Visible = true;
-
-            if (Settings.Default.ShowPatchesFirst)
-            {
-                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-                PiBArrow.BackColor = Color.Transparent;
-                PnlPlaceholder.BackgroundImage = Helper.Properties.Resources.BorderRectangleModPanel;
-                PnlPlaceholder.BackColor = Color.Transparent;
-                LblModExplanation.BackColor = Color.Transparent;
-                LblModExplanation.Visible = true;
-
-                PiBArrow.Left = 1212;
-                Wv2Patchnotes.Left = 1300;
-
-                Settings.Default.IsPatchModsShown = true;
-                Settings.Default.Save();
-            }
-            else
-            {
-                PnlPlaceholder.BackColor = Color.FromArgb(24, 24, 24);
-                PnlPlaceholder.BackgroundImage = null;
-                PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
-                PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
-                LblModExplanation.Visible = false;
-
-                PiBArrow.Left = 14;
-                Wv2Patchnotes.Left = 12;
-
-                Settings.Default.IsPatchModsShown = false;
-                Settings.Default.Save();
-            }
-        }
-
-        private void TmrAnimation_Tick(object sender, EventArgs e)
-        {
-            int startLeft = 12;  // start position of the panel
-            int endLeft = 1300;      // end position of the panel
-            int endLeftArrow = 1212;
-            int stepSize = 5;     // pixels to move
-            int endRight = 12;      // end position of the panel
-
-            // incrementally move
-
-            if (Wv2Patchnotes.Left == startLeft)
-            {
-                while (Wv2Patchnotes.Left != endLeft)
-                {
-                    Wv2Patchnotes.Left += stepSize;
-
-                    if (PiBArrow.Left < endLeftArrow)
-                    {
-                        PiBArrow.Left += stepSize;
-                    }
-                    // make sure we didn't over shoot
-                    if (Wv2Patchnotes.Left > endLeft) Wv2Patchnotes.Left = endLeft;
-
-                    // have we arrived?
-                    if (Wv2Patchnotes.Left == endLeft)
-                    {
-                        TmrAnimation.Enabled = false;
-                    }
-                }
-
-                PiBArrow.Left = endLeftArrow;
-
-                PiBArrow.Image = Helper.Properties.Resources.btnArrowLeft;
-                PiBArrow.BackColor = Color.Transparent;
-                PnlPlaceholder.BackgroundImage = Helper.Properties.Resources.BorderRectangleModPanel;
-                PnlPlaceholder.BackColor = Color.Transparent;
-                LblModExplanation.BackColor = Color.Transparent;
-                LblModExplanation.Visible = true;
-                Wv2Patchnotes.Visible = false;
-
-                Settings.Default.IsPatchModsShown = true;
-                Settings.Default.Save();
-            }
-            else
-            {
-                PnlPlaceholder.BackColor = Color.FromArgb(24, 24, 24);
-                PnlPlaceholder.BackgroundImage = null;
-                PiBArrow.Image = Helper.Properties.Resources.btnArrowRight;
-                PiBArrow.BackColor = Color.FromArgb(24, 24, 24);
-                LblModExplanation.Visible = false;
-                Wv2Patchnotes.Visible = true;
-
-                Settings.Default.IsPatchModsShown = false;
-                Settings.Default.Save();
-
-                while (Wv2Patchnotes.Left != endRight)
-                {
-                    Wv2Patchnotes.Left -= stepSize;
-
-                    if (PiBArrow.Left > endRight)
-                    {
-                        PiBArrow.Left -= stepSize;
-                    }
-                    // make sure we didn't over shoot
-                    if (Wv2Patchnotes.Left < endRight) Wv2Patchnotes.Left = endRight;
-
-                    // have we arrived?
-                    if (Wv2Patchnotes.Left == endRight)
-                    {
-                        TmrAnimation.Enabled = false;
-                    }
-                }
-
-                PiBArrow.Left = endRight;
-            }
         }
 
         private void BFME1_FormClosing(object sender, FormClosingEventArgs e)
@@ -829,7 +677,6 @@ namespace PatchLauncher
                 Settings.Default.SelectedOlderPatch = false;
             }
 
-            Wv2Patchnotes.Dispose();
             Settings.Default.Save();
         }
 
@@ -1106,7 +953,7 @@ namespace PatchLauncher
 
         private void UpdatePanelButtonActiveState()
         {
-            foreach (Control childControl in PnlPlaceholder.Controls)
+            foreach (Control childControl in PanelPlaceholder.Controls)
             {
                 if (childControl is Patch106Button)
                 {
@@ -1119,6 +966,23 @@ namespace PatchLauncher
                     patch222Buttons.SelectedIconVisible = (int)patch222Buttons.Tag == Settings.Default.PatchVersionInstalled;
                 }
             }
+        }
+        private void TurnPatchesAndModsViewOn()
+        {
+            PibLoadingRing.Visible = false;
+            PibLoadingBorder.Visible = false;
+            LabelLoadingPanel.Visible = false;
+            LblModExplanation.Visible = true;
+            PanelPlaceholder.Visible = true;
+        }
+
+        private void TurnPatchesAndModsViewOff()
+        {
+            PibLoadingRing.Visible = true;
+            PibLoadingBorder.Visible = true;
+            LabelLoadingPanel.Visible = true;
+            LblModExplanation.Visible = false;
+            PanelPlaceholder.Visible = false;
         }
     }
 }

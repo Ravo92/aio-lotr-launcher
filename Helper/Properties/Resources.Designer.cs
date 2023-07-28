@@ -293,46 +293,6 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap btnArrowLeft {
-            get {
-                object obj = ResourceManager.GetObject("btnArrowLeft", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap btnArrowLeft_Disabled {
-            get {
-                object obj = ResourceManager.GetObject("btnArrowLeft_Disabled", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap btnArrowRight {
-            get {
-                object obj = ResourceManager.GetObject("btnArrowRight", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap btnArrowRight_Disabled {
-            get {
-                object obj = ResourceManager.GetObject("btnArrowRight_Disabled", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap discord {
             get {
                 object obj = ResourceManager.GetObject("discord", resourceCulture);
@@ -559,6 +519,16 @@ namespace Helper.Properties {
         public static System.Drawing.Bitmap Unmute {
             get {
                 object obj = ResourceManager.GetObject("Unmute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap UpdaterSplash {
+            get {
+                object obj = ResourceManager.GetObject("UpdaterSplash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

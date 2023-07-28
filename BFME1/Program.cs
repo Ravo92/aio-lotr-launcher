@@ -84,7 +84,7 @@ namespace PatchLauncher
                 PatchPacks _latestPatchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
                 PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[assemblyName];
 
-                Settings.Default.LatestBetaPatchVersion = _betaPatchFiles.Version;
+                Settings.Default.BetaChannelVersion = _betaPatchFiles.Version;
                 Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
                 Settings.Default.Save();
 
