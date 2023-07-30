@@ -10,7 +10,7 @@ namespace Helper
         public const string C_EAFOLDER_NAME = "EA Games";
 
         public const string C_MUTEX_NAME = "Patch Launcher 2.22 Ravo92";
-        public const string C_MUTEX_NAME_Restarter = "Patch Launcher 2.22 Restarter Ravo92";
+        public const string C_MUTEX_NAME_RESTARTER = "Patch Launcher 2.22 Restarter Ravo92";
         public const string C_LAUNCHER_SHORTCUT_NAME = "Patch 2.22 Launcher";
 
         public const string C_REGISTRY_SERVICE_WRONG_PARAMETER = "WrongParameter";

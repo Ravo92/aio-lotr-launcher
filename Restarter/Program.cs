@@ -7,7 +7,7 @@ namespace Restarter
 {
     internal class Program
     {
-        static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
+        static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME_RESTARTER);
         static readonly string programPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
 
         static void Main(string[] args)
