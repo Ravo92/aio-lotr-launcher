@@ -2,11 +2,13 @@
 using System.Reflection;
 using System.Text;
 using Helper;
+using Microsoft.VisualBasic;
 
 namespace Restarter
 {
     internal class Program
     {
+        static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
         static readonly string programPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
 
         static void Main(string[] args)
@@ -18,10 +20,17 @@ namespace Restarter
                     return;
                 }
 
-                Application.Run(new UpdaterDialog());
+                if (_mutex.WaitOne(TimeSpan.Zero, true))
+                {
+                    Application.Run(new UpdaterDialog());
 
-                if (UpdateIsDownloaded.LauncherUpdateIsDownloaded)
-                    return;
+                    if (UpdateIsDownloaded.LauncherUpdateIsDownloaded)
+                        return;
+                }
+                else
+                {
+                    Application.Exit();
+                }
 
                 switch (args[0])
                 {
