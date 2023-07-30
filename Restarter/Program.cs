@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Text;
 using Helper;
-using Microsoft.VisualBasic;
 
 namespace Restarter
 {

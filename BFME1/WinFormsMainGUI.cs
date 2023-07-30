@@ -22,6 +22,9 @@ namespace PatchLauncher
         readonly PatchPacks patchPack = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
         readonly PatchPacksBeta patchPacksBeta = JSONDataListHelper._PatchBetaSettings;
 
+        readonly ChangelogPagePatch changelogPagePatch = new();
+        readonly ChangelogPageLauncher changelogPageLauncher = new();
+
         static bool IsLauncherCurrentlyWorking = false;
 
         public WinFormsMainGUI()
@@ -218,7 +221,6 @@ namespace PatchLauncher
 
                     TurnPatchesAndModsViewOff();
 
-                    ChangelogPagePatch changelogPagePatch = new();
                     changelogPagePatch.Show();
 
                     Settings.Default.IsGameInstalled = true;
@@ -778,8 +780,6 @@ namespace PatchLauncher
 
         private void ChangelogLauncherToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangelogPageLauncher changelogPageLauncher = new();
-
             DialogResult dialogResult = changelogPageLauncher.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
