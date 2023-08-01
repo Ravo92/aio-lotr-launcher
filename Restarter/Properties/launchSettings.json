@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Restarter": {
-      "commandName": "Project",
-      "commandLineArgs": "--startLauncher"
+      "commandName": "Project"
     }
   }
 }

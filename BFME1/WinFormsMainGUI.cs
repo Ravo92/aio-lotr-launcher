@@ -221,10 +221,9 @@ namespace PatchLauncher
 
                     TurnPatchesAndModsViewOff();
 
-                    changelogPagePatch.Show();
-
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.UseBetaChannel = false;
+                    Settings.Default.OpenPatchChangelogPage = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
                     Settings.Default.PatchVersionInstalled = Settings.Default.LatestPatchVersion;
@@ -282,6 +281,13 @@ namespace PatchLauncher
                 Settings.Default.OpenLauncherChangelogPageAfterUpdate = false;
                 Settings.Default.Save();
                 ChangelogLauncherToolStripMenuItem.PerformClick();
+            }
+
+            if (Settings.Default.OpenPatchChangelogPage)
+            {
+                Settings.Default.OpenPatchChangelogPage = false;
+                Settings.Default.Save();
+                ChangelogPatchToolStripMenuItem.PerformClick();
             }
         }
 
@@ -789,8 +795,6 @@ namespace PatchLauncher
 
         private void ChangelogPatchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangelogPagePatch changelogPagePatch = new();
-
             DialogResult dialogResult = changelogPagePatch.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {

@@ -14,11 +14,6 @@ namespace Restarter
         {
             try
             {
-                if (args.Length < 1)
-                {
-                    return;
-                }
-
                 if (_mutex.WaitOne(TimeSpan.Zero, true))
                 {
                     Application.Run(new UpdaterDialog());
@@ -31,67 +26,69 @@ namespace Restarter
                     Application.Exit();
                 }
 
-                switch (args[0])
+                if (args.Length == 0)
                 {
-                    case "--restart":
+                    if (GetLastSelectedGameLauncher() == 1)
+                    {
+                        StartBFME1Launcher("--official");
+                    }
 
-                        if (args[1] is not null)
-                        {
-                            if (args[1] == "--BFME1Launcher")
+                    else if (GetLastSelectedGameLauncher() == 2)
+                    {
+                        StartBFME2Launcher("--official");
+                    }
+
+                    else if (GetLastSelectedGameLauncher() == 25)
+                    {
+                        StartBFME25Launcher("--official");
+                    }
+                }
+                else
+                {
+                    switch (args[0])
+                    {
+                        case "--restart":
+
+                            if (args[1] is not null)
                             {
-                                StartBFME1Launcher("--official");
+                                if (args[1] == "--BFME1Launcher")
+                                {
+                                    StartBFME1Launcher("--official");
+                                }
+
+                                if (args[1] == "--BFME2Launcher")
+                                {
+                                    StartBFME2Launcher("--official");
+                                }
+
+                                if (args[1] == "--BFME25Launcher")
+                                {
+                                    StartBFME25Launcher("--official");
+                                }
+                            }
+                            break;
+
+                        case "--showLauncherUpdateLog":
+
+                            if (GetLastSelectedGameLauncher() == 1)
+                            {
+                                StartBFME1Launcher("--showLauncherUpdateLog");
                             }
 
-                            if (args[1] == "--BFME2Launcher")
+                            else if (GetLastSelectedGameLauncher() == 2)
                             {
-                                StartBFME2Launcher("--official");
+                                StartBFME2Launcher("--showLauncherUpdateLog");
                             }
 
-                            if (args[1] == "--BFME25Launcher")
+                            else if (GetLastSelectedGameLauncher() == 25)
                             {
-                                StartBFME25Launcher("--official");
+                                StartBFME25Launcher("--showLauncherUpdateLog");
                             }
-                        }
-                        break;
+                            break;
 
-                    case "--startLauncher":
-
-                        if (GetLastSelectedGameLauncher() == 1)
-                        {
-                            StartBFME1Launcher("--official");
-                        }
-
-                        else if (GetLastSelectedGameLauncher() == 2)
-                        {
-                            StartBFME2Launcher("--official");
-                        }
-
-                        else if (GetLastSelectedGameLauncher() == 25)
-                        {
-                            StartBFME25Launcher("--official");
-                        }
-                        break;
-
-                    case "--showLauncherUpdateLog":
-
-                        if (GetLastSelectedGameLauncher() == 1)
-                        {
-                            StartBFME1Launcher("--showLauncherUpdateLog");
-                        }
-
-                        else if (GetLastSelectedGameLauncher() == 2)
-                        {
-                            StartBFME2Launcher("--showLauncherUpdateLog");
-                        }
-
-                        else if (GetLastSelectedGameLauncher() == 25)
-                        {
-                            StartBFME25Launcher("--showLauncherUpdateLog");
-                        }
-                        break;
-
-                    default:
-                        return;
+                        default:
+                            break;
+                    }
                 }
             }
             catch (Exception ex)

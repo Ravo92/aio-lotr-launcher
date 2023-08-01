@@ -74,5 +74,5 @@ Type: filesandordirs; Name: "{app}\PatchLauncherBFME.exe.WebView2"
 Type: filesandordirs; Name: "{app}\Downloads"
 
 [Run]
-Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--startLauncher"
+Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--showLauncherUpdateLog"
 Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent; Parameters: "--showLauncherUpdateLog"

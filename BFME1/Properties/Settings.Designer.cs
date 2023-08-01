@@ -249,5 +249,17 @@ namespace PatchLauncher.Properties {
                 this["OpenLauncherChangelogPageAfterUpdate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OpenPatchChangelogPage {
+            get {
+                return ((bool)(this["OpenPatchChangelogPage"]));
+            }
+            set {
+                this["OpenPatchChangelogPage"] = value;
+            }
+        }
     }
 }
