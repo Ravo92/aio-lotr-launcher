@@ -121,16 +121,6 @@
     <value>STANDARD</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="LblEAX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 15</value>
-  </data>
-  <data name="LblEAX.Text" xml:space="preserve">
-    <value>EAX Support aktivieren</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PibBorderLauncherOptions.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
   <data name="LblLauncherSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 15</value>
   </data>
@@ -158,12 +148,6 @@
   <data name="LblBrutalAI.Text" xml:space="preserve">
     <value>Aktiviere die Brutale KI (Experimentell)</value>
   </data>
-  <data name="LblShowPatchesFirst.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 15</value>
-  </data>
-  <data name="LblShowPatchesFirst.Text" xml:space="preserve">
-    <value>Zeige zuerst Patches Anstelle von Patchnotes</value>
-  </data>
   <data name="BtnApply.Text" xml:space="preserve">
     <value>BESTÄTIGEN</value>
   </data>
@@ -171,16 +155,20 @@
     <value>ABBRECHEN</value>
   </data>
   <data name="LblUseBetaChannel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 15</value>
+    <value>264, 15</value>
   </data>
   <data name="LblUseBetaChannel.Text" xml:space="preserve">
-    <value>Benutze den Beta-Channel von 2.22 für Insider-Builds</value>
+    <value>Benutze Beta-Channel von 2.22 für Insider-Builds</value>
   </data>
   <data name="LblLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 21</value>
   </data>
   <data name="LblLanguage.Text" xml:space="preserve">
     <value>Launcher-Sprache:</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PibBorderLauncherOptions.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

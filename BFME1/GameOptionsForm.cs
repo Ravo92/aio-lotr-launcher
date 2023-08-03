@@ -1,7 +1,10 @@
 ﻿using Helper;
+using PatchLauncher.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -9,6 +12,9 @@ namespace PatchLauncher
 {
     public partial class GameOptionsForm : Form
     {
+        readonly static string GameInstallPath = RegistryService.GameInstallPath();
+        readonly bool FlagEAXFileExists = File.Exists(GameInstallPath + @"\dsound.dll");
+
         readonly string FlagStaticGameLOD = "UltraHigh";
         string FlagAnisotropicTextureFiltering = "yes";
         string FlagTerrainLighting = "yes";
@@ -19,7 +25,13 @@ namespace PatchLauncher
         string FlagShowAnimations = "yes";
         string FlagHeatEffects = "yes";
         string FlagDynamicLOD = "yes";
-        string FlagResolution;
+        string FlagResolution = "800 600";
+        string FlagUnitDecals = "yes";
+
+        string FlagSelectedIsoCode = "en_us";
+        string FlagUseEAX = "yes";
+
+        readonly Dictionary<string, string> _selectedLanguageDictionary = JSONDataListHelper._DictionarylanguageSettings.ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
 
         public GameOptionsForm()
         {
@@ -59,9 +71,13 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
-            LblGameSettings.Font = FontHelper.GetFont(1, 16);
-            LblGameSettings.ForeColor = Color.FromArgb(192, 145, 69);
-            LblGameSettings.BackColor = Color.Transparent;
+            LblVideoSettings.Font = FontHelper.GetFont(1, 16);
+            LblVideoSettings.ForeColor = Color.FromArgb(192, 145, 69);
+            LblVideoSettings.BackColor = Color.Transparent;
+
+            LblAudioSettings.Font = FontHelper.GetFont(1, 16);
+            LblAudioSettings.ForeColor = Color.FromArgb(192, 145, 69);
+            LblAudioSettings.BackColor = Color.Transparent;
 
             LblOptions.Font = FontHelper.GetFont(1, 20);
             LblOptions.ForeColor = Color.FromArgb(192, 145, 69);
@@ -116,6 +132,18 @@ namespace PatchLauncher
             LblResolution.Font = FontHelper.GetFont(0, 16);
             LblResolution.ForeColor = Color.FromArgb(192, 145, 69);
             LblResolution.BackColor = Color.Transparent;
+
+            LblUnitDecals.Font = FontHelper.GetFont(0, 16);
+            LblUnitDecals.ForeColor = Color.FromArgb(192, 145, 69);
+            LblUnitDecals.BackColor = Color.Transparent;
+
+            LblGameLanguage.Font = FontHelper.GetFont(0, 16);
+            LblGameLanguage.ForeColor = Color.FromArgb(192, 145, 69);
+            LblGameLanguage.BackColor = Color.Transparent;
+
+            LblEAX.Font = FontHelper.GetFont(0, 16);
+            LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
+            LblEAX.BackColor = Color.Transparent;
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -296,6 +324,41 @@ namespace PatchLauncher
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
+            FlagUnitDecals = OptionIniParser.ReadKey("UnitDecals");
+
+            ChkUnitDecals.FlatAppearance.BorderSize = 0;
+            ChkUnitDecals.FlatStyle = FlatStyle.Flat;
+            ChkUnitDecals.BackColor = Color.Transparent;
+            ChkUnitDecals.ForeColor = Color.FromArgb(192, 145, 69);
+
+            if (FlagUnitDecals == "yes")
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            }
+            else if (FlagUnitDecals == "no")
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
+
+            ChkEAX.FlatAppearance.BorderSize = 0;
+            ChkEAX.FlatStyle = FlatStyle.Flat;
+            ChkEAX.BackColor = Color.Transparent;
+            ChkEAX.ForeColor = Color.FromArgb(192, 145, 69);
+
+            if (FlagEAXFileExists)
+                FlagUseEAX = "yes";
+            else
+                FlagUseEAX = "no";
+
+            if (FlagEAXFileExists && FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
+
             ResolutionX.BackColor = Color.Black;
             ResolutionX.Font = FontHelper.GetFont(0, 14);
             ResolutionX.ForeColor = Color.FromArgb(192, 145, 69);
@@ -319,6 +382,16 @@ namespace PatchLauncher
                 ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
                 ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
             }
+
+            if (Settings.Default.InstalledLanguageISOCode != FlagSelectedIsoCode)
+            {
+                FlagSelectedIsoCode = Settings.Default.InstalledLanguageISOCode;
+            }
+
+            CmbSelectGameLanguage.DisplayMember = "Value";
+            CmbSelectGameLanguage.ValueMember = "Key";
+            CmbSelectGameLanguage.DataSource = new BindingSource(_selectedLanguageDictionary, null);
+            CmbSelectGameLanguage.SelectedValue = Settings.Default.InstalledLanguageISOCode;
             #endregion
         }
 
@@ -336,6 +409,8 @@ namespace PatchLauncher
             FlagHeatEffects = "yes";
             FlagDynamicLOD = "yes";
             FlagResolution = "yes";
+            FlagUnitDecals = "yes";
+            FlagUseEAX = "yes";
 
             ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME1CHK_Selected;
             ChkTerrainLighting.Image = Helper.Properties.Resources.BFME1CHK_Selected;
@@ -349,6 +424,10 @@ namespace PatchLauncher
 
             ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
             ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
+
+            ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+
+            ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Selected;
         }
 
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
@@ -374,6 +453,14 @@ namespace PatchLauncher
         private void BtnApply_Click(object sender, EventArgs e)
         {
             SaveSettings();
+
+            if (FlagSelectedIsoCode != Settings.Default.InstalledLanguageISOCode)
+            {
+                ChangedGameLanguage.UserChangedGameLanguageInSettings = true;
+                Settings.Default.InstalledLanguageISOCode = FlagSelectedIsoCode;
+                Settings.Default.Save();
+            }
+
             Close();
         }
 
@@ -460,6 +547,35 @@ namespace PatchLauncher
 
             OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh");
             OptionIniParser.WriteKey("IdealStaticGameLOD", "UltraHigh");
+            OptionIniParser.WriteKey("UnitDecals", FlagUnitDecals);
+            OptionIniParser.WriteKey("UseEAX3", FlagUseEAX);
+
+            //Settings-Valuations
+
+            if (!FlagEAXFileExists && FlagUseEAX == "yes")
+            {
+                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                foreach (var file in _EAXFiles)
+                {
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
+                }
+
+                OptionIniParser.WriteKey("UseEAX3", "yes");
+            }
+
+            if (FlagEAXFileExists && FlagUseEAX == "no")
+            {
+                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                foreach (var file in _EAXFiles)
+                {
+                    File.Delete(Path.Combine(GameInstallPath, file));
+                }
+
+                OptionIniParser.WriteKey("UseEAX3", "no");
+            }
+
             OptionIniParser.ClearOptionsFile();
         }
         #endregion
@@ -809,6 +925,83 @@ namespace PatchLauncher
             else
                 ChkDynamicLOD.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
+
+        private void ChkUnitDecals_Click(object sender, EventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
+                FlagUnitDecals = "no";
+            }
+            else
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
+                FlagUnitDecals = "yes";
+            }
+        }
+
+        private void ChkUnitDecals_MouseEnter(object sender, EventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
+            else
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
+        }
+
+        private void ChkUnitDecals_MouseLeave(object sender, EventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            else
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+        }
+
+        private void ChkUnitDecals_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
+            else
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
+        }
+
+        private void ChkEAX_Click(object sender, EventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+            {
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
+                FlagUseEAX = "no";
+            }
+            else
+            {
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
+                FlagUseEAX = "yes";
+            }
+        }
+
+        private void ChkEAX_MouseEnter(object sender, EventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
+        }
+
+        private void ChkEAX_MouseLeave(object sender, EventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Selected;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
+        }
+
+        private void ChkEAX_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
+        }
+
         #endregion
 
         private void OptionsBFME1_KeyDown(object sender, KeyEventArgs e)
@@ -817,6 +1010,14 @@ namespace PatchLauncher
             {
                 Close();
             }
+        }
+
+        private void CmbSelectGameLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox control = (ComboBox)sender;
+            string isoCode = (string)control.SelectedValue;
+            LanguagePacks settings = JSONDataListHelper._DictionarylanguageSettings[isoCode];
+            FlagSelectedIsoCode = settings.RegistrySelectedLocale;
         }
     }
 }

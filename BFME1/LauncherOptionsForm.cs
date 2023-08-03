@@ -13,11 +13,7 @@ namespace PatchLauncher
 {
     public partial class LauncherOptionsForm : Form
     {
-        readonly static string GameInstallPath = RegistryService.GameInstallPath();
-        readonly bool FlagEAXFileExists = File.Exists(GameInstallPath + @"\dsound.dll");
-
         //Launcher Settings
-        bool FlagEAX = Settings.Default.EAXSupport;
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
         bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
@@ -64,10 +60,6 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(192, 145, 69);
 
             //Label-Styles
-            LblEAX.Font = FontHelper.GetFont(0, 16);
-            LblEAX.ForeColor = Color.FromArgb(192, 145, 69);
-            LblEAX.BackColor = Color.Transparent;
-
             LblLauncherSettings.Font = FontHelper.GetFont(1, 16);
             LblLauncherSettings.ForeColor = Color.FromArgb(192, 145, 69);
             LblLauncherSettings.BackColor = Color.Transparent;
@@ -137,7 +129,6 @@ namespace PatchLauncher
 
             if (!Settings.Default.IsGameInstalled)
             {
-                ChkEAX.Enabled = false;
                 ChkBrutalAI.Enabled = false;
                 ChkUseBetaChannel.Enabled = false;
                 LblWarning.Text = Strings.Warning_GameNotInstalled;
@@ -150,21 +141,6 @@ namespace PatchLauncher
             };
 
             ///////////////////////////////////////////////////////////////////////////////////////////
-
-            ChkEAX.FlatAppearance.BorderSize = 0;
-            ChkEAX.FlatStyle = FlatStyle.Flat;
-            ChkEAX.BackColor = Color.Transparent;
-            ChkEAX.ForeColor = Color.FromArgb(192, 145, 69);
-
-            if (FlagEAXFileExists)
-                FlagEAX = true;
-            else
-                FlagEAX = false;
-
-            if (FlagEAXFileExists && FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Selected;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
 
             ChkWindowed.FlatAppearance.BorderSize = 0;
             ChkWindowed.FlatStyle = FlatStyle.Flat;
@@ -203,11 +179,9 @@ namespace PatchLauncher
 
         private void BtnDefault_Click(object sender, EventArgs e)
         {
-            FlagEAX = false;
             FlagWindowed = false;
             FlagBrutalAI = false;
 
-            ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             ChkWindowed.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             ChkBrutalAI.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
@@ -306,7 +280,6 @@ namespace PatchLauncher
         private void SaveSettings()
         {
             //Save Launcher-Settings
-            Settings.Default.EAXSupport = FlagEAX;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
 
             if (FlagLauncherLanguageIndex != Settings.Default.LauncherLanguage)
@@ -327,72 +300,12 @@ namespace PatchLauncher
 
             //Settings-Valuations
 
-            if (!FlagEAXFileExists && FlagEAX == true)
-            {
-                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                foreach (var file in _EAXFiles)
-                {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
-                }
-
-                OptionIniParser.WriteKey("UseEAX3", "yes");
-            }
-
-            if (FlagEAXFileExists && FlagEAX == false)
-            {
-                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                foreach (var file in _EAXFiles)
-                {
-                    File.Delete(Path.Combine(GameInstallPath, file));
-                }
-
-                OptionIniParser.WriteKey("UseEAX3", "no");
-            }
+            string GameInstallPath = RegistryService.GameInstallPath();
 
             if (FlagBrutalAI && GameInstallPath != null)
                 File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"), true);
             else if (GameInstallPath != null && File.Exists(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big")))
                 File.Delete(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"));
-        }
-
-        private void ChkEAX_Click(object sender, EventArgs e)
-        {
-            if (FlagEAX == true)
-            {
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
-                FlagEAX = false;
-            }
-            else
-            {
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
-                FlagEAX = true;
-            }
-        }
-
-        private void ChkEAX_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
-        }
-
-        private void ChkEAX_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Selected;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
-        }
-
-        private void ChkEAX_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_SelectedHover;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME1CHK_UnselectedHover;
         }
 
         private void ChkWindowed_MouseClick(object sender, MouseEventArgs e)

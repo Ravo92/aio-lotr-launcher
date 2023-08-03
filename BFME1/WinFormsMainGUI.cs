@@ -1,5 +1,6 @@
 using Helper;
 using Helper.UserControls;
+using Microsoft.Web.WebView2.Core;
 using PatchLauncher.Properties;
 using System;
 using System.Diagnostics;
@@ -117,7 +118,7 @@ namespace PatchLauncher
             }
         }
 
-        private async void WinFormsMainGUI_Load(object sender, EventArgs e)
+        private void WinFormsMainGUI_Load(object sender, EventArgs e)
         {
             if (patchPack.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
             {
@@ -169,75 +170,10 @@ namespace PatchLauncher
                     }
                 }
 
-                if (Settings.Default.UseBetaChannel)
-                {
-                    TurnPatchesAndModsViewOff();
-                    PanelPlaceholder.Visible = false;
-
-                    LblModExplanation.Font = FontHelper.GetFont(0, 30);
-                    LblModExplanation.Location = new Point(130, 300);
-                    LblModExplanation.Text = Strings.Info_BetaActivated;
-                    LblModExplanation.BringToFront();
-
-                    if (patchPacksBeta.Version > Settings.Default.BetaChannelVersion)
-                    {
-                        await InstallUpdatRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URL, patchPacksBeta.MD5);
-                    }
-
-                    TurnPatchesAndModsViewOn();
-                    PanelPlaceholder.Visible = false;
-                }
-
                 if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKey("path"))) || RegistryService.ReadRegKey("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKey("path"), ConstStrings.C_MAIN_GAME_FILE)))
                 {
                     Settings.Default.IsGameInstalled = false;
                     BtnInstall.Text = Strings.BtnInstall_TextInstall;
-                }
-                else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled)
-                {
-                    if (Settings.Default.UseBetaChannel || Settings.Default.SelectedOlderPatch)
-                    {
-                        DialogResult _dialogResult = MessageBox.Show(Strings.Msg_RestartForUpdate_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);
-                        if (_dialogResult == DialogResult.Yes)
-                        {
-                            Settings.Default.UseBetaChannel = false;
-                            Settings.Default.SelectedOlderPatch = false;
-                            Settings.Default.Save();
-
-                            Process _restarterProcess = new();
-                            _restarterProcess.StartInfo.FileName = ConstStrings.C_RESTARTEREXE_FILENAME;
-                            _restarterProcess.StartInfo.Arguments = "--restart --BFME1Launcher";
-                            _restarterProcess.StartInfo.WorkingDirectory = Application.StartupPath;
-                            _restarterProcess.StartInfo.UseShellExecute = true;
-                            _restarterProcess.Start();
-                            Application.ExitThread();
-                            Application.Exit();
-                        }
-                        else if (_dialogResult == DialogResult.No)
-                        {
-                            return;
-                        }
-                    }
-
-                    TurnPatchesAndModsViewOff();
-
-                    Settings.Default.IsGameInstalled = true;
-                    Settings.Default.UseBetaChannel = false;
-                    Settings.Default.OpenPatchChangelogPage = true;
-                    Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
-                    Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
-                    Settings.Default.PatchVersionInstalled = Settings.Default.LatestPatchVersion;
-                    Settings.Default.Save();
-
-                    await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
-
-                    if (patchPack.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
-                    {
-                        await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
-                    }
-
-                    TurnPatchesAndModsViewOn();
-                    UpdatePanelButtonActiveState();
                 }
                 else
                 {
@@ -274,8 +210,74 @@ namespace PatchLauncher
             }
         }
 
-        private void BFME1_Shown(object sender, EventArgs e)
+        private async void BFME1_Shown(object sender, EventArgs e)
         {
+            if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled)
+            {
+                if (Settings.Default.UseBetaChannel || Settings.Default.SelectedOlderPatch)
+                {
+                    DialogResult _dialogResult = MessageBox.Show(Strings.Msg_RestartForUpdate_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);
+                    if (_dialogResult == DialogResult.Yes)
+                    {
+                        Settings.Default.UseBetaChannel = false;
+                        Settings.Default.SelectedOlderPatch = false;
+                        Settings.Default.Save();
+
+                        Process _restarterProcess = new();
+                        _restarterProcess.StartInfo.FileName = ConstStrings.C_RESTARTEREXE_FILENAME;
+                        _restarterProcess.StartInfo.Arguments = "--restart --BFME1Launcher";
+                        _restarterProcess.StartInfo.WorkingDirectory = Application.StartupPath;
+                        _restarterProcess.StartInfo.UseShellExecute = true;
+                        _restarterProcess.Start();
+                        Application.ExitThread();
+                        Application.Exit();
+                    }
+                    else if (_dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+
+                TurnPatchesAndModsViewOff();
+
+                Settings.Default.IsGameInstalled = true;
+                Settings.Default.UseBetaChannel = false;
+                Settings.Default.OpenPatchChangelogPage = true;
+                Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
+                Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage();
+                Settings.Default.PatchVersionInstalled = Settings.Default.LatestPatchVersion;
+                Settings.Default.Save();
+
+                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
+
+                if (patchPack.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
+                {
+                    await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                }
+
+                TurnPatchesAndModsViewOn();
+                UpdatePanelButtonActiveState();
+            }
+
+            if (Settings.Default.UseBetaChannel)
+            {
+                TurnPatchesAndModsViewOff();
+                PanelPlaceholder.Visible = false;
+
+                LblModExplanation.Font = FontHelper.GetFont(0, 30);
+                LblModExplanation.Location = new Point(130, 300);
+                LblModExplanation.Text = Strings.Info_BetaActivated;
+                LblModExplanation.BringToFront();
+
+                if (patchPacksBeta.Version > Settings.Default.BetaChannelVersion)
+                {
+                    await InstallUpdatRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URL, patchPacksBeta.MD5);
+                }
+
+                TurnPatchesAndModsViewOn();
+                PanelPlaceholder.Visible = false;
+            }
+
             if (Settings.Default.OpenLauncherChangelogPageAfterUpdate)
             {
                 Settings.Default.OpenLauncherChangelogPageAfterUpdate = false;
@@ -624,7 +626,7 @@ namespace PatchLauncher
             }
         }
 
-        private Task<bool> PrepareInstallFolder()
+        private Task<bool> PrepareInstallFolder(bool AskForFolderClearance = true)
         {
             try
             {
@@ -633,7 +635,7 @@ namespace PatchLauncher
                     Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0)
+                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0 && AskForFolderClearance)
                 {
                     DialogResult dialogResult = MessageBox.Show(Strings.Msg_InstallFolderNotEmpty_Text, Strings.Msg_InstallFolderNotEmpty_Title, MessageBoxButtons.OKCancel);
                     if (dialogResult == DialogResult.OK)
@@ -646,6 +648,11 @@ namespace PatchLauncher
                         return Task.FromResult(false);
                     }
                 }
+                else if (!AskForFolderClearance)
+                {
+                    Directory.Delete(Settings.Default.GameInstallPath, true);
+                }
+
                 return Task.FromResult(true);
             }
             catch (Exception ex)
@@ -808,10 +815,50 @@ namespace PatchLauncher
             launcherOptionsForm.ShowDialog();
         }
 
-        private void GameSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void GameSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GameOptionsForm _Gameoptions = new();
             _Gameoptions.ShowDialog();
+
+            if (ChangedGameLanguage.UserChangedGameLanguageInSettings)
+            {
+                ChangedGameLanguage.UserChangedGameLanguageInSettings = false;
+                TurnPatchesAndModsViewOff();
+
+                Task<bool> taskPrepareInstallFolder = PrepareInstallFolder(false);
+                taskPrepareInstallFolder.Wait();
+
+                languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+
+                RegistryService.WriteRegKeysInstallation(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
+
+                await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URL, mainPack.MD5);
+                await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URL, languagePackSettings.MD5);
+                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
+
+                if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
+                {
+                    patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+                    await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                }
+
+                patchPack.Version = Settings.Default.PatchVersionInstalled;
+                Settings.Default.Save();
+
+                if (Settings.Default.CreateDesktopShortcut)
+                {
+                    GameDesktopShortcutToolStripMenuItem.PerformClick();
+                }
+
+                if (Settings.Default.CreateStartMenuShortcut)
+                {
+                    GameStartmenuShortcutsToolStripMenuItem.PerformClick();
+                }
+
+                taskPrepareInstallFolder.Dispose();
+
+                TurnPatchesAndModsViewOn();
+            }
         }
 
         private void GameDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -999,11 +1046,9 @@ namespace PatchLauncher
                 }
             }
         }
-        private void TurnPatchesAndModsViewOn()
+        private async void TurnPatchesAndModsViewOn()
         {
             IsLauncherCurrentlyWorking = false;
-
-            PanelPlaceholder.Visible = true;
 
             PibLoadingRing.Visible = false;
             PibLoadingBorder.Visible = false;
@@ -1019,15 +1064,21 @@ namespace PatchLauncher
             LaunchGameToolStripMenuItem.Enabled = true;
             RepairGameToolStripMenuItem.Enabled = true;
 
+            Update();
+            await Task.Delay(500);
+
+            PanelPlaceholder.Visible = true;
+
             if (!Settings.Default.UseBetaChannel)
                 PanelPlaceholder.Visible = true;
         }
 
-        private void TurnPatchesAndModsViewOff()
+        private async void TurnPatchesAndModsViewOff()
         {
-            IsLauncherCurrentlyWorking = true;
-
             PanelPlaceholder.Visible = false;
+            Update();
+
+            IsLauncherCurrentlyWorking = true;
 
             PibLoadingRing.Visible = true;
             PibLoadingBorder.Visible = true;
@@ -1038,10 +1089,15 @@ namespace PatchLauncher
             LblWorkerFileName.Visible = true;
             LblWorkerIOTask.Visible = true;
 
+            //Update();
+            //System.Threading.Thread.Sleep(500);
+
             BtnInstall.Enabled = false;
 
             LaunchGameToolStripMenuItem.Enabled = false;
             RepairGameToolStripMenuItem.Enabled = false;
+
+            await Task.Delay(500);
 
             if (Settings.Default.UseBetaChannel)
                 PanelPlaceholder.Visible = false;

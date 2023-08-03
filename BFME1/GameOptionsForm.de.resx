@@ -136,11 +136,8 @@
   <data name="LblOptions.Text" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
-  <data name="LblGameSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 15</value>
-  </data>
-  <data name="LblGameSettings.Text" xml:space="preserve">
-    <value>Grafik-Einstellungen</value>
+  <data name="LblVideoSettings.Text" xml:space="preserve">
+    <value>Video und Auflösung</value>
   </data>
   <data name="LblAniTextureFiltering.Size" type="System.Drawing.Size, System.Drawing">
     <value>233, 15</value>
@@ -214,6 +211,33 @@
   <data name="LblInfoLOD.Text" xml:space="preserve">
     <value>Dynamisches Level of Detail (LoD) ist in diesem Spiel
 verbuggt und sollte daher nicht verwendet werden!</value>
+  </data>
+  <data name="LblAudioSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 125</value>
+  </data>
+  <data name="LblAudioSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 15</value>
+  </data>
+  <data name="LblAudioSettings.Text" xml:space="preserve">
+    <value>Sprache und Sound</value>
+  </data>
+  <data name="LblGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 15</value>
+  </data>
+  <data name="LblGameLanguage.Text" xml:space="preserve">
+    <value>Spiel-Sprache</value>
+  </data>
+  <data name="LblUnitDecals.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 15</value>
+  </data>
+  <data name="LblUnitDecals.Text" xml:space="preserve">
+    <value>Einheiten Decals</value>
+  </data>
+  <data name="LblEAX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 15</value>
+  </data>
+  <data name="LblEAX.Text" xml:space="preserve">
+    <value>Aktiviere EAX3-Support</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
