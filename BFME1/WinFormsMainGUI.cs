@@ -1,6 +1,5 @@
 using Helper;
 using Helper.UserControls;
-using Microsoft.Web.WebView2.Core;
 using PatchLauncher.Properties;
 using System;
 using System.Diagnostics;
@@ -209,7 +208,7 @@ namespace PatchLauncher
         {
             if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && !Settings.Default.SelectedOlderPatch)
             {
-                await TurnPatchesAndModsViewOff();
+                TurnPatchesAndModsViewOff();
 
                 Settings.Default.OpenPatchChangelogPage = true;
                 Settings.Default.GameInstallPath = RegistryService.ReadRegKey("path");
@@ -249,7 +248,7 @@ namespace PatchLauncher
             }
             else if (Settings.Default.UseBetaChannel)
             {
-                await TurnPatchesAndModsViewOff();
+                TurnPatchesAndModsViewOff();
 
                 LblModExplanation.Font = FontHelper.GetFont(0, 30);
                 LblModExplanation.Location = new Point(130, 300);
@@ -281,7 +280,7 @@ namespace PatchLauncher
 
         private async void PiBVersion103_Click(object sender, EventArgs e)
         {
-            await TurnPatchesAndModsViewOff();
+            TurnPatchesAndModsViewOff();
 
             try
             {
@@ -289,6 +288,7 @@ namespace PatchLauncher
                 await PatchModDetectionHelper.DeletePatch222Files();
 
                 Settings.Default.PatchVersionInstalled = 103;
+                Settings.Default.SelectedOlderPatch = true;
                 Settings.Default.Save();
                 UpdatePanelButtonActiveState();
             }
@@ -302,12 +302,11 @@ namespace PatchLauncher
 
         private async void PatchButton106Clicked(object? sender, EventArgs e)
         {
-            await TurnPatchesAndModsViewOff();
+            TurnPatchesAndModsViewOff();
 
             Patch106Button patch106Button = (Patch106Button)sender!;
             int version = Convert.ToInt32(patch106Button.Tag);
             PatchPacks patchPack106 = JSONDataListHelper._DictionaryPatchPacksSettings[version];
-            LanguageFiles patchPackLanguages = patchPack106.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
 
             if (Settings.Default.PatchVersionInstalled == version)
             {
@@ -315,6 +314,7 @@ namespace PatchLauncher
                 await PatchModDetectionHelper.DeletePatch222Files();
 
                 Settings.Default.PatchVersionInstalled = 103;
+                Settings.Default.Save();
                 UpdatePanelButtonActiveState();
             }
             else
@@ -328,6 +328,7 @@ namespace PatchLauncher
 
                     if (patchPack106.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
+                        LanguageFiles patchPackLanguages = patchPack106.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
                         await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
                     }
 
@@ -340,13 +341,14 @@ namespace PatchLauncher
                 }
             }
 
+            Settings.Default.SelectedOlderPatch = true;
             Settings.Default.Save();
             await TurnPatchesAndModsViewOn();
         }
 
         private async void PatchButton222Clicked(object? sender, EventArgs e)
         {
-            await TurnPatchesAndModsViewOff();
+            TurnPatchesAndModsViewOff();
 
             Patch222Buttons patch222Buttons = (Patch222Buttons)sender!;
             int version = Convert.ToInt32(patch222Buttons.Tag);
@@ -394,32 +396,6 @@ namespace PatchLauncher
 
             Settings.Default.Save();
             await TurnPatchesAndModsViewOn();
-        }
-
-        private async void GameisClosedEvent(object? sender, EventArgs e)
-        {
-            //if (InvokeRequired)
-            //{
-            //    Invoke(new MethodInvoker(delegate
-            //    {
-            //        Show();
-            //        WindowState = FormWindowState.Normal;
-            //        SysTray.Visible = false;
-            //        await TurnPatchesAndModsViewOn();
-            //    }));
-            //}
-            //else
-            //{
-            Show();
-            WindowState = FormWindowState.Normal;
-            SysTray.Visible = false;
-            await TurnPatchesAndModsViewOn();
-            //}
-
-            if (Settings.Default.PlayBackgroundMusic)
-            {
-                soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
-            }
         }
 
         private void BtnInstall_MouseLeave(object sender, EventArgs e)
@@ -705,8 +681,6 @@ namespace PatchLauncher
 
         private async void LaunchGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await TurnPatchesAndModsViewOff();
-
             Process processLaunchGame = new();
             processLaunchGame.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_MAIN_GAME_FILE);
 
@@ -719,15 +693,35 @@ namespace PatchLauncher
             processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
             processLaunchGame.Start();
 
+            BtnInstall.Enabled = false;
+            LaunchGameToolStripMenuItem.Enabled = false;
+            RepairGameToolStripMenuItem.Enabled = false;
+            PanelPlaceholder.Visible = false;
+            soundPlayerHelper.StopTheme();
+            Update();
+
             WindowState = FormWindowState.Minimized;
             Hide();
 
             SysTray.Visible = true;
             SysTray.ShowBalloonTip(2000);
-            soundPlayerHelper.StopTheme();
 
             await processLaunchGame.WaitForExitAsync();
-            processLaunchGame.Exited += GameisClosedEvent;
+
+            Show();
+            WindowState = FormWindowState.Normal;
+            SysTray.Visible = false;
+
+            BtnInstall.Enabled = true;
+            LaunchGameToolStripMenuItem.Enabled = true;
+            RepairGameToolStripMenuItem.Enabled = true;
+            PanelPlaceholder.Visible = true;
+            Update();
+
+            if (Settings.Default.PlayBackgroundMusic)
+            {
+                soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
+            }
         }
 
         private void CloseTheLauncherToolStripMenuItem_Click(object sender, EventArgs e)
@@ -808,7 +802,7 @@ namespace PatchLauncher
             if (ChangedGameLanguage.UserChangedGameLanguageInSettings)
             {
                 ChangedGameLanguage.UserChangedGameLanguageInSettings = false;
-                await TurnPatchesAndModsViewOff();
+                TurnPatchesAndModsViewOff();
 
                 Task<bool> taskPrepareInstallFolder = PrepareInstallFolder(false);
                 taskPrepareInstallFolder.Wait();
@@ -922,7 +916,7 @@ namespace PatchLauncher
 
         private async void RepairGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await TurnPatchesAndModsViewOff();
+            TurnPatchesAndModsViewOff();
 
             LogHelper.LoggerGRepairFile.Information("Started Repairing...");
             await RepairFileHelper.RepairFeature();
@@ -957,7 +951,7 @@ namespace PatchLauncher
                     DialogResult dialogResult = installPathDialog.ShowDialog();
                     if (dialogResult == DialogResult.OK)
                     {
-                        await TurnPatchesAndModsViewOff();
+                        TurnPatchesAndModsViewOff();
 
                         Task<bool> taskPrepareInstallFolder = PrepareInstallFolder();
                         taskPrepareInstallFolder.Wait();
@@ -1057,7 +1051,7 @@ namespace PatchLauncher
             Update();
         }
 
-        private async Task TurnPatchesAndModsViewOff()
+        private void TurnPatchesAndModsViewOff()
         {
             PanelPlaceholder.Visible = false;
             Update();
@@ -1079,7 +1073,6 @@ namespace PatchLauncher
             RepairGameToolStripMenuItem.Enabled = false;
 
             Update();
-            //await Task.Delay(500);
         }
     }
 }
