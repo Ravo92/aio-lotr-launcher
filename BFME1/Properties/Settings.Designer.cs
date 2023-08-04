@@ -62,18 +62,6 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EAXSupport {
-            get {
-                return ((bool)(this["EAXSupport"]));
-            }
-            set {
-                this["EAXSupport"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool StartGameWindowed {
             get {
                 return ((bool)(this["StartGameWindowed"]));
