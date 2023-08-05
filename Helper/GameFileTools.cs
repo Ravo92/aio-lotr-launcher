@@ -23,7 +23,7 @@ namespace Helper
             try
             {
                 // Try deserializing the JSON file from remote into local GameFileDictionary class objects
-                json = await DownloadJSONFile();
+                //json = await DownloadJSONFile();
                 _gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
             }
             catch (Exception ex)
@@ -34,15 +34,24 @@ namespace Helper
             // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
             if (json == "noInternet")
             {
+                _gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(File.ReadAllText(Path.Combine(Application.StartupPath, "GameFileDictionary.json")))!;
                 return _gameFileDictionary;
             }
             else
             {
-                // write JSON directly to a file
-                using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, "GameFileDictionary.json"));
-                await file.WriteAsync(json);
-                return _gameFileDictionary;
+                try
+                {
+                    // write JSON directly to a file
+                    using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, "GameFileDictionary.json"));
+                    await file.WriteAsync(json);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    LogHelper.LoggerGameFileTools.Warning(ex, "Cant Access local json file! Data may not be accurate!");
+                    return _gameFileDictionary;
+                }
             }
+            return _gameFileDictionary;
         }
 
         public static async Task<string> DownloadJSONFile()

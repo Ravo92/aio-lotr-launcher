@@ -5,6 +5,8 @@ namespace Helper
     public static class ConstStrings
     {
         public const string C_GAMEFOLDER_NAME_BFME1 = "BFME1";
+        public const string C_GAMEFOLDER_NAME_BFME2 = "BFME2";
+        public const string C_GAMEFOLDER_NAME_BFME25 = "BFME25";
         public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
         public const string C_GAMETITLE_NAME_EN = "The Battle for Middle-earth";
         public const string C_EAFOLDER_NAME = "EA Games";
@@ -70,7 +72,9 @@ namespace Helper
 
         public const string C_TOOLFOLDER_NAME = "Tools";
         public const string C_PATCHFOLDER_NAME = "Patches";
-        public const string C_DOWNLOADFOLDER_NAME = "Downloads";
+        public const string C_DOWNLOADFOLDER_NAME_BFME1 = "Downloads\\BFME1";
+        public const string C_DOWNLOADFOLDER_NAME_BFME2 = "Downloads\\BFME2";
+        public const string C_DOWNLOADFOLDER_NAME_BFME25 = "Downloads\\BFME25";
         public const string C_BETAFOLDER_NAME = "Beta";
         public const string C_GAMEINSTALLFOLDER_NAME = "Games";
         public const string C_LOGFOLDER_NAME = "Logfiles";
@@ -87,5 +91,9 @@ namespace Helper
         public static readonly Image C_BFME1_BUTTONIMAGE_NEUTR = Resources.BFME1BTN_Neutral;
         public static readonly Image C_BFME1_BUTTONIMAGE_HOVER = Resources.BFME1BTN_Hover;
         public static readonly Image C_BFME1_BUTTONIMAGE_CLICK = Resources.BFME1BTN_Click;
+
+        public static readonly Image C_BFME2_BUTTONIMAGE_NEUTR = Resources.BFME2BTN_Neutral;
+        public static readonly Image C_BFME2_BUTTONIMAGE_HOVER = Resources.BFME2BTN_Hover;
+        public static readonly Image C_BFME2_BUTTONIMAGE_CLICK = Resources.BFME2BTN_Click;
     }
 }
