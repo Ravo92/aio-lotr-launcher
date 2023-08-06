@@ -1,7 +1,10 @@
 ﻿using Helper;
+using PatchLauncher.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -9,6 +12,9 @@ namespace PatchLauncher
 {
     public partial class GameOptionsForm : Form
     {
+        readonly static string GameInstallPath = RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName);
+        readonly bool FlagEAXFileExists = File.Exists(GameInstallPath + @"\dsound.dll");
+
         readonly string FlagStaticGameLOD = "UltraHigh";
         string FlagAnisotropicTextureFiltering = "yes";
         string FlagTerrainLighting = "yes";
@@ -19,7 +25,13 @@ namespace PatchLauncher
         string FlagShowAnimations = "yes";
         string FlagHeatEffects = "yes";
         string FlagDynamicLOD = "yes";
-        string FlagResolution;
+        string FlagResolution = "800 600";
+        string FlagUnitDecals = "yes";
+
+        string FlagSelectedIsoCode = "en_uk";
+        string FlagUseEAX = "yes";
+
+        readonly Dictionary<string, string> _selectedLanguageDictionary = JSONDataListHelper._DictionarylanguageSettings.ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
 
         public GameOptionsForm()
         {
@@ -59,9 +71,13 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(168, 190, 98);
 
             //Label-Styles
-            LblGameSettings.Font = FontHelper.GetFont(1, 16);
-            LblGameSettings.ForeColor = Color.FromArgb(168, 190, 98);
-            LblGameSettings.BackColor = Color.Transparent;
+            LblVideoSettings.Font = FontHelper.GetFont(1, 16);
+            LblVideoSettings.ForeColor = Color.FromArgb(168, 190, 98);
+            LblVideoSettings.BackColor = Color.Transparent;
+
+            LblAudioSettings.Font = FontHelper.GetFont(1, 16);
+            LblAudioSettings.ForeColor = Color.FromArgb(168, 190, 98);
+            LblAudioSettings.BackColor = Color.Transparent;
 
             LblOptions.Font = FontHelper.GetFont(1, 20);
             LblOptions.ForeColor = Color.FromArgb(168, 190, 98);
@@ -117,10 +133,22 @@ namespace PatchLauncher
             LblResolution.ForeColor = Color.FromArgb(168, 190, 98);
             LblResolution.BackColor = Color.Transparent;
 
+            LblUnitDecals.Font = FontHelper.GetFont(0, 16);
+            LblUnitDecals.ForeColor = Color.FromArgb(168, 190, 98);
+            LblUnitDecals.BackColor = Color.Transparent;
+
+            LblGameLanguage.Font = FontHelper.GetFont(0, 16);
+            LblGameLanguage.ForeColor = Color.FromArgb(168, 190, 98);
+            LblGameLanguage.BackColor = Color.Transparent;
+
+            LblEAX.Font = FontHelper.GetFont(0, 16);
+            LblEAX.ForeColor = Color.FromArgb(168, 190, 98);
+            LblEAX.BackColor = Color.Transparent;
+
             ///////////////////////////////////////////////////////////////////////////////////////////
 
             //Checkbox-Styles
-            if (OptionIniParser.ReadKey("StaticGameLOD") == "UltraHigh")
+            if (OptionIniParser.ReadKey("StaticGameLOD", AssemblyNameHelper.BFMELauncherGameName) == "UltraHigh")
             {
                 FlagAnisotropicTextureFiltering = "yes";
                 FlagTerrainLighting = "yes";
@@ -131,21 +159,21 @@ namespace PatchLauncher
                 FlagShowAnimations = "yes";
                 FlagHeatEffects = "yes";
                 FlagDynamicLOD = "yes";
-                FlagResolution = OptionIniParser.ReadKey("Resolution");
+                FlagResolution = OptionIniParser.ReadKey("Resolution", AssemblyNameHelper.BFMELauncherGameName);
             }
             else
             {
-                FlagStaticGameLOD = OptionIniParser.ReadKey("StaticGameLOD");
-                FlagAnisotropicTextureFiltering = OptionIniParser.ReadKey("AnisotropicTextureFiltering");
-                FlagTerrainLighting = OptionIniParser.ReadKey("TerrainLighting");
-                Flag3DShadows = OptionIniParser.ReadKey("3DShadows");
-                Flag2DShadows = OptionIniParser.ReadKey("2DShadows");
-                FlagSmoothWaterBorder = OptionIniParser.ReadKey("SmoothWaterBorder");
-                FlagShowProps = OptionIniParser.ReadKey("ShowProps");
-                FlagShowAnimations = OptionIniParser.ReadKey("ExtraAnimations");
-                FlagHeatEffects = OptionIniParser.ReadKey("HeatEffects");
-                FlagDynamicLOD = OptionIniParser.ReadKey("DynamicLOD");
-                FlagResolution = OptionIniParser.ReadKey("Resolution");
+                FlagStaticGameLOD = OptionIniParser.ReadKey("StaticGameLOD", AssemblyNameHelper.BFMELauncherGameName);
+                FlagAnisotropicTextureFiltering = OptionIniParser.ReadKey("AnisotropicTextureFiltering", AssemblyNameHelper.BFMELauncherGameName);
+                FlagTerrainLighting = OptionIniParser.ReadKey("TerrainLighting", AssemblyNameHelper.BFMELauncherGameName);
+                Flag3DShadows = OptionIniParser.ReadKey("3DShadows", AssemblyNameHelper.BFMELauncherGameName);
+                Flag2DShadows = OptionIniParser.ReadKey("2DShadows", AssemblyNameHelper.BFMELauncherGameName);
+                FlagSmoothWaterBorder = OptionIniParser.ReadKey("SmoothWaterBorder", AssemblyNameHelper.BFMELauncherGameName);
+                FlagShowProps = OptionIniParser.ReadKey("ShowProps", AssemblyNameHelper.BFMELauncherGameName);
+                FlagShowAnimations = OptionIniParser.ReadKey("ExtraAnimations", AssemblyNameHelper.BFMELauncherGameName);
+                FlagHeatEffects = OptionIniParser.ReadKey("HeatEffects", AssemblyNameHelper.BFMELauncherGameName);
+                FlagDynamicLOD = OptionIniParser.ReadKey("DynamicLOD", AssemblyNameHelper.BFMELauncherGameName);
+                FlagResolution = OptionIniParser.ReadKey("Resolution", AssemblyNameHelper.BFMELauncherGameName);
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////
@@ -296,6 +324,41 @@ namespace PatchLauncher
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
+            FlagUnitDecals = OptionIniParser.ReadKey("UnitDecals", AssemblyNameHelper.BFMELauncherGameName);
+
+            ChkUnitDecals.FlatAppearance.BorderSize = 0;
+            ChkUnitDecals.FlatStyle = FlatStyle.Flat;
+            ChkUnitDecals.BackColor = Color.Transparent;
+            ChkUnitDecals.ForeColor = Color.FromArgb(168, 190, 98);
+
+            if (FlagUnitDecals == "yes")
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+            }
+            else if (FlagUnitDecals == "no")
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
+            }
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
+
+            ChkEAX.FlatAppearance.BorderSize = 0;
+            ChkEAX.FlatStyle = FlatStyle.Flat;
+            ChkEAX.BackColor = Color.Transparent;
+            ChkEAX.ForeColor = Color.FromArgb(168, 190, 98);
+
+            if (FlagEAXFileExists)
+                FlagUseEAX = "yes";
+            else
+                FlagUseEAX = "no";
+
+            if (FlagEAXFileExists && FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
+
             ResolutionX.BackColor = Color.Black;
             ResolutionX.Font = FontHelper.GetFont(0, 14);
             ResolutionX.ForeColor = Color.FromArgb(168, 190, 98);
@@ -319,6 +382,16 @@ namespace PatchLauncher
                 ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
                 ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
             }
+
+            if (Settings.Default.InstalledLanguageISOCode != FlagSelectedIsoCode)
+            {
+                FlagSelectedIsoCode = Settings.Default.InstalledLanguageISOCode;
+            }
+
+            CmbSelectGameLanguage.DisplayMember = "Value";
+            CmbSelectGameLanguage.ValueMember = "Key";
+            CmbSelectGameLanguage.DataSource = new BindingSource(_selectedLanguageDictionary, null);
+            CmbSelectGameLanguage.SelectedValue = Settings.Default.InstalledLanguageISOCode;
             #endregion
         }
 
@@ -336,6 +409,8 @@ namespace PatchLauncher
             FlagHeatEffects = "yes";
             FlagDynamicLOD = "yes";
             FlagResolution = "yes";
+            FlagUnitDecals = "yes";
+            FlagUseEAX = "yes";
 
             ChkAniTextureFiltering.Image = Helper.Properties.Resources.BFME2CHK_Selected;
             ChkTerrainLighting.Image = Helper.Properties.Resources.BFME2CHK_Selected;
@@ -349,6 +424,10 @@ namespace PatchLauncher
 
             ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
             ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
+
+            ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+
+            ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Selected;
         }
 
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
@@ -374,6 +453,14 @@ namespace PatchLauncher
         private void BtnApply_Click(object sender, EventArgs e)
         {
             SaveSettings();
+
+            if (FlagSelectedIsoCode != Settings.Default.InstalledLanguageISOCode)
+            {
+                ChangedGameLanguage.UserChangedGameLanguageInSettings = true;
+                Settings.Default.InstalledLanguageISOCode = FlagSelectedIsoCode;
+                Settings.Default.Save();
+            }
+
             Close();
         }
 
@@ -424,43 +511,72 @@ namespace PatchLauncher
 
         private void SaveSettings()
         {
-            if (File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
+            if (File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
                 if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes"
                     && FlagShowProps == "yes" && FlagShowAnimations == "yes" && FlagHeatEffects == "yes" && FlagDynamicLOD == "yes")
                 {
-                    OptionIniParser.WriteKey("StaticGameLOD", FlagStaticGameLOD);
-                    OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
+                    OptionIniParser.WriteKey("StaticGameLOD", FlagStaticGameLOD, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text, AssemblyNameHelper.BFMELauncherGameName);
 
-                    OptionIniParser.DeleteKey("AnisotropicTextureFiltering");
-                    OptionIniParser.DeleteKey("TerrainLighting");
-                    OptionIniParser.DeleteKey("3DShadows");
-                    OptionIniParser.DeleteKey("2DShadows");
-                    OptionIniParser.DeleteKey("SmoothWaterBorder");
-                    OptionIniParser.DeleteKey("ShowProps");
-                    OptionIniParser.DeleteKey("ExtraAnimations");
-                    OptionIniParser.DeleteKey("HeatEffects");
-                    OptionIniParser.DeleteKey("DynamicLOD");
+                    OptionIniParser.DeleteKey("AnisotropicTextureFiltering", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("TerrainLighting", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("3DShadows", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("2DShadows", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("SmoothWaterBorder", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("ShowProps", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("ExtraAnimations", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("HeatEffects", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.DeleteKey("DynamicLOD", AssemblyNameHelper.BFMELauncherGameName);
                 }
                 else
                 {
-                    OptionIniParser.WriteKey("StaticGameLOD", "Custom");
-                    OptionIniParser.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering);
-                    OptionIniParser.WriteKey("TerrainLighting", FlagTerrainLighting);
-                    OptionIniParser.WriteKey("3DShadows", Flag3DShadows);
-                    OptionIniParser.WriteKey("2DShadows", Flag2DShadows);
-                    OptionIniParser.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder);
-                    OptionIniParser.WriteKey("ShowProps", FlagShowProps);
-                    OptionIniParser.WriteKey("ExtraAnimations", FlagShowAnimations);
-                    OptionIniParser.WriteKey("HeatEffects", FlagHeatEffects);
-                    OptionIniParser.WriteKey("DynamicLOD", FlagDynamicLOD);
-                    OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text);
+                    OptionIniParser.WriteKey("StaticGameLOD", "Custom", AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("AnisotropicTextureFiltering", FlagAnisotropicTextureFiltering, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("TerrainLighting", FlagTerrainLighting, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("3DShadows", Flag3DShadows, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("2DShadows", Flag2DShadows, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("SmoothWaterBorder", FlagSmoothWaterBorder, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("ShowProps", FlagShowProps, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("ExtraAnimations", FlagShowAnimations, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("HeatEffects", FlagHeatEffects, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("DynamicLOD", FlagDynamicLOD, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text, AssemblyNameHelper.BFMELauncherGameName);
                 }
             }
 
-            OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh");
-            OptionIniParser.WriteKey("IdealStaticGameLOD", "UltraHigh");
-            OptionIniParser.ClearOptionsFile();
+            OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh", AssemblyNameHelper.BFMELauncherGameName);
+            OptionIniParser.WriteKey("IdealStaticGameLOD", "UltraHigh", AssemblyNameHelper.BFMELauncherGameName);
+            OptionIniParser.WriteKey("UnitDecals", FlagUnitDecals, AssemblyNameHelper.BFMELauncherGameName);
+            OptionIniParser.WriteKey("UseEAX3", FlagUseEAX, AssemblyNameHelper.BFMELauncherGameName);
+
+            //Settings-Valuations
+
+            if (!FlagEAXFileExists && FlagUseEAX == "yes")
+            {
+                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                foreach (var file in _EAXFiles)
+                {
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
+                }
+
+                OptionIniParser.WriteKey("UseEAX3", "yes", AssemblyNameHelper.BFMELauncherGameName);
+            }
+
+            if (FlagEAXFileExists && FlagUseEAX == "no")
+            {
+                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                foreach (var file in _EAXFiles)
+                {
+                    File.Delete(Path.Combine(GameInstallPath, file));
+                }
+
+                OptionIniParser.WriteKey("UseEAX3", "no", AssemblyNameHelper.BFMELauncherGameName);
+            }
+
+            OptionIniParser.ClearOptionsFile(AssemblyNameHelper.BFMELauncherGameName);
         }
         #endregion
 
@@ -809,14 +925,99 @@ namespace PatchLauncher
             else
                 ChkDynamicLOD.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
         }
+
+        private void ChkUnitDecals_Click(object sender, EventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+                FlagUnitDecals = "no";
+            }
+            else
+            {
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+                FlagUnitDecals = "yes";
+            }
+        }
+
+        private void ChkUnitDecals_MouseEnter(object sender, EventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+            else
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+        }
+
+        private void ChkUnitDecals_MouseLeave(object sender, EventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+            else
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
+        }
+
+        private void ChkUnitDecals_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (FlagUnitDecals == "yes")
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+            else
+                ChkUnitDecals.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+        }
+
+        private void ChkEAX_Click(object sender, EventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+            {
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+                FlagUseEAX = "no";
+            }
+            else
+            {
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+                FlagUseEAX = "yes";
+            }
+        }
+
+        private void ChkEAX_MouseEnter(object sender, EventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+        }
+
+        private void ChkEAX_MouseLeave(object sender, EventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
+        }
+
+        private void ChkEAX_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (FlagUseEAX == "yes")
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+            else
+                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+        }
+
         #endregion
 
-        private void OptionsBFME2_KeyDown(object sender, KeyEventArgs e)
+        private void OptionsBFME_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
                 Close();
             }
+        }
+
+        private void CmbSelectGameLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox control = (ComboBox)sender;
+            string isoCode = (string)control.SelectedValue;
+            LanguagePacks settings = JSONDataListHelper._DictionarylanguageSettings[isoCode];
+            FlagSelectedIsoCode = settings.RegistrySelectedLocale;
         }
     }
 }

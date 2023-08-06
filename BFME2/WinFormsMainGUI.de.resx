@@ -117,69 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PibHeader.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBYoutube.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBDiscord.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBModDB.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBThemeSwitcher.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LblWorkerFileName.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="BtnInstall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 51</value>
-  </data>
   <data name="BtnInstall.Text" xml:space="preserve">
     <value>SPIEL INSTALLIEREN</value>
   </data>
-  <data name="BtnInstall.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LblWorkerIOTask.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PibLoadingRing.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LabelLoadingPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PibLoadingBorder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBTwitch.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PanelPlaceholder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion103.ToolTip" xml:space="preserve">
-    <value />
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="LblModExplanation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1267, 47</value>
+    <value>1174, 47</value>
   </data>
   <data name="LblModExplanation.Text" xml:space="preserve">
-    <value>Hier kannst du auswählen, welche Mod oder welchen Patch du spielen möchtest.</value>
-  </data>
-  <data name="LblModExplanation.ToolTip" xml:space="preserve">
-    <value />
+    <value>Hier kannst du auswählen, welche(n) Mod oder Patch du spielen möchtest.
+</value>
   </data>
   <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 48</value>
-  </data>
-  <data name="NotifyContextMenu.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
@@ -192,12 +142,6 @@
   </data>
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Beenden</value>
-  </data>
-  <data name="PibMute.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="WinFormsMainMenuStrip.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
@@ -336,9 +280,6 @@
   </data>
   <data name="PBarActualFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 684</value>
-  </data>
-  <data name="PBarActualFile.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="SysTray.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -9361,8 +9302,5 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////8=
 </value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

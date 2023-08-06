@@ -1,6 +1,5 @@
 ﻿using Helper;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,20 +12,12 @@ namespace PatchLauncher
 {
     public partial class LauncherOptionsForm : Form
     {
-        readonly static string GameInstallPath = RegistryService.GameInstallPath();
-        readonly bool FlagEAXFileExists = File.Exists(GameInstallPath + @"\dsound.dll");
-
         //Launcher Settings
-        bool FlagEAX = Settings.Default.EAXSupport;
         bool FlagWindowed = Settings.Default.StartGameWindowed;
         bool FlagBrutalAI = Settings.Default.UseBrutalAI;
-        bool FlagUseBetaChannel = Settings.Default.UseBetaChannel;
         string FlagLauncherLanguageIndex = Settings.Default.LauncherLanguage;
 
         bool FlagIsLanguageChanged = false;
-        bool FlagIsBetaChannelChanged = false;
-
-        readonly PatchPacksBeta _patchPacksBeta = JSONDataListHelper._PatchBetaSettings;
 
         public LauncherOptionsForm()
         {
@@ -64,10 +55,6 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(168, 190, 98);
 
             //Label-Styles
-            LblEAX.Font = FontHelper.GetFont(0, 16);
-            LblEAX.ForeColor = Color.FromArgb(168, 190, 98);
-            LblEAX.BackColor = Color.Transparent;
-
             LblLauncherSettings.Font = FontHelper.GetFont(1, 16);
             LblLauncherSettings.ForeColor = Color.FromArgb(168, 190, 98);
             LblLauncherSettings.BackColor = Color.Transparent;
@@ -105,30 +92,15 @@ namespace PatchLauncher
             LblWarning.ForeColor = Color.Red;
             LblWarning.BackColor = Color.Transparent;
 
-            LblUseBetaChannel.Font = FontHelper.GetFont(0, 16);
-            LblUseBetaChannel.ForeColor = Color.FromArgb(168, 190, 98);
-            LblUseBetaChannel.BackColor = Color.Transparent;
-
             LblLanguage.Font = FontHelper.GetFont(0, 16);
             LblLanguage.ForeColor = Color.FromArgb(168, 190, 98);
             LblLanguage.BackColor = Color.Transparent;
 
-            if (Settings.Default.PatchVersionInstalled > 106 && !FlagUseBetaChannel)
-            {
-                LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[3..];
-            }
-            else if (Settings.Default.PatchVersionInstalled >= 103 && !FlagUseBetaChannel)
-            {
-                LblPatchVersion.Text = Settings.Default.PatchVersionInstalled.ToString();
-            }
-            else if (FlagUseBetaChannel)
-            {
-                LblPatchVersion.Text = _patchPacksBeta.MajorVersion.ToString() + "v" + _patchPacksBeta.MinorVersion.ToString() + " BETA " + _patchPacksBeta.Version.ToString();
-            }
+            LblPatchVersion.Text = Settings.Default.PatchVersionInstalled.ToString();
 
             if (FlagBrutalAI)
             {
-                LblWarning.Text = Strings.Warning_BrutalAI;
+                LblWarning.Text = "";
             }
             else
             {
@@ -137,9 +109,7 @@ namespace PatchLauncher
 
             if (!Settings.Default.IsGameInstalled)
             {
-                ChkEAX.Enabled = false;
                 ChkBrutalAI.Enabled = false;
-                ChkUseBetaChannel.Enabled = false;
                 LblWarning.Text = Strings.Warning_GameNotInstalled;
             }
 
@@ -150,21 +120,6 @@ namespace PatchLauncher
             };
 
             ///////////////////////////////////////////////////////////////////////////////////////////
-
-            ChkEAX.FlatAppearance.BorderSize = 0;
-            ChkEAX.FlatStyle = FlatStyle.Flat;
-            ChkEAX.BackColor = Color.Transparent;
-            ChkEAX.ForeColor = Color.FromArgb(168, 190, 98);
-
-            if (FlagEAXFileExists)
-                FlagEAX = true;
-            else
-                FlagEAX = false;
-
-            if (FlagEAXFileExists && FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Selected;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
 
             ChkWindowed.FlatAppearance.BorderSize = 0;
             ChkWindowed.FlatStyle = FlatStyle.Flat;
@@ -186,16 +141,6 @@ namespace PatchLauncher
             else
                 ChkBrutalAI.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
 
-            ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
-            ChkUseBetaChannel.FlatStyle = FlatStyle.Flat;
-            ChkUseBetaChannel.BackColor = Color.Transparent;
-            ChkUseBetaChannel.ForeColor = Color.FromArgb(168, 190, 98);
-
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_Selected;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
-
             #endregion
         }
 
@@ -203,14 +148,11 @@ namespace PatchLauncher
 
         private void BtnDefault_Click(object sender, EventArgs e)
         {
-            FlagEAX = false;
             FlagWindowed = false;
             FlagBrutalAI = false;
 
-            ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
             ChkWindowed.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
             ChkBrutalAI.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
-            ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
         }
 
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
@@ -237,7 +179,7 @@ namespace PatchLauncher
         {
             SaveSettings();
 
-            if (FlagIsLanguageChanged || FlagIsBetaChannelChanged)
+            if (FlagIsLanguageChanged)
             {
                 DialogResult _dialogResult = MessageBox.Show(Strings.Msg_Restart_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);
                 if (_dialogResult == DialogResult.Yes)
@@ -306,7 +248,6 @@ namespace PatchLauncher
         private void SaveSettings()
         {
             //Save Launcher-Settings
-            Settings.Default.EAXSupport = FlagEAX;
             Settings.Default.UseBrutalAI = FlagBrutalAI;
 
             if (FlagLauncherLanguageIndex != Settings.Default.LauncherLanguage)
@@ -314,85 +255,18 @@ namespace PatchLauncher
                 FlagIsLanguageChanged = true;
             }
 
-            if (FlagUseBetaChannel != Settings.Default.UseBetaChannel)
-            {
-                FlagIsBetaChannelChanged = true;
-                Settings.Default.BetaChannelVersion = 0;
-            }
-
             Settings.Default.LauncherLanguage = FlagLauncherLanguageIndex;
-            Settings.Default.UseBetaChannel = FlagUseBetaChannel;
             Settings.Default.StartGameWindowed = FlagWindowed;
             Settings.Default.Save();
 
             //Settings-Valuations
 
-            if (!FlagEAXFileExists && FlagEAX == true)
-            {
-                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                foreach (var file in _EAXFiles)
-                {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
-                }
-
-                OptionIniParser.WriteKey("UseEAX3", "yes");
-            }
-
-            if (FlagEAXFileExists && FlagEAX == false)
-            {
-                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
-
-                foreach (var file in _EAXFiles)
-                {
-                    File.Delete(Path.Combine(GameInstallPath, file));
-                }
-
-                OptionIniParser.WriteKey("UseEAX3", "no");
-            }
+            string GameInstallPath = RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName);
 
             if (FlagBrutalAI && GameInstallPath != null)
                 File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"), true);
             else if (GameInstallPath != null && File.Exists(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big")))
                 File.Delete(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"));
-        }
-
-        private void ChkEAX_Click(object sender, EventArgs e)
-        {
-            if (FlagEAX == true)
-            {
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
-                FlagEAX = false;
-            }
-            else
-            {
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
-                FlagEAX = true;
-            }
-        }
-
-        private void ChkEAX_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
-        }
-
-        private void ChkEAX_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Selected;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
-        }
-
-        private void ChkEAX_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagEAX)
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
-            else
-                ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
         }
 
         private void ChkWindowed_MouseClick(object sender, MouseEventArgs e)
@@ -444,7 +318,7 @@ namespace PatchLauncher
             else
             {
                 ChkBrutalAI.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
-                LblWarning.Text = Strings.Warning_BrutalAI;
+                LblWarning.Text = "";
                 FlagBrutalAI = true;
             }
         }
@@ -473,48 +347,9 @@ namespace PatchLauncher
                 ChkBrutalAI.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
         }
 
-        private void ChkUseBetaChannel_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (FlagUseBetaChannel == true)
-            {
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
-                FlagUseBetaChannel = false;
-
-            }
-            else
-            {
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
-                FlagUseBetaChannel = true;
-            }
-        }
-
-        private void ChkUseBetaChannel_MouseEnter(object sender, EventArgs e)
-        {
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
-        }
-
-        private void ChkUseBetaChannel_MouseLeave(object sender, EventArgs e)
-        {
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_Selected;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
-        }
-
-        private void ChkUseBetaChannel_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (FlagUseBetaChannel)
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
-            else
-                ChkUseBetaChannel.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
-        }
-
         #endregion
 
-        private void OptionsBFME2_KeyDown(object sender, KeyEventArgs e)
+        private void OptionsBFME_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -527,7 +362,7 @@ namespace PatchLauncher
             switch (CmBLanguage.SelectedIndex)
             {
                 case 0:
-                    FlagLauncherLanguageIndex = "en_us";
+                    FlagLauncherLanguageIndex = "en";
                     break;
                 case 1:
                     FlagLauncherLanguageIndex = "de";

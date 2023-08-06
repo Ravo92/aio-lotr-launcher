@@ -123,10 +123,6 @@
   <data name="BtnInstall.TextLaunch" xml:space="preserve">
     <value>LAUNCH GAME</value>
   </data>
-  <data name="Info.BetaActivated" xml:space="preserve">
-    <value>Beta-Channel is activated and needs to be disabled in Launcher-
-options first in order to see the patch- and mod-selection!</value>
-  </data>
   <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
     <value>Copy files and apply patch...</value>
   </data>
@@ -138,9 +134,6 @@ options first in order to see the patch- and mod-selection!</value>
   </data>
   <data name="Info.PreparingUpdate" xml:space="preserve">
     <value>Preparing Update...</value>
-  </data>
-  <data name="Info.PreparingUpdateBeta" xml:space="preserve">
-    <value>Preparing Beta Update...</value>
   </data>
   <data name="Msg.InstallFolderNotEmpty.Text" xml:space="preserve">
     <value>The target directory is not empty. Continue installing the game?
@@ -161,10 +154,12 @@ Exisiting files will be deleted!</value>
   <data name="Msg.Restart.Title" xml:space="preserve">
     <value>Launcher Restart required</value>
   </data>
-  <data name="Msg.RestartForUpdate.Text" xml:space="preserve">
-    <value>A new official Patch 2.22 update is available!
-It seems, you are using the Beta-Channel or a older patch from the list.
-Do you wish to restart the launcher now and apply the new patch?</value>
+  <data name="Msg.UpdateAlreadyActive.Text" xml:space="preserve">
+    <value>The selected patch or mod is already active!
+No action has been conducted.</value>
+  </data>
+  <data name="Msg.UpdateAlreadyActive.Title" xml:space="preserve">
+    <value>Already activated!</value>
   </data>
   <data name="ToolTip.MusicSwitcher" xml:space="preserve">
     <value>Switch between faction music and default theme music</value>
@@ -174,10 +169,6 @@ Do you wish to restart the launcher now and apply the new patch?</value>
   </data>
   <data name="Warning.AlreadyRunningTitle" xml:space="preserve">
     <value>Launcher already running!</value>
-  </data>
-  <data name="Warning.BrutalAI" xml:space="preserve">
-    <value>WARNING: Brutal AI is activated.
-You may not be able to play online</value>
   </data>
   <data name="Warning.CantStopNow" xml:space="preserve">
     <value>There is still some download or install active!

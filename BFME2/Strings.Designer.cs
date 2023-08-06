@@ -79,16 +79,6 @@ namespace PatchLauncher {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beta-Channel is activated and needs to be disabled in Launcher-
-        ///options first in order to see the patch- and mod-selection!.
-        /// </summary>
-        internal static string Info_BetaActivated {
-            get {
-                return ResourceManager.GetString("Info.BetaActivated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Copy files and apply patch....
         /// </summary>
         internal static string Info_CopyFilesAndApplyPatch {
@@ -121,15 +111,6 @@ namespace PatchLauncher {
         internal static string Info_PreparingUpdate {
             get {
                 return ResourceManager.GetString("Info.PreparingUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preparing Beta Update....
-        /// </summary>
-        internal static string Info_PreparingUpdateBeta {
-            get {
-                return ResourceManager.GetString("Info.PreparingUpdateBeta", resourceCulture);
             }
         }
         
@@ -189,13 +170,21 @@ namespace PatchLauncher {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A new official Patch 2.22 update is available!
-        ///It seems, you are using the Beta-Channel or a older patch from the list.
-        ///Do you wish to restart the launcher now and apply the new patch?.
+        ///   Looks up a localized string similar to The selected patch or mod is already active!
+        ///No action has been conducted..
         /// </summary>
-        internal static string Msg_RestartForUpdate_Text {
+        internal static string Msg_UpdateAlreadyActive_Text {
             get {
-                return ResourceManager.GetString("Msg.RestartForUpdate.Text", resourceCulture);
+                return ResourceManager.GetString("Msg.UpdateAlreadyActive.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already activated!.
+        /// </summary>
+        internal static string Msg_UpdateAlreadyActive_Title {
+            get {
+                return ResourceManager.GetString("Msg.UpdateAlreadyActive.Title", resourceCulture);
             }
         }
         
@@ -223,16 +212,6 @@ namespace PatchLauncher {
         internal static string Warning_AlreadyRunningTitle {
             get {
                 return ResourceManager.GetString("Warning.AlreadyRunningTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WARNING: Brutal AI is activated.
-        ///You may not be able to play online.
-        /// </summary>
-        internal static string Warning_BrutalAI {
-            get {
-                return ResourceManager.GetString("Warning.BrutalAI", resourceCulture);
             }
         }
         

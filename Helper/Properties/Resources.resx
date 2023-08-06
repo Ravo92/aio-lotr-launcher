@@ -229,6 +229,9 @@
   <data name="BFME2LoadingBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME2LoadingBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BFME2PatchModBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME2PatchModBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BFME2PatchModBG106" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME2PatchModBG106.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

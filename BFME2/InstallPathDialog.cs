@@ -14,7 +14,7 @@ namespace PatchLauncher
     {
         bool FlagCreateDesktopShortcut = true;
         bool FlagCreateStartMenuShortcut = true;
-        string FlagSelectedIsoCode = "en_us";
+        string FlagSelectedIsoCode = "en_uk";
 
         readonly Dictionary<string, string> _selectedLanguageDictionary = JSONDataListHelper._DictionarylanguageSettings.ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
 
@@ -95,9 +95,9 @@ namespace PatchLauncher
             {
                 TxtInstallPath.Text = Settings.Default.GameInstallPath;
             }
-            else if (RegistryService.ReadRegKey("path") != "ValueNotFound")
+            else if (RegistryService.ReadRegKeyBFME2("path") != "ValueNotFound")
             {
-                TxtInstallPath.Text = RegistryService.ReadRegKey("path");
+                TxtInstallPath.Text = RegistryService.ReadRegKeyBFME2("path");
             }
             else
             {

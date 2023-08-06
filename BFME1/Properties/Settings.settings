@@ -42,7 +42,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LauncherLanguage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">en_us</Value>
+      <Value Profile="(Default)">en</Value>
     </Setting>
     <Setting Name="InstalledLanguageISOCode" Type="System.String" Scope="User">
       <Value Profile="(Default)">en_us</Value>

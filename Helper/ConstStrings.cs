@@ -8,7 +8,6 @@ namespace Helper
         public const string C_GAMEFOLDER_NAME_BFME2 = "BFME2";
         public const string C_GAMEFOLDER_NAME_BFME25 = "BFME25";
         public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
-        public const string C_GAMETITLE_NAME_EN = "The Battle for Middle-earth";
         public const string C_EAFOLDER_NAME = "EA Games";
 
         public const string C_MUTEX_NAME = "Patch Launcher 2.22 Ravo92";
@@ -47,10 +46,15 @@ namespace Helper
         public const string C_LAUNCHEREXE_BFME2_FILENAME = "BFME2.exe";
         public const string C_LAUNCHEREXE_BFME25_FILENAME = "BFME25.exe";
 
-        public const string C_MAIN_GAME_FILE = "lotrbfme.exe";
+        public const string C_BFME1_MAIN_GAME_FILE = "lotrbfme.exe";
+        public const string C_BFME2_MAIN_GAME_FILE = "lotrbfme2.exe";
+        public const string C_BFME25_MAIN_GAME_FILE = "lotrbfme2ep1.exe";
         public const string C_WORLDBUILDER_FILE = "worldbuilder.exe";
+
         public const string C_MAIN_ASSET_FILE = "asset.dat";
-        public const string C_103_ASSET_FILE = "asset.dat.103";
+        public const string C_BFME1_103_ASSET_FILE = "asset.dat.103";
+        public const string C_BFME2_106_ASSET_FILE = "asset.dat.103";
+        public const string C_BFME25_201_ASSET_FILE = "asset.dat.103";
         public const string C_ORIGINAL_ASSET_FILE = "asset.dat.BACKUP";
 
         public const string C_ERRORLOGGING_FILE = "PLEASE_REPORT_TO_DEVELOPER_UnassignedErrors.log";
@@ -75,6 +79,7 @@ namespace Helper
         public const string C_DOWNLOADFOLDER_NAME_BFME1 = "Downloads\\BFME1";
         public const string C_DOWNLOADFOLDER_NAME_BFME2 = "Downloads\\BFME2";
         public const string C_DOWNLOADFOLDER_NAME_BFME25 = "Downloads\\BFME25";
+        public const string C_DOWNLOADFOLDER_NAME_LAUNCHER = "Downloads\\LAUNCHER";
         public const string C_BETAFOLDER_NAME = "Beta";
         public const string C_GAMEINSTALLFOLDER_NAME = "Games";
         public const string C_LOGFOLDER_NAME = "Logfiles";

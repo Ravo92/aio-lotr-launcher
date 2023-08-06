@@ -62,36 +62,12 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EAXSupport {
-            get {
-                return ((bool)(this["EAXSupport"]));
-            }
-            set {
-                this["EAXSupport"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool StartGameWindowed {
             get {
                 return ((bool)(this["StartGameWindowed"]));
             }
             set {
                 this["StartGameWindowed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool UseBrutalAI {
-            get {
-                return ((bool)(this["UseBrutalAI"]));
-            }
-            set {
-                this["UseBrutalAI"] = value;
             }
         }
         
@@ -134,48 +110,12 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SelectedOlderPatch {
-            get {
-                return ((bool)(this["SelectedOlderPatch"]));
-            }
-            set {
-                this["SelectedOlderPatch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool IsSettingChanged {
             get {
                 return ((bool)(this["IsSettingChanged"]));
             }
             set {
                 this["IsSettingChanged"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool UseBetaChannel {
-            get {
-                return ((bool)(this["UseBetaChannel"]));
-            }
-            set {
-                this["UseBetaChannel"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int BetaChannelVersion {
-            get {
-                return ((int)(this["BetaChannelVersion"]));
-            }
-            set {
-                this["BetaChannelVersion"] = value;
             }
         }
         
@@ -192,7 +132,7 @@ namespace PatchLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en_us")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
         public string LauncherLanguage {
             get {
                 return ((string)(this["LauncherLanguage"]));
@@ -204,7 +144,7 @@ namespace PatchLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en_us")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en_uk")]
         public string InstalledLanguageISOCode {
             get {
                 return ((string)(this["InstalledLanguageISOCode"]));
@@ -253,12 +193,12 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool OpenPatchChangelogPage {
+        public bool UseBrutalAI {
             get {
-                return ((bool)(this["OpenPatchChangelogPage"]));
+                return ((bool)(this["UseBrutalAI"]));
             }
             set {
-                this["OpenPatchChangelogPage"] = value;
+                this["UseBrutalAI"] = value;
             }
         }
     }

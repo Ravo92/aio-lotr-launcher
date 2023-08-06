@@ -180,7 +180,7 @@ namespace PatchLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en_us")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
         public string LauncherLanguage {
             get {
                 return ((string)(this["LauncherLanguage"]));

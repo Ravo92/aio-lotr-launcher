@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.ComponentModel;
 using SevenZipExtractor;
+using System.Reflection;
 
 namespace Helper
 {
@@ -106,13 +107,13 @@ namespace Helper
             }
         }
 
-        public Task ExtractFile(string pathtoZIPFile, string ZIPFileName, string gameInstallPath, IProgress<ProgressHelper> extractProgress)
+        public Task ExtractFile(string pathtoZIPFile, string ZIPFileName, string gameInstallPath, IProgress<ProgressHelper> extractProgress, bool hasExternalClient = false)
         {
             try
             {
                 string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
 
-                if (Path.GetExtension(ZIPFileName) != ".7z")
+                if (Path.GetExtension(ZIPFileName) != ".7z" && Path.GetExtension(ZIPFileName) != ".rar")
                 {
                     File.Copy(fullPathwithFileName, Path.Combine(gameInstallPath, ZIPFileName), true);
                     return Task.CompletedTask;
@@ -129,7 +130,15 @@ namespace Helper
                             EntrySize = entry.Size;
                             EntryFilename = entry.FileName;
                             extractProgress.Report(new ProgressHelper() { CurrentFileName = EntryFilename, CurrentlyExtractedFileCount = counter, TotalArchiveFileCount = archiveFile.Entries.Count });
-                            entry.Extract(Path.Combine(gameInstallPath, entry.FileName));
+
+                            if (hasExternalClient)
+                            {
+                                entry.Extract(Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, Path.GetFileNameWithoutExtension(ZIPFileName), entry.FileName));
+                            }
+                            else
+                            {
+                                entry.Extract(Path.Combine(gameInstallPath, entry.FileName));
+                            }
                         }
                     });
                 }
@@ -175,13 +184,13 @@ namespace Helper
             }
         }
 
-        public static bool EnsureBFMEAppdataFolderExists()
+        public static bool EnsureBFMEAppdataFolderExists(string assemblyName)
         {
             try
             {
-                if (!Directory.Exists(RegistryService.GameAppdataFolderPath()))
+                if (!Directory.Exists(RegistryService.GameAppdataFolderPath(assemblyName)))
                 {
-                    CreateBFMEAppdataFolder();
+                    CreateBFMEAppdataFolder(assemblyName);
                 }
                 return true;
             }
@@ -192,11 +201,11 @@ namespace Helper
             }
         }
 
-        private static void CreateBFMEAppdataFolder()
+        private static void CreateBFMEAppdataFolder(string assemblyName)
         {
             try
             {
-                Directory.CreateDirectory(RegistryService.GameAppdataFolderPath());
+                Directory.CreateDirectory(RegistryService.GameAppdataFolderPath(assemblyName));
             }
             catch (Exception ex)
             {
@@ -204,12 +213,12 @@ namespace Helper
             }
         }
 
-        public static void EnsureBFMEOptionsIniFileExists()
+        public static void EnsureBFMEOptionsIniFileExists(string assemblyName)
         {
             try
             {
-                if (!File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME)))
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(), ConstStrings.C_OPTIONSINI_FILENAME));
+                if (!File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME)))
+                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
             }
             catch (Exception ex)
             {

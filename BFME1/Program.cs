@@ -4,7 +4,6 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -13,7 +12,6 @@ namespace PatchLauncher
     internal class Program
     {
         static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
-        readonly static string assemblyName = AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Name!;
 
         /// <summary>
         ///  The main entry point for the application.
@@ -30,13 +28,13 @@ namespace PatchLauncher
                 }
                 else if (args[0] == "--showLauncherUpdateLog")
                 {
-                    LogHelper.LoggerBFME1GUI.Information(string.Format("Launched after LauncherUpdate now with version: > {0} <", Assembly.GetEntryAssembly()!.GetName().Version));
+                    LogHelper.LoggerBFME1GUI.Information(string.Format("Launched after LauncherUpdate now with version: > {0} <", AssemblyNameHelper.BFMELauncherGameVerion));
                     Settings.Default.OpenLauncherChangelogPageAfterUpdate = true;
                     Settings.Default.Save();
                 }
                 else if (args[0] != "--official")
                 {
-                    LogHelper.LoggerBFME1GUI.Warning(string.Format("Parameter > {0} < not the expected one at void Main() args in {1}", args[0], assemblyName));
+                    LogHelper.LoggerBFME1GUI.Warning(string.Format("Parameter > {0} < not the expected one at void Main() args in {1}", args[0], AssemblyNameHelper.BFMELauncherGameName));
                     return;
                 }
             }
@@ -83,19 +81,19 @@ namespace PatchLauncher
                 GameFileTools _gameFileTools = new();
                 GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
 
-                JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[assemblyName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
-                JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[assemblyName];
-                JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[assemblyName].ToDictionary(x => x.Version, x => x);
+                JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
+                JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[AssemblyNameHelper.BFMELauncherGameName];
+                JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.Version, x => x);
 
                 PatchPacks _latestPatchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
-                PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[assemblyName];
+                PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[AssemblyNameHelper.BFMELauncherGameName];
 
                 Settings.Default.BetaChannelVersion = _betaPatchFiles.Version;
                 Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
                 Settings.Default.Save();
 
-                GameFileTools.EnsureBFMEAppdataFolderExists();
-                GameFileTools.EnsureBFMEOptionsIniFileExists();
+                GameFileTools.EnsureBFMEAppdataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
+                GameFileTools.EnsureBFMEOptionsIniFileExists(AssemblyNameHelper.BFMELauncherGameName);
 
                 Application.Run(new WinFormsMainGUI());
                 _mutex.ReleaseMutex();

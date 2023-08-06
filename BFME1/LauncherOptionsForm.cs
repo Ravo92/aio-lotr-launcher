@@ -34,7 +34,7 @@ namespace PatchLauncher
             //Main Form style behaviour
 
             PibHeader.Image = Helper.Properties.Resources.BFME1_Header;
-            PibBorderLauncherOptions.Image = Helper.Properties.Resources.borderRectangle;
+            PibBorderLauncherOptions.Image = Helper.Properties.Resources.BFME1BorderRectangle;
             BackgroundImage = Helper.Properties.Resources.BGMap;
 
             // Button-Styles
@@ -300,7 +300,7 @@ namespace PatchLauncher
 
             //Settings-Valuations
 
-            string GameInstallPath = RegistryService.GameInstallPath();
+            string GameInstallPath = RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName);
 
             if (FlagBrutalAI && GameInstallPath != null)
                 File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"), true);
@@ -440,7 +440,7 @@ namespace PatchLauncher
             switch (CmBLanguage.SelectedIndex)
             {
                 case 0:
-                    FlagLauncherLanguageIndex = "en_us";
+                    FlagLauncherLanguageIndex = "en";
                     break;
                 case 1:
                     FlagLauncherLanguageIndex = "de";

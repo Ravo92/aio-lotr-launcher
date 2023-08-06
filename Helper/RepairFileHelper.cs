@@ -2,14 +2,14 @@
 {
     public class RepairFileHelper
     {
-        public static Task RepairFeature()
+        public static Task RepairFeature(string assemblyName)
         {
             try
             {
-                if (Directory.Exists(RegistryService.GameInstallPath()))
+                if (Directory.Exists(RegistryService.GameInstallPath(assemblyName)))
                 {
-                    Directory.Delete(RegistryService.GameInstallPath(), true);
-                    LogHelper.LoggerGRepairFile.Information(string.Format("Deleted Folder: {0}", RegistryService.GameInstallPath()));
+                    Directory.Delete(RegistryService.GameInstallPath(assemblyName), true);
+                    LogHelper.LoggerGRepairFile.Information(string.Format("Deleted Folder: {0}", RegistryService.GameInstallPath(assemblyName)));
                 }
                 return Task.CompletedTask;
             }

@@ -87,7 +87,7 @@ namespace PatchLauncher
             }
 
             PibLanguageSupport.Image = Helper.Properties.Resources.languageSupportTransparent;
-            PibPathBorder.Image = Helper.Properties.Resources.borderRectangleSmallest;
+            PibPathBorder.Image = Helper.Properties.Resources.BFME1BorderRectangleSmallest;
             PibLanguageSupport.BackColor = Color.Transparent;
             BackgroundImage = Helper.Properties.Resources.BGMap;
 
@@ -95,9 +95,9 @@ namespace PatchLauncher
             {
                 TxtInstallPath.Text = Settings.Default.GameInstallPath;
             }
-            else if (RegistryService.ReadRegKey("path") != "ValueNotFound")
+            else if (RegistryService.ReadRegKeyBFME1("path") != "ValueNotFound")
             {
-                TxtInstallPath.Text = RegistryService.ReadRegKey("path");
+                TxtInstallPath.Text = RegistryService.ReadRegKeyBFME1("path");
             }
             else
             {

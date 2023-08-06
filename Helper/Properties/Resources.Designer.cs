@@ -443,6 +443,16 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BFME2PatchModBG {
+            get {
+                object obj = ResourceManager.GetObject("BFME2PatchModBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BFME2PatchModBG106 {
             get {
                 object obj = ResourceManager.GetObject("BFME2PatchModBG106", resourceCulture);
