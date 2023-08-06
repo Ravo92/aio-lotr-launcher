@@ -123,6 +123,12 @@
   <data name="BtnInstall.TextLaunch" xml:space="preserve">
     <value>LAUNCH GAME</value>
   </data>
+  <data name="Error.ExternalInstallerCanceled.Text" xml:space="preserve">
+    <value>External Installer was canceled and Version will be set back to 1.06!</value>
+  </data>
+  <data name="Error.ExternalInstallerCanceled.Title" xml:space="preserve">
+    <value>External Installer canceled</value>
+  </data>
   <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
     <value>Copy files and apply patch...</value>
   </data>

@@ -79,6 +79,24 @@ namespace PatchLauncher {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External Installer was canceled and Version will be set back to 1.06!.
+        /// </summary>
+        internal static string Error_ExternalInstallerCanceled_Text {
+            get {
+                return ResourceManager.GetString("Error.ExternalInstallerCanceled.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External Installer canceled.
+        /// </summary>
+        internal static string Error_ExternalInstallerCanceled_Title {
+            get {
+                return ResourceManager.GetString("Error.ExternalInstallerCanceled.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy files and apply patch....
         /// </summary>
         internal static string Info_CopyFilesAndApplyPatch {

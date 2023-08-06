@@ -35,10 +35,10 @@
             // 
             // Wv2Credits
             // 
-            resources.ApplyResources(Wv2Credits, "Wv2Credits");
             Wv2Credits.AllowExternalDrop = true;
             Wv2Credits.CreationProperties = null;
             Wv2Credits.DefaultBackgroundColor = System.Drawing.Color.White;
+            resources.ApplyResources(Wv2Credits, "Wv2Credits");
             Wv2Credits.Name = "Wv2Credits";
             Wv2Credits.Source = new System.Uri("https://www.google.com", System.UriKind.Absolute);
             Wv2Credits.ZoomFactor = 1D;

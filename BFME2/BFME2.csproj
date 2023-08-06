@@ -48,10 +48,7 @@
     <Compile Update="ChangelogPageLauncher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GameOptionsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="LauncherOptionsForm.cs">
+    <Compile Update="OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">

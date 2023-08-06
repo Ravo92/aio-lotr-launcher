@@ -201,5 +201,29 @@ namespace PatchLauncher.Properties {
                 this["UseBrutalAI"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ActivePatchOrModExternalProgramFolderPath {
+            get {
+                return ((string)(this["ActivePatchOrModExternalProgramFolderPath"]));
+            }
+            set {
+                this["ActivePatchOrModExternalProgramFolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ActivePatchOrModExternalProgramLaunchAbility {
+            get {
+                return ((bool)(this["ActivePatchOrModExternalProgramLaunchAbility"]));
+            }
+            set {
+                this["ActivePatchOrModExternalProgramLaunchAbility"] = value;
+            }
+        }
     }
 }

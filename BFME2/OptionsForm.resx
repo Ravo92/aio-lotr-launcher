@@ -117,127 +117,1635 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BtnDefault.Text" xml:space="preserve">
-    <value>STANDARD</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnDefault.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="BtnDefault.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="BtnDefault.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 673</value>
+  </data>
+  <data name="BtnDefault.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 51</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnDefault.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="BtnDefault.Text" xml:space="preserve">
+    <value>DEFAULT</value>
+  </data>
+  <data name="&gt;&gt;BtnDefault.Name" xml:space="preserve">
+    <value>BtnDefault</value>
+  </data>
+  <data name="&gt;&gt;BtnDefault.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnDefault.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnDefault.ZOrder" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="PibBorderLanguageOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 115</value>
+  </data>
+  <data name="PibBorderLanguageOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 400</value>
+  </data>
+  <data name="PibBorderLanguageOptions.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PibBorderLanguageOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="PibBorderLanguageOptions.WaitOnLoad" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLanguageOptions.Name" xml:space="preserve">
+    <value>PibBorderLanguageOptions</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLanguageOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLanguageOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLanguageOptions.ZOrder" xml:space="preserve">
+    <value>54</value>
+  </data>
+  <data name="PibHeader.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PibHeader.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="PibHeader.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="PibHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 0</value>
+    <value>198, 0</value>
   </data>
   <data name="PibHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1130, 105</value>
+    <value>775, 105</value>
   </data>
-  <data name="LblOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 8</value>
+  <data name="PibHeader.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
-  <data name="LblOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 15</value>
+  <data name="PibHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
-  <data name="LblOptions.Text" xml:space="preserve">
-    <value>Einstellungen</value>
+  <data name="PibHeader.WaitOnLoad" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="LblVideoSettings.Text" xml:space="preserve">
-    <value>Video und Auflösung</value>
+  <data name="&gt;&gt;PibHeader.Name" xml:space="preserve">
+    <value>PibHeader</value>
   </data>
-  <data name="LblAniTextureFiltering.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 15</value>
+  <data name="&gt;&gt;PibHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LblAniTextureFiltering.Text" xml:space="preserve">
-    <value>Anisotropische Texturenfilterung aktivieren</value>
+  <data name="&gt;&gt;PibHeader.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="LblTerrainLighting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 15</value>
+  <data name="&gt;&gt;PibHeader.ZOrder" xml:space="preserve">
+    <value>53</value>
   </data>
-  <data name="LblTerrainLighting.Text" xml:space="preserve">
-    <value>Geländebeleuchtung aktivieren</value>
+  <data name="LblSettingsTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="Lbl2DShadows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 15</value>
+  <data name="LblSettingsTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>485, 8</value>
   </data>
-  <data name="Lbl2DShadows.Text" xml:space="preserve">
-    <value>2D Schatten anzeigen</value>
+  <data name="LblSettingsTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 15</value>
   </data>
-  <data name="Lbl3DShadows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 15</value>
+  <data name="LblSettingsTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="Lbl3DShadows.Text" xml:space="preserve">
-    <value>3D-Schatten anzeigen</value>
+  <data name="LblSettingsTitle.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
-  <data name="LblShowProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 15</value>
+  <data name="&gt;&gt;LblSettingsTitle.Name" xml:space="preserve">
+    <value>LblSettingsTitle</value>
   </data>
-  <data name="LblShowProps.Text" xml:space="preserve">
-    <value>Mehr Gegenstanddetails</value>
+  <data name="&gt;&gt;LblSettingsTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LblSmoothWaterBorder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 15</value>
+  <data name="&gt;&gt;LblSettingsTitle.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="LblSmoothWaterBorder.Text" xml:space="preserve">
-    <value>Wasserkanten glätten</value>
+  <data name="&gt;&gt;LblSettingsTitle.ZOrder" xml:space="preserve">
+    <value>52</value>
   </data>
-  <data name="LblDynamicLOD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 15</value>
+  <data name="PibBorderGameOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>442, 115</value>
   </data>
-  <data name="LblDynamicLOD.Text" xml:space="preserve">
-    <value>Dynamisches Level of Detail (LoD)</value>
+  <data name="PibBorderGameOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>693, 670</value>
   </data>
-  <data name="LblHeatEffects.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 15</value>
+  <data name="PibBorderGameOptions.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
-  <data name="LblHeatEffects.Text" xml:space="preserve">
-    <value>Hitze-Effekte anzeigen</value>
+  <data name="PibBorderGameOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="LblShowAnimations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 15</value>
+  <data name="PibBorderGameOptions.WaitOnLoad" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="LblShowAnimations.Text" xml:space="preserve">
-    <value>Zeige mehr Animationen</value>
+  <data name="&gt;&gt;PibBorderGameOptions.Name" xml:space="preserve">
+    <value>PibBorderGameOptions</value>
+  </data>
+  <data name="&gt;&gt;PibBorderGameOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibBorderGameOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibBorderGameOptions.ZOrder" xml:space="preserve">
+    <value>51</value>
+  </data>
+  <data name="LblVideoSettingsTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblVideoSettingsTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>572, 125</value>
+  </data>
+  <data name="LblVideoSettingsTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 15</value>
+  </data>
+  <data name="LblVideoSettingsTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="LblVideoSettingsTitle.Text" xml:space="preserve">
+    <value>Video and Resolution</value>
+  </data>
+  <data name="&gt;&gt;LblVideoSettingsTitle.Name" xml:space="preserve">
+    <value>LblVideoSettingsTitle</value>
+  </data>
+  <data name="&gt;&gt;LblVideoSettingsTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblVideoSettingsTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblVideoSettingsTitle.ZOrder" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="ResolutionX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 745</value>
+  </data>
+  <data name="ResolutionX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 16</value>
+  </data>
+  <data name="ResolutionX.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="ResolutionX.Text" xml:space="preserve">
+    <value>1920</value>
+  </data>
+  <data name="ResolutionX.WordWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;ResolutionX.Name" xml:space="preserve">
+    <value>ResolutionX</value>
+  </data>
+  <data name="&gt;&gt;ResolutionX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResolutionX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ResolutionX.ZOrder" xml:space="preserve">
+    <value>49</value>
+  </data>
+  <data name="ResolutionY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>587, 745</value>
+  </data>
+  <data name="ResolutionY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 16</value>
+  </data>
+  <data name="ResolutionY.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="ResolutionY.Text" xml:space="preserve">
+    <value>1080</value>
+  </data>
+  <data name="ResolutionY.WordWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;ResolutionY.Name" xml:space="preserve">
+    <value>ResolutionY</value>
+  </data>
+  <data name="&gt;&gt;ResolutionY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResolutionY.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ResolutionY.ZOrder" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="LblResolutionX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblResolutionX.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 15.75pt</value>
+  </data>
+  <data name="LblResolutionX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>556, 741</value>
+  </data>
+  <data name="LblResolutionX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 30</value>
+  </data>
+  <data name="LblResolutionX.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="LblResolutionX.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;LblResolutionX.Name" xml:space="preserve">
+    <value>LblResolutionX</value>
+  </data>
+  <data name="&gt;&gt;LblResolutionX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblResolutionX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblResolutionX.ZOrder" xml:space="preserve">
+    <value>47</value>
+  </data>
+  <data name="LblResolution.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblResolution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>665, 740</value>
   </data>
   <data name="LblResolution.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 15</value>
+    <value>97, 15</value>
+  </data>
+  <data name="LblResolution.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
   <data name="LblResolution.Text" xml:space="preserve">
-    <value>Bestimme die Spielauflösung</value>
+    <value>Game Resolution</value>
+  </data>
+  <data name="&gt;&gt;LblResolution.Name" xml:space="preserve">
+    <value>LblResolution</value>
+  </data>
+  <data name="&gt;&gt;LblResolution.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblResolution.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblResolution.ZOrder" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="BtnApply.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="BtnApply.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="BtnApply.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 734</value>
+  </data>
+  <data name="BtnApply.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 51</value>
+  </data>
+  <data name="BtnApply.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
   </data>
   <data name="BtnApply.Text" xml:space="preserve">
-    <value>ÜBERNEHMEN</value>
+    <value>APPLY</value>
+  </data>
+  <data name="&gt;&gt;BtnApply.Name" xml:space="preserve">
+    <value>BtnApply</value>
+  </data>
+  <data name="&gt;&gt;BtnApply.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnApply.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnApply.ZOrder" xml:space="preserve">
+    <value>44</value>
+  </data>
+  <data name="BtnCancel.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="BtnCancel.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="BtnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 734</value>
+  </data>
+  <data name="BtnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 51</value>
+  </data>
+  <data name="BtnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
   </data>
   <data name="BtnCancel.Text" xml:space="preserve">
-    <value>ABBRECHEN</value>
+    <value>CANCEL</value>
   </data>
-  <data name="LblInfoLOD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>452, 50</value>
+  <data name="&gt;&gt;BtnCancel.Name" xml:space="preserve">
+    <value>BtnCancel</value>
   </data>
-  <data name="LblInfoLOD.Text" xml:space="preserve">
-    <value>Dynamisches Level of Detail (LoD) ist in diesem Spiel
-verbuggt und sollte daher nicht verwendet werden!</value>
+  <data name="&gt;&gt;BtnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LblAudioSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 125</value>
+  <data name="&gt;&gt;BtnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="LblAudioSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 15</value>
+  <data name="&gt;&gt;BtnCancel.ZOrder" xml:space="preserve">
+    <value>43</value>
   </data>
-  <data name="LblAudioSettings.Text" xml:space="preserve">
-    <value>Sprache und Sound</value>
+  <data name="CmbSelectGameLanguage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 181</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 23</value>
+  </data>
+  <data name="CmbSelectGameLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.Name" xml:space="preserve">
+    <value>CmbSelectGameLanguage</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectGameLanguage.ZOrder" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="LblAudioSettingsTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblAudioSettingsTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblAudioSettingsTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 125</value>
+  </data>
+  <data name="LblAudioSettingsTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 15</value>
+  </data>
+  <data name="LblAudioSettingsTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="LblAudioSettingsTitle.Text" xml:space="preserve">
+    <value>Language and Audio</value>
+  </data>
+  <data name="&gt;&gt;LblAudioSettingsTitle.Name" xml:space="preserve">
+    <value>LblAudioSettingsTitle</value>
+  </data>
+  <data name="&gt;&gt;LblAudioSettingsTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblAudioSettingsTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblAudioSettingsTitle.ZOrder" xml:space="preserve">
+    <value>41</value>
+  </data>
+  <data name="LblGameLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblGameLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblGameLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 180</value>
   </data>
   <data name="LblGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 15</value>
-  </data>
-  <data name="LblGameLanguage.Text" xml:space="preserve">
-    <value>Spiel-Sprache</value>
-  </data>
-  <data name="LblUnitDecals.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 15</value>
   </data>
-  <data name="LblUnitDecals.Text" xml:space="preserve">
-    <value>Einheiten Decals</value>
+  <data name="LblGameLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="LblGameLanguage.Text" xml:space="preserve">
+    <value>Game Language</value>
+  </data>
+  <data name="&gt;&gt;LblGameLanguage.Name" xml:space="preserve">
+    <value>LblGameLanguage</value>
+  </data>
+  <data name="&gt;&gt;LblGameLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblGameLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblGameLanguage.ZOrder" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="LblEAX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblEAX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblEAX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 280</value>
   </data>
   <data name="LblEAX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 15</value>
+    <value>80, 15</value>
+  </data>
+  <data name="LblEAX.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
   </data>
   <data name="LblEAX.Text" xml:space="preserve">
-    <value>Aktiviere EAX3-Support</value>
+    <value>Activate EAX3</value>
+  </data>
+  <data name="&gt;&gt;LblEAX.Name" xml:space="preserve">
+    <value>LblEAX</value>
+  </data>
+  <data name="&gt;&gt;LblEAX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblEAX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblEAX.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="ChkEAX.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="ChkEAX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="ChkEAX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ChkEAX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 280</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ChkEAX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ChkEAX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 29</value>
+  </data>
+  <data name="ChkEAX.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="ChkEAX.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
+  <data name="&gt;&gt;ChkEAX.Name" xml:space="preserve">
+    <value>ChkEAX</value>
+  </data>
+  <data name="&gt;&gt;ChkEAX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ChkEAX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ChkEAX.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="LblLauncherVersion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="LblLauncherVersion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblLauncherVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 639</value>
+  </data>
+  <data name="LblLauncherVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 21</value>
+  </data>
+  <data name="LblLauncherVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="LblLauncherVersion.Text" xml:space="preserve">
+    <value>2.2.2.2</value>
+  </data>
+  <data name="LblLauncherVersion.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersion.Name" xml:space="preserve">
+    <value>LblLauncherVersion</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersion.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="LblPatchVersion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="LblPatchVersion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblPatchVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 609</value>
+  </data>
+  <data name="LblPatchVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 21</value>
+  </data>
+  <data name="LblPatchVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="LblPatchVersion.Text" xml:space="preserve">
+    <value>1.1.1.1</value>
+  </data>
+  <data name="LblPatchVersion.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersion.Name" xml:space="preserve">
+    <value>LblPatchVersion</value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersion.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="CmbSelectLauncherLanguage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="CmbSelectLauncherLanguage.Items" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="CmbSelectLauncherLanguage.Items1" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="CmbSelectLauncherLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 558</value>
+  </data>
+  <data name="CmbSelectLauncherLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 23</value>
+  </data>
+  <data name="CmbSelectLauncherLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectLauncherLanguage.Name" xml:space="preserve">
+    <value>CmbSelectLauncherLanguage</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectLauncherLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectLauncherLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CmbSelectLauncherLanguage.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="LblLauncherVersionTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblLauncherVersionTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="LblLauncherVersionTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblLauncherVersionTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 639</value>
+  </data>
+  <data name="LblLauncherVersionTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 21</value>
+  </data>
+  <data name="LblLauncherVersionTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="LblLauncherVersionTitle.Text" xml:space="preserve">
+    <value>Launcher-Version: </value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersionTitle.Name" xml:space="preserve">
+    <value>LblLauncherVersionTitle</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersionTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersionTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherVersionTitle.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="LblWindowed.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblWindowed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblWindowed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>520, 695</value>
+  </data>
+  <data name="LblWindowed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 15</value>
+  </data>
+  <data name="LblWindowed.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="LblWindowed.Text" xml:space="preserve">
+    <value>Run game in windowed mode</value>
+  </data>
+  <data name="&gt;&gt;LblWindowed.Name" xml:space="preserve">
+    <value>LblWindowed</value>
+  </data>
+  <data name="&gt;&gt;LblWindowed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblWindowed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblWindowed.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="ChkWindowed.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="ChkWindowed.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="ChkWindowed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ChkWindowed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 695</value>
+  </data>
+  <data name="ChkWindowed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ChkWindowed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 29</value>
+  </data>
+  <data name="ChkWindowed.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="ChkWindowed.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
+  <data name="&gt;&gt;ChkWindowed.Name" xml:space="preserve">
+    <value>ChkWindowed</value>
+  </data>
+  <data name="&gt;&gt;ChkWindowed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ChkWindowed.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ChkWindowed.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="LblPatchVersionTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblPatchVersionTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="LblPatchVersionTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblPatchVersionTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 609</value>
+  </data>
+  <data name="LblPatchVersionTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 21</value>
+  </data>
+  <data name="LblPatchVersionTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="LblPatchVersionTitle.Text" xml:space="preserve">
+    <value>Patch-Version: </value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersionTitle.Name" xml:space="preserve">
+    <value>LblPatchVersionTitle</value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersionTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersionTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblPatchVersionTitle.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="LblLauncherLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblLauncherLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblLauncherLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 558</value>
+  </data>
+  <data name="LblLauncherLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 15</value>
+  </data>
+  <data name="LblLauncherLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="LblLauncherLanguage.Text" xml:space="preserve">
+    <value>Launcher Language</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherLanguage.Name" xml:space="preserve">
+    <value>LblLauncherLanguage</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblLauncherLanguage.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="PibBorderLauncherSettings.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PibBorderLauncherSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 547</value>
+  </data>
+  <data name="PibBorderLauncherSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 47</value>
+  </data>
+  <data name="PibBorderLauncherSettings.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PibBorderLauncherSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="PibBorderLauncherSettings.WaitOnLoad" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLauncherSettings.Name" xml:space="preserve">
+    <value>PibBorderLauncherSettings</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLauncherSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLauncherSettings.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PibBorderLauncherSettings.ZOrder" xml:space="preserve">
+    <value>55</value>
+  </data>
+  <data name="TrackBarOptionsShaderLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 565</value>
+  </data>
+  <data name="TrackBarOptionsShaderLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsShaderLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShaderLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsShaderLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShaderLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShaderLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShaderLOD.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="LblTrackBarShaderLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarShaderLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarShaderLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 537</value>
+  </data>
+  <data name="LblTrackBarShaderLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 15</value>
+  </data>
+  <data name="LblTrackBarShaderLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
+  <data name="LblTrackBarShaderLOD.Text" xml:space="preserve">
+    <value>Shader Detail</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderLOD.Name" xml:space="preserve">
+    <value>LblTrackBarShaderLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderLOD.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="LblTrackBarShaderValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarShaderValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarShaderValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 565</value>
+  </data>
+  <data name="LblTrackBarShaderValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarShaderValue.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="LblTrackBarShaderValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderValue.Name" xml:space="preserve">
+    <value>LblTrackBarShaderValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShaderValue.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="LblTrackBarModelValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarModelValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarModelValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 203</value>
+  </data>
+  <data name="LblTrackBarModelValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarModelValue.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
+  <data name="LblTrackBarModelValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelValue.Name" xml:space="preserve">
+    <value>LblTrackBarModelValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelValue.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="LblTrackBarModelLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarModelLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarModelLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 175</value>
+  </data>
+  <data name="LblTrackBarModelLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 15</value>
+  </data>
+  <data name="LblTrackBarModelLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="LblTrackBarModelLOD.Text" xml:space="preserve">
+    <value>Model Detail</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelLOD.Name" xml:space="preserve">
+    <value>LblTrackBarModelLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarModelLOD.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="TrackBarOptionsModelLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 203</value>
+  </data>
+  <data name="TrackBarOptionsModelLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsModelLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsModelLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsModelLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsModelLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsModelLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsModelLOD.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="LblTrackBarAnimationValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarAnimationValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarAnimationValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 294</value>
+  </data>
+  <data name="LblTrackBarAnimationValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarAnimationValue.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="LblTrackBarAnimationValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationValue.Name" xml:space="preserve">
+    <value>LblTrackBarAnimationValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationValue.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="LblTrackBarAnimationLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarAnimationLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarAnimationLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 266</value>
+  </data>
+  <data name="LblTrackBarAnimationLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 15</value>
+  </data>
+  <data name="LblTrackBarAnimationLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="LblTrackBarAnimationLOD.Text" xml:space="preserve">
+    <value>Animation Detail</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationLOD.Name" xml:space="preserve">
+    <value>LblTrackBarAnimationLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarAnimationLOD.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="TrackBarOptionsAnimationLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TrackBarOptionsAnimationLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 294</value>
+  </data>
+  <data name="TrackBarOptionsAnimationLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsAnimationLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsAnimationLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsAnimationLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsAnimationLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsAnimationLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsAnimationLOD.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="LblTrackBarVFXValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarVFXValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarVFXValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 384</value>
+  </data>
+  <data name="LblTrackBarVFXValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarVFXValue.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="LblTrackBarVFXValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXValue.Name" xml:space="preserve">
+    <value>LblTrackBarVFXValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXValue.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="LblTrackBarVFXLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarVFXLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarVFXLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 356</value>
+  </data>
+  <data name="LblTrackBarVFXLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 15</value>
+  </data>
+  <data name="LblTrackBarVFXLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="LblTrackBarVFXLOD.Text" xml:space="preserve">
+    <value>VFX Detail</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXLOD.Name" xml:space="preserve">
+    <value>LblTrackBarVFXLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarVFXLOD.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="TrackBarOptionsVFXLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TrackBarOptionsVFXLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 384</value>
+  </data>
+  <data name="TrackBarOptionsVFXLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsVFXLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsVFXLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsVFXLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsVFXLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsVFXLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsVFXLOD.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="LblTrackBarShadowsValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarShadowsValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarShadowsValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 473</value>
+  </data>
+  <data name="LblTrackBarShadowsValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarShadowsValue.TabIndex" type="System.Int32, mscorlib">
+    <value>85</value>
+  </data>
+  <data name="LblTrackBarShadowsValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsValue.Name" xml:space="preserve">
+    <value>LblTrackBarShadowsValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsValue.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="LblTrackBarShadowsLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarShadowsLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarShadowsLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 445</value>
+  </data>
+  <data name="LblTrackBarShadowsLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 15</value>
+  </data>
+  <data name="LblTrackBarShadowsLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>84</value>
+  </data>
+  <data name="LblTrackBarShadowsLOD.Text" xml:space="preserve">
+    <value>Shadows</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsLOD.Name" xml:space="preserve">
+    <value>LblTrackBarShadowsLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarShadowsLOD.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="TrackBarOptionsShadowsLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TrackBarOptionsShadowsLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>480, 473</value>
+  </data>
+  <data name="TrackBarOptionsShadowsLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsShadowsLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShadowsLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsShadowsLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShadowsLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShadowsLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsShadowsLOD.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="LblTrackBarWaterValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarWaterValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarWaterValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>980, 203</value>
+  </data>
+  <data name="LblTrackBarWaterValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarWaterValue.TabIndex" type="System.Int32, mscorlib">
+    <value>88</value>
+  </data>
+  <data name="LblTrackBarWaterValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterValue.Name" xml:space="preserve">
+    <value>LblTrackBarWaterValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterValue.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="LblTrackBarWaterLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarWaterLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarWaterLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 175</value>
+  </data>
+  <data name="LblTrackBarWaterLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 15</value>
+  </data>
+  <data name="LblTrackBarWaterLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>87</value>
+  </data>
+  <data name="LblTrackBarWaterLOD.Text" xml:space="preserve">
+    <value>Water Detail</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterLOD.Name" xml:space="preserve">
+    <value>LblTrackBarWaterLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarWaterLOD.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="TrackBarOptionsWaterLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TrackBarOptionsWaterLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 203</value>
+  </data>
+  <data name="TrackBarOptionsWaterLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsWaterLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsWaterLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsWaterLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsWaterLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsWaterLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsWaterLOD.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="LblTrackBarTextureValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarTextureValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarTextureValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>980, 294</value>
+  </data>
+  <data name="LblTrackBarTextureValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarTextureValue.TabIndex" type="System.Int32, mscorlib">
+    <value>91</value>
+  </data>
+  <data name="LblTrackBarTextureValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureValue.Name" xml:space="preserve">
+    <value>LblTrackBarTextureValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureValue.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="LblTrackBarTextureLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarTextureLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarTextureLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 266</value>
+  </data>
+  <data name="LblTrackBarTextureLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 15</value>
+  </data>
+  <data name="LblTrackBarTextureLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="LblTrackBarTextureLOD.Text" xml:space="preserve">
+    <value>Texture Quality</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureLOD.Name" xml:space="preserve">
+    <value>LblTrackBarTextureLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTextureLOD.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="TrackBarOptionsTextureLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TrackBarOptionsTextureLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 294</value>
+  </data>
+  <data name="TrackBarOptionsTextureLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsTextureLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>89</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTextureLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsTextureLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTextureLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTextureLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTextureLOD.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="LblTrackBarTerrainValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarTerrainValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarTerrainValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>980, 384</value>
+  </data>
+  <data name="LblTrackBarTerrainValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarTerrainValue.TabIndex" type="System.Int32, mscorlib">
+    <value>94</value>
+  </data>
+  <data name="LblTrackBarTerrainValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainValue.Name" xml:space="preserve">
+    <value>LblTrackBarTerrainValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainValue.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="LblTrackBarTerrainLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarTerrainLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarTerrainLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 356</value>
+  </data>
+  <data name="LblTrackBarTerrainLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 15</value>
+  </data>
+  <data name="LblTrackBarTerrainLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>93</value>
+  </data>
+  <data name="LblTrackBarTerrainLOD.Text" xml:space="preserve">
+    <value>Terrain Detail</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainLOD.Name" xml:space="preserve">
+    <value>LblTrackBarTerrainLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarTerrainLOD.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="TrackBarOptionsTerrainLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TrackBarOptionsTerrainLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 384</value>
+  </data>
+  <data name="TrackBarOptionsTerrainLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsTerrainLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>92</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTerrainLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsTerrainLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTerrainLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTerrainLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsTerrainLOD.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="LblTrackBarDecalValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarDecalValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarDecalValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>980, 473</value>
+  </data>
+  <data name="LblTrackBarDecalValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="LblTrackBarDecalValue.TabIndex" type="System.Int32, mscorlib">
+    <value>97</value>
+  </data>
+  <data name="LblTrackBarDecalValue.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalValue.Name" xml:space="preserve">
+    <value>LblTrackBarDecalValue</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalValue.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="LblTrackBarDecalLOD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LblTrackBarDecalLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LblTrackBarDecalLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 445</value>
+  </data>
+  <data name="LblTrackBarDecalLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 15</value>
+  </data>
+  <data name="LblTrackBarDecalLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>96</value>
+  </data>
+  <data name="LblTrackBarDecalLOD.Text" xml:space="preserve">
+    <value>Decal Detail</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalLOD.Name" xml:space="preserve">
+    <value>LblTrackBarDecalLOD</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LblTrackBarDecalLOD.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="TrackBarOptionsDecalLOD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TrackBarOptionsDecalLOD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 473</value>
+  </data>
+  <data name="TrackBarOptionsDecalLOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="TrackBarOptionsDecalLOD.TabIndex" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsDecalLOD.Name" xml:space="preserve">
+    <value>TrackBarOptionsDecalLOD</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsDecalLOD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsDecalLOD.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TrackBarOptionsDecalLOD.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>980, 565</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Ultra High</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 537</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 15</value>
+  </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Shader Detail</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="trackBar5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="trackBar5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>822, 565</value>
+  </data>
+  <data name="trackBar5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 45</value>
+  </data>
+  <data name="trackBar5.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
+  </data>
+  <data name="&gt;&gt;trackBar5.Name" xml:space="preserve">
+    <value>trackBar5</value>
+  </data>
+  <data name="&gt;&gt;trackBar5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;trackBar5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1154, 801</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4750,7 +6258,16 @@ verbuggt und sollte daher nicht verwendet werden!</value>
         //////////////////////////////////////////////////8=
 </value>
   </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Spiele-Einstellungen anpassen</value>
+    <value>Launcher and Game Settings</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>OptionsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

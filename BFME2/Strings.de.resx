@@ -123,6 +123,13 @@
   <data name="BtnInstall.TextLaunch" xml:space="preserve">
     <value>SPIEL STARTEN</value>
   </data>
+  <data name="Error.ExternalInstallerCanceled.Text" xml:space="preserve">
+    <value>Ein Externes Setup, welches für diese Mod nötig ist, wurde abgebrochen.
+Der Launcher setzt das Spiel daher wieder auf 1.06 zurück.</value>
+  </data>
+  <data name="Error.ExternalInstallerCanceled.Title" xml:space="preserve">
+    <value>Externes Installationsprogramm abgebrochen</value>
+  </data>
   <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
     <value>Spiel patchen und aufräumen...</value>
   </data>

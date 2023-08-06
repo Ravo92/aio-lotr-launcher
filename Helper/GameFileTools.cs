@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System.ComponentModel;
 using SevenZipExtractor;
-using System.Reflection;
 
 namespace Helper
 {
@@ -24,7 +23,7 @@ namespace Helper
             try
             {
                 // Try deserializing the JSON file from remote into local GameFileDictionary class objects
-                //json = await DownloadJSONFile();
+                json = await DownloadJSONFile();
                 _gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
             }
             catch (Exception ex)
@@ -107,7 +106,7 @@ namespace Helper
             }
         }
 
-        public Task ExtractFile(string pathtoZIPFile, string ZIPFileName, string gameInstallPath, IProgress<ProgressHelper> extractProgress, bool hasExternalClient = false)
+        public Task ExtractFile(string pathtoZIPFile, string ZIPFileName, string gameInstallPath, IProgress<ProgressHelper> extractProgress, bool hasExternalInstaller = false)
         {
             try
             {
@@ -131,7 +130,7 @@ namespace Helper
                             EntryFilename = entry.FileName;
                             extractProgress.Report(new ProgressHelper() { CurrentFileName = EntryFilename, CurrentlyExtractedFileCount = counter, TotalArchiveFileCount = archiveFile.Entries.Count });
 
-                            if (hasExternalClient)
+                            if (hasExternalInstaller)
                             {
                                 entry.Extract(Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, Path.GetFileNameWithoutExtension(ZIPFileName), entry.FileName));
                             }

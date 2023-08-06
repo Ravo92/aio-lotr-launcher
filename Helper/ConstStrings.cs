@@ -62,6 +62,7 @@ namespace Helper
         public const string C_LOGFILE_PATCHMODDETECTION_NAME = "PatchModDetection.log";
         public const string C_LOGFILE_REPAIRFILE_NAME = "RepairFile.log";
         public const string C_LOGFILE_SHORTCUTS_NAME = "ShortCuts.log";
+        public const string C_LOGFILE_REGISTRY_NAME = "RegistryTools.log";
         public const string C_LOGFILE_ZIPFILE_NAME = "ZIPFile.log";
         public const string C_LOGFILE_RESTARTER_NAME = "Restarter.log";
         public const string C_LOGFILE_WEBVIEW2_NAME = "WebView2.log";

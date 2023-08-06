@@ -50,6 +50,20 @@ namespace Helper
             };
         }
 
+        public static string ReadRegKey(string key, string value)
+        {
+            try
+            {
+                using RegistryKey? registryPath = Registry.LocalMachine.OpenSubKey(key);
+                return registryPath?.GetValue(value)?.ToString() ?? ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerRegistryTools.Error(ex, "");
+                return ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND;
+            }
+        }
+
         public static string GameLanguage(string BFMEGameVersion)
         {
             return BFMEGameVersion switch
