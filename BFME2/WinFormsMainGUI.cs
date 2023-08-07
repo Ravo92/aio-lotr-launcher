@@ -163,9 +163,10 @@ namespace PatchLauncher
 
                     PanelPlaceholder.Visible = false;
                     LaunchGameToolStripMenuItem.Enabled = false;
-                    OptionsToolStripMenuItem.Enabled = false;
+                    SettingsToolStripMenuItem.Enabled = false;
                     RepairGameToolStripMenuItem.Enabled = false;
                     MenuItemLaunchGame.Enabled = false;
+                    LblModExplanation.Visible = false;
 
                     Update();
                 }
@@ -317,7 +318,8 @@ namespace PatchLauncher
                         await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URL, mainPack.MD5);
                         await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URL, languagePackSettings.MD5);
 
-                        patchPack.Version = Settings.Default.PatchVersionInstalled;
+                        Settings.Default.PatchVersionInstalled = patchPack.Version;
+                        Settings.Default.IsGameInstalled = true;
                         Settings.Default.Save();
 
                         if (Settings.Default.CreateDesktopShortcut)
@@ -332,6 +334,7 @@ namespace PatchLauncher
 
                         taskPrepareInstallFolder.Dispose();
 
+                        SettingsToolStripMenuItem.Enabled = true;
                         await TurnPatchesAndModsViewOn();
                     }
                 }

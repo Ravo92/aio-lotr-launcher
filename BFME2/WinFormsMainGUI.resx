@@ -465,21 +465,6 @@
   <data name="PanelPlaceholder.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
-  <data name="PiBVersion106.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="PiBVersion106.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="PiBVersion106.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 200</value>
-  </data>
-  <data name="PiBVersion106.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="PiBVersion106.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
   <data name="&gt;&gt;PiBVersion106.Name" xml:space="preserve">
     <value>PiBVersion106</value>
   </data>
@@ -519,6 +504,33 @@
   <data name="&gt;&gt;PanelPlaceholder.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="PiBVersion106.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBVersion106.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="PiBVersion106.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 200</value>
+  </data>
+  <data name="PiBVersion106.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBVersion106.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.Name" xml:space="preserve">
+    <value>PiBVersion106</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.Parent" xml:space="preserve">
+    <value>PanelPlaceholder</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion106.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="LblModExplanation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -552,6 +564,15 @@
   <metadata name="NotifyContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>169, 17</value>
   </metadata>
+  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 48</value>
+  </data>
+  <data name="&gt;&gt;NotifyContextMenu.Name" xml:space="preserve">
+    <value>NotifyContextMenu</value>
+  </data>
+  <data name="&gt;&gt;NotifyContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
@@ -563,15 +584,6 @@
   </data>
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Close the Launcher</value>
-  </data>
-  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 48</value>
-  </data>
-  <data name="&gt;&gt;NotifyContextMenu.Name" xml:space="preserve">
-    <value>NotifyContextMenu</value>
-  </data>
-  <data name="&gt;&gt;NotifyContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PibMute.Location" type="System.Drawing.Point, System.Drawing">
     <value>1213, 35</value>
@@ -600,6 +612,36 @@
   <metadata name="WinFormsMainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>312, 17</value>
   </metadata>
+  <data name="WinFormsMainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1280, 24</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Name" xml:space="preserve">
+    <value>WinFormsMainMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="LaunchGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 22</value>
   </data>
@@ -615,16 +657,16 @@
   <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
   </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
+  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
   </data>
-  <data name="GameSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
   </data>
-  <data name="GameSettingsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="SettingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
@@ -657,11 +699,11 @@
   <data name="LauncherStartmenuShortcutToolStripMenuItem.Text" xml:space="preserve">
     <value>Use Launcher Shortcut in Startmenu</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
+  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 20</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Options</value>
+  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
+    <value>Advanced</value>
   </data>
   <data name="OpenLauncherDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>268, 22</value>
@@ -714,11 +756,11 @@
   <data name="RepairGameToolStripMenuItem.Text" xml:space="preserve">
     <value>Analyze Game Files and Repair Game</value>
   </data>
-  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 20</value>
+  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
   </data>
-  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
-    <value>Advanced</value>
+  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="CreditsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
@@ -731,36 +773,6 @@
   </data>
   <data name="ChangelogLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Changelog Launcher</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 24</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Name" xml:space="preserve">
-    <value>WinFormsMainMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="PBarActualFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 664</value>
@@ -9886,10 +9898,10 @@
   <data name="&gt;&gt;OptionsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GameSettingsToolStripMenuItem.Name" xml:space="preserve">
-    <value>GameSettingsToolStripMenuItem</value>
+  <data name="&gt;&gt;SettingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>SettingsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;GameSettingsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;SettingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">

@@ -59,7 +59,7 @@ namespace PatchLauncher
             toolStripSeparator1 = new ToolStripSeparator();
             ExitToolStripMenuItem = new ToolStripMenuItem();
             OptionsToolStripMenuItem = new ToolStripMenuItem();
-            GameSettingsToolStripMenuItem = new ToolStripMenuItem();
+            SettingsToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             GameDesktopShortcutToolStripMenuItem = new ToolStripMenuItem();
             GameStartmenuShortcutsToolStripMenuItem = new ToolStripMenuItem();
@@ -289,15 +289,15 @@ namespace PatchLauncher
             // 
             // OptionsToolStripMenuItem
             // 
-            OptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { GameSettingsToolStripMenuItem, toolStripSeparator5, GameDesktopShortcutToolStripMenuItem, GameStartmenuShortcutsToolStripMenuItem, toolStripSeparator6, LauncherDesktopShortcutToolStripMenuItem, LauncherStartmenuShortcutToolStripMenuItem });
+            OptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { SettingsToolStripMenuItem, toolStripSeparator5, GameDesktopShortcutToolStripMenuItem, GameStartmenuShortcutsToolStripMenuItem, toolStripSeparator6, LauncherDesktopShortcutToolStripMenuItem, LauncherStartmenuShortcutToolStripMenuItem });
             OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem";
             resources.ApplyResources(OptionsToolStripMenuItem, "OptionsToolStripMenuItem");
             // 
-            // GameSettingsToolStripMenuItem
+            // SettingsToolStripMenuItem
             // 
-            GameSettingsToolStripMenuItem.Name = "GameSettingsToolStripMenuItem";
-            resources.ApplyResources(GameSettingsToolStripMenuItem, "GameSettingsToolStripMenuItem");
-            GameSettingsToolStripMenuItem.Click += SettingsToolStripMenuItem_Click;
+            SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
+            resources.ApplyResources(SettingsToolStripMenuItem, "SettingsToolStripMenuItem");
+            SettingsToolStripMenuItem.Click += SettingsToolStripMenuItem_Click;
             // 
             // toolStripSeparator5
             // 
@@ -509,7 +509,7 @@ namespace PatchLauncher
         private ToolStripMenuItem LaunchGameToolStripMenuItem;
         private ToolStripMenuItem ExitToolStripMenuItem;
         private ToolStripMenuItem OptionsToolStripMenuItem;
-        private ToolStripMenuItem GameSettingsToolStripMenuItem;
+        private ToolStripMenuItem SettingsToolStripMenuItem;
         private ToolStripMenuItem AdvancedToolStripMenuItem;
         private ToolStripMenuItem OpenGameDirectoryToolStripMenuItem;
         private ToolStripMenuItem OpenLauncherDirectoryToolStripMenuItem;
