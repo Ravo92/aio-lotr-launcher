@@ -119,16 +119,22 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="LblChooseDir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 15</value>
+    <value>325, 15</value>
   </data>
   <data name="LblChooseDir.Text" xml:space="preserve">
-    <value>Wo Soll die "Schlacht um Mittelerde" installiert werden?</value>
+    <value>Wohin soll die "Schlacht um Mittelerde II" installiert werden?</value>
   </data>
   <data name="BtnChoose.Text" xml:space="preserve">
     <value>AUSWÄHLEN...</value>
   </data>
   <data name="BtnAccept.Text" xml:space="preserve">
     <value>BESTÄTIGEN</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>344, 167</value>
+  </data>
+  <data name="CmbSelectGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 23</value>
   </data>
   <data name="LblSelectGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 15</value>

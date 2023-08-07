@@ -150,13 +150,13 @@
     <value>12, 4</value>
   </data>
   <data name="LblChooseDir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 15</value>
+    <value>380, 15</value>
   </data>
   <data name="LblChooseDir.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="LblChooseDir.Text" xml:space="preserve">
-    <value>Where do you want to install the game "The Battle for Middle-earth"?</value>
+    <value>Where do you want to install the game "The Battle for Middle-earth II"?</value>
   </data>
   <data name="&gt;&gt;LblChooseDir.Name" xml:space="preserve">
     <value>LblChooseDir</value>
@@ -235,10 +235,10 @@
     <value>Flat</value>
   </data>
   <data name="CmbSelectGameLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 167</value>
+    <value>344, 167</value>
   </data>
   <data name="CmbSelectGameLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 23</value>
+    <value>230, 23</value>
   </data>
   <data name="CmbSelectGameLanguage.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>

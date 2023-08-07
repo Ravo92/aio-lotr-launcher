@@ -160,7 +160,7 @@ namespace Restarter
         /// <returns>Returns the selected Game Launcher as an integer value</returns>
         private static int GetLastSelectedGameLauncher()
         {
-            int selectedGame = 1;
+            int selectedGame = 2;
 
             try
             {

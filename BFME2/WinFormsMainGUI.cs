@@ -160,6 +160,14 @@ namespace PatchLauncher
                     Settings.Default.IsGameInstalled = false;
                     BtnInstall.Text = Strings.BtnInstall_TextInstall;
                     Settings.Default.Save();
+
+                    PanelPlaceholder.Visible = false;
+                    LaunchGameToolStripMenuItem.Enabled = false;
+                    OptionsToolStripMenuItem.Enabled = false;
+                    RepairGameToolStripMenuItem.Enabled = false;
+                    MenuItemLaunchGame.Enabled = false;
+
+                    Update();
                 }
                 else
                 {
@@ -871,6 +879,7 @@ namespace PatchLauncher
 
             LaunchGameToolStripMenuItem.Enabled = true;
             RepairGameToolStripMenuItem.Enabled = true;
+            MenuItemLaunchGame.Enabled = true;
 
             PanelPlaceholder.Visible = true;
 
@@ -893,6 +902,7 @@ namespace PatchLauncher
 
             LaunchGameToolStripMenuItem.Enabled = false;
             RepairGameToolStripMenuItem.Enabled = false;
+            MenuItemLaunchGame.Enabled = false;
 
             Update();
         }

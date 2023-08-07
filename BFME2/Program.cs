@@ -61,7 +61,7 @@ namespace PatchLauncher
                     case "de":
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
 
-                        if (RegistryService.ReadRegKeyBFME2("locale") == "de")
+                        if (RegistryService.ReadRegKeyBFME2("locale") == "de" || RegistryService.ReadRegKeyBFME2("locale") == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                         {
                             Settings.Default.InstalledLanguageISOCode = "de";
                             Settings.Default.Save();
@@ -77,7 +77,7 @@ namespace PatchLauncher
                     default:
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
 
-                        if (RegistryService.ReadRegKeyBFME2("locale") == "en_uk")
+                        if (RegistryService.ReadRegKeyBFME2("locale") == "en_uk" || RegistryService.ReadRegKeyBFME2("locale") == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                         {
                             Settings.Default.InstalledLanguageISOCode = "en_uk";
                             Settings.Default.Save();
