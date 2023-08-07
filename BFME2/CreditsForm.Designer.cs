@@ -40,7 +40,7 @@
             Wv2Credits.DefaultBackgroundColor = System.Drawing.Color.White;
             resources.ApplyResources(Wv2Credits, "Wv2Credits");
             Wv2Credits.Name = "Wv2Credits";
-            Wv2Credits.Source = new System.Uri("https://www.google.com", System.UriKind.Absolute);
+            Wv2Credits.Source = new System.Uri("https://ravo92.github.io/creditspage/index.html", System.UriKind.Absolute);
             Wv2Credits.ZoomFactor = 1D;
             // 
             // BtnClose
