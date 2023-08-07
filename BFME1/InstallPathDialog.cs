@@ -86,7 +86,7 @@ namespace PatchLauncher
                 ChkStartMenuShortcut.Image = Helper.Properties.Resources.BFME1CHK_Unselected;
             }
 
-            PibLanguageSupport.Image = Helper.Properties.Resources.languageSupportTransparent;
+            PibLanguageSupport.Image = Helper.Properties.Resources.BFME1LanguageSupportTransparent;
             PibPathBorder.Image = Helper.Properties.Resources.BFME1BorderRectangleSmallest;
             PibLanguageSupport.BackColor = Color.Transparent;
             BackgroundImage = Helper.Properties.Resources.BGMap;

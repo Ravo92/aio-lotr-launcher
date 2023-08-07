@@ -253,6 +253,16 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BFME1LanguageSupportTransparent {
+            get {
+                object obj = ResourceManager.GetObject("BFME1LanguageSupportTransparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BFME1LoadingBorder {
             get {
                 object obj = ResourceManager.GetObject("BFME1LoadingBorder", resourceCulture);
@@ -433,6 +443,16 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BFME2LanguageSupportTransparent {
+            get {
+                object obj = ResourceManager.GetObject("BFME2LanguageSupportTransparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BFME2LoadingBorder {
             get {
                 object obj = ResourceManager.GetObject("BFME2LoadingBorder", resourceCulture);
@@ -546,16 +566,6 @@ namespace Helper.Properties {
         public static System.Drawing.Bitmap LanguageSupport {
             get {
                 object obj = ResourceManager.GetObject("LanguageSupport", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap languageSupportTransparent {
-            get {
-                object obj = ResourceManager.GetObject("languageSupportTransparent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

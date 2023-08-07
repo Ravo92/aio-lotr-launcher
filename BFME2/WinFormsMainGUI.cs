@@ -141,6 +141,12 @@ namespace PatchLauncher
                     if (version.Value.Version == Settings.Default.PatchVersionInstalled)
                     {
                         patchesButtonsBFME2.SelectedIconVisible = true;
+                        if (RegistryService.ReadRegKey(version.Value.RegistryPathForInstalledProgram, version.Value.RegistryKeyName) != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                        {
+                            Settings.Default.ActivePatchOrModExternalProgramFolderPath = Path.Combine(RegistryService.ReadRegKey(version.Value.RegistryPathForInstalledProgram, version.Value.RegistryKeyName), version.Value.ThirdPartyToolExecutableName);
+                            Settings.Default.ActivePatchOrModExternalProgramLaunchAbility = version.Value.ExternalInstallerHasLaunchAbility;
+                        }
+                        Settings.Default.Save();
                     }
 
                     UpdatePanelButtonActiveState();
@@ -149,16 +155,18 @@ namespace PatchLauncher
                     PanelPlaceholder.Controls.Add(patchesButtonsBFME2);
                 }
 
-                if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKeyBFME2("path"))) || RegistryService.ReadRegKeyBFME2("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKeyBFME2("path"), ConstStrings.C_BFME2_MAIN_GAME_FILE)))
+                if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKeyBFME2("path"))) || RegistryService.ReadRegKeyBFME2("path") == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(RegistryService.ReadRegKeyBFME2("path"), ConstStrings.C_BFME2_MAIN_GAME_FILE)))
                 {
                     Settings.Default.IsGameInstalled = false;
                     BtnInstall.Text = Strings.BtnInstall_TextInstall;
+                    Settings.Default.Save();
                 }
                 else
                 {
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKeyBFME2("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage(AssemblyNameHelper.BFMELauncherGameName);
+                    Settings.Default.Save();
                 }
 
                 if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), RegistryService.ReadRegKeyBFME2("displayName")))

@@ -172,6 +172,9 @@
   <data name="BFME1CHK_UnselectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME1CHK_UnselectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BFME1LanguageSupportTransparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME1LanguageSupportTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BFME1LoadingBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME1LoadingBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -226,6 +229,9 @@
   <data name="BFME2CHK_UnselectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME2CHK_UnselectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BFME2LanguageSupportTransparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME2LanguageSupportTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BFME2LoadingBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME2LoadingBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -264,9 +270,6 @@
   </data>
   <data name="LanguageSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LanguageSupport.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="languageSupportTransparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\languageSupportTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="loadingRing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loadingRing.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
