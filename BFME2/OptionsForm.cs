@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -34,6 +35,7 @@ namespace PatchLauncher
         string FlagResolution = "1024 768";
 
         string FlagSelectedIsoCode = "en_uk";
+        string FlagHighAudio = "High";
         string FlagUseEAX = "yes";
 
         bool FlagWindowed = Settings.Default.StartGameWindowed;
@@ -92,7 +94,12 @@ namespace PatchLauncher
             BtnDefault.ForeColor = Color.FromArgb(168, 190, 98);
 
             //Label-Styles
-            LblSettingsTitle.Font = FontHelper.GetFont(1, 20);
+
+            if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "de")
+                LblSettingsTitle.Font = FontHelper.GetFont(1, 17);
+            else
+                LblSettingsTitle.Font = FontHelper.GetFont(1, 20);
+
             LblSettingsTitle.ForeColor = Color.FromArgb(168, 190, 98);
             LblSettingsTitle.BackColor = Color.Black;
 
@@ -243,6 +250,10 @@ namespace PatchLauncher
             LblEAX.ForeColor = Color.FromArgb(168, 190, 98);
             LblEAX.BackColor = Color.Transparent;
 
+            LblHighAudio.Font = FontHelper.GetFont(0, 16);
+            LblHighAudio.ForeColor = Color.FromArgb(168, 190, 98);
+            LblHighAudio.BackColor = Color.Transparent;
+
             ///////////////////////////////////////////////////////////////////////////////////////////
 
             //Checkbox-Styles
@@ -264,6 +275,20 @@ namespace PatchLauncher
             }
 
             FlagResolution = OptionIniParser.ReadKey("Resolution", AssemblyNameHelper.BFMELauncherGameName);
+            FlagUseEAX = OptionIniParser.ReadKey("UseEAX3", AssemblyNameHelper.BFMELauncherGameName);
+            FlagHighAudio = OptionIniParser.ReadKey("AudioLOD", AssemblyNameHelper.BFMELauncherGameName);
+
+            ///////////////////////////////////////////////////////////////////////////////////////////
+
+            ChkHighAudio.FlatAppearance.BorderSize = 0;
+            ChkHighAudio.FlatStyle = FlatStyle.Flat;
+            ChkHighAudio.BackColor = Color.Transparent;
+            ChkHighAudio.ForeColor = Color.FromArgb(168, 190, 98);
+
+            if (FlagHighAudio == "High")
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+            else
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
 
             ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -271,11 +296,6 @@ namespace PatchLauncher
             ChkEAX.FlatStyle = FlatStyle.Flat;
             ChkEAX.BackColor = Color.Transparent;
             ChkEAX.ForeColor = Color.FromArgb(168, 190, 98);
-
-            if (FlagEAXFileExists)
-                FlagUseEAX = "yes";
-            else
-                FlagUseEAX = "no";
 
             if (FlagEAXFileExists && FlagUseEAX == "yes")
                 ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Selected;
@@ -451,6 +471,7 @@ namespace PatchLauncher
         {
             FlagResolution = "yes";
             FlagUseEAX = "yes";
+            FlagHighAudio = "High";
 
             ResolutionX.Text = Screen.PrimaryScreen.Bounds.Width.ToString();
             ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
@@ -492,6 +513,7 @@ namespace PatchLauncher
 
             ChkWindowed.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
             ChkEAX.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+            ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_Selected;
         }
 
         private void BtnDefault_MouseLeave(object sender, EventArgs e)
@@ -632,6 +654,7 @@ namespace PatchLauncher
             OptionIniParser.WriteKey("FixedStaticGameLOD", "UltraHigh", AssemblyNameHelper.BFMELauncherGameName);
             OptionIniParser.WriteKey("IdealStaticGameLOD", "UltraHigh", AssemblyNameHelper.BFMELauncherGameName);
             OptionIniParser.WriteKey("UseEAX3", FlagUseEAX, AssemblyNameHelper.BFMELauncherGameName);
+            OptionIniParser.WriteKey("AudioLOD", FlagHighAudio, AssemblyNameHelper.BFMELauncherGameName);
 
             //Settings-Valuations
 
@@ -679,6 +702,45 @@ namespace PatchLauncher
         #endregion
 
         #region Checkboxes for game specific settings
+
+        private void ChkHighAudio_Click(object sender, EventArgs e)
+        {
+
+            if (FlagHighAudio == "High")
+            {
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+                FlagHighAudio = "Low";
+            }
+            else
+            {
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+                FlagHighAudio = "High";
+            }
+        }
+
+        private void ChkHighAudio_MouseEnter(object sender, EventArgs e)
+        {
+            if (FlagHighAudio == "High")
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+            else
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+        }
+
+        private void ChkHighAudio_MouseLeave(object sender, EventArgs e)
+        {
+            if (FlagHighAudio == "High")
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_Selected;
+            else
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_Unselected;
+        }
+
+        private void ChkHighAudio_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (FlagHighAudio == "High")
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_SelectedHover;
+            else
+                ChkHighAudio.Image = Helper.Properties.Resources.BFME2CHK_UnselectedHover;
+        }
 
         private void ChkEAX_Click(object sender, EventArgs e)
         {
@@ -859,11 +921,6 @@ namespace PatchLauncher
             LblTrackBarDecalValue.Text = regex.Replace(graphicSettingsDecalsLOD.ToString(), " ");
 
             FlagDecalLOD = graphicSettingsDecalsLOD.ToString();
-        }
-
-        private void TrackBar5_Scroll(object sender, EventArgs e)
-        {
-
         }
     }
 }
