@@ -78,6 +78,8 @@ namespace PatchLauncher
             openReplayDirectoryToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             RepairGameToolStripMenuItem = new ToolStripMenuItem();
+            SelectGameToolStripMenuItem = new ToolStripMenuItem();
+            BFME2ToolStripMenuItem = new ToolStripMenuItem();
             AboutToolStripMenuItem = new ToolStripMenuItem();
             CreditsToolStripMenuItem = new ToolStripMenuItem();
             ChangelogLauncherToolStripMenuItem = new ToolStripMenuItem();
@@ -262,7 +264,7 @@ namespace PatchLauncher
             // 
             // WinFormsMainMenuStrip
             // 
-            WinFormsMainMenuStrip.Items.AddRange(new ToolStripItem[] { FileToolStripMenuItem, OptionsToolStripMenuItem, AdvancedToolStripMenuItem, AboutToolStripMenuItem });
+            WinFormsMainMenuStrip.Items.AddRange(new ToolStripItem[] { FileToolStripMenuItem, OptionsToolStripMenuItem, AdvancedToolStripMenuItem, SelectGameToolStripMenuItem, AboutToolStripMenuItem });
             resources.ApplyResources(WinFormsMainMenuStrip, "WinFormsMainMenuStrip");
             WinFormsMainMenuStrip.Name = "WinFormsMainMenuStrip";
             // 
@@ -408,6 +410,18 @@ namespace PatchLauncher
             resources.ApplyResources(RepairGameToolStripMenuItem, "RepairGameToolStripMenuItem");
             RepairGameToolStripMenuItem.Click += RepairGameToolStripMenuItem_Click;
             // 
+            // SelectGameToolStripMenuItem
+            // 
+            SelectGameToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { BFME2ToolStripMenuItem });
+            SelectGameToolStripMenuItem.Name = "SelectGameToolStripMenuItem";
+            resources.ApplyResources(SelectGameToolStripMenuItem, "SelectGameToolStripMenuItem");
+            // 
+            // BFME2ToolStripMenuItem
+            // 
+            BFME2ToolStripMenuItem.Name = "BFME2ToolStripMenuItem";
+            resources.ApplyResources(BFME2ToolStripMenuItem, "BFME2ToolStripMenuItem");
+            BFME2ToolStripMenuItem.Click += BFME2ToolStripMenuItem_Click;
+            // 
             // AboutToolStripMenuItem
             // 
             AboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { CreditsToolStripMenuItem, ChangelogLauncherToolStripMenuItem, ChangelogPatchToolStripMenuItem });
@@ -550,5 +564,7 @@ namespace PatchLauncher
         private ToolStripSeparator toolStripSeparator6;
         private ToolStripMenuItem LauncherStartmenuShortcutToolStripMenuItem;
         private ToolStripMenuItem ChangelogPatchToolStripMenuItem;
+        private ToolStripMenuItem SelectGameToolStripMenuItem;
+        private ToolStripMenuItem BFME2ToolStripMenuItem;
     }
 }

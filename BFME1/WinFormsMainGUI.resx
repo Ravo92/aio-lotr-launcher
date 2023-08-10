@@ -18,7 +18,7 @@
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing"">Blue</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
@@ -725,6 +725,18 @@
   </data>
   <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
     <value>Advanced</value>
+  </data>
+  <data name="BFME2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="BFME2ToolStripMenuItem.Text" xml:space="preserve">
+    <value>The Battle for Middle-earth II ™</value>
+  </data>
+  <data name="SelectGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 20</value>
+  </data>
+  <data name="SelectGameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Select Game</value>
   </data>
   <data name="CreditsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 22</value>
@@ -9848,7 +9860,7 @@
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Bfme 2.22 Launcher - The Battle for Middle-earth (tm)</value>
+    <value>Bfme 2.22 Launcher - The Battle for Middle-earth ™</value>
   </data>
   <data name="&gt;&gt;ToolTip.Name" xml:space="preserve">
     <value>ToolTip</value>
@@ -10010,6 +10022,18 @@
     <value>RepairGameToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;RepairGameToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SelectGameToolStripMenuItem.Name" xml:space="preserve">
+    <value>SelectGameToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;SelectGameToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BFME2ToolStripMenuItem.Name" xml:space="preserve">
+    <value>BFME2ToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;BFME2ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AboutToolStripMenuItem.Name" xml:space="preserve">

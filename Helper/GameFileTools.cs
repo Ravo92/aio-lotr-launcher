@@ -156,7 +156,7 @@ namespace Helper
 
         private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
         {
-            if (_DownloadProgressChangedLimiter < 2048)
+            if (_DownloadProgressChangedLimiter < 1024)
             {
                 _DownloadProgressChangedLimiter++;
             }

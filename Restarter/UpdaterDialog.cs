@@ -63,7 +63,7 @@ namespace Restarter
                 }
                 else
                 {
-                    Thread.Sleep(1500);
+                    Thread.Sleep(1000);
                     Close();
                 }
             }

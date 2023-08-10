@@ -116,20 +116,20 @@ namespace PatchLauncher
             LblLauncherLanguage.BackColor = Color.Transparent;
 
             LblLauncherVersionTitle.Font = FontHelper.GetFont(0, 16);
-            LblLauncherVersionTitle.ForeColor = Color.FromArgb(24, 63, 20);
+            LblLauncherVersionTitle.ForeColor = Color.FromArgb(168, 190, 98);
             LblLauncherVersionTitle.BackColor = Color.Transparent;
 
             LblPatchVersionTitle.Font = FontHelper.GetFont(0, 16);
-            LblPatchVersionTitle.ForeColor = Color.FromArgb(24, 63, 20);
+            LblPatchVersionTitle.ForeColor = Color.FromArgb(168, 190, 98);
             LblPatchVersionTitle.BackColor = Color.Transparent;
 
             LblLauncherVersion.Text = Assembly.GetEntryAssembly()!.GetName().Version!.ToString();
             LblLauncherVersion.Font = FontHelper.GetFont(0, 14);
-            LblLauncherVersion.ForeColor = Color.FromArgb(24, 63, 20);
+            LblLauncherVersion.ForeColor = Color.FromArgb(168, 190, 98);
             LblLauncherVersion.BackColor = Color.Transparent;
 
             LblPatchVersion.Font = FontHelper.GetFont(0, 14);
-            LblPatchVersion.ForeColor = Color.FromArgb(24, 63, 20);
+            LblPatchVersion.ForeColor = Color.FromArgb(168, 190, 98);
             LblPatchVersion.BackColor = Color.Transparent;
 
             LblWindowed.Font = FontHelper.GetFont(0, 16);

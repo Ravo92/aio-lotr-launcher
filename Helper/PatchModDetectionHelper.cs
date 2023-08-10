@@ -2,7 +2,7 @@
 {
     public class PatchModDetectionHelper
     {
-        public static Task DeletePatch106(string assemblyName)
+        public static Task DeletePatch106ForBFME1(string assemblyName)
         {
             try
             {
@@ -30,7 +30,7 @@
             return Task.CompletedTask;
         }
 
-        public static Task DeletePatch222Files(string assemblyName)
+        public static Task DeletePatch222FilesForBFME1(string assemblyName)
         {
             try
             {
@@ -47,6 +47,44 @@
                 }
 
                 File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_BFME1_103_ASSET_FILE), Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_MAIN_ASSET_FILE));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerPatchModDectection.Error(ex, "");
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public static Task MovePatch109FilesForBFME2(string assemblyName, string patchModName, bool removeFromGameDir)
+        {
+            string launcherDownloadFolderPatchModPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, patchModName);
+            try
+            {
+
+
+                if (removeFromGameDir)
+                {
+                    string[] get109PatchFiles = Directory.GetFiles(RegistryService.GameInstallPath(assemblyName), "*BT2DC*.*");
+                    if (get109PatchFiles.Any())
+                    {
+                        foreach (var file in get109PatchFiles)
+                        {
+                            File.Move(Path.Combine(file), Path.Combine(launcherDownloadFolderPatchModPath, Path.GetFileName(file)), true);
+                        }
+                    }
+                }
+                else
+                {
+                    string[] get109PatchFiles = Directory.GetFiles(launcherDownloadFolderPatchModPath, "*BT2DC*.*");
+                    if (get109PatchFiles.Any())
+                    {
+                        foreach (var file in get109PatchFiles)
+                        {
+                            File.Move(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

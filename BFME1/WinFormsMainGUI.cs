@@ -38,10 +38,12 @@ namespace PatchLauncher
             LblWorkerFileName.Font = FontHelper.GetFont(0, 16); ;
             LblWorkerFileName.ForeColor = Color.FromArgb(192, 145, 69);
             LblWorkerFileName.BackColor = Color.Transparent;
+            LblWorkerFileName.Text = "";
 
             LblWorkerIOTask.Font = FontHelper.GetFont(0, 16); ;
             LblWorkerIOTask.ForeColor = Color.FromArgb(192, 145, 69);
             LblWorkerIOTask.BackColor = Color.Transparent;
+            LblWorkerIOTask.Text = "";
 
             LabelLoadingPanel.Font = FontHelper.GetFont(0, 20);
             LabelLoadingPanel.ForeColor = Color.FromArgb(192, 145, 69);
@@ -284,8 +286,8 @@ namespace PatchLauncher
 
             try
             {
-                await PatchModDetectionHelper.DeletePatch106(AssemblyNameHelper.BFMELauncherGameName);
-                await PatchModDetectionHelper.DeletePatch222Files(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                 Settings.Default.PatchVersionInstalled = 103;
                 Settings.Default.SelectedOlderPatch = true;
@@ -310,8 +312,8 @@ namespace PatchLauncher
 
             if (Settings.Default.PatchVersionInstalled == version)
             {
-                await PatchModDetectionHelper.DeletePatch106(AssemblyNameHelper.BFMELauncherGameName);
-                await PatchModDetectionHelper.DeletePatch222Files(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                 Settings.Default.PatchVersionInstalled = 103;
                 Settings.Default.Save();
@@ -321,8 +323,8 @@ namespace PatchLauncher
             {
                 try
                 {
-                    await PatchModDetectionHelper.DeletePatch106(AssemblyNameHelper.BFMELauncherGameName);
-                    await PatchModDetectionHelper.DeletePatch222Files(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                     await InstallUpdatRepairRoutine(patchPack106.FileName, patchPack106.URL, patchPack106.MD5);
 
@@ -362,8 +364,8 @@ namespace PatchLauncher
 
             if (Settings.Default.PatchVersionInstalled == version)
             {
-                await PatchModDetectionHelper.DeletePatch106(AssemblyNameHelper.BFMELauncherGameName);
-                await PatchModDetectionHelper.DeletePatch222Files(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                 Settings.Default.PatchVersionInstalled = 103;
                 UpdatePanelButtonActiveState();
@@ -372,8 +374,8 @@ namespace PatchLauncher
             {
                 try
                 {
-                    await PatchModDetectionHelper.DeletePatch106(AssemblyNameHelper.BFMELauncherGameName);
-                    await PatchModDetectionHelper.DeletePatch222Files(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                     await InstallUpdatRepairRoutine(patchPack222.FileName, patchPack222.URL, patchPack222.MD5);
 
@@ -565,7 +567,9 @@ namespace PatchLauncher
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
                 GameFileTools gameFileTools = new();
                 await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrl, progressHandlerDownload);
-                LblWorkerFileName.Text = Strings.Info_PleaseWait;
+                LblWorkerFileName.Text = "";
+                LblWorkerIOTask.Text = "";
+                Update();
                 string calculatedMD5Value = MD5Tools.CalculateMD5(fullPathToZIPFile);
 
                 if (calculatedMD5Value == CorrectMD5HashValue)
@@ -644,15 +648,6 @@ namespace PatchLauncher
                 e.Cancel = true;
             }
 
-            if (Settings.Default.PatchVersionInstalled < Settings.Default.LatestPatchVersion)
-            {
-                Settings.Default.SelectedOlderPatch = true;
-            }
-            else
-            {
-                Settings.Default.SelectedOlderPatch = false;
-            }
-
             Settings.Default.Save();
         }
 
@@ -696,6 +691,7 @@ namespace PatchLauncher
             BtnInstall.Enabled = false;
             LaunchGameToolStripMenuItem.Enabled = false;
             RepairGameToolStripMenuItem.Enabled = false;
+            SelectGameToolStripMenuItem.Enabled = false;
             PanelPlaceholder.Visible = false;
             soundPlayerHelper.StopTheme();
             Update();
@@ -715,6 +711,7 @@ namespace PatchLauncher
             BtnInstall.Enabled = true;
             LaunchGameToolStripMenuItem.Enabled = true;
             RepairGameToolStripMenuItem.Enabled = true;
+            SelectGameToolStripMenuItem.Enabled = true;
             PanelPlaceholder.Visible = true;
             Update();
 
@@ -757,6 +754,17 @@ namespace PatchLauncher
         private void OpenLauncherLogfileDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", Path.Combine(Application.StartupPath, ConstStrings.C_LOGFOLDER_NAME));
+        }
+
+        private void BFME2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process _restarterProcess = new();
+            _restarterProcess.StartInfo.FileName = ConstStrings.C_RESTARTEREXE_FILENAME;
+            _restarterProcess.StartInfo.Arguments = "--restart --BFME2Launcher";
+            _restarterProcess.StartInfo.WorkingDirectory = Application.StartupPath;
+            _restarterProcess.StartInfo.UseShellExecute = true;
+            _restarterProcess.Start();
+            Application.Exit();
         }
 
         private void CreditsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1042,6 +1050,8 @@ namespace PatchLauncher
 
             LaunchGameToolStripMenuItem.Enabled = true;
             RepairGameToolStripMenuItem.Enabled = true;
+            SelectGameToolStripMenuItem.Enabled = true;
+            MenuItemLaunchGame.Enabled = true;
 
             if (!Settings.Default.UseBetaChannel)
                 PanelPlaceholder.Visible = true;
@@ -1069,6 +1079,8 @@ namespace PatchLauncher
 
             LaunchGameToolStripMenuItem.Enabled = false;
             RepairGameToolStripMenuItem.Enabled = false;
+            SelectGameToolStripMenuItem.Enabled = false;
+            MenuItemLaunchGame.Enabled = false;
 
             Update();
         }

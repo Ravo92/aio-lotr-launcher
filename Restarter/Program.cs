@@ -53,16 +53,19 @@ namespace Restarter
                             {
                                 if (args[1] == "--BFME1Launcher")
                                 {
+                                    SetLastSelectedGameLauncher(1);
                                     StartBFME1Launcher("--official");
                                 }
 
                                 if (args[1] == "--BFME2Launcher")
                                 {
+                                    SetLastSelectedGameLauncher(2);
                                     StartBFME2Launcher("--official");
                                 }
 
                                 if (args[1] == "--BFME25Launcher")
                                 {
+                                    SetLastSelectedGameLauncher(25);
                                     StartBFME25Launcher("--official");
                                 }
                             }
@@ -72,16 +75,19 @@ namespace Restarter
 
                             if (GetLastSelectedGameLauncher() == 1)
                             {
+                                SetLastSelectedGameLauncher(1);
                                 StartBFME1Launcher("--showLauncherUpdateLog");
                             }
 
                             else if (GetLastSelectedGameLauncher() == 2)
                             {
+                                SetLastSelectedGameLauncher(2);
                                 StartBFME2Launcher("--showLauncherUpdateLog");
                             }
 
                             else if (GetLastSelectedGameLauncher() == 25)
                             {
+                                SetLastSelectedGameLauncher(25);
                                 StartBFME25Launcher("--showLauncherUpdateLog");
                             }
                             break;
@@ -160,28 +166,31 @@ namespace Restarter
         /// <returns>Returns the selected Game Launcher as an integer value</returns>
         private static int GetLastSelectedGameLauncher()
         {
-            int selectedGame = 2;
-
             try
             {
-                byte[] selectedGameAsByteArray = new UTF8Encoding(true).GetBytes(selectedGame.ToString());
-
                 if (File.Exists(Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE)))
                 {
-                    selectedGame = Convert.ToInt32(File.ReadAllText(@Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE), Encoding.UTF8));
-                }
-                else
-                {
-                    using FileStream _fileStream = File.Create(Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE));
-                    _fileStream.Write(selectedGameAsByteArray);
+                    int selectedGame = Convert.ToInt32(File.ReadAllText(@Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE), Encoding.UTF8));
+                    return selectedGame;
                 }
             }
             catch (Exception ex)
             {
                 LogHelper.LoggerRestarter.Error(ex, "");
             }
+            return 1;
+        }
 
-            return selectedGame;
+        private static void SetLastSelectedGameLauncher(int selectedGame)
+        {
+            try
+            {
+                File.WriteAllText(Path.Combine(programPath, ConstStrings.C_LAUNCHERSELECTEDINFOFILE), selectedGame.ToString());
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerRestarter.Error(ex, "");
+            }
         }
     }
 }

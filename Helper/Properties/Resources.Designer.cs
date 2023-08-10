@@ -313,6 +313,26 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BFME25PatchModBG {
+            get {
+                object obj = ResourceManager.GetObject("BFME25PatchModBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25PatchModBG201 {
+            get {
+                object obj = ResourceManager.GetObject("BFME25PatchModBG201", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BFME2BGDefault {
             get {
                 object obj = ResourceManager.GetObject("BFME2BGDefault", resourceCulture);

@@ -52,6 +52,9 @@
     <Compile Update="UserControls\Patch106Button.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\PatchesButtonsBFME25.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\PatchesButtonsBFME2.cs">
       <SubType>UserControl</SubType>
     </Compile>
