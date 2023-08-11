@@ -190,11 +190,62 @@
   <data name="BFME1_Header" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME1_Header.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BFME25BGDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BGDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BorderRectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BorderRectangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BorderRectangleLong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BorderRectangleLong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BorderRectangleModPanel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BorderRectangleModPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BorderRectangleModPanel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BorderRectangleModPanel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BorderRectangleSmallest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BorderRectangleSmallest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BorderSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BorderSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BTN_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BTN_Click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BTN_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BTN_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25BTN_Neutral" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25BTN_Neutral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25CHK_Selected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25CHK_Selected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25CHK_SelectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25CHK_SelectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25CHK_Unselected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25CHK_Unselected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25CHK_UnselectedHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25CHK_UnselectedHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25LanguageSupportTransparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25LanguageSupportTransparent.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25LoadingBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25LoadingBorder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BFME25PatchModBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME25PatchModBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BFME25PatchModBG201" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME25PatchModBG201.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BFME25_Header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BFME25_Header.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BFME2BGDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BFME2BGDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

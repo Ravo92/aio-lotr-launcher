@@ -7,7 +7,9 @@ namespace Helper
         public const string C_GAMEFOLDER_NAME_BFME1 = "BFME1";
         public const string C_GAMEFOLDER_NAME_BFME2 = "BFME2";
         public const string C_GAMEFOLDER_NAME_BFME25 = "BFME25";
-        public const string C_APPDATAFOLDER_NAME_EN = "My Battle for Middle-earth Files";
+        public const string C_APPDATAFOLDER_BFME1_NAME_EN = "My Battle for Middle-earth Files";
+        public const string C_APPDATAFOLDER_BFME2_NAME_EN = "My Battle for Middle-earth II Files";
+        public const string C_APPDATAFOLDER_BFME25_NAME_EN = "My Rise of the Witch-king Files";
         public const string C_EAFOLDER_NAME = "EA Games";
 
         public const string C_MUTEX_NAME = "Patch Launcher 2.22 Ravo92";
@@ -50,6 +52,8 @@ namespace Helper
         public const string C_BFME2_MAIN_GAME_FILE = "lotrbfme2.exe";
         public const string C_BFME25_MAIN_GAME_FILE = "lotrbfme2ep1.exe";
         public const string C_WORLDBUILDER_FILE = "worldbuilder.exe";
+
+        public const string C_EAUNINSTALL_FILENAME = "eauninstall.exe";
 
         public const string C_MAIN_ASSET_FILE = "asset.dat";
         public const string C_BFME1_103_ASSET_FILE = "asset.dat.103";
@@ -101,5 +105,9 @@ namespace Helper
         public static readonly Image C_BFME2_BUTTONIMAGE_NEUTR = Resources.BFME2BTN_Neutral;
         public static readonly Image C_BFME2_BUTTONIMAGE_HOVER = Resources.BFME2BTN_Hover;
         public static readonly Image C_BFME2_BUTTONIMAGE_CLICK = Resources.BFME2BTN_Click;
+
+        public static readonly Image C_BFME25_BUTTONIMAGE_NEUTR = Resources.BFME25BTN_Neutral;
+        public static readonly Image C_BFME25_BUTTONIMAGE_HOVER = Resources.BFME25BTN_Hover;
+        public static readonly Image C_BFME25_BUTTONIMAGE_CLICK = Resources.BFME25BTN_Click;
     }
 }

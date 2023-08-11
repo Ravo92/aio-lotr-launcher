@@ -93,7 +93,7 @@ namespace Helper
                 if (ReadRegKeyBFME1("appData") != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                     return Path.Combine(AppDataFolderPath, ReadRegKeyBFME1("appData"));
                 else
-                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_NAME_EN);
+                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_BFME1_NAME_EN);
             }
 
             else if (BFMEGameVersion == "BFME2")
@@ -101,7 +101,7 @@ namespace Helper
                 if (ReadRegKeyBFME2("appData") != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                     return Path.Combine(AppDataFolderPath, ReadRegKeyBFME2("appData"));
                 else
-                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_NAME_EN);
+                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_BFME2_NAME_EN);
             }
 
             else if (BFMEGameVersion == "BFME25")
@@ -109,14 +109,14 @@ namespace Helper
                 if (ReadRegKeyBFME25("appData") != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                     return Path.Combine(AppDataFolderPath, ReadRegKeyBFME25("appData"));
                 else
-                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_NAME_EN);
+                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_BFME25_NAME_EN);
             }
             else
             {
                 if (ReadRegKeyBFME1("appData") != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                     return Path.Combine(AppDataFolderPath, ReadRegKeyBFME1("appData"));
                 else
-                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_NAME_EN);
+                    return Path.Combine(AppDataFolderPath, ConstStrings.C_APPDATAFOLDER_BFME1_NAME_EN);
             }
         }
 
@@ -148,7 +148,7 @@ namespace Helper
             keyFolder5.SetValue("Language", strLanguage);
             keyFolder5.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder5.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyFolder5.SetValue("UserDataLeafName", "My Battle for Middle-earth Files");
+            keyFolder5.SetValue("UserDataLeafName", ConstStrings.C_APPDATAFOLDER_BFME1_NAME_EN);
             keyFolder5.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             using RegistryKey keyFolder6 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\ergc");
@@ -183,7 +183,7 @@ namespace Helper
             keyFolder5.SetValue("Language", strLanguage);
             keyFolder5.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder5.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyFolder5.SetValue("UserDataLeafName", "My Battle for Middle-earth II Files");
+            keyFolder5.SetValue("UserDataLeafName", ConstStrings.C_APPDATAFOLDER_BFME2_NAME_EN);
             keyFolder5.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             using RegistryKey keyFolder6 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc");
@@ -226,7 +226,7 @@ namespace Helper
             keyFolder5.SetValue("Language", strLanguage);
             keyFolder5.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder5.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyFolder5.SetValue("UserDataLeafName", "My Rise of the Witch-king Files");
+            keyFolder5.SetValue("UserDataLeafName", ConstStrings.C_APPDATAFOLDER_BFME25_NAME_EN);
             keyFolder5.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             using RegistryKey keyFolder6 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc");

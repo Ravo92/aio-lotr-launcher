@@ -313,6 +313,176 @@ namespace Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BFME25_Header {
+            get {
+                object obj = ResourceManager.GetObject("BFME25_Header", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BGDefault {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BGDefault", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BorderRectangle {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BorderRectangle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BorderRectangleLong {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BorderRectangleLong", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BorderRectangleModPanel {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BorderRectangleModPanel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BorderRectangleModPanel1 {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BorderRectangleModPanel1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BorderRectangleSmallest {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BorderRectangleSmallest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BorderSquare {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BorderSquare", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BTN_Click {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BTN_Click", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BTN_Hover {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BTN_Hover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25BTN_Neutral {
+            get {
+                object obj = ResourceManager.GetObject("BFME25BTN_Neutral", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25CHK_Selected {
+            get {
+                object obj = ResourceManager.GetObject("BFME25CHK_Selected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25CHK_SelectedHover {
+            get {
+                object obj = ResourceManager.GetObject("BFME25CHK_SelectedHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25CHK_Unselected {
+            get {
+                object obj = ResourceManager.GetObject("BFME25CHK_Unselected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25CHK_UnselectedHover {
+            get {
+                object obj = ResourceManager.GetObject("BFME25CHK_UnselectedHover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25LanguageSupportTransparent {
+            get {
+                object obj = ResourceManager.GetObject("BFME25LanguageSupportTransparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25LoadingBorder {
+            get {
+                object obj = ResourceManager.GetObject("BFME25LoadingBorder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap BFME25PatchModBG {
             get {
                 object obj = ResourceManager.GetObject("BFME25PatchModBG", resourceCulture);
