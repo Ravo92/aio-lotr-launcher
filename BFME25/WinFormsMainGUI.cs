@@ -574,7 +574,7 @@ namespace PatchLauncher
             }
         }
 
-        private async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string CorrectMD5HashValue, bool hasExternalInstaller = false, bool externalInstallerHasLaunchAbility = false)
+        private async Task InstallUpdatRepairRoutine(string ZIPFileName, string[] DownloadUrls, string CorrectMD5HashValue, bool hasExternalInstaller = false, bool externalInstallerHasLaunchAbility = false)
         {
             PBarActualFile.Visible = true;
             LblWorkerFileName.Visible = true;
@@ -612,7 +612,7 @@ namespace PatchLauncher
             {
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
                 GameFileTools gameFileTools = new();
-                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadUrl, progressHandlerDownload);
+                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadUrls, progressHandlerDownload);
                 LblWorkerFileName.Text = "";
                 LblWorkerIOTask.Text = "";
                 Update();
@@ -627,7 +627,7 @@ namespace PatchLauncher
                     LogHelper.LoggerBFME25GUI.Error(string.Format("MD5 HashSum check failed. Should be: {0} was: {1}", CorrectMD5HashValue, calculatedMD5Value));
                     LogHelper.LoggerBFME25GUI.Information(string.Format("Deleting file > {0} < and retry Download...", ZIPFileName));
                     File.Delete(fullPathToZIPFile);
-                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadUrl, progressHandlerDownload);
+                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadUrls, progressHandlerDownload);
                     LogHelper.LoggerBFME25GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
                     await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction, hasExternalInstaller);
                 }

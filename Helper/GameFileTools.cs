@@ -34,7 +34,7 @@ namespace Helper
             // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
             if (json == "noInternet")
             {
-                _gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(File.ReadAllText(Path.Combine(Application.StartupPath, "GameFileDictionary.json")))!;
+                _gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE)))!;
                 return _gameFileDictionary;
             }
             else
@@ -42,7 +42,7 @@ namespace Helper
                 try
                 {
                     // write JSON directly to a file
-                    using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, "GameFileDictionary.json"));
+                    using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE));
                     await file.WriteAsync(json);
                 }
                 catch (UnauthorizedAccessException ex)
@@ -61,7 +61,7 @@ namespace Helper
                 // TODO: Write better network connection detection -> Ping 1.1.1.1 or check network adapter state.
                 using var _httpClient = new HttpClient();
                 _httpClient.Timeout = TimeSpan.FromSeconds(3);
-                string json = await _httpClient.GetStringAsync("https://ravo92.github.io/GameFileDictionary.json");
+                string json = await _httpClient.GetStringAsync($"https://ravo92.github.io/{ConstStrings.C_JSON_GAMEDICTIONARY_FILE}");
                 return json;
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
@@ -71,10 +71,11 @@ namespace Helper
             }
         }
 
-        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, string DownloadUrl, IProgress<ProgressHelper> downloadProgress)
+        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, string[] DownloadUrls, IProgress<ProgressHelper> downloadProgress)
         {
             try
             {
+                string DownloadUrl = DownloadUrls[new Random().Next(DownloadUrls.Length)];
                 string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
 
                 var downloadOpt = new DownloadConfiguration()

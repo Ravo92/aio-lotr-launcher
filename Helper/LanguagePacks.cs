@@ -2,7 +2,7 @@
 {
     public class LanguagePacks
     {
-        public string URL { get; set; }
+        public string[] URLs { get; set; }
         public string MD5 { get; set; }
         public string RegistrySelectedLanguageName { get; set; }
         public string RegistrySelectedLanguage { get; set; }
