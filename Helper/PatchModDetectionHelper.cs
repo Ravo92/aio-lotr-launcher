@@ -70,7 +70,8 @@
                     {
                         foreach (var file in get109PatchFiles)
                         {
-                            File.Move(Path.Combine(file), Path.Combine(launcherDownloadFolderPatchModPath, Path.GetFileName(file)), true);
+                            LogHelper.LoggerGRepairFile.Information("Moving file > {0} < from game folder to backup-folder", file);
+                            File.Move(file, Path.Combine(launcherDownloadFolderPatchModPath, Path.GetFileName(file)), true);
                         }
                     }
                 }
@@ -81,6 +82,7 @@
                     {
                         foreach (var file in get109PatchFiles)
                         {
+                            LogHelper.LoggerGRepairFile.Information("Moving file > {0} < from backup-folder to game folder", file);
                             File.Move(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
                         }
                     }

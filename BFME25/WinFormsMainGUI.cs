@@ -256,6 +256,9 @@ namespace PatchLauncher
                 LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                 await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URL, languagePackSettings.MD5);
 
+                Settings.Default.PatchVersionInstalled = 201;
+                Settings.Default.Save();
+
                 UpdatePanelButtonActiveState();
             }
             catch (Exception ex)

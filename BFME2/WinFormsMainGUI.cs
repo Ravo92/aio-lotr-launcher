@@ -392,7 +392,7 @@ namespace PatchLauncher
                         await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URL, mainPack.MD5);
                         await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URL, languagePackSettings.MD5);
 
-                        Settings.Default.PatchVersionInstalled = patchPack.Version;
+                        Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                         Settings.Default.IsGameInstalled = true;
                         Settings.Default.Save();
 
@@ -941,6 +941,12 @@ namespace PatchLauncher
         {
             TurnPatchesAndModsViewOff();
 
+            if (Settings.Default.PatchVersionInstalled == 109)
+            {
+                PatchPacks patchPacks = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.PatchVersionInstalled];
+                await PatchModDetectionHelper.MovePatch109FilesForBFME2(AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPacks.FileName), true);
+            }
+
             LogHelper.LoggerGRepairFile.Information("Started Repairing...");
             await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
@@ -953,6 +959,8 @@ namespace PatchLauncher
             Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
             Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";
             Settings.Default.Save();
+
+            UpdatePanelButtonActiveState();
 
             await TurnPatchesAndModsViewOn();
         }
