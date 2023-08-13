@@ -67,10 +67,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="microsoft.web.webview2" Version="1.0.1901.177" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Helper\Helper.csproj" />
   </ItemGroup>
 

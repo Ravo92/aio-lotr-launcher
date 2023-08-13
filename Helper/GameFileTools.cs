@@ -17,41 +17,46 @@ namespace Helper
 
         public static async Task<GameFileDictionary> LoadGameFileDictionary()
         {
-            GameFileDictionary _gameFileDictionary = new();
             string json = "noInternet";
 
             try
             {
                 // Try deserializing the JSON file from remote into local GameFileDictionary class objects
                 json = await DownloadJSONFile();
-                _gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
+
+                // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
+                if (json == "noInternet")
+                {
+                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE)))
+                    {
+                        json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE));
+                        return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can not download game info. Please establish an internet connection and restart the launcher!");
+                        Environment.Exit(1);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 LogHelper.LoggerGameFileTools.Error(ex, "");
             }
 
-            // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
-            if (json == "noInternet")
+            try
             {
-                _gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE)))!;
-                return _gameFileDictionary;
+                // write JSON directly to a file
+                using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE));
+                await file.WriteAsync(json);
             }
-            else
+            catch (UnauthorizedAccessException ex)
             {
-                try
-                {
-                    // write JSON directly to a file
-                    using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE));
-                    await file.WriteAsync(json);
-                }
-                catch (UnauthorizedAccessException ex)
-                {
-                    LogHelper.LoggerGameFileTools.Warning(ex, "Cant Access local json file! Data may not be accurate!");
-                    return _gameFileDictionary;
-                }
+                LogHelper.LoggerGameFileTools.Fatal(ex, "Cant Access local json file! Data may not be accurate!");
+                Environment.Exit(1);
             }
-            return _gameFileDictionary;
+
+            return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
         }
 
         public static async Task<string> DownloadJSONFile()
@@ -69,6 +74,11 @@ namespace Helper
                 LogHelper.LoggerGameFileTools.Error(ex, "");
                 return "noInternet";
             }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerGameFileTools.Error(ex, "");
+                return "noInternet";
+            }
         }
 
         public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, string[] DownloadUrls, IProgress<ProgressHelper> downloadProgress)
@@ -76,25 +86,30 @@ namespace Helper
             try
             {
                 string DownloadUrl = DownloadUrls[new Random().Next(DownloadUrls.Length)];
+                LogHelper.LoggerGameFileTools.Information("Downloading from URI: < {0} >", DownloadUrl);
+
                 string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
+                LogHelper.LoggerGameFileTools.Information("Downloading into file: < {0} >", fullPathwithFileName);
 
                 var downloadOpt = new DownloadConfiguration()
                 {
                     ChunkCount = 1,
                     ParallelDownload = false,
                     ReserveStorageSpaceBeforeStartingDownload = true,
-                    BufferBlockSize = 8000,
-                    MaximumBytesPerSecond = 131072000,
-                    ClearPackageOnCompletionWithFailure = true
+                    ClearPackageOnCompletionWithFailure = true,
+                    MaxTryAgainOnFailover = 5,
+                    Timeout = 5000
                 };
 
                 OverallProgress = downloadProgress;
-
                 var downloader = new DownloadService(downloadOpt);
+                LogHelper.LoggerGameFileTools.Debug(downloader.Status.ToString());
 
                 downloader.DownloadStarted += OnDownloadStarted;
                 downloader.DownloadProgressChanged += OnDownloadProgressChanged;
                 downloader.DownloadFileCompleted += OnDownloadFileCompleted;
+
+                LogHelper.LoggerGameFileTools.Debug(downloader.Status.ToString());
 
                 if (!File.Exists(fullPathwithFileName))
                 {
@@ -152,35 +167,57 @@ namespace Helper
 
         private void OnDownloadStarted(object? sender, DownloadStartedEventArgs e)
         {
-            OverallProgress!.Report(new ProgressHelper() { CurrentFileName = EntryFilename, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
+            try
+            {
+                OverallProgress!.Report(new ProgressHelper() { CurrentFileName = EntryFilename, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerGameFileTools.Error(ex, "");
+            }
         }
 
         private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
         {
-            if (_DownloadProgressChangedLimiter < 1024)
+            try
             {
-                _DownloadProgressChangedLimiter++;
-            }
-            else
-            {
-                OverallProgress!.Report(new ProgressHelper()
+                if (_DownloadProgressChangedLimiter < 1024)
                 {
-                    PercentageValue = e.ProgressPercentage,
-                    DownloadSpeedSizeInBytes = e.BytesPerSecondSpeed,
-                    TotalDownloadSizeInBytes = e.TotalBytesToReceive,
-                    ProgressedDownloadSizeInBytes = e.ReceivedBytesSize
-                });
+                    _DownloadProgressChangedLimiter++;
+                }
+                else
+                {
+                    OverallProgress!.Report(new ProgressHelper()
+                    {
+                        PercentageValue = e.ProgressPercentage,
+                        DownloadSpeedSizeInBytes = e.BytesPerSecondSpeed,
+                        TotalDownloadSizeInBytes = e.TotalBytesToReceive,
+                        ProgressedDownloadSizeInBytes = e.ReceivedBytesSize
+                    });
 
-                _DownloadProgressChangedLimiter = 0;
+                    _DownloadProgressChangedLimiter = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerGameFileTools.Error(ex, "");
             }
         }
 
         private void OnDownloadFileCompleted(object? sender, AsyncCompletedEventArgs e)
         {
-            if (e.Error != null)
+            try
             {
-                OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
-                LogHelper.LoggerGameFileTools.Error(e.Error.Message);
+                if (e.Error != null)
+                {
+                    OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
+                    LogHelper.LoggerGameFileTools.Error(e.Error.Message);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                LogHelper.LoggerGameFileTools.Error(ex, "");
             }
         }
 

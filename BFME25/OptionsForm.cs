@@ -302,6 +302,9 @@ namespace PatchLauncher
             else
                 ChkEAX.Image = Helper.Properties.Resources.BFME25CHK_Unselected;
 
+            if (!FlagEAXFileExists)
+                FlagUseEAX = "no";
+
             ///////////////////////////////////////////////////////////////////////////////////////////
 
             ResolutionX.BackColor = Color.Black;

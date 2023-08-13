@@ -542,28 +542,29 @@ namespace PatchLauncher
 
         private async Task InstallUpdatRepairRoutine(string ZIPFileName, string[] DownloadUrls, string CorrectMD5HashValue)
         {
-            PBarActualFile.Value = 0;
-            PBarActualFile.Maximum = 100;
-
-            string fullPathToZIPFile = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1, ZIPFileName);
-
-            var progressHandlerDownload = new Progress<ProgressHelper>(progress =>
-            {
-                PBarActualFile.Value = (int)progress.PercentageValue;
-                LblWorkerFileName.Text = Path.GetFileNameWithoutExtension(ZIPFileName);
-                LblWorkerIOTask.Text = string.Concat(progress.ProgressedDownloadSizeInBytes / 1024000, " / ", progress.TotalDownloadSizeInBytes / 1024000, " MB @ ", Math.Round(progress.DownloadSpeedSizeInBytes / 1024000), " MB/s");
-            });
-
-            var progressHandlerExtraction = new Progress<ProgressHelper>(progress =>
-            {
-                PBarActualFile.Value = progress.CurrentlyExtractedFileCount;
-                PBarActualFile.Maximum = progress.TotalArchiveFileCount;
-                LblWorkerFileName.Text = progress.CurrentFileName;
-                LblWorkerIOTask.Text = string.Concat(progress.CurrentlyExtractedFileCount, " / ", progress.TotalArchiveFileCount);
-            });
-
             try
             {
+                PBarActualFile.Value = 0;
+                PBarActualFile.Maximum = 100;
+
+                string fullPathToZIPFile = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1, ZIPFileName);
+
+                var progressHandlerDownload = new Progress<ProgressHelper>(progress =>
+                {
+                    PBarActualFile.Value = (int)progress.PercentageValue;
+                    LblWorkerFileName.Text = Path.GetFileNameWithoutExtension(ZIPFileName);
+                    LblWorkerIOTask.Text = string.Concat(progress.ProgressedDownloadSizeInBytes / 1024000, " / ", progress.TotalDownloadSizeInBytes / 1024000, " MB @ ", Math.Round(progress.DownloadSpeedSizeInBytes / 1024000), " MB/s");
+                });
+
+                var progressHandlerExtraction = new Progress<ProgressHelper>(progress =>
+                {
+                    PBarActualFile.Value = progress.CurrentlyExtractedFileCount;
+                    PBarActualFile.Maximum = progress.TotalArchiveFileCount;
+                    LblWorkerFileName.Text = progress.CurrentFileName;
+                    LblWorkerIOTask.Text = string.Concat(progress.CurrentlyExtractedFileCount, " / ", progress.TotalArchiveFileCount);
+                });
+
+
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
                 GameFileTools gameFileTools = new();
                 await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrls, progressHandlerDownload);

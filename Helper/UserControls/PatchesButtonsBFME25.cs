@@ -32,7 +32,7 @@
 
             // label-Styles
             LblPatchVersion.Font = FontHelper.GetFont(0, 17);
-            LblPatchVersion.ForeColor = Color.FromArgb(192, 145, 69);
+            LblPatchVersion.ForeColor = Color.FromArgb(114, 153, 169);
             LblPatchVersion.BackColor = Color.Transparent;
             LblPatchVersion.BorderStyle = BorderStyle.None;
             LblPatchVersion.OutlineWidth = 6;

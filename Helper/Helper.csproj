@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="Downloader" Version="3.0.6" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1901.177" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="SevenZipExtractor" Version="1.0.17" />
