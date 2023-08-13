@@ -243,11 +243,13 @@ namespace PatchLauncher
             // 
             // LblModExplanation
             // 
+            /*
             resources.ApplyResources(LblModExplanation, "LblModExplanation");
             LblModExplanation.Name = "LblModExplanation";
             LblModExplanation.OutlineForeColor = System.Drawing.Color.Black;
             LblModExplanation.OutlineWidth = 4F;
             ToolTip.SetToolTip(LblModExplanation, resources.GetString("LblModExplanation.ToolTip"));
+            */
             // 
             // NotifyContextMenu
             // 

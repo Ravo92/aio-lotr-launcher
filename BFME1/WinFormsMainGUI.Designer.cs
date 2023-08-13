@@ -468,7 +468,7 @@ namespace PatchLauncher
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.ActiveBorder;
             resources.ApplyResources(this, "$this");
-            // Controls.Add(LblModExplanation);
+            Controls.Add(LblModExplanation);
             Controls.Add(PBarActualFile);
             Controls.Add(BtnInstall);
             Controls.Add(WinFormsMainMenuStrip);
