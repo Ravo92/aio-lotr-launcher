@@ -57,8 +57,8 @@ namespace PatchLauncher
             LblModExplanation.BorderStyle = BorderStyle.None;
             LblModExplanation.OutlineWidth = 4;
 
-            PBarActualFile.ForeColor = Color.FromArgb(192, 145, 69);
-            PBarActualFile.BackColor = Color.FromArgb(255, 100, 0);
+            PBarActualFile.ForeColor = Color.FromArgb(87, 24, 0);
+            PBarActualFile.BackColor = Color.FromArgb(11, 14, 17);
 
             BtnInstall.FlatAppearance.BorderSize = 0;
             BtnInstall.FlatStyle = FlatStyle.Flat;
