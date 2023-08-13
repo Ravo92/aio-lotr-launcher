@@ -75,7 +75,7 @@ namespace Helper
         public const string C_LOGFILE_BFME25LAUNCHER_NAME = "BFME25Launcher.log";
 
         public const string C_LAUNCHERSELECTEDINFOFILE = "selectedGameLauncher.txt";
-        public const string C_JSON_GAMEDICTIONARY_FILE = "GameFileDictionary.json";
+        public const string C_JSON_GAMEDICTIONARY_FILE = "GameFileDictionary2.json";
 
         public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
 

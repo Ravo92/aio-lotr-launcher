@@ -218,12 +218,12 @@ namespace PatchLauncher
                 Settings.Default.PatchVersionInstalled = Settings.Default.LatestPatchVersion;
                 Settings.Default.Save();
 
-                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
+                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
                 if (patchPack.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                 {
                     LanguageFiles patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                    await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                    await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                 }
 
                 await TurnPatchesAndModsViewOn();
@@ -259,7 +259,7 @@ namespace PatchLauncher
 
                 if (patchPacksBeta.Version > Settings.Default.BetaChannelVersion)
                 {
-                    await InstallUpdatRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URL, patchPacksBeta.MD5);
+                    await InstallUpdatRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URLs, patchPacksBeta.MD5);
                 }
 
                 await TurnPatchesAndModsViewOn();
@@ -326,12 +326,12 @@ namespace PatchLauncher
                     await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                     await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
-                    await InstallUpdatRepairRoutine(patchPack106.FileName, patchPack106.URL, patchPack106.MD5);
+                    await InstallUpdatRepairRoutine(patchPack106.FileName, patchPack106.URLs, patchPack106.MD5);
 
                     if (patchPack106.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
                         LanguageFiles patchPackLanguages = patchPack106.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                     }
 
                     Settings.Default.PatchVersionInstalled = version;
@@ -377,11 +377,11 @@ namespace PatchLauncher
                     await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                     await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
-                    await InstallUpdatRepairRoutine(patchPack222.FileName, patchPack222.URL, patchPack222.MD5);
+                    await InstallUpdatRepairRoutine(patchPack222.FileName, patchPack222.URLs, patchPack222.MD5);
 
                     if (patchPack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode) && patchPackLanguages != null)
                     {
-                        await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                        await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                     }
 
                     Settings.Default.PatchVersionInstalled = version;
@@ -540,7 +540,7 @@ namespace PatchLauncher
             }
         }
 
-        private async Task InstallUpdatRepairRoutine(string ZIPFileName, string DownloadUrl, string CorrectMD5HashValue)
+        private async Task InstallUpdatRepairRoutine(string ZIPFileName, string[] DownloadUrls, string CorrectMD5HashValue)
         {
             PBarActualFile.Value = 0;
             PBarActualFile.Maximum = 100;
@@ -566,7 +566,7 @@ namespace PatchLauncher
             {
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
                 GameFileTools gameFileTools = new();
-                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrl, progressHandlerDownload);
+                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrls, progressHandlerDownload);
                 LblWorkerFileName.Text = "";
                 LblWorkerIOTask.Text = "";
                 Update();
@@ -581,7 +581,7 @@ namespace PatchLauncher
                     LogHelper.LoggerBFME1GUI.Error(string.Format("MD5 HashSum check failed. Should be: {0} was: {1}", CorrectMD5HashValue, calculatedMD5Value));
                     LogHelper.LoggerBFME1GUI.Information(string.Format("Deleting file > {0} < and retry Download...", ZIPFileName));
                     File.Delete(fullPathToZIPFile);
-                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrl, progressHandlerDownload);
+                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrls, progressHandlerDownload);
                     LogHelper.LoggerBFME1GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
                     await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction);
                 }
@@ -819,14 +819,14 @@ namespace PatchLauncher
 
                 RegistryService.WriteRegKeysInstallationBFME1(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
 
-                await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URL, mainPack.MD5);
-                await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URL, languagePackSettings.MD5);
-                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
+                await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
+                await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
                 if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
                 {
                     patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                    await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                    await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                 }
 
                 patchPack.Version = Settings.Default.PatchVersionInstalled;
@@ -930,19 +930,19 @@ namespace PatchLauncher
             await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
             LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
-            await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URL, mainPack.MD5);
+            await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
             LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
-            await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URL, languagePackSettings.MD5);
+            await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
             LogHelper.LoggerGRepairFile.Information(string.Format("Downloading and/or extracting Latest Patch 2.22 Version \"{0}\" ...", patchPack.Version));
-            await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
+            await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
             if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
             {
                 patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
                 LogHelper.LoggerGRepairFile.Information(string.Format("Downloading and/or extracting Language-Files for Patch 2.22 Version \"{0}\" in language \"{1}\" ...", patchPack.Version, patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode]));
-                await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
             }
 
             await TurnPatchesAndModsViewOn();
@@ -973,14 +973,14 @@ namespace PatchLauncher
 
                         RegistryService.WriteRegKeysInstallationBFME1(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
 
-                        await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URL, mainPack.MD5);
-                        await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URL, languagePackSettings.MD5);
-                        await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URL, patchPack.MD5);
+                        await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
+                        await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                        await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
                         if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
                         {
                             patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URL, patchPackLanguages.MD5);
+                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                         }
 
                         patchPack.Version = Settings.Default.PatchVersionInstalled;
