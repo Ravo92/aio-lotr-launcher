@@ -228,12 +228,10 @@ namespace PatchLauncher
             // 
             // LblModExplanation
             // 
-            /*
             resources.ApplyResources(LblModExplanation, "LblModExplanation");
             LblModExplanation.Name = "LblModExplanation";
             LblModExplanation.OutlineForeColor = System.Drawing.Color.Black;
             LblModExplanation.OutlineWidth = 4F;
-            */
             // 
             // NotifyContextMenu
             // 
