@@ -81,6 +81,16 @@ namespace Helper.Properties {
         }
         
         /// <summary>
+        ///     Looks up the background progress bar for BFME 1
+        /// </summary>
+        public static System.Drawing.Bitmap BFME1_PBarBG {
+            get {
+                object obj = ResourceManager.GetObject("BFME1_PBarBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap BFME1BGDefault {
@@ -311,11 +321,31 @@ namespace Helper.Properties {
         }
         
         /// <summary>
+        ///     Looks up the background progress bar for BFME 2
+        /// </summary>
+        public static System.Drawing.Bitmap BFME2_PBarBG {
+            get {
+                object obj = ResourceManager.GetObject("BFME2_PBarBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap BFME25_Header {
             get {
                 object obj = ResourceManager.GetObject("BFME25_Header", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///     Looks up the background progress bar for BFME 2
+        /// </summary>
+        public static System.Drawing.Bitmap BFME25_PBarBG {
+            get {
+                object obj = ResourceManager.GetObject("BFME25_PBarBG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

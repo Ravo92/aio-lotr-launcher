@@ -443,6 +443,7 @@ namespace PatchLauncher
             PBarActualFile.BackColor = System.Drawing.Color.Black;
             PBarActualFile.CustomText = null;
             PBarActualFile.DisplayStyle = ProgressBarDisplayText.Percentage;
+            PBarActualFile.Game = Game.BFME25;
             PBarActualFile.ForeColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(PBarActualFile, "PBarActualFile");
             PBarActualFile.Name = "PBarActualFile";
