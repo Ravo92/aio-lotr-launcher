@@ -106,6 +106,15 @@ namespace PatchLauncher {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking File integrity....
+        /// </summary>
+        internal static string Info_MD5Check {
+            get {
+                return ResourceManager.GetString("Info.MD5Check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Searching for the one ring....
         /// </summary>
         internal static string Info_PleaseWait {

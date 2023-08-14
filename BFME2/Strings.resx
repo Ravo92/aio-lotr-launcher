@@ -132,6 +132,9 @@
   <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
     <value>Copy files and apply patch...</value>
   </data>
+  <data name="Info.MD5Check" xml:space="preserve">
+    <value>Checking File integrity...</value>
+  </data>
   <data name="Info.PleaseWait" xml:space="preserve">
     <value>Searching for the one ring...</value>
   </data>

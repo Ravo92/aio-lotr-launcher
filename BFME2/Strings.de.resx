@@ -133,6 +133,9 @@ Der Launcher setzt das Spiel daher wieder auf 1.06 zurück.</value>
   <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
     <value>Spiel patchen und aufräumen...</value>
   </data>
+  <data name="Info.MD5Check" xml:space="preserve">
+    <value>Prüfe Datei-Integrität...</value>
+  </data>
   <data name="Info.PleaseWait" xml:space="preserve">
     <value>Suche Ring...</value>
   </data>

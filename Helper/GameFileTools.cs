@@ -27,9 +27,9 @@ namespace Helper
                 // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
                 if (json == "noInternet")
                 {
-                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE)))
+                    if (File.Exists(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE)))
                     {
-                        json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE));
+                        json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE));
                         return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
                     }
                     else
@@ -47,7 +47,7 @@ namespace Helper
             try
             {
                 // write JSON directly to a file
-                using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_FILE));
+                using StreamWriter file = File.CreateText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE));
                 await file.WriteAsync(json);
             }
             catch (UnauthorizedAccessException ex)
@@ -66,7 +66,7 @@ namespace Helper
                 // TODO: Write better network connection detection -> Ping 1.1.1.1 or check network adapter state.
                 using var _httpClient = new HttpClient();
                 _httpClient.Timeout = TimeSpan.FromSeconds(3);
-                string json = await _httpClient.GetStringAsync($"https://ravo92.github.io/{ConstStrings.C_JSON_GAMEDICTIONARY_FILE}");
+                string json = await _httpClient.GetStringAsync($"https://ravo92.github.io/{ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE}");
                 return json;
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
@@ -81,11 +81,11 @@ namespace Helper
             }
         }
 
-        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, string[] DownloadUrls, IProgress<ProgressHelper> downloadProgress)
+        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, List<string> DownloadUrls, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress)
         {
             try
             {
-                string DownloadUrl = DownloadUrls[new Random().Next(DownloadUrls.Length)];
+                string DownloadUrl = DownloadUrls[downloadUrlCount]; //[new Random().Next(DownloadUrls.Length)];
                 LogHelper.LoggerGameFileTools.Information("Downloading from URI: < {0} >", DownloadUrl);
 
                 string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
@@ -93,12 +93,14 @@ namespace Helper
 
                 var downloadOpt = new DownloadConfiguration()
                 {
-                    ChunkCount = 1,
                     ParallelDownload = false,
                     ReserveStorageSpaceBeforeStartingDownload = true,
                     ClearPackageOnCompletionWithFailure = true,
-                    MaxTryAgainOnFailover = 5,
-                    Timeout = 5000
+                    MaximumMemoryBufferBytes = 1024 * 1024 * 512,
+                    MaxTryAgainOnFailover = 1,
+                    Timeout = 5000,
+                    ChunkCount = 1,
+                    BufferBlockSize = 8000,
                 };
 
                 OverallProgress = downloadProgress;
@@ -181,7 +183,7 @@ namespace Helper
         {
             try
             {
-                if (_DownloadProgressChangedLimiter < 1024)
+                if (_DownloadProgressChangedLimiter < 4096)
                 {
                     _DownloadProgressChangedLimiter++;
                 }

@@ -2,6 +2,7 @@ using Helper;
 using Helper.UserControls;
 using PatchLauncher.Properties;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -225,7 +226,7 @@ namespace PatchLauncher
 
             try
             {
-                if (Settings.Default.PatchVersionInstalled == 106)
+                if (Settings.Default.PatchVersionInstalled == mainPack.LatestPatchVersionOfficial)
                 {
                     MessageBox.Show(Strings.Msg_UpdateAlreadyActive_Text, Strings.Msg_UpdateAlreadyActive_Title, MessageBoxButtons.OK);
                     UpdatePanelButtonActiveState();
@@ -569,86 +570,104 @@ namespace PatchLauncher
             }
         }
 
-        private async Task InstallUpdatRepairRoutine(string ZIPFileName, string[] DownloadUrls, string CorrectMD5HashValue, bool hasExternalInstaller = false, bool externalInstallerHasLaunchAbility = false)
+        private async Task InstallUpdatRepairRoutine(string ZIPFileName, List<string> DownloadUrls, string CorrectMD5HashValue, bool hasExternalInstaller = false, bool externalInstallerHasLaunchAbility = false)
         {
             try
             {
-                PBarActualFile.Visible = true;
-                LblWorkerFileName.Visible = true;
-                LblWorkerIOTask.Visible = true;
-
-                PBarActualFile.Value = 0;
-                PBarActualFile.Maximum = 100;
-
-                Update();
-
                 string fullPathToZIPFile = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, ZIPFileName);
                 string getFileNameFromArchiveIfExe = ConstStrings.C_BFME2_MAIN_GAME_FILE;
-
-                var progressHandlerDownload = new Progress<ProgressHelper>(progress =>
-                {
-                    PBarActualFile.Value = (int)progress.PercentageValue;
-                    LblWorkerFileName.Text = Path.GetFileNameWithoutExtension(ZIPFileName);
-                    LblWorkerIOTask.Text = string.Concat(progress.ProgressedDownloadSizeInBytes / 1024000, " / ", progress.TotalDownloadSizeInBytes / 1024000, " MB @ ", Math.Round(progress.DownloadSpeedSizeInBytes / 1024000), " MB/s");
-                });
-
-                var progressHandlerExtraction = new Progress<ProgressHelper>(progress =>
-                {
-                    PBarActualFile.Value = progress.CurrentlyExtractedFileCount;
-                    PBarActualFile.Maximum = progress.TotalArchiveFileCount;
-                    LblWorkerFileName.Text = progress.CurrentFileName;
-                    LblWorkerIOTask.Text = string.Concat(progress.CurrentlyExtractedFileCount, " / ", progress.TotalArchiveFileCount);
-
-                    if (hasExternalInstaller && Path.GetExtension(progress.CurrentFileName) == ".exe")
-                    {
-                        getFileNameFromArchiveIfExe = progress.CurrentFileName!;
-                    }
-                });
-
-                BtnInstall.Text = Strings.BtnInstall_TextLaunch;
+                string calculatedMD5Value = "404";
+                bool doesTheFileExist = File.Exists(fullPathToZIPFile);
+                bool doesTheFileHasTheCorrectMD5Value = false;
 
                 GameFileTools gameFileTools = new();
 
-                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, DownloadUrls, progressHandlerDownload);
+                LblWorkerFileName.Visible = true;
+                LblWorkerIOTask.Visible = true;
 
-                LblWorkerFileName.Text = "";
-                LblWorkerIOTask.Text = "";
-
-                Update();
-
-                string calculatedMD5Value = MD5Tools.CalculateMD5(fullPathToZIPFile);
-
-                if (calculatedMD5Value == CorrectMD5HashValue)
+                for (int RetryCount = 0; RetryCount < 2; RetryCount++)
                 {
-                    await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction, hasExternalInstaller);
-                }
-                else
-                {
-                    LogHelper.LoggerBFME2GUI.Error(string.Format("MD5 HashSum check failed. Should be: > {0} < was: > {1} <", CorrectMD5HashValue, calculatedMD5Value));
-                    LogHelper.LoggerBFME2GUI.Information(string.Format("Deleting file > {0} < and retry Download...", ZIPFileName));
+                    BtnInstall.Text = Strings.BtnInstall_TextLaunch;
+                    LblWorkerFileName.Text = Strings.Info_MD5Check;
+                    LblWorkerIOTask.Text = "";
 
-                    if (File.Exists(fullPathToZIPFile))
+                    Update();
+
+                    LogHelper.LoggerBFME2GUI.Information("Found File: > {0} <, start to calculate", ZIPFileName);
+                    calculatedMD5Value = await MD5Tools.CalculateMD5Async(fullPathToZIPFile);
+
+                    if (calculatedMD5Value == CorrectMD5HashValue)
+                        doesTheFileHasTheCorrectMD5Value = true;
+
+                    if (doesTheFileExist && doesTheFileHasTheCorrectMD5Value)
                     {
-                        LogHelper.LoggerBFME2GUI.Information("File > {0} < existed and deleted!", fullPathToZIPFile);
-                        File.Delete(fullPathToZIPFile);
+                        LogHelper.LoggerBFME2GUI.Information("File > {0} < has the correct value of > {1} <, start to extract file...", ZIPFileName, calculatedMD5Value);
+                    }
+                    else
+                    {
+                        if (doesTheFileExist)
+                        {
+                            LogHelper.LoggerBFME2GUI.Error(string.Format("MD5 HashSum check failed. Should be: > {0} < was: > {1} <", CorrectMD5HashValue, calculatedMD5Value));
+                            LogHelper.LoggerBFME2GUI.Information(string.Format("Deleting file > {0} < and retry Download...", ZIPFileName));
+                            File.Delete(fullPathToZIPFile);
+                        }
+                        else
+                        {
+                            LogHelper.LoggerBFME2GUI.Error(string.Format("File > {0} < does not exist, start downloading...", CorrectMD5HashValue));
+                        }
+
+                        Progress<ProgressHelper> progressHandlerDownload = new(progress =>
+                        {
+                            PBarActualFile.Value = (int)progress.PercentageValue;
+                            LblWorkerFileName.Text = Path.GetFileNameWithoutExtension(ZIPFileName);
+                            LblWorkerIOTask.Text = string.Concat(progress.ProgressedDownloadSizeInBytes / 1024000, " / ", progress.TotalDownloadSizeInBytes / 1024000, " MB @ ", Math.Round(progress.DownloadSpeedSizeInBytes / 1024000), " MB/s");
+                        });
+
+                        PBarActualFile.Visible = true;
+                        PBarActualFile.Value = 0;
+                        PBarActualFile.Maximum = 100;
+
+                        LogHelper.LoggerBFME2GUI.Information("Start downloading file: > {0} <", ZIPFileName);
+                        await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, DownloadUrls, 0, progressHandlerDownload);
+                        RetryCount++;
                     }
 
-                    LogHelper.LoggerBFME2GUI.Information("Start downloading file: > {0} <", ZIPFileName);
-                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, DownloadUrls, progressHandlerDownload);
+                    if (doesTheFileHasTheCorrectMD5Value)
+                    {
+                        PBarActualFile.Visible = true;
 
-                    LogHelper.LoggerBFME2GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
-                    await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction, hasExternalInstaller);
-                }
+                        Progress<ProgressHelper> progressHandlerExtraction = new(progress =>
+                        {
+                            PBarActualFile.Value = progress.CurrentlyExtractedFileCount;
+                            PBarActualFile.Maximum = progress.TotalArchiveFileCount;
+                            LblWorkerFileName.Text = progress.CurrentFileName;
+                            LblWorkerIOTask.Text = string.Concat(progress.CurrentlyExtractedFileCount, " / ", progress.TotalArchiveFileCount);
 
-                if (hasExternalInstaller)
-                {
-                    Process processLaunchExternalTool = new();
-                    processLaunchExternalTool.StartInfo.FileName = Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, Path.GetFileNameWithoutExtension(ZIPFileName), getFileNameFromArchiveIfExe);
-                    //processLaunchExternalTool.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
+                            if (hasExternalInstaller && Path.GetExtension(progress.CurrentFileName) == ".exe")
+                            {
+                                getFileNameFromArchiveIfExe = progress.CurrentFileName!;
+                            }
+                        });
 
-                    processLaunchExternalTool.Start();
-                    await processLaunchExternalTool.WaitForExitAsync();
-                    AssemblyNameHelper.ExternalInstallerReturnCode = processLaunchExternalTool.ExitCode;
+                        await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction, hasExternalInstaller);
+
+                        if (hasExternalInstaller)
+                        {
+                            Process processLaunchExternalTool = new();
+                            processLaunchExternalTool.StartInfo.FileName = Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, Path.GetFileNameWithoutExtension(ZIPFileName), getFileNameFromArchiveIfExe);
+                            //processLaunchExternalTool.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
+
+                            processLaunchExternalTool.Start();
+                            await processLaunchExternalTool.WaitForExitAsync();
+                            AssemblyNameHelper.ExternalInstallerReturnCode = processLaunchExternalTool.ExitCode;
+                        }
+
+                        RetryCount = 2;
+                    }
+                    else
+                    {
+                        RetryCount++;
+                    }
                 }
             }
             catch (Exception ex)

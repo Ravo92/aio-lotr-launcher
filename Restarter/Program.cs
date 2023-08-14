@@ -163,7 +163,7 @@ namespace Restarter
         /// 2 = BFME2
         /// 25 = ROTWK
         /// </summary>
-        /// <returns>Returns the selected Game Launcher as an integer value</returns>
+        /// <returns>Returns the selected ProgressBarGame Launcher as an integer value</returns>
         private static int GetLastSelectedGameLauncher()
         {
             try

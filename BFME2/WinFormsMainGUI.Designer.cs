@@ -445,7 +445,7 @@ namespace PatchLauncher
             PBarActualFile.CustomText = null;
             PBarActualFile.DisplayStyle = ProgressBarDisplayText.Percentage;
             PBarActualFile.ForeColor = System.Drawing.Color.Transparent;
-            PBarActualFile.Game = Game.BFME2;
+            CustomProgressBar.Game = ProgressBarGame.BFME2;
             resources.ApplyResources(PBarActualFile, "PBarActualFile");
             PBarActualFile.Name = "PBarActualFile";
             PBarActualFile.Style = ProgressBarStyle.Continuous;

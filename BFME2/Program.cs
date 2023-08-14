@@ -1,4 +1,5 @@
 using Helper;
+using Newtonsoft.Json;
 using PatchLauncher.Properties;
 using System;
 using System.Configuration;
@@ -99,7 +100,11 @@ namespace PatchLauncher
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
                 GameFileTools _gameFileTools = new();
-                GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
+
+                string json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE));
+                GameFileDictionary gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
+
+                //GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
 
                 JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
                 JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[AssemblyNameHelper.BFMELauncherGameName];

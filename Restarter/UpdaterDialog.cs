@@ -16,7 +16,7 @@ namespace Restarter
         {
             try
             {
-                AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater_Test.xml");
+                AutoUpdater.Start("https://ravo92.github.io/LauncherUpdater.xml");
                 AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
                 AutoUpdater.Synchronous = true;
                 AutoUpdater.Mandatory = true;
