@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "Restarter.exe"
-#define MyAppExeVersion "1.0.5.1"
+#define MyAppExeVersion "1.0.5.2"
 #define MyAppPublishFolder "PatchLauncher"
 
 [Setup]
@@ -25,7 +25,7 @@ SolidCompression=yes
 ShowLanguageDialog=yes
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
-SetupIconFile=MainIcon.ico
+SetupIconFile=Restarter\MainIcon.ico
 VersionInfoVersion={#MyAppExeVersion}
 AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
 AppPublisher=Raphael Vogel
@@ -61,14 +61,6 @@ Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilen
 [Tasks]
 Name: "startmenuicon"; Description: "{cm:CreateStartMenuIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
-
-[InstallDelete]
-Type: files; Name: "{app}\PatchLauncherBFME.exe"
-Type: files; Name: "{app}\PatchLauncherBFME.dll"
-Type: files; Name: "{app}\PatchLauncherBFME.dll.config"
-Type: files; Name: "{app}\PatchLauncherBFME.deps.json"
-Type: files; Name: "{app}\PatchLauncherBFME.runtimeconfig.json"
-Type: filesandordirs; Name: "{app}\PatchLauncherBFME.exe.WebView2"
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\Downloads"

@@ -240,10 +240,6 @@ namespace PatchLauncher
                     Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                     Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";
                     Settings.Default.Save();
-
-                    LogHelper.LoggerBFME2GUI.Information("Patch 1.09 files found in game directory. We are now moving them to safety inside launcher/downloads-folder");
-
-                    await PatchModDetectionHelper.MovePatch109FilesForBFME2(AssemblyNameHelper.BFMELauncherGameName, "Patch_1.09", true);
                 }
 
                 LogHelper.LoggerBFME2GUI.Information("Performing Repair Routine after clicking on button > Patch 1.06 <");
@@ -276,6 +272,7 @@ namespace PatchLauncher
             PatchesButtonsBFME2 patchesButtonsBFME2 = (PatchesButtonsBFME2)sender!;
             int version = Convert.ToInt32(patchesButtonsBFME2.Tag);
             PatchPacks patchPacks = JSONDataListHelper._DictionaryPatchPacksSettings[version];
+            string activePatchOrModExternalProgramFolderPath = Path.Combine(RegistryService.ReadRegKey(patchPacks.RegistryPathForInstalledProgram, patchPacks.RegistryKeyName), patchPacks.ThirdPartyToolExecutableName);
 
             if (patchPacks.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
             {
@@ -295,15 +292,15 @@ namespace PatchLauncher
 
                     if (patchPacks.RegistryPathForInstalledProgram != "")
                     {
-                        Settings.Default.ActivePatchOrModExternalProgramFolderPath = Path.Combine(RegistryService.ReadRegKey(patchPacks.RegistryPathForInstalledProgram, patchPacks.RegistryKeyName), patchPacks.ThirdPartyToolExecutableName);
+                        Settings.Default.ActivePatchOrModExternalProgramFolderPath = activePatchOrModExternalProgramFolderPath;
                         Settings.Default.ActivePatchOrModExternalProgramLaunchAbility = patchPacks.ExternalInstallerHasLaunchAbility;
                         Settings.Default.Save();
-
-                        if (version == 109)
-                        {
-                            await PatchModDetectionHelper.MovePatch109FilesForBFME2(AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPacks.FileName), true);
-                        }
                     }
+
+                    if (File.Exists(Settings.Default.GameInstallPath + @"\dsound.dll"))
+                        AssemblyNameHelper.EAXWasActivated = true;
+                    else
+                        AssemblyNameHelper.EAXWasActivated = false;
 
                     LogHelper.LoggerGRepairFile.Information("Started Repairing...");
                     await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
@@ -332,12 +329,23 @@ namespace PatchLauncher
                         LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                         await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
+                        if (AssemblyNameHelper.EAXWasActivated)
+                        {
+                            List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                            foreach (var file in _EAXFiles)
+                            {
+                                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                            }
+                        }
+
                         await TurnPatchesAndModsViewOn();
 
                         if (version == 109)
                         {
-                            Settings.Default.ActivePatchOrModExternalProgramFolderPath = Path.Combine(RegistryService.ReadRegKey(patchPacks.RegistryPathForInstalledProgram, patchPacks.RegistryKeyName), patchPacks.ThirdPartyToolExecutableName);
+                            Settings.Default.ActivePatchOrModExternalProgramFolderPath = activePatchOrModExternalProgramFolderPath;
                             Settings.Default.ActivePatchOrModExternalProgramLaunchAbility = patchPacks.ExternalInstallerHasLaunchAbility;
+                            Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                             Settings.Default.Save();
                         }
 
@@ -351,7 +359,9 @@ namespace PatchLauncher
 
                     if (version == 109)
                     {
-                        await PatchModDetectionHelper.MovePatch109FilesForBFME2(AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPacks.FileName), false);
+                        await PatchModDetectionHelper.MovePatch109FilesForBFME2(AssemblyNameHelper.BFMELauncherGameName, activePatchOrModExternalProgramFolderPath[..activePatchOrModExternalProgramFolderPath.LastIndexOf('\\')]);
+                        Settings.Default.ActivePatchOrModExternalProgramFolderPath = activePatchOrModExternalProgramFolderPath;
+                        Settings.Default.ActivePatchOrModExternalProgramLaunchAbility = patchPacks.ExternalInstallerHasLaunchAbility;
                     }
 
                     Settings.Default.PatchVersionInstalled = version;
@@ -392,7 +402,7 @@ namespace PatchLauncher
 
                         languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
 
-                        RegistryService.WriteRegKeysInstallationBFME25(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
+                        RegistryService.WriteRegKeysInstallationBFME2(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
 
                         await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
                         await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
@@ -417,11 +427,12 @@ namespace PatchLauncher
                 else
                 {
                     LaunchGameToolStripMenuItem.PerformClick();
+                    return;
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerBFME25GUI.Error(ex.ToString());
+                LogHelper.LoggerBFME2GUI.Error(ex.ToString());
 
                 Settings.Default.IsGameInstalled = false;
                 BtnInstall.Text = Strings.BtnInstall_TextInstall;
@@ -597,7 +608,10 @@ namespace PatchLauncher
                     calculatedMD5Value = await MD5Tools.CalculateMD5Async(fullPathToZIPFile);
 
                     if (calculatedMD5Value == CorrectMD5HashValue)
+                    {
                         doesTheFileHasTheCorrectMD5Value = true;
+                        doesTheFileExist = true;
+                    }
 
                     if (doesTheFileExist && doesTheFileHasTheCorrectMD5Value)
                     {
@@ -629,7 +643,6 @@ namespace PatchLauncher
 
                         LogHelper.LoggerBFME2GUI.Information("Start downloading file: > {0} <", ZIPFileName);
                         await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, DownloadUrls, 0, progressHandlerDownload);
-                        RetryCount++;
                     }
 
                     if (doesTheFileHasTheCorrectMD5Value)
@@ -663,10 +676,6 @@ namespace PatchLauncher
                         }
 
                         RetryCount = 2;
-                    }
-                    else
-                    {
-                        RetryCount++;
                     }
                 }
             }
@@ -781,24 +790,12 @@ namespace PatchLauncher
             processLaunchGame.Start();
 
             WindowState = FormWindowState.Minimized;
-            Hide();
-
-            SysTray.Visible = true;
-            SysTray.ShowBalloonTip(2000);
-            soundPlayerHelper.StopTheme();
 
             await processLaunchGame.WaitForExitAsync();
 
-            Show();
             WindowState = FormWindowState.Normal;
-            SysTray.Visible = false;
 
             await TurnPatchesAndModsViewOn();
-
-            if (Settings.Default.PlayBackgroundMusic)
-            {
-                soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
-            }
 
             processLaunchGame.Dispose();
         }
@@ -975,11 +972,10 @@ namespace PatchLauncher
             {
                 TurnPatchesAndModsViewOff();
 
-                if (Settings.Default.PatchVersionInstalled == 109)
-                {
-                    PatchPacks patchPacks = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.PatchVersionInstalled];
-                    await PatchModDetectionHelper.MovePatch109FilesForBFME2(AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPacks.FileName), true);
-                }
+                if (File.Exists(Settings.Default.GameInstallPath + @"\dsound.dll"))
+                    AssemblyNameHelper.EAXWasActivated = true;
+                else
+                    AssemblyNameHelper.EAXWasActivated = false;
 
                 LogHelper.LoggerGRepairFile.Information("Started Repairing...");
                 await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
@@ -989,6 +985,16 @@ namespace PatchLauncher
 
                 LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                 await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+
+                if (AssemblyNameHelper.EAXWasActivated)
+                {
+                    List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                    foreach (var file in _EAXFiles)
+                    {
+                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                    }
+                }
 
                 Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                 Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";

@@ -5,8 +5,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.0.5.1</AssemblyVersion>
-    <FileVersion>1.0.5.1</FileVersion>
+	<Version>1.0.5.2</Version>
+	<AssemblyVersion>1.0.5.2</AssemblyVersion>
+	<FileVersion>1.0.5.2</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
     <Copyright>Raphael Vogel</Copyright>
     <PackageId>2.22 Launcher Helper Library</PackageId>

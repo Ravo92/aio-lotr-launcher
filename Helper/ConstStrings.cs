@@ -76,7 +76,6 @@ namespace Helper
 
         public const string C_LAUNCHERSELECTEDINFOFILE = "selectedGameLauncher.txt";
         public const string C_JSON_GAMEDICTIONARY_MAIN_FILE = "GameFileDictionary.json";
-        public const string C_JSON_GAMEDICTIONARY_BACKUP_FILE = "GameFileDictionary2.json";
 
         public const string C_TWITCHCHANNEL_NAME = "beyondstandards";
 

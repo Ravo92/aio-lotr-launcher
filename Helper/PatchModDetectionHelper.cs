@@ -56,35 +56,17 @@
             return Task.CompletedTask;
         }
 
-        public static Task MovePatch109FilesForBFME2(string assemblyName, string patchModName, bool removeFromGameDir)
+        public static Task MovePatch109FilesForBFME2(string assemblyName, string patch109InstallationPath)
         {
-            string launcherDownloadFolderPatchModPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, patchModName);
             try
             {
-
-
-                if (removeFromGameDir)
+                string[] get109PatchFiles = Directory.GetFiles(Path.Combine(patch109InstallationPath, "renamefiles"), "*BT2DC*.*");
+                if (get109PatchFiles.Any())
                 {
-                    string[] get109PatchFiles = Directory.GetFiles(RegistryService.GameInstallPath(assemblyName), "*BT2DC*.*");
-                    if (get109PatchFiles.Any())
+                    foreach (var file in get109PatchFiles)
                     {
-                        foreach (var file in get109PatchFiles)
-                        {
-                            LogHelper.LoggerGRepairFile.Information("Moving file > {0} < from game folder to backup-folder", file);
-                            File.Move(file, Path.Combine(launcherDownloadFolderPatchModPath, Path.GetFileName(file)), true);
-                        }
-                    }
-                }
-                else
-                {
-                    string[] get109PatchFiles = Directory.GetFiles(launcherDownloadFolderPatchModPath, "*BT2DC*.*");
-                    if (get109PatchFiles.Any())
-                    {
-                        foreach (var file in get109PatchFiles)
-                        {
-                            LogHelper.LoggerGRepairFile.Information("Moving file > {0} < from backup-folder to game folder", file);
-                            File.Move(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
-                        }
+                        LogHelper.LoggerPatchModDectection.Information("Moving file > {0} < from 109-folder to game folder", file);
+                        File.Move(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
                     }
                 }
             }

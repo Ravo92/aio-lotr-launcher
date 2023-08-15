@@ -183,7 +183,7 @@ namespace Helper
         {
             try
             {
-                if (_DownloadProgressChangedLimiter < 4096)
+                if (_DownloadProgressChangedLimiter < 2048)
                 {
                     _DownloadProgressChangedLimiter++;
                 }
