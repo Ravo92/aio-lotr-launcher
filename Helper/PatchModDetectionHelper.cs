@@ -65,8 +65,8 @@
                 {
                     foreach (var file in get109PatchFiles)
                     {
-                        LogHelper.LoggerPatchModDectection.Information("Moving file > {0} < from 109-folder to game folder", file);
-                        File.Move(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
+                        LogHelper.LoggerPatchModDectection.Information("Copying file > {0} < from 109-folder to game folder", file);
+                        File.Copy(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
                     }
                 }
             }

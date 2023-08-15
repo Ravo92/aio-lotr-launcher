@@ -100,9 +100,6 @@ namespace PatchLauncher
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
                 GameFileTools _gameFileTools = new();
-
-                string json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE));
-                //GameFileDictionary gameFileDictionary = JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
                 GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
 
                 JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
