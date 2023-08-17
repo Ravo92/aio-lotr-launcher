@@ -190,8 +190,8 @@ namespace Helper
             keyFolder6.SetValue("", RandomCDKeyGenerator(20));
 
             using RegistryKey keyFolder7 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2.exe");
-            keyFolder7.SetValue("@", Path.Combine(installpath, ConstStrings.C_BFME2_MAIN_GAME_FILE));
-            keyFolder7.SetValue("ProgressBarGame Registry", @"SOFTWARE\Electronic Arts\The Battle for Middle-earth II");
+            keyFolder7.SetValue("", Path.Combine(installpath, ConstStrings.C_BFME2_MAIN_GAME_FILE));
+            keyFolder7.SetValue("Game Registry", @"SOFTWARE\Electronic Arts\The Battle for Middle-earth II");
             keyFolder7.SetValue("Restart", "00000000", RegistryValueKind.DWord);
             keyFolder7.SetValue("DirectX Installed", "00000000", RegistryValueKind.DWord);
             keyFolder7.SetValue("Installed", "00000001", RegistryValueKind.DWord);
