@@ -412,6 +412,10 @@ namespace PatchLauncher
 
                         taskPrepareInstallFolder.Dispose();
                     }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
@@ -629,7 +633,7 @@ namespace PatchLauncher
                     }
 
                     LogHelper.LoggerBFME25GUI.Information("Start downloading file: > {0} <", ZIPFileName);
-                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadUrls,1, progressHandlerDownload);
+                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadUrls, 1, progressHandlerDownload);
 
                     LogHelper.LoggerBFME25GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
                     await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction, hasExternalInstaller);
@@ -759,34 +763,10 @@ namespace PatchLauncher
 
             processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
             processLaunchGame.Start();
-
             WindowState = FormWindowState.Minimized;
-            Hide();
-
-            SysTray.Visible = true;
-            SysTray.ShowBalloonTip(2000);
-            soundPlayerHelper.StopTheme();
-
             await processLaunchGame.WaitForExitAsync();
-
-            Show();
             WindowState = FormWindowState.Normal;
-            SysTray.Visible = false;
-
             await TurnPatchesAndModsViewOn();
-
-            try
-            {
-                if (Settings.Default.PlayBackgroundMusic)
-                {
-                    soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LoggerBFME25GUI.Error(ex.ToString());
-            }
-
             processLaunchGame.Dispose();
         }
 

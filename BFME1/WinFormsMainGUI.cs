@@ -689,38 +689,11 @@ namespace PatchLauncher
 
             processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
             processLaunchGame.Start();
-
-            BtnInstall.Enabled = false;
-            LaunchGameToolStripMenuItem.Enabled = false;
-            RepairGameToolStripMenuItem.Enabled = false;
-            SelectGameToolStripMenuItem.Enabled = false;
-            PanelPlaceholder.Visible = false;
-            soundPlayerHelper.StopTheme();
-            Update();
-
             WindowState = FormWindowState.Minimized;
-            Hide();
-
-            SysTray.Visible = true;
-            SysTray.ShowBalloonTip(2000);
-
             await processLaunchGame.WaitForExitAsync();
-
-            Show();
             WindowState = FormWindowState.Normal;
-            SysTray.Visible = false;
-
-            BtnInstall.Enabled = true;
-            LaunchGameToolStripMenuItem.Enabled = true;
-            RepairGameToolStripMenuItem.Enabled = true;
-            SelectGameToolStripMenuItem.Enabled = true;
-            PanelPlaceholder.Visible = true;
-            Update();
-
-            if (Settings.Default.PlayBackgroundMusic)
-            {
-                soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
-            }
+            await TurnPatchesAndModsViewOn();
+            processLaunchGame.Dispose();
         }
 
         private void CloseTheLauncherToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1001,6 +974,10 @@ namespace PatchLauncher
                         taskPrepareInstallFolder.Dispose();
 
                         await TurnPatchesAndModsViewOn();
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
                 else

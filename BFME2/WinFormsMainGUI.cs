@@ -423,6 +423,10 @@ namespace PatchLauncher
 
                         taskPrepareInstallFolder.Dispose();
                     }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
@@ -596,7 +600,7 @@ namespace PatchLauncher
                 LblWorkerFileName.Visible = true;
                 LblWorkerIOTask.Visible = true;
 
-                for (int RetryCount = 0; RetryCount < 2; RetryCount++)
+                for (int RetryCount = 0; RetryCount <= DownloadUrls.Count; RetryCount++)
                 {
                     BtnInstall.Text = Strings.BtnInstall_TextLaunch;
                     LblWorkerFileName.Text = Strings.Info_MD5Check;
@@ -788,15 +792,10 @@ namespace PatchLauncher
 
             processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
             processLaunchGame.Start();
-
             WindowState = FormWindowState.Minimized;
-
             await processLaunchGame.WaitForExitAsync();
-
             WindowState = FormWindowState.Normal;
-
             await TurnPatchesAndModsViewOn();
-
             processLaunchGame.Dispose();
         }
 
