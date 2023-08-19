@@ -781,11 +781,6 @@ namespace PatchLauncher
                 {
                     soundPlayerHelper.PlayTheme(Settings.Default.BackgroundMusicFile);
                 }
-
-                if (File.Exists(eauninstallExePath))
-                {
-                    File.Delete(eauninstallExePath);
-                }
             }
             catch (Exception ex)
             {
