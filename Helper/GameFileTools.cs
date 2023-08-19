@@ -256,8 +256,11 @@ namespace Helper
         {
             try
             {
+                LogHelper.LoggerGameFileTools.Information("check if options.ini file for game > {0} < in path > {1} < exists...", assemblyName, Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
                 if (!File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME)))
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
+                    LogHelper.LoggerGameFileTools.Information("It does not exist, so we create it now...");
+                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
+                LogHelper.LoggerGameFileTools.Information("sucessfully created options.ini file in < {0} >", Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
             }
             catch (Exception ex)
             {
