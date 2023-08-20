@@ -75,13 +75,11 @@ namespace Helper
             }
         }
 
-        public static void DeleteGameShortcutsFromStartMenu()
+        public static void DeleteGameShortcutsFromStartMenu(string Folderpath)
         {
             try
             {
-                File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", RegistryService.ReadRegKeyBFME2("displayName"), RegistryService.ReadRegKeyBFME2("displayName") + ".lnk"));
-                File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", RegistryService.ReadRegKeyBFME2("displayName"), "Worldbuilder" + ".lnk"));
-                Directory.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", RegistryService.ReadRegKeyBFME2("displayName")));
+                Directory.Delete(Folderpath, true);
             }
             catch (Exception ex)
             {

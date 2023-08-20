@@ -24,6 +24,8 @@ namespace PatchLauncher
         readonly ChangelogPagePatch changelogPagePatch = new();
         readonly ChangelogPageLauncher changelogPageLauncher = new();
 
+        readonly string displayNameFromRegistry = RegistryService.ReadRegKeyBFME25("displayName");
+
         static bool IsLauncherCurrentlyWorking = false;
 
         public WinFormsMainGUI()
@@ -182,12 +184,12 @@ namespace PatchLauncher
                     Settings.Default.Save();
                 }
 
-                if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), RegistryService.ReadRegKeyBFME25("displayName")))
+                if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
                     GameDesktopShortcutToolStripMenuItem.Checked = true;
                 else
                     GameDesktopShortcutToolStripMenuItem.Checked = false;
 
-                if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", RegistryService.ReadRegKeyBFME25("displayName")), RegistryService.ReadRegKeyBFME25("displayName")))
+                if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry), displayNameFromRegistry))
                     GameStartmenuShortcutsToolStripMenuItem.Checked = true;
                 else
                     GameStartmenuShortcutsToolStripMenuItem.Checked = false;
@@ -864,7 +866,7 @@ namespace PatchLauncher
 
         private void GameDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), RegistryService.ReadRegKeyBFME25("displayName")))
+            if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
             {
                 ShortCutHelper.DeleteGameShortcutFromDesktop();
                 GameDesktopShortcutToolStripMenuItem.Checked = false;
@@ -873,7 +875,7 @@ namespace PatchLauncher
             {
                 ShortCutHelper.CreateShortcutToDesktop(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName),
                     ConstStrings.C_BFME25_MAIN_GAME_FILE),
-                    RegistryService.ReadRegKeyBFME25("displayName"),
+                    displayNameFromRegistry,
                     Settings.Default.StartGameWindowed == true ? "-win" : "");
                 GameDesktopShortcutToolStripMenuItem.Checked = true;
             }
@@ -881,23 +883,22 @@ namespace PatchLauncher
 
         private void GameStartmenuShortcutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", RegistryService.ReadRegKeyBFME25("displayName")),
-                RegistryService.ReadRegKeyBFME25("displayName")))
+            if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry), displayNameFromRegistry))
             {
-                ShortCutHelper.DeleteGameShortcutsFromStartMenu();
+                ShortCutHelper.DeleteGameShortcutsFromStartMenu(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry));
                 GameStartmenuShortcutsToolStripMenuItem.Checked = false;
             }
             else
             {
-                ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_BFME25_MAIN_GAME_FILE), RegistryService.ReadRegKeyBFME25("displayName"),
+                ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_BFME25_MAIN_GAME_FILE), displayNameFromRegistry,
                     Path.Combine("Programs", "Electronic Arts",
-                    RegistryService.ReadRegKeyBFME25("displayName")),
+                    displayNameFromRegistry),
                     Settings.Default.StartGameWindowed == true ? "-win" : "");
 
                 ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder",
                     Path.Combine("Programs",
                     "Electronic Arts",
-                    RegistryService.ReadRegKeyBFME25("displayName")));
+                    displayNameFromRegistry));
 
                 GameStartmenuShortcutsToolStripMenuItem.Checked = true;
             }
