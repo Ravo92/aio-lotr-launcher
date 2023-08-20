@@ -117,57 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PibHeader.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBYoutube.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBDiscord.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBModDB.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBThemeSwitcher.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="LblWorkerFileName.Location" type="System.Drawing.Point, System.Drawing">
     <value>613, 664</value>
   </data>
-  <data name="LblWorkerFileName.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="BtnInstall.Text" xml:space="preserve">
     <value>SPIEL INSTALLIEREN</value>
-  </data>
-  <data name="BtnInstall.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="LblWorkerIOTask.Location" type="System.Drawing.Point, System.Drawing">
     <value>613, 709</value>
   </data>
-  <data name="LblWorkerIOTask.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PibLoadingRing.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="LabelLoadingPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PibLoadingBorder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBTwitch.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PanelPlaceholder.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PiBVersion201.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LabelLoadingPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 491</value>
   </data>
   <data name="LblModExplanation.Size" type="System.Drawing.Size, System.Drawing">
     <value>1174, 47</value>
@@ -175,15 +136,6 @@
   <data name="LblModExplanation.Text" xml:space="preserve">
     <value>Hier kannst du auswählen, welche(n) Mod oder Patch du spielen möchtest.
 </value>
-  </data>
-  <data name="LblModExplanation.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 48</value>
-  </data>
-  <data name="NotifyContextMenu.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
@@ -197,38 +149,29 @@
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Beenden</value>
   </data>
-  <data name="PibMute.ToolTip" xml:space="preserve">
-    <value />
+  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 48</value>
   </data>
-  <data name="WinFormsMainMenuStrip.ToolTip" xml:space="preserve">
-    <value />
+  <data name="LaunchGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 22</value>
+  </data>
+  <data name="LaunchGameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Spiel starten</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 6</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 22</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Beenden</value>
   </data>
   <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
   <data name="FileToolStripMenuItem.Text" xml:space="preserve">
     <value>Datei</value>
-  </data>
-  <data name="LaunchGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="LaunchGameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Spiel starten</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Beenden</value>
-  </data>
-  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
-  </data>
-  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Optionen</value>
   </data>
   <data name="SettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>325, 22</value>
@@ -266,11 +209,11 @@
   <data name="LauncherStartmenuShortcutToolStripMenuItem.Text" xml:space="preserve">
     <value>Verwende Launcher-Verknüpfung im Startmenü</value>
   </data>
-  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
+  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 20</value>
   </data>
-  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
-    <value>Erweitert</value>
+  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Optionen</value>
   </data>
   <data name="OpenLauncherDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 22</value>
@@ -323,11 +266,11 @@
   <data name="RepairGameToolStripMenuItem.Text" xml:space="preserve">
     <value>Spieldateien überprüfen und reparieren</value>
   </data>
-  <data name="SelectGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 20</value>
+  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
   </data>
-  <data name="SelectGameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Spiel auswählen</value>
+  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
+    <value>Erweitert</value>
   </data>
   <data name="BFME1ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 22</value>
@@ -341,29 +284,23 @@
   <data name="BFME2ToolStripMenuItem.Text" xml:space="preserve">
     <value>Die Schlacht um Mittelerde II ™</value>
   </data>
+  <data name="SelectGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 20</value>
+  </data>
+  <data name="SelectGameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Spiel auswählen</value>
+  </data>
+  <data name="CreditsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Mitwirkende</value>
+  </data>
   <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
   <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
     <value>Über</value>
   </data>
-  <data name="CreditsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="CreditsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Mitwirkende</value>
-  </data>
-  <data name="ChangelogLauncherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="ChangelogLauncherToolStripMenuItem.Text" xml:space="preserve">
-    <value>Launcher-Changelog</value>
-  </data>
   <data name="PBarActualFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 664</value>
-  </data>
-  <data name="PBarActualFile.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="SysTray.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -9389,8 +9326,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Bfme 2.22 Launcher - Der Aufstieg des Hexenkönigs ™</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>
