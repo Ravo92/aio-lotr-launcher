@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.ComponentModel;
 using SevenZipExtractor;
+using System.Reflection;
 
 namespace Helper
 {
@@ -81,7 +82,7 @@ namespace Helper
             }
         }
 
-        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, List<string> DownloadUrls, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress)
+        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, List<string> DownloadUrls, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
         {
             try
             {
@@ -93,14 +94,18 @@ namespace Helper
 
                 var downloadOpt = new DownloadConfiguration()
                 {
-                    ParallelDownload = false,
+                    ParallelDownload = true,
                     ReserveStorageSpaceBeforeStartingDownload = true,
                     ClearPackageOnCompletionWithFailure = true,
-                    MaximumMemoryBufferBytes = 1024 * 1024 * 512,
                     MaxTryAgainOnFailover = 1,
                     Timeout = 5000,
-                    ChunkCount = 1,
-                    BufferBlockSize = 8000,
+                    ChunkCount = 8,
+                    RequestConfiguration =
+                    {
+                        KeepAlive = true,
+                        ProtocolVersion = System.Net.HttpVersion.Version11,
+                        UserAgent = assemblyName + " on Version: " + Assembly.GetEntryAssembly()!.GetName().Version
+                    }
                 };
 
                 OverallProgress = downloadProgress;
