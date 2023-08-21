@@ -1,6 +1,7 @@
 ﻿using Helper;
 using AutoUpdaterDotNET;
 using System.Net;
+using System;
 
 namespace Restarter
 {
@@ -58,8 +59,8 @@ namespace Restarter
                     {
                         MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
+                        LogHelper.LoggerRestarter.Error(exception, "AutoUpdaterOnCheckForUpdateEvent Error: ");
                     }
-
                 }
                 else
                 {
@@ -80,6 +81,8 @@ namespace Restarter
                     MessageBox.Show(args.Error.Message,
                         args.Error.GetType().ToString(), MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+
+                    LogHelper.LoggerRestarter.Error(args.Error.GetType().ToString(), "args.Error is WebException: ");
                 }
             }
         }
