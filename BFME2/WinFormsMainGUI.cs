@@ -370,6 +370,7 @@ namespace PatchLauncher
                     }
 
                     Settings.Default.PatchVersionInstalled = version;
+                    AssemblyNameHelper.ThirdPartyToolExecutableMissing = false;
                     UpdatePanelButtonActiveState();
                 }
                 catch (Exception ex)
