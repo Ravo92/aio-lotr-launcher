@@ -9,5 +9,6 @@ namespace PatchLauncher
         internal static readonly Version BFMELauncherGameVerion = Assembly.GetEntryAssembly()!.GetName().Version!;
         internal static int ExternalInstallerReturnCode { get; set; }
         internal static bool EAXWasActivated { get; set; }
+        internal static bool ThirdPartyToolExecutableMissing { get; set; }
     }
 }

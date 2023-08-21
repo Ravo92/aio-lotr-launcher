@@ -134,6 +134,26 @@ namespace PatchLauncher {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Seems like we lost the game itself or a third party patch- or mod-launcher
+        ///Its greatly advised, that you dont install any third party launcher into the game folder itself!
+        ///Do you want to repair the game now, so we got a clean 2.22 state again?.
+        /// </summary>
+        internal static string Msg_ErrorStartingGame_Text {
+            get {
+                return ResourceManager.GetString("Msg.ErrorStartingGame.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is a problem!.
+        /// </summary>
+        internal static string Msg_ErrorStartingGame_Title {
+            get {
+                return ResourceManager.GetString("Msg.ErrorStartingGame.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The target directory is not empty. Continue installing the game?
         ///Exisiting files will be deleted!.
         /// </summary>

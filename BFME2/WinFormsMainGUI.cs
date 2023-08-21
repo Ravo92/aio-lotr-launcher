@@ -313,7 +313,7 @@ namespace PatchLauncher
                     LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                     await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
-                    if (Settings.Default.ActivePatchOrModExternalProgramFolderPath == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND + "\\" + patchPacks.ThirdPartyToolExecutableName)
+                    if ((Settings.Default.ActivePatchOrModExternalProgramFolderPath == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND + "\\" + patchPacks.ThirdPartyToolExecutableName) || AssemblyNameHelper.ThirdPartyToolExecutableMissing)
                     {
                         await InstallUpdatRepairRoutine(patchPacks.FileName, patchPacks.URLs, patchPacks.MD5, patchPacks.HasExternalInstaller, patchPacks.ExternalInstallerHasLaunchAbility);
                     }
@@ -688,7 +688,7 @@ namespace PatchLauncher
             catch (Exception ex)
             {
                 LogHelper.LoggerBFME2GUI.Error(ex.ToString());
-                MessageBox.Show("Something went wrong. Please see Logfiles for further Details. \n We will no reset the launcher state so you can close it. \n Please click on the discord Logo to get support.");
+                MessageBox.Show("Something went wrong. Please see logfiles for further details. \n We will now reset the launcher state so you can close it. \n Please click on the discord logo to get support.");
                 await TurnPatchesAndModsViewOn();
             }
         }
@@ -773,32 +773,75 @@ namespace PatchLauncher
         {
             TurnPatchesAndModsViewOff();
 
-            if (!Settings.Default.ActivePatchOrModExternalProgramLaunchAbility && !string.IsNullOrEmpty(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
+            try
             {
-                Process processLaunchExternalTool = new();
-                processLaunchExternalTool.StartInfo.FileName = Settings.Default.ActivePatchOrModExternalProgramFolderPath;
-                processLaunchExternalTool.StartInfo.WorkingDirectory = Path.GetDirectoryName(Settings.Default.ActivePatchOrModExternalProgramFolderPath);
-                processLaunchExternalTool.Start();
-                await processLaunchExternalTool.WaitForExitAsync();
-                processLaunchExternalTool.Dispose();
+                if (!File.Exists(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
+                {
+                    throw new FileNotFoundException("Third party tool not found!", Path.GetFileName(Settings.Default.ActivePatchOrModExternalProgramFolderPath));
+                }
+
+                if (!Settings.Default.ActivePatchOrModExternalProgramLaunchAbility && !string.IsNullOrEmpty(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
+                {
+                    Process processLaunchExternalTool = new();
+                    processLaunchExternalTool.StartInfo.FileName = Settings.Default.ActivePatchOrModExternalProgramFolderPath;
+                    processLaunchExternalTool.StartInfo.WorkingDirectory = Path.GetDirectoryName(Settings.Default.ActivePatchOrModExternalProgramFolderPath);
+                    processLaunchExternalTool.Start();
+                    await processLaunchExternalTool.WaitForExitAsync();
+                    processLaunchExternalTool.Dispose();
+                }
+
+                Process processLaunchGame = new();
+                processLaunchGame.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_BFME2_MAIN_GAME_FILE);
+
+                // Start game windowed
+                if (Settings.Default.StartGameWindowed)
+                {
+                    processLaunchGame.StartInfo.Arguments = "-win";
+                }
+
+                processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
+                processLaunchGame.Start();
+                WindowState = FormWindowState.Minimized;
+                await processLaunchGame.WaitForExitAsync();
+                WindowState = FormWindowState.Normal;
+                await TurnPatchesAndModsViewOn();
+                processLaunchGame.Dispose();
             }
-
-            Process processLaunchGame = new();
-            processLaunchGame.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_BFME2_MAIN_GAME_FILE);
-
-            // Start game windowed
-            if (Settings.Default.StartGameWindowed)
+            catch (FileNotFoundException ex)
             {
-                processLaunchGame.StartInfo.Arguments = "-win";
-            }
+                LogHelper.LoggerBFME2GUI.Error(ex.ToString());
 
-            processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
-            processLaunchGame.Start();
-            WindowState = FormWindowState.Minimized;
-            await processLaunchGame.WaitForExitAsync();
-            WindowState = FormWindowState.Normal;
-            await TurnPatchesAndModsViewOn();
-            processLaunchGame.Dispose();
+                if (ex.FileName == patchPack.ThirdPartyToolExecutableName)
+                {
+                    Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";
+                    Settings.Default.ActivePatchOrModExternalProgramLaunchAbility = false;
+                    Settings.Default.Save();
+
+                    AssemblyNameHelper.ThirdPartyToolExecutableMissing = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerBFME2GUI.Error(ex.ToString());
+            }
+            finally
+            {
+                DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
+                if (dialogResult == DialogResult.OK)
+                {
+                    Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
+                    Settings.Default.Save();
+
+                    RepairGameToolStripMenuItem.Enabled = true;
+                    RepairGameToolStripMenuItem.PerformClick();
+
+                    UpdatePanelButtonActiveState();
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    await TurnPatchesAndModsViewOn();
+                }
+            }
         }
 
         private void CloseTheLauncherToolStripMenuItem_Click(object sender, EventArgs e)

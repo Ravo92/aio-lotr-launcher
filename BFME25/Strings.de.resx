@@ -142,6 +142,14 @@ Der Launcher setzt das Spiel daher wieder auf 1.06 zurück.</value>
   <data name="Info.PreparingUpdate" xml:space="preserve">
     <value>Bereite Update vor...</value>
   </data>
+  <data name="Msg.ErrorStartingGame.Text" xml:space="preserve">
+    <value>Scheint, als hätten wir das Spiel selbst oder einen Patch- oder Mod-Launcher eines Drittanbieters verloren!
+Es wird dringend empfohlen, keinen Launcher eines Drittanbieters im Spielordner selbst zu installieren!
+Möchtest du das Spiel jetzt reparieren, damit wir wieder einen sauberen 2.01 Stand haben?</value>
+  </data>
+  <data name="Msg.ErrorStartingGame.Title" xml:space="preserve">
+    <value>Spiel hat ein Problem!</value>
+  </data>
   <data name="Msg.InstallFolderNotEmpty.Text" xml:space="preserve">
     <value>Der Zielpfad enthält bereits Dateien. Bist du sicher, dass du die Installation fortsetzen möchtest?
 Bereits vorhandene Dateien in diesem Verzeichnis werden ohne Sicherung gelöscht!</value>

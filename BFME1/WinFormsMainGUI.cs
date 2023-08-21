@@ -687,22 +687,47 @@ namespace PatchLauncher
 
         private async void LaunchGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process processLaunchGame = new();
-            processLaunchGame.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_BFME1_MAIN_GAME_FILE);
-
-            // Start game windowed
-            if (Settings.Default.StartGameWindowed)
+            try
             {
-                processLaunchGame.StartInfo.Arguments = "-win";
-            }
+                Process processLaunchGame = new();
+                processLaunchGame.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_BFME1_MAIN_GAME_FILE);
 
-            processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
-            processLaunchGame.Start();
-            WindowState = FormWindowState.Minimized;
-            await processLaunchGame.WaitForExitAsync();
-            WindowState = FormWindowState.Normal;
-            await TurnPatchesAndModsViewOn();
-            processLaunchGame.Dispose();
+                // Start game windowed
+                if (Settings.Default.StartGameWindowed)
+                {
+                    processLaunchGame.StartInfo.Arguments = "-win";
+                }
+
+                processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
+                processLaunchGame.Start();
+                WindowState = FormWindowState.Minimized;
+                await processLaunchGame.WaitForExitAsync();
+                WindowState = FormWindowState.Normal;
+                await TurnPatchesAndModsViewOn();
+                processLaunchGame.Dispose();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerBFME2GUI.Error(ex.ToString());
+            }
+            finally
+            {
+                DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
+                if (dialogResult == DialogResult.OK)
+                {
+                    Settings.Default.PatchVersionInstalled = patchPack.Version;
+                    Settings.Default.Save();
+
+                    RepairGameToolStripMenuItem.Enabled = true;
+                    RepairGameToolStripMenuItem.PerformClick();
+
+                    UpdatePanelButtonActiveState();
+                }
+                else if (dialogResult == DialogResult.Cancel)
+                {
+                    await TurnPatchesAndModsViewOn();
+                }
+            }
         }
 
         private void CloseTheLauncherToolStripMenuItem_Click(object sender, EventArgs e)
