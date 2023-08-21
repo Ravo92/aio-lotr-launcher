@@ -304,14 +304,17 @@ namespace PatchLauncher
                     else
                         AssemblyNameHelper.EAXWasActivated = false;
 
-                    LogHelper.LoggerGRepairFile.Information("Started Repairing...");
-                    await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
+                    if (!AssemblyNameHelper.ThirdPartyToolExecutableMissing)
+                    {
+                        LogHelper.LoggerGRepairFile.Information("Started Repairing...");
+                        await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-                    LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
-                    await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
+                        LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+                        await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-                    LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
-                    await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                        LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+                        await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                    }
 
                     if ((Settings.Default.ActivePatchOrModExternalProgramFolderPath == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND + "\\" + patchPacks.ThirdPartyToolExecutableName) || AssemblyNameHelper.ThirdPartyToolExecutableMissing)
                     {
