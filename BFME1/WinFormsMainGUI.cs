@@ -699,19 +699,16 @@ namespace PatchLauncher
                 }
 
                 processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
-                processLaunchGame.Start();
                 WindowState = FormWindowState.Minimized;
+                processLaunchGame.Start();
                 await processLaunchGame.WaitForExitAsync();
-                WindowState = FormWindowState.Normal;
                 await TurnPatchesAndModsViewOn();
                 processLaunchGame.Dispose();
+                SysTray_MouseDoubleClick(null, null);
             }
             catch (Exception ex)
             {
                 LogHelper.LoggerBFME2GUI.Error(ex.ToString());
-            }
-            finally
-            {
                 DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
                 if (dialogResult == DialogResult.OK)
                 {

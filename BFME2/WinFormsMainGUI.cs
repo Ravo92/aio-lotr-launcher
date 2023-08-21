@@ -779,7 +779,7 @@ namespace PatchLauncher
 
             try
             {
-                if (!File.Exists(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
+                if (!File.Exists(Settings.Default.ActivePatchOrModExternalProgramFolderPath) && !string.IsNullOrEmpty(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
                 {
                     throw new FileNotFoundException("Third party tool not found!", Path.GetFileName(Settings.Default.ActivePatchOrModExternalProgramFolderPath));
                 }
@@ -804,12 +804,12 @@ namespace PatchLauncher
                 }
 
                 processLaunchGame.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
-                processLaunchGame.Start();
                 WindowState = FormWindowState.Minimized;
+                processLaunchGame.Start();
                 await processLaunchGame.WaitForExitAsync();
-                WindowState = FormWindowState.Normal;
                 await TurnPatchesAndModsViewOn();
                 processLaunchGame.Dispose();
+                SysTray_MouseDoubleClick(null, null);
             }
             catch (FileNotFoundException ex)
             {
@@ -822,14 +822,27 @@ namespace PatchLauncher
                     Settings.Default.Save();
 
                     AssemblyNameHelper.ThirdPartyToolExecutableMissing = true;
+
+                    DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
+                        Settings.Default.Save();
+
+                        RepairGameToolStripMenuItem.Enabled = true;
+                        RepairGameToolStripMenuItem.PerformClick();
+
+                        UpdatePanelButtonActiveState();
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
+                    {
+                        await TurnPatchesAndModsViewOn();
+                    }
                 }
             }
             catch (Exception ex)
             {
                 LogHelper.LoggerBFME2GUI.Error(ex.ToString());
-            }
-            finally
-            {
                 DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
                 if (dialogResult == DialogResult.OK)
                 {
