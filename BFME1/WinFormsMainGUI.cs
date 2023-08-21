@@ -211,7 +211,7 @@ namespace PatchLauncher
 
         private async void BFME1_Shown(object sender, EventArgs e)
         {
-            if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && !Settings.Default.SelectedOlderPatch)
+            if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
             {
                 TurnPatchesAndModsViewOff();
 
@@ -232,7 +232,7 @@ namespace PatchLauncher
                 await TurnPatchesAndModsViewOn();
                 UpdatePanelButtonActiveState();
             }
-            else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && (Settings.Default.SelectedOlderPatch || Settings.Default.UseBetaChannel))
+            else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && Settings.Default.SelectedOlderPatch)
             {
                 DialogResult _dialogResult = MessageBox.Show(Strings.Msg_RestartForUpdate_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);
                 if (_dialogResult == DialogResult.Yes)
@@ -263,6 +263,13 @@ namespace PatchLauncher
                 if (patchPacksBeta.Version > Settings.Default.BetaChannelVersion)
                 {
                     await InstallUpdatRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URLs, patchPacksBeta.MD5);
+                    Settings.Default.BetaChannelVersion = patchPacksBeta.Version;
+                    Settings.Default.Save();
+                }
+                else if (patchPacksBeta.Version < Settings.Default.BetaChannelVersion)
+                {
+                    Settings.Default.BetaChannelVersion = patchPacksBeta.Version;
+                    Settings.Default.Save();
                 }
 
                 await TurnPatchesAndModsViewOn();
@@ -396,7 +403,7 @@ namespace PatchLauncher
                 }
             }
 
-            if (Settings.Default.LatestPatchVersion > version)
+            if (Settings.Default.LatestPatchVersion > version || Settings.Default.PatchVersionInstalled == 103)
                 Settings.Default.SelectedOlderPatch = true;
 
             Settings.Default.Save();

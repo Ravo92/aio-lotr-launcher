@@ -296,6 +296,10 @@ namespace PatchLauncher
             Settings.Default.LauncherLanguage = FlagLauncherLanguageIndex;
             Settings.Default.UseBetaChannel = FlagUseBetaChannel;
             Settings.Default.StartGameWindowed = FlagWindowed;
+
+            if (FlagUseBetaChannel)
+                Settings.Default.SelectedOlderPatch = false;
+
             Settings.Default.Save();
 
             //Settings-Valuations
