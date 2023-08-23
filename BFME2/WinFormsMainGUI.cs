@@ -957,7 +957,7 @@ namespace PatchLauncher
         {
             if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
             {
-                ShortCutHelper.DeleteGameShortcutFromDesktop();
+                ShortCutHelper.DeleteGameShortcutFromDesktop(displayNameFromRegistry);
                 GameDesktopShortcutToolStripMenuItem.Checked = false;
             }
             else

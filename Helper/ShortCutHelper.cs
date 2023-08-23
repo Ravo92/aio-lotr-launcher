@@ -63,11 +63,11 @@ namespace Helper
             }
         }
 
-        public static void DeleteGameShortcutFromDesktop()
+        public static void DeleteGameShortcutFromDesktop(string linkName)
         {
             try
             {
-                File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), RegistryService.ReadRegKeyBFME2("displayName") + ".lnk"));
+                File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), linkName + ".lnk"));
             }
             catch (Exception ex)
             {
@@ -104,8 +104,7 @@ namespace Helper
         {
             try
             {
-                File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Patch 2.22 Launcher", ConstStrings.C_LAUNCHER_SHORTCUT_NAME + ".lnk"));
-                Directory.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), Path.Combine("Programs", "Patch 2.22 Launcher")));
+                Directory.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), Path.Combine("Programs", "Patch 2.22 Launcher")), true);
             }
             catch (Exception ex)
             {
