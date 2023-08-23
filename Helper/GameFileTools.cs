@@ -86,7 +86,13 @@ namespace Helper
         {
             try
             {
-                string DownloadUrl = DownloadUrls[downloadUrlCount]; //[new Random().Next(DownloadUrls.Length)];
+                string DownloadUrl = DownloadUrls[downloadUrlCount];
+
+                if (DownloadUrls.Count >= downloadUrlCount)
+                    DownloadUrl = DownloadUrls[downloadUrlCount]; //[new Random().Next(DownloadUrls.Length)];
+                else
+                    DownloadUrl = DownloadUrls[0];
+
                 LogHelper.LoggerGameFileTools.Information("Downloading from URI: < {0} >", DownloadUrl);
 
                 string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
