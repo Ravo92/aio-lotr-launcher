@@ -15,7 +15,7 @@ namespace Helper
         public static readonly ILogger LoggerRegistryTools = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_REGISTRY_NAME)).CreateLogger();
         public static readonly ILogger LoggerGameFileTools = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_GAMEFILETOOLS_NAME)).CreateLogger();
         public static readonly ILogger LoggerPatchModDectection = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_PATCHMODDETECTION_NAME)).CreateLogger();
-        public static readonly ILogger LoggerGRepairFile = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_REPAIRFILE_NAME)).CreateLogger();
+        public static readonly ILogger LoggerRepairFile = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_REPAIRFILE_NAME)).CreateLogger();
         public static readonly ILogger LoggerShortcuts = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(ConstStrings.C_LOGFOLDER_NAME, ConstStrings.C_LOGFILE_SHORTCUTS_NAME)).CreateLogger();
     }
 }

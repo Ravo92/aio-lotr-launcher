@@ -250,13 +250,13 @@ namespace PatchLauncher
 
                 LogHelper.LoggerBFME25GUI.Information("Performing Repair Routine after clicking on button > Patch 1.06 <");
 
-                LogHelper.LoggerGRepairFile.Information("Started Repairing...");
+                LogHelper.LoggerRepairFile.Information("Started Repairing...");
                 await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-                LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+                LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
                 await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-                LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+                LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                 await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
                 Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
@@ -308,13 +308,13 @@ namespace PatchLauncher
                         //}
                     }
 
-                    LogHelper.LoggerGRepairFile.Information("Started Repairing...");
+                    LogHelper.LoggerRepairFile.Information("Started Repairing...");
                     await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-                    LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+                    LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
                     await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-                    LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+                    LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                     await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
                     if (Settings.Default.ActivePatchOrModExternalProgramFolderPath == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND + "\\" + patchPacks.ThirdPartyToolExecutableName)
@@ -326,13 +326,13 @@ namespace PatchLauncher
                         MessageBox.Show(Strings.Error_ExternalInstallerCanceled_Text, Strings.Error_ExternalInstallerCanceled_Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         LogHelper.LoggerBFME25GUI.Error("Performing Install Routine for Patch or Mod > {0} < failed and perform repair", patchPacks.FileName);
 
-                        LogHelper.LoggerGRepairFile.Information("Started Repairing...");
+                        LogHelper.LoggerRepairFile.Information("Started Repairing...");
                         await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-                        LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+                        LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
                         await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-                        LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+                        LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                         await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
                         await TurnPatchesAndModsViewOn();
@@ -992,13 +992,13 @@ namespace PatchLauncher
         {
             TurnPatchesAndModsViewOff();
 
-            LogHelper.LoggerGRepairFile.Information("Started Repairing...");
+            LogHelper.LoggerRepairFile.Information("Started Repairing...");
             await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-            LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
             await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-            LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
             await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
             Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;

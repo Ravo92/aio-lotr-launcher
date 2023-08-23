@@ -931,22 +931,22 @@ namespace PatchLauncher
         {
             TurnPatchesAndModsViewOff();
 
-            LogHelper.LoggerGRepairFile.Information("Started Repairing...");
+            LogHelper.LoggerRepairFile.Information("Started Repairing...");
             await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-            LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
             await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-            LogHelper.LoggerGRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
             await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
-            LogHelper.LoggerGRepairFile.Information(string.Format("Downloading and/or extracting Latest Patch 2.22 Version \"{0}\" ...", patchPack.Version));
+            LogHelper.LoggerRepairFile.Information(string.Format("Downloading and/or extracting Latest Patch 2.22 Version \"{0}\" ...", patchPack.Version));
             await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
             if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
             {
                 patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                LogHelper.LoggerGRepairFile.Information(string.Format("Downloading and/or extracting Language-Files for Patch 2.22 Version \"{0}\" in language \"{1}\" ...", patchPack.Version, patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode]));
+                LogHelper.LoggerRepairFile.Information(string.Format("Downloading and/or extracting Language-Files for Patch 2.22 Version \"{0}\" in language \"{1}\" ...", patchPack.Version, patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode]));
                 await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
             }
 
