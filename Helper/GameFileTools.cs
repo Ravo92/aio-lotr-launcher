@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using SevenZipExtractor;
 using System.Reflection;
+using System;
 
 namespace Helper
 {
@@ -105,7 +106,7 @@ namespace Helper
                     ClearPackageOnCompletionWithFailure = true,
                     MaxTryAgainOnFailover = 1,
                     Timeout = 5000,
-                    ChunkCount = 8,
+                    ChunkCount = 4,
                     RequestConfiguration =
                     {
                         KeepAlive = true,
@@ -202,7 +203,7 @@ namespace Helper
                 {
                     OverallProgress!.Report(new ProgressHelper()
                     {
-                        PercentageValue = e.ProgressPercentage,
+                        PercentageValue = Math.Min(e.ProgressPercentage, 100),
                         DownloadSpeedSizeInBytes = e.BytesPerSecondSpeed,
                         TotalDownloadSizeInBytes = e.TotalBytesToReceive,
                         ProgressedDownloadSizeInBytes = e.ReceivedBytesSize
