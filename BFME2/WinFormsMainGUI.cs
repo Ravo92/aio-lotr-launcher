@@ -637,7 +637,7 @@ namespace PatchLauncher
                         }
                         else
                         {
-                            LogHelper.LoggerBFME2GUI.Error(string.Format("File > {0} < does not exist, start downloading...", CorrectMD5HashValue));
+                            LogHelper.LoggerBFME2GUI.Error(string.Format("File > {0} < does not exist, start downloading...", ZIPFileName));
                         }
 
                         Progress<ProgressHelper> progressHandlerDownload = new(progress =>
@@ -779,6 +779,12 @@ namespace PatchLauncher
 
             try
             {
+				string eauninstallExePath = Path.Combine(RegistryService.GameInstallPath("BFME2"), ConstStrings.C_EAUNINSTALL_FILENAME);
+				if (!File.Exists(eauninstallExePath))
+				{
+					File.Create(eauninstallExePath);
+				}
+				
                 if (!File.Exists(Settings.Default.ActivePatchOrModExternalProgramFolderPath) && !string.IsNullOrEmpty(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
                 {
                     throw new FileNotFoundException("Third party tool not found!", Path.GetFileName(Settings.Default.ActivePatchOrModExternalProgramFolderPath));
