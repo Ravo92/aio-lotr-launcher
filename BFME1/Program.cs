@@ -56,19 +56,22 @@ namespace PatchLauncher
                     Settings.Default.Save();
                 }
 
-                switch (Settings.Default.LauncherLanguage)
+                if (!Settings.Default.IsGameInstalled)
                 {
-                    case "de":
-                        Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-                        Settings.Default.InstalledLanguageISOCode = "de";
-                        Settings.Default.Save();
-                        break;
+                    switch (Settings.Default.LauncherLanguage)
+                    {
+                        case "de":
+                            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
+                            Settings.Default.InstalledLanguageISOCode = "de";
+                            Settings.Default.Save();
+                            break;
 
-                    default:
-                        Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                        Settings.Default.InstalledLanguageISOCode = "en_us";
-                        Settings.Default.Save();
-                        break;
+                        default:
+                            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+                            Settings.Default.InstalledLanguageISOCode = "en_us";
+                            Settings.Default.Save();
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -78,25 +81,32 @@ namespace PatchLauncher
 
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
-                GameFileTools _gameFileTools = new();
-                GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
+                try
+                {
+                    GameFileTools _gameFileTools = new();
+                    GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
 
-                JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
-                JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[AssemblyNameHelper.BFMELauncherGameName];
-                JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.Version, x => x);
+                    JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
+                    JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[AssemblyNameHelper.BFMELauncherGameName];
+                    JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.Version, x => x);
 
-                PatchPacks _latestPatchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
-                PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[AssemblyNameHelper.BFMELauncherGameName];
+                    PatchPacks _latestPatchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
+                    PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[AssemblyNameHelper.BFMELauncherGameName];
 
-                Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
-                Settings.Default.Save();
+                    Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
+                    Settings.Default.Save();
 
-                GameFileTools.EnsureBFMEAppdataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
-                GameFileTools.EnsureBFMEOptionsIniFileExists(AssemblyNameHelper.BFMELauncherGameName);
+                    GameFileTools.EnsureBFMEAppdataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
+                    GameFileTools.EnsureBFMEOptionsIniFileExists(AssemblyNameHelper.BFMELauncherGameName);
 
-                Application.Run(new WinFormsMainGUI());
-                _mutex.ReleaseMutex();
-                _mutex.Dispose();
+                    Application.Run(new WinFormsMainGUI());
+                    _mutex.ReleaseMutex();
+                    _mutex.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LoggerBFME1GUI.Error(ex, "JSON File Error!");
+                }
             }
             else
             {
