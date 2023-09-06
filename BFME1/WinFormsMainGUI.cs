@@ -689,7 +689,7 @@ namespace PatchLauncher
             }
         }
 
-        private static Task<bool> PrepareInstallFolder(bool AskForFolderClearance = true)
+        private Task<bool> PrepareInstallFolder(bool AskForFolderClearance = true)
         {
             try
             {
@@ -707,6 +707,7 @@ namespace PatchLauncher
                     }
                     else if (dialogResult == DialogResult.Cancel)
                     {
+                        TurnPatchesAndModsViewOff();
                         return Task.FromResult(false);
                     }
                 }
@@ -759,7 +760,7 @@ namespace PatchLauncher
             }
         }
 
-        private void SysTray_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void SysTray_MouseDoubleClick(object? sender, MouseEventArgs? e)
         {
             Show();
             WindowState = FormWindowState.Normal;
@@ -925,12 +926,12 @@ namespace PatchLauncher
                 patchPack.Version = Settings.Default.PatchVersionInstalled;
                 Settings.Default.Save();
 
-                if (Settings.Default.CreateDesktopShortcut)
+                if (Settings.Default.CreateDesktopShortcut && !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                 {
                     GameDesktopShortcutToolStripMenuItem.PerformClick();
                 }
 
-                if (Settings.Default.CreateStartMenuShortcut)
+                if (Settings.Default.CreateStartMenuShortcut && !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry), displayNameFromRegistry))
                 {
                     GameStartmenuShortcutsToolStripMenuItem.PerformClick();
                 }

@@ -697,7 +697,7 @@ namespace PatchLauncher
             }
         }
 
-        private Task<bool> PrepareInstallFolder()
+        private Task<bool> PrepareInstallFolder(bool AskForFolderClearance = true)
         {
             try
             {
@@ -706,7 +706,7 @@ namespace PatchLauncher
                     Directory.CreateDirectory(Settings.Default.GameInstallPath);
                 }
 
-                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0)
+                if (Directory.Exists(Settings.Default.GameInstallPath) && Directory.GetFileSystemEntries(Settings.Default.GameInstallPath).Length != 0 && AskForFolderClearance)
                 {
                     DialogResult dialogResult = MessageBox.Show(Strings.Msg_InstallFolderNotEmpty_Text, Strings.Msg_InstallFolderNotEmpty_Title, MessageBoxButtons.OKCancel);
                     if (dialogResult == DialogResult.OK)
@@ -719,6 +719,11 @@ namespace PatchLauncher
                         return Task.FromResult(false);
                     }
                 }
+                else if (!AskForFolderClearance)
+                {
+                    Directory.Delete(Settings.Default.GameInstallPath, true);
+                }
+
                 return Task.FromResult(true);
             }
             catch (Exception ex)
@@ -761,7 +766,7 @@ namespace PatchLauncher
             }
         }
 
-        private void SysTray_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void SysTray_MouseDoubleClick(object? sender, MouseEventArgs? e)
         {
             Show();
             WindowState = FormWindowState.Normal;
@@ -953,10 +958,51 @@ namespace PatchLauncher
             }
         }
 
-        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OptionsForm _Gameoptions = new();
             _Gameoptions.ShowDialog();
+            _Gameoptions.Dispose();
+
+            if (ChangedGameLanguage.UserChangedGameLanguageInSettings)
+            {
+                ChangedGameLanguage.UserChangedGameLanguageInSettings = false;
+                TurnPatchesAndModsViewOff();
+
+                Task<bool> taskPrepareInstallFolder = PrepareInstallFolder(false);
+                taskPrepareInstallFolder.Wait();
+
+                languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
+
+                RegistryService.WriteRegKeysInstallationBFME2(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
+
+                await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
+                await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
+
+                if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
+                {
+                    patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
+                    await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
+                }
+
+                patchPack.Version = Settings.Default.PatchVersionInstalled;
+                Settings.Default.Save();
+
+                if (Settings.Default.CreateDesktopShortcut && !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
+                {
+                    GameDesktopShortcutToolStripMenuItem.PerformClick();
+                }
+
+                if (Settings.Default.CreateStartMenuShortcut && !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry), displayNameFromRegistry))
+                {
+                    GameStartmenuShortcutsToolStripMenuItem.PerformClick();
+                }
+
+                taskPrepareInstallFolder.Dispose();
+
+                await TurnPatchesAndModsViewOn();
+            }
         }
 
         private void GameDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
