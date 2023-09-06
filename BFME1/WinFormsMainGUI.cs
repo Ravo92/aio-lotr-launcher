@@ -209,6 +209,8 @@ namespace PatchLauncher
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = true;
                 else
                     LauncherStartmenuShortcutToolStripMenuItem.Checked = false;
+
+                Settings.Default.Save();
             }
             catch (Exception ex)
             {
@@ -896,6 +898,7 @@ namespace PatchLauncher
         {
             GameOptionsForm _Gameoptions = new();
             _Gameoptions.ShowDialog();
+            _Gameoptions.Dispose();
 
             if (ChangedGameLanguage.UserChangedGameLanguageInSettings)
             {
