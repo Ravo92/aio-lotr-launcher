@@ -1,6 +1,5 @@
 ﻿using Helper;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -299,6 +298,11 @@ namespace PatchLauncher
 
             if (FlagUseBetaChannel)
                 Settings.Default.SelectedOlderPatch = false;
+
+            if (FlagIsBetaChannelChanged && !Settings.Default.UseBetaChannel)
+            {
+                Settings.Default.PatchVersionInstalled = Settings.Default.LatestPatchVersion - 1;
+            }
 
             Settings.Default.Save();
 
