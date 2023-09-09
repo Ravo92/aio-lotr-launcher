@@ -5,7 +5,7 @@
 
 [Setup]
 AppName={#MyAppName}
-AppId=Patch 2.22 Launcher
+AppId={#MyAppName}
 AppVersion={#MyAppExeVersion}
 AppVerName={#MyAppName}
 WizardStyle=modern
@@ -30,8 +30,6 @@ VersionInfoVersion={#MyAppExeVersion}
 AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
 AppPublisher=Raphael Vogel
 AppPublisherURL=https://github.com/Ravo92
-
-ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 
 [Languages]

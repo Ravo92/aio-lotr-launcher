@@ -23,6 +23,14 @@ namespace PatchLauncher
         {
             try
             {
+                string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+                if (!File.Exists(configPath))
+                {
+                    Settings.Default.Upgrade();
+                    Settings.Default.Reload();
+                    Settings.Default.Save();
+                }
+
                 if (args.Length < 1)
                 {
                     return;
@@ -49,14 +57,6 @@ namespace PatchLauncher
 
             try
             {
-                string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
-                if (!File.Exists(configPath))
-                {
-                    Settings.Default.Upgrade();
-                    Settings.Default.Reload();
-                    Settings.Default.Save();
-                }
-
                 Thread.CurrentThread.CurrentUICulture = Settings.Default.LauncherLanguage switch
                 {
                     "de" => new System.Globalization.CultureInfo("de"),
