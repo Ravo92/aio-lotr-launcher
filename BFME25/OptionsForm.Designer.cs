@@ -101,8 +101,8 @@
             // 
             // BtnDefault
             // 
-            resources.ApplyResources(BtnDefault, "BtnDefault");
             BtnDefault.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnDefault, "BtnDefault");
             BtnDefault.FlatAppearance.BorderSize = 0;
             BtnDefault.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -118,15 +118,15 @@
             // 
             // PibBorderLanguageOptions
             // 
-            resources.ApplyResources(PibBorderLanguageOptions, "PibBorderLanguageOptions");
             PibBorderLanguageOptions.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibBorderLanguageOptions, "PibBorderLanguageOptions");
             PibBorderLanguageOptions.Name = "PibBorderLanguageOptions";
             PibBorderLanguageOptions.TabStop = false;
             // 
             // PibHeader
             // 
-            resources.ApplyResources(PibHeader, "PibHeader");
             PibHeader.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibHeader, "PibHeader");
             PibHeader.Name = "PibHeader";
             PibHeader.TabStop = false;
             // 
@@ -137,8 +137,8 @@
             // 
             // PibBorderGameOptions
             // 
-            resources.ApplyResources(PibBorderGameOptions, "PibBorderGameOptions");
             PibBorderGameOptions.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibBorderGameOptions, "PibBorderGameOptions");
             PibBorderGameOptions.Name = "PibBorderGameOptions";
             PibBorderGameOptions.TabStop = false;
             // 
@@ -149,15 +149,15 @@
             // 
             // ResolutionX
             // 
-            resources.ApplyResources(ResolutionX, "ResolutionX");
             ResolutionX.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(ResolutionX, "ResolutionX");
             ResolutionX.Name = "ResolutionX";
             ResolutionX.TabStop = false;
             // 
             // ResolutionY
             // 
-            resources.ApplyResources(ResolutionY, "ResolutionY");
             ResolutionY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(ResolutionY, "ResolutionY");
             ResolutionY.Name = "ResolutionY";
             ResolutionY.TabStop = false;
             // 
@@ -173,8 +173,8 @@
             // 
             // BtnApply
             // 
-            resources.ApplyResources(BtnApply, "BtnApply");
             BtnApply.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnApply, "BtnApply");
             BtnApply.FlatAppearance.BorderSize = 0;
             BtnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -190,8 +190,8 @@
             // 
             // BtnCancel
             // 
-            resources.ApplyResources(BtnCancel, "BtnCancel");
             BtnCancel.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnCancel, "BtnCancel");
             BtnCancel.FlatAppearance.BorderSize = 0;
             BtnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -207,8 +207,8 @@
             // 
             // CmbSelectGameLanguage
             // 
-            resources.ApplyResources(CmbSelectGameLanguage, "CmbSelectGameLanguage");
             CmbSelectGameLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(CmbSelectGameLanguage, "CmbSelectGameLanguage");
             CmbSelectGameLanguage.FormattingEnabled = true;
             CmbSelectGameLanguage.Name = "CmbSelectGameLanguage";
             CmbSelectGameLanguage.SelectedIndexChanged += CmbSelectGameLanguage_SelectedIndexChanged;
@@ -230,8 +230,8 @@
             // 
             // ChkEAX
             // 
-            resources.ApplyResources(ChkEAX, "ChkEAX");
             ChkEAX.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkEAX, "ChkEAX");
             ChkEAX.FlatAppearance.BorderSize = 0;
             ChkEAX.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -257,8 +257,8 @@
             // 
             // CmbSelectLauncherLanguage
             // 
-            resources.ApplyResources(CmbSelectLauncherLanguage, "CmbSelectLauncherLanguage");
             CmbSelectLauncherLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(CmbSelectLauncherLanguage, "CmbSelectLauncherLanguage");
             CmbSelectLauncherLanguage.FormattingEnabled = true;
             CmbSelectLauncherLanguage.Items.AddRange(new object[] { resources.GetString("CmbSelectLauncherLanguage.Items"), resources.GetString("CmbSelectLauncherLanguage.Items1") });
             CmbSelectLauncherLanguage.Name = "CmbSelectLauncherLanguage";
@@ -276,8 +276,8 @@
             // 
             // ChkWindowed
             // 
-            resources.ApplyResources(ChkWindowed, "ChkWindowed");
             ChkWindowed.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkWindowed, "ChkWindowed");
             ChkWindowed.FlatAppearance.BorderSize = 0;
             ChkWindowed.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkWindowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -303,16 +303,16 @@
             // 
             // PibBorderLauncherSettings
             // 
-            resources.ApplyResources(PibBorderLauncherSettings, "PibBorderLauncherSettings");
             PibBorderLauncherSettings.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(PibBorderLauncherSettings, "PibBorderLauncherSettings");
             PibBorderLauncherSettings.Name = "PibBorderLauncherSettings";
             PibBorderLauncherSettings.TabStop = false;
             // 
             // TrackBarOptionsShaderLOD
             // 
-            resources.ApplyResources(TrackBarOptionsShaderLOD, "TrackBarOptionsShaderLOD");
             TrackBarOptionsShaderLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             TrackBarOptionsShaderLOD.LargeChange = 1;
+            resources.ApplyResources(TrackBarOptionsShaderLOD, "TrackBarOptionsShaderLOD");
             TrackBarOptionsShaderLOD.Maximum = 3;
             TrackBarOptionsShaderLOD.Name = "TrackBarOptionsShaderLOD";
             TrackBarOptionsShaderLOD.Value = 1;
@@ -340,9 +340,9 @@
             // 
             // TrackBarOptionsModelLOD
             // 
-            resources.ApplyResources(TrackBarOptionsModelLOD, "TrackBarOptionsModelLOD");
             TrackBarOptionsModelLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             TrackBarOptionsModelLOD.LargeChange = 1;
+            resources.ApplyResources(TrackBarOptionsModelLOD, "TrackBarOptionsModelLOD");
             TrackBarOptionsModelLOD.Maximum = 3;
             TrackBarOptionsModelLOD.Name = "TrackBarOptionsModelLOD";
             TrackBarOptionsModelLOD.Value = 1;
@@ -360,8 +360,8 @@
             // 
             // TrackBarOptionsAnimationLOD
             // 
-            resources.ApplyResources(TrackBarOptionsAnimationLOD, "TrackBarOptionsAnimationLOD");
             TrackBarOptionsAnimationLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(TrackBarOptionsAnimationLOD, "TrackBarOptionsAnimationLOD");
             TrackBarOptionsAnimationLOD.LargeChange = 1;
             TrackBarOptionsAnimationLOD.Maximum = 4;
             TrackBarOptionsAnimationLOD.Name = "TrackBarOptionsAnimationLOD";
@@ -380,8 +380,8 @@
             // 
             // TrackBarOptionsVFXLOD
             // 
-            resources.ApplyResources(TrackBarOptionsVFXLOD, "TrackBarOptionsVFXLOD");
             TrackBarOptionsVFXLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(TrackBarOptionsVFXLOD, "TrackBarOptionsVFXLOD");
             TrackBarOptionsVFXLOD.LargeChange = 1;
             TrackBarOptionsVFXLOD.Maximum = 4;
             TrackBarOptionsVFXLOD.Name = "TrackBarOptionsVFXLOD";
@@ -400,8 +400,8 @@
             // 
             // TrackBarOptionsShadowsLOD
             // 
-            resources.ApplyResources(TrackBarOptionsShadowsLOD, "TrackBarOptionsShadowsLOD");
             TrackBarOptionsShadowsLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(TrackBarOptionsShadowsLOD, "TrackBarOptionsShadowsLOD");
             TrackBarOptionsShadowsLOD.LargeChange = 1;
             TrackBarOptionsShadowsLOD.Maximum = 4;
             TrackBarOptionsShadowsLOD.Name = "TrackBarOptionsShadowsLOD";
@@ -420,8 +420,8 @@
             // 
             // TrackBarOptionsWaterLOD
             // 
-            resources.ApplyResources(TrackBarOptionsWaterLOD, "TrackBarOptionsWaterLOD");
             TrackBarOptionsWaterLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(TrackBarOptionsWaterLOD, "TrackBarOptionsWaterLOD");
             TrackBarOptionsWaterLOD.LargeChange = 1;
             TrackBarOptionsWaterLOD.Maximum = 3;
             TrackBarOptionsWaterLOD.Name = "TrackBarOptionsWaterLOD";
@@ -440,8 +440,8 @@
             // 
             // TrackBarOptionsTextureLOD
             // 
-            resources.ApplyResources(TrackBarOptionsTextureLOD, "TrackBarOptionsTextureLOD");
             TrackBarOptionsTextureLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(TrackBarOptionsTextureLOD, "TrackBarOptionsTextureLOD");
             TrackBarOptionsTextureLOD.LargeChange = 1;
             TrackBarOptionsTextureLOD.Maximum = 2;
             TrackBarOptionsTextureLOD.Name = "TrackBarOptionsTextureLOD";
@@ -460,8 +460,8 @@
             // 
             // TrackBarOptionsTerrainLOD
             // 
-            resources.ApplyResources(TrackBarOptionsTerrainLOD, "TrackBarOptionsTerrainLOD");
             TrackBarOptionsTerrainLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(TrackBarOptionsTerrainLOD, "TrackBarOptionsTerrainLOD");
             TrackBarOptionsTerrainLOD.LargeChange = 1;
             TrackBarOptionsTerrainLOD.Maximum = 2;
             TrackBarOptionsTerrainLOD.Name = "TrackBarOptionsTerrainLOD";
@@ -480,8 +480,8 @@
             // 
             // TrackBarOptionsDecalLOD
             // 
-            resources.ApplyResources(TrackBarOptionsDecalLOD, "TrackBarOptionsDecalLOD");
             TrackBarOptionsDecalLOD.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(TrackBarOptionsDecalLOD, "TrackBarOptionsDecalLOD");
             TrackBarOptionsDecalLOD.LargeChange = 1;
             TrackBarOptionsDecalLOD.Maximum = 2;
             TrackBarOptionsDecalLOD.Name = "TrackBarOptionsDecalLOD";
@@ -495,8 +495,8 @@
             // 
             // ChkHighAudio
             // 
-            resources.ApplyResources(ChkHighAudio, "ChkHighAudio");
             ChkHighAudio.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(ChkHighAudio, "ChkHighAudio");
             ChkHighAudio.FlatAppearance.BorderSize = 0;
             ChkHighAudio.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkHighAudio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -512,8 +512,8 @@
             // 
             // OptionsForm
             // 
-            resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            resources.ApplyResources(this, "$this");
             Controls.Add(LblHighAudio);
             Controls.Add(ChkHighAudio);
             Controls.Add(LblTrackBarDecalValue);

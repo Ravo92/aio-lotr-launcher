@@ -891,7 +891,7 @@ namespace PatchLauncher
 
         private async void GameSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GameOptionsForm _Gameoptions = new();
+            OptionsForm _Gameoptions = new();
             _Gameoptions.ShowDialog();
             _Gameoptions.Dispose();
 

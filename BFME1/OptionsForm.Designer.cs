@@ -1,6 +1,6 @@
 ﻿namespace PatchLauncher
 {
-    partial class GameOptionsForm
+    partial class OptionsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameOptionsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             BtnDefault = new System.Windows.Forms.Button();
             PibBorderLauncherOptions = new System.Windows.Forms.PictureBox();
             PibHeader = new System.Windows.Forms.PictureBox();

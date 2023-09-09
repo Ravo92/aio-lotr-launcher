@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace PatchLauncher
 {
-    public partial class GameOptionsForm : Form
+    public partial class OptionsForm : Form
     {
         readonly static string GameInstallPath = RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName);
         readonly bool FlagEAXFileExists = File.Exists(GameInstallPath + @"\dsound.dll");
@@ -46,7 +46,7 @@ namespace PatchLauncher
 
         readonly Dictionary<string, string> _selectedLanguageDictionary = JSONDataListHelper._DictionarylanguageSettings.ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
 
-        public GameOptionsForm()
+        public OptionsForm()
         {
             InitializeComponent();
 
