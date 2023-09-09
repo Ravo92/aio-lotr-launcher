@@ -12,6 +12,7 @@ namespace PatchLauncher
     internal class Program
     {
         static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
+        static readonly string RegistryDetectedGameLocale = RegistryService.ReadRegKeyBFME25("locale");
 
         /// <summary>
         ///  The main entry point for the application.
@@ -56,40 +57,40 @@ namespace PatchLauncher
                     Settings.Default.Save();
                 }
 
+                Thread.CurrentThread.CurrentUICulture = Settings.Default.LauncherLanguage switch
+                {
+                    "de" => new System.Globalization.CultureInfo("de"),
+                    _ => new System.Globalization.CultureInfo("en"),
+                };
+
                 if (!Settings.Default.IsGameInstalled)
                 {
-                    switch (Settings.Default.LauncherLanguage)
+                    switch (Settings.Default.InstalledLanguageISOCode)
                     {
                         case "de":
-                            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de");
-
-                            if (RegistryService.ReadRegKeyBFME25("locale") == "de" || RegistryService.ReadRegKeyBFME25("locale") == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                            if (RegistryDetectedGameLocale == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                             {
                                 Settings.Default.InstalledLanguageISOCode = "de";
                                 Settings.Default.Save();
                             }
                             else
                             {
-                                Settings.Default.InstalledLanguageISOCode = RegistryService.ReadRegKeyBFME25("locale");
+                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLocale;
                                 Settings.Default.Save();
                             }
-
                             break;
 
                         default:
-                            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-
-                            if (RegistryService.ReadRegKeyBFME25("locale") == "en_uk" || RegistryService.ReadRegKeyBFME25("locale") == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                            if (RegistryDetectedGameLocale == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                             {
                                 Settings.Default.InstalledLanguageISOCode = "en_uk";
                                 Settings.Default.Save();
                             }
                             else
                             {
-                                Settings.Default.InstalledLanguageISOCode = RegistryService.ReadRegKeyBFME25("locale");
+                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLocale;
                                 Settings.Default.Save();
                             }
-
                             break;
                     }
                 }

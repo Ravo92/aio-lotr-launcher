@@ -67,6 +67,19 @@
             ChkUnitDecals = new System.Windows.Forms.Button();
             LblEAX = new System.Windows.Forms.Label();
             ChkEAX = new System.Windows.Forms.Button();
+            LblUseBetaChannel = new System.Windows.Forms.Label();
+            ChkUseBetaChannel = new System.Windows.Forms.Button();
+            LblBrutalAI = new System.Windows.Forms.Label();
+            ChkBrutalAI = new System.Windows.Forms.Button();
+            LblWindowed = new System.Windows.Forms.Label();
+            ChkWindowed = new System.Windows.Forms.Button();
+            LblWarning = new System.Windows.Forms.Label();
+            LblLauncherVersion = new System.Windows.Forms.Label();
+            LblPatchVersion = new System.Windows.Forms.Label();
+            LblLanguage = new System.Windows.Forms.Label();
+            CmBLanguage = new System.Windows.Forms.ComboBox();
+            LblLauncherVersionTitle = new System.Windows.Forms.Label();
+            LblPatchVersionTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)PibBorderLauncherOptions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PibHeader).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PibBorderGameOptions).BeginInit();
@@ -74,8 +87,8 @@
             // 
             // BtnDefault
             // 
-            BtnDefault.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(BtnDefault, "BtnDefault");
+            BtnDefault.BackColor = System.Drawing.Color.Black;
             BtnDefault.FlatAppearance.BorderSize = 0;
             BtnDefault.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnDefault.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -91,15 +104,15 @@
             // 
             // PibBorderLauncherOptions
             // 
-            PibBorderLauncherOptions.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(PibBorderLauncherOptions, "PibBorderLauncherOptions");
+            PibBorderLauncherOptions.BackColor = System.Drawing.Color.Transparent;
             PibBorderLauncherOptions.Name = "PibBorderLauncherOptions";
             PibBorderLauncherOptions.TabStop = false;
             // 
             // PibHeader
             // 
-            PibHeader.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(PibHeader, "PibHeader");
+            PibHeader.BackColor = System.Drawing.Color.Transparent;
             PibHeader.Name = "PibHeader";
             PibHeader.TabStop = false;
             // 
@@ -110,8 +123,8 @@
             // 
             // PibBorderGameOptions
             // 
-            PibBorderGameOptions.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(PibBorderGameOptions, "PibBorderGameOptions");
+            PibBorderGameOptions.BackColor = System.Drawing.Color.Transparent;
             PibBorderGameOptions.Name = "PibBorderGameOptions";
             PibBorderGameOptions.TabStop = false;
             // 
@@ -127,8 +140,8 @@
             // 
             // ChkAniTextureFiltering
             // 
-            ChkAniTextureFiltering.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkAniTextureFiltering, "ChkAniTextureFiltering");
+            ChkAniTextureFiltering.BackColor = System.Drawing.Color.Black;
             ChkAniTextureFiltering.FlatAppearance.BorderSize = 0;
             ChkAniTextureFiltering.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkAniTextureFiltering.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -144,8 +157,8 @@
             // 
             // ChkTerrainLighting
             // 
-            ChkTerrainLighting.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkTerrainLighting, "ChkTerrainLighting");
+            ChkTerrainLighting.BackColor = System.Drawing.Color.Black;
             ChkTerrainLighting.FlatAppearance.BorderSize = 0;
             ChkTerrainLighting.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkTerrainLighting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -171,8 +184,8 @@
             // 
             // Chk2DShadows
             // 
-            Chk2DShadows.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(Chk2DShadows, "Chk2DShadows");
+            Chk2DShadows.BackColor = System.Drawing.Color.Black;
             Chk2DShadows.FlatAppearance.BorderSize = 0;
             Chk2DShadows.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             Chk2DShadows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -193,8 +206,8 @@
             // 
             // Chk3DShadows
             // 
-            Chk3DShadows.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(Chk3DShadows, "Chk3DShadows");
+            Chk3DShadows.BackColor = System.Drawing.Color.Black;
             Chk3DShadows.FlatAppearance.BorderSize = 0;
             Chk3DShadows.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             Chk3DShadows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -215,8 +228,8 @@
             // 
             // ChkShowProps
             // 
-            ChkShowProps.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkShowProps, "ChkShowProps");
+            ChkShowProps.BackColor = System.Drawing.Color.Black;
             ChkShowProps.FlatAppearance.BorderSize = 0;
             ChkShowProps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkShowProps.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -237,8 +250,8 @@
             // 
             // ChkSmoothWaterBorder
             // 
-            ChkSmoothWaterBorder.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkSmoothWaterBorder, "ChkSmoothWaterBorder");
+            ChkSmoothWaterBorder.BackColor = System.Drawing.Color.Black;
             ChkSmoothWaterBorder.FlatAppearance.BorderSize = 0;
             ChkSmoothWaterBorder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkSmoothWaterBorder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -259,8 +272,8 @@
             // 
             // ChkDynamicLOD
             // 
-            ChkDynamicLOD.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkDynamicLOD, "ChkDynamicLOD");
+            ChkDynamicLOD.BackColor = System.Drawing.Color.Black;
             ChkDynamicLOD.FlatAppearance.BorderSize = 0;
             ChkDynamicLOD.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkDynamicLOD.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -281,8 +294,8 @@
             // 
             // ChkHeatEffects
             // 
-            ChkHeatEffects.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkHeatEffects, "ChkHeatEffects");
+            ChkHeatEffects.BackColor = System.Drawing.Color.Black;
             ChkHeatEffects.FlatAppearance.BorderSize = 0;
             ChkHeatEffects.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkHeatEffects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -303,8 +316,8 @@
             // 
             // ChkShowAnimations
             // 
-            ChkShowAnimations.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkShowAnimations, "ChkShowAnimations");
+            ChkShowAnimations.BackColor = System.Drawing.Color.Black;
             ChkShowAnimations.FlatAppearance.BorderSize = 0;
             ChkShowAnimations.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkShowAnimations.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -320,15 +333,15 @@
             // 
             // ResolutionX
             // 
-            ResolutionX.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(ResolutionX, "ResolutionX");
+            ResolutionX.BorderStyle = System.Windows.Forms.BorderStyle.None;
             ResolutionX.Name = "ResolutionX";
             ResolutionX.TabStop = false;
             // 
             // ResolutionY
             // 
-            ResolutionY.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(ResolutionY, "ResolutionY");
+            ResolutionY.BorderStyle = System.Windows.Forms.BorderStyle.None;
             ResolutionY.Name = "ResolutionY";
             ResolutionY.TabStop = false;
             // 
@@ -344,8 +357,8 @@
             // 
             // BtnApply
             // 
-            BtnApply.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(BtnApply, "BtnApply");
+            BtnApply.BackColor = System.Drawing.Color.Black;
             BtnApply.FlatAppearance.BorderSize = 0;
             BtnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -361,8 +374,8 @@
             // 
             // BtnCancel
             // 
-            BtnCancel.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(BtnCancel, "BtnCancel");
+            BtnCancel.BackColor = System.Drawing.Color.Black;
             BtnCancel.FlatAppearance.BorderSize = 0;
             BtnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -383,8 +396,8 @@
             // 
             // CmbSelectGameLanguage
             // 
-            CmbSelectGameLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(CmbSelectGameLanguage, "CmbSelectGameLanguage");
+            CmbSelectGameLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             CmbSelectGameLanguage.FormattingEnabled = true;
             CmbSelectGameLanguage.Name = "CmbSelectGameLanguage";
             CmbSelectGameLanguage.SelectedIndexChanged += CmbSelectGameLanguage_SelectedIndexChanged;
@@ -406,8 +419,8 @@
             // 
             // ChkUnitDecals
             // 
-            ChkUnitDecals.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkUnitDecals, "ChkUnitDecals");
+            ChkUnitDecals.BackColor = System.Drawing.Color.Black;
             ChkUnitDecals.FlatAppearance.BorderSize = 0;
             ChkUnitDecals.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkUnitDecals.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -428,8 +441,8 @@
             // 
             // ChkEAX
             // 
-            ChkEAX.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(ChkEAX, "ChkEAX");
+            ChkEAX.BackColor = System.Drawing.Color.Black;
             ChkEAX.FlatAppearance.BorderSize = 0;
             ChkEAX.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkEAX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -443,10 +456,128 @@
             ChkEAX.MouseEnter += ChkEAX_MouseEnter;
             ChkEAX.MouseLeave += ChkEAX_MouseLeave;
             // 
+            // LblUseBetaChannel
+            // 
+            resources.ApplyResources(LblUseBetaChannel, "LblUseBetaChannel");
+            LblUseBetaChannel.Name = "LblUseBetaChannel";
+            // 
+            // ChkUseBetaChannel
+            // 
+            resources.ApplyResources(ChkUseBetaChannel, "ChkUseBetaChannel");
+            ChkUseBetaChannel.BackColor = System.Drawing.Color.Black;
+            ChkUseBetaChannel.FlatAppearance.BorderSize = 0;
+            ChkUseBetaChannel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            ChkUseBetaChannel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            ChkUseBetaChannel.ForeColor = System.Drawing.Color.Transparent;
+            ChkUseBetaChannel.Name = "ChkUseBetaChannel";
+            ChkUseBetaChannel.TabStop = false;
+            ChkUseBetaChannel.UseMnemonic = false;
+            ChkUseBetaChannel.UseVisualStyleBackColor = false;
+            ChkUseBetaChannel.MouseClick += ChkUseBetaChannel_MouseClick;
+            ChkUseBetaChannel.MouseDown += ChkUseBetaChannel_MouseDown;
+            ChkUseBetaChannel.MouseEnter += ChkUseBetaChannel_MouseEnter;
+            ChkUseBetaChannel.MouseLeave += ChkUseBetaChannel_MouseLeave;
+            // 
+            // LblBrutalAI
+            // 
+            resources.ApplyResources(LblBrutalAI, "LblBrutalAI");
+            LblBrutalAI.Name = "LblBrutalAI";
+            // 
+            // ChkBrutalAI
+            // 
+            resources.ApplyResources(ChkBrutalAI, "ChkBrutalAI");
+            ChkBrutalAI.BackColor = System.Drawing.Color.Black;
+            ChkBrutalAI.FlatAppearance.BorderSize = 0;
+            ChkBrutalAI.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            ChkBrutalAI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            ChkBrutalAI.ForeColor = System.Drawing.Color.Transparent;
+            ChkBrutalAI.Name = "ChkBrutalAI";
+            ChkBrutalAI.TabStop = false;
+            ChkBrutalAI.UseMnemonic = false;
+            ChkBrutalAI.UseVisualStyleBackColor = false;
+            ChkBrutalAI.MouseClick += ChkBrutalAI_MouseClick;
+            ChkBrutalAI.MouseDown += ChkBrutalAI_MouseDown;
+            ChkBrutalAI.MouseEnter += ChkBrutalAI_MouseEnter;
+            ChkBrutalAI.MouseLeave += ChkBrutalAI_MouseLeave;
+            // 
+            // LblWindowed
+            // 
+            resources.ApplyResources(LblWindowed, "LblWindowed");
+            LblWindowed.Name = "LblWindowed";
+            // 
+            // ChkWindowed
+            // 
+            resources.ApplyResources(ChkWindowed, "ChkWindowed");
+            ChkWindowed.BackColor = System.Drawing.Color.Black;
+            ChkWindowed.FlatAppearance.BorderSize = 0;
+            ChkWindowed.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            ChkWindowed.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            ChkWindowed.ForeColor = System.Drawing.Color.Transparent;
+            ChkWindowed.Name = "ChkWindowed";
+            ChkWindowed.TabStop = false;
+            ChkWindowed.UseMnemonic = false;
+            ChkWindowed.UseVisualStyleBackColor = false;
+            ChkWindowed.MouseClick += ChkWindowed_MouseClick;
+            ChkWindowed.MouseDown += ChkWindowed_MouseDown;
+            ChkWindowed.MouseEnter += ChkWindowed_MouseEnter;
+            ChkWindowed.MouseLeave += ChkWindowed_MouseLeave;
+            // 
+            // LblWarning
+            // 
+            resources.ApplyResources(LblWarning, "LblWarning");
+            LblWarning.Name = "LblWarning";
+            // 
+            // LblLauncherVersion
+            // 
+            resources.ApplyResources(LblLauncherVersion, "LblLauncherVersion");
+            LblLauncherVersion.Name = "LblLauncherVersion";
+            // 
+            // LblPatchVersion
+            // 
+            resources.ApplyResources(LblPatchVersion, "LblPatchVersion");
+            LblPatchVersion.Name = "LblPatchVersion";
+            // 
+            // LblLanguage
+            // 
+            resources.ApplyResources(LblLanguage, "LblLanguage");
+            LblLanguage.Name = "LblLanguage";
+            // 
+            // CmBLanguage
+            // 
+            resources.ApplyResources(CmBLanguage, "CmBLanguage");
+            CmBLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            CmBLanguage.FormattingEnabled = true;
+            CmBLanguage.Items.AddRange(new object[] { resources.GetString("CmBLanguage.Items"), resources.GetString("CmBLanguage.Items1") });
+            CmBLanguage.Name = "CmBLanguage";
+            CmBLanguage.SelectedIndexChanged += CmBLanguage_SelectedIndexChanged;
+            // 
+            // LblLauncherVersionTitle
+            // 
+            resources.ApplyResources(LblLauncherVersionTitle, "LblLauncherVersionTitle");
+            LblLauncherVersionTitle.Name = "LblLauncherVersionTitle";
+            // 
+            // LblPatchVersionTitle
+            // 
+            resources.ApplyResources(LblPatchVersionTitle, "LblPatchVersionTitle");
+            LblPatchVersionTitle.Name = "LblPatchVersionTitle";
+            // 
             // GameOptionsForm
             // 
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            Controls.Add(LblLauncherVersion);
+            Controls.Add(LblPatchVersion);
+            Controls.Add(LblLanguage);
+            Controls.Add(CmBLanguage);
+            Controls.Add(LblLauncherVersionTitle);
+            Controls.Add(LblPatchVersionTitle);
+            Controls.Add(LblWarning);
+            Controls.Add(LblUseBetaChannel);
+            Controls.Add(ChkUseBetaChannel);
+            Controls.Add(LblBrutalAI);
+            Controls.Add(ChkBrutalAI);
+            Controls.Add(LblWindowed);
+            Controls.Add(ChkWindowed);
             Controls.Add(LblEAX);
             Controls.Add(ChkEAX);
             Controls.Add(LblUnitDecals);
@@ -535,5 +666,18 @@
         private System.Windows.Forms.Button ChkUnitDecals;
         private System.Windows.Forms.Label LblEAX;
         private System.Windows.Forms.Button ChkEAX;
+        private System.Windows.Forms.Label LblUseBetaChannel;
+        private System.Windows.Forms.Button ChkUseBetaChannel;
+        private System.Windows.Forms.Label LblBrutalAI;
+        private System.Windows.Forms.Button ChkBrutalAI;
+        private System.Windows.Forms.Label LblWindowed;
+        private System.Windows.Forms.Button ChkWindowed;
+        private System.Windows.Forms.Label LblWarning;
+        private System.Windows.Forms.Label LblLauncherVersion;
+        private System.Windows.Forms.Label LblPatchVersion;
+        private System.Windows.Forms.Label LblLanguage;
+        private System.Windows.Forms.ComboBox CmBLanguage;
+        private System.Windows.Forms.Label LblLauncherVersionTitle;
+        private System.Windows.Forms.Label LblPatchVersionTitle;
     }
 }

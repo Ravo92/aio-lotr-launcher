@@ -621,12 +621,6 @@
   <data name="FileToolStripMenuItem.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="LauncherSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 22</value>
-  </data>
-  <data name="LauncherSettingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Launcher Settings</value>
-  </data>
   <data name="GameSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
   </data>
@@ -6529,12 +6523,6 @@
     <value>OptionsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;OptionsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LauncherSettingsToolStripMenuItem.Name" xml:space="preserve">
-    <value>LauncherSettingsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;LauncherSettingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;GameSettingsToolStripMenuItem.Name" xml:space="preserve">

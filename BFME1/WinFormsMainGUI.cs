@@ -889,12 +889,6 @@ namespace PatchLauncher
             }
         }
 
-        private void LauncherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LauncherOptionsForm launcherOptionsForm = new();
-            launcherOptionsForm.ShowDialog();
-        }
-
         private async void GameSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GameOptionsForm _Gameoptions = new();

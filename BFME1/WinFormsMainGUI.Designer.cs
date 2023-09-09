@@ -59,7 +59,6 @@ namespace PatchLauncher
             toolStripSeparator1 = new ToolStripSeparator();
             ExitToolStripMenuItem = new ToolStripMenuItem();
             OptionsToolStripMenuItem = new ToolStripMenuItem();
-            LauncherSettingsToolStripMenuItem = new ToolStripMenuItem();
             GameSettingsToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             GameDesktopShortcutToolStripMenuItem = new ToolStripMenuItem();
@@ -293,15 +292,9 @@ namespace PatchLauncher
             // 
             // OptionsToolStripMenuItem
             // 
-            OptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { LauncherSettingsToolStripMenuItem, GameSettingsToolStripMenuItem, toolStripSeparator5, GameDesktopShortcutToolStripMenuItem, GameStartmenuShortcutsToolStripMenuItem, toolStripSeparator6, LauncherDesktopShortcutToolStripMenuItem, LauncherStartmenuShortcutToolStripMenuItem });
+            OptionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { GameSettingsToolStripMenuItem, toolStripSeparator5, GameDesktopShortcutToolStripMenuItem, GameStartmenuShortcutsToolStripMenuItem, toolStripSeparator6, LauncherDesktopShortcutToolStripMenuItem, LauncherStartmenuShortcutToolStripMenuItem });
             OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem";
             resources.ApplyResources(OptionsToolStripMenuItem, "OptionsToolStripMenuItem");
-            // 
-            // LauncherSettingsToolStripMenuItem
-            // 
-            LauncherSettingsToolStripMenuItem.Name = "LauncherSettingsToolStripMenuItem";
-            resources.ApplyResources(LauncherSettingsToolStripMenuItem, "LauncherSettingsToolStripMenuItem");
-            LauncherSettingsToolStripMenuItem.Click += LauncherSettingsToolStripMenuItem_Click;
             // 
             // GameSettingsToolStripMenuItem
             // 
@@ -452,7 +445,6 @@ namespace PatchLauncher
             PBarActualFile.CustomText = null;
             PBarActualFile.DisplayStyle = ProgressBarDisplayText.Percentage;
             PBarActualFile.ForeColor = System.Drawing.Color.Transparent;
-            CustomProgressBar.Game = ProgressBarGame.BFME1;
             resources.ApplyResources(PBarActualFile, "PBarActualFile");
             PBarActualFile.Name = "PBarActualFile";
             PBarActualFile.Style = ProgressBarStyle.Continuous;
@@ -538,7 +530,6 @@ namespace PatchLauncher
         private ToolStripMenuItem LaunchGameToolStripMenuItem;
         private ToolStripMenuItem ExitToolStripMenuItem;
         private ToolStripMenuItem OptionsToolStripMenuItem;
-        private ToolStripMenuItem LauncherSettingsToolStripMenuItem;
         private ToolStripMenuItem GameSettingsToolStripMenuItem;
         private ToolStripMenuItem AdvancedToolStripMenuItem;
         private ToolStripMenuItem OpenGameDirectoryToolStripMenuItem;
