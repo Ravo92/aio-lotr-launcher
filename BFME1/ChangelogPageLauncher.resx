@@ -1296,7 +1296,7 @@
     <value>WindowsDefaultBounds</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Changelog Launcher</value>
+    <value>Launcher changelog page</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ChangelogPageLauncher</value>

@@ -282,5 +282,29 @@ namespace Helper
                 LogHelper.LoggerGameFileTools.Error(ex, "");
             }
         }
+
+        public static string CheckIfJSONLanguageExists(string jsonLocaleISOCode, string gameName)
+        {
+            if (JSONDataListHelper._DictionarylanguageSettings.ContainsKey(jsonLocaleISOCode))
+            {
+                LogHelper.LoggerGameFileTools.Information("Language key {0} exists in json, continue", jsonLocaleISOCode);
+                return jsonLocaleISOCode;
+            }
+            else
+            {
+                LogHelper.LoggerGameFileTools.Warning("Language key {0} DOES NOT exist in json, continue with locale > en_uk <", jsonLocaleISOCode);
+
+                try
+                {
+                    RegistryService.WriteRegKeyForBFMEGames("Locale", "en_uk", gameName);
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LoggerGameFileTools.Error(ex, "Error writing into key > Locale < with value > en_uk <");
+                }
+
+                return "en_uk";
+            }
+        }
     }
 }

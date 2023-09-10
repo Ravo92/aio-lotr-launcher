@@ -64,6 +64,27 @@ namespace Helper
             }
         }
 
+        public static void WriteRegKeyForBFMEGames(string key, string value, string gameName)
+        {
+            RegistryKey mainPath;
+
+            switch (gameName)
+            {
+                case "BFME1":
+                    mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\", true)!;
+                    mainPath.SetValue(key, value);
+                    break;
+                case "BFME2":
+                    mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Battle for Middle-earth II\", true)!;
+                    mainPath.SetValue(key, value);
+                    break;
+                case "BFME25":
+                    mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\", true)!;
+                    mainPath.SetValue(key, value);
+                    break;
+            }
+        }
+
         public static string GameLanguage(string BFMEGameVersion)
         {
             return BFMEGameVersion switch

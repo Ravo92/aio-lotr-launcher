@@ -116,7 +116,15 @@ namespace PatchLauncher
 
                     Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
                     Settings.Default.Save();
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LoggerBFME2GUI.Error(ex, "JSON File Error!");
+                    Application.Exit();
+                }
 
+                try
+                {
                     GameFileTools.EnsureBFMEAppdataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
                     GameFileTools.EnsureBFMEOptionsIniFileExists(AssemblyNameHelper.BFMELauncherGameName);
 
@@ -126,7 +134,7 @@ namespace PatchLauncher
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.LoggerBFME2GUI.Error(ex, "JSON File Error!");
+                    LogHelper.LoggerBFME2GUI.Error(ex, "Window Related Error!");
                 }
             }
             else
