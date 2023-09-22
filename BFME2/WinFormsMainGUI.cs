@@ -1054,7 +1054,7 @@ namespace PatchLauncher
             }
             else
             {
-                ShortCutHelper.CreateShortcutToDesktop(Path.Combine(Application.StartupPath, "Restarter.exe"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME, "--startLauncher");
+                ShortCutHelper.CreateShortcutToDesktop(Path.Combine(Application.StartupPath, "Restarter.exe"), ConstStrings.C_LAUNCHER_SHORTCUT_NAME);
                 LauncherDesktopShortcutToolStripMenuItem.Checked = true;
             }
         }
