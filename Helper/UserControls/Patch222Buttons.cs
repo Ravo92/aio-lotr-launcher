@@ -31,11 +31,11 @@
             InitializeComponent();
 
             // label-Styles
-            LblPatchVersion.Font = FontHelper.GetFont(0, 17);
+            LblPatchVersion.Font = FontHelper.GetFont(0, 16);
             LblPatchVersion.ForeColor = Color.FromArgb(192, 145, 69);
             LblPatchVersion.BackColor = Color.Transparent;
             LblPatchVersion.BorderStyle = BorderStyle.None;
-            LblPatchVersion.OutlineWidth = 6;
+            LblPatchVersion.OutlineWidth = 7;
         }
     }
 }

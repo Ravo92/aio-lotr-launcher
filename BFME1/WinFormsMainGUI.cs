@@ -148,24 +148,36 @@ namespace PatchLauncher
                         }
                     }
 
-                    foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key is >= 22220 and <= 22250))
+                    foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key is >= 22220 and <= 2229999))
                     {
-                        string patch222Version = version.Value.Version.ToString()[3..];
-                        Patch222Buttons patch222Buttons = new()
+                        if (!version.Value.HasSubPatchOrHotfix)
                         {
-                            LabelTextPatchVersion = "Version " + patch222Version,
-                            Tag = version.Key
-                        };
+                            string patch222Version = "";
+                            Patch222Buttons patch222Buttons = new();
 
-                        if (version.Value.Version == Settings.Default.PatchVersionInstalled)
-                        {
-                            patch222Buttons.SelectedIconVisible = true;
+                            if (version.Value.Version.ToString().Length >= 6)
+                            {
+                                patch222Version = version.Value.Version.ToString()[3..].Insert(2, ".");
+                                patch222Buttons.LabelTextPatchVersion = "Version " + patch222Version;
+                                patch222Buttons.Tag = version.Key;
+                            }
+                            else
+                            {
+                                patch222Version = version.Value.Version.ToString()[3..];
+                                patch222Buttons.LabelTextPatchVersion = "Version " + patch222Version;
+                                patch222Buttons.Tag = version.Key;
+                            }
+
+                            if (version.Value.Version == Settings.Default.PatchVersionInstalled)
+                            {
+                                patch222Buttons.SelectedIconVisible = true;
+                            }
+
+                            UpdatePanelButtonActiveState();
+
+                            patch222Buttons.Click += PatchButton222Clicked;
+                            PanelPlaceholder.Controls.Add(patch222Buttons);
                         }
-
-                        UpdatePanelButtonActiveState();
-
-                        patch222Buttons.Click += PatchButton222Clicked;
-                        PanelPlaceholder.Controls.Add(patch222Buttons);
                     }
                 }
 

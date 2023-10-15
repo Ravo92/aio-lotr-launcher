@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "Restarter.exe"
-#define MyAppExeVersion "1.0.5.7"
+#define MyAppExeVersion "1.0.5.8"
 #define MyAppPublishFolder "PatchLauncher"
 
 [Setup]
@@ -61,6 +61,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\Downloads"
+Type: filesandordirs; Name: "{app}\BFME1.exe.WebView2"
+Type: filesandordirs; Name: "{app}\BFME2.exe.WebView2"
+Type: filesandordirs; Name: "{app}\BFME25.exe.WebView2"
 
 [Run]
 Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--showLauncherUpdateLog"

@@ -11,6 +11,7 @@
         public string ThirdPartyToolExecutableName { get; set; }
         public bool HasExternalInstaller { get; set; }
         public bool ExternalInstallerHasLaunchAbility { get; set; }
+        public bool HasSubPatchOrHotfix { get; set; }
 
         public Dictionary<string, LanguageFiles> LanguageFiles;
     }
