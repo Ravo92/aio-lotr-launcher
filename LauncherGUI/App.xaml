@@ -4,6 +4,28 @@
              xmlns:local="clr-namespace:LauncherGUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/AccentButtonStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ListButtonStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/TextBlockButtonStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary>
+                    <Style x:Key="FocusVisual">
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

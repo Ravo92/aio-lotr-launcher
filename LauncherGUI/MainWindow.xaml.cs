@@ -1,6 +1,12 @@
 ﻿using LauncherGUI.Helpers;
+using LauncherGUI.Pages.Primary;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LauncherGUI
 {
@@ -9,110 +15,76 @@ namespace LauncherGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<PatchesAndModsVM> PatchesAndMods { get; set; }
+        public static MainWindow Instance { get; private set; }
+        private static Library Library = new Library();
+        private static Online Online = new Online();
 
         public MainWindow()
         {
             InitializeComponent();
+            Instance = this;
 
-            Loaded += new RoutedEventHandler(MainWindow_Loaded);
+            fullContent.Visibility = Visibility.Visible;
+
+            Width = System.Windows.SystemParameters.WorkArea.Width * 0.7;
+            Height = System.Windows.SystemParameters.WorkArea.Height * 0.8;
+
+            CheckSize();
+
+            ShowLibrary();
         }
 
-        private void ButtonGameBFME1_Click(object sender, RoutedEventArgs e)
+        public static void SetContent(FrameworkElement? newContent) => Instance.content.Child = newContent;
+        public static void SetFullContent(FrameworkElement? newContent)
         {
-            Style? styleButtonBFME1 = FindResource("UnderlinedButton") as Style;
-            GameBFME1.Style = styleButtonBFME1;
-
-            Style? styleButtonBFME2 = FindResource("ButtonHovered") as Style;
-            GameBFME2.Style = styleButtonBFME2;
-
-            Style? styleButtonBFME2EP1 = FindResource("ButtonHovered") as Style;
-            GameBFME2EP1.Style = styleButtonBFME2EP1;
+            Instance.content.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
+            Instance.fullContent.Child = newContent;
         }
 
-        private void ButtonGameBFME2_Click(object sender, RoutedEventArgs e)
+        public static void ShowLibrary()
         {
-            Style? styleButtonBFME1 = FindResource("ButtonHovered") as Style;
-            GameBFME1.Style = styleButtonBFME1;
+            SetContent(Library);
 
-            Style? styleButtonBFME2 = FindResource("UnderlinedButton") as Style;
-            GameBFME2.Style = styleButtonBFME2;
-
-            Style? styleButtonBFME2EP1 = FindResource("ButtonHovered") as Style;
-            GameBFME2EP1.Style = styleButtonBFME2EP1;
-        }
-
-        private void ButtonGameBFME2EP1_Click(object sender, RoutedEventArgs e)
-        {
-            Style? styleButtonBFME1 = FindResource("ButtonHovered") as Style;
-            GameBFME1.Style = styleButtonBFME1;
-
-            Style? styleButtonBFME2 = FindResource("ButtonHovered") as Style;
-            GameBFME2.Style = styleButtonBFME2;
-
-            Style? styleButtonBFME2EP1 = FindResource("UnderlinedButton") as Style;
-            GameBFME2EP1.Style = styleButtonBFME2EP1;
-        }
-
-        public void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            Style? styleButtonBFME1 = FindResource("UnderlinedButton") as Style;
-            GameBFME1.Style = styleButtonBFME1;
-
-            PatchesAndMods = new List<PatchesAndModsVM>
+            foreach (TextBlock tab in Instance.tabs.Children.OfType<TextBlock>())
             {
-                new()
+                if (tab == Instance.libraryTab)
+                    tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
+                else
                 {
-                    DataGridVerionNumber = "1.03",
-                    DataGridDescription = "Official Patch 1.03",
-                    DataGridKindOf = DataGridKindOf.Patch,
-                    DataGridActivated = true,
-                },
-                new()
-                {
-                    DataGridVerionNumber = "1.06",
-                    DataGridDescription = "Unofficial Patch 1.06",
-                    DataGridKindOf = DataGridKindOf.Patch,
-                    DataGridActivated = false,
-                },
-                new()
-                {
-                    DataGridVerionNumber = "2.22.32",
-                    DataGridDescription = "Patch 2.22",
-                    DataGridKindOf = DataGridKindOf.Patch,
-                    DataGridActivated = true,
-                },
-                new()
-                {
-                    DataGridVerionNumber = "6.01",
-                    DataGridDescription = "Elvenstar Mod",
-                    DataGridKindOf = DataGridKindOf.Mod,
-                    DataGridActivated = true,
-                },
-                new()
-                {
-                    DataGridVerionNumber = "1.1",
-                    DataGridDescription = "Shadow and Flame",
-                    DataGridKindOf = DataGridKindOf.Mod,
-                    DataGridActivated = true,
-                },
-                new()
-                {
-                    DataGridVerionNumber = "3.15",
-                    DataGridDescription = "Edain Mod",
-                    DataGridKindOf = DataGridKindOf.Mod,
-                    DataGridActivated = true,
-                },
-            };
+                    tab.Foreground = Brushes.White;
+                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                }
+            }
+        }
 
-            DataContext = this;
+        public static void ShowOnline()
+        {
+            SetContent(Online);
 
-            //foreach (string entries in PatchModDetectionHelper.AllPatchesAndMods)
-            //{
-            //    MainTable.Items.Add(entries);
-            //}
+            foreach (TextBlock tab in Instance.tabs.Children.OfType<TextBlock>())
+            {
+                if (tab == Instance.onlineTab)
+                    tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
+                else
+                {
+                    tab.Foreground = Brushes.White;
+                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                }
+            }
+        }
 
-            // MainTable.ItemsSource = ;
+        private void OnSettingsClicked(object sender, MouseButtonEventArgs e) => SetFullContent(new Settings());
+
+        private void OnLibraryTabClicked(object sender, MouseButtonEventArgs e) => ShowLibrary();
+
+        private void OnOnlineTabClicked(object sender, MouseButtonEventArgs e) => ShowOnline();
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e) => CheckSize();
+
+        public void CheckSize()
+        {
+            var dpi = VisualTreeHelper.GetDpi(this);
+            windowGrid.LayoutTransform = new ScaleTransform(1 / dpi.DpiScaleX * Math.Min(1, Math.Min((this.ActualWidth / 1500), (this.ActualHeight / 900))), 1 / dpi.DpiScaleX * Math.Min(1, Math.Min((this.ActualWidth / 1500), (this.ActualHeight / 900))));
         }
     }
 }

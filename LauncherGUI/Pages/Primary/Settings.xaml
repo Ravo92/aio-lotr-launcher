@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="LauncherGUI.Pages.Primary.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LauncherGUI.Pages.Primary"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1500" Background="#1C1E26">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="500" MinWidth="280"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="#0CFFFFFF">
+            <ScrollViewer>
+                <StackPanel HorizontalAlignment="Right" Margin="0,60,20,0" Width="200">
+                    <TextBlock Text="Launcher settings" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Language" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
+
+                    <TextBlock Text="The Battle for Middle-earth" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Video &amp; Resolution" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Language" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Gameplay" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Repair &amp; Remove" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
+                    
+                    <TextBlock Text="The Battle for Middle-earth II" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Video &amp; Resolution" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Language" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Gameplay" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Repair &amp; Remove" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
+                    
+                    <TextBlock Text="The Rise of the Whitch-king" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Video &amp; Resolution" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Language" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Gameplay" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button Style="{DynamicResource ListButton}" Content="Repair &amp; Remove" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel Background="Transparent" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="60" MouseDown="OnCloseClicked">
+                <Path Width="35" Height="35" Fill="{Binding ElementName=close, Path=Foreground}" Stretch="Uniform" Data="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                <TextBlock x:Name="close" Text="CLOSE" HorizontalAlignment="Center" FontSize="13" Margin="0,10,0,0" FontWeight="Medium"/>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="TextElement.Foreground" Value="#BFFFFFFF"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="TextElement.Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
