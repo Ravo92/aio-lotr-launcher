@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LauncherGUI.Pages.Primary"
-             xmlns:arena="clr-namespace:BFMECompetetiveArena_Embedded;assembly=BFMECompetetiveArena_Embedded"
+             xmlns:arenaKit="clr-namespace:BFMECompetetiveArenaKit;assembly=BFMECompetetiveArenaKit"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500" Loaded="OnLoaded">
-    <Grid>
-        <arena:OnlineMenu x:Name="arena"/>
+    <Grid Margin="-20,0,-20,-20">
+        <arenaKit:OnlineMenu x:Name="arena" AccessToken="3388d2fb-79b8-4576-ad19-37706fdda7aa"/>
     </Grid>
 </UserControl>

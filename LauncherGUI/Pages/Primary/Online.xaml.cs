@@ -35,7 +35,7 @@ namespace LauncherGUI.Pages.Primary
                 return;
 
             FirstLoad = false;
-            arena.Load("");
+            arena.Load();
         }
     }
 }
