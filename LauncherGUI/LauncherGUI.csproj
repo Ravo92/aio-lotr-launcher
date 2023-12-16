@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="BFMECompetetiveArena_Embedded">
-      <HintPath>OnlineArena\BFMECompetetiveArena_Embedded.dll</HintPath>
+    <Reference Include="BFMECompetetiveArenaKit">
+      <HintPath>OnlineArena\BFMECompetetiveArenaKit.dll</HintPath>
     </Reference>
   </ItemGroup>
 
