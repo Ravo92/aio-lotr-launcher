@@ -1,21 +1,18 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
 
 namespace Helper
 {
     public class OptionIniParser
     {
-        // TODO: Change the Game Directory detection Behaviours when game isnt installed yet, so every key defaults to "noValue"...
-        public static readonly string fullPathOptionIniFile = Directory.CreateDirectory(ConstStrings.GameAppdataFolderPath()).ToString();
-
-        public static string ReadKey(string keyName)
+        public static string ReadKey(string keyName, string assemblyName)
         {
-            StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
+            StreamReader _streamReader = new(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
             {
-                string? keyValue = null;
+                string keyValue = ConstStrings.C_REGISTRY_SERVICE_WRONG_PARAMETER;
                 using (_streamReader)
                 {
                     string importedOptionsFileText;
-                    while ((importedOptionsFileText = _streamReader.ReadLine()) != null)
+                    while ((importedOptionsFileText = _streamReader.ReadLine()!) != null)
                     {
                         string[] parts = importedOptionsFileText.Split(" = ");
                         if ((parts.Length == 2) && (parts[0] == keyName))
@@ -28,9 +25,9 @@ namespace Helper
             }
         }
 
-        public static void WriteKey(string keyName, string keyValue)
+        public static void WriteKey(string keyName, string keyValue, string assemblyName)
         {
-            StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
+            StreamReader _streamReader = new(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
             string importedOptionsFileText;
             string changedOptionsFileText;
             importedOptionsFileText = _streamReader.ReadToEnd();
@@ -43,15 +40,15 @@ namespace Helper
             }
             else
             {
-                changedOptionsFileText = importedOptionsFileText.Replace(keyName + " = " + ReadKey(keyName), keyName + " = " + keyValue + Environment.NewLine);
+                changedOptionsFileText = importedOptionsFileText.Replace(keyName + " = " + ReadKey(keyName, assemblyName), keyName + " = " + keyValue + Environment.NewLine);
             }
 
-            File.WriteAllText(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME), changedOptionsFileText);
+            File.WriteAllText(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME), changedOptionsFileText);
         }
 
-        public static void DeleteKey(string keyName)
+        public static void DeleteKey(string keyName, string assemblyName)
         {
-            StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
+            StreamReader _streamReader = new(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
             string importedOptionsFileText;
             string changedOptionsFileText;
             importedOptionsFileText = _streamReader.ReadToEnd();
@@ -60,19 +57,19 @@ namespace Helper
 
             if (importedOptionsFileText.Contains(keyName))
             {
-                changedOptionsFileText = importedOptionsFileText.Replace(keyName + " = " + ReadKey(keyName), "");
+                changedOptionsFileText = importedOptionsFileText.Replace(keyName + " = " + ReadKey(keyName, assemblyName), "");
             }
             else
             {
                 return;
             }
 
-            File.WriteAllText(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME), changedOptionsFileText);
+            File.WriteAllText(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME), changedOptionsFileText);
         }
 
-        public static void ClearOptionsFile()
+        public static void ClearOptionsFile(string assemblyName)
         {
-            StreamReader _streamReader = new(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME));
+            StreamReader _streamReader = new(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
             string importedOptionsFileText = _streamReader.ReadToEnd();
             _streamReader.Close();
             _streamReader.Dispose();
@@ -83,7 +80,7 @@ namespace Helper
 
             string changedOptionsFileText = cleanString + Environment.NewLine;
 
-            File.WriteAllText(Path.Combine(fullPathOptionIniFile, ConstStrings.C_OPTIONSINI_FILENAME), changedOptionsFileText);
+            File.WriteAllText(Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME), changedOptionsFileText);
         }
     }
 }

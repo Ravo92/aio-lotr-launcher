@@ -167,7 +167,7 @@ AutoTest.Net/
 [Ee]xpress/
 
 # Folder for Inno-Setup Files
-BFME_Launcher/
+PatchLauncher/
 
 # DocProject is a documentation generator add-in
 DocProject/buildhelp/

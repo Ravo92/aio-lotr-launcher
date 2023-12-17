@@ -2,77 +2,80 @@
 {
     public class PatchModDetectionHelper
     {
-        public static List<string> AllPatchesAndMods
+        public static Task DeletePatch106ForBFME1(string assemblyName)
         {
-            get;
-            set;
-        }
-
-        static PatchModDetectionHelper()
-        {
-            AllPatchesAndMods = new();
-
-            if (ConstStrings.GameInstallPath() != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+            try
             {
-                string filepath = ConstStrings.GameInstallPath();
-                DirectoryInfo _directoryInfo = new(filepath);
+                string get106LanguageFileForDelete = "";
 
-                foreach (var file in _directoryInfo.GetFiles("_patch*.big"))
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH105MAIN_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH106MAIN_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH106TEXTURES_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH106WSMAPS_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH106APT_FILENAME));
+
+                IEnumerable<string> get106LanguageFile = Directory.EnumerateFiles(RegistryService.GameInstallPath(assemblyName), "*106*.*");
+
+                if (get106LanguageFile.Any())
                 {
-                    AllPatchesAndMods.Add(file.Name);
+                    get106LanguageFileForDelete = get106LanguageFile.First();
+                    File.Delete(Path.Combine(get106LanguageFileForDelete));
                 }
             }
-
-            if (File.Exists(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE)) && MD5Tools.CalculateMD5(Path.Combine(ConstStrings.GameAppdataFolderPath(), ConstStrings.C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE)) == ConstStrings.C_BFME1_MOD_SHADOW_AND_FLAME_11_FILE)
+            catch (Exception ex)
             {
-                AllPatchesAndMods.Add("Shadow and Flame 1.1");
-            }
-        }
-
-        public static bool DetectPatch106()
-        {
-            if (File.Exists(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME)))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public static bool DeletePatch106()
-        {
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH105MAIN_FILENAME));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106MAIN_FILENAME));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106TEXTURES_FILENAME));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106WSMAPS_FILENAME));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_PATCH106APT_FILENAME));
-            return true;
-        }
-
-        public static void DeletePatch222Files()
-        {
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_PATCH_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_TEXTURES_PATCH_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_LIBRARIES_PATCH_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_BASES_PATCH_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAPS_PATCH_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE));
-
-
-            // THIS SECTION IS FOR PATCH 2.22 V30 AND UPWARDS FILES
-
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_ENGLISHPATCH_V30_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_PATCH_V30_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_LIBRARIES_PATCH_V30_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_TEXTURES_PATCH_V30_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_BASES_PATCH_V30_FILE));
-            File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAPS_PATCH_V30_FILE));
-
-            if (File.Exists(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_OPTIONAL_PATCH_FILE)))
-            {
-                File.Delete(Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_OPTIONAL_PATCH_FILE));
+                LogHelper.LoggerPatchModDectection.Error(ex, "");
             }
 
-            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_103_ASSET_FILE), Path.Combine(ConstStrings.GameInstallPath(), ConstStrings.C_MAIN_ASSET_FILE));
+            return Task.CompletedTask;
+        }
+
+        public static Task DeletePatch222FilesForBFME1(string assemblyName)
+        {
+            try
+            {
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_MAIN_PATCH_FILE));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_TEXTURES_PATCH_FILE));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_LIBRARIES_PATCH_FILE));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_BASES_PATCH_FILE));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_MAPS_PATCH_FILE));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_MAIN_ASSET_FILE));
+
+                if (File.Exists(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE)))
+                {
+                    File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_GERMANLANGUAGE_PATCH_FILE));
+                }
+
+                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_BFME1_103_ASSET_FILE), Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_MAIN_ASSET_FILE));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerPatchModDectection.Error(ex, "");
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public static Task MovePatch109FilesForBFME2(string assemblyName, string patch109InstallationPath)
+        {
+            try
+            {
+                string[] get109PatchFiles = Directory.GetFiles(Path.Combine(patch109InstallationPath, "renamefiles"), "*BT2DC*.*");
+                if (get109PatchFiles.Any())
+                {
+                    foreach (var file in get109PatchFiles)
+                    {
+                        LogHelper.LoggerPatchModDectection.Information("Copying file > {0} < from 109-folder to game folder", file);
+                        File.Copy(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerPatchModDectection.Error(ex, "");
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

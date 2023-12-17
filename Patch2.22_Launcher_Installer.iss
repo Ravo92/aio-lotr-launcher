@@ -1,12 +1,15 @@
 #define MyAppName "Patch 2.22 Launcher"
-#define MyAppExeName "PatchLauncherBFME.exe"
+#define MyAppExeName "Restarter.exe"
+#define MyAppExeVersion "1.0.5.8"
+#define MyAppPublishFolder "PatchLauncher"
 
 [Setup]
 AppName={#MyAppName}
-AppId=Patch 2.22 Launcher
+AppId={#MyAppName}
+AppVersion={#MyAppExeVersion}
 AppVerName={#MyAppName}
 WizardStyle=modern
-DefaultDirName={userappdata}\{#MyAppName}
+DefaultDirName=C:\{#MyAppName}
 DefaultGroupName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 VersionInfoDescription=Patch 2.22 Launcher Setup
@@ -17,32 +20,51 @@ DisableWelcomePage=no
 PrivilegesRequired=admin
 MissingMessagesWarning=yes
 NotRecognizedMessagesWarning=yes
-ShowLanguageDialog=no
+Compression=lzma2
+SolidCompression=yes
+ShowLanguageDialog=yes
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
-SetupIconFile=MainIcon.ico
-VersionInfoVersion=1.0.1.15
+SetupIconFile=Restarter\MainIcon.ico
+VersionInfoVersion={#MyAppExeVersion}
 AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
 AppPublisher=Raphael Vogel
 AppPublisherURL=https://github.com/Ravo92
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
+Name: de; MessagesFile: "compiler:Languages\German.isl"
+
+[Messages]
+en.BeveledLabel=English
+de.BeveledLabel=Deutsch
+
+[CustomMessages]
+en.CreateStartMenuIcon=Create start menu entries
+en.LaunchAfterInstall=Launch Application after Install
+
+de.CreateStartMenuIcon=Erstelle Verknüpfungen im Startmenü
+de.LaunchAfterInstall=Starte die Anwendung nach der Installation
 
 [Files]
-Source: "BFME_Launcher\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
-Source: "BFME_Launcher\{#MyAppExeName}"; DestDir: "{app}"
+Source: "{#MyAppPublishFolder}\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
+Source: "{#MyAppPublishFolder}\{#MyAppExeName}"; DestDir: "{app}"
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: Not FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk')) 
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: startmenuicon
+Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: Not FileExists(ExpandConstant('{userdesktop}\{#MyAppName}.lnk'))
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "startmenuicon"; Description: "{cm:CreateStartMenuIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [UninstallDelete]
-Type: filesandordirs; Name: "Downloads"
+Type: filesandordirs; Name: "{app}\Downloads"
+Type: filesandordirs; Name: "{app}\BFME1.exe.WebView2"
+Type: filesandordirs; Name: "{app}\BFME2.exe.WebView2"
+Type: filesandordirs; Name: "{app}\BFME25.exe.WebView2"
 
 [Run]
-Filename: {app}\{#MyAppExeName}; Description: "Launch Application after Install"; Flags: postinstall shellexec nowait unchecked skipifsilent;
-Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent
+Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--showLauncherUpdateLog"
+Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent; Parameters: "--showLauncherUpdateLog"

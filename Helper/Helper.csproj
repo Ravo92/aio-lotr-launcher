@@ -5,10 +5,23 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyVersion>1.0.1.15</AssemblyVersion>
-    <FileVersion>1.0.1.15</FileVersion>
+	<Version>1.0.5.8</Version>
+	<AssemblyVersion>1.0.5.8</AssemblyVersion>
+	<FileVersion>1.0.5.8</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
     <Copyright>Raphael Vogel</Copyright>
+    <PackageId>2.22 Launcher Helper Library</PackageId>
+    <Authors>Patch 2.22 Team</Authors>
+    <Product>2.22 Launcher Helper Library</Product>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,19 +34,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Downloader" Version="3.0.6" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1901.177" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="SevenZipExtractor" Version="1.0.17" />
     <PackageReference Include="SharpDX.XAudio2" Version="4.2.0" />
+    <PackageReference Include="WindowsShortcutFactory" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CustomLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="UserControls\CustomProgressBar.cs" />
+    <Compile Update="UserControls\CustomLabel.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\Patch106Button.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\PatchesButtonsBFME25.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\PatchesButtonsBFME2.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 
@@ -65,6 +90,12 @@
     <None Update="Tools\asset.dat.103">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Html\credits.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Html\design.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Tools\dsoal-aldrv.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -78,9 +109,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Tools\Options.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tools\_patch106german.big">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Tools\_patch222LibrariesBrutalAI.big">

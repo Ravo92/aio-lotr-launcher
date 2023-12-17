@@ -46,7 +46,7 @@ namespace Helper
 
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.2f);
+            _masteringVoice.SetVolume(0.07f);
             PlaySoundFile(_sound, _SoundClickFile);
             _masteringVoice.Dispose();
             _sound.Dispose();
@@ -58,7 +58,7 @@ namespace Helper
 
             XAudio2 _sound = new();
             MasteringVoice _masteringVoice = new(_sound);
-            _masteringVoice.SetVolume(0.2f);
+            _masteringVoice.SetVolume(0.05f);
             PlaySoundFile(_sound, _SoundHoverFile);
             _masteringVoice.Dispose();
             _sound.Dispose();

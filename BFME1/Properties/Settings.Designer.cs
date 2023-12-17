@@ -12,7 +12,7 @@ namespace PatchLauncher.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -56,18 +56,6 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["BackgroundMusicFile"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EAXSupport {
-            get {
-                return ((bool)(this["EAXSupport"]));
-            }
-            set {
-                this["EAXSupport"] = value;
             }
         }
         
@@ -134,66 +122,6 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch106Installed {
-            get {
-                return ((bool)(this["IsPatch106Installed"]));
-            }
-            set {
-                this["IsPatch106Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool FirstTimeUse {
-            get {
-                return ((bool)(this["FirstTimeUse"]));
-            }
-            set {
-                this["FirstTimeUse"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch29Downloaded {
-            get {
-                return ((bool)(this["IsPatch29Downloaded"]));
-            }
-            set {
-                this["IsPatch29Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch30Downloaded {
-            get {
-                return ((bool)(this["IsPatch30Downloaded"]));
-            }
-            set {
-                this["IsPatch30Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch31Downloaded {
-            get {
-                return ((bool)(this["IsPatch31Downloaded"]));
-            }
-            set {
-                this["IsPatch31Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SelectedOlderPatch {
             get {
                 return ((bool)(this["SelectedOlderPatch"]));
@@ -206,84 +134,12 @@ namespace PatchLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch29Installed {
-            get {
-                return ((bool)(this["IsPatch29Installed"]));
-            }
-            set {
-                this["IsPatch29Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch30Installed {
-            get {
-                return ((bool)(this["IsPatch30Installed"]));
-            }
-            set {
-                this["IsPatch30Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch31Installed {
-            get {
-                return ((bool)(this["IsPatch31Installed"]));
-            }
-            set {
-                this["IsPatch31Installed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool IsSettingChanged {
             get {
                 return ((bool)(this["IsSettingChanged"]));
             }
             set {
                 this["IsSettingChanged"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatchModsShown {
-            get {
-                return ((bool)(this["IsPatchModsShown"]));
-            }
-            set {
-                this["IsPatchModsShown"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsPatch106Downloaded {
-            get {
-                return ((bool)(this["IsPatch106Downloaded"]));
-            }
-            set {
-                this["IsPatch106Downloaded"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ShowPatchesFirst {
-            get {
-                return ((bool)(this["ShowPatchesFirst"]));
-            }
-            set {
-                this["ShowPatchesFirst"] = value;
             }
         }
         
@@ -308,6 +164,89 @@ namespace PatchLauncher.Properties {
             }
             set {
                 this["BetaChannelVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int LatestPatchVersion {
+            get {
+                return ((int)(this["LatestPatchVersion"]));
+            }
+            set {
+                this["LatestPatchVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        public string LauncherLanguage {
+            get {
+                return ((string)(this["LauncherLanguage"]));
+            }
+            set {
+                this["LauncherLanguage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en_us")]
+        public string InstalledLanguageISOCode {
+            get {
+                return ((string)(this["InstalledLanguageISOCode"]));
+            }
+            set {
+                this["InstalledLanguageISOCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateStartMenuShortcut {
+            get {
+                return ((bool)(this["CreateStartMenuShortcut"]));
+            }
+            set {
+                this["CreateStartMenuShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateDesktopShortcut {
+            get {
+                return ((bool)(this["CreateDesktopShortcut"]));
+            }
+            set {
+                this["CreateDesktopShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OpenLauncherChangelogPageAfterUpdate {
+            get {
+                return ((bool)(this["OpenLauncherChangelogPageAfterUpdate"]));
+            }
+            set {
+                this["OpenLauncherChangelogPageAfterUpdate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OpenPatchChangelogPage {
+            get {
+                return ((bool)(this["OpenPatchChangelogPage"]));
+            }
+            set {
+                this["OpenPatchChangelogPage"] = value;
             }
         }
     }

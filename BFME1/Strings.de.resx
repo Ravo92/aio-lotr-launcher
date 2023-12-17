@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BtnInstall.TextInstall" xml:space="preserve">
+    <value>SPIEL INSTALLIEREN</value>
+  </data>
+  <data name="BtnInstall.TextLaunch" xml:space="preserve">
+    <value>SPIEL STARTEN</value>
+  </data>
+  <data name="Info.BetaActivated" xml:space="preserve">
+    <value>Um die Versionen wechseln zu können, erst den Beta-Modus
+in den Launcher-Einstellungen unter "Optionen" deaktivieren!</value>
+  </data>
+  <data name="Info.CopyFilesAndApplyPatch" xml:space="preserve">
+    <value>Spiel patchen und aufräumen...</value>
+  </data>
+  <data name="Info.PleaseWait" xml:space="preserve">
+    <value>Suche Ring...</value>
+  </data>
+  <data name="Info.PreparingSetup" xml:space="preserve">
+    <value>Bereite Setup vor...</value>
+  </data>
+  <data name="Info.PreparingUpdate" xml:space="preserve">
+    <value>Bereite Update vor...</value>
+  </data>
+  <data name="Info.PreparingUpdateBeta" xml:space="preserve">
+    <value>Bereite Beta-Update vor...</value>
+  </data>
+  <data name="Msg.ErrorStartingGame.Text" xml:space="preserve">
+    <value>Scheint, als hätten wir das Spiel selbst oder einen Patch- oder Mod-Launcher eines Drittanbieters verloren!
+Es wird dringend empfohlen, keinen Launcher eines Drittanbieters im Spielordner selbst zu installieren!
+Möchtest du das Spiel jetzt reparieren, damit wir wieder einen sauberen 2.22 Stand haben?</value>
+  </data>
+  <data name="Msg.ErrorStartingGame.Title" xml:space="preserve">
+    <value>Spiel hat ein Problem!</value>
+  </data>
+  <data name="Msg.InstallFolderNotEmpty.Text" xml:space="preserve">
+    <value>Der Zielpfad enthält bereits Dateien. Bist du sicher, dass du die Installation fortsetzen möchtest?
+Bereits vorhandene Dateien in diesem Verzeichnis werden ohne Sicherung gelöscht!</value>
+  </data>
+  <data name="Msg.InstallFolderNotEmpty.Title" xml:space="preserve">
+    <value>Zielpfad ist nicht leer</value>
+  </data>
+  <data name="Msg.RepairDone.Text" xml:space="preserve">
+    <value>Der Reparaturvorgang wurde beendet und ein Log wurde unter "Logfiles" gespeichert.</value>
+  </data>
+  <data name="Msg.RepairDone.Title" xml:space="preserve">
+    <value>Reparatur beendet!</value>
+  </data>
+  <data name="Msg.Restart.Text" xml:space="preserve">
+    <value>Ein Launcher Neustart wird benötigt um die Einstellungen zu übernehmen. Soll der Launcher jetzt neu gestartet werden?</value>
+  </data>
+  <data name="Msg.Restart.Title" xml:space="preserve">
+    <value>Programm Neustart benötigt</value>
+  </data>
+  <data name="Msg.RestartForUpdate.Text" xml:space="preserve">
+    <value>Es wurde eine neue offizielle Version von Patch 2.22 veröffentlicht.
+Zum installieren muss der Beta-Channel oder die ältere Patch-Auswahl verworfen werden.
+Soll der Launcher nun für das Update neu gestartet werden?</value>
+  </data>
+  <data name="ToolTip.MusicSwitcher" xml:space="preserve">
+    <value>Hier kannst du die Musik umschalten. Es gibt 5 verschiedene Themes.</value>
+  </data>
+  <data name="Warning.AlreadyRunning" xml:space="preserve">
+    <value>Eine zweite Instanz des Launchers ist nicht zulässig.
+Bitte Taskmanager oder Tray-Icons (Taskbar) prüfen.</value>
+  </data>
+  <data name="Warning.AlreadyRunningTitle" xml:space="preserve">
+    <value>Der Launcher läuft bereits</value>
+  </data>
+  <data name="Warning.BrutalAI" xml:space="preserve">
+    <value>Warnung! Brutale KI ist aktiviert worden!
+Du wirst unter Umständen
+nicht online spielen können!</value>
+  </data>
+  <data name="Warning.CantStopNow" xml:space="preserve">
+    <value>Es ist noch ein Download oder Patchvorgang aktiv. Der Launcher kann momentan nicht beendet werden.
+Bitte versuche es später erneut.</value>
+  </data>
+  <data name="Warning.CantStopNowTitle" xml:space="preserve">
+    <value>Geht gerade leider nicht...</value>
+  </data>
+  <data name="Warning.GameNotInstalled" xml:space="preserve">
+    <value>Manche Optionen werden erst frei-
+geschaltet, wenn das Spiel installiert wurde!</value>
+  </data>
+</root>
