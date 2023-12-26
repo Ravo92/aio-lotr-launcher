@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "Restarter.exe"
-#define MyAppExeVersion "1.0.5.8"
+#define MyAppExeVersion "1.0.6.0"
 #define MyAppPublishFolder "PatchLauncher"
 
 [Setup]

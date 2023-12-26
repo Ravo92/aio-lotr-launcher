@@ -30,6 +30,22 @@
             return Task.CompletedTask;
         }
 
+        public static Task DeletePatch109ForBFME1(string assemblyName)
+        {
+            try
+            {
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH109MAIN_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH109TEXTURES_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH109WSMAPS_FILENAME));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerPatchModDectection.Error(ex, "");
+            }
+
+            return Task.CompletedTask;
+        }
+
         public static Task DeletePatch222FilesForBFME1(string assemblyName)
         {
             try

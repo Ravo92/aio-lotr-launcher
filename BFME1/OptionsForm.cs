@@ -451,10 +451,10 @@ namespace PatchLauncher
 
             if (Settings.Default.PatchVersionInstalled > 106 && !FlagUseBetaChannel)
             {
-                if (Settings.Default.PatchVersionInstalled.ToString().Length >= 6)
-                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[3..].Insert(2, ".");
+                if (Settings.Default.PatchVersionInstalled.ToString().Length == 3)
+                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[0..].Insert(2, ".");
                 else
-                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[3..];
+                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[0..];
             }
             else if (Settings.Default.PatchVersionInstalled >= 103 && !FlagUseBetaChannel)
             {

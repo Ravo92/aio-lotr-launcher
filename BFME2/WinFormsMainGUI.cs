@@ -136,14 +136,14 @@ namespace PatchLauncher
 
                 foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings)//.Where(x => x.Key is >= 22220 and <= 22250))
                 {
-                    string patchBFME2Version = version.Value.Version.ToString();//[3..];
+                    string patchBFME2Version = version.Value.MajorVersion.ToString();//[3..];
                     PatchesButtonsBFME2 patchesButtonsBFME2 = new()
                     {
                         LabelTextPatchVersion = "Version " + patchBFME2Version,
                         Tag = version.Key
                     };
 
-                    if (version.Value.Version == Settings.Default.PatchVersionInstalled)
+                    if (version.Value.MajorVersion == Settings.Default.PatchVersionInstalled)
                     {
                         patchesButtonsBFME2.SelectedIconVisible = true;
                         if (RegistryService.ReadRegKey(version.Value.RegistryPathForInstalledProgram, version.Value.RegistryKeyName) != ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
@@ -986,7 +986,7 @@ namespace PatchLauncher
                     await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                 }
 
-                patchPack.Version = Settings.Default.PatchVersionInstalled;
+                patchPack.MajorVersion = Settings.Default.PatchVersionInstalled;
                 Settings.Default.Save();
 
                 if (Settings.Default.CreateDesktopShortcut && !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))

@@ -41,6 +41,10 @@ namespace Helper
         public const string C_PATCH106MAIN_FILENAME = "_patch106.big";
         public const string C_PATCH106TEXTURES_FILENAME = "_patch106textures.big";
 
+        public const string C_PATCH109WSMAPS_FILENAME = "_WSMaps.big";
+        public const string C_PATCH109MAIN_FILENAME = "_patch109.big";
+        public const string C_PATCH109TEXTURES_FILENAME = "_patch109textures.big";
+
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
         public const string C_RESTARTEREXE_FILENAME = "Restarter.exe";

@@ -13,9 +13,9 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-	<Version>1.0.5.8</Version>
-    <AssemblyVersion>1.0.5.8</AssemblyVersion>
-    <FileVersion>1.0.5.8</FileVersion>
+	<Version>1.0.6.0</Version>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
     <Copyright>Raphael Vogel</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
@@ -64,6 +64,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="BfmeOnlineKitForms">
+      <HintPath>BfmeOnlineKit\BfmeOnlineKitForms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
@@ -71,6 +77,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="BfmeOnlineKit\BfmeOnlineKit.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BfmeOnlineKit\BfmeOnlineKitForms.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

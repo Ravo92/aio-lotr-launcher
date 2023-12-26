@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PibHeader.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="PiBYoutube.Location" type="System.Drawing.Point, System.Drawing">
     <value>491, 35</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PiBYoutube.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="PiBDiscord.Location" type="System.Drawing.Point, System.Drawing">
     <value>552, 35</value>
@@ -199,7 +199,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PiBDiscord.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="PiBModDB.Location" type="System.Drawing.Point, System.Drawing">
     <value>613, 35</value>
@@ -223,7 +223,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PiBModDB.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="PiBThemeSwitcher.Location" type="System.Drawing.Point, System.Drawing">
     <value>735, 35</value>
@@ -247,7 +247,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PiBThemeSwitcher.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <metadata name="ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -283,7 +283,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LblWorkerFileName.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="BtnInstall.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -313,7 +313,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;BtnInstall.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="LblWorkerIOTask.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -346,7 +346,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LblWorkerIOTask.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="PibLoadingRing.Location" type="System.Drawing.Point, System.Drawing">
     <value>587, 316</value>
@@ -373,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PibLoadingRing.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="LabelLoadingPanel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -406,7 +406,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LabelLoadingPanel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="PibLoadingBorder.Location" type="System.Drawing.Point, System.Drawing">
     <value>527, 259</value>
@@ -430,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PibLoadingBorder.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="PiBTwitch.Location" type="System.Drawing.Point, System.Drawing">
     <value>674, 35</value>
@@ -454,7 +454,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PiBTwitch.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="PanelPlaceholder.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -464,21 +464,6 @@
   </data>
   <data name="PanelPlaceholder.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
-  </data>
-  <data name="PiBVersion103.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="PiBVersion103.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="PiBVersion103.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 200</value>
-  </data>
-  <data name="PiBVersion103.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="PiBVersion103.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
   </data>
   <data name="&gt;&gt;PiBVersion103.Name" xml:space="preserve">
     <value>PiBVersion103</value>
@@ -517,7 +502,34 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PanelPlaceholder.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
+  </data>
+  <data name="PiBVersion103.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PiBVersion103.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="PiBVersion103.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 200</value>
+  </data>
+  <data name="PiBVersion103.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="PiBVersion103.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.Name" xml:space="preserve">
+    <value>PiBVersion103</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.Parent" xml:space="preserve">
+    <value>PanelPlaceholder</value>
+  </data>
+  <data name="&gt;&gt;PiBVersion103.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="LblModExplanation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -547,11 +559,20 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LblModExplanation.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="NotifyContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>201, 17</value>
   </metadata>
+  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 48</value>
+  </data>
+  <data name="&gt;&gt;NotifyContextMenu.Name" xml:space="preserve">
+    <value>NotifyContextMenu</value>
+  </data>
+  <data name="&gt;&gt;NotifyContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="MenuItemLaunchGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
@@ -563,15 +584,6 @@
   </data>
   <data name="closeTheLauncherToolStripMenuItem.Text" xml:space="preserve">
     <value>Close the Launcher</value>
-  </data>
-  <data name="NotifyContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 48</value>
-  </data>
-  <data name="&gt;&gt;NotifyContextMenu.Name" xml:space="preserve">
-    <value>NotifyContextMenu</value>
-  </data>
-  <data name="&gt;&gt;NotifyContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PibMute.Location" type="System.Drawing.Point, System.Drawing">
     <value>1213, 35</value>
@@ -595,11 +607,41 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PibMute.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <metadata name="WinFormsMainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>360, 17</value>
   </metadata>
+  <data name="WinFormsMainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1280, 24</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="WinFormsMainMenuStrip.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Name" xml:space="preserve">
+    <value>WinFormsMainMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;WinFormsMainMenuStrip.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="LaunchGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 22</value>
   </data>
@@ -615,11 +657,11 @@
   <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
   </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
+  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
   </data>
   <data name="GameSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -657,11 +699,11 @@
   <data name="LauncherStartmenuShortcutToolStripMenuItem.Text" xml:space="preserve">
     <value>Use Launcher Shortcut in Startmenu</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
+  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 20</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Options</value>
+  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
+    <value>Advanced</value>
   </data>
   <data name="OpenLauncherDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>268, 22</value>
@@ -714,11 +756,11 @@
   <data name="RepairGameToolStripMenuItem.Text" xml:space="preserve">
     <value>Analyze Game Files and Repair Game</value>
   </data>
-  <data name="AdvancedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 20</value>
+  <data name="SelectGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 20</value>
   </data>
-  <data name="AdvancedToolStripMenuItem.Text" xml:space="preserve">
-    <value>Advanced</value>
+  <data name="SelectGameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Select Game</value>
   </data>
   <data name="BFME2ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 22</value>
@@ -726,11 +768,11 @@
   <data name="BFME2ToolStripMenuItem.Text" xml:space="preserve">
     <value>The Battle for Middle-earth II ™</value>
   </data>
-  <data name="SelectGameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 20</value>
+  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
   </data>
-  <data name="SelectGameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Select Game</value>
+  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="CreditsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 22</value>
@@ -749,36 +791,6 @@
   </data>
   <data name="ChangelogPatchToolStripMenuItem.Text" xml:space="preserve">
     <value>Changelog Patch 2.22</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1280, 24</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="WinFormsMainMenuStrip.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Name" xml:space="preserve">
-    <value>WinFormsMainMenuStrip</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;WinFormsMainMenuStrip.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="PBarActualFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 684</value>
@@ -802,7 +814,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PBarActualFile.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="SysTray.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
@@ -1947,6 +1959,39 @@
   </data>
   <data name="SysTray.Text" xml:space="preserve">
     <value>BFME 2.22 Launcher</value>
+  </data>
+  <data name="BtnPlayOnline.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="BtnPlayOnline.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="BtnPlayOnline.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="BtnPlayOnline.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1018, 685</value>
+  </data>
+  <data name="BtnPlayOnline.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 51</value>
+  </data>
+  <data name="BtnPlayOnline.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="BtnPlayOnline.Text" xml:space="preserve">
+    <value>PLAY ONLINE</value>
+  </data>
+  <data name="&gt;&gt;BtnPlayOnline.Name" xml:space="preserve">
+    <value>BtnPlayOnline</value>
+  </data>
+  <data name="&gt;&gt;BtnPlayOnline.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnPlayOnline.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnPlayOnline.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
