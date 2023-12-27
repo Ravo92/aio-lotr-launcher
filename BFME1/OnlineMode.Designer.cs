@@ -36,7 +36,7 @@ namespace PatchLauncher
             // 
             // OnlineMenu
             // 
-            OnlineMenu.AccessToken = "*deleted*";
+            OnlineMenu.AccessToken = "";
             OnlineMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             OnlineMenu.Location = new System.Drawing.Point(0, 0);
             OnlineMenu.Name = "OnlineMenu";
@@ -52,7 +52,7 @@ namespace PatchLauncher
             Controls.Add(OnlineMenu);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "OnlineMode";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             Text = "Online Mode";
             FormClosing += OnlineMode_FormClosing;
             ResumeLayout(false);

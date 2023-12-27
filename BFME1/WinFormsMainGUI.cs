@@ -641,7 +641,7 @@ namespace PatchLauncher
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
-        private void PiBYoutube_Click(object sender, EventArgs e)
+        private void PiBYouTube_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://www.youtube.com/BeyondStandards") { UseShellExecute = true });
         }
@@ -761,7 +761,7 @@ namespace PatchLauncher
             }
         }
 
-        private async Task InstallUpdateRepairRoutine(string ZIPFileName, List<string> DownloadUrls, string CorrectMD5HashValue)
+        private async Task InstallUpdateRepairRoutine(string ZIPFileName, List<string> DownloadURLs, string CorrectMD5HashValue)
         {
             try
             {
@@ -788,7 +788,7 @@ namespace PatchLauncher
 
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
                 GameFileTools gameFileTools = new();
-                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrls, 0, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
+                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadURLs, 0, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
                 LblWorkerFileName.Text = "";
                 LblWorkerIOTask.Text = "";
                 Update();
@@ -803,7 +803,7 @@ namespace PatchLauncher
                     LogHelper.LoggerBFME1GUI.Error(string.Format("MD5 HashSum check failed. Should be: {0} was: {1}", CorrectMD5HashValue, calculatedMD5Value));
                     LogHelper.LoggerBFME1GUI.Information(string.Format("Deleting file > {0} < and retry Download...", ZIPFileName));
                     File.Delete(fullPathToZIPFile);
-                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrls, 1, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
+                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadURLs, 1, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
                     LogHelper.LoggerBFME1GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
                     await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction);
                 }
@@ -1168,11 +1168,17 @@ namespace PatchLauncher
             {
                 if (childControl is Patch106Button patch106Buttons)
                 {
-                    patch106Buttons.SelectedIconVisible = (int)patch106Buttons.Tag == 0;
+                    if (Settings.Default.PatchVersionInstalled == 106)
+                        patch106Buttons.SelectedIconVisible = true;
+                    else
+                        patch106Buttons.SelectedIconVisible = false;
                 }
-                if (childControl is Patch109Button patch109Buttons)
+                else if (childControl is Patch109Button patch109Buttons)
                 {
-                    patch109Buttons.SelectedIconVisible = (int)patch109Buttons.Tag == 1;
+                    if (Settings.Default.PatchVersionInstalled == 109)
+                        patch109Buttons.SelectedIconVisible = true;
+                    else
+                        patch109Buttons.SelectedIconVisible = false;
                 }
                 else if (childControl is Patch222Buttons patch222Buttons)
                 {

@@ -55,7 +55,8 @@ namespace Helper
             catch (UnauthorizedAccessException ex)
             {
                 LogHelper.LoggerGameFileTools.Fatal(ex, "Cant Access local json file! Data may not be accurate!");
-                Environment.Exit(1);
+                json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE));
+                return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
             }
 
             return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
@@ -83,21 +84,21 @@ namespace Helper
             }
         }
 
-        public async Task DownloadFile(string pathtoZIPFile, string ZIPFileName, List<string> DownloadUrls, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
+        public async Task DownloadFile(string pathToZIPFile, string ZIPFileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
         {
             try
             {
-                string DownloadUrl = DownloadUrls[downloadUrlCount];
+                string DownloadUrl = DownloadURLs[downloadUrlCount];
 
-                if (DownloadUrls.Count >= downloadUrlCount)
-                    DownloadUrl = DownloadUrls[downloadUrlCount]; //[new Random().Next(DownloadUrls.Length)];
+                if (DownloadURLs.Count >= downloadUrlCount)
+                    DownloadUrl = DownloadURLs[downloadUrlCount]; //[new Random().Next(DownloadURLs.Length)];
                 else
-                    DownloadUrl = DownloadUrls[0];
+                    DownloadUrl = DownloadURLs[0];
 
                 LogHelper.LoggerGameFileTools.Information("Downloading from URI: < {0} >", DownloadUrl);
 
-                string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
-                LogHelper.LoggerGameFileTools.Information("Downloading into file: < {0} >", fullPathwithFileName);
+                string fullPathWithFileName = Path.Combine(pathToZIPFile, ZIPFileName);
+                LogHelper.LoggerGameFileTools.Information("Downloading into file: < {0} >", fullPathWithFileName);
 
                 var downloadOpt = new DownloadConfiguration()
                 {
@@ -125,9 +126,9 @@ namespace Helper
 
                 LogHelper.LoggerGameFileTools.Debug(downloader.Status.ToString());
 
-                if (!File.Exists(fullPathwithFileName))
+                if (!File.Exists(fullPathWithFileName))
                 {
-                    await downloader.DownloadFileTaskAsync(DownloadUrl, fullPathwithFileName);
+                    await downloader.DownloadFileTaskAsync(DownloadUrl, fullPathWithFileName);
                 }
             }
             catch (Exception ex)
@@ -136,22 +137,22 @@ namespace Helper
             }
         }
 
-        public Task ExtractFile(string pathtoZIPFile, string ZIPFileName, string gameInstallPath, IProgress<ProgressHelper> extractProgress, bool hasExternalInstaller = false)
+        public Task ExtractFile(string pathToZIPFile, string ZIPFileName, string gameInstallPath, IProgress<ProgressHelper> extractProgress, bool hasExternalInstaller = false)
         {
             try
             {
-                string fullPathwithFileName = Path.Combine(pathtoZIPFile, ZIPFileName);
+                string fullPathWithFileName = Path.Combine(pathToZIPFile, ZIPFileName);
 
                 if (Path.GetExtension(ZIPFileName) != ".7z" && Path.GetExtension(ZIPFileName) != ".rar")
                 {
-                    File.Copy(fullPathwithFileName, Path.Combine(gameInstallPath, ZIPFileName), true);
+                    File.Copy(fullPathWithFileName, Path.Combine(gameInstallPath, ZIPFileName), true);
                     return Task.CompletedTask;
                 }
                 else
                 {
                     return Task.Run(() =>
                     {
-                        using ArchiveFile archiveFile = new(fullPathwithFileName);
+                        using ArchiveFile archiveFile = new(fullPathWithFileName);
 
                         foreach (Entry entry in archiveFile.Entries)
                         {
@@ -235,13 +236,13 @@ namespace Helper
             }
         }
 
-        public static bool EnsureBFMEAppdataFolderExists(string assemblyName)
+        public static bool EnsureBFMEAppDataFolderExists(string assemblyName)
         {
             try
             {
                 if (!Directory.Exists(RegistryService.GameAppdataFolderPath(assemblyName)))
                 {
-                    CreateBFMEAppdataFolder(assemblyName);
+                    CreateBFMEAppDataFolder(assemblyName);
                 }
                 return true;
             }
@@ -252,7 +253,7 @@ namespace Helper
             }
         }
 
-        private static void CreateBFMEAppdataFolder(string assemblyName)
+        private static void CreateBFMEAppDataFolder(string assemblyName)
         {
             try
             {
@@ -274,7 +275,7 @@ namespace Helper
                 {
                     LogHelper.LoggerGameFileTools.Information("It does not exist, so we create it now...");
                     File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, ConstStrings.C_OPTIONSINI_FILENAME), Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
-                    LogHelper.LoggerGameFileTools.Information("sucessfully created options.ini file in < {0} >", Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
+                    LogHelper.LoggerGameFileTools.Information("successfully created options.ini file in < {0} >", Path.Combine(RegistryService.GameAppdataFolderPath(assemblyName), ConstStrings.C_OPTIONSINI_FILENAME));
                 }
             }
             catch (Exception ex)

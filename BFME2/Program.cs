@@ -125,7 +125,7 @@ namespace PatchLauncher
 
                 try
                 {
-                    GameFileTools.EnsureBFMEAppdataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
+                    GameFileTools.EnsureBFMEAppDataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
                     GameFileTools.EnsureBFMEOptionsIniFileExists(AssemblyNameHelper.BFMELauncherGameName);
 
                     Application.Run(new WinFormsMainGUI());
