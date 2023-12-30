@@ -24,7 +24,7 @@
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerPatchModDectection.Error(ex, "");
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
             }
 
             return Task.CompletedTask;
@@ -40,7 +40,7 @@
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerPatchModDectection.Error(ex, "");
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
             }
 
             return Task.CompletedTask;
@@ -66,7 +66,7 @@
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerPatchModDectection.Error(ex, "");
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
             }
 
             return Task.CompletedTask;
@@ -81,14 +81,14 @@
                 {
                     foreach (var file in get109PatchFiles)
                     {
-                        LogHelper.LoggerPatchModDectection.Information("Copying file > {0} < from 109-folder to game folder", file);
+                        LogHelper.LoggerPatchModDetection.Information("Copying file > {0} < from 109-folder to game folder", file);
                         File.Copy(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
                     }
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerPatchModDectection.Error(ex, "");
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
             }
 
             return Task.CompletedTask;

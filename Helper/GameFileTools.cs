@@ -4,6 +4,7 @@ using System.ComponentModel;
 using SevenZipExtractor;
 using System.Reflection;
 using System;
+using System.IO;
 
 namespace Helper
 {
@@ -105,8 +106,8 @@ namespace Helper
                     ParallelDownload = true,
                     ReserveStorageSpaceBeforeStartingDownload = true,
                     ClearPackageOnCompletionWithFailure = true,
-                    MaxTryAgainOnFailover = 1,
-                    Timeout = 5000,
+                    MaxTryAgainOnFailover = 2,
+                    Timeout = 10000,
                     ChunkCount = 4,
                     RequestConfiguration =
                     {
@@ -306,6 +307,27 @@ namespace Helper
 
                 return "en_uk";
             }
+        }
+
+        public static (string driveLetter, int totalDiskSpace, int totalFreeDiskSpace) CheckIfThereIsEnoughDiskSpace (string path)
+        {
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            int totalSize = 0;
+            int totalFreeSize = 0;
+            string driveLetter = "C:\\";
+
+            foreach (DriveInfo driveInfo in allDrives)
+            {
+                if (driveInfo.IsReady == true && path[..3] == driveInfo.Name)
+                {
+                    totalFreeSize = Convert.ToInt32(driveInfo.TotalFreeSpace / (1024 * 1024 * 1024));
+                    totalSize = Convert.ToInt32(driveInfo.TotalSize / (1024 * 1024 * 1024));
+                    driveLetter = driveInfo.Name;
+                }
+            }
+
+            return (driveLetter, totalSize, totalFreeSize);
         }
     }
 }
