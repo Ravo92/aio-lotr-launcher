@@ -53,7 +53,7 @@ namespace PatchLauncher
             KeyPreview = true;
 
             #region Styles
-            //Main Form style behaviour
+            //Main Form style behavioral
 
             PibBorderLauncherOptions.Image = Helper.Properties.Resources.BFME1BorderRectangle;
             PibBorderGameOptions.Image = Helper.Properties.Resources.BFME1BorderRectangleLong;
@@ -451,10 +451,10 @@ namespace PatchLauncher
 
             if (Settings.Default.PatchVersionInstalled > 106 && !FlagUseBetaChannel)
             {
-                if (Settings.Default.PatchVersionInstalled.ToString().Length == 3)
-                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[0..].Insert(2, ".");
+                if (Settings.Default.PatchVersionInstalled.ToString().EndsWith("0"))
+                    LblPatchVersion.Text = string.Concat("2.22 v ", Settings.Default.PatchVersionInstalled.ToString().AsSpan(0, 2));
                 else
-                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[0..];
+                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[0..].Insert(2, ".");
             }
             else if (Settings.Default.PatchVersionInstalled >= 103 && !FlagUseBetaChannel)
             {
@@ -667,7 +667,7 @@ namespace PatchLauncher
                 if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes"
                     && FlagShowProps == "yes" && FlagShowAnimations == "yes" && FlagHeatEffects == "yes" && FlagDynamicLOD == "yes")
                 {
-                    OptionIniParser.WriteKey("StaticGameLOD", FlagStaticGameLOD, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("StaticGameLOD", "UltraHigh", AssemblyNameHelper.BFMELauncherGameName);
                     OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text, AssemblyNameHelper.BFMELauncherGameName);
 
                     OptionIniParser.DeleteKey("AnisotropicTextureFiltering", AssemblyNameHelper.BFMELauncherGameName);

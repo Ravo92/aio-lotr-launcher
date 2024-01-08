@@ -143,7 +143,7 @@ in den Launcher-Einstellungen unter "Optionen" deaktivieren!</value>
     <value>Bereite Beta-Update vor...</value>
   </data>
   <data name="Msg.ErrorStartingGame.Text" xml:space="preserve">
-    <value>Scheint, als hätten wir das Spiel selbst oder einen Patch- oder Mod-Launcher eines Drittanbieters verloren!
+    <value>Scheint, als hätten wir das Spiel selbst oder einen Patch-Launcher eines Drittanbieters verloren!
 Es wird dringend empfohlen, keinen Launcher eines Drittanbieters im Spielordner selbst zu installieren!
 Möchtest du das Spiel jetzt reparieren, damit wir wieder einen sauberen 2.22 Stand haben?</value>
   </data>

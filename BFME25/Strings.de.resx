@@ -124,7 +124,7 @@
     <value>SPIEL STARTEN</value>
   </data>
   <data name="Error.ExternalInstallerCanceled.Text" xml:space="preserve">
-    <value>Ein Externes Setup, welches für diese Mod nötig ist, wurde abgebrochen.
+    <value>Ein Externes Setup, welches für diesen Patch nötig ist, wurde abgebrochen.
 Der Launcher setzt das Spiel daher wieder auf 1.06 zurück.</value>
   </data>
   <data name="Error.ExternalInstallerCanceled.Title" xml:space="preserve">
@@ -143,7 +143,7 @@ Der Launcher setzt das Spiel daher wieder auf 1.06 zurück.</value>
     <value>Bereite Update vor...</value>
   </data>
   <data name="Msg.ErrorStartingGame.Text" xml:space="preserve">
-    <value>Scheint, als hätten wir das Spiel selbst oder einen Patch- oder Mod-Launcher eines Drittanbieters verloren!
+    <value>Scheint, als hätten wir das Spiel selbst oder einen Patch-Launcher eines Drittanbieters verloren!
 Es wird dringend empfohlen, keinen Launcher eines Drittanbieters im Spielordner selbst zu installieren!
 Möchtest du das Spiel jetzt reparieren, damit wir wieder einen sauberen 2.01 Stand haben?</value>
   </data>
@@ -170,7 +170,7 @@ Bereits vorhandene Dateien in diesem Verzeichnis werden ohne Sicherung gelöscht
     <value>Programm Neustart benötigt</value>
   </data>
   <data name="Msg.UpdateAlreadyActive.Text" xml:space="preserve">
-    <value>Selektierte(r) Patch oder Mod bereits aktiv!
+    <value>Selektierter Patch bereits aktiv!
 Es wurde keine Änderung durchgeführt.</value>
   </data>
   <data name="Msg.UpdateAlreadyActive.Title" xml:space="preserve">

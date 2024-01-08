@@ -535,7 +535,7 @@
     <value>29</value>
   </data>
   <data name="LblModExplanation.Text" xml:space="preserve">
-    <value>Here you can choose which mod or patch you want to play.</value>
+    <value>Here you can choose which patch you want to play.</value>
   </data>
   <data name="&gt;&gt;LblModExplanation.Name" xml:space="preserve">
     <value>LblModExplanation</value>

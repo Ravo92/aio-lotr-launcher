@@ -170,7 +170,7 @@
     <value>1267, 47</value>
   </data>
   <data name="LblModExplanation.Text" xml:space="preserve">
-    <value>Hier kannst du auswählen, welche Mod oder welchen Patch du spielen möchtest.</value>
+    <value>Hier kannst du auswählen, welchen Patch du spielen möchtest.</value>
   </data>
   <data name="LblModExplanation.ToolTip" xml:space="preserve">
     <value />

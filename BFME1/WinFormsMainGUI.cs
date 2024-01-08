@@ -168,55 +168,40 @@ namespace PatchLauncher
                         }
                     }
 
-                    if (JSONDataListHelper._DictionaryPatchPacksSettings.ContainsKey(patchPack.Index))
+                    foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key is > 2))
                     {
-                        string patch222Version = "";
-                        Patch222Buttons patch222Buttons = new();
-
-                        if (patchPack.Revision > 0)
+                        if (version.Value.Visible)
                         {
-                            patch222Version = (patchPack.MinorVersion * 10 + patchPack.Revision).ToString()[0..].Insert(2, ".");
+                            string patch222Version = "";
+                            Patch222Buttons patch222Buttons = new();
+
+                            int fullVersionAsInteger = version.Value.MinorVersion * 10 + version.Value.Revision;
+                            string fullVersionAsString = fullVersionAsInteger.ToString();
+
+                            if (version.Value.Revision > 0)
+                            {
+                                patch222Version = fullVersionAsString[0..].Insert(2, ".");
+                                patch222Buttons.LabelTextPatchVersion = "Version " + patch222Version;
+                                patch222Buttons.Tag = fullVersionAsInteger;
+                            }
+                            else
+                            {
+                                patch222Version = fullVersionAsString[0..];
+                                patch222Buttons.LabelTextPatchVersion = "Version " + version.Value.MinorVersion.ToString();
+                                patch222Buttons.Tag = fullVersionAsInteger;
+                            }
+
+                            if (fullVersionAsInteger == Settings.Default.PatchVersionInstalled)
+                            {
+                                patch222Buttons.SelectedIconVisible = true;
+                            }
+
+                            UpdatePanelButtonActiveState();
+
+                            patch222Buttons.Click += PatchButton222Clicked;
+                            PanelPlaceholder.Controls.Add(patch222Buttons);
                         }
-                        else
-                        {
-                            patch222Version = patchPack.MinorVersion.ToString();
-                        }
-
-                        patch222Buttons.LabelTextPatchVersion = "Version " + patch222Version;
-                        patch222Buttons.Tag = patchPack.Index;
-
-                        patch222Buttons.Click += PatchButton222Clicked;
-                        PanelPlaceholder.Controls.Add(patch222Buttons);
-
-                        UpdatePanelButtonActiveState();
                     }
-                }
-                else
-                {
-                    // foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Value.Index is > 2))
-                    // {
-                    //     string patch222Version = "";
-                    //     Patch222Buttons patch222Buttons = new();
-                    // 
-                    //     if (patchPack.Revision > 0)
-                    //     {
-                    //         patch222Version = (patchPack.MinorVersion * 10 + patchPack.Revision).ToString()[0..].Insert(2, ".");
-                    //     }
-                    //     else
-                    //     {
-                    //         patch222Version = patchPack.MinorVersion.ToString();
-                    //     }
-                    // 
-                    //     if (version.Value.MinorVersion == Settings.Default.PatchVersionInstalled)
-                    //     {
-                    //         patch222Buttons.SelectedIconVisible = true;
-                    //     }
-                    // 
-                    //     UpdatePanelButtonActiveState();
-                    // 
-                    //     patch222Buttons.Click += PatchButton222Clicked;
-                    //     PanelPlaceholder.Controls.Add(patch222Buttons);
-                    // }
                 }
 
                 if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKeyBFME1("path"))) || RegistryService.ReadRegKeyBFME1("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKeyBFME1("path"), ConstStrings.C_BFME1_MAIN_GAME_FILE)))
@@ -230,6 +215,7 @@ namespace PatchLauncher
                     RepairGameToolStripMenuItem.Enabled = false;
                     MenuItemLaunchGame.Enabled = false;
                     LblModExplanation.Visible = false;
+                    BtnPlayOnline.Enabled = false;
                 }
                 else
                 {
@@ -237,6 +223,9 @@ namespace PatchLauncher
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKeyBFME1("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage(AssemblyNameHelper.BFMELauncherGameName);
                 }
+
+                if (Settings.Default.PatchVersionInstalled != patchPack.MinorVersion * 10 + patchPack.Revision)
+                    BtnPlayOnline.Enabled = false;
 
                 if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
                     GameDesktopShortcutToolStripMenuItem.Checked = true;
@@ -375,8 +364,6 @@ namespace PatchLauncher
         private async void PatchButton106Clicked(object? sender, EventArgs e)
         {
             TurnPatchesAndModsViewOff();
-
-            Patch106Button patch106Button = (Patch106Button)sender!;
             PatchPacks patchPack106 = JSONDataListHelper._DictionaryPatchPacksSettings[0];
 
             if (Settings.Default.PatchVersionInstalled == 106)
@@ -422,8 +409,6 @@ namespace PatchLauncher
         private async void PatchButton109Clicked(object? sender, EventArgs e)
         {
             TurnPatchesAndModsViewOff();
-
-            Patch109Button patch109Button = (Patch109Button)sender!;
             PatchPacks patchPack109 = JSONDataListHelper._DictionaryPatchPacksSettings[1];
 
             if (Settings.Default.PatchVersionInstalled == 109)
@@ -474,7 +459,7 @@ namespace PatchLauncher
                 patchPackLanguages = patchPack222.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
             }
 
-            if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision)
+            if (Settings.Default.PatchVersionInstalled == patchPack222.MinorVersion * 10 + patchPack222.Revision)
             {
                 await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                 await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
@@ -498,8 +483,7 @@ namespace PatchLauncher
                         await InstallUpdateRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                     }
 
-                    Settings.Default.PatchVersionInstalled = patchPack.MinorVersion * 10 + patchPack.Revision;
-                    UpdatePanelButtonActiveState();
+                    Settings.Default.PatchVersionInstalled = patchPack222.MinorVersion * 10 + patchPack222.Revision;
                 }
                 catch (Exception ex)
                 {
@@ -512,6 +496,7 @@ namespace PatchLauncher
 
             Settings.Default.Save();
             await TurnPatchesAndModsViewOn();
+            UpdatePanelButtonActiveState();
         }
 
         private async void BtnInstall_Click(object sender, EventArgs e)
@@ -1168,27 +1153,19 @@ namespace PatchLauncher
             {
                 if (childControl is Patch106Button patch106Buttons)
                 {
-                    if (Settings.Default.PatchVersionInstalled == 106)
-                        patch106Buttons.SelectedIconVisible = true;
-                    else
-                        patch106Buttons.SelectedIconVisible = false;
+                    patch106Buttons.SelectedIconVisible = (int)patch106Buttons.Tag == Settings.Default.PatchVersionInstalled;
                 }
                 else if (childControl is Patch109Button patch109Buttons)
                 {
-                    if (Settings.Default.PatchVersionInstalled == 109)
-                        patch109Buttons.SelectedIconVisible = true;
-                    else
-                        patch109Buttons.SelectedIconVisible = false;
+                    patch109Buttons.SelectedIconVisible = (int)patch109Buttons.Tag == Settings.Default.PatchVersionInstalled;
                 }
                 else if (childControl is Patch222Buttons patch222Buttons)
                 {
-                    if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision)
-                        patch222Buttons.SelectedIconVisible = true;
-                    else
-                        patch222Buttons.SelectedIconVisible = false;
+                    patch222Buttons.SelectedIconVisible = (int)patch222Buttons.Tag == Settings.Default.PatchVersionInstalled;
                 }
             }
         }
+
         private async Task TurnPatchesAndModsViewOn()
         {
             Update();
@@ -1205,7 +1182,9 @@ namespace PatchLauncher
             LblWorkerIOTask.Visible = false;
 
             BtnInstall.Enabled = true;
-            BtnPlayOnline.Enabled = true;
+
+            if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision)
+                BtnPlayOnline.Enabled = true;
 
             LaunchGameToolStripMenuItem.Enabled = true;
             RepairGameToolStripMenuItem.Enabled = true;

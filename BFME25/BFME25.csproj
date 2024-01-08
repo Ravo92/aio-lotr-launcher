@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
     <RootNamespace>PatchLauncher</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -13,9 +13,9 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-	<Version>1.0.6.2</Version>
-	<AssemblyVersion>1.0.6.2</AssemblyVersion>
-	<FileVersion>1.0.6.2</FileVersion>
+	<Version>1.0.6.3</Version>
+	<AssemblyVersion>1.0.6.3</AssemblyVersion>
+	<FileVersion>1.0.6.3</FileVersion>
     <Copyright>Raphael Vogel</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>

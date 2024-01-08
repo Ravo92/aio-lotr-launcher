@@ -114,7 +114,7 @@ namespace PatchLauncher
             resources.ApplyResources(PiBYoutube, "PiBYoutube");
             PiBYoutube.Name = "PiBYoutube";
             PiBYoutube.TabStop = false;
-            PiBYoutube.Click += PiBYoutube_Click;
+            PiBYoutube.Click += PiBYouTube_Click;
             // 
             // PiBDiscord
             // 

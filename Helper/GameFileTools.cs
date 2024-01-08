@@ -5,6 +5,7 @@ using SevenZipExtractor;
 using System.Reflection;
 using System;
 using System.IO;
+using System.Diagnostics;
 
 namespace Helper
 {
@@ -164,7 +165,7 @@ namespace Helper
 
                             if (hasExternalInstaller)
                             {
-                                entry.Extract(Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2, Path.GetFileNameWithoutExtension(ZIPFileName), entry.FileName));
+                                entry.Extract(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, "BFME2", Path.GetFileNameWithoutExtension(ZIPFileName), entry.FileName));
                             }
                             else
                             {
@@ -309,7 +310,7 @@ namespace Helper
             }
         }
 
-        public static (string driveLetter, int totalDiskSpace, int totalFreeDiskSpace) CheckIfThereIsEnoughDiskSpace (string path)
+        public static (string driveLetter, int totalDiskSpace, int totalFreeDiskSpace) CheckIfThereIsEnoughDiskSpace(string path)
         {
             DriveInfo[] allDrives = DriveInfo.GetDrives();
 

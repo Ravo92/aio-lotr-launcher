@@ -299,7 +299,6 @@ namespace PatchLauncher
                     if (patchPacks.RegistryPathForInstalledProgram != "")
                     {
                         Settings.Default.ActivePatchOrModExternalProgramFolderPath = Path.Combine(RegistryService.ReadRegKey(patchPacks.RegistryPathForInstalledProgram, patchPacks.RegistryKeyName), patchPacks.ThirdPartyToolExecutableName);
-                        Settings.Default.ActivePatchOrModExternalProgramLaunchAbility = patchPacks.ExternalInstallerHasLaunchAbility;
                         Settings.Default.Save();
 
                         //if (version == 109)
@@ -319,12 +318,12 @@ namespace PatchLauncher
 
                     if (Settings.Default.ActivePatchOrModExternalProgramFolderPath == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND + "\\" + patchPacks.ThirdPartyToolExecutableName)
                     {
-                        await InstallUpdatRepairRoutine(patchPacks.FileName, patchPacks.URLs, patchPacks.MD5, patchPacks.HasExternalInstaller, patchPacks.ExternalInstallerHasLaunchAbility);
+                        await InstallUpdatRepairRoutine(patchPacks.FileName, patchPacks.URLs, patchPacks.MD5, patchPacks.HasExternalInstaller);
                     }
                     else if (AssemblyNameHelper.ExternalInstallerReturnCode != 0 && patchPacks.RegistryPathForInstalledProgram == "")
                     {
                         MessageBox.Show(Strings.Error_ExternalInstallerCanceled_Text, Strings.Error_ExternalInstallerCanceled_Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        LogHelper.LoggerBFME25GUI.Error("Performing Install Routine for Patch or Mod > {0} < failed and perform repair", patchPacks.FileName);
+                        LogHelper.LoggerBFME25GUI.Error("Performing Install Routine for Patch > {0} < failed and perform repair", patchPacks.FileName);
 
                         LogHelper.LoggerRepairFile.Information("Started Repairing...");
                         await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
@@ -340,7 +339,6 @@ namespace PatchLauncher
                         if (version == 202)
                         {
                             Settings.Default.ActivePatchOrModExternalProgramFolderPath = Path.Combine(RegistryService.ReadRegKey(patchPacks.RegistryPathForInstalledProgram, patchPacks.RegistryKeyName), patchPacks.ThirdPartyToolExecutableName);
-                            Settings.Default.ActivePatchOrModExternalProgramLaunchAbility = patchPacks.ExternalInstallerHasLaunchAbility;
                             Settings.Default.Save();
                         }
 
@@ -575,7 +573,7 @@ namespace PatchLauncher
             }
         }
 
-        private async Task InstallUpdatRepairRoutine(string ZIPFileName, List<string> DownloadUrls, string CorrectMD5HashValue, bool hasExternalInstaller = false, bool externalInstallerHasLaunchAbility = false)
+        private async Task InstallUpdatRepairRoutine(string ZIPFileName, List<string> DownloadUrls, string CorrectMD5HashValue, bool hasExternalInstaller = false)
         {
             try
             {
