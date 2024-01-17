@@ -36,7 +36,7 @@ namespace PatchLauncher
             // 
             // OnlineMenu
             // 
-            OnlineMenu.AccessToken = "cb1018ab-d27b-4870-98ac-3f5df1771e7b";
+            OnlineMenu.AccessToken = "";
             OnlineMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             OnlineMenu.Location = new System.Drawing.Point(0, 0);
             OnlineMenu.Name = "OnlineMenu";
