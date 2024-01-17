@@ -204,6 +204,8 @@ namespace PatchLauncher
                     }
                 }
 
+                BtnPlayOnline.Enabled = false;
+
                 if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKeyBFME1("path"))) || RegistryService.ReadRegKeyBFME1("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKeyBFME1("path"), ConstStrings.C_BFME1_MAIN_GAME_FILE)))
                 {
                     Settings.Default.IsGameInstalled = false;
@@ -215,17 +217,16 @@ namespace PatchLauncher
                     RepairGameToolStripMenuItem.Enabled = false;
                     MenuItemLaunchGame.Enabled = false;
                     LblModExplanation.Visible = false;
-                    BtnPlayOnline.Enabled = false;
                 }
                 else
                 {
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKeyBFME1("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage(AssemblyNameHelper.BFMELauncherGameName);
-                }
 
-                if (Settings.Default.PatchVersionInstalled != patchPack.MinorVersion * 10 + patchPack.Revision)
-                    BtnPlayOnline.Enabled = false;
+                    if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision || Settings.Default.PatchVersionInstalled == 106 || Settings.Default.PatchVersionInstalled == 109)
+                        BtnPlayOnline.Enabled = true;
+                }
 
                 if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
                     GameDesktopShortcutToolStripMenuItem.Checked = true;
@@ -321,6 +322,9 @@ namespace PatchLauncher
                 }
 
                 await TurnPatchesAndModsViewOn();
+
+                BtnPlayOnline.Visible = false;
+                Update();
             }
 
             if (Settings.Default.OpenLauncherChangelogPageAfterUpdate)
@@ -777,7 +781,7 @@ namespace PatchLauncher
                 LblWorkerFileName.Text = "";
                 LblWorkerIOTask.Text = "";
                 Update();
-                string calculatedMD5Value = MD5Tools.CalculateMD5(fullPathToZIPFile);
+                string calculatedMD5Value = await MD5Tools.CalculateMD5Async(fullPathToZIPFile);
 
                 if (calculatedMD5Value == CorrectMD5HashValue)
                 {
@@ -931,17 +935,17 @@ namespace PatchLauncher
 
         private void OpenSaveDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Save");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Save");
         }
 
         private void OpenMapDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Maps");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Maps");
         }
 
         private void OpenReplayDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Replays");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Replays");
         }
 
         private void OpenGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1183,7 +1187,7 @@ namespace PatchLauncher
 
             BtnInstall.Enabled = true;
 
-            if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision)
+            if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision || Settings.Default.PatchVersionInstalled == 106 || Settings.Default.PatchVersionInstalled == 109)
                 BtnPlayOnline.Enabled = true;
 
             LaunchGameToolStripMenuItem.Enabled = true;

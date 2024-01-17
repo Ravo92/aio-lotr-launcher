@@ -231,10 +231,13 @@ namespace PatchLauncher
         {
             MessageBox.Show("There is a new Patch 1.09 version with many bug fixes.\nPlease press \"Yes\" when you get asked about uninstalling the old Patch!", "New Patch 1.09 Version detected!", MessageBoxButtons.OK);
 
-            Process processLaunchUninstaller = new();
-            processLaunchUninstaller.StartInfo.FileName = pathToPatch109UninstallerSetup;
-            processLaunchUninstaller.Start();
-            await processLaunchUninstaller.WaitForExitAsync();
+            if (File.Exists(pathToPatch109UninstallerSetup))
+            {
+                Process processLaunchUninstaller = new();
+                processLaunchUninstaller.StartInfo.FileName = pathToPatch109UninstallerSetup;
+                processLaunchUninstaller.Start();
+                await processLaunchUninstaller.WaitForExitAsync();
+            }
 
             Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
             Settings.Default.Save();
@@ -282,12 +285,6 @@ namespace PatchLauncher
                     }
                 }
 
-                string eaUninstallExePath = Path.Combine(RegistryService.GameInstallPath("BFME2"), ConstStrings.C_EAUNINSTALL_FILENAME);
-                if (!File.Exists(eaUninstallExePath))
-                {
-                    File.Create(eaUninstallExePath);
-                }
-
                 Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                 Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";
                 Settings.Default.Save();
@@ -333,7 +330,7 @@ namespace PatchLauncher
                         AssemblyNameHelper.EAXWasActivated = false;
 
                     Settings.Default.PatchVersionInstalled = patchPack.MajorVersion;
-                    await InstallUpdateRepairRoutine(patchPacks.FileName, patchPacks.URLs, patchPacks.MD5, patchPacks.ThirdPartyToolExecutableName, patchPacks.HasExternalInstaller);
+                    await InstallUpdateRepairRoutine(patchPacks.FileName, patchPacks.URLs, patchPacks.MD5, patchPacks.HasExternalInstaller);
 
                     if (AssemblyNameHelper.EAXWasActivated)
                     {
@@ -392,7 +389,10 @@ namespace PatchLauncher
                         await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
                         await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
-                        Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial; //patchPack.Version;
+                        PatchPacks patchPacks = JSONDataListHelper._DictionaryPatchPacksSettings[mainPack.LatestPatchVersionOfficial];
+                        await InstallUpdateRepairRoutine(patchPacks.FileName, patchPacks.URLs, patchPacks.MD5, patchPacks.HasExternalInstaller);
+
+                        Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                         Settings.Default.IsGameInstalled = true;
                         Settings.Default.Save();
 
@@ -570,7 +570,7 @@ namespace PatchLauncher
             }
         }
 
-        private async Task InstallUpdateRepairRoutine(string ZIPFileName, List<string> DownloadURLs, string CorrectMD5HashValue, string getFileNameFromArchiveIfExe = ConstStrings.C_BFME2_MAIN_GAME_FILE, bool hasExternalInstaller = false)
+        private async Task InstallUpdateRepairRoutine(string ZIPFileName, List<string> DownloadURLs, string CorrectMD5HashValue, bool hasExternalInstaller = false)
         {
             try
             {
@@ -831,17 +831,17 @@ namespace PatchLauncher
 
         private void OpenSaveDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Save");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Save");
         }
 
         private void OpenMapDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Maps");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Maps");
         }
 
         private void OpenReplayDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Replays");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Replays");
         }
 
         private void OpenGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e)

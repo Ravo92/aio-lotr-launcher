@@ -57,8 +57,6 @@ namespace Helper
         public const string C_BFME25_MAIN_GAME_FILE = "lotrbfme2ep1.exe";
         public const string C_WORLDBUILDER_FILE = "worldbuilder.exe";
 
-        public const string C_EAUNINSTALL_FILENAME = "eauninstall.exe";
-
         public const string C_MAIN_ASSET_FILE = "asset.dat";
         public const string C_BFME1_103_ASSET_FILE = "asset.dat.103";
         public const string C_BFME2_106_ASSET_FILE = "asset.dat.103";

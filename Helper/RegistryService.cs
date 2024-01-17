@@ -107,7 +107,7 @@ namespace Helper
             };
         }
 
-        public static string GameAppdataFolderPath(string BFMEGameVersion)
+        public static string GameAppDataFolderPath(string BFMEGameVersion)
         {
             if (BFMEGameVersion == "BFME1")
             {
@@ -141,7 +141,7 @@ namespace Helper
             }
         }
 
-        public static void WriteRegKeysInstallationBFME1(string installpath, string locale, string strLanguageName, string strLanguage)
+        public static void WriteRegKeysInstallationBFME1(string installPath, string locale, string strLanguageName, string strLanguage)
         {
             using RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\EA Games");
 
@@ -150,7 +150,7 @@ namespace Helper
             keyFolder2.SetValue("CD Drive", @"I:\");
             keyFolder2.SetValue("DisplayName", "The Battle for Middle-earth");
             keyFolder2.SetValue("Folder", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\EA GAMES\The Battle for Middle-earth\");
-            keyFolder2.SetValue("Install Dir", installpath);
+            keyFolder2.SetValue("Install Dir", installPath + Path.DirectorySeparatorChar);
             keyFolder2.SetValue("Installed From", @"I:\");
             keyFolder2.SetValue("Language", strLanguageName);
             keyFolder2.SetValue("Locale", locale);
@@ -165,7 +165,7 @@ namespace Helper
             using RegistryKey keyFolder4 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games");
 
             using RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth");
-            keyFolder5.SetValue("InstallPath", installpath);
+            keyFolder5.SetValue("InstallPath", installPath + Path.DirectorySeparatorChar);
             keyFolder5.SetValue("Language", strLanguage);
             keyFolder5.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder5.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
@@ -176,7 +176,7 @@ namespace Helper
             keyFolder6.SetValue("", RandomCDKeyGenerator(20));
         }
 
-        public static void WriteRegKeysInstallationBFME2(string installpath, string locale, string strLanguageName, string strLanguage)
+        public static void WriteRegKeysInstallationBFME2(string installPath, string locale, string strLanguageName, string strLanguage)
         {
             using RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts");
 
@@ -185,7 +185,7 @@ namespace Helper
             keyFolder2.SetValue("CD Drive", @"I:\");
             keyFolder2.SetValue("DisplayName", "The Battle for Middle-earth II");
             keyFolder2.SetValue("Folder", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Electronic Arts\The Battle for Middle-earth II\");
-            keyFolder2.SetValue("Install Dir", installpath);
+            keyFolder2.SetValue("Install Dir", installPath + Path.DirectorySeparatorChar);
             keyFolder2.SetValue("Installed From", @"I:\");
             keyFolder2.SetValue("Language", strLanguageName);
             keyFolder2.SetValue("Locale", locale);
@@ -200,7 +200,7 @@ namespace Helper
             using RegistryKey keyFolder4 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts");
 
             using RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Battle for Middle-earth II");
-            keyFolder5.SetValue("InstallPath", installpath);
+            keyFolder5.SetValue("InstallPath", installPath + Path.DirectorySeparatorChar);
             keyFolder5.SetValue("Language", strLanguage);
             keyFolder5.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder5.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
@@ -211,15 +211,15 @@ namespace Helper
             keyFolder6.SetValue("", RandomCDKeyGenerator(20));
 
             using RegistryKey keyFolder7 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2.exe");
-            keyFolder7.SetValue("", Path.Combine(installpath, ConstStrings.C_BFME2_MAIN_GAME_FILE));
+            keyFolder7.SetValue("", Path.Combine(installPath, ConstStrings.C_BFME2_MAIN_GAME_FILE));
             keyFolder7.SetValue("Game Registry", @"SOFTWARE\Electronic Arts\The Battle for Middle-earth II");
             keyFolder7.SetValue("Restart", "00000000", RegistryValueKind.DWord);
             keyFolder7.SetValue("DirectX Installed", "00000000", RegistryValueKind.DWord);
             keyFolder7.SetValue("Installed", "00000001", RegistryValueKind.DWord);
-            keyFolder7.SetValue("Path", installpath);
+            keyFolder7.SetValue("Path", installPath);
         }
 
-        public static void WriteRegKeysInstallationBFME25(string installpath, string locale, string strLanguageName, string strLanguage)
+        public static void WriteRegKeysInstallationBFME25(string installPath, string locale, string strLanguageName, string strLanguage)
         {
             using RegistryKey keyFolder1 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts");
 
@@ -228,7 +228,7 @@ namespace Helper
             keyFolder2.SetValue("CD Drive", @"I:\");
             keyFolder2.SetValue("DisplayName", "The Rise of the Witch-king");
             keyFolder2.SetValue("Folder", @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Electronic Arts\The Rise of the Witch-king\");
-            keyFolder2.SetValue("Install Dir", installpath);
+            keyFolder2.SetValue("Install Dir", installPath + Path.DirectorySeparatorChar);
             keyFolder2.SetValue("Installed From", @"I:\");
             keyFolder2.SetValue("Language", strLanguageName);
             keyFolder2.SetValue("Locale", locale);
@@ -243,7 +243,7 @@ namespace Helper
             using RegistryKey keyFolder4 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts");
 
             using RegistryKey keyFolder5 = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king");
-            keyFolder5.SetValue("InstallPath", installpath);
+            keyFolder5.SetValue("InstallPath", installPath + Path.DirectorySeparatorChar);
             keyFolder5.SetValue("Language", strLanguage);
             keyFolder5.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyFolder5.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);

@@ -619,7 +619,7 @@ namespace PatchLauncher
 
         private void SaveSettings()
         {
-            if (File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_OPTIONSINI_FILENAME)))
+            if (File.Exists(Path.Combine(RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
                 if (FlagModelLOD == "UltraHigh" && FlagAnimationLOD == "UltraHigh" && FlagEffectsLOD == "UltraHigh" && FlagShadowLOD == "UltraHigh" && FlagShaderLOD == "UltraHigh"
                     && FlagWaterLOD == "UltraHigh" && FlagTextureQualityLOD == "High" && FlagTerrainLOD == "High" && FlagDecalLOD == "High")
