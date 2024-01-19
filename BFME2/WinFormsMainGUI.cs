@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,7 +21,7 @@ namespace PatchLauncher
         LanguageFiles? patchPackLanguages;
         LanguagePacks languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[GameFileTools.CheckIfJSONLanguageExists(Settings.Default.InstalledLanguageISOCode, AssemblyNameHelper.BFMELauncherGameName)];
         readonly MainPacks mainPack = JSONDataListHelper._MainPackSettings;
-        readonly PatchPacks patchPack = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
+        readonly PatchPacks patchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
 
         readonly ChangelogPagePatch changelogPagePatch = new();
         readonly ChangelogPageLauncher changelogPageLauncher = new();
@@ -1074,8 +1075,13 @@ namespace PatchLauncher
                     }
                 }
 
+                string completePathForExternalExecuteFile = Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPack.FileName), patchPack.ThirdPartyToolExecutableName);
+
+                using RegistryKey keyFolder = Registry.LocalMachine.CreateSubKey(patchPack.RegistryPathForInstalledProgram);
+                keyFolder.SetValue("InstallLocation", Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPack.FileName)));
+
+                Settings.Default.ActivePatchOrModExternalProgramFolderPath = completePathForExternalExecuteFile;
                 Settings.Default.PatchVersionInstalled = patchPack.MajorVersion;
-                Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";
                 Settings.Default.Save();
 
                 TurnPatchesAndModsViewOn();
