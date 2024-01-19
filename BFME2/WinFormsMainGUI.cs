@@ -396,6 +396,12 @@ namespace PatchLauncher
                             File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
                         }
 
+                        string completePathForExternalExecuteFile = Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPack.FileName), patchPack.ThirdPartyToolExecutableName);
+
+                        using RegistryKey keyFolder = Registry.LocalMachine.CreateSubKey(patchPack.RegistryPathForInstalledProgram);
+                        keyFolder.SetValue("InstallLocation", Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, AssemblyNameHelper.BFMELauncherGameName, Path.GetFileNameWithoutExtension(patchPack.FileName)));
+                        Settings.Default.ActivePatchOrModExternalProgramFolderPath = completePathForExternalExecuteFile;
+
                         Settings.Default.PatchVersionInstalled = patchPack.MajorVersion;
                         Settings.Default.IsGameInstalled = true;
                         Settings.Default.Save();

@@ -114,7 +114,7 @@ namespace PatchLauncher
                     PatchPacks _latestPatchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
                     PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[AssemblyNameHelper.BFMELauncherGameName];
 
-                    Settings.Default.LatestPatchVersion = _latestPatchPack.MinorVersion * 10 + _latestPatchPack.Revision;
+                    Settings.Default.LatestPatchVersion = _latestPatchPack.MajorVersion;
                     Settings.Default.Save();
                 }
                 catch (Exception ex)
