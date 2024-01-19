@@ -37,7 +37,7 @@ namespace PatchLauncher
                 }
                 else if (args[0] == "--showLauncherUpdateLog")
                 {
-                    LogHelper.LoggerBFME2GUI.Information(string.Format("Launched after LauncherUpdate now with version: > {0} <", AssemblyNameHelper.BFMELauncherGameVerion));
+                    LogHelper.LoggerBFME2GUI.Information(string.Format("Launched after LauncherUpdate now with version: > {0} <", AssemblyNameHelper.BFMELauncherGameVersion));
                     Settings.Default.OpenLauncherChangelogPageAfterUpdate = true;
                     Settings.Default.Save();
                 }

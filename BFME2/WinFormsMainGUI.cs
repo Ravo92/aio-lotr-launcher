@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -254,7 +253,7 @@ namespace PatchLauncher
                 if (Settings.Default.PatchVersionInstalled == mainPack.LatestPatchVersionOfficial)
                 {
                     MessageBox.Show(Strings.Msg_UpdateAlreadyActive_Text, Strings.Msg_UpdateAlreadyActive_Title, MessageBoxButtons.OK);
-                    await TurnPatchesAndModsViewOn();
+                    TurnPatchesAndModsViewOn();
                     UpdatePanelButtonActiveState();
                     return;
                 }
@@ -281,7 +280,7 @@ namespace PatchLauncher
 
                     foreach (var file in _EAXFiles)
                     {
-                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                        File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
                     }
                 }
 
@@ -293,10 +292,10 @@ namespace PatchLauncher
             {
                 LogHelper.LoggerBFME2GUI.Error(ex.ToString());
                 MessageBox.Show("Something went wrong. Please see Logfiles for further Details. \n We will no reset the launcher state so you can close it. \n Please click on the discord Logo to get support.");
-                await TurnPatchesAndModsViewOn();
+                TurnPatchesAndModsViewOn();
             }
 
-            await TurnPatchesAndModsViewOn();
+            TurnPatchesAndModsViewOn();
             UpdatePanelButtonActiveState();
         }
 
@@ -338,7 +337,7 @@ namespace PatchLauncher
 
                         foreach (var file in _EAXFiles)
                         {
-                            File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
                         }
                     }
 
@@ -352,12 +351,12 @@ namespace PatchLauncher
                 {
                     LogHelper.LoggerBFME2GUI.Error(ex.ToString());
                     MessageBox.Show("Something went wrong. Please see Logfiles for further Details.\nWe will now reset the launcher state so you can close it.\nPlease click on the discord Logo to get support.");
-                    await TurnPatchesAndModsViewOn();
+                    TurnPatchesAndModsViewOn();
                 }
             }
 
             Settings.Default.Save();
-            await TurnPatchesAndModsViewOn();
+            TurnPatchesAndModsViewOn();
             UpdatePanelButtonActiveState();
         }
 
@@ -388,11 +387,16 @@ namespace PatchLauncher
 
                         await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
                         await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                        await InstallUpdateRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5, patchPack.HasExternalInstaller);
 
-                        PatchPacks patchPacks = JSONDataListHelper._DictionaryPatchPacksSettings[mainPack.LatestPatchVersionOfficial];
-                        await InstallUpdateRepairRoutine(patchPacks.FileName, patchPacks.URLs, patchPacks.MD5, patchPacks.HasExternalInstaller);
+                        List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
 
-                        Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
+                        foreach (var file in _EAXFiles)
+                        {
+                            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                        }
+
+                        Settings.Default.PatchVersionInstalled = patchPack.MajorVersion;
                         Settings.Default.IsGameInstalled = true;
                         Settings.Default.Save();
 
@@ -407,6 +411,7 @@ namespace PatchLauncher
                         }
 
                         taskPrepareInstallFolder.Dispose();
+                        UpdatePanelButtonActiveState();
                     }
                     else
                     {
@@ -430,8 +435,8 @@ namespace PatchLauncher
 
             SettingsToolStripMenuItem.Enabled = true;
             BFME25ToolStripMenuItem.Enabled = true;
-            await TurnPatchesAndModsViewOn();
 
+            TurnPatchesAndModsViewOn();
             Update();
         }
 
@@ -655,7 +660,7 @@ namespace PatchLauncher
             {
                 LogHelper.LoggerBFME2GUI.Error(ex.ToString());
                 MessageBox.Show("Something went wrong. Please see logfiles for further details. \n We will now reset the launcher state so you can close it. \n Please click on the discord logo to get support.");
-                await TurnPatchesAndModsViewOn();
+                TurnPatchesAndModsViewOn();
             }
         }
 
@@ -755,7 +760,7 @@ namespace PatchLauncher
                     await processLaunchExternalTool.WaitForExitAsync();
                     processLaunchExternalTool.Dispose();
 
-                    await TurnPatchesAndModsViewOn();
+                    TurnPatchesAndModsViewOn();
                 }
                 else
                 {
@@ -772,7 +777,7 @@ namespace PatchLauncher
                     WindowState = FormWindowState.Minimized;
                     processLaunchGame.Start();
                     await processLaunchGame.WaitForExitAsync();
-                    await TurnPatchesAndModsViewOn();
+                    TurnPatchesAndModsViewOn();
                     processLaunchGame.Dispose();
                     SysTray_MouseDoubleClick(null, null);
                 }
@@ -800,7 +805,7 @@ namespace PatchLauncher
                 }
                 else if (dialogResult == DialogResult.Cancel)
                 {
-                    await TurnPatchesAndModsViewOn();
+                    TurnPatchesAndModsViewOn();
                 }
             }
             catch (Exception ex)
@@ -819,7 +824,7 @@ namespace PatchLauncher
                 }
                 else if (dialogResult == DialogResult.Cancel)
                 {
-                    await TurnPatchesAndModsViewOn();
+                    TurnPatchesAndModsViewOn();
                 }
             }
         }
@@ -846,7 +851,7 @@ namespace PatchLauncher
 
         private void OpenGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName));
+            Process.Start("explorer.exe", "\"" + RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName) + "\"");
         }
 
         private void OpenLauncherDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -953,7 +958,7 @@ namespace PatchLauncher
 
                 taskPrepareInstallFolder.Dispose();
 
-                await TurnPatchesAndModsViewOn();
+                TurnPatchesAndModsViewOn();
             }
         }
 
@@ -1050,28 +1055,32 @@ namespace PatchLauncher
                 LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                 await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
+                LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Patch 109v3 if needed...");
+                await InstallUpdateRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5, patchPack.HasExternalInstaller);
+
                 if (AssemblyNameHelper.EAXWasActivated)
                 {
                     List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
 
                     foreach (var file in _EAXFiles)
                     {
-                        File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                        File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
                     }
                 }
 
-                Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
+                Settings.Default.PatchVersionInstalled = patchPack.MajorVersion;
                 Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";
                 Settings.Default.Save();
 
-                await TurnPatchesAndModsViewOn();
+                TurnPatchesAndModsViewOn();
                 UpdatePanelButtonActiveState();
             }
             catch (Exception ex)
             {
                 LogHelper.LoggerRepairFile.Error(ex.ToString());
                 MessageBox.Show("Something went wrong. Please see Logfiles for further Details. \n We will no reset the launcher state so you can close it. \n Please click on the discord Logo to get support.");
-                await TurnPatchesAndModsViewOn();
+
+                TurnPatchesAndModsViewOn();
                 UpdatePanelButtonActiveState();
             }
         }
@@ -1095,10 +1104,10 @@ namespace PatchLauncher
             }
         }
 
-        private async Task TurnPatchesAndModsViewOn()
+        private void TurnPatchesAndModsViewOn()
         {
             Update();
-            await Task.Delay(1000);
+
             IsLauncherCurrentlyWorking = false;
 
             PibLoadingRing.Visible = false;

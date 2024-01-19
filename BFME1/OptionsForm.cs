@@ -707,7 +707,7 @@ namespace PatchLauncher
 
                 foreach (var file in _EAXFiles)
                 {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
+                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
                 }
 
                 OptionIniParser.WriteKey("UseEAX3", "yes", AssemblyNameHelper.BFMELauncherGameName);

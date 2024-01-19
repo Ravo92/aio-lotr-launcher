@@ -3,11 +3,13 @@ using Helper.UserControls;
 using PatchLauncher.Properties;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.UI.WebUI;
 
 namespace PatchLauncher
 {
@@ -189,19 +191,20 @@ namespace PatchLauncher
                 ChangelogLauncherToolStripMenuItem.PerformClick();
             }
 
-            TurnPatchesAndModsViewOff();
-            string calculatedMD5ValueMainPack = await MD5Tools.CalculateMD5Async(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25, mainPack.FileName));
-            string calculatedMD5ValueLanguagePack = await MD5Tools.CalculateMD5Async(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25, languagePackSettings.LanguagePackName));
+            if (Settings.Default.IsGameInstalled == true)
+            {
+                TurnPatchesAndModsViewOff();
+                string calculatedMD5ValueMainPack = await MD5Tools.CalculateMD5Async(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25, mainPack.FileName));
+                string calculatedMD5ValueLanguagePack = await MD5Tools.CalculateMD5Async(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25, languagePackSettings.LanguagePackName));
 
-            if (calculatedMD5ValueMainPack != mainPack.MD5 || calculatedMD5ValueLanguagePack != languagePackSettings.MD5)
-            {
-                RepairGameToolStripMenuItem.Enabled = true;
-                RepairGameToolStripMenuItem.PerformClick();
-            }
-            else
-            {
+                if (calculatedMD5ValueMainPack != mainPack.MD5 || calculatedMD5ValueLanguagePack != languagePackSettings.MD5)
+                {
+                    RepairGameToolStripMenuItem.Enabled = true;
+                    Update();
+                    RepairGameToolStripMenuItem.PerformClick();
+                }
+
                 TurnPatchesAndModsViewOn();
-                return;
             }
         }
 
@@ -221,6 +224,11 @@ namespace PatchLauncher
                     return;
                 }
 
+                if (File.Exists(Settings.Default.GameInstallPath + @"\dsound.dll"))
+                    AssemblyNameHelper.EAXWasActivated = true;
+                else
+                    AssemblyNameHelper.EAXWasActivated = false;
+
                 LogHelper.LoggerBFME25GUI.Information("Performing Repair Routine after clicking on button > Patch 1.06 <");
 
                 LogHelper.LoggerRepairFile.Information("Started Repairing...");
@@ -231,6 +239,16 @@ namespace PatchLauncher
 
                 LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
                 await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+
+                if (AssemblyNameHelper.EAXWasActivated)
+                {
+                    List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                    foreach (var file in _EAXFiles)
+                    {
+                        File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                    }
+                }
 
                 Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                 Settings.Default.Save();
@@ -359,7 +377,14 @@ namespace PatchLauncher
                         await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
                         await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
-                        Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial; //patchPack.Version;
+                        List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                        foreach (var file in _EAXFiles)
+                        {
+                            File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                        }
+
+                        Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
                         Settings.Default.IsGameInstalled = true;
                         Settings.Default.Save();
 
@@ -572,13 +597,15 @@ namespace PatchLauncher
                     }
                 });
 
+                string calculatedMD5Value = await MD5Tools.CalculateMD5Async(fullPathToZIPFile);
+
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
-                GameFileTools gameFileTools = new();
-                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadURLs, 0, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
                 LblWorkerFileName.Text = "";
                 LblWorkerIOTask.Text = "";
+
                 Update();
-                string calculatedMD5Value = await MD5Tools.CalculateMD5Async(fullPathToZIPFile);
+
+                GameFileTools gameFileTools = new();
 
                 if (calculatedMD5Value == CorrectMD5HashValue)
                 {
@@ -596,7 +623,7 @@ namespace PatchLauncher
                     }
 
                     LogHelper.LoggerBFME25GUI.Information("Start downloading file: > {0} <", ZIPFileName);
-                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadURLs, 1, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
+                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, DownloadURLs, 0, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
 
                     LogHelper.LoggerBFME25GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
                     await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction, hasExternalInstaller);
@@ -606,7 +633,6 @@ namespace PatchLauncher
                 {
                     Process processLaunchExternalTool = new();
                     processLaunchExternalTool.StartInfo.FileName = Path.Combine(ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25, Path.GetFileNameWithoutExtension(ZIPFileName), getFileNameFromArchiveIfExe);
-                    //processLaunchExternalTool.StartInfo.WorkingDirectory = Settings.Default.GameInstallPath;
 
                     processLaunchExternalTool.Start();
                     await processLaunchExternalTool.WaitForExitAsync();
@@ -759,6 +785,7 @@ namespace PatchLauncher
                     Settings.Default.Save();
 
                     RepairGameToolStripMenuItem.Enabled = true;
+                    Update();
                     RepairGameToolStripMenuItem.PerformClick();
 
                     UpdatePanelButtonActiveState();
@@ -792,7 +819,7 @@ namespace PatchLauncher
 
         private void OpenGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName));
+            Process.Start("explorer.exe", "\"" + RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName) + "\"");
         }
 
         private void OpenLauncherDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -971,6 +998,11 @@ namespace PatchLauncher
         {
             TurnPatchesAndModsViewOff();
 
+            if (File.Exists(Settings.Default.GameInstallPath + @"\dsound.dll"))
+                AssemblyNameHelper.EAXWasActivated = true;
+            else
+                AssemblyNameHelper.EAXWasActivated = false;
+
             LogHelper.LoggerRepairFile.Information("Started Repairing...");
             await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
@@ -979,6 +1011,16 @@ namespace PatchLauncher
 
             LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
             await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+
+            if (AssemblyNameHelper.EAXWasActivated)
+            {
+                List<string> _EAXFiles = new() { "dsoal-aldrv.dll", "dsound.dll", "dsound.ini", };
+
+                foreach (var file in _EAXFiles)
+                {
+                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(Settings.Default.GameInstallPath, file), true);
+                }
+            }
 
             Settings.Default.PatchVersionInstalled = mainPack.LatestPatchVersionOfficial;
             Settings.Default.ActivePatchOrModExternalProgramFolderPath = "";
