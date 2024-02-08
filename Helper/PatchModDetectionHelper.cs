@@ -24,7 +24,23 @@
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerPatchModDectection.Error(ex, "");
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public static Task DeletePatch109ForBFME1(string assemblyName)
+        {
+            try
+            {
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH109MAIN_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH109TEXTURES_FILENAME));
+                File.Delete(Path.Combine(RegistryService.GameInstallPath(assemblyName), ConstStrings.C_PATCH109WSMAPS_FILENAME));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
             }
 
             return Task.CompletedTask;
@@ -50,7 +66,7 @@
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerPatchModDectection.Error(ex, "");
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
             }
 
             return Task.CompletedTask;
@@ -65,14 +81,14 @@
                 {
                     foreach (var file in get109PatchFiles)
                     {
-                        LogHelper.LoggerPatchModDectection.Information("Copying file > {0} < from 109-folder to game folder", file);
+                        LogHelper.LoggerPatchModDetection.Information("Copying file > {0} < from 109-folder to game folder", file);
                         File.Copy(file, Path.Combine(RegistryService.GameInstallPath(assemblyName), Path.GetFileName(file)), true);
                     }
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerPatchModDectection.Error(ex, "");
+                LogHelper.LoggerPatchModDetection.Error(ex, "");
             }
 
             return Task.CompletedTask;

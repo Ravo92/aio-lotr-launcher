@@ -619,7 +619,7 @@ namespace PatchLauncher
 
         private void SaveSettings()
         {
-            if (File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_OPTIONSINI_FILENAME)))
+            if (File.Exists(Path.Combine(RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
                 if (FlagModelLOD == "UltraHigh" && FlagAnimationLOD == "UltraHigh" && FlagEffectsLOD == "UltraHigh" && FlagShadowLOD == "UltraHigh" && FlagShaderLOD == "UltraHigh"
                     && FlagWaterLOD == "UltraHigh" && FlagTextureQualityLOD == "High" && FlagTerrainLOD == "High" && FlagDecalLOD == "High")
@@ -667,7 +667,7 @@ namespace PatchLauncher
 
                 foreach (var file in _EAXFiles)
                 {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
+                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
                 }
 
                 OptionIniParser.WriteKey("UseEAX3", "yes", AssemblyNameHelper.BFMELauncherGameName);
@@ -688,7 +688,7 @@ namespace PatchLauncher
             OptionIniParser.ClearOptionsFile(AssemblyNameHelper.BFMELauncherGameName);
 
             if (FlagBrutalAI && GameInstallPath != null)
-                File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"), true);
+                File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, "_patch222LibrariesBrutalAI.big"), Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"), true);
             else if (GameInstallPath != null && File.Exists(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big")))
                 File.Delete(Path.Combine(GameInstallPath, "_patch222LibrariesBrutalAI.big"));
 

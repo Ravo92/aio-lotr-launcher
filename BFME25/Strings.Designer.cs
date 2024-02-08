@@ -133,8 +133,8 @@ namespace PatchLauncher {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Seems like we lost the game itself or a third party patch- or mod-launcher
-        ///Its greatly advised, that you dont install any third party launcher into the game folder itself!
+        ///   Sucht eine lokalisierte Zeichenfolge, die Seems like we lost the game itself or a third party patch-launcher
+        ///Its greatly advised, that you do not install any third party launcher into the game folder itself!
         ///Do you want to repair the game now, so we got a clean 2.01 state again? ähnelt.
         /// </summary>
         internal static string Msg_ErrorStartingGame_Text {
@@ -208,7 +208,7 @@ namespace PatchLauncher {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The selected patch or mod is already active!
+        ///   Sucht eine lokalisierte Zeichenfolge, die The selected patch is already active!
         ///No action has been conducted. ähnelt.
         /// </summary>
         internal static string Msg_UpdateAlreadyActive_Text {

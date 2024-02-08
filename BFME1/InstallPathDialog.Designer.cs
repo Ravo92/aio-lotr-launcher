@@ -41,15 +41,18 @@
             ChkDesktopShortcut = new System.Windows.Forms.Button();
             LblStartMenuShortCut = new System.Windows.Forms.Label();
             ChkStartMenuShortcut = new System.Windows.Forms.Button();
+            LblFreeSpace = new System.Windows.Forms.Label();
+            LblNeededSpace = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)PibLanguageSupport).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PibPathBorder).BeginInit();
             SuspendLayout();
             // 
             // TxtInstallPath
             // 
-            TxtInstallPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(TxtInstallPath, "TxtInstallPath");
+            TxtInstallPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
             TxtInstallPath.Name = "TxtInstallPath";
+            TxtInstallPath.TextChanged += TxtInstallPath_TextChanged;
             // 
             // LblChooseDir
             // 
@@ -59,8 +62,8 @@
             // 
             // BtnChoose
             // 
-            BtnChoose.BackColor = System.Drawing.SystemColors.ActiveCaption;
             resources.ApplyResources(BtnChoose, "BtnChoose");
+            BtnChoose.BackColor = System.Drawing.SystemColors.ActiveCaption;
             BtnChoose.FlatAppearance.BorderSize = 0;
             BtnChoose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnChoose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -76,8 +79,8 @@
             // 
             // BtnAccept
             // 
-            BtnAccept.BackColor = System.Drawing.SystemColors.ActiveCaption;
             resources.ApplyResources(BtnAccept, "BtnAccept");
+            BtnAccept.BackColor = System.Drawing.SystemColors.ActiveCaption;
             BtnAccept.FlatAppearance.BorderSize = 0;
             BtnAccept.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             BtnAccept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -93,8 +96,8 @@
             // 
             // CmbSelectGameLanguage
             // 
-            CmbSelectGameLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(CmbSelectGameLanguage, "CmbSelectGameLanguage");
+            CmbSelectGameLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             CmbSelectGameLanguage.FormattingEnabled = true;
             CmbSelectGameLanguage.Name = "CmbSelectGameLanguage";
             CmbSelectGameLanguage.SelectedIndexChanged += CmbSelectGameLanguage_SelectedIndexChanged;
@@ -107,15 +110,15 @@
             // 
             // PibLanguageSupport
             // 
-            PibLanguageSupport.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(PibLanguageSupport, "PibLanguageSupport");
+            PibLanguageSupport.BackColor = System.Drawing.Color.Black;
             PibLanguageSupport.Name = "PibLanguageSupport";
             PibLanguageSupport.TabStop = false;
             // 
             // PibPathBorder
             // 
-            PibPathBorder.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(PibPathBorder, "PibPathBorder");
+            PibPathBorder.BackColor = System.Drawing.Color.Transparent;
             PibPathBorder.Name = "PibPathBorder";
             PibPathBorder.TabStop = false;
             // 
@@ -127,8 +130,8 @@
             // 
             // ChkDesktopShortcut
             // 
-            ChkDesktopShortcut.BackColor = System.Drawing.Color.DarkGray;
             resources.ApplyResources(ChkDesktopShortcut, "ChkDesktopShortcut");
+            ChkDesktopShortcut.BackColor = System.Drawing.Color.DarkGray;
             ChkDesktopShortcut.FlatAppearance.BorderSize = 0;
             ChkDesktopShortcut.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkDesktopShortcut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -150,8 +153,8 @@
             // 
             // ChkStartMenuShortcut
             // 
-            ChkStartMenuShortcut.BackColor = System.Drawing.Color.IndianRed;
             resources.ApplyResources(ChkStartMenuShortcut, "ChkStartMenuShortcut");
+            ChkStartMenuShortcut.BackColor = System.Drawing.Color.IndianRed;
             ChkStartMenuShortcut.FlatAppearance.BorderSize = 0;
             ChkStartMenuShortcut.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             ChkStartMenuShortcut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -165,11 +168,25 @@
             ChkStartMenuShortcut.MouseEnter += ChkStartMenuShortcut_MouseEnter;
             ChkStartMenuShortcut.MouseLeave += ChkStartMenuShortcut_MouseLeave;
             // 
+            // LblFreeSpace
+            // 
+            resources.ApplyResources(LblFreeSpace, "LblFreeSpace");
+            LblFreeSpace.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            LblFreeSpace.Name = "LblFreeSpace";
+            // 
+            // LblNeededSpace
+            // 
+            resources.ApplyResources(LblNeededSpace, "LblNeededSpace");
+            LblNeededSpace.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            LblNeededSpace.Name = "LblNeededSpace";
+            // 
             // InstallPathDialog
             // 
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            resources.ApplyResources(this, "$this");
+            Controls.Add(LblNeededSpace);
+            Controls.Add(LblFreeSpace);
             Controls.Add(LblStartMenuShortCut);
             Controls.Add(ChkStartMenuShortcut);
             Controls.Add(LblDesktopShortCut);
@@ -206,5 +223,7 @@
         private System.Windows.Forms.Button ChkDesktopShortcut;
         private System.Windows.Forms.Label LblStartMenuShortCut;
         private System.Windows.Forms.Button ChkStartMenuShortcut;
+        private System.Windows.Forms.Label LblFreeSpace;
+        private System.Windows.Forms.Label LblNeededSpace;
     }
 }

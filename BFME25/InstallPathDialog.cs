@@ -26,6 +26,14 @@ namespace PatchLauncher
             LblChooseDir.ForeColor = Color.FromArgb(114, 153, 169);
             LblChooseDir.BackColor = Color.Transparent;
 
+            LblFreeSpace.Font = FontHelper.GetFont(0, 12);
+            LblFreeSpace.ForeColor = Color.FromArgb(114, 153, 169);
+            LblFreeSpace.BackColor = Color.Transparent;
+
+            LblNeededSpace.Font = FontHelper.GetFont(0, 12);
+            LblNeededSpace.ForeColor = Color.FromArgb(114, 153, 169);
+            LblNeededSpace.BackColor = Color.Transparent;
+
             LblSelectGameLanguage.Font = FontHelper.GetFont(0, 12);
             LblSelectGameLanguage.ForeColor = Color.FromArgb(114, 153, 169);
             LblSelectGameLanguage.BackColor = Color.Transparent;
@@ -256,6 +264,32 @@ namespace PatchLauncher
             string isoCode = (string)control.SelectedValue;
             var settings = JSONDataListHelper._DictionarylanguageSettings[isoCode];
             FlagSelectedIsoCode = settings.RegistrySelectedLocale;
+        }
+
+        private void TxtInstallPath_TextChanged(object sender, EventArgs e)
+        {
+            int totalDiskSpace = GameFileTools.CheckIfThereIsEnoughDiskSpace(TxtInstallPath.Text).totalDiskSpace;
+            int totalFreeDiskSpace = GameFileTools.CheckIfThereIsEnoughDiskSpace(TxtInstallPath.Text).totalFreeDiskSpace;
+            string driveLetter = GameFileTools.CheckIfThereIsEnoughDiskSpace(TxtInstallPath.Text).driveLetter;
+
+            if (Settings.Default.LauncherLanguage == "de")
+                LblFreeSpace.Text = "Freier Platz: " + totalFreeDiskSpace.ToString() + " GB / Gesamter Platz: " + totalDiskSpace.ToString() + " GB";
+            else
+                LblFreeSpace.Text = "Free Space: " + totalFreeDiskSpace.ToString() + " GB / Total Space: " + totalDiskSpace.ToString() + " GB";
+
+            if (totalFreeDiskSpace <= 10)
+            {
+                if (Settings.Default.LauncherLanguage == "de")
+                    MessageBox.Show(string.Format("Auf der Partition \"{0}\" ist nicht genügend freier Platz vorhanden.\nBitte etwas Platz freischaufeln und dann erneut versuchen!", driveLetter), "Nicht genug freier Speicherplatz", MessageBoxButtons.OK);
+                else
+                    MessageBox.Show(string.Format("There is not enough disk space on the partition \"{0}\".\nPlease free some space before you can install the game", driveLetter), "Not enough free space", MessageBoxButtons.OK);
+
+                BtnAccept.Enabled = false;
+            }
+            else
+            {
+                BtnAccept.Enabled = true;
+            }
         }
     }
 }

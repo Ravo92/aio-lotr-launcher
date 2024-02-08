@@ -41,6 +41,10 @@ namespace Helper
         public const string C_PATCH106MAIN_FILENAME = "_patch106.big";
         public const string C_PATCH106TEXTURES_FILENAME = "_patch106textures.big";
 
+        public const string C_PATCH109WSMAPS_FILENAME = "_patch109maps.big";
+        public const string C_PATCH109MAIN_FILENAME = "_patch109.big";
+        public const string C_PATCH109TEXTURES_FILENAME = "_patch109textures.big";
+
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
         public const string C_RESTARTEREXE_FILENAME = "Restarter.exe";
@@ -52,8 +56,6 @@ namespace Helper
         public const string C_BFME2_MAIN_GAME_FILE = "lotrbfme2.exe";
         public const string C_BFME25_MAIN_GAME_FILE = "lotrbfme2ep1.exe";
         public const string C_WORLDBUILDER_FILE = "worldbuilder.exe";
-
-        public const string C_EAUNINSTALL_FILENAME = "eauninstall.exe";
 
         public const string C_MAIN_ASSET_FILE = "asset.dat";
         public const string C_BFME1_103_ASSET_FILE = "asset.dat.103";

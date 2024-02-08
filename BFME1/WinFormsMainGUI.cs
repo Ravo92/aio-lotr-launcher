@@ -20,7 +20,7 @@ namespace PatchLauncher
         LanguageFiles? patchPackLanguages;
         LanguagePacks languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[GameFileTools.CheckIfJSONLanguageExists(Settings.Default.InstalledLanguageISOCode, AssemblyNameHelper.BFMELauncherGameName)];
         readonly MainPacks mainPack = JSONDataListHelper._MainPackSettings;
-        readonly PatchPacks patchPack = JSONDataListHelper._DictionaryPatchPacksSettings[Settings.Default.LatestPatchVersion];
+        readonly PatchPacks patchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()]; // [Settings.Default.LatestPatchVersion];
         readonly PatchPacksBeta patchPacksBeta = JSONDataListHelper._PatchBetaSettings;
 
         readonly ChangelogPagePatch changelogPagePatch = new();
@@ -69,6 +69,13 @@ namespace PatchLauncher
             BtnInstall.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
             BtnInstall.Font = FontHelper.GetFont(0, 16); ;
             BtnInstall.ForeColor = Color.FromArgb(192, 145, 69);
+
+            BtnPlayOnline.FlatAppearance.BorderSize = 0;
+            BtnPlayOnline.FlatStyle = FlatStyle.Flat;
+            BtnPlayOnline.BackColor = Color.Transparent;
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
+            BtnPlayOnline.Font = FontHelper.GetFont(0, 16); ;
+            BtnPlayOnline.ForeColor = Color.FromArgb(192, 145, 69);
 
             PanelPlaceholder.BackgroundImage = Helper.Properties.Resources.BFME1BorderRectangleModPanel;
             PanelPlaceholder.BackColor = Color.Transparent;
@@ -135,7 +142,7 @@ namespace PatchLauncher
 
                 if (!Settings.Default.UseBetaChannel)
                 {
-                    if (JSONDataListHelper._DictionaryPatchPacksSettings.ContainsKey(106))
+                    if (JSONDataListHelper._DictionaryPatchPacksSettings.ContainsKey(0))
                     {
                         Patch106Button patch106Button = new();
                         PanelPlaceholder.Controls.Add(patch106Button);
@@ -148,27 +155,43 @@ namespace PatchLauncher
                         }
                     }
 
-                    foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key is >= 22220 and <= 2229999))
+                    if (JSONDataListHelper._DictionaryPatchPacksSettings.ContainsKey(1))
                     {
-                        if (!version.Value.HasSubPatchOrHotfix)
+                        Patch109Button patch109Button = new();
+                        PanelPlaceholder.Controls.Add(patch109Button);
+                        patch109Button.Tag = 109;
+                        patch109Button.Click += PatchButton109Clicked;
+
+                        if (Settings.Default.PatchVersionInstalled == 109)
+                        {
+                            patch109Button.SelectedIconVisible = true;
+                        }
+                    }
+
+                    foreach (var version in JSONDataListHelper._DictionaryPatchPacksSettings.Where(x => x.Key is > 2))
+                    {
+                        if (version.Value.Visible)
                         {
                             string patch222Version = "";
                             Patch222Buttons patch222Buttons = new();
 
-                            if (version.Value.Version.ToString().Length >= 6)
+                            int fullVersionAsInteger = version.Value.MinorVersion * 10 + version.Value.Revision;
+                            string fullVersionAsString = fullVersionAsInteger.ToString();
+
+                            if (version.Value.Revision > 0)
                             {
-                                patch222Version = version.Value.Version.ToString()[3..].Insert(2, ".");
+                                patch222Version = fullVersionAsString[0..].Insert(2, ".");
                                 patch222Buttons.LabelTextPatchVersion = "Version " + patch222Version;
-                                patch222Buttons.Tag = version.Key;
+                                patch222Buttons.Tag = fullVersionAsInteger;
                             }
                             else
                             {
-                                patch222Version = version.Value.Version.ToString()[3..];
-                                patch222Buttons.LabelTextPatchVersion = "Version " + patch222Version;
-                                patch222Buttons.Tag = version.Key;
+                                patch222Version = fullVersionAsString[0..];
+                                patch222Buttons.LabelTextPatchVersion = "Version " + version.Value.MinorVersion.ToString();
+                                patch222Buttons.Tag = fullVersionAsInteger;
                             }
 
-                            if (version.Value.Version == Settings.Default.PatchVersionInstalled)
+                            if (fullVersionAsInteger == Settings.Default.PatchVersionInstalled)
                             {
                                 patch222Buttons.SelectedIconVisible = true;
                             }
@@ -180,6 +203,8 @@ namespace PatchLauncher
                         }
                     }
                 }
+
+                BtnPlayOnline.Enabled = false;
 
                 if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKeyBFME1("path"))) || RegistryService.ReadRegKeyBFME1("path") == "ValueNotFound" || !File.Exists(Path.Combine(RegistryService.ReadRegKeyBFME1("path"), ConstStrings.C_BFME1_MAIN_GAME_FILE)))
                 {
@@ -198,6 +223,9 @@ namespace PatchLauncher
                     Settings.Default.IsGameInstalled = true;
                     Settings.Default.GameInstallPath = RegistryService.ReadRegKeyBFME1("path");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage(AssemblyNameHelper.BFMELauncherGameName);
+
+                    if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision || Settings.Default.PatchVersionInstalled == 106 || Settings.Default.PatchVersionInstalled == 109)
+                        BtnPlayOnline.Enabled = true;
                 }
 
                 if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
@@ -232,7 +260,7 @@ namespace PatchLauncher
 
         private async void BFME1_Shown(object sender, EventArgs e)
         {
-            if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
+            if (Settings.Default.LatestPatchVersion != Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
             {
                 TurnPatchesAndModsViewOff();
 
@@ -242,18 +270,18 @@ namespace PatchLauncher
                 Settings.Default.PatchVersionInstalled = Settings.Default.LatestPatchVersion;
                 Settings.Default.Save();
 
-                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
+                await InstallUpdateRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
                 if (patchPack.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                 {
                     LanguageFiles patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                    await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
+                    await InstallUpdateRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                 }
 
                 await TurnPatchesAndModsViewOn();
                 UpdatePanelButtonActiveState();
             }
-            else if (Settings.Default.LatestPatchVersion > Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && Settings.Default.SelectedOlderPatch)
+            else if (Settings.Default.LatestPatchVersion != Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && Settings.Default.SelectedOlderPatch)
             {
                 DialogResult _dialogResult = MessageBox.Show(Strings.Msg_RestartForUpdate_Text, Strings.Msg_Restart_Title, MessageBoxButtons.YesNo);
                 if (_dialogResult == DialogResult.Yes)
@@ -283,7 +311,7 @@ namespace PatchLauncher
 
                 if (patchPacksBeta.Version > Settings.Default.BetaChannelVersion)
                 {
-                    await InstallUpdatRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URLs, patchPacksBeta.MD5);
+                    await InstallUpdateRepairRoutine(patchPacksBeta.FileName, patchPacksBeta.URLs, patchPacksBeta.MD5);
                     Settings.Default.BetaChannelVersion = patchPacksBeta.Version;
                     Settings.Default.Save();
                 }
@@ -294,6 +322,9 @@ namespace PatchLauncher
                 }
 
                 await TurnPatchesAndModsViewOn();
+
+                BtnPlayOnline.Visible = false;
+                Update();
             }
 
             if (Settings.Default.OpenLauncherChangelogPageAfterUpdate)
@@ -318,6 +349,7 @@ namespace PatchLauncher
             try
             {
                 await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                 await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                 Settings.Default.PatchVersionInstalled = 103;
@@ -336,14 +368,12 @@ namespace PatchLauncher
         private async void PatchButton106Clicked(object? sender, EventArgs e)
         {
             TurnPatchesAndModsViewOff();
+            PatchPacks patchPack106 = JSONDataListHelper._DictionaryPatchPacksSettings[0];
 
-            Patch106Button patch106Button = (Patch106Button)sender!;
-            int version = Convert.ToInt32(patch106Button.Tag);
-            PatchPacks patchPack106 = JSONDataListHelper._DictionaryPatchPacksSettings[version];
-
-            if (Settings.Default.PatchVersionInstalled == version)
+            if (Settings.Default.PatchVersionInstalled == 106)
             {
                 await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                 await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                 Settings.Default.PatchVersionInstalled = 103;
@@ -355,17 +385,57 @@ namespace PatchLauncher
                 try
                 {
                     await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                     await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
-                    await InstallUpdatRepairRoutine(patchPack106.FileName, patchPack106.URLs, patchPack106.MD5);
+                    await InstallUpdateRepairRoutine(patchPack106.FileName, patchPack106.URLs, patchPack106.MD5);
 
                     if (patchPack106.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
                     {
                         LanguageFiles patchPackLanguages = patchPack106.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                        await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
+                        await InstallUpdateRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                     }
 
-                    Settings.Default.PatchVersionInstalled = version;
+                    Settings.Default.PatchVersionInstalled = 106;
+                    UpdatePanelButtonActiveState();
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.LoggerBFME1GUI.Error(ex.ToString());
+                }
+            }
+
+            Settings.Default.SelectedOlderPatch = true;
+            Settings.Default.Save();
+            await TurnPatchesAndModsViewOn();
+        }
+
+        private async void PatchButton109Clicked(object? sender, EventArgs e)
+        {
+            TurnPatchesAndModsViewOff();
+            PatchPacks patchPack109 = JSONDataListHelper._DictionaryPatchPacksSettings[1];
+
+            if (Settings.Default.PatchVersionInstalled == 109)
+            {
+                await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+
+                Settings.Default.PatchVersionInstalled = 103;
+                Settings.Default.Save();
+                UpdatePanelButtonActiveState();
+            }
+            else
+            {
+                try
+                {
+                    await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+
+                    await InstallUpdateRepairRoutine(patchPack109.FileName, patchPack109.URLs, patchPack109.MD5);
+
+                    Settings.Default.PatchVersionInstalled = 109;
                     UpdatePanelButtonActiveState();
                 }
                 catch (Exception ex)
@@ -384,8 +454,8 @@ namespace PatchLauncher
             TurnPatchesAndModsViewOff();
 
             Patch222Buttons patch222Buttons = (Patch222Buttons)sender!;
-            int version = Convert.ToInt32(patch222Buttons.Tag);
-            PatchPacks patchPack222 = JSONDataListHelper._DictionaryPatchPacksSettings[version];
+            int patch222Version = Convert.ToInt32(patch222Buttons.Tag);
+            PatchPacks patchPack222 = JSONDataListHelper._DictionaryPatchPacksSettings[patch222Version];
             LanguageFiles? patchPackLanguages = null;
 
             if (patchPack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
@@ -393,9 +463,10 @@ namespace PatchLauncher
                 patchPackLanguages = patchPack222.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
             }
 
-            if (Settings.Default.PatchVersionInstalled == version)
+            if (Settings.Default.PatchVersionInstalled == patchPack222.MinorVersion * 10 + patchPack222.Revision)
             {
                 await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                 await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
                 Settings.Default.PatchVersionInstalled = 103;
@@ -406,17 +477,17 @@ namespace PatchLauncher
                 try
                 {
                     await PatchModDetectionHelper.DeletePatch106ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
+                    await PatchModDetectionHelper.DeletePatch109ForBFME1(AssemblyNameHelper.BFMELauncherGameName);
                     await PatchModDetectionHelper.DeletePatch222FilesForBFME1(AssemblyNameHelper.BFMELauncherGameName);
 
-                    await InstallUpdatRepairRoutine(patchPack222.FileName, patchPack222.URLs, patchPack222.MD5);
+                    await InstallUpdateRepairRoutine(patchPack222.FileName, patchPack222.URLs, patchPack222.MD5);
 
                     if (patchPack222.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode) && patchPackLanguages != null)
                     {
-                        await InstallUpdatRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
+                        await InstallUpdateRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                     }
 
-                    Settings.Default.PatchVersionInstalled = version;
-                    UpdatePanelButtonActiveState();
+                    Settings.Default.PatchVersionInstalled = patchPack222.MinorVersion * 10 + patchPack222.Revision;
                 }
                 catch (Exception ex)
                 {
@@ -424,11 +495,12 @@ namespace PatchLauncher
                 }
             }
 
-            if (Settings.Default.LatestPatchVersion > version || Settings.Default.PatchVersionInstalled == 103)
+            if (Settings.Default.LatestPatchVersion > patch222Version || Settings.Default.PatchVersionInstalled == 103)
                 Settings.Default.SelectedOlderPatch = true;
 
             Settings.Default.Save();
             await TurnPatchesAndModsViewOn();
+            UpdatePanelButtonActiveState();
         }
 
         private async void BtnInstall_Click(object sender, EventArgs e)
@@ -456,17 +528,16 @@ namespace PatchLauncher
 
                         RegistryService.WriteRegKeysInstallationBFME1(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
 
-                        await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
-                        await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
-                        await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
+                        await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
+                        await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                        await InstallUpdateRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
                         if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
                         {
                             patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                            await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
+                            await InstallUpdateRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                         }
 
-                        patchPack.Version = Settings.Default.PatchVersionInstalled;
                         Settings.Default.IsGameInstalled = true;
 
                         if (Settings.Default.CreateDesktopShortcut)
@@ -528,7 +599,38 @@ namespace PatchLauncher
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 
-        private void PiBYoutube_Click(object sender, EventArgs e)
+        private void BtnPlayOnline_Click(object sender, EventArgs e)
+        {
+            OnlineMode onlineMode = new();
+            DialogResult dialogResult = onlineMode.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void BtnPlayOnline_MouseLeave(object sender, EventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_NEUTR;
+            BtnPlayOnline.ForeColor = Color.FromArgb(192, 145, 69);
+        }
+
+        private void BtnPlayOnline_MouseEnter(object sender, EventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_HOVER;
+            BtnPlayOnline.ForeColor = Color.FromArgb(100, 53, 5);
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
+        }
+
+        private void BtnPlayOnline_MouseDown(object sender, MouseEventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME1_BUTTONIMAGE_CLICK;
+            BtnPlayOnline.ForeColor = Color.FromArgb(192, 145, 69);
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
+        }
+
+        private void PiBYouTube_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://www.youtube.com/BeyondStandards") { UseShellExecute = true });
         }
@@ -648,7 +750,7 @@ namespace PatchLauncher
             }
         }
 
-        private async Task InstallUpdatRepairRoutine(string ZIPFileName, List<string> DownloadUrls, string CorrectMD5HashValue)
+        private async Task InstallUpdateRepairRoutine(string ZIPFileName, List<string> DownloadURLs, string CorrectMD5HashValue)
         {
             try
             {
@@ -675,11 +777,11 @@ namespace PatchLauncher
 
                 BtnInstall.Text = Strings.BtnInstall_TextLaunch;
                 GameFileTools gameFileTools = new();
-                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrls, 0, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
+                await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadURLs, 0, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
                 LblWorkerFileName.Text = "";
                 LblWorkerIOTask.Text = "";
                 Update();
-                string calculatedMD5Value = MD5Tools.CalculateMD5(fullPathToZIPFile);
+                string calculatedMD5Value = await MD5Tools.CalculateMD5Async(fullPathToZIPFile);
 
                 if (calculatedMD5Value == CorrectMD5HashValue)
                 {
@@ -690,7 +792,7 @@ namespace PatchLauncher
                     LogHelper.LoggerBFME1GUI.Error(string.Format("MD5 HashSum check failed. Should be: {0} was: {1}", CorrectMD5HashValue, calculatedMD5Value));
                     LogHelper.LoggerBFME1GUI.Information(string.Format("Deleting file > {0} < and retry Download...", ZIPFileName));
                     File.Delete(fullPathToZIPFile);
-                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadUrls, 1, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
+                    await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, DownloadURLs, 1, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
                     LogHelper.LoggerBFME1GUI.Information(string.Format("Now trying to extract > {0} <", ZIPFileName));
                     await gameFileTools.ExtractFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME1), ZIPFileName, Settings.Default.GameInstallPath, progressHandlerExtraction);
                 }
@@ -811,7 +913,7 @@ namespace PatchLauncher
                 DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
                 if (dialogResult == DialogResult.OK)
                 {
-                    Settings.Default.PatchVersionInstalled = patchPack.Version;
+                    Settings.Default.PatchVersionInstalled = patchPack.MinorVersion * 10 + patchPack.Revision;
                     Settings.Default.Save();
 
                     RepairGameToolStripMenuItem.Enabled = true;
@@ -833,17 +935,17 @@ namespace PatchLauncher
 
         private void OpenSaveDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Save");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Save");
         }
 
         private void OpenMapDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Maps");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Maps");
         }
 
         private void OpenReplayDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Replays");
+            Process.Start("explorer.exe", RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName) + "\\Replays");
         }
 
         private void OpenGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -919,18 +1021,15 @@ namespace PatchLauncher
 
                 RegistryService.WriteRegKeysInstallationBFME1(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
 
-                await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
-                await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
-                await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
+                await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
+                await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+                await InstallUpdateRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
                 if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
                 {
                     patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                    await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
+                    await InstallUpdateRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                 }
-
-                patchPack.Version = Settings.Default.PatchVersionInstalled;
-                Settings.Default.Save();
 
                 if (Settings.Default.CreateDesktopShortcut && !ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ConstStrings.C_LAUNCHER_SHORTCUT_NAME))
                 {
@@ -1029,19 +1128,19 @@ namespace PatchLauncher
             await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
             LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
-            await InstallUpdatRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
+            await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
             LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
-            await InstallUpdatRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
+            await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
-            LogHelper.LoggerRepairFile.Information(string.Format("Downloading and/or extracting Latest Patch 2.22 Version \"{0}\" ...", patchPack.Version));
-            await InstallUpdatRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
+            LogHelper.LoggerRepairFile.Information(string.Format("Downloading and/or extracting Latest Patch 2.22 Version \"{0}\" ...", patchPack.MinorVersion));
+            await InstallUpdateRepairRoutine(patchPack.FileName, patchPack.URLs, patchPack.MD5);
 
             if (patchPack.LanguageFiles.ContainsKey(languagePackSettings.RegistrySelectedLocale))
             {
                 patchPackLanguages = patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-                LogHelper.LoggerRepairFile.Information(string.Format("Downloading and/or extracting Language-Files for Patch 2.22 Version \"{0}\" in language \"{1}\" ...", patchPack.Version, patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode]));
-                await InstallUpdatRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
+                LogHelper.LoggerRepairFile.Information(string.Format("Downloading and/or extracting Language-Files for Patch 2.22 Version \"{0}\" in language \"{1}\" ...", patchPack.MinorVersion, patchPack.LanguageFiles[Settings.Default.InstalledLanguageISOCode]));
+                await InstallUpdateRepairRoutine(patchPackLanguages.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
             }
 
             await TurnPatchesAndModsViewOn();
@@ -1060,12 +1159,17 @@ namespace PatchLauncher
                 {
                     patch106Buttons.SelectedIconVisible = (int)patch106Buttons.Tag == Settings.Default.PatchVersionInstalled;
                 }
+                else if (childControl is Patch109Button patch109Buttons)
+                {
+                    patch109Buttons.SelectedIconVisible = (int)patch109Buttons.Tag == Settings.Default.PatchVersionInstalled;
+                }
                 else if (childControl is Patch222Buttons patch222Buttons)
                 {
                     patch222Buttons.SelectedIconVisible = (int)patch222Buttons.Tag == Settings.Default.PatchVersionInstalled;
                 }
             }
         }
+
         private async Task TurnPatchesAndModsViewOn()
         {
             Update();
@@ -1082,6 +1186,9 @@ namespace PatchLauncher
             LblWorkerIOTask.Visible = false;
 
             BtnInstall.Enabled = true;
+
+            if (Settings.Default.PatchVersionInstalled == patchPack.MinorVersion * 10 + patchPack.Revision || Settings.Default.PatchVersionInstalled == 106 || Settings.Default.PatchVersionInstalled == 109)
+                BtnPlayOnline.Enabled = true;
 
             LaunchGameToolStripMenuItem.Enabled = true;
             RepairGameToolStripMenuItem.Enabled = true;
@@ -1111,6 +1218,7 @@ namespace PatchLauncher
             LblWorkerIOTask.Visible = true;
 
             BtnInstall.Enabled = false;
+            BtnPlayOnline.Enabled = false;
 
             LaunchGameToolStripMenuItem.Enabled = false;
             RepairGameToolStripMenuItem.Enabled = false;

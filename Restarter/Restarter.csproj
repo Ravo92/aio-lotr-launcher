@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <BaseOutputPath>..\build</BaseOutputPath>
-	<Version>1.0.5.8</Version>
-	<AssemblyVersion>1.0.5.8</AssemblyVersion>
-	<FileVersion>1.0.5.8</FileVersion>
+	<Version>1.0.6.6</Version>
+	<AssemblyVersion>1.0.6.6</AssemblyVersion>
+	<FileVersion>1.0.6.6</FileVersion>
     <PackageId>2.22 Restarter</PackageId>
     <Authors>Patch 2.22 Team</Authors>
     <Product>2.22 Restarter</Product>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autoupdater.NET.Official" Version="1.8.3" />
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.8.4" />
   </ItemGroup>
 
   <ItemGroup>

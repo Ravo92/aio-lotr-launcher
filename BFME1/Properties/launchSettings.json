@@ -2,7 +2,8 @@
   "profiles": {
     "Patch2.22Launcher": {
       "commandName": "Project",
-      "workingDirectory": "..\\build\\Debug\\net6.0-windows",
+      "commandLineArgs": "--official",
+      "workingDirectory": "..\\build\\Debug",
       "remoteDebugEnabled": false
     }
   }

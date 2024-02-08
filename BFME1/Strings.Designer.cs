@@ -80,7 +80,7 @@ namespace PatchLauncher {
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Beta-Channel is activated and needs to be disabled in Launcher-
-        ///options first in order to see the patch- and mod-selection! ähnelt.
+        ///options first in order to see the patch-selection! ähnelt.
         /// </summary>
         internal static string Info_BetaActivated {
             get {
@@ -134,8 +134,8 @@ namespace PatchLauncher {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Seems like we lost the game itself or a third party patch- or mod-launcher
-        ///Its greatly advised, that you dont install any third party launcher into the game folder itself!
+        ///   Sucht eine lokalisierte Zeichenfolge, die Seems like we lost the game itself or a third party patch-launcher
+        ///Its greatly advised, that you do not install any third party launcher into the game folder itself!
         ///Do you want to repair the game now, so we got a clean 2.22 state again? ähnelt.
         /// </summary>
         internal static string Msg_ErrorStartingGame_Text {

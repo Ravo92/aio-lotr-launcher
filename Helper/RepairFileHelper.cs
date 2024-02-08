@@ -91,7 +91,7 @@
         //                foreach (var file in _EAXFiles)
         //                {
         //                    LogHelper.LoggerRepairFile.Information("Installed file: " + file);
-        //                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(gameInstallPath, file), true);
+        //                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(gameInstallPath, file), true);
         //                }
         //            }
         //            else
@@ -123,7 +123,7 @@
         //                foreach (var file in _EAXFiles)
         //                {
         //                    LogHelper.LoggerRepairFile.Information("Installed file: " + file);
-        //                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(gameInstallPath, file), true);
+        //                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(gameInstallPath, file), true);
         //                }
         //            }
         //            else

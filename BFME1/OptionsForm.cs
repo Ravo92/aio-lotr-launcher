@@ -17,7 +17,6 @@ namespace PatchLauncher
         readonly static string GameInstallPath = RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName);
         readonly bool FlagEAXFileExists = File.Exists(GameInstallPath + @"\dsound.dll");
 
-        readonly string FlagStaticGameLOD = "UltraHigh";
         string FlagAnisotropicTextureFiltering = "yes";
         string FlagTerrainLighting = "yes";
         string Flag3DShadows = "yes";
@@ -53,7 +52,7 @@ namespace PatchLauncher
             KeyPreview = true;
 
             #region Styles
-            //Main Form style behaviour
+            //Main Form style behavioral
 
             PibBorderLauncherOptions.Image = Helper.Properties.Resources.BFME1BorderRectangle;
             PibBorderGameOptions.Image = Helper.Properties.Resources.BFME1BorderRectangleLong;
@@ -217,7 +216,6 @@ namespace PatchLauncher
             }
             else
             {
-                FlagStaticGameLOD = OptionIniParser.ReadKey("StaticGameLOD", AssemblyNameHelper.BFMELauncherGameName);
                 FlagAnisotropicTextureFiltering = OptionIniParser.ReadKey("AnisotropicTextureFiltering", AssemblyNameHelper.BFMELauncherGameName);
                 FlagTerrainLighting = OptionIniParser.ReadKey("TerrainLighting", AssemblyNameHelper.BFMELauncherGameName);
                 Flag3DShadows = OptionIniParser.ReadKey("3DShadows", AssemblyNameHelper.BFMELauncherGameName);
@@ -451,10 +449,10 @@ namespace PatchLauncher
 
             if (Settings.Default.PatchVersionInstalled > 106 && !FlagUseBetaChannel)
             {
-                if (Settings.Default.PatchVersionInstalled.ToString().Length >= 6)
-                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[3..].Insert(2, ".");
+                if (Settings.Default.PatchVersionInstalled.ToString().EndsWith("0"))
+                    LblPatchVersion.Text = string.Concat("2.22 v ", Settings.Default.PatchVersionInstalled.ToString().AsSpan(0, 2));
                 else
-                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[3..];
+                    LblPatchVersion.Text = "2.22 v " + Settings.Default.PatchVersionInstalled.ToString()[0..].Insert(2, ".");
             }
             else if (Settings.Default.PatchVersionInstalled >= 103 && !FlagUseBetaChannel)
             {
@@ -662,12 +660,12 @@ namespace PatchLauncher
 
         private void SaveSettings()
         {
-            if (File.Exists(Path.Combine(RegistryService.GameAppdataFolderPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_OPTIONSINI_FILENAME)))
+            if (File.Exists(Path.Combine(RegistryService.GameAppDataFolderPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_OPTIONSINI_FILENAME)))
             {
                 if (FlagAnisotropicTextureFiltering == "yes" && FlagTerrainLighting == "yes" && Flag3DShadows == "yes" && Flag2DShadows == "yes" && FlagSmoothWaterBorder == "yes"
                     && FlagShowProps == "yes" && FlagShowAnimations == "yes" && FlagHeatEffects == "yes" && FlagDynamicLOD == "yes")
                 {
-                    OptionIniParser.WriteKey("StaticGameLOD", FlagStaticGameLOD, AssemblyNameHelper.BFMELauncherGameName);
+                    OptionIniParser.WriteKey("StaticGameLOD", "UltraHigh", AssemblyNameHelper.BFMELauncherGameName);
                     OptionIniParser.WriteKey("Resolution", ResolutionX.Text + " " + ResolutionY.Text, AssemblyNameHelper.BFMELauncherGameName);
 
                     OptionIniParser.DeleteKey("AnisotropicTextureFiltering", AssemblyNameHelper.BFMELauncherGameName);
@@ -709,7 +707,7 @@ namespace PatchLauncher
 
                 foreach (var file in _EAXFiles)
                 {
-                    File.Copy(Path.Combine(ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
+                    File.Copy(Path.Combine(Application.StartupPath, ConstStrings.C_TOOLFOLDER_NAME, file), Path.Combine(GameInstallPath, file), true);
                 }
 
                 OptionIniParser.WriteKey("UseEAX3", "yes", AssemblyNameHelper.BFMELauncherGameName);

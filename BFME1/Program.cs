@@ -1,4 +1,5 @@
 using Helper;
+using Newtonsoft.Json;
 using PatchLauncher.Properties;
 using System;
 using System.Configuration;
@@ -105,16 +106,17 @@ namespace PatchLauncher
                 try
                 {
                     GameFileTools _gameFileTools = new();
-                    GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
+                    //string json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE));
+                    GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result; //JsonConvert.DeserializeObject<GameFileDictionary>(json)!;  //GameFileTools.LoadGameFileDictionary().Result;
 
                     JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
                     JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[AssemblyNameHelper.BFMELauncherGameName];
-                    JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.Version, x => x);
+                    JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.Index, x => x);
 
                     PatchPacks _latestPatchPack = JSONDataListHelper._DictionaryPatchPacksSettings[JSONDataListHelper._DictionaryPatchPacksSettings.Keys.Max()];
                     PatchPacksBeta _betaPatchFiles = JSONDataListHelper._PatchBetaSettings = gameFileDictionary.PatchPacksBeta[AssemblyNameHelper.BFMELauncherGameName];
 
-                    Settings.Default.LatestPatchVersion = _latestPatchPack.Version;
+                    Settings.Default.LatestPatchVersion = _latestPatchPack.MinorVersion * 10 + _latestPatchPack.Revision;
                     Settings.Default.Save();
                 }
                 catch (Exception ex)
@@ -125,7 +127,7 @@ namespace PatchLauncher
 
                 try
                 {
-                    GameFileTools.EnsureBFMEAppdataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
+                    GameFileTools.EnsureBFMEAppDataFolderExists(AssemblyNameHelper.BFMELauncherGameName);
                     GameFileTools.EnsureBFMEOptionsIniFileExists(AssemblyNameHelper.BFMELauncherGameName);
 
                     Application.Run(new WinFormsMainGUI());
