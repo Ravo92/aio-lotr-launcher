@@ -1,0 +1,3 @@
+[submodule "bfme-online-kit"]
+	path = bfme-online-kit
+	url = https://github.com/MarcellVokk/bfme-online-kit

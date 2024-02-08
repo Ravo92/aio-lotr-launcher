@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LauncherGUI"
         mc:Ignorable="d"
-        Title="Battle for Middle-Earth Launcher" Height="1000" Width="1500" Background="#1C1E26" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged">
+        Title="BFME Launcher" Width="1280" Height="720" Background="#1C1E26" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow">
     <Grid x:Name="windowGrid">
         <Grid Margin="20">
             <Grid.RowDefinitions>

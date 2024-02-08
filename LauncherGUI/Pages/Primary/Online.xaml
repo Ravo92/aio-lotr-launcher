@@ -2,12 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LauncherGUI.Pages.Primary"
-             xmlns:arenaKit="clr-namespace:BFMECompetetiveArenaKit;assembly=BFMECompetetiveArenaKit"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:onlineKit="clr-namespace:BFMECompetetiveArena_OnlineKit;assembly=BfmeOnlineKit"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500" Loaded="OnLoaded">
     <Grid Margin="-20,0,-20,-20">
-        <arenaKit:OnlineMenu x:Name="arena" AccessToken="3388d2fb-79b8-4576-ad19-37706fdda7aa"/>
+        <onlineKit:OnlineMenu x:Name="arena" AccessToken="3388d2fb-79b8-4576-ad19-37706fdda7aa"/>
     </Grid>
 </UserControl>
