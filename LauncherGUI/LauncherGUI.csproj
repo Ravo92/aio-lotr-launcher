@@ -75,4 +75,18 @@
 		</Resource>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="OnlineArena\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="OnlineArena\BfmeOnlineKit.dll">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="copy &quot;$(SolutionDir)\bfme-online-kit\BfmeOnlineKit.dll&quot; &quot;$(SolutionDir)\LauncherGUI\OnlineArena\BfmeOnlineKit.dll&quot;" />
+	</Target>
+
 </Project>
