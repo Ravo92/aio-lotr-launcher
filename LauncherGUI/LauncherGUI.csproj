@@ -86,7 +86,7 @@
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="copy &quot;$(SolutionDir)\bfme-online-kit\BfmeOnlineKit.dll&quot; &quot;$(SolutionDir)\LauncherGUI\OnlineArena\BfmeOnlineKit.dll&quot;" />
+	  <Exec Command="set sourcePath=$(SolutionDir)bfme-online-kit\BfmeOnlineKit.dll&#xD;&#xA;set destinationPath=$(SolutionDir)LauncherGUI\OnlineArena\BfmeOnlineKit.dll&#xD;&#xA;&#xD;&#xA;echo &quot;copy file %25sourcePath%25 into %25destinationPath%25&quot;&#xD;&#xA;copy %25sourcePath%25 %25destinationPath%25" />
 	</Target>
 
 </Project>
