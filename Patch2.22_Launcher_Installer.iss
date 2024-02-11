@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "Restarter.exe"
-#define MyAppExeVersion "1.0.6.6"
+#define MyAppExeVersion "1.0.6.7"
 #define MyAppPublishFolder "PatchLauncher"
 
 [Setup]
@@ -58,6 +58,9 @@ Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilen
 [Tasks]
 Name: "startmenuicon"; Description: "{cm:CreateStartMenuIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+
+[InstallDelete]
+Type: filesandordirs; Name: "{app}\BfmeOnlineKit"
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\Downloads"
