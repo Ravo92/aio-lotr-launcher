@@ -606,7 +606,7 @@ namespace PatchLauncher
 
             if (dialogResult == DialogResult.OK)
             {
-
+                onlineMode.Dispose();
             }
         }
 

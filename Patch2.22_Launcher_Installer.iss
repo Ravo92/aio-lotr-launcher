@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "Restarter.exe"
-#define MyAppExeVersion "1.0.6.7"
+#define MyAppExeVersion "1.0.6.8"
 #define MyAppPublishFolder "PatchLauncher"
 
 [Setup]
@@ -30,7 +30,7 @@ VersionInfoVersion={#MyAppExeVersion}
 AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
 AppPublisher=Raphael Vogel
 AppPublisherURL=https://github.com/Ravo92
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesInstallIn64BitMode=x64 arm64
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
@@ -61,6 +61,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\BfmeOnlineKit"
+Type: filesandordirs; Name: "{app}\BFME1.exe.WebView2"
+Type: filesandordirs; Name: "{app}\BFME2.exe.WebView2"
+Type: filesandordirs; Name: "{app}\BFME25.exe.WebView2"
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\Downloads"

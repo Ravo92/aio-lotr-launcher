@@ -6,9 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <BaseOutputPath>..\build</BaseOutputPath>
-	<Version>1.0.6.7</Version>
-	<AssemblyVersion>1.0.6.7</AssemblyVersion>
-	<FileVersion>1.0.6.7</FileVersion>
+	<Version>1.0.6.8</Version>
+	<AssemblyVersion>1.0.6.8</AssemblyVersion>
+	<FileVersion>1.0.6.8</FileVersion>
     <PackageId>2.22 Restarter</PackageId>
     <Authors>Patch 2.22 Team</Authors>
     <Product>2.22 Restarter</Product>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autoupdater.NET.Official" Version="1.8.4" />
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.8.5" />
   </ItemGroup>
 
   <ItemGroup>
