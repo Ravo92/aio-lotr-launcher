@@ -22,20 +22,20 @@ namespace LauncherGUI.Elements
         {
             if (!isLoaded)
             {
-                ScrollInfo = new ScrollInfoAdapter(ScrollInfo) { _mouseWheelDelta = mouseWheelDelta };
+                ScrollInfo = new ScrollInfoAdapter(ScrollInfo) { _mouseWheelDelta = MouseWheelDelta };
                 isLoaded = true;
             }
         }
 
         private double _mouseWheelDelta = 105.0;
-        public double mouseWheelDelta
+        public double MouseWheelDelta
         {
             get { return _mouseWheelDelta; }
             set
             {
                 if (ScrollInfo != null && ScrollInfo is ScrollInfoAdapter)
                 {
-                    (ScrollInfo as ScrollInfoAdapter)._mouseWheelDelta = value;
+                    (ScrollInfo as ScrollInfoAdapter)!._mouseWheelDelta = value;
                 }
 
                 _mouseWheelDelta = value;
@@ -52,7 +52,7 @@ namespace LauncherGUI.Elements
 
     public class ScrollInfoAdapter : UIElement, IScrollInfo
     {
-        private IScrollInfo _child;
+        private readonly IScrollInfo _child;
         public double _computedVerticalOffset = 0;
         private double _computedHorizontalOffset = 0;
         public double _scrollLineDelta = 56.0;
@@ -225,9 +225,11 @@ namespace LauncherGUI.Elements
         private void Animate(DependencyProperty property, double targetValue, int duration = 350)
         {
             //make a smooth animation that starts and ends slowly
-            var keyFramesAnimation = new DoubleAnimationUsingKeyFrames();
-            keyFramesAnimation.FillBehavior = FillBehavior.HoldEnd;
-            keyFramesAnimation.Duration = TimeSpan.FromMilliseconds(duration);
+            var keyFramesAnimation = new DoubleAnimationUsingKeyFrames
+            {
+                FillBehavior = FillBehavior.HoldEnd,
+                Duration = TimeSpan.FromMilliseconds(duration)
+            };
             keyFramesAnimation.KeyFrames.Add(
                 new SplineDoubleKeyFrame(
                     targetValue,

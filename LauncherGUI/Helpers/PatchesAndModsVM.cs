@@ -4,7 +4,7 @@
 
     public class PatchesAndModsVM
     {
-        public string DataGridVerionNumber { get; set; }
+        public required string DataGridVersionNumber { get; set; }
         public DataGridKindOf DataGridKindOf { get; set; }
 
         public void SetDataGridKindOf(DataGridKindOf value)

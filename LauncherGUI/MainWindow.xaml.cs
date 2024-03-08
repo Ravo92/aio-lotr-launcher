@@ -14,8 +14,8 @@ namespace LauncherGUI
     public partial class MainWindow : Window
     {
         public static MainWindow Instance { get; private set; }
-        private static Library Library = new Library();
-        private static Online Online = new Online();
+        private static readonly Library Library = new();
+        private static readonly Online Online = new();
 
         public MainWindow()
         {
@@ -24,15 +24,21 @@ namespace LauncherGUI
 
             fullContent.Visibility = Visibility.Visible;
 
-            Width = System.Windows.SystemParameters.WorkArea.Width * 0.7;
-            Height = System.Windows.SystemParameters.WorkArea.Height * 0.8;
+            Width = SystemParameters.WorkArea.Width * 0.7;
+            Height = SystemParameters.WorkArea.Height * 0.8;
 
             CheckSize();
-
             ShowLibrary();
+
+            _ = new
+            Pages.Settings.Launcher.LauncherSettings_General();
         }
 
-        public static void SetContent(FrameworkElement? newContent) => Instance.content.Child = newContent;
+        public static void SetContent(FrameworkElement? newContent)
+        {
+            Instance.content.Child = newContent;
+        }
+
         public static void SetFullContent(FrameworkElement? newContent)
         {
             Instance.content.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
@@ -83,6 +89,13 @@ namespace LauncherGUI
         {
             var dpi = VisualTreeHelper.GetDpi(this);
             windowGrid.LayoutTransform = new ScaleTransform(1 / dpi.DpiScaleX * Math.Min(1, Math.Min((this.ActualWidth / 1500), (this.ActualHeight / 900))), 1 / dpi.DpiScaleX * Math.Min(1, Math.Min((this.ActualWidth / 1500), (this.ActualHeight / 900))));
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
         }
     }
 }

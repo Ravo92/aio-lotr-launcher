@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
+		<TargetFramework>net8.0-windows7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<StartupObject></StartupObject>
@@ -41,10 +41,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Helper\Helper.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Reference Include="BFMECompetetiveArena_OnlineKit">
 			<HintPath>OnlineArena\BfmeOnlineKit.dll</HintPath>
 		</Reference>
@@ -77,6 +73,9 @@
 
 	<ItemGroup>
 	  <Folder Include="OnlineArena\" />
+	  <Folder Include="Pages\Settings\Bfme1\" />
+	  <Folder Include="Pages\Settings\Bfme2\" />
+	  <Folder Include="Pages\Settings\RotWK\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,9 +83,5 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
-
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="set sourcePath=$(SolutionDir)bfme-online-kit\BfmeOnlineKit.dll&#xD;&#xA;set destinationPath=$(SolutionDir)LauncherGUI\OnlineArena\BfmeOnlineKit.dll&#xD;&#xA;&#xD;&#xA;echo &quot;copy file %25sourcePath%25 into %25destinationPath%25&quot;&#xD;&#xA;copy %25sourcePath%25 %25destinationPath%25" />
-	</Target>
 
 </Project>

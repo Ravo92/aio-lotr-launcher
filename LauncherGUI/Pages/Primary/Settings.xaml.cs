@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LauncherGUI.Pages.Settings.Launcher;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -25,9 +15,20 @@ namespace LauncherGUI.Pages.Primary
             InitializeComponent();
         }
 
+        LauncherSettings_General? launcherSettings_General;
+
         private void OnCloseClicked(object sender, MouseButtonEventArgs e)
         {
             MainWindow.SetFullContent(null);
+        }
+
+        private void SettingsMenuLauncherSettingsGeneralLabel_Click(object sender, RoutedEventArgs e)
+        {
+            if (launcherSettings_General == null)
+            {
+                launcherSettings_General = new LauncherSettings_General();
+                PanelSettings.Children.Add(launcherSettings_General);
+            }
         }
     }
 }
