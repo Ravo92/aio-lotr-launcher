@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="LauncherGUI.Pages.Primary.Settings"
+﻿<UserControl x:Name="LauncherParentSettingsWindow" x:Class="LauncherGUI.Pages.Primary.Settings"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1500" Background="#1C1E26">
+             d:DesignHeight="1000" d:DesignWidth="1500" Background="#1C1E26" Loaded="LauncherParentSettingsWindow_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MaxWidth="500" MinWidth="280"/>
@@ -18,24 +18,18 @@
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
                     <TextBlock x:Name="SettingsBFME1Header" Text="{DynamicResource SettingsBFME1Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsBFME1General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME1General}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsBFME1Video" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME1Video}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsBFME1Language" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME1Language}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsBFME1Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME1Repair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsBFME1General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME1General_Click"/>
+                    <Button x:Name="SettingsBFME1Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
                     <TextBlock x:Name="SettingsBFME2Header" Text="{DynamicResource SettingsBFME2Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsBFME2General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME2General}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsBFME2Video" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME2Video}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsBFME2Language" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME2Language}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsBFME2Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFME2Repair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsBFME2General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsBFME2Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
                     <TextBlock x:Name="SettingsRotWKHeader" Text="{DynamicResource SettingsRotWKHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsRotWKGeneral" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsRotWKGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsRotWKVideo" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsRotWKVideo}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsRotWKLanguage" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsRotWKLanguage}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsRotWKRepair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsRotWKRepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsRotWKGeneral" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsRotWKRepair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
                 </StackPanel>
             </ScrollViewer>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace LauncherGUI.Pages.Settings.Launcher
 {
@@ -9,31 +7,30 @@ namespace LauncherGUI.Pages.Settings.Launcher
     /// </summary>
     public partial class LauncherSettings_General : UserControl
     {
+        bool isNotUserInteractionForLanguageDropDown = true;
         public LauncherSettings_General()
         {
             InitializeComponent();
+            ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.LauncherLanguageSetting;
         }
 
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ChangeLauncherLanguage(ComboBoxLanguage.SelectedIndex);
-        }
-
-        public static void ChangeLauncherLanguage(int languageIndex)
-        {
-            ResourceDictionary resourceDictionary = [];
-
-            switch (languageIndex)
+            // The first call will always be the resolutions being added and set to the user-saved resolution.
+            // We skip the first entry point here and then set the "isNotUserInteractionForLanguageDropDown" to false, so the user actually can change the value
+            if (isNotUserInteractionForLanguageDropDown)
             {
-                case 0:
-                    resourceDictionary.Source = new Uri("..\\..\\..\\Resources\\Dictionary\\LanguageResources.en.xaml", UriKind.Relative);
-                    break;
-                case 1:
-                    resourceDictionary.Source = new Uri("..\\..\\..\\Resources\\Dictionary\\LanguageResources.de.xaml", UriKind.Relative);
-                    break;
+                isNotUserInteractionForLanguageDropDown = false;
+                return;
             }
 
-            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+            if (ComboBoxLanguage.SelectedIndex == 0)
+                Helpers.LauncherLanguageHelper.GetAvailableLauncherLanguage(0);
+            else
+                Helpers.LauncherLanguageHelper.GetAvailableLauncherLanguage(ComboBoxLanguage.SelectedIndex);
+
+            Properties.Settings.Default.LauncherLanguageSetting = ComboBoxLanguage.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
     }
 }

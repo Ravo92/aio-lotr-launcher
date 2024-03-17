@@ -27,11 +27,10 @@ namespace LauncherGUI
             Width = SystemParameters.WorkArea.Width * 0.7;
             Height = SystemParameters.WorkArea.Height * 0.8;
 
+            Helpers.LauncherLanguageHelper.GetAvailableLauncherLanguage(Properties.Settings.Default.LauncherLanguageSetting);
+
             CheckSize();
             ShowLibrary();
-
-            _ = new
-            Pages.Settings.Launcher.LauncherSettings_General();
         }
 
         public static void SetContent(FrameworkElement? newContent)

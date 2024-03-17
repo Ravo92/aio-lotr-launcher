@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LauncherGUI"
         mc:Ignorable="d"
-        Title="BFME Launcher" Width="1280" Height="720" Background="#1C1E26" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow">
+        Title="{DynamicResource MainLauncherTitle}" Width="1280" Height="720" Background="#1C1E26" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow">
     <Grid x:Name="windowGrid">
         <Grid Margin="20">
             <Grid.RowDefinitions>
@@ -15,8 +14,8 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel x:Name="tabs" Orientation="Horizontal">
-                    <TextBlock x:Name="libraryTab" Style="{DynamicResource TextBlockButton}" Text="LIBRARY" FontSize="16" FontWeight="Bold" Background="Transparent" Cursor="Hand" MouseDown="OnLibraryTabClicked"/>
-                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" Text="ONLINE" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
+                    <TextBlock x:Name="libraryTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainLauncherLibrary}" FontSize="16" FontWeight="Bold" Background="Transparent" Cursor="Hand" MouseDown="OnLibraryTabClicked"/>
+                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainLauncherOnline}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
                 </StackPanel>
                 <Grid x:Name="settings" Background="Transparent" Cursor="Hand" HorizontalAlignment="Right" MouseDown="OnSettingsClicked">
                     <TextBlock x:Name="color" Visibility="Collapsed"/>

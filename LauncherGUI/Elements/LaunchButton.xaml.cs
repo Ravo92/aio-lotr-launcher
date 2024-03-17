@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LauncherGUI.Elements
 {
@@ -21,7 +11,7 @@ namespace LauncherGUI.Elements
     /// </summary>
     public partial class LaunchButton : UserControl
     {
-        RectangleGeometry ProgressFillClip = new RectangleGeometry() { Rect = new Rect(0, 0, 0, 0) };
+        readonly RectangleGeometry ProgressFillClip = new() { Rect = new Rect(0, 0, 0, 0) };
 
         public LaunchButton()
         {
@@ -74,7 +64,7 @@ namespace LauncherGUI.Elements
             LaunchButton progressBar = (LaunchButton)sender;
             if (progressBar != null && progressBar.ButtonState == LaunchButtonState.Loading)
             {
-                RectAnimation b = new RectAnimation { From = new Rect(0, 0, progressBar.ProgressFillClip.Rect.Width, progressBar.background.ActualHeight), To = new Rect(0, 0, progressBar.background.ActualWidth * ((double)e.NewValue / 100), progressBar.background.ActualHeight), Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
+                RectAnimation b = new() { From = new Rect(0, 0, progressBar.ProgressFillClip.Rect.Width, progressBar.background.ActualHeight), To = new Rect(0, 0, progressBar.background.ActualWidth * ((double)e.NewValue / 100), progressBar.background.ActualHeight), Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
                 progressBar.ProgressFillClip.BeginAnimation(RectangleGeometry.RectProperty, b, HandoffBehavior.Compose);
                 progressBar.progressText.Text = $"{(double)e.NewValue}%";
             }
@@ -86,7 +76,7 @@ namespace LauncherGUI.Elements
             set => statusText.Text = value;
         }
 
-        private void progress_SizeChanged(object sender, SizeChangedEventArgs e) => ProgressFillClip.Rect = new Rect(0, 0, ProgressFillClip.Rect.Width, e.NewSize.Height);
+        private void Progress_SizeChanged(object sender, SizeChangedEventArgs e) => ProgressFillClip.Rect = new Rect(0, 0, ProgressFillClip.Rect.Width, e.NewSize.Height);
 
         private void OnClicked(object sender, RoutedEventArgs e)
         {

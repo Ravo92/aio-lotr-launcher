@@ -15,6 +15,8 @@
 		<PackageId>BFME Launcher</PackageId>
 		<Authors>Patch 2.22 Team</Authors>
 		<Product>BFME Launcher</Product>
+		<UseWindowsForms>False</UseWindowsForms>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -73,14 +75,28 @@
 
 	<ItemGroup>
 	  <Folder Include="OnlineArena\" />
-	  <Folder Include="Pages\Settings\Bfme1\" />
 	  <Folder Include="Pages\Settings\Bfme2\" />
 	  <Folder Include="Pages\Settings\RotWK\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\Settings\Bfme1\BFME1Settings_General.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Update="OnlineArena\BfmeOnlineKit.dll">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 	  </None>
 	</ItemGroup>
 
