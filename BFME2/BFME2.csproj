@@ -13,9 +13,9 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-	<Version>1.0.6.8</Version>
-	<AssemblyVersion>1.0.6.8</AssemblyVersion>
-	<FileVersion>1.0.6.8</FileVersion>
+	<Version>1.0.6.9</Version>
+	<AssemblyVersion>1.0.6.9</AssemblyVersion>
+	<FileVersion>1.0.6.9</FileVersion>
     <Copyright>Raphael Vogel</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BfmeOnlineKitForms" Version="1.4.3" />
+    <PackageReference Include="BfmeOnlineKitForms" Version="1.4.4" />
   </ItemGroup>
 
   <ItemGroup>
