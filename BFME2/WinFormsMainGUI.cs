@@ -68,8 +68,15 @@ namespace PatchLauncher
             BtnInstall.FlatStyle = FlatStyle.Flat;
             BtnInstall.BackColor = Color.Transparent;
             BtnInstall.BackgroundImage = ConstStrings.C_BFME2_BUTTONIMAGE_NEUTR;
-            BtnInstall.Font = FontHelper.GetFont(0, 16); ;
+            BtnInstall.Font = FontHelper.GetFont(0, 16);
             BtnInstall.ForeColor = Color.FromArgb(168, 190, 98);
+
+            BtnPlayOnline.FlatAppearance.BorderSize = 0;
+            BtnPlayOnline.FlatStyle = FlatStyle.Flat;
+            BtnPlayOnline.BackColor = Color.Transparent;
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME2_BUTTONIMAGE_NEUTR;
+            BtnPlayOnline.Font = FontHelper.GetFont(0, 16);
+            BtnPlayOnline.ForeColor = Color.FromArgb(168, 190, 98);
 
             PanelPlaceholder.BackgroundImage = Helper.Properties.Resources.BFME2BorderRectangleModPanel;
             PanelPlaceholder.BackColor = Color.Transparent;
@@ -178,6 +185,7 @@ namespace PatchLauncher
                     BFME25ToolStripMenuItem.Enabled = false;
                     MenuItemLaunchGame.Enabled = false;
                     LblModExplanation.Visible = false;
+                    BtnPlayOnline.Enabled = false;
 
                     Update();
                 }
@@ -1132,6 +1140,7 @@ namespace PatchLauncher
             LblWorkerIOTask.Visible = false;
 
             BtnInstall.Enabled = true;
+            BtnPlayOnline.Enabled = true;
 
             LaunchGameToolStripMenuItem.Enabled = true;
             RepairGameToolStripMenuItem.Enabled = true;
@@ -1155,6 +1164,7 @@ namespace PatchLauncher
             LabelLoadingPanel.Visible = true;
             LblModExplanation.Visible = false;
 
+            BtnPlayOnline.Enabled = false;
             BtnInstall.Enabled = false;
 
             LaunchGameToolStripMenuItem.Enabled = false;
@@ -1163,6 +1173,37 @@ namespace PatchLauncher
             MenuItemLaunchGame.Enabled = false;
 
             Update();
+        }
+
+        private void BtnPlayOnline_Click(object sender, EventArgs e)
+        {
+            OnlineMode onlineMode = new();
+            DialogResult dialogResult = onlineMode.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                onlineMode.Dispose();
+            }
+        }
+
+        private void BtnPlayOnline_MouseLeave(object sender, EventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME2_BUTTONIMAGE_NEUTR;
+            BtnPlayOnline.ForeColor = Color.FromArgb(168, 190, 98);
+        }
+
+        private void BtnPlayOnline_MouseEnter(object sender, EventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME2_BUTTONIMAGE_HOVER;
+            BtnPlayOnline.ForeColor = Color.FromArgb(24, 63, 20);
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
+        }
+
+        private void BtnPlayOnline_MouseDown(object sender, MouseEventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME2_BUTTONIMAGE_CLICK;
+            BtnPlayOnline.ForeColor = Color.FromArgb(168, 190, 98);
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
     }
 }

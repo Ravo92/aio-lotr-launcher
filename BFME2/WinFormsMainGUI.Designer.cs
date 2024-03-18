@@ -85,6 +85,7 @@ namespace PatchLauncher
             ChangelogLauncherToolStripMenuItem = new ToolStripMenuItem();
             PBarActualFile = new CustomProgressBar();
             SysTray = new NotifyIcon(components);
+            BtnPlayOnline = new Button();
             ((System.ComponentModel.ISupportInitialize)PibHeader).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBYoutube).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PiBDiscord).BeginInit();
@@ -445,7 +446,6 @@ namespace PatchLauncher
             PBarActualFile.CustomText = null;
             PBarActualFile.DisplayStyle = ProgressBarDisplayText.Percentage;
             PBarActualFile.ForeColor = System.Drawing.Color.Transparent;
-            CustomProgressBar.Game = ProgressBarGame.BFME2;
             resources.ApplyResources(PBarActualFile, "PBarActualFile");
             PBarActualFile.Name = "PBarActualFile";
             PBarActualFile.Style = ProgressBarStyle.Continuous;
@@ -456,11 +456,29 @@ namespace PatchLauncher
             resources.ApplyResources(SysTray, "SysTray");
             SysTray.MouseDoubleClick += SysTray_MouseDoubleClick;
             // 
+            // BtnPlayOnline
+            // 
+            BtnPlayOnline.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(BtnPlayOnline, "BtnPlayOnline");
+            BtnPlayOnline.FlatAppearance.BorderSize = 0;
+            BtnPlayOnline.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            BtnPlayOnline.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            BtnPlayOnline.ForeColor = System.Drawing.Color.Transparent;
+            BtnPlayOnline.Name = "BtnPlayOnline";
+            BtnPlayOnline.TabStop = false;
+            BtnPlayOnline.UseMnemonic = false;
+            BtnPlayOnline.UseVisualStyleBackColor = false;
+            BtnPlayOnline.Click += BtnPlayOnline_Click;
+            BtnPlayOnline.MouseDown += BtnPlayOnline_MouseDown;
+            BtnPlayOnline.MouseEnter += BtnPlayOnline_MouseEnter;
+            BtnPlayOnline.MouseLeave += BtnPlayOnline_MouseLeave;
+            // 
             // WinFormsMainGUI
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.SystemColors.ActiveBorder;
             resources.ApplyResources(this, "$this");
+            Controls.Add(BtnPlayOnline);
             Controls.Add(LblModExplanation);
             Controls.Add(PBarActualFile);
             Controls.Add(BtnInstall);
@@ -559,5 +577,6 @@ namespace PatchLauncher
         private ToolStripMenuItem SelectGameToolStripMenuItem;
         private ToolStripMenuItem BFME1ToolStripMenuItem;
         private ToolStripMenuItem BFME25ToolStripMenuItem;
+        private Button BtnPlayOnline;
     }
 }

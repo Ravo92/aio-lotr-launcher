@@ -3,13 +3,11 @@ using Helper.UserControls;
 using PatchLauncher.Properties;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Windows.UI.WebUI;
 
 namespace PatchLauncher
 {
@@ -67,8 +65,15 @@ namespace PatchLauncher
             BtnInstall.FlatStyle = FlatStyle.Flat;
             BtnInstall.BackColor = Color.Transparent;
             BtnInstall.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_NEUTR;
-            BtnInstall.Font = FontHelper.GetFont(0, 16); ;
+            BtnInstall.Font = FontHelper.GetFont(0, 16);
             BtnInstall.ForeColor = Color.FromArgb(114, 153, 169);
+
+            BtnPlayOnline.FlatAppearance.BorderSize = 0;
+            BtnPlayOnline.FlatStyle = FlatStyle.Flat;
+            BtnPlayOnline.BackColor = Color.Transparent;
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_NEUTR;
+            BtnPlayOnline.Font = FontHelper.GetFont(0, 16);
+            BtnPlayOnline.ForeColor = Color.FromArgb(114, 153, 169);
 
             PanelPlaceholder.BackgroundImage = Helper.Properties.Resources.BFME25BorderRectangleModPanel;
             PanelPlaceholder.BackColor = Color.Transparent;
@@ -143,6 +148,7 @@ namespace PatchLauncher
                     BFME2ToolStripMenuItem.Enabled = false;
                     MenuItemLaunchGame.Enabled = false;
                     LblModExplanation.Visible = false;
+                    BtnPlayOnline.Enabled = false;
 
                     Update();
                 }
@@ -1059,6 +1065,7 @@ namespace PatchLauncher
             LblWorkerFileName.Visible = false;
             LblWorkerIOTask.Visible = false;
 
+            BtnPlayOnline.Enabled = true;
             BtnInstall.Enabled = true;
 
             LaunchGameToolStripMenuItem.Enabled = true;
@@ -1083,6 +1090,7 @@ namespace PatchLauncher
             LabelLoadingPanel.Visible = true;
             LblModExplanation.Visible = false;
 
+            BtnPlayOnline.Enabled = false;
             BtnInstall.Enabled = false;
 
             LaunchGameToolStripMenuItem.Enabled = false;
@@ -1091,6 +1099,37 @@ namespace PatchLauncher
             MenuItemLaunchGame.Enabled = false;
 
             Update();
+        }
+
+        private void BtnPlayOnline_Click(object sender, EventArgs e)
+        {
+            OnlineMode onlineMode = new();
+            DialogResult dialogResult = onlineMode.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+            {
+                onlineMode.Dispose();
+            }
+        }
+
+        private void BtnPlayOnline_MouseLeave(object sender, EventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_NEUTR;
+            BtnPlayOnline.ForeColor = Color.FromArgb(114, 153, 169);
+        }
+
+        private void BtnPlayOnline_MouseEnter(object sender, EventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_HOVER;
+            BtnPlayOnline.ForeColor = Color.FromArgb(173, 215, 232);
+            Task.Run(() => SoundPlayerHelper.PlaySoundHover());
+        }
+
+        private void BtnPlayOnline_MouseDown(object sender, MouseEventArgs e)
+        {
+            BtnPlayOnline.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_CLICK;
+            BtnPlayOnline.ForeColor = Color.FromArgb(114, 153, 169);
+            Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
     }
 }

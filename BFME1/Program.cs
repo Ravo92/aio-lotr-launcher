@@ -1,5 +1,4 @@
 using Helper;
-using Newtonsoft.Json;
 using PatchLauncher.Properties;
 using System;
 using System.Configuration;

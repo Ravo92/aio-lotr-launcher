@@ -5,9 +5,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	<Version>1.0.6.6</Version>
-	<AssemblyVersion>1.0.6.6</AssemblyVersion>
-	<FileVersion>1.0.6.6</FileVersion>
+	<Version>1.0.6.8</Version>
+	<AssemblyVersion>1.0.6.8</AssemblyVersion>
+	<FileVersion>1.0.6.8</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
     <Copyright>Raphael Vogel</Copyright>
     <PackageId>2.22 Launcher Helper Library</PackageId>
@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <PackageReference Include="Downloader" Version="3.0.6" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2210.55" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2365.46" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="SevenZipExtractor" Version="1.0.17" />
