@@ -13,9 +13,9 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageOutputPath />
     <SignAssembly>False</SignAssembly>
-	<Version>1.0.6.9</Version>
-	<AssemblyVersion>1.0.6.9</AssemblyVersion>
-	<FileVersion>1.0.6.9</FileVersion>
+	<Version>1.0.7.0</Version>
+	<AssemblyVersion>1.0.7.0</AssemblyVersion>
+	<FileVersion>1.0.7.0</FileVersion>
     <Copyright>Raphael Vogel</Copyright>
     <Description>Launcher for configuring the patch 2.22 files.</Description>
     <ApplicationIcon>MainIcon.ico</ApplicationIcon>
