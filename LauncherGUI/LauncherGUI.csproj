@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<StartupObject></StartupObject>
+		<ApplicationIcon>MainIcon.ico</ApplicationIcon>
+		<Version>2.0.0.0</Version>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<BaseOutputPath>..\build</BaseOutputPath>
+		<Copyright>Raphael Vogel</Copyright>
+		<PackageId>BFME Launcher</PackageId>
+		<Authors>Patch 2.22 Team</Authors>
+		<Product>BFME Launcher</Product>
+		<UseWindowsForms>False</UseWindowsForms>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<WarningLevel>6</WarningLevel>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="MainIcon.ico" />
+		<None Remove="Resources\Images\bfme1.png" />
+		<None Remove="Resources\Images\bfme1_title.png" />
+		<None Remove="Resources\Images\bfme2.png" />
+		<None Remove="Resources\Images\bfme2_title.png" />
+		<None Remove="Resources\Images\bfmeRotWK.png" />
+		<None Remove="Resources\Images\bfmeRotWK_title.png" />
+		<None Remove="Resources\Images\patch222.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="MainIcon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="BFMECompetetiveArena_OnlineKit">
+			<HintPath>OnlineArena\BfmeOnlineKit.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="MainIcon.ico" />
+		<Resource Include="Resources\Images\bfme1.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\bfme1_title.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\bfme2.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\bfme2_title.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\bfmeRotWK.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\bfmeRotWK_title.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Images\patch222.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="OnlineArena\" />
+	  <Folder Include="Pages\Settings\Bfme2\" />
+	  <Folder Include="Pages\Settings\RotWK\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\Settings\Bfme1\BFME1Settings_General.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="OnlineArena\BfmeOnlineKit.dll">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+</Project>

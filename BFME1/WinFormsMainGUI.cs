@@ -260,6 +260,17 @@ namespace PatchLauncher
 
         private async void BFME1_Shown(object sender, EventArgs e)
         {
+            // // PLAYGROUND
+            // List<string> testURL = new()
+            // {
+            //     "https://www.moddb.com/downloads/mirror/257917/130/6290557095531f1a08c9a1a032d0ca9d"
+            // };
+            // 
+            // TurnPatchesAndModsViewOff();
+            // await InstallUpdateRepairRoutine(patchPack.FileName, testURL, patchPack.MD5);
+            // await TurnPatchesAndModsViewOn();
+            // UpdatePanelButtonActiveState();
+
             if (Settings.Default.LatestPatchVersion != Settings.Default.PatchVersionInstalled && Settings.Default.IsGameInstalled && !Settings.Default.SelectedOlderPatch && !Settings.Default.UseBetaChannel)
             {
                 TurnPatchesAndModsViewOff();

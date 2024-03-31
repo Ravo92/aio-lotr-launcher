@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=netstandard">
+
+    <system:String x:Key="MainLauncherTitle">All-in-One Launcher by 2.22 Team</system:String>
+
+    <system:String x:Key="MainLauncherLibrary">LIBRARY</system:String>
+    <system:String x:Key="MainLauncherOnline">ONLINE-MODE</system:String>
+
+    <system:String x:Key="SettingsLauncherClose">CLOSE</system:String>
+
+    <system:String x:Key="SettingsLauncherHeader">Launcher Settings</system:String>
+    <system:String x:Key="SettingsLauncherGeneral">General</system:String>
+
+    <system:String x:Key="SettingsBFMEGeneral">General</system:String>
+    <system:String x:Key="SettingsBFMEVideo">Video &amp; Resolution</system:String>
+    <system:String x:Key="SettingsBFMELanguage">Language &amp; Sound</system:String>
+    <system:String x:Key="SettingsBFMERepair">Repair or Uninstall</system:String>
+    <system:String x:Key="SettingsBFMEGeneralLanguageDropDownLabelText">Switch Game-language</system:String>
+    <system:String x:Key="SettingsBFMEGeneralResolutionDropDownLabelText">Set game resolution</system:String>
+
+    <system:String x:Key="SettingsBFME1Header">The Battle for Middle-earth™</system:String>
+
+    <system:String x:Key="SettingsBFME2Header">The Battle for Middle-earth™ II</system:String>
+
+    <system:String x:Key="SettingsRotWKHeader">Rise of the Witchking™</system:String>
+
+    <system:String x:Key="SettingsLauncherGeneralDropDownLabelText">Switch Launcher-language</system:String>
+
+</ResourceDictionary>

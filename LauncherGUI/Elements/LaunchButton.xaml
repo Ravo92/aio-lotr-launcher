@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="LauncherGUI.Elements.LaunchButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LauncherGUI.Elements"
+             mc:Ignorable="d" Width="300">
+    <Grid x:Name="background">
+        <Button x:Name="button" Style="{DynamicResource AccentButton}" Content="PLAY" Click="OnClicked"></Button>
+        <Border x:Name="progress" Background="#33FFFFFF" CornerRadius="4" SizeChanged="Progress_SizeChanged" d:Visibility="Hidden"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="progressText" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="White"/>
+            <TextBlock x:Name="statusText" HorizontalAlignment="Center" FontWeight="Medium" Margin="0,2,0,0" FontSize="16" Foreground="#FFC3C3C3"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -188,29 +188,13 @@ namespace PatchLauncher
             }
         }
 
-        private async void BFME25_Shown(object sender, EventArgs e)
+        private void BFME25_Shown(object sender, EventArgs e)
         {
             if (Settings.Default.OpenLauncherChangelogPageAfterUpdate)
             {
                 Settings.Default.OpenLauncherChangelogPageAfterUpdate = false;
                 Settings.Default.Save();
                 ChangelogLauncherToolStripMenuItem.PerformClick();
-            }
-
-            if (Settings.Default.IsGameInstalled == true)
-            {
-                TurnPatchesAndModsViewOff();
-                string calculatedMD5ValueMainPack = await MD5Tools.CalculateMD5Async(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25, mainPack.FileName));
-                string calculatedMD5ValueLanguagePack = await MD5Tools.CalculateMD5Async(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME25, languagePackSettings.LanguagePackName));
-
-                if (calculatedMD5ValueMainPack != mainPack.MD5 || calculatedMD5ValueLanguagePack != languagePackSettings.MD5)
-                {
-                    RepairGameToolStripMenuItem.Enabled = true;
-                    Update();
-                    RepairGameToolStripMenuItem.PerformClick();
-                }
-
-                TurnPatchesAndModsViewOn();
             }
         }
 

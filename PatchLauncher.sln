@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BFME2", "BFME2\BFME2.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BFME25", "BFME25\BFME25.csproj", "{90A1784A-F148-425D-8B8C-4D02CEDEB0AA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LauncherGUI", "LauncherGUI\LauncherGUI.csproj", "{D710B848-4DB8-4828-A8E0-A0EC61A65939}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{90A1784A-F148-425D-8B8C-4D02CEDEB0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90A1784A-F148-425D-8B8C-4D02CEDEB0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90A1784A-F148-425D-8B8C-4D02CEDEB0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D710B848-4DB8-4828-A8E0-A0EC61A65939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D710B848-4DB8-4828-A8E0-A0EC61A65939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D710B848-4DB8-4828-A8E0-A0EC61A65939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D710B848-4DB8-4828-A8E0-A0EC61A65939}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

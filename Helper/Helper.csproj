@@ -5,9 +5,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	<Version>1.0.6.8</Version>
-	<AssemblyVersion>1.0.6.8</AssemblyVersion>
-	<FileVersion>1.0.6.8</FileVersion>
+	<Version>1.0.7.0</Version>
+	<AssemblyVersion>1.0.7.0</AssemblyVersion>
+	<FileVersion>1.0.7.0</FileVersion>
     <BaseOutputPath>..\build</BaseOutputPath>
     <Copyright>Raphael Vogel</Copyright>
     <PackageId>2.22 Launcher Helper Library</PackageId>
@@ -51,18 +51,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UserControls\Patch109Button.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserControls\Patch106Button.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserControls\PatchesButtonsBFME25.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserControls\PatchesButtonsBFME2.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserControls\Patch109Button.cs" />
+    <Compile Update="UserControls\Patch106Button.cs" />
+    <Compile Update="UserControls\PatchesButtonsBFME25.cs" />
+    <Compile Update="UserControls\PatchesButtonsBFME2.cs" />
   </ItemGroup>
 
   <ItemGroup>
