@@ -12,24 +12,24 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="#0CFFFFFF">
             <ScrollViewer>
-                <StackPanel HorizontalAlignment="Right" Margin="0,60,20,0" Width="200">
+                <StackPanel HorizontalAlignment="Right" Margin="0,60,20,0" Width="200" Name="ButtonStackPanel">
                     <TextBlock x:Name="SettingsMenuLauncherSettingsHeaderLabel" Text="{DynamicResource SettingsLauncherHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
                     <Button x:Name="SettingsMenuLauncherSettingsGeneralLabel" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsLauncherGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsMenuLauncherSettingsGeneralLabel_Click"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
                     <TextBlock x:Name="SettingsBFME1Header" Text="{DynamicResource SettingsBFME1Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
                     <Button x:Name="SettingsBFME1General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME1General_Click"/>
-                    <Button x:Name="SettingsBFME1Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsBFME1Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME1Repair_Click"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
                     <TextBlock x:Name="SettingsBFME2Header" Text="{DynamicResource SettingsBFME2Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsBFME2General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsBFME2Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsBFME2General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME2General_Click"/>
+                    <Button x:Name="SettingsBFME2Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME2Repair_Click"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
                     <TextBlock x:Name="SettingsRotWKHeader" Text="{DynamicResource SettingsRotWKHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsRotWKGeneral" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
-                    <Button x:Name="SettingsRotWKRepair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2"/>
+                    <Button x:Name="SettingsRotWKGeneral" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsRotWKGeneral_Click"/>
+                    <Button x:Name="SettingsRotWKRepair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsRotWKRepair_Click"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
                 </StackPanel>
             </ScrollViewer>

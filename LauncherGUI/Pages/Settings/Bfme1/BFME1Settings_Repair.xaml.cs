@@ -4,14 +4,14 @@ using System.Windows.Controls;
 namespace LauncherGUI.Pages.Settings.Launcher
 {
     /// <summary>
-    /// Interaktionslogik für BFME1Settings_General.xaml
+    /// Interaktionslogik für BFME1Settings_Repair.xaml
     /// </summary>
-    public partial class BFME1Settings_General : UserControl
+    public partial class BFME1Settings_Repair : UserControl
     {
         bool isNotUserInteractionForResolutionDropDown = true;
         bool isNotUserInteractionForLanguageDropDown = true;
 
-        public BFME1Settings_General()
+        public BFME1Settings_Repair()
         {
             InitializeComponent();
         }

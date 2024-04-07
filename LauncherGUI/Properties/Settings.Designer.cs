@@ -58,5 +58,53 @@ namespace LauncherGUI.Properties {
                 this["BFME1LanguageSetting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BFME2ResolutionSetting {
+            get {
+                return ((string)(this["BFME2ResolutionSetting"]));
+            }
+            set {
+                this["BFME2ResolutionSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int BFME2LanguageSetting {
+            get {
+                return ((int)(this["BFME2LanguageSetting"]));
+            }
+            set {
+                this["BFME2LanguageSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ROTWKLanguageSetting {
+            get {
+                return ((int)(this["ROTWKLanguageSetting"]));
+            }
+            set {
+                this["ROTWKLanguageSetting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ROTWKResolutionSetting {
+            get {
+                return ((string)(this["ROTWKResolutionSetting"]));
+            }
+            set {
+                this["ROTWKResolutionSetting"] = value;
+            }
+        }
     }
 }

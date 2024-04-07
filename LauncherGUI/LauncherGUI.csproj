@@ -74,30 +74,43 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="OnlineArena\" />
-	  <Folder Include="Pages\Settings\Bfme2\" />
-	  <Folder Include="Pages\Settings\RotWK\" />
+		<Folder Include="OnlineArena\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\Settings\Bfme1\BFME1Settings_General.xaml.cs">
-	    <SubType>Code</SubType>
-	  </Compile>
-	  <Compile Update="Properties\Settings.Designer.cs">
-	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Settings.settings</DependentUpon>
-	  </Compile>
+		<Compile Update="Pages\Settings\Bfme1\BFME1Settings_General.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Pages\Settings\Bfme1\BFME1Settings_Repair.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Pages\Settings\Bfme2\BFME2Settings_General.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Pages\Settings\Bfme2\BFME2Settings_Repair.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Pages\Settings\RotWK\ROTWKSettings_General.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Pages\Settings\RotWK\ROTWKSettings_Repair.xaml.cs">
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="OnlineArena\BfmeOnlineKit.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Properties\Settings.settings">
-	    <Generator>SettingsSingleFileGenerator</Generator>
-	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-	  </None>
+		<None Update="OnlineArena\BfmeOnlineKit.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
 	</ItemGroup>
 
 </Project>

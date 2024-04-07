@@ -4,14 +4,14 @@ using System.Windows.Controls;
 namespace LauncherGUI.Pages.Settings.Launcher
 {
     /// <summary>
-    /// Interaktionslogik für BFME1Settings_General.xaml
+    /// Interaktionslogik für ROTWKSettings_General.xaml
     /// </summary>
-    public partial class BFME1Settings_General : UserControl
+    public partial class ROTWKSettings_General : UserControl
     {
         bool isNotUserInteractionForResolutionDropDown = true;
         bool isNotUserInteractionForLanguageDropDown = true;
 
-        public BFME1Settings_General()
+        public ROTWKSettings_General()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace LauncherGUI.Pages.Settings.Launcher
                 return;
             }
 
-            Properties.Settings.Default.BFME1LanguageSetting = ComboBoxLanguage.SelectedIndex;
+            Properties.Settings.Default.ROTWKLanguageSetting = ComboBoxLanguage.SelectedIndex;
             Properties.Settings.Default.Save();
         }
 
@@ -40,28 +40,28 @@ namespace LauncherGUI.Pages.Settings.Launcher
                 return;
             }
 
-            Properties.Settings.Default.BFME1ResolutionSetting = ComboBoxResolution.SelectedItem.ToString();
+            Properties.Settings.Default.ROTWKResolutionSetting = ComboBoxResolution.SelectedItem.ToString();
             Properties.Settings.Default.Save();
         }
 
-        private void BFME1ChildSettingsWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void ROTWKChildSettingsWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
 
         }
 
-        private void BFME1ChildSettingsWindow_Initialized(object sender, EventArgs e)
+        private void ROTWKChildSettingsWindow_Initialized(object sender, EventArgs e)
         {
             ComboBoxResolution.ItemsSource = Helpers.DesktopResolutionHelper.GetAllSupportedResolutions();
 
-            if (Properties.Settings.Default.BFME1ResolutionSetting != null)
-                ComboBoxResolution.SelectedItem = Properties.Settings.Default.BFME1ResolutionSetting;
+            if (Properties.Settings.Default.ROTWKResolutionSetting != null)
+                ComboBoxResolution.SelectedItem = Properties.Settings.Default.ROTWKResolutionSetting;
             else
             {
                 ComboBoxResolution.SelectedItem = ComboBoxLanguage.Items.Count - 1;
             }
 
-            if (Properties.Settings.Default.BFME1LanguageSetting != 0)
-                ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.BFME1LanguageSetting;
+            if (Properties.Settings.Default.ROTWKLanguageSetting != 0)
+                ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.ROTWKLanguageSetting;
             else
             {
                 ComboBoxLanguage.SelectedIndex = 0;
