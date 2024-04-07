@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="LauncherGUI.Pages.Primary.Library"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:elements="clr-namespace:LauncherGUI.Elements"
+             xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="LauncherGUI.Pages.Primary.Library"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500">
     <Grid>
@@ -38,18 +39,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="2">
-                <elements:SmoothScrollViewer>
-                    <WrapPanel>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                    </WrapPanel>
-                </elements:SmoothScrollViewer>
+                <Wpf:WebView2 x:Name="ChangelogPage"/>
             </Grid>
         </Grid>
     </Grid>

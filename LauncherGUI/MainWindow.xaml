@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="{DynamicResource MainLauncherTitle}" Width="1280" Height="720" Background="#1C1E26" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow">
+        Title="{DynamicResource MainLauncherTitle}" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow">
+    <Window.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Resources/Images/BGMap.png"/>
+    </Window.Background>
     <Grid x:Name="windowGrid">
         <Grid Margin="20">
             <Grid.RowDefinitions>

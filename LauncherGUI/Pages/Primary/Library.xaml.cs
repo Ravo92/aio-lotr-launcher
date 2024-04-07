@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -34,17 +29,25 @@ namespace LauncherGUI.Pages.Primary
 
         private void TabChanged(object sender, EventArgs e)
         {
-            if(tabs.SelectedIndex == 0) // BFME1
+            if (tabs.SelectedIndex == 0) // BFME1
             {
                 titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/bfme1_title.png"));
+                ChangelogPage.Source = new Uri("https://ravo92.github.io/changelogpage/index.html");
+
+                if (ChangelogPage.Visibility == Visibility.Hidden)
+                    ChangelogPage.Visibility = Visibility.Visible;
             }
             else if (tabs.SelectedIndex == 1) // BFME2
             {
                 titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/bfme2_title.png"));
+                if (ChangelogPage.Visibility == Visibility.Visible)
+                    ChangelogPage.Visibility = Visibility.Hidden;
             }
             else if (tabs.SelectedIndex == 2) // ROTWK
             {
                 titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/bfmeRotWK_title.png"));
+                if (ChangelogPage.Visibility == Visibility.Visible)
+                    ChangelogPage.Visibility = Visibility.Hidden;
             }
         }
     }

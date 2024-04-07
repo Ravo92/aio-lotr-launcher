@@ -6,6 +6,7 @@
 
     <system:String x:Key="MainLauncherLibrary">BIBLIOTHEK</system:String>
     <system:String x:Key="MainLauncherOnline">ONLINE-MODUS</system:String>
+    <system:String x:Key="MainLauncherPlay">SPIELEN</system:String>
 
     <system:String x:Key="SettingsLauncherClose">SCHLIESSEN</system:String>
 

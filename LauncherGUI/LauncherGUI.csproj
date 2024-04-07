@@ -35,6 +35,7 @@
 		<None Remove="Resources\Images\bfme2_title.png" />
 		<None Remove="Resources\Images\bfmeRotWK.png" />
 		<None Remove="Resources\Images\bfmeRotWK_title.png" />
+		<None Remove="Resources\Images\BGMap.png" />
 		<None Remove="Resources\Images\patch222.png" />
 	</ItemGroup>
 
@@ -68,6 +69,9 @@
 		<Resource Include="Resources\Images\bfmeRotWK_title.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Resources\Images\BGMap.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="Resources\Images\patch222.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
@@ -75,6 +79,10 @@
 
 	<ItemGroup>
 		<Folder Include="OnlineArena\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2420.47" />
 	</ItemGroup>
 
 	<ItemGroup>

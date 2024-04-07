@@ -1,71 +1,63 @@
-﻿using System;
+﻿using LauncherGUI.Helpers;
 using System.Windows.Controls;
 
 namespace LauncherGUI.Pages.Settings.Launcher
 {
-    /// <summary>
-    /// Interaktionslogik für BFME1Settings_General.xaml
-    /// </summary>
     public partial class BFME1Settings_General : UserControl
     {
-        bool isNotUserInteractionForResolutionDropDown = true;
-        bool isNotUserInteractionForLanguageDropDown = true;
+        private bool _isNotUserInteractionForResolutionDropDown = true;
+        private bool _isNotUserInteractionForLanguageDropDown = true;
 
         public BFME1Settings_General()
         {
             InitializeComponent();
+            InitializeComboBoxes();
+        }
+
+        private void InitializeComboBoxes()
+        {
+            ComboBoxResolution.ItemsSource = DesktopResolutionHelper.GetAllSupportedResolutions();
+            ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.BFME1ResolutionSetting) ? Properties.Settings.Default.BFME1ResolutionSetting : ComboBoxResolution.Items.Count - 1;
+            ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.BFME1LanguageSetting != 0 ? Properties.Settings.Default.BFME1LanguageSetting : 0;
         }
 
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // The first call will always be the resolutions being added and set to the user-saved resolution.
-            // We skip the first entry point here and then set the "isNotUserInteractionForLanguageDropDown" to false, so the user actually can change the value
-            if (isNotUserInteractionForLanguageDropDown)
+            if (_isNotUserInteractionForLanguageDropDown)
             {
-                isNotUserInteractionForLanguageDropDown = false;
+                _isNotUserInteractionForLanguageDropDown = false;
                 return;
             }
-
-            Properties.Settings.Default.BFME1LanguageSetting = ComboBoxLanguage.SelectedIndex;
-            Properties.Settings.Default.Save();
+            else
+            {
+                SaveLanguageSettings();
+            }
         }
 
         private void ComboBoxResolution_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // The first call will always be the resolutions being added and set to the user-saved resolution.
-            // We skip the first entry point here and then set the "isNotUserInteractionForResolutionDropDown" to false, so the user actually can change the value
-            if (isNotUserInteractionForResolutionDropDown)
+            if (_isNotUserInteractionForResolutionDropDown)
             {
-                isNotUserInteractionForResolutionDropDown = false;
+                _isNotUserInteractionForResolutionDropDown = false;
                 return;
             }
+            else
+            {
+                SaveResolutionSettings();
+            }
+        }
 
-            Properties.Settings.Default.BFME1ResolutionSetting = ComboBoxResolution.SelectedItem.ToString();
+        private void SaveLanguageSettings()
+        {
+            Properties.Settings.Default.BFME1LanguageSetting = ComboBoxLanguage.SelectedIndex;
             Properties.Settings.Default.Save();
         }
 
-        private void BFME1ChildSettingsWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void SaveResolutionSettings()
         {
-
-        }
-
-        private void BFME1ChildSettingsWindow_Initialized(object sender, EventArgs e)
-        {
-            ComboBoxResolution.ItemsSource = Helpers.DesktopResolutionHelper.GetAllSupportedResolutions();
-
-            if (Properties.Settings.Default.BFME1ResolutionSetting != null)
-                ComboBoxResolution.SelectedItem = Properties.Settings.Default.BFME1ResolutionSetting;
-            else
-            {
-                ComboBoxResolution.SelectedItem = ComboBoxLanguage.Items.Count - 1;
-            }
-
-            if (Properties.Settings.Default.BFME1LanguageSetting != 0)
-                ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.BFME1LanguageSetting;
-            else
-            {
-                ComboBoxLanguage.SelectedIndex = 0;
-            }
+            Properties.Settings.Default.BFME1ResolutionSetting = ComboBoxResolution.SelectedItem?.ToString();
+            BFMEIniEditorHelper.WriteKey("Resolution", ComboBoxResolution.SelectedValue?.ToString() ?? string.Empty, "BFME1");
+            Properties.Settings.Default.Save();
         }
     }
 }

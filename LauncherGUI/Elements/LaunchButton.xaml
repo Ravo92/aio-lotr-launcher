@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" Width="300">
     <Grid x:Name="background">
-        <Button x:Name="button" Style="{DynamicResource AccentButton}" Content="PLAY" Click="OnClicked"></Button>
+        <Button x:Name="button" Style="{DynamicResource AccentButton}" Content="{DynamicResource MainLauncherPlay}" Click="OnClicked"></Button>
         <Border x:Name="progress" Background="#33FFFFFF" CornerRadius="4" SizeChanged="Progress_SizeChanged" d:Visibility="Hidden"/>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock x:Name="progressText" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="White"/>

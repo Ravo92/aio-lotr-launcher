@@ -49,7 +49,7 @@ namespace LauncherGUI.Helpers
             while (EnumDisplaySettings(null, i, ref vDevMode))
             {
                 if (vDevMode.dmDisplayFrequency == 60 && vDevMode.dmBitsPerPel == 32 && vDevMode.dmDisplayFixedOutput == 0)
-                    allResolutions.Add(vDevMode.dmPelsWidth.ToString() + "x" + vDevMode.dmPelsHeight.ToString());
+                    allResolutions.Add(vDevMode.dmPelsWidth.ToString() + " " + vDevMode.dmPelsHeight.ToString());
 
                 i++;
             }
