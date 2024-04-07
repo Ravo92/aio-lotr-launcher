@@ -8,7 +8,7 @@ namespace PatchLauncher
         {
             InitializeComponent();
 
-            OnlineMenu.Load(BFMECompetetiveArena_OnlineKit.OnlineMenu.BfmeGame.RotWK);
+            OnlineMenu.Load(BFMECompetetiveArena_OnlineKit.Data.BfmeGame.RotWK);
         }
 
         private void OnlineMode_FormClosing(object sender, FormClosingEventArgs e)

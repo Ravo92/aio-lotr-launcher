@@ -6,9 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <BaseOutputPath>..\build</BaseOutputPath>
-	<Version>1.0.7.1</Version>
-	<AssemblyVersion>1.0.7.1</AssemblyVersion>
-	<FileVersion>1.0.7.1</FileVersion>
+	<Version>1.0.7.2</Version>
+	<AssemblyVersion>1.0.7.2</AssemblyVersion>
+	<FileVersion>1.0.7.2</FileVersion>
     <PackageId>2.22 Restarter</PackageId>
     <Authors>Patch 2.22 Team</Authors>
     <Product>2.22 Restarter</Product>
