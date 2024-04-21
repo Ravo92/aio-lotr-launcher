@@ -54,10 +54,8 @@ namespace LauncherGUI
             Instance.content.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
             Instance.fullContent.Child = newContent;
 
-            Instance.libraryTab.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
-            Instance.onlineTab.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
-            Instance.workshopTab.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
-            Instance.guidesTab.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
+            Instance.tabs.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
+            Instance.icons.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public static void ShowLibrary()
@@ -124,7 +122,7 @@ namespace LauncherGUI
             }
         }
 
-        private void OnSettingsClicked(object sender, MouseButtonEventArgs e) => SetFullContent(new Settings());
+        private void OnSettingsTabClicked(object sender, MouseButtonEventArgs e) => SetFullContent(new Settings());
 
         private void OnLibraryTabClicked(object sender, MouseButtonEventArgs e) => ShowLibrary();
 
