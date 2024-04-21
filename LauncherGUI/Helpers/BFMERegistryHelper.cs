@@ -2,12 +2,19 @@
 using System.Linq;
 using System;
 using System.IO;
+using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Helpers
 {
     internal class BFMERegistryHelper
     {
-        private static readonly string AppDataFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        private enum RegServiceStates
+        {
+            ReturnedValue = 0,
+            NotFound = 1,
+            WrongParameter = 2
+        }
+
         public static string ReadRegKeyBFME1(string kindOf)
         {
             using RegistryKey? mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\");
@@ -62,86 +69,63 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                // LogHelper.LoggerRegistryTools.Error(ex, "");
+                LogHelper.LoggerRegistryTools.Error(ex, "");
                 return ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND;
             }
         }
 
-        public static void WriteRegKeyForBFMEGames(string key, string value, string gameName)
+        public static void WriteRegKeyForBFMEGames(string key, string value, AvailableBFMEGames gameName)
         {
             RegistryKey mainPath;
 
             switch (gameName)
             {
-                case "BFME1":
+                case AvailableBFMEGames.BFME1:
                     mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\", true)!;
                     mainPath.SetValue(key, value);
                     break;
-                case "BFME2":
+                case AvailableBFMEGames.BFME2:
                     mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Battle for Middle-earth II\", true)!;
                     mainPath.SetValue(key, value);
                     break;
-                case "ROTWK":
+                case AvailableBFMEGames.ROTWK:
                     mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\", true)!;
                     mainPath.SetValue(key, value);
                     break;
             }
         }
 
-        public static string GameLanguage(string BFMEGameVersion)
+        public static string GameLanguage(AvailableBFMEGames BFMEGameVersion)
         {
             return BFMEGameVersion switch
             {
-                "BFME1" => ReadRegKeyBFME1("locale"),
-                "BFME2" => ReadRegKeyBFME2("locale"),
-                "ROTWK" => ReadRegKeyROTWK("locale"),
+                AvailableBFMEGames.BFME1 => ReadRegKeyBFME1("locale"),
+                AvailableBFMEGames.BFME2 => ReadRegKeyBFME2("locale"),
+                AvailableBFMEGames.ROTWK => ReadRegKeyROTWK("locale"),
                 _ => ReadRegKeyBFME1("locale"),
             };
         }
 
-        public static string GameInstallPath(string BFMEGameVersion)
+        public static string GameInstallPath(AvailableBFMEGames BFMEGameVersion)
         {
             return BFMEGameVersion switch
             {
-                "BFME1" => ReadRegKeyBFME1("path"),
-                "BFME2" => ReadRegKeyBFME2("path"),
-                "ROTWK" => ReadRegKeyROTWK("path"),
+                AvailableBFMEGames.BFME1 => ReadRegKeyBFME1("path"),
+                AvailableBFMEGames.BFME2 => ReadRegKeyBFME2("path"),
+                AvailableBFMEGames.ROTWK => ReadRegKeyROTWK("path"),
                 _ => ReadRegKeyBFME1("path"),
             };
         }
 
-        public static string GameAppDataFolderPath(string BFMEGameVersion)
+        public static string GameAppDataFolderPath(AvailableBFMEGames BFMEGameVersion)
         {
-            if (BFMEGameVersion == "BFME1")
+            return BFMEGameVersion switch
             {
-                if (ReadRegKeyBFME1("appData") != ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND)
-                    return Path.Combine(AppDataFolderPath, ReadRegKeyBFME1("appData"));
-                else
-                    return Path.Combine(AppDataFolderPath, ConstStringsHelper.C_APPDATAFOLDER_BFME1_NAME_EN);
-            }
-
-            else if (BFMEGameVersion == "BFME2")
-            {
-                if (ReadRegKeyBFME2("appData") != ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND)
-                    return Path.Combine(AppDataFolderPath, ReadRegKeyBFME2("appData"));
-                else
-                    return Path.Combine(AppDataFolderPath, ConstStringsHelper.C_APPDATAFOLDER_BFME2_NAME_EN);
-            }
-
-            else if (BFMEGameVersion == "ROTWK")
-            {
-                if (ReadRegKeyROTWK("appData") != ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND)
-                    return Path.Combine(AppDataFolderPath, ReadRegKeyROTWK("appData"));
-                else
-                    return Path.Combine(AppDataFolderPath, ConstStringsHelper.C_APPDATAFOLDER_ROTWK_NAME_EN);
-            }
-            else
-            {
-                if (ReadRegKeyBFME1("appData") != ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND)
-                    return Path.Combine(AppDataFolderPath, ReadRegKeyBFME1("appData"));
-                else
-                    return Path.Combine(AppDataFolderPath, ConstStringsHelper.C_APPDATAFOLDER_BFME1_NAME_EN);
-            }
+                AvailableBFMEGames.BFME1 => ReadRegKeyBFME1("appData"),
+                AvailableBFMEGames.BFME2 => ReadRegKeyBFME2("appData"),
+                AvailableBFMEGames.ROTWK => ReadRegKeyROTWK("appData"),
+                _ => ReadRegKeyBFME1("appData"),
+            };
         }
 
         public static void WriteRegKeysInstallationBFME1(string installPath, string locale, string strLanguageName, string strLanguage)

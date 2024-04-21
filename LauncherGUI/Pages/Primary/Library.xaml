@@ -17,7 +17,7 @@
             <elements:HTabs.Tabs>
                 <BitmapImage UriSource="pack://application:,,,/Resources/Images/bfme1.png"/>
                 <BitmapImage UriSource="pack://application:,,,/Resources/Images/bfme2.png"/>
-                <BitmapImage UriSource="pack://application:,,,/Resources/Images/bfmeRotWK.png"/>
+                <BitmapImage UriSource="pack://application:,,,/Resources/Images/RotWK.png"/>
             </elements:HTabs.Tabs>
         </elements:HTabs>
         <Grid Grid.Row="2">
@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <StackPanel Margin="0,20,0,0">
-                    <Image x:Name="titleImage" Source="pack://application:,,,/Resources/Images/bfme1_title.png"/>
+                    <Image x:Name="titleImage"/>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Bottom">
                     <elements:LaunchButton x:Name="launchButton" Margin="0,0,0,20" OnLaunchClicked="OnLaunchGameClicked"/>
@@ -38,8 +38,8 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Column="2">
-                <Wpf:WebView2 x:Name="ChangelogPage"/>
+            <Grid Grid.Column="2" Name="WebView2Grid">
+                <Wpf:WebView2 x:Name="ChangelogPage" KeyDown="ChangelogPage_KeyDown"/>
             </Grid>
         </Grid>
     </Grid>

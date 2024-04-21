@@ -1,5 +1,6 @@
 ﻿using LauncherGUI.Helpers;
 using System.Windows.Controls;
+using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Pages.Settings.Launcher
 {
@@ -56,7 +57,7 @@ namespace LauncherGUI.Pages.Settings.Launcher
         private void SaveResolutionSettings()
         {
             Properties.Settings.Default.BFME2ResolutionSetting = ComboBoxResolution.SelectedItem?.ToString();
-            BFMEIniEditorHelper.WriteKey("Resolution", ComboBoxResolution.SelectedValue?.ToString() ?? string.Empty, "BFME2");
+            BFMEIniEditorHelper.WriteKey("Resolution", ComboBoxResolution.SelectedValue?.ToString() ?? string.Empty, AvailableBFMEGames.BFME2);
             Properties.Settings.Default.Save();
         }
     }

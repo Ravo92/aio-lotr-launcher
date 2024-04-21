@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
 namespace LauncherGUI.Pages.Primary
@@ -31,7 +27,16 @@ namespace LauncherGUI.Pages.Primary
         {
             if (tabs.SelectedIndex == 0) // BFME1
             {
-                titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/bfme1_title.png"));
+                switch (Properties.Settings.Default.LauncherLanguageSetting)
+                {
+                    case 0:
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_bfme1_title.png"));
+                        break;
+                    case 1:
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_bfme1_title.png"));
+                        break;
+                }
+
                 ChangelogPage.Source = new Uri("https://ravo92.github.io/changelogpage/index.html");
 
                 if (ChangelogPage.Visibility == Visibility.Hidden)
@@ -39,15 +44,44 @@ namespace LauncherGUI.Pages.Primary
             }
             else if (tabs.SelectedIndex == 1) // BFME2
             {
-                titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/bfme2_title.png"));
+                switch (Properties.Settings.Default.LauncherLanguageSetting)
+                {
+                    case 0:
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_bfme2_title.png"));
+                        break;
+                    case 1:
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_bfme2_title.png"));
+                        break;
+                }
+
                 if (ChangelogPage.Visibility == Visibility.Visible)
                     ChangelogPage.Visibility = Visibility.Hidden;
             }
             else if (tabs.SelectedIndex == 2) // ROTWK
             {
-                titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/bfmeRotWK_title.png"));
-                if (ChangelogPage.Visibility == Visibility.Visible)
-                    ChangelogPage.Visibility = Visibility.Hidden;
+                switch (Properties.Settings.Default.LauncherLanguageSetting)
+                {
+                    case 0:
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_rotwk_title.png"));
+                        break;
+                    case 1:
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_rotwk_title.png"));
+                        break;
+                }
+
+                ChangelogPage.Source = new Uri("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
+
+                if (ChangelogPage.Visibility == Visibility.Hidden)
+                    ChangelogPage.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ChangelogPage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F12)
+            {
+                ChangelogPage.CoreWebView2.OpenDevToolsWindow();
+                e.Handled = true;
             }
         }
     }

@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500" Loaded="OnLoaded">
     <Grid Margin="-20,0,-20,-20">
-        <onlineKit:OnlineMenu x:Name="arena" AccessToken="3388d2fb-79b8-4576-ad19-37706fdda7aa"/>
+        <onlineKit:OnlineMenu x:Name="arena" AccessToken="cb1018ab-d27b-4870-98ac-3f5df1771e7b"/>
     </Grid>
 </UserControl>

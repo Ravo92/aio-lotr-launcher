@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
+using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Helpers
 {
     internal class BFMEIniEditorHelper
     {
-        public static string ReadKey(string keyName, string assemblyName)
+        public static string ReadKey(string keyName, AvailableBFMEGames assemblyName)
         {
             StreamReader _streamReader = new(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
             {
@@ -26,7 +27,7 @@ namespace LauncherGUI.Helpers
             }
         }
 
-        public static void WriteKey(string keyName, string keyValue, string assemblyName)
+        public static void WriteKey(string keyName, string keyValue, AvailableBFMEGames assemblyName)
         {
             StreamReader _streamReader = new(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
             string importedOptionsFileText;
@@ -47,7 +48,7 @@ namespace LauncherGUI.Helpers
             File.WriteAllText(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME), changedOptionsFileText);
         }
 
-        public static void DeleteKey(string keyName, string assemblyName)
+        public static void DeleteKey(string keyName, AvailableBFMEGames assemblyName)
         {
             StreamReader _streamReader = new(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
             string importedOptionsFileText;
@@ -68,7 +69,7 @@ namespace LauncherGUI.Helpers
             File.WriteAllText(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME), changedOptionsFileText);
         }
 
-        public static void ClearOptionsFile(string assemblyName)
+        public static void ClearOptionsFile(AvailableBFMEGames assemblyName)
         {
             StreamReader _streamReader = new(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
             string importedOptionsFileText = _streamReader.ReadToEnd();

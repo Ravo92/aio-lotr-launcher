@@ -1,11 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<PropertyGroup Label="Globals">
+	  <WebView2LoaderPreference>Dynamic</WebView2LoaderPreference>
+	</PropertyGroup>
+
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows7.0</TargetFramework>
+		<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-		<StartupObject></StartupObject>
+		<StartupObject>LauncherGUI.App</StartupObject>
 		<ApplicationIcon>MainIcon.ico</ApplicationIcon>
 		<Version>2.0.0.0</Version>
 		<AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,27 +20,42 @@
 		<Authors>Patch 2.22 Team</Authors>
 		<Product>BFME Launcher</Product>
 		<UseWindowsForms>False</UseWindowsForms>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+		<PlatformTarget>x64</PlatformTarget>
+		<SignAssembly>False</SignAssembly>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<WarningLevel>6</WarningLevel>
+		<DebugType>full</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<WarningLevel>6</WarningLevel>
+		<DebugType>full</DebugType>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Remove="MainIcon.ico" />
 		<None Remove="Resources\Images\bfme1.png" />
-		<None Remove="Resources\Images\bfme1_title.png" />
+		<None Remove="Resources\Images\de_bfme1_title.png" />
+		<None Remove="Resources\Images\de_bfme2_title.png" />
+		<None Remove="Resources\Images\de_RotWK_title.png" />
+		<None Remove="Resources\Images\discord.png" />
+		<None Remove="Resources\Images\en_bfme1_title.png" />
 		<None Remove="Resources\Images\bfme2.png" />
-		<None Remove="Resources\Images\bfme2_title.png" />
-		<None Remove="Resources\Images\bfmeRotWK.png" />
-		<None Remove="Resources\Images\bfmeRotWK_title.png" />
+		<None Remove="Resources\Images\en_bfme2_title.png" />
+		<None Remove="Resources\Images\MainIcon.png" />
+		<None Remove="Resources\Images\RotWK.png" />
+		<None Remove="Resources\Images\en_RotWK_title.png" />
 		<None Remove="Resources\Images\BGMap.png" />
+		<None Remove="Resources\Images\en_RotWK_title.png" />
+		<None Remove="Resources\Images\moddb.png" />
 		<None Remove="Resources\Images\patch222.png" />
+		<None Remove="Resources\Images\patreon.png" />
+		<None Remove="Resources\Images\RotWK.png" />
+		<None Remove="Resources\Images\twitch.png" />
+		<None Remove="Resources\Images\youtube.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -44,45 +63,45 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="BFMECompetetiveArena_OnlineKit">
-			<HintPath>OnlineArena\BfmeOnlineKit.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
 		<Resource Include="MainIcon.ico" />
 		<Resource Include="Resources\Images\bfme1.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\bfme1_title.png">
+		<Resource Include="Resources\Images\de_bfme1_title.png" />
+		<Resource Include="Resources\Images\de_bfme2_title.png" />
+		<Resource Include="Resources\Images\de_RotWK_title.png" />
+		<Resource Include="Resources\Images\discord.png" />
+		<Resource Include="Resources\Images\en_bfme1_title.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\bfme2.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
-		<Resource Include="Resources\Images\bfme2_title.png">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\bfmeRotWK.png">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Resources\Images\bfmeRotWK_title.png">
+		<Resource Include="Resources\Images\en_bfme2_title.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\BGMap.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Resources\Images\en_RotWK_title.png" />
+		<Resource Include="Resources\Images\MainIcon.png" />
+		<Resource Include="Resources\Images\moddb.png" />
 		<Resource Include="Resources\Images\patch222.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Resources\Images\patreon.png" />
+		<Resource Include="Resources\Images\RotWK.png" />
+		<Resource Include="Resources\Images\twitch.png" />
+		<Resource Include="Resources\Images\youtube.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="OnlineArena\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <PackageReference Include="BfmeOnlineKit" Version="1.6.0" />
+	  <PackageReference Include="Downloader" Version="3.0.6" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2420.47" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+	  <PackageReference Include="WindowsShortcutFactory" Version="1.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -112,9 +131,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="OnlineArena\BfmeOnlineKit.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="Properties\Settings.settings">
 			<Generator>SettingsSingleFileGenerator</Generator>
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
