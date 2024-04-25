@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,60 +22,43 @@ namespace LauncherGUI.Elements
         {
             OnPathSelected?.Invoke(this, EventArgs.Empty);
         }
-    }
 
-    public class LibraryTileData
-    {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private string? _driveLetter;
-        private string? _driveSizes;
-        private double _progressBarValue;
-        private double _progressBarMaxValue;
-
-        public string DriveLetter
+        private string? _driveName;
+        public string DriveName
         {
-            get => _driveLetter!;
+            get => _driveName!;
             set
             {
-                _driveLetter = value;
-                OnPropertyChanged();
+                _driveName = value;
+
+                driveName.Text = value;
             }
         }
 
-        public string DriveSizes
+        private double _driveSize;
+        public double DriveSize
         {
-            get => _driveSizes!;
+            get => _driveSize;
             set
             {
-                _driveSizes = value;
-                OnPropertyChanged();
+                _driveSize = value;
+
+                driveSpaceUsageBar.Progress = (DriveSize - FreeSpace) / DriveSize * 100d;
+                driveSize.Text = $"{FreeSpace} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize} GB";
             }
         }
 
-        public double ProgressBarValue
+        private double _freeSpace;
+        public double FreeSpace
         {
-            get => _progressBarValue;
+            get => _freeSpace;
             set
             {
-                _progressBarValue = value;
-                OnPropertyChanged();
-            }
-        }
+                _freeSpace = value;
 
-        public double ProgressBarMaxValue
-        {
-            get => _progressBarMaxValue;
-            set
-            {
-                _progressBarMaxValue = value;
-                OnPropertyChanged();
+                driveSpaceUsageBar.Progress = (DriveSize - FreeSpace) / DriveSize * 100d;
+                driveSize.Text = $"{FreeSpace} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize} GB";
             }
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

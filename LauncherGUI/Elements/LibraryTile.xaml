@@ -6,39 +6,33 @@
              xmlns:local="clr-namespace:LauncherGUI.Elements"
              mc:Ignorable="d"
              Width="715" Height="113" Margin="10">
-    <Border Background="Transparent" CornerRadius="6">
-        <Border.OpacityMask>
-            <VisualBrush>
-                <VisualBrush.Visual>
-                    <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
-                </VisualBrush.Visual>
-            </VisualBrush>
-        </Border.OpacityMask>
+    <Border Background="Transparent">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Image Source="/Resources/Images/harddrive.png" Margin="0,0,640,0"/>
-                <TextBlock x:Name="driveLetterAndName" Foreground="White" FontWeight="Bold" Width="Auto" FontSize="16" Text="{Binding DriveLetter}" Margin="80,8,335,35"/>
-                <ProgressBar x:Name="DriveSizesVisualBar" Margin="80,34,1,9" Value="{Binding ProgressBarValue, RelativeSource={RelativeSource AncestorType={x:Type local:LibraryTile}}}" Maximum="{Binding ProgressBarMaxValue}" Minimum="0">
-                    <ProgressBar.Style>
-                        <Style TargetType="ProgressBar">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ProgressBarValue, RelativeSource={RelativeSource AncestorType={x:Type local:LibraryTile}}}" Value="85">
-                                    <Setter Property="Foreground" Value="Red"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ProgressBar.Style>
-                </ProgressBar>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="/Resources/Images/harddrive.png" HorizontalAlignment="Left"/>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <Grid>
+                        <TextBlock x:Name="driveName" HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" Width="Auto" FontSize="14" d:Text="C:/"/>
+                        <TextBlock x:Name="driveSize" HorizontalAlignment="Right" Foreground="#66FFFFFF" FontWeight="Medium" Width="Auto" FontSize="14" d:Text="500 GB free of 700 GB"/>
+                    </Grid>
+                    <local:UnanimatedProgressBar x:Name="driveSpaceUsageBar" Height="25" Margin="0,5,0,0" ProgressFillBrush="#FF7BFF7B" Progress="29"/>
+                </StackPanel>
             </Grid>
-            <Grid Grid.Row="1" Background="#19FFFFFF" Height="42" VerticalAlignment="Top">
-                <Button x:Name="selectButton" Content="Select" HorizontalAlignment="Right" VerticalAlignment="Top" Click="OnSelectClicked" Visibility="Visible" Margin="0,0,2,0"/>
-                <TextBlock x:Name="libraryPath" Foreground="White" FontWeight="Bold" FontSize="16" Width="Auto" Text="C:\Patch 2.22 Launcher\Games\" Margin="11,0,102,0" Height="20" VerticalAlignment="Center"/>
-            </Grid>
-            <TextBlock x:Name="freeSpaceAndUsedSpace" Foreground="White" TextAlignment="Right" FontWeight="Bold" FontSize="16" Text="{Binding DriveSizes}" Margin="463,8,2,35"/>
+            <Border Grid.Row="1" Background="#19FFFFFF" CornerRadius="4">
+                <Grid>
+                    <Button x:Name="selectButton" Content="Select" HorizontalAlignment="Right" VerticalAlignment="Top" Click="OnSelectClicked" Visibility="Visible"/>
+                    <TextBlock x:Name="libraryPath" Foreground="White" FontWeight="Medium" FontSize="14" TextTrimming="CharacterEllipsis" Text="C:\Patch 2.22 Launcher\Games\" Margin="10,0,100,0" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 </UserControl>
