@@ -39,12 +39,6 @@
                         <elements:PatchTileButton/>
                         <elements:PatchTileButton/>
                         <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
                     </WrapPanel>
                 </elements:SmoothScrollViewer>
             </Grid>

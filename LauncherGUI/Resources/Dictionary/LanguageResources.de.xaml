@@ -8,11 +8,6 @@
     <system:String x:Key="MainLauncherOnline">MEHRSPIELER</system:String>
     <system:String x:Key="MainLauncherWorkShop">WORKSHOP</system:String>
     <system:String x:Key="MainLauncherGuides">LEITFÄDEN</system:String>
-
-    <system:String x:Key="LibraryBFME1Logo">pack://application:,,,/Resources/Images/de_bfme1_title.png</system:String>
-    <system:String x:Key="LibraryBFME2Logo">pack://application:,,,/Resources/Images/de_bfme2_title.png</system:String>
-    <system:String x:Key="LibraryRotWKLogo">pack://application:,,,/Resources/Images/de_rotwk_title.png</system:String>
-
     <system:String x:Key="MainLauncherPlay">SPIELEN</system:String>
 
     <system:String x:Key="SettingsLauncherClose">SCHLIESSEN</system:String>
@@ -28,11 +23,16 @@
     <system:String x:Key="SettingsBFMEGeneralResolutionDropDownLabelText">Spielauflösung festlegen</system:String>
 
     <system:String x:Key="SettingsBFME1Header">Die Schlacht um Mittelerde™</system:String>
-
     <system:String x:Key="SettingsBFME2Header">Die Schlacht um Mittelerde™ II</system:String>
-
     <system:String x:Key="SettingsRotWKHeader">Aufstieg des Hexenkönigs™</system:String>
 
     <system:String x:Key="SettingsLauncherGeneralDropDownLabelText">Launcher-Sprache ändern</system:String>
+    <system:String x:Key="SettingsLauncherGeneralLibraryLabelText">Bibliotheks-Einstellungen</system:String>
+    <system:String x:Key="SettingsLauncherGeneralDriveSizeText">frei von</system:String>
+    <system:String x:Key="SettingsLauncherGeneralDriveDefaultNameText">Lokaler Datenträger</system:String>
+
+    <system:String x:Key="LibraryBFME1Logo">pack://application:,,,/Resources/Images/de_bfme1_title.png</system:String>
+    <system:String x:Key="LibraryBFME2Logo">pack://application:,,,/Resources/Images/de_bfme2_title.png</system:String>
+    <system:String x:Key="LibraryRotWKLogo">pack://application:,,,/Resources/Images/de_rotwk_title.png</system:String>
 
 </ResourceDictionary>

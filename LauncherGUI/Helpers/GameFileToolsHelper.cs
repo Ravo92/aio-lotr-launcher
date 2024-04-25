@@ -9,21 +9,20 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using static LauncherGUI.Helpers.GameSelectorHelper;
+using Serilog;
 
 namespace LauncherGUI.Helpers
 {
-    public class GameFileToolsHelper
+    class GameFileToolsHelper(ILogger logger)
     {
-        public ulong EntrySize = 0;
-        public string EntryFilename = "";
-        public int counter = 0;
-        public int Percentage = 0;
-        public static readonly string startupPath = AppDomain.CurrentDomain.BaseDirectory;
+        private static readonly string startupPath = AppDomain.CurrentDomain.BaseDirectory;
 
         private int _DownloadProgressChangedLimiter = 0;
         private IProgress<ProgressHelper>? OverallProgress;
 
-        public static async Task<GameFileDictionary> LoadGameFileDictionary()
+        private readonly ILogger _logger = logger;
+
+        private async Task<GameFileDictionary> LoadGameFileDictionary()
         {
             string json = "noInternet";
 
@@ -49,7 +48,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "");
             }
 
             try
@@ -60,7 +59,7 @@ namespace LauncherGUI.Helpers
             }
             catch (UnauthorizedAccessException ex)
             {
-                LogHelper.LoggerGameFileTools.Fatal(ex, "Cant Access local json file! Data may not be accurate!");
+                _logger.Fatal(ex, "Cant Access local json file! Data may not be accurate!");
                 json = File.ReadAllText(Path.Combine(startupPath, ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE));
                 return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
             }
@@ -68,43 +67,42 @@ namespace LauncherGUI.Helpers
             return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
         }
 
-        public static async Task<string> DownloadJSONFile()
+        private async Task<string> DownloadJSONFile()
         {
             try
             {
-                // TODO: Write better network connection detection -> Ping 1.1.1.1 or check network adapter state.
-                using HttpClient _httpClient = new();
-                _httpClient.Timeout = TimeSpan.FromSeconds(3);
-                string json = await _httpClient.GetStringAsync($"https://ravo92.github.io/{ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE}");
+                using var httpClient = new HttpClient();
+                httpClient.Timeout = TimeSpan.FromSeconds(3);
+                string json = await httpClient.GetStringAsync($"https://ravo92.github.io/{ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE}");
                 return json;
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "Timeout while downloading JSON file");
                 return "noInternet";
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "Error while downloading JSON file");
                 return "noInternet";
             }
         }
 
-        public async Task DownloadFile(string pathToZIPFile, string ZIPFileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
+        private async Task DownloadFile(string pathToZIPFile, string ZIPFileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
         {
             try
             {
                 string DownloadUrl = DownloadURLs[downloadUrlCount];
 
                 if (DownloadURLs.Count >= downloadUrlCount)
-                    DownloadUrl = DownloadURLs[downloadUrlCount]; //[new Random().Next(DownloadURLs.Length)];
+                    DownloadUrl = DownloadURLs[downloadUrlCount];
                 else
                     DownloadUrl = DownloadURLs[0];
 
-                LogHelper.LoggerGameFileTools.Information("Downloading from URI: < {0} >", DownloadUrl);
+                _logger.Information("Downloading from URI: < {0} >", DownloadUrl);
 
                 string fullPathWithFileName = Path.Combine(pathToZIPFile, ZIPFileName);
-                LogHelper.LoggerGameFileTools.Information("Downloading into file: < {0} >", fullPathWithFileName);
+                _logger.Information("Downloading into file: < {0} >", fullPathWithFileName);
 
                 var downloadOpt = new DownloadConfiguration()
                 {
@@ -124,13 +122,13 @@ namespace LauncherGUI.Helpers
 
                 OverallProgress = downloadProgress;
                 var downloader = new DownloadService(downloadOpt);
-                LogHelper.LoggerGameFileTools.Debug(downloader.Status.ToString());
+                _logger.Debug(downloader.Status.ToString());
 
                 downloader.DownloadStarted += OnDownloadStarted;
                 downloader.DownloadProgressChanged += OnDownloadProgressChanged;
                 downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
-                LogHelper.LoggerGameFileTools.Debug(downloader.Status.ToString());
+                _logger.Debug(downloader.Status.ToString());
 
                 if (!File.Exists(fullPathWithFileName))
                 {
@@ -139,7 +137,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "");
             }
         }
 
@@ -147,11 +145,11 @@ namespace LauncherGUI.Helpers
         {
             try
             {
-                OverallProgress!.Report(new ProgressHelper() { CurrentFileName = EntryFilename, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
+                OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.FileName, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "");
             }
         }
 
@@ -178,7 +176,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "");
             }
         }
 
@@ -189,17 +187,17 @@ namespace LauncherGUI.Helpers
                 if (e.Error != null)
                 {
                     OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
-                    LogHelper.LoggerGameFileTools.Error(e.Error.Message);
+                    _logger.Error(e.Error.Message);
                 }
             }
 
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "");
             }
         }
 
-        internal static bool EnsureBFMEAppDataFolderExists(AvailableBFMEGames assemblyName)
+        internal bool EnsureBFMEAppDataFolderExists(AvailableBFMEGames assemblyName)
         {
             try
             {
@@ -211,52 +209,45 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "");
                 return false;
             }
         }
 
         internal static void CreateBFMEAppDataFolder(AvailableBFMEGames assemblyName)
         {
-            try
-            {
-                Directory.CreateDirectory(BFMERegistryHelper.GameAppDataFolderPath(assemblyName));
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
-            }
+            Directory.CreateDirectory(BFMERegistryHelper.GameAppDataFolderPath(assemblyName));
         }
 
-        internal static void EnsureBFMEOptionsIniFileExists(AvailableBFMEGames assemblyName)
+        internal void EnsureBFMEOptionsIniFileExists(AvailableBFMEGames assemblyName)
         {
             try
             {
-                LogHelper.LoggerGameFileTools.Information("check if options.ini file for game > {0} < in path > {1} < exists...", assemblyName, Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
+                _logger.Information("check if options.ini file for game > {0} < in path > {1} < exists...", assemblyName, Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
 
                 if (!File.Exists(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME)))
                 {
-                    LogHelper.LoggerGameFileTools.Information("It does not exist, so we create it now...");
+                    _logger.Information("It does not exist, so we create it now...");
                     File.Copy(Path.Combine(ConstStringsHelper.C_TOOLFOLDER_NAME, ConstStringsHelper.C_OPTIONSINI_FILENAME), Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
-                    LogHelper.LoggerGameFileTools.Information("successfully created options.ini file in < {0} >", Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
+                    _logger.Information("successfully created options.ini file in < {0} >", Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerGameFileTools.Error(ex, "");
+                _logger.Error(ex, "");
             }
         }
 
-        internal static string CheckIfJSONLanguageExists(string jsonLocaleISOCode, AvailableBFMEGames gameName)
+        internal string CheckIfJSONLanguageExists(string jsonLocaleISOCode, AvailableBFMEGames gameName)
         {
             if (JSONDataListHelper._DictionarylanguageSettings.ContainsKey(jsonLocaleISOCode))
             {
-                LogHelper.LoggerGameFileTools.Information("Language key {0} exists in json, continue", jsonLocaleISOCode);
+                _logger.Information("Language key {0} exists in json, continue", jsonLocaleISOCode);
                 return jsonLocaleISOCode;
             }
             else
             {
-                LogHelper.LoggerGameFileTools.Warning("Language key {0} DOES NOT exist in json, continue with locale > en_uk <", jsonLocaleISOCode);
+                _logger.Warning("Language key {0} DOES NOT exist in json, continue with locale > en_uk <", jsonLocaleISOCode);
 
                 try
                 {
@@ -264,7 +255,7 @@ namespace LauncherGUI.Helpers
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.LoggerGameFileTools.Error(ex, "Error writing into key > Locale < with value > en_uk <");
+                    _logger.Error(ex, "Error writing into key > Locale < with value > en_uk <");
                 }
 
                 return "en_uk";
@@ -290,6 +281,26 @@ namespace LauncherGUI.Helpers
             }
 
             return (driveLetter, totalSize, totalFreeSize);
+        }
+
+        internal static void CheckForInstalledGames()
+        {
+            if (BFMERegistryHelper.ReadRegKeyBFME1("path") == ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyBFME1("path"), ConstStringsHelper.C_BFME1_MAIN_GAME_FILE)))
+                Properties.Settings.Default.BFME1GameInstalled = false;
+            else
+                Properties.Settings.Default.BFME1GameInstalled = true;
+
+            if (BFMERegistryHelper.ReadRegKeyBFME2("path") == ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyBFME2("path"), ConstStringsHelper.C_BFME2_MAIN_GAME_FILE)))
+                Properties.Settings.Default.BFME2GameInstalled = false;
+            else
+                Properties.Settings.Default.BFME2GameInstalled = true;
+
+            if (BFMERegistryHelper.ReadRegKeyROTWK("path") == ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyROTWK("path"), ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE)))
+                Properties.Settings.Default.ROTWKGameInstalled = false;
+            else
+                Properties.Settings.Default.ROTWKGameInstalled = true;
+
+            Properties.Settings.Default.Save();
         }
     }
 }

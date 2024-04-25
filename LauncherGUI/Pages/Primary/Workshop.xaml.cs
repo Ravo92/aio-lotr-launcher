@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace LauncherGUI.Pages.Primary
 {

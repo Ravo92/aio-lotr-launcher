@@ -106,5 +106,41 @@ namespace LauncherGUI.Properties {
                 this["ROTWKResolutionSetting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BFME1GameInstalled {
+            get {
+                return ((bool)(this["BFME1GameInstalled"]));
+            }
+            set {
+                this["BFME1GameInstalled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool BFME2GameInstalled {
+            get {
+                return ((bool)(this["BFME2GameInstalled"]));
+            }
+            set {
+                this["BFME2GameInstalled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ROTWKGameInstalled {
+            get {
+                return ((bool)(this["ROTWKGameInstalled"]));
+            }
+            set {
+                this["ROTWKGameInstalled"] = value;
+            }
+        }
     }
 }

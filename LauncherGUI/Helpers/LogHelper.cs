@@ -15,7 +15,7 @@ namespace LauncherGUI.Helpers
 
         public static readonly ILogger LoggerZipFile = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(logFolderPath, ConstStringsHelper.C_LOGFILE_ZIPFILE_NAME)).CreateLogger();
         public static readonly ILogger LoggerRegistryTools = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(logFolderPath, ConstStringsHelper.C_LOGFILE_REGISTRY_NAME)).CreateLogger();
-        public static readonly ILogger LoggerGameFileTools = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(logFolderPath, ConstStringsHelper.C_LOGFILE_GAMEFILETOOLS_NAME)).CreateLogger();
+
         public static readonly ILogger LoggerPatchModDetection = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(logFolderPath, ConstStringsHelper.C_LOGFILE_PATCHMODDETECTION_NAME)).CreateLogger();
         public static readonly ILogger LoggerRepairFile = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(logFolderPath, ConstStringsHelper.C_LOGFILE_REPAIRFILE_NAME)).CreateLogger();
         public static readonly ILogger LoggerShortcuts = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File(Path.Combine(logFolderPath, ConstStringsHelper.C_LOGFILE_SHORTCUTS_NAME)).CreateLogger();

@@ -20,7 +20,7 @@
 		<Authors>Patch 2.22 Team</Authors>
 		<Product>BFME Launcher</Product>
 		<UseWindowsForms>False</UseWindowsForms>
-		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<PlatformTarget>x64</PlatformTarget>
 		<SignAssembly>False</SignAssembly>
 	</PropertyGroup>
@@ -45,6 +45,7 @@
 		<None Remove="Resources\Images\en_bfme1_title.png" />
 		<None Remove="Resources\Images\bfme2.png" />
 		<None Remove="Resources\Images\en_bfme2_title.png" />
+		<None Remove="Resources\Images\harddrive.png" />
 		<None Remove="Resources\Images\MainIcon.png" />
 		<None Remove="Resources\Images\RotWK.png" />
 		<None Remove="Resources\Images\en_RotWK_title.png" />
@@ -84,6 +85,7 @@
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\en_RotWK_title.png" />
+		<Resource Include="Resources\Images\harddrive.png" />
 		<Resource Include="Resources\Images\MainIcon.png" />
 		<Resource Include="Resources\Images\moddb.png" />
 		<Resource Include="Resources\Images\patch222.png">

@@ -15,7 +15,7 @@ namespace LauncherGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow Instance { get; private set; }
+        public static MainWindow? Instance { get; private set; }
         private static readonly Library Library = new();
         private static readonly Online Online = new();
         private static readonly Guides Guides = new();
@@ -23,13 +23,6 @@ namespace LauncherGUI
 
         public MainWindow()
         {
-            MutexHelper.BringApplicationInFrontOrCreateNewMutex();
-
-            if (MutexHelper.MutexAlreadyExists)
-            {
-                Application.Current.Shutdown();
-            }
-
             InitializeComponent();
             Instance = this;
 
@@ -38,6 +31,7 @@ namespace LauncherGUI
             Width = SystemParameters.WorkArea.Width * 0.7;
             Height = SystemParameters.WorkArea.Height * 0.8;
 
+            LauncherConfigHelper.MigrateLauncherSettings();
             LauncherLanguageHelper.GetAvailableLauncherLanguage(Properties.Settings.Default.LauncherLanguageSetting);
 
             CheckSize();
@@ -46,12 +40,12 @@ namespace LauncherGUI
 
         public static void SetContent(FrameworkElement? newContent)
         {
-            Instance.content.Child = newContent;
+            Instance!.content.Child = newContent;
         }
 
         public static void SetFullContent(FrameworkElement? newContent)
         {
-            Instance.content.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
+            Instance!.content.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
             Instance.fullContent.Child = newContent;
 
             Instance.tabs.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
@@ -62,7 +56,7 @@ namespace LauncherGUI
         {
             SetContent(Library);
 
-            foreach (TextBlock tab in Instance.tabs.Children.OfType<TextBlock>())
+            foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
                 if (tab == Instance.libraryTab)
                     tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
@@ -78,7 +72,7 @@ namespace LauncherGUI
         {
             SetContent(Online);
 
-            foreach (TextBlock tab in Instance.tabs.Children.OfType<TextBlock>())
+            foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
                 if (tab == Instance.onlineTab)
                     tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
@@ -94,7 +88,7 @@ namespace LauncherGUI
         {
             SetContent(Workshop);
 
-            foreach (TextBlock tab in Instance.tabs.Children.OfType<TextBlock>())
+            foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
                 if (tab == Instance.workshopTab)
                     tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
@@ -110,7 +104,7 @@ namespace LauncherGUI
         {
             SetContent(Guides);
 
-            foreach (TextBlock tab in Instance.tabs.Children.OfType<TextBlock>())
+            foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
                 if (tab == Instance.guidesTab)
                     tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));

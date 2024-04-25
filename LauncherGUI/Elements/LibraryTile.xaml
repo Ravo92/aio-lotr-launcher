@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="LauncherGUI.Elements.LibraryTile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LauncherGUI.Elements"
+             mc:Ignorable="d"
+             Width="715" Height="113" Margin="10">
+    <Border Background="Transparent" CornerRadius="6">
+        <Border.OpacityMask>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Border.OpacityMask>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Image Source="/Resources/Images/harddrive.png" Margin="0,0,640,0"/>
+                <TextBlock x:Name="driveLetterAndName" Foreground="White" FontWeight="Bold" Width="Auto" FontSize="16" Text="{Binding DriveLetter}" Margin="80,8,335,35"/>
+                <ProgressBar x:Name="DriveSizesVisualBar" Margin="80,34,1,9" Value="{Binding ProgressBarValue, RelativeSource={RelativeSource AncestorType={x:Type local:LibraryTile}}}" Maximum="{Binding ProgressBarMaxValue}" Minimum="0">
+                    <ProgressBar.Style>
+                        <Style TargetType="ProgressBar">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ProgressBarValue, RelativeSource={RelativeSource AncestorType={x:Type local:LibraryTile}}}" Value="85">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ProgressBar.Style>
+                </ProgressBar>
+            </Grid>
+            <Grid Grid.Row="1" Background="#19FFFFFF" Height="42" VerticalAlignment="Top">
+                <Button x:Name="selectButton" Content="Select" HorizontalAlignment="Right" VerticalAlignment="Top" Click="OnSelectClicked" Visibility="Visible" Margin="0,0,2,0"/>
+                <TextBlock x:Name="libraryPath" Foreground="White" FontWeight="Bold" FontSize="16" Width="Auto" Text="C:\Patch 2.22 Launcher\Games\" Margin="11,0,102,0" Height="20" VerticalAlignment="Center"/>
+            </Grid>
+            <TextBlock x:Name="freeSpaceAndUsedSpace" Foreground="White" TextAlignment="Right" FontWeight="Bold" FontSize="16" Text="{Binding DriveSizes}" Margin="463,8,2,35"/>
+        </Grid>
+    </Border>
+</UserControl>
