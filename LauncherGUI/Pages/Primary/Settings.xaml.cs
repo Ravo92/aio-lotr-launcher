@@ -29,128 +29,116 @@ namespace LauncherGUI.Pages.Primary
             MainWindow.SetFullContent(null);
         }
 
+        private void LauncherParentSettingsWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            launcherSettings_General = new LauncherSettings_General();
+            PanelSettings.Child = launcherSettings_General;
+            DrawSelectionOnMenuEntry(SettingsMenuLauncherSettingsGeneralLabel);
+        }
+
         private void SettingsMenuLauncherSettingsGeneralLabel_Click(object sender, RoutedEventArgs e)
         {
-            DisposeAnyChildrenInPanel();
             DrawSelectionOnMenuEntry(sender);
 
             if (launcherSettings_General == null)
             {
                 launcherSettings_General = new LauncherSettings_General();
-                PanelSettings.Children.Add(launcherSettings_General);
+                PanelSettings.Child = launcherSettings_General;
             }
             else
             {
-                PanelSettings.Children.Add(launcherSettings_General);
+                PanelSettings.Child = launcherSettings_General;
             }
-        }
-
-        private void LauncherParentSettingsWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            launcherSettings_General = new LauncherSettings_General();
-            PanelSettings.Children.Add(launcherSettings_General);
         }
 
         private void SettingsBFME1General_Click(object sender, RoutedEventArgs e)
         {
-            DisposeAnyChildrenInPanel();
             DrawSelectionOnMenuEntry(sender);
 
             if (bFME1Settings_General == null)
             {
                 bFME1Settings_General = new BFME1Settings_General();
-                PanelSettings.Children.Add(bFME1Settings_General);
+                    PanelSettings.Child = bFME1Settings_General;
             }
             else
             {
-                PanelSettings.Children.Add(bFME1Settings_General);
+                PanelSettings.Child = bFME1Settings_General;
             }
         }
 
         private void SettingsBFME1Repair_Click(object sender, RoutedEventArgs e)
         {
-            DisposeAnyChildrenInPanel();
             DrawSelectionOnMenuEntry(sender);
 
             if (bFME1Settings_Repair == null)
             {
                 bFME1Settings_Repair = new BFME1Settings_Repair();
-                PanelSettings.Children.Add(bFME1Settings_Repair);
+                PanelSettings.Child = bFME1Settings_Repair;
             }
             else
             {
-                PanelSettings.Children.Add(bFME1Settings_Repair);
+                PanelSettings.Child = bFME1Settings_Repair;
             }
         }
 
         private void SettingsBFME2General_Click(object sender, RoutedEventArgs e)
         {
-            DisposeAnyChildrenInPanel();
             DrawSelectionOnMenuEntry(sender);
 
             if (bFME2Settings_General == null)
             {
                 bFME2Settings_General = new BFME2Settings_General();
-                PanelSettings.Children.Add(bFME2Settings_General);
+                PanelSettings.Child = bFME2Settings_General;
             }
             else
             {
-                PanelSettings.Children.Add(bFME2Settings_General);
+                PanelSettings.Child = bFME2Settings_General;
             }
         }
 
         private void SettingsBFME2Repair_Click(object sender, RoutedEventArgs e)
         {
-            DisposeAnyChildrenInPanel();
             DrawSelectionOnMenuEntry(sender);
 
             if (bFME2Settings_Repair == null)
             {
                 bFME2Settings_Repair = new BFME2Settings_Repair();
-                PanelSettings.Children.Add(bFME2Settings_Repair);
+                PanelSettings.Child = bFME2Settings_Repair;
             }
             else
             {
-                PanelSettings.Children.Add(bFME2Settings_Repair);
+                PanelSettings.Child = bFME2Settings_Repair;
             }
         }
 
         private void SettingsRotWKGeneral_Click(object sender, RoutedEventArgs e)
         {
-            DisposeAnyChildrenInPanel();
             DrawSelectionOnMenuEntry(sender);
 
             if (rOTWKSettings_General == null)
             {
                 rOTWKSettings_General = new ROTWKSettings_General();
-                PanelSettings.Children.Add(rOTWKSettings_General);
+                PanelSettings.Child = rOTWKSettings_General;
             }
             else
             {
-                PanelSettings.Children.Add(rOTWKSettings_General);
+                PanelSettings.Child = rOTWKSettings_General;
             }
         }
 
         private void SettingsRotWKRepair_Click(object sender, RoutedEventArgs e)
         {
-            DisposeAnyChildrenInPanel();
             DrawSelectionOnMenuEntry(sender);
 
             if (rOTWKSettings_Repair == null)
             {
                 rOTWKSettings_Repair = new ROTWKSettings_Repair();
-                PanelSettings.Children.Add(rOTWKSettings_Repair);
+                PanelSettings.Child = rOTWKSettings_Repair;
             }
             else
             {
-                PanelSettings.Children.Add(rOTWKSettings_Repair);
+                PanelSettings.Child = rOTWKSettings_Repair;
             }
-        }
-
-        private void DisposeAnyChildrenInPanel()
-        {
-            if (PanelSettings.Children.Count > 0)
-                PanelSettings.Children.Clear();
         }
 
         private void DrawSelectionOnMenuEntry(object sender)
@@ -164,9 +152,9 @@ namespace LauncherGUI.Pages.Primary
                 {
                     button.Background = Brushes.Transparent;
 
-                    if (ReferenceEquals(clickedButton, button))
+                    if (clickedButton == button)
                     {
-                        button.Background = new SolidColorBrush(Color.FromArgb(128, 255, 255, 255));
+                        button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#19FFFFFF"));
                     }
                 }
             }

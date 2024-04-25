@@ -13,14 +13,17 @@ namespace LauncherGUI.Pages.Settings.Launcher
     /// </summary>
     public partial class LauncherSettings_General : UserControl
     {
-        public ObservableCollection<LibraryTileData> LibraryTileCollection { get; } = new();
-
         bool isNotUserInteractionForLanguageDropDown = true;
         public LauncherSettings_General()
         {
             InitializeComponent();
             DataContext = this;
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.LauncherLanguageSetting;
+            GetDriveData();
         }
 
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -41,27 +44,26 @@ namespace LauncherGUI.Pages.Settings.Launcher
             Properties.Settings.Default.LauncherLanguageSetting = ComboBoxLanguage.SelectedIndex;
             Properties.Settings.Default.Save();
 
-            LibraryTileCollection.Clear();
             GetDriveData();
         }
 
         private void GetDriveData()
         {
+            libraryTiles.Children.Clear();
             foreach (var drive in DriveInfo.GetDrives())
             {
                 if (!drive.VolumeLabel.Contains("Google"))
                 {
                     if (drive.DriveType != DriveType.CDRom || drive.DriveType != DriveType.Network || drive.DriveType != DriveType.Removable)
                     {
-                        LibraryTileData libraryTileData = new()
+                        LibraryTile libraryTile = new()
                         {
-                            DriveLetter = string.Concat(drive.VolumeLabel == string.Empty ? Application.Current.FindResource("SettingsLauncherGeneralDriveDefaultNameText") : drive.VolumeLabel, " (", drive.Name[..^1], ")"),
-                            DriveSizes = string.Concat((drive.AvailableFreeSpace / Math.Pow(1024, 3)).ToString("0"), " GB ", Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText"), " ", (drive.TotalSize / Math.Pow(1024, 3)).ToString("0"), " GB"),
-                            ProgressBarValue = Convert.ToInt32((drive.AvailableFreeSpace / drive.TotalSize) * 100),
-                            ProgressBarMaxValue = 100
+                            DriveName = string.Concat(drive.VolumeLabel == string.Empty ? Application.Current.FindResource("SettingsLauncherGeneralDriveDefaultNameText") : drive.VolumeLabel, " (", drive.Name[..^1], ")"),
+                            DriveSize = Math.Floor(drive.TotalSize / Math.Pow(1024, 3)),
+                            FreeSpace = Math.Floor(drive.AvailableFreeSpace / Math.Pow(1024, 3))
                         };
 
-                        LibraryTileCollection.Add(libraryTileData);
+                        libraryTiles.Children.Add(libraryTile);
                     }
                 }
             }
