@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using static LauncherGUI.Helpers.GameSelectorHelper;
 
@@ -69,20 +70,35 @@ namespace LauncherGUI.Helpers
             File.WriteAllText(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME), changedOptionsFileText);
         }
 
-        public static void ClearOptionsFile(AvailableBFMEGames assemblyName)
+        public static void SetDefaultOptionsFile(AvailableBFMEGames assemblyName)
         {
-            StreamReader _streamReader = new(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
-            string importedOptionsFileText = _streamReader.ReadToEnd();
-            _streamReader.Close();
-            _streamReader.Dispose();
+            List<string> iniOptionsSettingsList =
+                [
+                     "AllHealthBars = yes",
+                     "AlternateMouseSetup = no",
+                     "AmbientVolume = 50",
+                     "AudioLOD = High",
+                     "Brightness = 50",
+                     "FixedStaticGameLOD = UltraHigh",
+                     "FlashTutorial = 0",
+                     "HasGotOnline = yes",
+                     "HasSeenLogoMovies = yes",
+                     "HeatEffects = yes",
+                     "IdealStaticGameLOD = UltraHigh",
+                     "IsThreadedLoad = yes",
+                     "MovieVolume = 70",
+                     "MusicVolume = 70",
+                     "Resolution = ",
+                     "SFXVolume = 70",
+                     "ScrollFactor = 50",
+                     "StaticGameLOD = UltraHigh",
+                     "TimesInGame = 1",
+                     "UnitDecals = yes",
+                     "UseEAX3 = yes",
+                     "VoiceVolume = 70"
+                     ];
 
-            char[] lineFeedChars = { '\n', '\r' };
-            string[] cleanStringArray = importedOptionsFileText.Split(lineFeedChars, StringSplitOptions.RemoveEmptyEntries);
-            string cleanString = String.Join(Environment.NewLine, cleanStringArray);
-
-            string changedOptionsFileText = cleanString + Environment.NewLine;
-
-            File.WriteAllText(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME), changedOptionsFileText);
+            File.WriteAllLines(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME), iniOptionsSettingsList);
         }
     }
 }

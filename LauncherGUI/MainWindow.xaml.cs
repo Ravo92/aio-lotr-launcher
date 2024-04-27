@@ -21,7 +21,7 @@ namespace LauncherGUI
         private static readonly Guides Guides = new();
         private static readonly Workshop Workshop = new();
 
-        public MainWindow()
+        public MainWindow(string argument)
         {
             InitializeComponent();
             Instance = this;
@@ -32,10 +32,20 @@ namespace LauncherGUI
             Height = SystemParameters.WorkArea.Height * 0.8;
 
             LauncherConfigHelper.MigrateLauncherSettings();
-            LauncherLanguageHelper.GetAvailableLauncherLanguage(Properties.Settings.Default.LauncherLanguageSetting);
+            LauncherLanguageHelper.SetAvailableLauncherLanguage(Properties.Settings.Default.LauncherLanguageSetting);
 
             CheckSize();
             ShowLibrary();
+
+            if (!string.IsNullOrEmpty(argument))
+            {
+                if (argument == "--SetKeyBFME1")
+                    SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.BFME1));
+                else if (argument == "--SetKeyBFME2")
+                    SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.BFME2));
+                else if (argument == "--SetKeyROTWK")
+                    SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.ROTWK));
+            }
         }
 
         public static void SetContent(FrameworkElement? newContent)
@@ -116,7 +126,7 @@ namespace LauncherGUI
             }
         }
 
-        private void OnSettingsTabClicked(object sender, MouseButtonEventArgs e) => SetFullContent(new Settings());
+        private void OnSettingsTabClicked(object sender, MouseButtonEventArgs e) => SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.NONE));
 
         private void OnLibraryTabClicked(object sender, MouseButtonEventArgs e) => ShowLibrary();
 

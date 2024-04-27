@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Windows;
 using System.Diagnostics;
+using System.Linq;
 using System.IO;
 
 namespace LauncherGUI
@@ -19,17 +20,35 @@ namespace LauncherGUI
 
         private Mutex? _mutex;
 
-        protected override void OnStartup(StartupEventArgs eventArgs)
+        protected override void OnStartup(StartupEventArgs e)
         {
             bool createdNew;
             _mutex = new(true, ConstStringsHelper.C_MUTEX_NAME, out createdNew);
 
-            if (createdNew)
+            base.OnStartup(e);
+
+            string[] args = Environment.GetCommandLineArgs();
+            string argumentToFind = "--SetKey";
+            string argument = "";
+
+            if (args.Length > 1)
+                argument = args.FirstOrDefault(arg => arg.Contains(argumentToFind))!;
+
+
+            if (createdNew || (!createdNew && args.Length > 1))
             {
                 GameFileToolsHelper.CheckForInstalledGames();
 
-                MainWindow mainWindow = new();
-                mainWindow.Show();
+                if (argument is null)
+                {
+                    MainWindow mainWindow = new("");
+                    mainWindow.Show();
+                }
+                else
+                {
+                    MainWindow mainWindow = new(argument);
+                    mainWindow.Show();
+                }
             }
             else
             {

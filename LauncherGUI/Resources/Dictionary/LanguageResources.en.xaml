@@ -21,12 +21,15 @@
     <system:String x:Key="SettingsBFMERepair">Repair or Uninstall</system:String>
     <system:String x:Key="SettingsBFMEGeneralLanguageDropDownLabelText">Switch Game-language</system:String>
     <system:String x:Key="SettingsBFMEGeneralResolutionDropDownLabelText">Set game resolution</system:String>
+    <system:String x:Key="SettingsBFMEGeneralCDKeyLabelText">Serialnumber</system:String>
+    <system:String x:Key="SettingsBFMEGeneralCDKeyButtonText">Change Serial</system:String>
+    <system:String x:Key="SettingsBFMEGeneralCDKeyButtonTextGenerate">Randomize</system:String>
 
     <system:String x:Key="SettingsBFME1Header">The Battle for Middle-earth™</system:String>
     <system:String x:Key="SettingsBFME2Header">The Battle for Middle-earth™ II</system:String>
     <system:String x:Key="SettingsRotWKHeader">Rise of the Witchking™</system:String>
 
-    <system:String x:Key="SettingsLauncherGeneralLauncherGeneralDropDownLabelText">Switch Launcher-language</system:String>
+    <system:String x:Key="SettingsLauncherGeneralLanguageDropDownLabelText">Switch Launcher-language</system:String>
     <system:String x:Key="SettingsLauncherGeneralLibraryLabelText">Library settings</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveSizeText">free of</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveDefaultNameText">Local Disk</system:String>

@@ -19,21 +19,32 @@ namespace LauncherGUI.Helpers
         {
             using RegistryKey? mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\");
             using RegistryKey? secondPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\");
+            using RegistryKey? ergcPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\EA Games\The Battle for Middle-earth\ergc");
 
-            return kindOf switch
+            if (mainPath is not null && secondPath is not null)
             {
-                "locale" => mainPath?.GetValue("Locale")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
-                "displayName" => mainPath?.GetValue("DisplayName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
-                "path" => mainPath?.GetValue("Install Dir")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
-                "appData" => secondPath?.GetValue("UserDataLeafName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
-                _ => ConstStringsHelper.C_REGISTRY_SERVICE_WRONG_PARAMETER,
-            };
+                return kindOf switch
+                {
+                    "locale" => mainPath?.GetValue("Locale")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
+                    "displayName" => mainPath?.GetValue("DisplayName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
+                    "path" => mainPath?.GetValue("Install Dir")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
+                    "appData" => secondPath?.GetValue("UserDataLeafName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
+                    "cdKey" => ergcPath?.GetValue("")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
+                    _ => ConstStringsHelper.C_REGISTRY_SERVICE_WRONG_PARAMETER,
+                };
+            }
+            else
+            {
+                LogHelper.LoggerRegistryTools.Error(string.Concat("Error Reading Registry: ", kindOf, " was not found in Registry!"));
+                return ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND;
+            }
         }
 
         public static string ReadRegKeyBFME2(string kindOf)
         {
             using RegistryKey? mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Battle for Middle-earth II\");
             using RegistryKey? secondPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\");
+            using RegistryKey? ergcPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc");
 
             return kindOf switch
             {
@@ -41,6 +52,7 @@ namespace LauncherGUI.Helpers
                 "displayName" => mainPath?.GetValue("DisplayName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
                 "path" => mainPath?.GetValue("Install Dir")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
                 "appData" => secondPath?.GetValue("UserDataLeafName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
+                "cdKey" => ergcPath?.GetValue("")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
                 _ => ConstStringsHelper.C_REGISTRY_SERVICE_WRONG_PARAMETER,
             };
         }
@@ -49,6 +61,7 @@ namespace LauncherGUI.Helpers
         {
             using RegistryKey? mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\");
             using RegistryKey? secondPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\");
+            using RegistryKey? ergcPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc");
 
             return kindOf switch
             {
@@ -56,6 +69,7 @@ namespace LauncherGUI.Helpers
                 "displayName" => mainPath?.GetValue("DisplayName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
                 "path" => mainPath?.GetValue("Install Dir")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
                 "appData" => secondPath?.GetValue("UserDataLeafName")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
+                "cdKey" => ergcPath?.GetValue("")?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND,
                 _ => ConstStringsHelper.C_REGISTRY_SERVICE_WRONG_PARAMETER,
             };
         }
@@ -74,25 +88,11 @@ namespace LauncherGUI.Helpers
             }
         }
 
-        public static void WriteRegKeyForBFMEGames(string key, string value, AvailableBFMEGames gameName)
+        public static void SetRegKey(string path, string key, string value)
         {
             RegistryKey mainPath;
-
-            switch (gameName)
-            {
-                case AvailableBFMEGames.BFME1:
-                    mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\EA Games\The Battle for Middle-earth\", true)!;
-                    mainPath.SetValue(key, value);
-                    break;
-                case AvailableBFMEGames.BFME2:
-                    mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Battle for Middle-earth II\", true)!;
-                    mainPath.SetValue(key, value);
-                    break;
-                case AvailableBFMEGames.ROTWK:
-                    mainPath = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\", true)!;
-                    mainPath.SetValue(key, value);
-                    break;
-            }
+            mainPath = Registry.LocalMachine.OpenSubKey(path, true)!;
+            mainPath.SetValue(key, value);
         }
 
         public static string GameLanguage(AvailableBFMEGames BFMEGameVersion)
@@ -121,10 +121,10 @@ namespace LauncherGUI.Helpers
         {
             return BFMEGameVersion switch
             {
-                AvailableBFMEGames.BFME1 => ReadRegKeyBFME1("appData"),
-                AvailableBFMEGames.BFME2 => ReadRegKeyBFME2("appData"),
-                AvailableBFMEGames.ROTWK => ReadRegKeyROTWK("appData"),
-                _ => ReadRegKeyBFME1("appData"),
+                AvailableBFMEGames.BFME1 => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ReadRegKeyBFME1("appData")),
+                AvailableBFMEGames.BFME2 => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ReadRegKeyBFME2("appData")),
+                AvailableBFMEGames.ROTWK => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ReadRegKeyROTWK("appData")),
+                _ => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ReadRegKeyBFME1("appData")),
             };
         }
 

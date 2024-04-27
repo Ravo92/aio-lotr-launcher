@@ -5,7 +5,7 @@ namespace LauncherGUI.Helpers
 {
     internal class LauncherLanguageHelper
     {
-        public static void GetAvailableLauncherLanguage(int languageIndex)
+        public static void SetAvailableLauncherLanguage(int languageIndex)
         {
             ResourceDictionary resourceDictionary = [];
 
@@ -20,6 +20,11 @@ namespace LauncherGUI.Helpers
             }
 
             Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+        }
+
+        public static int GetAvailableLauncherLanguage()
+        {
+            return Properties.Settings.Default.LauncherLanguageSetting;
         }
     }
 }

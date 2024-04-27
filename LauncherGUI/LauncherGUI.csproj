@@ -56,6 +56,7 @@
 		<None Remove="Resources\Images\patreon.png" />
 		<None Remove="Resources\Images\RotWK.png" />
 		<None Remove="Resources\Images\twitch.png" />
+		<None Remove="Resources\Images\uac.png" />
 		<None Remove="Resources\Images\youtube.png" />
 	</ItemGroup>
 
@@ -94,6 +95,7 @@
 		<Resource Include="Resources\Images\patreon.png" />
 		<Resource Include="Resources\Images\RotWK.png" />
 		<Resource Include="Resources\Images\twitch.png" />
+		<Resource Include="Resources\Images\uac.png" />
 		<Resource Include="Resources\Images\youtube.png" />
 	</ItemGroup>
 

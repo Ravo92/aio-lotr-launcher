@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LauncherDriver": {
+      "commandName": "Project",
+      "commandLineArgs": "--SetKeyBFME1"
+    }
+  }
+}

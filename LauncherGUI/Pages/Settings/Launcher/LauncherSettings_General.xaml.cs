@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.IO;
 using System;
 using System.Windows;
@@ -37,9 +36,9 @@ namespace LauncherGUI.Pages.Settings.Launcher
             }
 
             if (ComboBoxLanguage.SelectedIndex == 0)
-                LauncherLanguageHelper.GetAvailableLauncherLanguage(0);
+                LauncherLanguageHelper.SetAvailableLauncherLanguage(0);
             else
-                LauncherLanguageHelper.GetAvailableLauncherLanguage(ComboBoxLanguage.SelectedIndex);
+                LauncherLanguageHelper.SetAvailableLauncherLanguage(ComboBoxLanguage.SelectedIndex);
 
             Properties.Settings.Default.LauncherLanguageSetting = ComboBoxLanguage.SelectedIndex;
             Properties.Settings.Default.Save();

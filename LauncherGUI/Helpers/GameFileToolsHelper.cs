@@ -197,21 +197,9 @@ namespace LauncherGUI.Helpers
             }
         }
 
-        internal bool EnsureBFMEAppDataFolderExists(AvailableBFMEGames assemblyName)
+        internal static bool BFMEAppDataFolderExists(AvailableBFMEGames assemblyName)
         {
-            try
-            {
-                if (!Directory.Exists(BFMERegistryHelper.GameAppDataFolderPath(assemblyName)))
-                {
-                    CreateBFMEAppDataFolder(assemblyName);
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "");
-                return false;
-            }
+            return Directory.Exists(BFMERegistryHelper.GameAppDataFolderPath(assemblyName));
         }
 
         internal static void CreateBFMEAppDataFolder(AvailableBFMEGames assemblyName)
@@ -219,22 +207,20 @@ namespace LauncherGUI.Helpers
             Directory.CreateDirectory(BFMERegistryHelper.GameAppDataFolderPath(assemblyName));
         }
 
-        internal void EnsureBFMEOptionsIniFileExists(AvailableBFMEGames assemblyName)
+        internal static bool BFMEOptionsIniFileExists(AvailableBFMEGames assemblyName)
+        {
+            return File.Exists(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
+        }
+
+        internal static void CreateBFMEOptionsIniFile(AvailableBFMEGames assemblyName)
         {
             try
             {
-                _logger.Information("check if options.ini file for game > {0} < in path > {1} < exists...", assemblyName, Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
-
-                if (!File.Exists(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME)))
-                {
-                    _logger.Information("It does not exist, so we create it now...");
-                    File.Copy(Path.Combine(ConstStringsHelper.C_TOOLFOLDER_NAME, ConstStringsHelper.C_OPTIONSINI_FILENAME), Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
-                    _logger.Information("successfully created options.ini file in < {0} >", Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME));
-                }
+                File.Create(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME), 0, FileOptions.WriteThrough).Close();
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "");
+               // _logger.Error(ex, "");
             }
         }
 
@@ -251,7 +237,7 @@ namespace LauncherGUI.Helpers
 
                 try
                 {
-                    BFMERegistryHelper.WriteRegKeyForBFMEGames("Locale", "en_uk", gameName);
+                   // BFMERegistryHelper.WriteRegKeyForBFMEGames("Locale", "en_uk", gameName);
                 }
                 catch (Exception ex)
                 {

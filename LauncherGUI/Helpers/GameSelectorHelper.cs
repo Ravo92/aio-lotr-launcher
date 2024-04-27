@@ -1,12 +1,13 @@
 ﻿namespace LauncherGUI.Helpers
 {
-    internal class GameSelectorHelper
+    public class GameSelectorHelper
     {
-        internal enum AvailableBFMEGames
+        public enum AvailableBFMEGames
         {
             BFME1 = 0,
             BFME2 = 1,
-            ROTWK = 2
+            ROTWK = 2,
+            NONE = 3
         }
     }
 }

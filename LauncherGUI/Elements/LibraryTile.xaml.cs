@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -46,7 +43,7 @@ namespace LauncherGUI.Elements
 
                 driveSpaceUsageBar.Progress = (DriveSize - FreeSpace) / DriveSize * 100d;
                 driveSpaceUsageBar.ProgressFillBrush = new SolidColorBrush(driveSpaceUsageBar.Progress < 85 ? (Color)ColorConverter.ConvertFromString("#FF7BFF7B") : (Color)ColorConverter.ConvertFromString("#FFFF8D7B"));
-                driveSize.Text = $"{FreeSpace} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize} GB";
+                driveSize.Text = $"{FreeSpace:N0} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize:N0} GB";
             }
         }
 
@@ -60,7 +57,7 @@ namespace LauncherGUI.Elements
 
                 driveSpaceUsageBar.Progress = (DriveSize - FreeSpace) / DriveSize * 100d;
                 driveSpaceUsageBar.ProgressFillBrush = new SolidColorBrush(driveSpaceUsageBar.Progress < 85 ? (Color)ColorConverter.ConvertFromString("#FF7BFF7B") : (Color)ColorConverter.ConvertFromString("#FFFF8D7B"));
-                driveSize.Text = $"{FreeSpace} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize} GB";
+                driveSize.Text = $"{FreeSpace:N0} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize:N0} GB";
             }
         }
     }

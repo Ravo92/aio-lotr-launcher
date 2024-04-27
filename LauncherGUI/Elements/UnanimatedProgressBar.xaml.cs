@@ -1,5 +1,4 @@
-﻿using BFMECompetetiveArena_OnlineKit.Elements;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -10,7 +9,7 @@ namespace LauncherGUI.Elements
     /// </summary>
     public partial class UnanimatedProgressBar : UserControl
     {
-        RectangleGeometry ProgressFillClip = new RectangleGeometry() { Rect = new Rect(0, 0, 0, 0) };
+        private readonly RectangleGeometry ProgressFillClip = new() { Rect = new Rect(0, 0, 0, 0) };
 
         public UnanimatedProgressBar()
         {
@@ -43,6 +42,6 @@ namespace LauncherGUI.Elements
                 progressBar.ProgressFillClip.Rect = new Rect(0, 0, progressBar.background.ActualWidth * ((double)e.NewValue / 100), progressBar.background.ActualHeight);
         }
 
-        private void progress_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e) => ProgressFillClip.Rect = new Rect(0, 0, background.ActualWidth * (Progress / 100), e.NewSize.Height);
+        private void Progress_SizeChanged(object sender, SizeChangedEventArgs e) => ProgressFillClip.Rect = new Rect(0, 0, background.ActualWidth * (Progress / 100), e.NewSize.Height);
     }
 }

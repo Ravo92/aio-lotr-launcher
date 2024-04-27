@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -11,9 +12,20 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Settings : UserControl
     {
-        public Settings()
+        public Settings(AvailableBFMEGames availableBFMEGames)
         {
             InitializeComponent();
+
+            if (availableBFMEGames == AvailableBFMEGames.NONE)
+            {
+                launcherSettings_General = new LauncherSettings_General();
+                PanelSettings.Child = launcherSettings_General;
+                DrawSelectionOnMenuEntry(SettingsMenuLauncherSettingsGeneralLabel);
+            }
+            else
+            {
+                LaunchGameSettingsPage(availableBFMEGames);
+            }
         }
 
         LauncherSettings_General? launcherSettings_General;
@@ -29,11 +41,14 @@ namespace LauncherGUI.Pages.Primary
             MainWindow.SetFullContent(null);
         }
 
-        private void LauncherParentSettingsWindow_Loaded(object sender, RoutedEventArgs e)
+        private void LaunchGameSettingsPage(AvailableBFMEGames availableBFMEGames)
         {
-            launcherSettings_General = new LauncherSettings_General();
-            PanelSettings.Child = launcherSettings_General;
-            DrawSelectionOnMenuEntry(SettingsMenuLauncherSettingsGeneralLabel);
+           if (availableBFMEGames == AvailableBFMEGames.BFME1)
+                SettingsBFME1General.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            else if (availableBFMEGames == AvailableBFMEGames.BFME2)
+                SettingsBFME2General.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            else if (availableBFMEGames == AvailableBFMEGames.ROTWK)
+                SettingsRotWKGeneral.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         }
 
         private void SettingsMenuLauncherSettingsGeneralLabel_Click(object sender, RoutedEventArgs e)
@@ -58,7 +73,7 @@ namespace LauncherGUI.Pages.Primary
             if (bFME1Settings_General == null)
             {
                 bFME1Settings_General = new BFME1Settings_General();
-                    PanelSettings.Child = bFME1Settings_General;
+                PanelSettings.Child = bFME1Settings_General;
             }
             else
             {

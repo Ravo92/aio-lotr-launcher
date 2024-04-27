@@ -21,12 +21,15 @@
     <system:String x:Key="SettingsBFMERepair">Reparieren oder Deinstallieren</system:String>
     <system:String x:Key="SettingsBFMEGeneralLanguageDropDownLabelText">Spielsprache ändern</system:String>
     <system:String x:Key="SettingsBFMEGeneralResolutionDropDownLabelText">Spielauflösung festlegen</system:String>
+    <system:String x:Key="SettingsBFMEGeneralCDKeyLabelText">Seriennummer</system:String>
+    <system:String x:Key="SettingsBFMEGeneralCDKeyButtonText">Ändern</system:String>
+    <system:String x:Key="SettingsBFMEGeneralCDKeyButtonTextGenerate">Randomisieren</system:String>
 
     <system:String x:Key="SettingsBFME1Header">Die Schlacht um Mittelerde™</system:String>
     <system:String x:Key="SettingsBFME2Header">Die Schlacht um Mittelerde™ II</system:String>
     <system:String x:Key="SettingsRotWKHeader">Aufstieg des Hexenkönigs™</system:String>
 
-    <system:String x:Key="SettingsLauncherGeneralDropDownLabelText">Launcher-Sprache ändern</system:String>
+    <system:String x:Key="SettingsLauncherGeneralLanguageDropDownLabelText">Launcher-Sprache ändern</system:String>
     <system:String x:Key="SettingsLauncherGeneralLibraryLabelText">Bibliotheks-Einstellungen</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveSizeText">frei von</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveDefaultNameText">Lokaler Datenträger</system:String>
