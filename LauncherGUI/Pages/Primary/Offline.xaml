@@ -31,10 +31,10 @@
                     <Image x:Name="titleImage"/>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Bottom">
-                    <elements:LaunchButton x:Name="launchButton" Margin="0,0,0,20" OnLaunchClicked="OnLaunchGameClicked"/>
+                    <elements:LaunchButton x:Name="launchButton" Margin="0,0,0,20" OnLaunchClicked="OnLaunchGameClicked" OnInstallClicked="OnInstallGameClicked"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Launch in windowed mode" Foreground="White" FontSize="13" FontWeight="Medium" VerticalAlignment="Center"/>
-                        <CheckBox Margin="15,0,0,0" HorizontalAlignment="Center" IsChecked="False"/>
+                        <CheckBox x:Name="CheckBoxWindowed" Margin="15,0,0,0" HorizontalAlignment="Center" IsChecked="False" Checked="CheckBoxWindowed_Checked" Unchecked="CheckBoxWindowed_Unchecked"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

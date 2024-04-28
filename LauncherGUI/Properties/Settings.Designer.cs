@@ -142,5 +142,17 @@ namespace LauncherGUI.Properties {
                 this["ROTWKGameInstalled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsWindowed {
+            get {
+                return ((bool)(this["IsWindowed"]));
+            }
+            set {
+                this["IsWindowed"] = value;
+            }
+        }
     }
 }

@@ -19,6 +19,7 @@
 
         public const string C_OPTIONSINI_FILENAME = "Options.ini";
 
+        public const string C_MAIN_GAMEDAT_FILE = "game.dat";
         public const string C_BFME1_MAIN_GAME_FILE = "lotrbfme.exe";
         public const string C_BFME2_MAIN_GAME_FILE = "lotrbfme2.exe";
         public const string C_ROTWK_MAIN_GAME_FILE = "lotrbfme2ep1.exe";

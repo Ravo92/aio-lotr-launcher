@@ -220,7 +220,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-               // _logger.Error(ex, "");
+                // _logger.Error(ex, "");
             }
         }
 
@@ -237,7 +237,7 @@ namespace LauncherGUI.Helpers
 
                 try
                 {
-                   // BFMERegistryHelper.WriteRegKeyForBFMEGames("Locale", "en_uk", gameName);
+                    // BFMERegistryHelper.WriteRegKeyForBFMEGames("Locale", "en_uk", gameName);
                 }
                 catch (Exception ex)
                 {
@@ -271,17 +271,19 @@ namespace LauncherGUI.Helpers
 
         internal static void CheckForInstalledGames()
         {
-            if (BFMERegistryHelper.ReadRegKeyBFME1("path") == ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyBFME1("path"), ConstStringsHelper.C_BFME1_MAIN_GAME_FILE)))
+            if (!File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyBFME1("path"), ConstStringsHelper.C_BFME1_MAIN_GAME_FILE)))
                 Properties.Settings.Default.BFME1GameInstalled = false;
             else
                 Properties.Settings.Default.BFME1GameInstalled = true;
 
-            if (BFMERegistryHelper.ReadRegKeyBFME2("path") == ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyBFME2("path"), ConstStringsHelper.C_BFME2_MAIN_GAME_FILE)))
+
+            if (!File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyBFME2("path"), ConstStringsHelper.C_BFME2_MAIN_GAME_FILE)))
                 Properties.Settings.Default.BFME2GameInstalled = false;
             else
                 Properties.Settings.Default.BFME2GameInstalled = true;
 
-            if (BFMERegistryHelper.ReadRegKeyROTWK("path") == ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyROTWK("path"), ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE)))
+
+            if (!File.Exists(Path.Combine(BFMERegistryHelper.ReadRegKeyROTWK("path"), ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE)))
                 Properties.Settings.Default.ROTWKGameInstalled = false;
             else
                 Properties.Settings.Default.ROTWKGameInstalled = true;

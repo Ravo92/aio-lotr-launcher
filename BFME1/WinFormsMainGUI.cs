@@ -920,7 +920,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerBFME2GUI.Error(ex.ToString());
+                LogHelper.LoggerBFME1GUI.Error(ex.ToString());
                 DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
                 if (dialogResult == DialogResult.OK)
                 {

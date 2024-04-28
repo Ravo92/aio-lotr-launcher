@@ -1,8 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Diagnostics;
+using LauncherGUI.Helpers;
+using System.Threading;
+using System.Linq;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -19,10 +24,103 @@ namespace LauncherGUI.Pages.Primary
 
         private void OnLaunchGameClicked(object sender, EventArgs e)
         {
-            launchButton.ButtonState = Elements.LaunchButtonState.Loading;
-            launchButton.LoadProgress = 20;
-            launchButton.LoadStatus = "Downloading x.zip";
+            Process processLaunchGame = new();
+
+            if (CheckBoxWindowed.IsChecked == false)
+                processLaunchGame.StartInfo.Arguments = "-win -xres " + FullscreenWindowedHelper.GetScreenResolutionX() + " -yres " + FullscreenWindowedHelper.GetScreenResolutionY();
+            else
+                processLaunchGame.StartInfo.Arguments = "-win";
+
+            HideLauncher();
+
+            if (tabs.SelectedIndex == 0) // BFME1
+            {
+                processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME1("path"), ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
+                processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME1("path");
+                processLaunchGame.Start();
+
+                if (CheckBoxWindowed.IsChecked == false)
+                {
+                    int xPos = 0;
+                    int yPos = 0;
+                    int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
+                    int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
+
+                    while (Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE).Length == 0)
+                    {
+                        Thread.Sleep(2000);
+                    }
+
+                    IntPtr handle = Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE)[0].MainWindowHandle;
+                    FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
+                }
+            }
+            else if (tabs.SelectedIndex == 1) // BFME2
+            {
+                processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME2("path"), ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
+                processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME2("path");
+                processLaunchGame.Start();
+
+                if (CheckBoxWindowed.IsChecked == false)
+                {
+                    int xPos = 0;
+                    int yPos = 0;
+                    int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
+                    int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
+
+                    while (Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE).Length == 0)
+                    {
+                        Thread.Sleep(2000);
+                    }
+
+                    IntPtr handle = Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE)[0].MainWindowHandle;
+                    FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
+                }
+            }
+            else if (tabs.SelectedIndex == 2) // ROTWK
+            {
+                processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyROTWK("path"), ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
+                processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyROTWK("path");
+                processLaunchGame.Start();
+
+                if (CheckBoxWindowed.IsChecked == false)
+                {
+                    int xPos = 0;
+                    int yPos = 0;
+                    int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
+                    int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
+
+                    Process process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
+
+                    IntPtr handle = process.MainWindowHandle;
+                    FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
+                }
+            }
+
+            processLaunchGame.WaitForExit();
+            processLaunchGame.Dispose();
+
+            ShowLauncher();
         }
+
+        private void OnInstallGameClicked(object sender, EventArgs e)
+        {
+            if (tabs.SelectedIndex == 0) // BFME1
+            {
+                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
+                launchButton.LoadProgress = 20;
+                launchButton.LoadStatus = "Downloading x.zip";
+            }
+            else if (tabs.SelectedIndex == 1) // BFME2
+            {
+                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
+            }
+            else if (tabs.SelectedIndex == 2) // ROTWK
+            {
+                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
+            }
+        }
+
 
         private void TabChanged(object sender, EventArgs e)
         {
@@ -35,8 +133,10 @@ namespace LauncherGUI.Pages.Primary
             }
             else if (tabs.SelectedIndex == 1) // BFME2
             {
-                if (ChangelogPage.Visibility == Visibility.Visible)
-                    ChangelogPage.Visibility = Visibility.Hidden;
+                ChangelogPage.Source = new Uri("https://ravo92.github.io/changelogpages/bfme2/106/changelog.txt");
+
+                if (ChangelogPage.Visibility == Visibility.Hidden)
+                    ChangelogPage.Visibility = Visibility.Visible;
             }
             else if (tabs.SelectedIndex == 2) // ROTWK
             {
@@ -47,6 +147,7 @@ namespace LauncherGUI.Pages.Primary
             }
 
             UpdateTitleImage();
+            InitializePlayButton();
         }
 
         private void ChangelogPage_KeyDown(object sender, KeyEventArgs e)
@@ -101,6 +202,55 @@ namespace LauncherGUI.Pages.Primary
         private void LauncherSettingsChanged(object sender, EventArgs e)
         {
             UpdateTitleImage();
+        }
+
+        private void HideLauncher()
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+            Application.Current.MainWindow.ShowInTaskbar = false;
+        }
+
+        private void ShowLauncher()
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            Application.Current.MainWindow.ShowInTaskbar = true;
+        }
+
+        private void InitializePlayButton()
+        {
+            if (tabs.SelectedIndex == 0) // BFME1
+            {
+                if (Properties.Settings.Default.BFME1GameInstalled)
+                    launchButton.ButtonState = Elements.LaunchButtonState.Launch;
+                else
+                    launchButton.ButtonState = Elements.LaunchButtonState.Install;
+            }
+            else if (tabs.SelectedIndex == 1) // BFME2
+            {
+                if (Properties.Settings.Default.BFME2GameInstalled)
+                    launchButton.ButtonState = Elements.LaunchButtonState.Launch;
+                else
+                    launchButton.ButtonState = Elements.LaunchButtonState.Install;
+            }
+            else if (tabs.SelectedIndex == 2) // ROTWK
+            {
+                if (Properties.Settings.Default.ROTWKGameInstalled)
+                    launchButton.ButtonState = Elements.LaunchButtonState.Launch;
+                else
+                    launchButton.ButtonState = Elements.LaunchButtonState.Install;
+            }
+        }
+
+        private void CheckBoxWindowed_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.IsWindowed = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBoxWindowed_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.IsWindowed = false;
+            Properties.Settings.Default.Save();
         }
     }
 }
