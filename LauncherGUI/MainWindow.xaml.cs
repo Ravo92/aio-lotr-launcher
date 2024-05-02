@@ -1,4 +1,5 @@
-﻿using LauncherGUI.Helpers;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using LauncherGUI.Helpers;
 using LauncherGUI.Pages.Primary;
 using System;
 using System.Diagnostics;
@@ -26,6 +27,7 @@ namespace LauncherGUI
             InitializeComponent();
             Instance = this;
 
+            TrayIcon.Visibility = Visibility.Collapsed;
             fullContent.Visibility = Visibility.Visible;
 
             Width = SystemParameters.WorkArea.Width * 0.7;
@@ -158,6 +160,47 @@ namespace LauncherGUI
         {
             base.OnClosed(e);
             Application.Current.Shutdown();
+        }
+
+        private void ToggleWindowVisibility()
+        {
+            if (WindowState == WindowState.Normal || WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Minimized;
+                ShowInTaskbar = false;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+                ShowInTaskbar = true;
+                Activate();
+            }
+        }
+
+        private void TrayMenuShowApplication_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleWindowVisibility();
+        }
+
+        private void TrayMenuCloseApplication_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void TrayIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            ToggleWindowVisibility();
+        }
+
+        private void LauncherMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (WindowState != WindowState.Minimized)
+            {
+                e.Cancel = true;
+                WindowState = WindowState.Minimized;
+                ShowInTaskbar = false;
+                TrayIcon.Visibility = Visibility.Visible;
+            }
         }
     }
 }

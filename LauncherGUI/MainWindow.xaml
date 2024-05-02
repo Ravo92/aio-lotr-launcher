@@ -1,14 +1,23 @@
-﻿<Window x:Class="LauncherGUI.MainWindow"
+﻿<Window x:Name="LauncherMainWindow" x:Class="LauncherGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="{DynamicResource MainLauncherTitle}" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow">
+        Title="{DynamicResource MainLauncherTitle}" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Closing="LauncherMainWindow_Closing">
     <Window.Background>
         <ImageBrush ImageSource="pack://application:,,,/Resources/Images/BGMap.png"/>
     </Window.Background>
     <Grid x:Name="windowGrid">
+        <tb:TaskbarIcon x:Name="TrayIcon" IconSource="pack://application:,,,/MainIcon.ico" ToolTipText="Patch 2.22 Launcher" MenuActivation="RightClick" TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu Background="White">
+                    <MenuItem x:Name="TrayMenuShowApplication" Header="{DynamicResource LauncherTrayContextMenuShowApplication}" Click="TrayMenuShowApplication_Click"/>
+                    <MenuItem x:Name="TrayMenuCloseApplication" Header="{DynamicResource LauncherTrayContextMenuCloseApplication}" Click="TrayMenuCloseApplication_Click"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

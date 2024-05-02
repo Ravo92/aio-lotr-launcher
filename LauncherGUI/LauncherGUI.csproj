@@ -61,10 +61,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="MainIcon.ico" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Resource Include="MainIcon.ico" />
 		<Resource Include="Resources\Images\bfme1.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -102,7 +98,8 @@
 	<ItemGroup>
 	  <PackageReference Include="BfmeOnlineKit" Version="1.6.0" />
 	  <PackageReference Include="Downloader" Version="3.0.6" />
-	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2420.47" />
+	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2478.35" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	  <PackageReference Include="WindowsShortcutFactory" Version="1.1.0" />
