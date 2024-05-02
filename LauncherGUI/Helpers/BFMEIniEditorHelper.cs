@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Helpers

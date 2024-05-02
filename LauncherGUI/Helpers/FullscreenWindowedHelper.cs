@@ -1,16 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
+using System.Diagnostics;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 namespace LauncherGUI.Helpers
 {
     internal class FullscreenWindowedHelper
     {
-        private const uint styleCache = 382664704;
-
         internal const int xDefaultRes = 1024;
         internal const int yDefaultRes = 768;
 
@@ -83,16 +80,6 @@ namespace LauncherGUI.Helpers
         internal static double GetScreenResolutionY()
         {
             return SystemParameters.PrimaryScreenHeight;
-        }
-
-        internal static double GetCenterX()
-        {
-            return (SystemParameters.PrimaryScreenWidth / 2) - (xDefaultRes / 2);
-        }
-
-        internal static double GetCenterY()
-        {
-            return (SystemParameters.PrimaryScreenHeight / 2) - (yDefaultRes / 2);
         }
 
         private static bool WindowIsFullScreen(IntPtr handle)

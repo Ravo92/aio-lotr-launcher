@@ -1,7 +1,7 @@
-﻿using Microsoft.Win32;
-using System.Linq;
-using System;
+﻿using System;
 using System.IO;
+using System.Linq;
+using Microsoft.Win32;
 using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Helpers
@@ -35,7 +35,7 @@ namespace LauncherGUI.Helpers
             }
             else
             {
-                LogHelper.LoggerRegistryTools.Error(string.Concat("Error Reading Registry: ", kindOf, " was not found in Registry!"));
+                // LogHelper.LoggerRegistryTools.Error(string.Concat("Error Reading Registry: ", kindOf, " was not found in Registry!"));
                 return ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND;
             }
         }
@@ -83,7 +83,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerRegistryTools.Error(ex, "");
+                // LogHelper.LoggerRegistryTools.Error(ex, "");
                 return ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND;
             }
         }

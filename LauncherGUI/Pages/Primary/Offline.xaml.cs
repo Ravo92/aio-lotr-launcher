@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using Newtonsoft.Json;
+using System.Threading;
+using System.Diagnostics;
+using LauncherGUI.Helpers;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using System.Diagnostics;
-using LauncherGUI.Helpers;
-using System.Threading;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -16,6 +17,8 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Library : UserControl
     {
+        string json = "";
+
         public Library()
         {
             InitializeComponent();
@@ -26,12 +29,15 @@ namespace LauncherGUI.Pages.Primary
         {
             Process processLaunchGame = new();
 
+            double getSmallerWindowedResolutionX = FullscreenWindowedHelper.GetScreenResolutionX() - 100;
+            double getSmallerWindowedResolutionY = FullscreenWindowedHelper.GetScreenResolutionY() - 100;
+
             if (CheckBoxWindowed.IsChecked == false)
-                processLaunchGame.StartInfo.Arguments = "-win -xres " + FullscreenWindowedHelper.GetScreenResolutionX() + " -yres " + FullscreenWindowedHelper.GetScreenResolutionY();
+                processLaunchGame.StartInfo.Arguments = "-win -xres " + getSmallerWindowedResolutionX + " -yres " + getSmallerWindowedResolutionY;
             else
                 processLaunchGame.StartInfo.Arguments = "-win";
 
-            HideLauncher();
+            LauncherConfigHelper.SetWindowInvisible();
 
             if (tabs.SelectedIndex == 0) // BFME1
             {
@@ -100,10 +106,10 @@ namespace LauncherGUI.Pages.Primary
             processLaunchGame.WaitForExit();
             processLaunchGame.Dispose();
 
-            ShowLauncher();
+            LauncherConfigHelper.SetWindowVisible();
         }
 
-        private void OnInstallGameClicked(object sender, EventArgs e)
+        private async void OnInstallGameClicked(object sender, EventArgs e)
         {
             if (tabs.SelectedIndex == 0) // BFME1
             {
@@ -113,6 +119,13 @@ namespace LauncherGUI.Pages.Primary
             }
             else if (tabs.SelectedIndex == 1) // BFME2
             {
+                json = await GameFileToolsHelper.DownloadJSONFile("https://bfmelauncherfiles.ravonator.at/LauncherJson/BFME2BaseGameFiles.json");
+                List<GameFileDictionary> gameFiles = JsonConvert.DeserializeObject<List<GameFileDictionary>>(json) ?? [];
+
+                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
+                launchButton.LoadProgress = 20;
+                launchButton.LoadStatus = "Downloading x.zip";
+
                 launchButton.ButtonState = Elements.LaunchButtonState.Loading;
             }
             else if (tabs.SelectedIndex == 2) // ROTWK
@@ -202,18 +215,6 @@ namespace LauncherGUI.Pages.Primary
         private void LauncherSettingsChanged(object sender, EventArgs e)
         {
             UpdateTitleImage();
-        }
-
-        private void HideLauncher()
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
-            Application.Current.MainWindow.ShowInTaskbar = false;
-        }
-
-        private void ShowLauncher()
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
-            Application.Current.MainWindow.ShowInTaskbar = true;
         }
 
         private void InitializePlayButton()

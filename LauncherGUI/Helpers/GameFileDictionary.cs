@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace LauncherGUI.Helpers
+﻿namespace LauncherGUI.Helpers
 {
     public class GameFileDictionary
     {
-        public Dictionary<string, MainPacksHelper> MainPacks { get; set; }
-        public Dictionary<string, PatchPacksHelper[]> PatchPacks { get; set; }
-        public Dictionary<string, LanguagePacksHelper[]> LanguagePacks { get; set; }
+        public required string SHA256 { get; set; }
+        public required string FileName { get; set; }
+        public required string FileURL { get; set; }
     }
 }

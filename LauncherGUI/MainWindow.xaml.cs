@@ -1,13 +1,12 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using LauncherGUI.Helpers;
-using LauncherGUI.Pages.Primary;
-using System;
-using System.Diagnostics;
+﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+using System.Diagnostics;
+using LauncherGUI.Helpers;
 using System.Windows.Media;
+using System.Windows.Input;
+using System.Windows.Controls;
+using LauncherGUI.Pages.Primary;
 
 namespace LauncherGUI
 {
@@ -156,30 +155,18 @@ namespace LauncherGUI
             windowGrid.LayoutTransform = new ScaleTransform(1 / dpi.DpiScaleX * Math.Min(1, Math.Min((ActualWidth / 1500), (ActualHeight / 900))), 1 / dpi.DpiScaleX * Math.Min(1, Math.Min((ActualWidth / 1500), (ActualHeight / 900))));
         }
 
-        protected override void OnClosed(EventArgs e)
+        private void TrayMenuShowApplication_Click(object sender, RoutedEventArgs e)
         {
-            base.OnClosed(e);
-            Application.Current.Shutdown();
-        }
-
-        private void ToggleWindowVisibility()
-        {
-            if (WindowState == WindowState.Normal || WindowState == WindowState.Maximized)
+            if (Application.Current.MainWindow.WindowState == WindowState.Normal || Application.Current.MainWindow.WindowState == WindowState.Maximized)
             {
-                WindowState = WindowState.Minimized;
-                ShowInTaskbar = false;
+                TrayIcon.Visibility = Visibility.Visible;
+                LauncherConfigHelper.SetWindowInvisible();
             }
             else
             {
-                WindowState = WindowState.Normal;
-                ShowInTaskbar = true;
-                Activate();
+                TrayIcon.Visibility = Visibility.Collapsed;
+                LauncherConfigHelper.SetWindowVisible();
             }
-        }
-
-        private void TrayMenuShowApplication_Click(object sender, RoutedEventArgs e)
-        {
-            ToggleWindowVisibility();
         }
 
         private void TrayMenuCloseApplication_Click(object sender, RoutedEventArgs e)
@@ -189,7 +176,16 @@ namespace LauncherGUI
 
         private void TrayIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
-            ToggleWindowVisibility();
+            if (Application.Current.MainWindow.WindowState == WindowState.Normal || Application.Current.MainWindow.WindowState == WindowState.Maximized)
+            {
+                TrayIcon.Visibility = Visibility.Visible;
+                LauncherConfigHelper.SetWindowInvisible();
+            }
+            else
+            {
+                TrayIcon.Visibility = Visibility.Collapsed;
+                LauncherConfigHelper.SetWindowVisible();
+            }
         }
 
         private void LauncherMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -197,8 +193,7 @@ namespace LauncherGUI
             if (WindowState != WindowState.Minimized)
             {
                 e.Cancel = true;
-                WindowState = WindowState.Minimized;
-                ShowInTaskbar = false;
+                LauncherConfigHelper.SetWindowInvisible();
                 TrayIcon.Visibility = Visibility.Visible;
             }
         }

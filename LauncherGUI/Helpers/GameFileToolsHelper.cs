@@ -1,94 +1,42 @@
-﻿using Downloader;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
-using System.Windows;
+using Downloader;
 using System.Net.Http;
 using System.Reflection;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using static LauncherGUI.Helpers.GameSelectorHelper;
-using Serilog;
 
 namespace LauncherGUI.Helpers
 {
-    class GameFileToolsHelper(ILogger logger)
+    class GameFileToolsHelper()
     {
         private static readonly string startupPath = AppDomain.CurrentDomain.BaseDirectory;
 
         private int _DownloadProgressChangedLimiter = 0;
         private IProgress<ProgressHelper>? OverallProgress;
 
-        private readonly ILogger _logger = logger;
-
-        private async Task<GameFileDictionary> LoadGameFileDictionary()
-        {
-            string json = "noInternet";
-
-            try
-            {
-                // Try deserializing the JSON file from remote into local GameFileDictionary class objects
-                json = await DownloadJSONFile();
-
-                // Check if JSON file exists and if the values are identical with remote file, if not, save new remote file as local json file
-                if (json == "noInternet")
-                {
-                    if (File.Exists(Path.Combine(startupPath, ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE)))
-                    {
-                        json = File.ReadAllText(Path.Combine(startupPath, ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE));
-                        return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Can not download game info. Please establish an internet connection and restart the launcher!");
-                        Environment.Exit(1);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "");
-            }
-
-            try
-            {
-                // write JSON directly to a file
-                using StreamWriter file = File.CreateText(Path.Combine(startupPath, ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE));
-                await file.WriteAsync(json);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                _logger.Fatal(ex, "Cant Access local json file! Data may not be accurate!");
-                json = File.ReadAllText(Path.Combine(startupPath, ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE));
-                return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
-            }
-
-            return JsonConvert.DeserializeObject<GameFileDictionary>(json)!;
-        }
-
-        private async Task<string> DownloadJSONFile()
+        internal static async Task<string> DownloadJSONFile(string url)
         {
             try
             {
                 using var httpClient = new HttpClient();
-                httpClient.Timeout = TimeSpan.FromSeconds(3);
-                string json = await httpClient.GetStringAsync($"https://ravo92.github.io/{ConstStringsHelper.C_JSON_GAMEDICTIONARY_MAIN_FILE}");
+                httpClient.Timeout = TimeSpan.FromSeconds(10);
+                string json = await httpClient.GetStringAsync(url);
                 return json;
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
             {
-                _logger.Error(ex, "Timeout while downloading JSON file");
                 return "noInternet";
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Error while downloading JSON file");
                 return "noInternet";
             }
         }
 
-        private async Task DownloadFile(string pathToZIPFile, string ZIPFileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
+        private async Task DownloadFile(string pathWithFilenameDestination, string FileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
         {
             try
             {
@@ -99,19 +47,16 @@ namespace LauncherGUI.Helpers
                 else
                     DownloadUrl = DownloadURLs[0];
 
-                _logger.Information("Downloading from URI: < {0} >", DownloadUrl);
-
-                string fullPathWithFileName = Path.Combine(pathToZIPFile, ZIPFileName);
-                _logger.Information("Downloading into file: < {0} >", fullPathWithFileName);
+                string fullPathWithFileName = Path.Combine(pathWithFilenameDestination, FileName);
 
                 var downloadOpt = new DownloadConfiguration()
                 {
-                    ParallelDownload = true,
+                    ParallelDownload = false,
                     ReserveStorageSpaceBeforeStartingDownload = true,
                     ClearPackageOnCompletionWithFailure = true,
                     MaxTryAgainOnFailover = 2,
-                    Timeout = 10000,
-                    ChunkCount = 4,
+                    Timeout = 20000,
+                    ChunkCount = 1,
                     RequestConfiguration =
                     {
                         KeepAlive = true,
@@ -122,13 +67,10 @@ namespace LauncherGUI.Helpers
 
                 OverallProgress = downloadProgress;
                 var downloader = new DownloadService(downloadOpt);
-                _logger.Debug(downloader.Status.ToString());
 
                 downloader.DownloadStarted += OnDownloadStarted;
                 downloader.DownloadProgressChanged += OnDownloadProgressChanged;
                 downloader.DownloadFileCompleted += OnDownloadFileCompleted;
-
-                _logger.Debug(downloader.Status.ToString());
 
                 if (!File.Exists(fullPathWithFileName))
                 {
@@ -137,7 +79,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "");
+
             }
         }
 
@@ -149,7 +91,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "");
+
             }
         }
 
@@ -176,7 +118,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "");
+
             }
         }
 
@@ -187,13 +129,12 @@ namespace LauncherGUI.Helpers
                 if (e.Error != null)
                 {
                     OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
-                    _logger.Error(e.Error.Message);
                 }
             }
 
             catch (Exception ex)
             {
-                _logger.Error(ex, "");
+
             }
         }
 
@@ -220,31 +161,7 @@ namespace LauncherGUI.Helpers
             }
             catch (Exception ex)
             {
-                // _logger.Error(ex, "");
-            }
-        }
 
-        internal string CheckIfJSONLanguageExists(string jsonLocaleISOCode, AvailableBFMEGames gameName)
-        {
-            if (JSONDataListHelper._DictionarylanguageSettings.ContainsKey(jsonLocaleISOCode))
-            {
-                _logger.Information("Language key {0} exists in json, continue", jsonLocaleISOCode);
-                return jsonLocaleISOCode;
-            }
-            else
-            {
-                _logger.Warning("Language key {0} DOES NOT exist in json, continue with locale > en_uk <", jsonLocaleISOCode);
-
-                try
-                {
-                    // BFMERegistryHelper.WriteRegKeyForBFMEGames("Locale", "en_uk", gameName);
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex, "Error writing into key > Locale < with value > en_uk <");
-                }
-
-                return "en_uk";
             }
         }
 

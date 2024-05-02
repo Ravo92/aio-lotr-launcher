@@ -1,11 +1,10 @@
-﻿using LauncherGUI.Helpers;
-using System.Runtime.InteropServices;
-using System;
-using System.Threading;
-using System.Windows;
-using System.Diagnostics;
+﻿using System;
 using System.Linq;
-using System.IO;
+using System.Windows;
+using System.Threading;
+using System.Diagnostics;
+using LauncherGUI.Helpers;
+using System.Runtime.InteropServices;
 
 namespace LauncherGUI
 {
