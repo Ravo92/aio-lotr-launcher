@@ -36,18 +36,11 @@ namespace LauncherGUI.Helpers
             }
         }
 
-        private async Task DownloadFile(string pathWithFilenameDestination, string FileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
+        internal async Task DownloadFile(string pathWithFilenameDestination, string FileName, string DownloadURL)
         {
             try
             {
-                string DownloadUrl = DownloadURLs[downloadUrlCount];
-
-                if (DownloadURLs.Count >= downloadUrlCount)
-                    DownloadUrl = DownloadURLs[downloadUrlCount];
-                else
-                    DownloadUrl = DownloadURLs[0];
-
-                string fullPathWithFileName = Path.Combine(pathWithFilenameDestination, FileName);
+                string fullPathWithFileName = Path.Combine(pathWithFilenameDestination, FileName.Replace("/", "\\"));
 
                 var downloadOpt = new DownloadConfiguration()
                 {
@@ -61,20 +54,18 @@ namespace LauncherGUI.Helpers
                     {
                         KeepAlive = true,
                         ProtocolVersion = System.Net.HttpVersion.Version11,
-                        UserAgent = assemblyName + " on Version: " + Assembly.GetEntryAssembly()!.GetName().Version
+                        UserAgent = Assembly.GetEntryAssembly()!.GetName() + " on Version: " + Assembly.GetEntryAssembly()!.GetName().Version
                     }
                 };
 
-                OverallProgress = downloadProgress;
                 var downloader = new DownloadService(downloadOpt);
 
                 downloader.DownloadStarted += OnDownloadStarted;
-                downloader.DownloadProgressChanged += OnDownloadProgressChanged;
                 downloader.DownloadFileCompleted += OnDownloadFileCompleted;
 
                 if (!File.Exists(fullPathWithFileName))
                 {
-                    await downloader.DownloadFileTaskAsync(DownloadUrl, fullPathWithFileName);
+                    await downloader.DownloadFileTaskAsync(DownloadURL, fullPathWithFileName);
                 }
             }
             catch (Exception ex)
@@ -87,34 +78,7 @@ namespace LauncherGUI.Helpers
         {
             try
             {
-                OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.FileName, TotalDownloadSizeInBytes = e.TotalBytesToReceive });
-            }
-            catch (Exception ex)
-            {
 
-            }
-        }
-
-        private void OnDownloadProgressChanged(object? sender, DownloadProgressChangedEventArgs e)
-        {
-            try
-            {
-                if (_DownloadProgressChangedLimiter < 2048)
-                {
-                    _DownloadProgressChangedLimiter++;
-                }
-                else
-                {
-                    OverallProgress!.Report(new ProgressHelper()
-                    {
-                        PercentageValue = Math.Min(e.ProgressPercentage, 100),
-                        DownloadSpeedSizeInBytes = e.BytesPerSecondSpeed,
-                        TotalDownloadSizeInBytes = e.TotalBytesToReceive,
-                        ProgressedDownloadSizeInBytes = e.ReceivedBytesSize
-                    });
-
-                    _DownloadProgressChangedLimiter = 0;
-                }
             }
             catch (Exception ex)
             {

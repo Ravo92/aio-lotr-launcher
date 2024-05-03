@@ -9,6 +9,9 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using LauncherGUI.Elements;
+using System.Threading.Tasks;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -113,24 +116,32 @@ namespace LauncherGUI.Pages.Primary
         {
             if (tabs.SelectedIndex == 0) // BFME1
             {
-                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
+                launchButton.ButtonState = LaunchButtonState.Loading;
                 launchButton.LoadProgress = 20;
                 launchButton.LoadStatus = "Downloading x.zip";
             }
             else if (tabs.SelectedIndex == 1) // BFME2
             {
-                json = await GameFileToolsHelper.DownloadJSONFile("https://bfmelauncherfiles.ravonator.at/LauncherJson/BFME2BaseGameFiles.json");
-                List<GameFileDictionary> gameFiles = JsonConvert.DeserializeObject<List<GameFileDictionary>>(json) ?? [];
+                launchButton.ButtonState = LaunchButtonState.Loading;
 
-                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
-                launchButton.LoadProgress = 20;
-                launchButton.LoadStatus = "Downloading x.zip";
+                List<GameFileDictionary> gameFiles = JsonConvert.DeserializeObject<List<GameFileDictionary>>(await GameFileToolsHelper.DownloadJSONFile("https://bfmelauncherfiles.ravonator.at/LauncherJson/BFME2BaseGameFiles.json")) ?? [];
+                GameFileToolsHelper gameFileToolsHelper = new();
+                int totalCount = gameFiles.Count;
+                int currentCount = 0;
 
-                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
+                foreach (GameFileDictionary gameFile in gameFiles)
+                {
+                    launchButton.LoadProgress = Math.Round((double)currentCount / totalCount * 100, 0);
+                    launchButton.LoadStatus = Path.GetFileName(gameFile.FileName);
+
+                    await gameFileToolsHelper.DownloadFile(BFMERegistryHelper.ReadRegKeyBFME2("path"), gameFile.FileName, gameFile.FileURL);
+
+                    currentCount++;
+                }
             }
             else if (tabs.SelectedIndex == 2) // ROTWK
             {
-                launchButton.ButtonState = Elements.LaunchButtonState.Loading;
+                launchButton.ButtonState = LaunchButtonState.Loading;
             }
         }
 
