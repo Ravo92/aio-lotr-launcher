@@ -9,9 +9,8 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using LauncherGUI.Elements;
-using System.Threading.Tasks;
+using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -30,84 +29,20 @@ namespace LauncherGUI.Pages.Primary
 
         private void OnLaunchGameClicked(object sender, EventArgs e)
         {
-            Process processLaunchGame = new();
-
-            double getSmallerWindowedResolutionX = FullscreenWindowedHelper.GetScreenResolutionX() - 100;
-            double getSmallerWindowedResolutionY = FullscreenWindowedHelper.GetScreenResolutionY() - 100;
-
-            if (CheckBoxWindowed.IsChecked == false)
-                processLaunchGame.StartInfo.Arguments = "-win -xres " + getSmallerWindowedResolutionX + " -yres " + getSmallerWindowedResolutionY;
-            else
-                processLaunchGame.StartInfo.Arguments = "-win";
-
             LauncherConfigHelper.SetWindowInvisible();
 
-            if (tabs.SelectedIndex == 0) // BFME1
+            if (tabs.SelectedIndex == 0)
             {
-                processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME1("path"), ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
-                processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME1("path");
-                processLaunchGame.Start();
-
-                if (CheckBoxWindowed.IsChecked == false)
-                {
-                    int xPos = 0;
-                    int yPos = 0;
-                    int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
-                    int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
-
-                    while (Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE).Length == 0)
-                    {
-                        Thread.Sleep(2000);
-                    }
-
-                    IntPtr handle = Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE)[0].MainWindowHandle;
-                    FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
-                }
+                LaunchSelectedGame(AvailableBFMEGames.BFME1);
             }
-            else if (tabs.SelectedIndex == 1) // BFME2
+            else if (tabs.SelectedIndex == 1)
             {
-                processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME2("path"), ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
-                processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME2("path");
-                processLaunchGame.Start();
-
-                if (CheckBoxWindowed.IsChecked == false)
-                {
-                    int xPos = 0;
-                    int yPos = 0;
-                    int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
-                    int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
-
-                    while (Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE).Length == 0)
-                    {
-                        Thread.Sleep(2000);
-                    }
-
-                    IntPtr handle = Process.GetProcessesByName(ConstStringsHelper.C_MAIN_GAMEDAT_FILE)[0].MainWindowHandle;
-                    FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
-                }
+                LaunchSelectedGame(AvailableBFMEGames.BFME2);
             }
-            else if (tabs.SelectedIndex == 2) // ROTWK
+            else if (tabs.SelectedIndex == 2)
             {
-                processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyROTWK("path"), ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
-                processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyROTWK("path");
-                processLaunchGame.Start();
-
-                if (CheckBoxWindowed.IsChecked == false)
-                {
-                    int xPos = 0;
-                    int yPos = 0;
-                    int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
-                    int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
-
-                    Process process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
-
-                    IntPtr handle = process.MainWindowHandle;
-                    FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
-                }
+                LaunchSelectedGame(AvailableBFMEGames.ROTWK);
             }
-
-            processLaunchGame.WaitForExit();
-            processLaunchGame.Dispose();
 
             LauncherConfigHelper.SetWindowVisible();
         }
@@ -233,23 +168,23 @@ namespace LauncherGUI.Pages.Primary
             if (tabs.SelectedIndex == 0) // BFME1
             {
                 if (Properties.Settings.Default.BFME1GameInstalled)
-                    launchButton.ButtonState = Elements.LaunchButtonState.Launch;
+                    launchButton.ButtonState = LaunchButtonState.Launch;
                 else
-                    launchButton.ButtonState = Elements.LaunchButtonState.Install;
+                    launchButton.ButtonState = LaunchButtonState.Install;
             }
             else if (tabs.SelectedIndex == 1) // BFME2
             {
                 if (Properties.Settings.Default.BFME2GameInstalled)
-                    launchButton.ButtonState = Elements.LaunchButtonState.Launch;
+                    launchButton.ButtonState = LaunchButtonState.Launch;
                 else
-                    launchButton.ButtonState = Elements.LaunchButtonState.Install;
+                    launchButton.ButtonState = LaunchButtonState.Install;
             }
             else if (tabs.SelectedIndex == 2) // ROTWK
             {
                 if (Properties.Settings.Default.ROTWKGameInstalled)
-                    launchButton.ButtonState = Elements.LaunchButtonState.Launch;
+                    launchButton.ButtonState = LaunchButtonState.Launch;
                 else
-                    launchButton.ButtonState = Elements.LaunchButtonState.Install;
+                    launchButton.ButtonState = LaunchButtonState.Install;
             }
         }
 
@@ -263,6 +198,70 @@ namespace LauncherGUI.Pages.Primary
         {
             Properties.Settings.Default.IsWindowed = false;
             Properties.Settings.Default.Save();
+        }
+
+        private void LaunchSelectedGame(AvailableBFMEGames availableBFMEGames)
+        {
+            Process processLaunchGame = new();
+
+            double getSmallerWindowedResolutionX = FullscreenWindowedHelper.GetScreenResolutionX() - 100;
+            double getSmallerWindowedResolutionY = FullscreenWindowedHelper.GetScreenResolutionY() - 100;
+
+            if (CheckBoxWindowed.IsChecked == true)
+                processLaunchGame.StartInfo.Arguments = "-win -xres " + getSmallerWindowedResolutionX + " -yres " + getSmallerWindowedResolutionY;
+            else
+                processLaunchGame.StartInfo.Arguments = "-win";
+
+            switch (availableBFMEGames)
+            {
+                case AvailableBFMEGames.BFME1:
+                    processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME1("path"), ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
+                    processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME1("path");
+                    break;
+                case AvailableBFMEGames.BFME2:
+                    processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME2("path"), ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
+                    processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME2("path");
+                    break;
+                case AvailableBFMEGames.ROTWK:
+                    processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyROTWK("path"), ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
+                    processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyROTWK("path");
+                    break;
+                default:
+                    break;
+            }
+
+            processLaunchGame.Start();
+
+            if (CheckBoxWindowed.IsChecked == false)
+            {
+                int xPos = 0;
+                int yPos = 0;
+                int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
+                int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
+
+                Process process = new();
+
+                switch (availableBFMEGames)
+                {
+                    case AvailableBFMEGames.BFME1:
+                        process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
+                        break;
+                    case AvailableBFMEGames.BFME2:
+                        process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
+                        break;
+                    case AvailableBFMEGames.ROTWK:
+                        process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
+                        break;
+                    default:
+                        break;
+                }
+
+                IntPtr handle = process.MainWindowHandle;
+                FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
+            }
+
+            processLaunchGame.WaitForExit();
+            processLaunchGame.Dispose();
         }
     }
 }
