@@ -31,6 +31,7 @@
 
     <system:String x:Key="SettingsLauncherGeneralLanguageDropDownLabelText">Switch Launcher-language</system:String>
     <system:String x:Key="SettingsLauncherGeneralLibraryLabelText">Library settings</system:String>
+    <system:String x:Key="SettingsLauncherGeneralLibraryButtonText">Add Library Location</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveSizeText">free of</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveDefaultNameText">Local Disk</system:String>
 

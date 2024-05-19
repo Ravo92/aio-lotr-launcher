@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Controls;
 using LauncherGUI.Pages.Primary;
+using System.Collections.Specialized;
 
 namespace LauncherGUI
 {
@@ -34,6 +36,16 @@ namespace LauncherGUI
 
             LauncherConfigHelper.MigrateLauncherSettings();
             LauncherLanguageHelper.SetAvailableLauncherLanguage(Properties.Settings.Default.LauncherLanguageSetting);
+
+            Properties.Settings.Default.DefaultLibraryPath = Path.GetPathRoot(Environment.CurrentDirectory);
+            StringCollection myStringCollection = Properties.Settings.Default.UsedLibraryPartitions;
+
+            if (!Properties.Settings.Default.UsedLibraryPartitions.Contains(Properties.Settings.Default.DefaultLibraryPath))
+            {
+                myStringCollection.Add(Path.GetPathRoot(Environment.CurrentDirectory));
+                Properties.Settings.Default.UsedLibraryPartitions = myStringCollection;
+                Properties.Settings.Default.Save();
+            }
 
             CheckSize();
             ShowLibrary();
@@ -176,26 +188,46 @@ namespace LauncherGUI
 
         private void TrayIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.MainWindow.WindowState == WindowState.Normal || Application.Current.MainWindow.WindowState == WindowState.Maximized)
-            {
-                TrayIcon.Visibility = Visibility.Visible;
-                LauncherConfigHelper.SetWindowInvisible();
-            }
-            else
-            {
-                TrayIcon.Visibility = Visibility.Collapsed;
-                LauncherConfigHelper.SetWindowVisible();
-            }
+            TrayIcon.Visibility = Visibility.Hidden;
+            LauncherConfigHelper.SetWindowVisible();
         }
 
         private void LauncherMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (WindowState != WindowState.Minimized)
+            e.Cancel = true;
+            ReloadContextMenu();
+            TrayIcon.Visibility = Visibility.Visible;
+            LauncherConfigHelper.SetWindowInvisible();
+        }
+
+        private void ReloadContextMenu()
+        {
+            if (TrayIcon.ContextMenu != null)
             {
-                e.Cancel = true;
-                LauncherConfigHelper.SetWindowInvisible();
-                TrayIcon.Visibility = Visibility.Visible;
+                TrayIcon.ContextMenu = null;
             }
+
+            ContextMenu newContextMenu = new()
+            {
+                Background = Brushes.White
+            };
+
+            MenuItem showApplicationItem = new()
+            {
+                Header = Application.Current.FindResource("LauncherTrayContextMenuShowApplication")
+            };
+            showApplicationItem.Click += TrayMenuShowApplication_Click;
+
+            MenuItem closeApplicationItem = new()
+            {
+                Header = Application.Current.FindResource("LauncherTrayContextMenuCloseApplication")
+            };
+
+            closeApplicationItem.Click += TrayMenuCloseApplication_Click;
+            newContextMenu.Items.Add(showApplicationItem);
+            newContextMenu.Items.Add(closeApplicationItem);
+
+            TrayIcon.ContextMenu = newContextMenu;
         }
     }
 }

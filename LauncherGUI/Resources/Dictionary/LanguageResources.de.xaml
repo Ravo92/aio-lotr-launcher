@@ -31,6 +31,7 @@
 
     <system:String x:Key="SettingsLauncherGeneralLanguageDropDownLabelText">Launcher-Sprache ändern</system:String>
     <system:String x:Key="SettingsLauncherGeneralLibraryLabelText">Bibliotheks-Einstellungen</system:String>
+    <system:String x:Key="SettingsLauncherGeneralLibraryButtonText">Bibliothek hinzufügen</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveSizeText">frei von</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveDefaultNameText">Lokaler Datenträger</system:String>
 

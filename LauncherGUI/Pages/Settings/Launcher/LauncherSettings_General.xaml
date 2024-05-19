@@ -13,6 +13,7 @@
             <ComboBoxItem Content="Deutsch"/>
         </ComboBox>
         <TextBlock Text="{DynamicResource SettingsLauncherGeneralLibraryLabelText}" d:Text="Library Settings" HorizontalAlignment="Left" Margin="0,20,0,0" Foreground="white"/>
+        <Button Content="{DynamicResource SettingsLauncherGeneralLibraryButtonText}" Width="220" HorizontalAlignment="Left" Margin="0,5,0,0" d:Content="Add Library Location"/>
         <StackPanel x:Name="libraryTiles" HorizontalAlignment="Left" Margin="0,5,0,0"/>
     </StackPanel>
 </UserControl>

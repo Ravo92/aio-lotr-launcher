@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using LauncherGUI.Elements;
 using LauncherGUI.Helpers;
+using System.Collections.Specialized;
 
 namespace LauncherGUI.Pages.Settings.Launcher
 {
@@ -27,8 +28,8 @@ namespace LauncherGUI.Pages.Settings.Launcher
 
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // The first call will always be the resolutions being added and set to the user-saved resolution.
-            // We skip the first entry point here and then set the "isNotUserInteractionForLanguageDropDown" to false, so the user actually can change the value
+            // The first call will always be the language being added and set to the user-saved language.
+            // We skip the first entry point here and then set the "isNotUserInteractionForLanguageDropDown" to false, so the user can actually change the value
             if (isNotUserInteractionForLanguageDropDown)
             {
                 isNotUserInteractionForLanguageDropDown = false;
@@ -49,6 +50,9 @@ namespace LauncherGUI.Pages.Settings.Launcher
         private void GetDriveData()
         {
             libraryTiles.Children.Clear();
+
+            StringCollection myStringCollection = Properties.Settings.Default.UsedLibraryPartitions;
+
             foreach (var drive in DriveInfo.GetDrives())
             {
                 if (!drive.VolumeLabel.Contains("Google"))
@@ -62,7 +66,8 @@ namespace LauncherGUI.Pages.Settings.Launcher
                             FreeSpace = Math.Floor(drive.AvailableFreeSpace / Math.Pow(1024, 3))
                         };
 
-                        libraryTiles.Children.Add(libraryTile);
+                        if (myStringCollection.Contains(drive.Name))
+                            libraryTiles.Children.Add(libraryTile);
                     }
                 }
             }

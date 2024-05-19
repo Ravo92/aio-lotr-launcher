@@ -12,7 +12,7 @@
     <Grid x:Name="windowGrid">
         <tb:TaskbarIcon x:Name="TrayIcon" IconSource="pack://application:,,,/MainIcon.ico" ToolTipText="Patch 2.22 Launcher" MenuActivation="RightClick" TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
             <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu Background="White">
+                <ContextMenu Background="White" x:Name="TrayIconContextMenu">
                     <MenuItem x:Name="TrayMenuShowApplication" Header="{DynamicResource LauncherTrayContextMenuShowApplication}" Click="TrayMenuShowApplication_Click"/>
                     <MenuItem x:Name="TrayMenuCloseApplication" Header="{DynamicResource LauncherTrayContextMenuCloseApplication}" Click="TrayMenuCloseApplication_Click"/>
                 </ContextMenu>

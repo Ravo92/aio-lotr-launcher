@@ -28,9 +28,8 @@
                 </StackPanel>
             </Grid>
             <Border Grid.Row="1" Background="#19FFFFFF" CornerRadius="4">
-                <Grid>
-                    <Button x:Name="selectButton" Content="Select" HorizontalAlignment="Right" VerticalAlignment="Top" Click="OnSelectClicked" Visibility="Visible"/>
-                    <TextBlock x:Name="libraryPath" Foreground="White" FontWeight="Medium" FontSize="14" TextTrimming="CharacterEllipsis" Text="C:\Patch 2.22 Launcher\Games\" Margin="10,0,100,0" VerticalAlignment="Center"/>
+                <Grid Height="40">
+                    <TextBlock x:Name="libraryPath" Foreground="White" FontWeight="Medium" FontSize="18" TextTrimming="CharacterEllipsis" Text="C:\Patch 2.22 Launcher\Games\" Margin="10,0,10,0" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
         </Grid>
