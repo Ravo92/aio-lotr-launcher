@@ -83,7 +83,7 @@ namespace Helper
             }
         }
 
-        public async Task DownloadFile(string pathToZIPFile, string ZIPFileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress, string assemblyName)
+        public async Task DownloadFile(string pathToZIPFile, string ZIPFileName, List<string> DownloadURLs, int downloadUrlCount, IProgress<ProgressHelper> downloadProgress)
         {
             try
             {
@@ -104,14 +104,15 @@ namespace Helper
                     ParallelDownload = true,
                     ReserveStorageSpaceBeforeStartingDownload = true,
                     ClearPackageOnCompletionWithFailure = true,
-                    MaxTryAgainOnFailover = 2,
-                    Timeout = 10000,
-                    ChunkCount = 4,
+                    MaxTryAgainOnFailover = 3,
+                    Timeout = 30000,
+                    MaximumBytesPerSecond = 50 * 1024 * 1024,
+                    MinimumSizeOfChunking = 10 * 1024 * 1024,
+                    ChunkCount = 2,
                     RequestConfiguration =
                     {
-                        KeepAlive = true,
                         ProtocolVersion = System.Net.HttpVersion.Version11,
-                        UserAgent = assemblyName + " on Version: " + Assembly.GetEntryAssembly()!.GetName().Version
+                        UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
                     }
                 };
 

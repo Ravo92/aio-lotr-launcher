@@ -650,7 +650,7 @@ namespace PatchLauncher
                         PBarActualFile.Maximum = 100;
 
                         LogHelper.LoggerBFME2GUI.Information("Start downloading file: > {0} <", ZIPFileName);
-                        await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, DownloadURLs, RetryCount, progressHandlerDownload, AssemblyNameHelper.BFMELauncherGameName);
+                        await gameFileTools.DownloadFile(Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_BFME2), ZIPFileName, DownloadURLs, RetryCount, progressHandlerDownload);
                     }
 
                     if (doesTheFileHasTheCorrectMD5Value)

@@ -25,7 +25,7 @@ namespace Restarter
                 AutoUpdater.ShowSkipButton = false;
                 AutoUpdater.ShowRemindLaterButton = false;
                 AutoUpdater.LetUserSelectRemindLater = false;
-                AutoUpdater.HttpUserAgent = "BFME Patch 2.22 Launcher Updater";
+                AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 AutoUpdater.AppTitle = "Patch 2.22 Launcher";
                 AutoUpdater.RunUpdateAsAdmin = true;
                 AutoUpdater.DownloadPath = Path.Combine(Application.StartupPath, ConstStrings.C_DOWNLOADFOLDER_NAME_LAUNCHER);
