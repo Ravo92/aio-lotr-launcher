@@ -10,6 +10,7 @@
     <Grid>
         <Grid Grid.Column="2" Name="WebView2Grid">
             <Wpf:WebView2 x:Name="GuidesPage" KeyDown="GuidesPage_KeyDown"/>
+            <WebBrowser/>
         </Grid>
     </Grid>
 </UserControl>

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:elements="clr-namespace:LauncherGUI.Elements"
-             xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="LauncherGUI.Pages.Primary.Library"
+             xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="LauncherGUI.Pages.Primary.Offline"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500">
     <Grid>
@@ -38,8 +38,9 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Column="2" Name="WebView2Grid">
-                <Wpf:WebView2 x:Name="ChangelogPage" KeyDown="ChangelogPage_KeyDown"/>
+            <Grid Grid.Column="2" Name="WebView2Grid" KeyDown="ChangelogPage_KeyDown">
+                <TextBlock x:Name="LoadingText" Text="Loading..." Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+                <Wpf:WebView2 x:Name="ChangelogPage" NavigationCompleted="ChangelogPage_NavigationCompleted" NavigationStarting="ChangelogPage_NavigationStarting"/>
             </Grid>
         </Grid>
     </Grid>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="{DynamicResource MainLauncherTitle}" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Closing="LauncherMainWindow_Closing">
+        Title="{DynamicResource MainLauncherTitle}" MinWidth="1024" MinHeight="786" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Closing="LauncherMainWindow_Closing">
     <Window.Background>
         <ImageBrush ImageSource="pack://application:,,,/Resources/Images/BGMap.png"/>
     </Window.Background>
@@ -26,10 +26,11 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel x:Name="tabs" Orientation="Horizontal">
-                    <TextBlock x:Name="libraryTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainLauncherLibrary}" FontSize="16" FontWeight="Bold" Background="Transparent" Cursor="Hand" MouseDown="OnLibraryTabClicked"/>
-                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainLauncherOnline}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
-                    <TextBlock x:Name="workshopTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainLauncherWorkShop}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnWorkShopItemsTabClicked"/>
-                    <TextBlock x:Name="guidesTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainLauncherGuides}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnGuidesTabClicked"/>
+                    <TextBlock x:Name="offlineTab" Style="{DynamicResource TextBlockButton}" d:Text="OFFLINE" Text="{DynamicResource MainLauncherLibrary}" FontSize="16" FontWeight="Bold" Margin="0,0,20,0" Background="Transparent" Cursor="Hand" MouseDown="OnOfflineTabClicked"/>
+                    <Image x:Name="IconUAC" Source="pack://application:,,,/Resources/Images/uac.png" Width="20" Height="20" Margin="0,0,2,8" RenderOptions.BitmapScalingMode="HighQuality" />
+                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" d:Text="ONLINE" Text="{DynamicResource MainLauncherOnline}" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
+                    <TextBlock x:Name="workshopTab" Style="{DynamicResource TextBlockButton}" d:Text="WORKSHOP" Text="{DynamicResource MainLauncherWorkShop}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Visibility="Collapsed" Background="Transparent" Cursor="Hand" MouseDown="OnWorkShopItemsTabClicked"/>
+                    <TextBlock x:Name="guidesTab" Style="{DynamicResource TextBlockButton}" d:Text="GUIDES" Text="{DynamicResource MainLauncherGuides}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnGuidesTabClicked"/>
                 </StackPanel>
                 <StackPanel x:Name="icons" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Image x:Name="youTubeTab" Source="pack://application:,,,/Resources/Images/youtube.png" Height="32px" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,5,0" Cursor="Hand" MouseDown="OnYouTubeTabClicked"/>

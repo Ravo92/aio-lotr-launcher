@@ -23,6 +23,7 @@ namespace LauncherGUI.Pages.Settings.Launcher
         private void OnLoad(object sender, RoutedEventArgs e)
         {
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.LauncherLanguageSetting;
+            CheckBoxCloseToTray.IsChecked = Properties.Settings.Default.CloseLauncherToTray;
             GetDriveData();
         }
 
@@ -71,6 +72,18 @@ namespace LauncherGUI.Pages.Settings.Launcher
                     }
                 }
             }
+        }
+
+        private void CheckBoxCloseToTray_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.CloseLauncherToTray = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBoxCloseToTray_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.CloseLauncherToTray = false;
+            Properties.Settings.Default.Save();
         }
     }
 }

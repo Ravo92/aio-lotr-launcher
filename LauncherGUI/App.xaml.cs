@@ -5,6 +5,7 @@ using System.Threading;
 using System.Diagnostics;
 using LauncherGUI.Helpers;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace LauncherGUI
 {
@@ -26,30 +27,24 @@ namespace LauncherGUI
 
             base.OnStartup(e);
 
-            string[] args = Environment.GetCommandLineArgs();
-            string argumentToFind = "--SetKey";
-            string argument = "";
+            List<string> allowedArguments = ["--SetKeyBFME1", "--SetKeyBFME2", "--SetKeyROTWK", "--OnlineMode"];
+            string[] arguments = Environment.GetCommandLineArgs().Skip(1).ToArray();
 
-            if (args.Length > 1)
-                argument = args.FirstOrDefault(arg => arg.Contains(argumentToFind))!;
+            GameFileToolsHelper.CheckForInstalledGames();
 
-
-            if (createdNew || (!createdNew && args.Length > 1))
+            if (!createdNew && arguments.Length > 0)
             {
-                GameFileToolsHelper.CheckForInstalledGames();
-
-                if (argument is null)
+                foreach (var argument in arguments)
                 {
-                    MainWindow mainWindow = new("");
-                    mainWindow.Show();
-                }
-                else
-                {
-                    MainWindow mainWindow = new(argument);
-                    mainWindow.Show();
+                    if (allowedArguments.Contains(argument))
+                    {
+                        MainWindow mainWindow = new(argument);
+                        mainWindow.Show();
+                        return;
+                    }
                 }
             }
-            else
+            else if (!createdNew)
             {
                 Process current = Process.GetCurrentProcess();
                 foreach (Process process in Process.GetProcessesByName(current.ProcessName))
@@ -61,6 +56,13 @@ namespace LauncherGUI
                     }
                 }
                 Current.Shutdown();
+                return;
+            }
+            else if (arguments.Length == 0)
+            {
+                MainWindow mainWindow = new("");
+                mainWindow.Show();
+                return;
             }
         }
 

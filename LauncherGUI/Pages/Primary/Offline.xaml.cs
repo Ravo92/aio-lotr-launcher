@@ -2,28 +2,34 @@
 using System.IO;
 using System.Windows;
 using Newtonsoft.Json;
-using System.Threading;
 using System.Diagnostics;
 using LauncherGUI.Helpers;
+using LauncherGUI.Elements;
 using System.Windows.Input;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using System.Collections.Generic;
-using LauncherGUI.Elements;
+using System.Windows.Media.Imaging;
 using static LauncherGUI.Helpers.GameSelectorHelper;
+using Windows.Web.Http;
 
 namespace LauncherGUI.Pages.Primary
 {
     /// <summary>
-    /// Interaction logic for Library.xaml
+    /// Interaction logic for Offline.xaml
     /// </summary>
-    public partial class Library : UserControl
+    public partial class Offline : UserControl
     {
         string json = "";
+        readonly Uri changelogBFME1 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/index.html");
+        readonly Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.txt");
+        readonly Uri changelogROTWK = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
 
-        public Library()
+        private static readonly HttpClient httpClient = new();
+
+        public Offline()
         {
             InitializeComponent();
+            InitializeWebView();
             Properties.Settings.Default.SettingsSaving += LauncherSettingsChanged;
         }
 
@@ -83,39 +89,21 @@ namespace LauncherGUI.Pages.Primary
 
         private void TabChanged(object sender, EventArgs e)
         {
-            if (tabs.SelectedIndex == 0) // BFME1
+            switch (tabs.SelectedIndex)
             {
-                ChangelogPage.Source = new Uri("https://ravo92.github.io/changelogpage/index.html");
-
-                if (ChangelogPage.Visibility == Visibility.Hidden)
-                    ChangelogPage.Visibility = Visibility.Visible;
-            }
-            else if (tabs.SelectedIndex == 1) // BFME2
-            {
-                ChangelogPage.Source = new Uri("https://ravo92.github.io/changelogpages/bfme2/106/changelog.txt");
-
-                if (ChangelogPage.Visibility == Visibility.Hidden)
-                    ChangelogPage.Visibility = Visibility.Visible;
-            }
-            else if (tabs.SelectedIndex == 2) // ROTWK
-            {
-                ChangelogPage.Source = new Uri("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
-
-                if (ChangelogPage.Visibility == Visibility.Hidden)
-                    ChangelogPage.Visibility = Visibility.Visible;
+                case 0: // BFME1
+                    ChangelogPage.Source = changelogBFME1;
+                    break;
+                case 1: // BFME2
+                    ChangelogPage.Source = changelogBFME2;
+                    break;
+                case 2: // ROTWK
+                    ChangelogPage.Source = changelogROTWK;
+                    break;
             }
 
             UpdateTitleImage();
             InitializePlayButton();
-        }
-
-        private void ChangelogPage_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F12)
-            {
-                ChangelogPage.CoreWebView2.OpenDevToolsWindow();
-                e.Handled = true;
-            }
         }
 
         private void UpdateTitleImage()
@@ -125,10 +113,10 @@ namespace LauncherGUI.Pages.Primary
                 switch (Properties.Settings.Default.LauncherLanguageSetting)
                 {
                     case 0:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_bfme1_title.png"));
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_BFME1_title.png"));
                         break;
                     case 1:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_bfme1_title.png"));
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_BFME1_title.png"));
                         break;
                 }
             }
@@ -137,10 +125,10 @@ namespace LauncherGUI.Pages.Primary
                 switch (Properties.Settings.Default.LauncherLanguageSetting)
                 {
                     case 0:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_bfme2_title.png"));
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_BFME2_title.png"));
                         break;
                     case 1:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_bfme2_title.png"));
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_BFME2_title.png"));
                         break;
                 }
             }
@@ -149,10 +137,10 @@ namespace LauncherGUI.Pages.Primary
                 switch (Properties.Settings.Default.LauncherLanguageSetting)
                 {
                     case 0:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_rotwk_title.png"));
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_ROTWK_title.png"));
                         break;
                     case 1:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_rotwk_title.png"));
+                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_ROTWK_title.png"));
                         break;
                 }
             }
@@ -262,6 +250,33 @@ namespace LauncherGUI.Pages.Primary
 
             processLaunchGame.WaitForExit();
             processLaunchGame.Dispose();
+        }
+
+        private void ChangelogPage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F12)
+            {
+                ChangelogPage.CoreWebView2.OpenDevToolsWindow();
+                e.Handled = true;
+            }
+        }
+
+        private async void InitializeWebView()
+        {
+            await ChangelogPage.EnsureCoreWebView2Async();
+
+            ChangelogPage.CoreWebView2.NavigationStarting += ChangelogPage_NavigationStarting;
+            ChangelogPage.CoreWebView2.NavigationCompleted += ChangelogPage_NavigationCompleted;
+        }
+
+        private void ChangelogPage_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
+        {
+            LoadingText.Visibility = Visibility.Visible;
+        }
+
+        private void ChangelogPage_NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
+        {
+            LoadingText.Visibility = Visibility.Collapsed;
         }
     }
 }

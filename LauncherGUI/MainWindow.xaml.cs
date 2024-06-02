@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using LauncherGUI.Pages.Primary;
 using System.Collections.Specialized;
+using System.Security.Principal;
 
 namespace LauncherGUI
 {
@@ -18,10 +19,11 @@ namespace LauncherGUI
     public partial class MainWindow : Window
     {
         public static MainWindow? Instance { get; private set; }
-        private static readonly Library Library = new();
+        private static readonly Offline Offline = new();
         private static readonly Online Online = new();
         private static readonly Guides Guides = new();
         private static readonly Workshop Workshop = new();
+        public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
         public MainWindow(string argument)
         {
@@ -30,6 +32,11 @@ namespace LauncherGUI
 
             TrayIcon.Visibility = Visibility.Collapsed;
             fullContent.Visibility = Visibility.Visible;
+
+            if (IsElevated)
+            {
+                IconUAC.Visibility = Visibility.Collapsed;
+            }
 
             Width = SystemParameters.WorkArea.Width * 0.7;
             Height = SystemParameters.WorkArea.Height * 0.8;
@@ -48,16 +55,28 @@ namespace LauncherGUI
             }
 
             CheckSize();
-            ShowLibrary();
 
             if (!string.IsNullOrEmpty(argument))
             {
-                if (argument == "--SetKeyBFME1")
-                    SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.BFME1));
-                else if (argument == "--SetKeyBFME2")
-                    SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.BFME2));
-                else if (argument == "--SetKeyROTWK")
-                    SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.ROTWK));
+                switch (argument)
+                {
+                    case "--SetKeyBFME1":
+                        SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.BFME1));
+                        break;
+                    case "--SetKeyBFME2":
+                        SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.BFME2));
+                        break;
+                    case "--SetKeyROTWK":
+                        SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.ROTWK));
+                        break;
+                    case "--OnlineMode":
+                        SetFullContent(Online);
+                        break;
+                }
+            }
+            else
+            {
+                ShowOffline();
             }
         }
 
@@ -75,13 +94,13 @@ namespace LauncherGUI
             Instance.icons.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        public static void ShowLibrary()
+        public static void ShowOffline()
         {
-            SetContent(Library);
+            SetContent(Offline);
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
-                if (tab == Instance.libraryTab)
+                if (tab == Instance.offlineTab)
                     tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
                 else
                 {
@@ -93,17 +112,34 @@ namespace LauncherGUI
 
         public static void ShowOnline()
         {
-            SetContent(Online);
-
-            foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
+            if (IsElevated)
             {
-                if (tab == Instance.onlineTab)
-                    tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
-                else
+                SetContent(Online);
+
+                foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
                 {
-                    tab.Foreground = Brushes.White;
-                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                    if (tab == Instance.onlineTab)
+                        tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
+                    else
+                    {
+                        tab.Foreground = Brushes.White;
+                        tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                    }
                 }
+            }
+            else
+            {
+                ProcessStartInfo startInfo = new()
+                {
+                    UseShellExecute = true,
+                    WorkingDirectory = Environment.CurrentDirectory,
+                    FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LauncherDriver.exe"),
+                    Arguments = "--OnlineMode",
+                    Verb = "runas"
+                };
+                Process.Start(startInfo);
+
+                Environment.Exit(0);
             }
         }
 
@@ -141,7 +177,7 @@ namespace LauncherGUI
 
         private void OnSettingsTabClicked(object sender, MouseButtonEventArgs e) => SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.NONE));
 
-        private void OnLibraryTabClicked(object sender, MouseButtonEventArgs e) => ShowLibrary();
+        private void OnOfflineTabClicked(object sender, MouseButtonEventArgs e) => ShowOffline();
 
         private void OnOnlineTabClicked(object sender, MouseButtonEventArgs e) => ShowOnline();
 
@@ -160,6 +196,11 @@ namespace LauncherGUI
         private void OnPatreonTabClicked(object sender, MouseButtonEventArgs e) => Process.Start(new ProcessStartInfo("explorer", "https://www.patreon.com/AllInOneLauncher"));
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e) => CheckSize();
+
+        private void MyUserControl_NavigationCompleted(object sender, EventArgs e)
+        {
+            Visibility = Visibility.Visible;
+        }
 
         public void CheckSize()
         {
@@ -194,10 +235,17 @@ namespace LauncherGUI
 
         private void LauncherMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
-            ReloadContextMenu();
-            TrayIcon.Visibility = Visibility.Visible;
-            LauncherConfigHelper.SetWindowInvisible();
+            if (Properties.Settings.Default.CloseLauncherToTray)
+            {
+                e.Cancel = true;
+                ReloadContextMenu();
+                TrayIcon.Visibility = Visibility.Visible;
+                LauncherConfigHelper.SetWindowInvisible();
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
         }
 
         private void ReloadContextMenu()

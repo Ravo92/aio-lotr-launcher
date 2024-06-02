@@ -30,6 +30,7 @@
     <system:String x:Key="SettingsRotWKHeader">Rise of the Witchking™</system:String>
 
     <system:String x:Key="SettingsLauncherGeneralLanguageDropDownLabelText">Switch Launcher-language</system:String>
+    <system:String x:Key="SettingsLauncherGeneralCloseToTray">Close Launcher to tray</system:String>
     <system:String x:Key="SettingsLauncherGeneralLibraryLabelText">Library settings</system:String>
     <system:String x:Key="SettingsLauncherGeneralLibraryButtonText">Add Library Location</system:String>
     <system:String x:Key="SettingsLauncherGeneralDriveSizeText">free of</system:String>
