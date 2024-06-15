@@ -14,6 +14,7 @@ namespace LauncherGUI.Pages.Settings.Launcher
     public partial class LauncherSettings_General : UserControl
     {
         bool isNotUserInteractionForLanguageDropDown = true;
+
         public LauncherSettings_General()
         {
             InitializeComponent();
@@ -29,8 +30,6 @@ namespace LauncherGUI.Pages.Settings.Launcher
 
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // The first call will always be the language being added and set to the user-saved language.
-            // We skip the first entry point here and then set the "isNotUserInteractionForLanguageDropDown" to false, so the user can actually change the value
             if (isNotUserInteractionForLanguageDropDown)
             {
                 isNotUserInteractionForLanguageDropDown = false;
@@ -84,6 +83,11 @@ namespace LauncherGUI.Pages.Settings.Launcher
         {
             Properties.Settings.Default.CloseLauncherToTray = false;
             Properties.Settings.Default.Save();
+        }
+
+        private void ButtonAddLibrary_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

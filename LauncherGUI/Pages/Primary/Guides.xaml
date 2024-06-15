@@ -9,8 +9,7 @@
              d:DesignHeight="1000" d:DesignWidth="1500">
     <Grid>
         <Grid Grid.Column="2" Name="WebView2Grid">
-            <Wpf:WebView2 x:Name="GuidesPage" KeyDown="GuidesPage_KeyDown"/>
-            <WebBrowser/>
+            <Wpf:WebView2 x:Name="GuidesPage" DefaultBackgroundColor="Transparent"/>
         </Grid>
     </Grid>
 </UserControl>

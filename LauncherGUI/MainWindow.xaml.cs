@@ -19,10 +19,6 @@ namespace LauncherGUI
     public partial class MainWindow : Window
     {
         public static MainWindow? Instance { get; private set; }
-        private static readonly Offline Offline = new();
-        private static readonly Online Online = new();
-        private static readonly Guides Guides = new();
-        private static readonly Workshop Workshop = new();
         public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
         public MainWindow(string argument)
@@ -70,7 +66,7 @@ namespace LauncherGUI
                         SetFullContent(new Settings(GameSelectorHelper.AvailableBFMEGames.ROTWK));
                         break;
                     case "--OnlineMode":
-                        SetFullContent(Online);
+                        SetFullContent(new Online());
                         break;
                 }
             }
@@ -96,7 +92,7 @@ namespace LauncherGUI
 
         public static void ShowOffline()
         {
-            SetContent(Offline);
+            SetContent(new Offline());
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
@@ -114,7 +110,7 @@ namespace LauncherGUI
         {
             if (IsElevated)
             {
-                SetContent(Online);
+                SetContent(new Online());
 
                 foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
                 {
@@ -145,7 +141,7 @@ namespace LauncherGUI
 
         public static void ShowWorkShop()
         {
-            SetContent(Workshop);
+            SetContent(new Workshop());
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
@@ -161,7 +157,7 @@ namespace LauncherGUI
 
         public static void ShowGuides()
         {
-            SetContent(Guides);
+            SetContent(new Guides());
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {

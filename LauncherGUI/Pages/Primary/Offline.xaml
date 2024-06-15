@@ -38,9 +38,8 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <Grid Grid.Column="2" Name="WebView2Grid" KeyDown="ChangelogPage_KeyDown">
-                <TextBlock x:Name="LoadingText" Text="Loading..." Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
-                <Wpf:WebView2 x:Name="ChangelogPage" NavigationCompleted="ChangelogPage_NavigationCompleted" NavigationStarting="ChangelogPage_NavigationStarting"/>
+            <Grid Grid.Column="2" Name="WebView2Grid">
+                <Wpf:WebView2 x:Name="ChangelogPage" DefaultBackgroundColor="Transparent"/>
             </Grid>
         </Grid>
     </Grid>

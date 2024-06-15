@@ -1,16 +1,15 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows;
-using Newtonsoft.Json;
+using System.Net.Http;
 using System.Diagnostics;
 using LauncherGUI.Helpers;
 using LauncherGUI.Elements;
-using System.Windows.Input;
+using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using static LauncherGUI.Helpers.GameSelectorHelper;
-using Windows.Web.Http;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -19,12 +18,16 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Offline : UserControl
     {
-        string json = "";
-        readonly Uri changelogBFME1 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/index.html");
+        private const string winParameter = "-win";
+        private const string winXResParameter = " -xres ";
+        private const string winYResParameter = " -yres ";
         readonly Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.txt");
         readonly Uri changelogROTWK = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
 
-        private static readonly HttpClient httpClient = new();
+        private readonly string tempFileBFME2 = Path.GetTempFileName() + ".html";
+        private readonly string tempFileROTWK = Path.GetTempFileName() + ".html";
+
+        private int previousSelectedIndex = -1;
 
         public Offline()
         {
@@ -55,55 +58,77 @@ namespace LauncherGUI.Pages.Primary
 
         private async void OnInstallGameClicked(object sender, EventArgs e)
         {
-            if (tabs.SelectedIndex == 0) // BFME1
-            {
-                launchButton.ButtonState = LaunchButtonState.Loading;
-                launchButton.LoadProgress = 20;
-                launchButton.LoadStatus = "Downloading x.zip";
-            }
-            else if (tabs.SelectedIndex == 1) // BFME2
-            {
-                launchButton.ButtonState = LaunchButtonState.Loading;
+            GameInstallerHelper installerHelper;
 
-                List<GameFileDictionary> gameFiles = JsonConvert.DeserializeObject<List<GameFileDictionary>>(await GameFileToolsHelper.DownloadJSONFile("https://bfmelauncherfiles.ravonator.at/LauncherJson/BFME2BaseGameFiles.json")) ?? [];
-                GameFileToolsHelper gameFileToolsHelper = new();
-                int totalCount = gameFiles.Count;
-                int currentCount = 0;
+            installerHelper = new GameInstallerHelper();
+            installerHelper.ProgressChanged += InstallerHelper_ProgressChanged;
+            installerHelper.StatusChanged += InstallerHelper_StatusChanged;
 
-                foreach (GameFileDictionary gameFile in gameFiles)
+            launchButton.ButtonState = LaunchButtonState.Loading;
+
+            try
+            {
+                if (tabs.SelectedIndex == 0) // BFME1
                 {
-                    launchButton.LoadProgress = Math.Round((double)currentCount / totalCount * 100, 0);
-                    launchButton.LoadStatus = Path.GetFileName(gameFile.FileName);
-
-                    await gameFileToolsHelper.DownloadFile(BFMERegistryHelper.ReadRegKeyBFME2("path"), gameFile.FileName, gameFile.FileURL);
-
-                    currentCount++;
+                    await installerHelper.InstallGame(AvailableBFMEGames.BFME1);
+                }
+                else if (tabs.SelectedIndex == 1) // BFME2
+                {
+                    await installerHelper.InstallGame(AvailableBFMEGames.BFME2);
+                }
+                else if (tabs.SelectedIndex == 2) // ROTWK
+                {
+                    await installerHelper.InstallGame(AvailableBFMEGames.ROTWK);
                 }
             }
-            else if (tabs.SelectedIndex == 2) // ROTWK
+            catch (Exception)
             {
-                launchButton.ButtonState = LaunchButtonState.Loading;
+
+            }
+            finally
+            {
+                launchButton.ButtonState = LaunchButtonState.Launch;
             }
         }
 
+        private void InstallerHelper_ProgressChanged(object? sender, double progress)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                launchButton.LoadProgress = progress;
+            });
+        }
+
+        private void InstallerHelper_StatusChanged(object? sender, string status)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                launchButton.LoadStatus = status;
+            });
+        }
 
         private void TabChanged(object sender, EventArgs e)
         {
-            switch (tabs.SelectedIndex)
+            if (tabs.SelectedIndex != previousSelectedIndex)
             {
-                case 0: // BFME1
-                    ChangelogPage.Source = changelogBFME1;
-                    break;
-                case 1: // BFME2
-                    ChangelogPage.Source = changelogBFME2;
-                    break;
-                case 2: // ROTWK
-                    ChangelogPage.Source = changelogROTWK;
-                    break;
-            }
+                previousSelectedIndex = tabs.SelectedIndex;
 
-            UpdateTitleImage();
-            InitializePlayButton();
+                switch (tabs.SelectedIndex)
+                {
+                    case 0: // BFME1
+                        ChangelogPage.Source = new("https://ravo92.github.io/changelogpage");
+                        break;
+                    case 1: // BFME2
+                        ChangelogPage.Source = new Uri(tempFileBFME2);
+                        break;
+                    case 2: // ROTWK
+                        ChangelogPage.Source = new Uri(tempFileROTWK);
+                        break;
+                }
+
+                UpdateTitleImage();
+                InitializePlayButton();
+            }
         }
 
         private void UpdateTitleImage()
@@ -196,9 +221,9 @@ namespace LauncherGUI.Pages.Primary
             double getSmallerWindowedResolutionY = FullscreenWindowedHelper.GetScreenResolutionY() - 100;
 
             if (CheckBoxWindowed.IsChecked == true)
-                processLaunchGame.StartInfo.Arguments = "-win -xres " + getSmallerWindowedResolutionX + " -yres " + getSmallerWindowedResolutionY;
+                processLaunchGame.StartInfo.Arguments = winParameter + winXResParameter + getSmallerWindowedResolutionX + winYResParameter + getSmallerWindowedResolutionY;
             else
-                processLaunchGame.StartInfo.Arguments = "-win";
+                processLaunchGame.StartInfo.Arguments = winParameter;
 
             switch (availableBFMEGames)
             {
@@ -252,31 +277,40 @@ namespace LauncherGUI.Pages.Primary
             processLaunchGame.Dispose();
         }
 
-        private void ChangelogPage_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F12)
-            {
-                ChangelogPage.CoreWebView2.OpenDevToolsWindow();
-                e.Handled = true;
-            }
-        }
-
         private async void InitializeWebView()
         {
-            await ChangelogPage.EnsureCoreWebView2Async();
+            string contentBFME2 = await LoadContentFromUriAsync(changelogBFME2);
+            string contentROTWK = await LoadContentFromUriAsync(changelogROTWK);
 
-            ChangelogPage.CoreWebView2.NavigationStarting += ChangelogPage_NavigationStarting;
-            ChangelogPage.CoreWebView2.NavigationCompleted += ChangelogPage_NavigationCompleted;
+            await WriteTextToFile(tempFileBFME2, contentBFME2, Encoding.UTF8, "transparent", "white");
+            await WriteTextToFile(tempFileROTWK, contentROTWK, Encoding.UTF8, "transparent", "white");
         }
 
-        private void ChangelogPage_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
+        private static async Task WriteTextToFile(string filePath, string content, Encoding encoding, string backgroundColor, string foregroundColor)
         {
-            LoadingText.Visibility = Visibility.Visible;
+            string htmlContent = $@"
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <style>
+                body {{
+                    background-color: {backgroundColor};
+                    color: {foregroundColor};
+                }}
+                </style>
+                </head>
+                <body>
+                <pre>{content}</pre>
+                </body>
+                </html>";
+
+            await File.WriteAllTextAsync(filePath, htmlContent, encoding);
         }
 
-        private void ChangelogPage_NavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
+        private static async Task<string> LoadContentFromUriAsync(Uri uri)
         {
-            LoadingText.Visibility = Visibility.Collapsed;
+            using HttpClient client = new();
+            return await client.GetStringAsync(uri);
         }
     }
 }

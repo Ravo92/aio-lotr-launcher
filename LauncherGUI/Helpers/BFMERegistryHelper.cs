@@ -81,9 +81,8 @@ namespace LauncherGUI.Helpers
                 using RegistryKey? registryPath = Registry.LocalMachine.OpenSubKey(key);
                 return registryPath?.GetValue(value)?.ToString() ?? ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // LogHelper.LoggerRegistryTools.Error(ex, "");
                 return ConstStringsHelper.C_REGISTRY_SERVICE_NOT_FOUND;
             }
         }

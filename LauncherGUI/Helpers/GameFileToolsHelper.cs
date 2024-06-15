@@ -3,20 +3,13 @@ using System.IO;
 using Downloader;
 using System.Net.Http;
 using System.Reflection;
-using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Helpers
 {
     class GameFileToolsHelper()
     {
-        private static readonly string startupPath = AppDomain.CurrentDomain.BaseDirectory;
-
-        private int _DownloadProgressChangedLimiter = 0;
-        private IProgress<ProgressHelper>? OverallProgress;
-
         internal static async Task<string> DownloadJSONFile(string url)
         {
             try
@@ -30,13 +23,13 @@ namespace LauncherGUI.Helpers
             {
                 return "noInternet";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "noInternet";
             }
         }
 
-        internal async Task DownloadFile(string pathWithFilenameDestination, string FileName, string DownloadURL)
+        internal static async Task DownloadFile(string pathWithFilenameDestination, string FileName, string DownloadURL)
         {
             try
             {
@@ -60,43 +53,12 @@ namespace LauncherGUI.Helpers
 
                 var downloader = new DownloadService(downloadOpt);
 
-                downloader.DownloadStarted += OnDownloadStarted;
-                downloader.DownloadFileCompleted += OnDownloadFileCompleted;
-
                 if (!File.Exists(fullPathWithFileName))
                 {
                     await downloader.DownloadFileTaskAsync(DownloadURL, fullPathWithFileName);
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        private void OnDownloadStarted(object? sender, DownloadStartedEventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        private void OnDownloadFileCompleted(object? sender, AsyncCompletedEventArgs e)
-        {
-            try
-            {
-                if (e.Error != null)
-                {
-                    OverallProgress!.Report(new ProgressHelper() { CurrentFileName = e.Error.Message });
-                }
-            }
-
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -123,7 +85,7 @@ namespace LauncherGUI.Helpers
             {
                 File.Create(Path.Combine(BFMERegistryHelper.GameAppDataFolderPath(assemblyName), ConstStringsHelper.C_OPTIONSINI_FILENAME), 0, FileOptions.WriteThrough).Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
