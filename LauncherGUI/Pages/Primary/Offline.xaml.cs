@@ -27,6 +27,13 @@ namespace LauncherGUI.Pages.Primary
         private readonly string tempFileBFME2 = Path.GetTempFileName() + ".html";
         private readonly string tempFileROTWK = Path.GetTempFileName() + ".html";
 
+        int xPosition = 30;
+        int yPosition = 30;
+        int xResolution = FullscreenWindowedHelper.GetScreenResolutionX() - 200;
+        int yResolution = FullscreenWindowedHelper.GetScreenResolutionY() - 200;
+
+        IntPtr gameHandle = IntPtr.Zero;
+
         private int previousSelectedIndex = -1;
 
         public Offline()
@@ -217,11 +224,8 @@ namespace LauncherGUI.Pages.Primary
         {
             Process processLaunchGame = new();
 
-            double getSmallerWindowedResolutionX = FullscreenWindowedHelper.GetScreenResolutionX() - 100;
-            double getSmallerWindowedResolutionY = FullscreenWindowedHelper.GetScreenResolutionY() - 100;
-
             if (CheckBoxWindowed.IsChecked == true)
-                processLaunchGame.StartInfo.Arguments = winParameter + winXResParameter + getSmallerWindowedResolutionX + winYResParameter + getSmallerWindowedResolutionY;
+                processLaunchGame.StartInfo.Arguments = winParameter + winXResParameter + xResolution + winYResParameter + yResolution;
             else
                 processLaunchGame.StartInfo.Arguments = winParameter;
 
@@ -245,35 +249,43 @@ namespace LauncherGUI.Pages.Primary
 
             processLaunchGame.Start();
 
+            switch (availableBFMEGames)
+            {
+                case AvailableBFMEGames.BFME1:
+                    processLaunchGame = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
+                    break;
+                case AvailableBFMEGames.BFME2:
+                    processLaunchGame = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
+                    break;
+                case AvailableBFMEGames.ROTWK:
+                    processLaunchGame = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
+                    break;
+                default:
+                    break;
+            }
+
+            CatchMousePointerHelper.InitializeGlobalHook();
+            gameHandle = processLaunchGame.MainWindowHandle;
+
             if (CheckBoxWindowed.IsChecked == false)
             {
-                int xPos = 0;
-                int yPos = 0;
-                int xRes = (int)FullscreenWindowedHelper.GetScreenResolutionX();
-                int yRes = (int)FullscreenWindowedHelper.GetScreenResolutionY();
+                xPosition = 0;
+                yPosition = 0;
+                xResolution = FullscreenWindowedHelper.GetScreenResolutionX();
+                yResolution = FullscreenWindowedHelper.GetScreenResolutionY();
 
-                Process process = new();
-
-                switch (availableBFMEGames)
-                {
-                    case AvailableBFMEGames.BFME1:
-                        process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
-                        break;
-                    case AvailableBFMEGames.BFME2:
-                        process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
-                        break;
-                    case AvailableBFMEGames.ROTWK:
-                        process = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
-                        break;
-                    default:
-                        break;
-                }
-
-                IntPtr handle = process.MainWindowHandle;
-                FullscreenWindowedHelper.GoBorderless(handle, xPos, yPos, xRes, yRes);
+                CatchMousePointerHelper.SetupBorderlessGameWindowWithMouseClipping(gameHandle, xPosition, yPosition, xResolution, yResolution, true);
+            }
+            else
+            {
+                CatchMousePointerHelper.SetupBorderlessGameWindowWithMouseClipping(gameHandle, xPosition, yPosition, xResolution, yResolution, false);
             }
 
             processLaunchGame.WaitForExit();
+
+            CatchMousePointerHelper.UnclipCursor();
+            CatchMousePointerHelper.TerminateGlobalHook();
+
             processLaunchGame.Dispose();
         }
 

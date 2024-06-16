@@ -44,14 +44,17 @@ namespace LauncherGUI.Helpers
         /// A helper method that calls other methods internally
         /// </summary>ram>
         /// <returns></returns>
-        internal static void GoBorderless(IntPtr handle, int xPos, int yPos, int xRes, int yRes)
+        internal static void GoBorderless(IntPtr handle, int xPos, int yPos, int xRes, int yRes, bool removeBorder = true)
         {
             if (WindowIsFullScreen(handle))
                 return;
-            RestoreWindow(handle);
-            SetBorderless(handle);
-            SetWindowPos(handle, handle, xPos, yPos, xRes, yRes, SWP_NOZORDER);
 
+            RestoreWindow(handle);
+
+            if (removeBorder)
+                SetBorderless(handle);
+
+            SetWindowPos(handle, handle, xPos, yPos, xRes, yRes, SWP_NOZORDER);
             SetForeground(handle);
         }
 
@@ -72,14 +75,14 @@ namespace LauncherGUI.Helpers
             return SetForegroundWindow(handle);
         }
 
-        internal static double GetScreenResolutionX()
+        internal static int GetScreenResolutionX()
         {
-            return SystemParameters.PrimaryScreenWidth;
+            return Convert.ToInt32(SystemParameters.PrimaryScreenWidth);
         }
 
-        internal static double GetScreenResolutionY()
+        internal static int GetScreenResolutionY()
         {
-            return SystemParameters.PrimaryScreenHeight;
+            return Convert.ToInt32(SystemParameters.PrimaryScreenHeight);
         }
 
         private static bool WindowIsFullScreen(IntPtr handle)

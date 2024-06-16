@@ -85,9 +85,6 @@
 		<Resource Include="Resources\Images\harddrive.png" />
 		<Resource Include="Resources\Images\MainIcon.png" />
 		<Resource Include="Resources\Images\moddb.png" />
-		<Resource Include="Resources\Images\patch222.png">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Resource>
 		<Resource Include="Resources\Images\patreon.png" />
 		<Resource Include="Resources\Images\RotWK.png" />
 		<Resource Include="Resources\Images\twitch.png" />
@@ -100,6 +97,7 @@
 	  <PackageReference Include="Downloader" Version="3.0.6" />
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2535.41" />
+	  <PackageReference Include="MouseKeyHook" Version="5.7.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="WindowsShortcutFactory" Version="1.2.0" />
 	</ItemGroup>

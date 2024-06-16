@@ -24,21 +24,7 @@
             <Grid Grid.Column="1">
                 <elements:SmoothScrollViewer>
                     <WrapPanel>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
-                        <elements:PatchTileButton/>
+                        <elements:LaunchButton/>
                     </WrapPanel>
                 </elements:SmoothScrollViewer>
             </Grid>
