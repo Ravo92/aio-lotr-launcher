@@ -8,39 +8,43 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <elements:HTabs Grid.Row="0" x:Name="tabs" SelectedIndexChanged="TabChanged">
-            <elements:HTabs.Tabs>
-                <BitmapImage UriSource="pack://application:,,,/Resources/Images/bfme1.png"/>
-                <BitmapImage UriSource="pack://application:,,,/Resources/Images/bfme2.png"/>
-                <BitmapImage UriSource="pack://application:,,,/Resources/Images/RotWK.png"/>
-            </elements:HTabs.Tabs>
-        </elements:HTabs>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <StackPanel Margin="0,20,0,0">
-                    <Image x:Name="titleImage"/>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Bottom">
-                    <elements:LaunchButton x:Name="launchButton" Margin="0,0,0,20" OnLaunchClicked="OnLaunchGameClicked" OnInstallClicked="OnInstallGameClicked"/>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Launch in windowed mode" Foreground="White" FontSize="13" FontWeight="Medium" VerticalAlignment="Center"/>
-                        <CheckBox x:Name="CheckBoxWindowed" Margin="15,0,0,0" HorizontalAlignment="Center" IsChecked="False" Checked="CheckBoxWindowed_Checked" Unchecked="CheckBoxWindowed_Unchecked"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <elements:HTabs Grid.Row="0" x:Name="tabs" SelectedIndexChanged="TabChanged">
+                <elements:HTabs.Tabs>
+                    <BitmapImage UriSource="pack://application:,,,/Resources/Images/bfme1.png"/>
+                    <BitmapImage UriSource="pack://application:,,,/Resources/Images/bfme2.png"/>
+                    <BitmapImage UriSource="pack://application:,,,/Resources/Images/RotWK.png"/>
+                </elements:HTabs.Tabs>
+            </elements:HTabs>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <StackPanel Margin="0,20,0,0">
+                        <Image x:Name="titleImage"/>
                     </StackPanel>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Column="2" Name="WebView2Grid">
-                <Wpf:WebView2 x:Name="ChangelogPage" DefaultBackgroundColor="Transparent"/>
+                    <StackPanel VerticalAlignment="Bottom">
+                        <elements:LaunchButton x:Name="launchButton" Margin="0,0,0,20" OnLaunchClicked="OnLaunchGameClicked" OnInstallClicked="OnInstallGameClicked"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{DynamicResource SettingsLaunchGameWindowed}" d:Text="Launch in windowed mode" Foreground="White" FontSize="13" FontWeight="Medium" VerticalAlignment="Center"/>
+                            <CheckBox x:Name="CheckBoxWindowed" Margin="15,0,0,0" HorizontalAlignment="Center" IsChecked="False" Checked="CheckBoxWindowed_Checked" Unchecked="CheckBoxWindowed_Unchecked"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="2" Name="WebView2Grid">
+                    <Wpf:WebView2 x:Name="ChangelogPage" DefaultBackgroundColor="Transparent" />
+                </Grid>
             </Grid>
         </Grid>
+        <Border x:Name="Overlay" Background="Black" Opacity="0.5" Visibility="Collapsed" Panel.ZIndex="1"/>
+        <elements:InstallDialog x:Name="ModalDialog" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

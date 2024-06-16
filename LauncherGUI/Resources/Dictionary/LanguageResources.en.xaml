@@ -9,11 +9,21 @@
     <system:String x:Key="MainLauncherWorkShop">WORKSHOP</system:String>
     <system:String x:Key="MainLauncherGuides">GUIDES</system:String>
     <system:String x:Key="MainLauncherPlay">PLAY</system:String>
+    <system:String x:Key="MainLauncherInstall">INSTALL</system:String>
+    <system:String x:Key="MainLauncherLoading">LOADING</system:String>
 
+    <system:String x:Key="GameTitleLabelInstall">Install</system:String>
     <system:String x:Key="SettingsLauncherClose">CLOSE</system:String>
+
+    <system:String x:Key="LauncherButtonAccept">ACCEPT</system:String>
+    <system:String x:Key="LauncherButtonCancel">CANCEL</system:String>
+
+    <system:String x:Key="GameInstallDialogLanguage">Language</system:String>
+    <system:String x:Key="GameInstallDialogLibrary">Library</system:String>
 
     <system:String x:Key="SettingsLauncherHeader">Launcher Settings</system:String>
     <system:String x:Key="SettingsLauncherGeneral">General</system:String>
+    <system:String x:Key="SettingsLaunchGameWindowed">Launch game in windowed mode</system:String>
 
     <system:String x:Key="SettingsBFMEGeneral">General</system:String>
     <system:String x:Key="SettingsBFMEVideo">Video &amp; Resolution</system:String>

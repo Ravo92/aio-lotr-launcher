@@ -32,6 +32,8 @@ namespace LauncherGUI.Pages.Primary
         int xResolution = FullscreenWindowedHelper.GetScreenResolutionX() - 200;
         int yResolution = FullscreenWindowedHelper.GetScreenResolutionY() - 200;
 
+        bool installationCanceled = false;
+
         IntPtr gameHandle = IntPtr.Zero;
 
         private int previousSelectedIndex = -1;
@@ -41,6 +43,9 @@ namespace LauncherGUI.Pages.Primary
             InitializeComponent();
             InitializeWebView();
             Properties.Settings.Default.SettingsSaving += LauncherSettingsChanged;
+
+            ModalDialog.AcceptClicked += ModalDialog_AcceptClicked;
+            ModalDialog.CancelClicked += ModalDialog_CancelClicked;
         }
 
         private void OnLaunchGameClicked(object sender, EventArgs e)
@@ -63,39 +68,9 @@ namespace LauncherGUI.Pages.Primary
             LauncherConfigHelper.SetWindowVisible();
         }
 
-        private async void OnInstallGameClicked(object sender, EventArgs e)
+        private void OnInstallGameClicked(object sender, EventArgs e)
         {
-            GameInstallerHelper installerHelper;
-
-            installerHelper = new GameInstallerHelper();
-            installerHelper.ProgressChanged += InstallerHelper_ProgressChanged;
-            installerHelper.StatusChanged += InstallerHelper_StatusChanged;
-
-            launchButton.ButtonState = LaunchButtonState.Loading;
-
-            try
-            {
-                if (tabs.SelectedIndex == 0) // BFME1
-                {
-                    await installerHelper.InstallGame(AvailableBFMEGames.BFME1);
-                }
-                else if (tabs.SelectedIndex == 1) // BFME2
-                {
-                    await installerHelper.InstallGame(AvailableBFMEGames.BFME2);
-                }
-                else if (tabs.SelectedIndex == 2) // ROTWK
-                {
-                    await installerHelper.InstallGame(AvailableBFMEGames.ROTWK);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                launchButton.ButtonState = LaunchButtonState.Launch;
-            }
+            ShowModalDialog();
         }
 
         private void InstallerHelper_ProgressChanged(object? sender, double progress)
@@ -323,6 +298,81 @@ namespace LauncherGUI.Pages.Primary
         {
             using HttpClient client = new();
             return await client.GetStringAsync(uri);
+        }
+
+        private void ShowModalDialog()
+        {
+            Overlay.Visibility = Visibility.Visible;
+            ModalDialog.Visibility = Visibility.Visible;
+            ChangelogPage.Visibility = Visibility.Collapsed;
+
+            string installWord = Application.Current.FindResource("GameTitleLabelInstall").ToString()!;
+
+            switch (tabs.SelectedIndex)
+            {
+                case 0:
+                    ModalDialog.TextInstallTitle = string.Concat(installWord, " ", Application.Current.FindResource("SettingsBFME1Header").ToString()!);
+                    break;
+                case 1:
+                    ModalDialog.TextInstallTitle = string.Concat(installWord, " ", Application.Current.FindResource("SettingsBFME2Header").ToString()!);
+                    break;
+                case 2:
+                    ModalDialog.TextInstallTitle = string.Concat(installWord, " ", Application.Current.FindResource("SettingsRotWKHeader").ToString()!);
+                    break;
+            }
+        }
+
+        private void HideModalDialog()
+        {
+            Overlay.Visibility = Visibility.Collapsed;
+            ModalDialog.Visibility = Visibility.Collapsed;
+            ChangelogPage.Visibility = Visibility.Visible;
+        }
+
+        private async void ModalDialog_AcceptClicked(object sender, EventArgs e)
+        {
+            HideModalDialog();
+            installationCanceled = false;
+
+            launchButton.ButtonState = LaunchButtonState.Loading;
+
+            GameInstallerHelper installerHelper;
+
+            installerHelper = new GameInstallerHelper();
+            installerHelper.ProgressChanged += InstallerHelper_ProgressChanged;
+            installerHelper.StatusChanged += InstallerHelper_StatusChanged;
+
+            if (!installationCanceled)
+                try
+                {
+                    if (tabs.SelectedIndex == 0) // BFME1
+                    {
+                        await installerHelper.InstallGame(AvailableBFMEGames.BFME1);
+                    }
+                    else if (tabs.SelectedIndex == 1) // BFME2
+                    {
+                        await installerHelper.InstallGame(AvailableBFMEGames.BFME2);
+                    }
+                    else if (tabs.SelectedIndex == 2) // ROTWK
+                    {
+                        await installerHelper.InstallGame(AvailableBFMEGames.ROTWK);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    launchButton.ButtonState = LaunchButtonState.Launch;
+                }
+        }
+
+        private void ModalDialog_CancelClicked(object sender, EventArgs e)
+        {
+            HideModalDialog();
+            installationCanceled = true;
+            launchButton.ButtonState = LaunchButtonState.Install;
         }
     }
 }

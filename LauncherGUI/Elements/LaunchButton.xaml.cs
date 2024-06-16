@@ -32,20 +32,20 @@ namespace LauncherGUI.Elements
 
                 if(value == LaunchButtonState.Launch)
                 {
-                    button.Content = "PLAY";
+                    button.Content = Application.Current.FindResource("MainLauncherPlay").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                 }
                 else if (value == LaunchButtonState.Install)
                 {
-                    button.Content = "INSTALL";
+                    button.Content = Application.Current.FindResource("MainLauncherInstall").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                 }
                 else if (value == LaunchButtonState.Loading)
                 {
                     button.Content = "";
-                    LoadStatus = "Loading";
+                    LoadStatus = Application.Current.FindResource("MainLauncherLoading").ToString()!;
                     button.Opacity = 0.4d;
                     button.IsHitTestVisible = false;
                     LoadProgress = 0;

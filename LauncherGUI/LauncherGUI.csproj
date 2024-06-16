@@ -38,6 +38,7 @@
 	<ItemGroup>
 		<None Remove="MainIcon.ico" />
 		<None Remove="Resources\Images\bfme1.png" />
+		<None Remove="Resources\Images\BFME1LanguageSupport.png" />
 		<None Remove="Resources\Images\de_bfme1_title.png" />
 		<None Remove="Resources\Images\de_bfme2_title.png" />
 		<None Remove="Resources\Images\de_RotWK_title.png" />
@@ -65,6 +66,7 @@
 		<Resource Include="Resources\Images\bfme1.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Resources\Images\BFME1LanguageSupport.png" />
 		<Resource Include="Resources\Images\de_bfme1_title.png" />
 		<Resource Include="Resources\Images\de_bfme2_title.png" />
 		<Resource Include="Resources\Images\de_RotWK_title.png" />

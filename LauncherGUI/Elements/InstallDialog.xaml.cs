@@ -9,26 +9,39 @@ namespace LauncherGUI.Elements
     /// </summary>
     public partial class InstallDialog : UserControl
     {
+        public event EventHandler? AcceptClicked;
+        public event EventHandler? CancelClicked;
+
+        public string TextInstallTitle
+        {
+            get => TextTitleInstall.Text;
+            set => TextTitleInstall.Text = value;
+        }
+
         public InstallDialog()
         {
             InitializeComponent();
+            ComboBoxGameLanguage.SelectedIndex = 0;
         }
 
-        public string PatchName
+        private void ComboBoxLibrarySelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            get => patchName.Text;
-            set => patchName.Text = value;
+
         }
 
-        public string PatchVersion
+        private void ComboBoxGameLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            get => patchVersion.Text;
-            set => patchVersion.Text = value;
+
         }
 
         private void ButtonAcceptClicked(object sender, RoutedEventArgs e)
         {
+            AcceptClicked?.Invoke(this, EventArgs.Empty);
+        }
 
+        private void ButtonCancelClicked(object sender, RoutedEventArgs e)
+        {
+            CancelClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }
