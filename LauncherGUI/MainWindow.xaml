@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:elements="clr-namespace:LauncherGUI.Elements"
         mc:Ignorable="d"
         Title="{DynamicResource MainLauncherTitle}" MinWidth="1024" MinHeight="786" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Closing="LauncherMainWindow_Closing">
     <Window.Background>
@@ -18,7 +19,7 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-        <Grid Margin="20">
+        <Grid Margin="20" x:Name="outerContent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="20"/>
@@ -57,5 +58,6 @@
             <Border Grid.Row="2" x:Name="content"/>
         </Grid>
         <Border x:Name="fullContent" Visibility="Collapsed"/>
+        <elements:PopupVisualizer d:Visibility="Collapsed"/>
     </Grid>
 </Window>
