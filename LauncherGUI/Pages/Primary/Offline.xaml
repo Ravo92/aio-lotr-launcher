@@ -40,11 +40,10 @@
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="2" Name="WebView2Grid">
-                    <Wpf:WebView2 x:Name="ChangelogPage" DefaultBackgroundColor="Transparent" />
+                    <Wpf:WebView2 x:Name="ChangelogPage" DefaultBackgroundColor="Transparent"/>
+                    <Image x:Name="ChangelogPageImage" Stretch="Fill"/>
                 </Grid>
             </Grid>
         </Grid>
-        <Border x:Name="Overlay" Background="Black" Opacity="0.5" Visibility="Collapsed" Panel.ZIndex="1"/>
-        <elements:InstallDialog x:Name="ModalDialog" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>
