@@ -8,6 +8,8 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Online : UserControl
     {
+        public static Online Instance = new Online();
+
         private bool FirstLoad = true;
 
         public Online()

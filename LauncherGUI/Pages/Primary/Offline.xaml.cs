@@ -11,6 +11,8 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using static LauncherGUI.Helpers.GameSelectorHelper;
 using LauncherGUI.Popups;
+using System.Windows.Media;
+using System.Linq;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -19,6 +21,8 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Offline : UserControl
     {
+        public static Offline Instance = new Offline();
+
         private const string winParameter = "-win";
         private const string winXResParameter = " -xres ";
         private const string winYResParameter = " -yres ";
@@ -46,29 +50,36 @@ namespace LauncherGUI.Pages.Primary
             Properties.Settings.Default.SettingsSaving += LauncherSettingsChanged;
         }
 
-        private void SetChangelogVisibility(bool isVisible)
+        private void ShowLibrary()
         {
-            if (isVisible)
+            foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
             {
-                ChangelogPage.Visibility = Visibility.Visible;
-                ChangelogPageImage.Visibility = Visibility.Hidden;
+                if (tab == libraryTab)
+                    tab.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1EFFFFFF"));
+                else
+                    tab.Background = Brushes.Transparent;
             }
-            else
-            {
-                Dispatcher.Invoke(async () =>
-                {
-                    // Cursed workaround for WebView2 airspace issue
-                    MemoryStream ms = new MemoryStream();
-                    await ChangelogPage.CoreWebView2.CapturePreviewAsync(Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Png, ms);
-                    BitmapImage bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.StreamSource = ms;
-                    bi.EndInit();
-                    ChangelogPageImage.Source = bi;
+        }
 
-                    ChangelogPageImage.Visibility = Visibility.Visible;
-                    ChangelogPage.Visibility = Visibility.Hidden;
-                });
+        private void ShowWorkshop()
+        {
+            foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
+            {
+                if (tab == workshopTab)
+                    tab.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1EFFFFFF"));
+                else
+                    tab.Background = Brushes.Transparent;
+            }
+        }
+
+        private void ShowNews()
+        {
+            foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
+            {
+                if (tab == newsTab)
+                    tab.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1EFFFFFF"));
+                else
+                    tab.Background = Brushes.Transparent;
             }
         }
 
@@ -94,8 +105,6 @@ namespace LauncherGUI.Pages.Primary
 
         private void OnInstallGameClicked(object sender, EventArgs e)
         {
-            SetChangelogVisibility(false);
-
             PopupVisualizer.ShowPopup(new InstallGameDialog(),
             OnPopupSubmited: async (submitedData) =>
             {
@@ -134,10 +143,6 @@ namespace LauncherGUI.Pages.Primary
                     {
                         launchButton.ButtonState = LaunchButtonState.Launch;
                     }
-            },
-            OnPopupClosed: () =>
-            {
-                SetChangelogVisibility(true);
             });
         }
 
@@ -147,18 +152,18 @@ namespace LauncherGUI.Pages.Primary
             {
                 previousSelectedIndex = tabs.SelectedIndex;
 
-                switch (tabs.SelectedIndex)
-                {
-                    case 0: // BFME1
-                        ChangelogPage.Source = new("https://ravo92.github.io/changelogpage");
-                        break;
-                    case 1: // BFME2
-                        ChangelogPage.Source = new Uri(tempFileBFME2);
-                        break;
-                    case 2: // ROTWK
-                        ChangelogPage.Source = new Uri(tempFileROTWK);
-                        break;
-                }
+                //switch (tabs.SelectedIndex)
+                //{
+                //    case 0: // BFME1
+                //        ChangelogPage.Source = new("https://ravo92.github.io/changelogpage");
+                //        break;
+                //    case 1: // BFME2
+                //        ChangelogPage.Source = new Uri(tempFileBFME2);
+                //        break;
+                //    case 2: // ROTWK
+                //        ChangelogPage.Source = new Uri(tempFileROTWK);
+                //        break;
+                //}
 
                 UpdateTitleImage();
                 InitializePlayButton();
@@ -251,7 +256,7 @@ namespace LauncherGUI.Pages.Primary
         {
             Process processLaunchGame = new();
 
-            if (CheckBoxWindowed.IsChecked == true)
+            if (ToggleLaunchWindowed.IsToggled)
                 processLaunchGame.StartInfo.Arguments = winParameter + winXResParameter + xResolution + winYResParameter + yResolution;
             else
                 processLaunchGame.StartInfo.Arguments = winParameter;
@@ -294,7 +299,7 @@ namespace LauncherGUI.Pages.Primary
             CatchMousePointerHelper.InitializeGlobalHook();
             gameHandle = processLaunchGame.MainWindowHandle;
 
-            if (CheckBoxWindowed.IsChecked == false)
+            if (ToggleLaunchWindowed.IsToggled)
             {
                 xPosition = 0;
                 yPosition = 0;
@@ -351,5 +356,11 @@ namespace LauncherGUI.Pages.Primary
             using HttpClient client = new();
             return await client.GetStringAsync(uri);
         }
+
+        private void OnLibraryTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowLibrary();
+
+        private void OnWorkshopTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowWorkshop();
+
+        private void OnNewsTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowNews();
     }
 }

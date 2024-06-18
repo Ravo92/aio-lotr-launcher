@@ -39,6 +39,7 @@
 		<None Remove="MainIcon.ico" />
 		<None Remove="Resources\Images\bfme1.png" />
 		<None Remove="Resources\Images\BFME1LanguageSupport.png" />
+		<None Remove="Resources\Images\BGMap_acrylic.png" />
 		<None Remove="Resources\Images\de_bfme1_title.png" />
 		<None Remove="Resources\Images\de_bfme2_title.png" />
 		<None Remove="Resources\Images\de_RotWK_title.png" />
@@ -67,6 +68,7 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Resources\Images\BFME1LanguageSupport.png" />
+		<Resource Include="Resources\Images\BGMap_acrylic.png" />
 		<Resource Include="Resources\Images\de_bfme1_title.png" />
 		<Resource Include="Resources\Images\de_bfme2_title.png" />
 		<Resource Include="Resources\Images\de_RotWK_title.png" />
@@ -95,7 +97,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="BfmeOnlineKit" Version="1.6.3" />
+	  <PackageReference Include="BfmeOnlineKit" Version="1.6.4" />
 	  <PackageReference Include="Downloader" Version="3.0.6" />
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2535.41" />
@@ -122,6 +124,9 @@
 		</Compile>
 		<Compile Update="Pages\Settings\RotWK\ROTWKSettings_Repair.xaml.cs">
 			<SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Popups\MessagePopup.xaml.cs">
+		  <SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Properties\Resources.Designer.cs">
 		  <DesignTime>True</DesignTime>

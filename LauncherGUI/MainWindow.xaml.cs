@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using LauncherGUI.Pages.Primary;
 using System.Collections.Specialized;
 using System.Security.Principal;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Effects;
 
 namespace LauncherGUI
 {
@@ -20,6 +22,9 @@ namespace LauncherGUI
     {
         public static MainWindow? Instance { get; private set; }
         public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+
+        private BitmapSource AcrylicBitmap = new BitmapImage(new Uri("pack://application:,,,/LauncherGUI;component/Resources/Images/BGMap_acrylic.png"));
+        public TransformedBitmap AcrylicBackground => new TransformedBitmap(AcrylicBitmap, new ScaleTransform(windowGrid.ActualWidth / AcrylicBitmap.PixelWidth, windowGrid.ActualHeight / AcrylicBitmap.PixelHeight));
 
         public MainWindow(string argument)
         {
@@ -88,11 +93,16 @@ namespace LauncherGUI
 
             Instance.tabs.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
             Instance.icons.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
+
+            if (newContent is Settings)
+                Instance.background.Effect = new BlurEffect() { Radius = 20 };
+            else
+                Instance.background.Effect = null;
         }
 
         public static void ShowOffline()
         {
-            SetContent(new Offline());
+            SetContent(Offline.Instance);
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
@@ -110,7 +120,7 @@ namespace LauncherGUI
         {
             if (IsElevated)
             {
-                SetContent(new Online());
+                SetContent(Online.Instance);
 
                 foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
                 {
@@ -139,25 +149,9 @@ namespace LauncherGUI
             }
         }
 
-        public static void ShowWorkShop()
-        {
-            SetContent(new Workshop());
-
-            foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
-            {
-                if (tab == Instance.workshopTab)
-                    tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
-                else
-                {
-                    tab.Foreground = Brushes.White;
-                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
-                }
-            }
-        }
-
         public static void ShowGuides()
         {
-            SetContent(new Guides());
+            SetContent(Guides.Instance);
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
@@ -176,8 +170,6 @@ namespace LauncherGUI
         private void OnOfflineTabClicked(object sender, MouseButtonEventArgs e) => ShowOffline();
 
         private void OnOnlineTabClicked(object sender, MouseButtonEventArgs e) => ShowOnline();
-
-        private void OnWorkShopItemsTabClicked(object sender, MouseButtonEventArgs e) => ShowWorkShop();
 
         private void OnGuidesTabClicked(object sender, MouseButtonEventArgs e) => ShowGuides();
 
@@ -273,5 +265,7 @@ namespace LauncherGUI
 
             TrayIcon.ContextMenu = newContextMenu;
         }
+
+        private void OnLoad(object sender, RoutedEventArgs e) => CheckSize();
     }
 }

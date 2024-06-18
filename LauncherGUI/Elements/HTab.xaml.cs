@@ -45,10 +45,7 @@ namespace LauncherGUI.Elements
             }
         }
 
-        private void OnClicked(object sender, MouseButtonEventArgs e)
-        {
-            Owner.SelectedIndex = Owner.tabs.Children.IndexOf(this);
-        }
+        private void OnClicked(object sender, MouseButtonEventArgs e) => Owner.SelectedIndex = Owner.tabs.Children.IndexOf(this);
 
         private void OnMouseEntered(object sender, MouseEventArgs e)
         {

@@ -5,11 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LauncherGUI.Elements"
              mc:Ignorable="d" 
-             Width="64" Height="64" Background="Transparent" Cursor="Hand" MouseDown="OnClicked" MouseEnter="OnMouseEntered" MouseLeave="OnMouseLeft">
+             Width="54" Height="54" Background="Transparent" Cursor="Hand" MouseDown="OnClicked" MouseEnter="OnMouseEntered" MouseLeave="OnMouseLeft">
     <Grid>
+        <Border x:Name="background" Background="#19FFFFFF" Opacity="0" CornerRadius="10"/>
+        <Border x:Name="hoverBackground" Background="#0CFFFFFF" Opacity="0" CornerRadius="10"/>
+        <Border x:Name="indicator" Background="#00000000" Opacity="0" CornerRadius="10">
+            <Grid>
+                <Border VerticalAlignment="Bottom" Margin="0,0,0,-4" HorizontalAlignment="Center" Width="38" CornerRadius="1" Height="2" Background="#028BDB"/>
+            </Grid>
+        </Border>
         <Image x:Name="icon" Margin="13"/>
-        <Border x:Name="indicator" Height="2" VerticalAlignment="Bottom" Background="#1CB3F1" Opacity="0"/>
-        <Border x:Name="background" Background="#19FFFFFF" Opacity="0"/>
-        <Border x:Name="hoverBackground" Background="#0CFFFFFF" Opacity="0"/>
     </Grid>
 </UserControl>

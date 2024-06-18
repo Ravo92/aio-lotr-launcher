@@ -9,12 +9,12 @@
     <Grid x:Name="root" Opacity="0" d:Opacity="1" IsHitTestVisible="False">
         <Grid x:Name="background" Background="#CC0A0A0C" MouseUp="OnMouseUp"/>
         <Grid x:Name="popupBody">
-            <Border CornerRadius="4" Margin="-19.8" Background="Black">
+            <Border CornerRadius="6" Margin="-19.8" Background="Black">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="50" Opacity="0.5" Color="Black" ShadowDepth="8" Direction="270"/>
                 </Border.Effect>
             </Border>
-            <Border CornerRadius="4" Margin="-20">
+            <Border CornerRadius="6" Margin="-20">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
                         <GradientStop Color="#FF232831" Offset="1"/>

@@ -23,7 +23,7 @@
 
     <system:String x:Key="SettingsLauncherHeader">Launcher Settings</system:String>
     <system:String x:Key="SettingsLauncherGeneral">General</system:String>
-    <system:String x:Key="SettingsLaunchGameWindowed">Launch game in windowed mode</system:String>
+    <system:String x:Key="SettingsLaunchGameWindowed">Windowed mode</system:String>
 
     <system:String x:Key="SettingsBFMEGeneral">General</system:String>
     <system:String x:Key="SettingsBFMEVideo">Video &amp; Resolution</system:String>

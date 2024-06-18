@@ -6,11 +6,12 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:elements="clr-namespace:LauncherGUI.Elements"
         mc:Ignorable="d"
-        Title="{DynamicResource MainLauncherTitle}" MinWidth="1024" MinHeight="786" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Closing="LauncherMainWindow_Closing">
-    <Window.Background>
-        <ImageBrush ImageSource="pack://application:,,,/Resources/Images/BGMap.png"/>
-    </Window.Background>
+        Title="{DynamicResource MainLauncherTitle}" MinWidth="1024" MinHeight="786" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Loaded="OnLoad" Closing="LauncherMainWindow_Closing">
     <Grid x:Name="windowGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Resources/Images/BGMap.png"/>
+        </Grid.Background>
+        <Image x:Name="background" Source="pack://application:,,,/Resources/Images/BGMap.png" Stretch="Fill"/>
         <tb:TaskbarIcon x:Name="TrayIcon" IconSource="pack://application:,,,/MainIcon.ico" ToolTipText="Patch 2.22 Launcher" MenuActivation="RightClick" TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu Background="White" x:Name="TrayIconContextMenu">
@@ -26,11 +27,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <StackPanel x:Name="tabs" Orientation="Horizontal">
+                <StackPanel x:Name="tabs" Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock x:Name="offlineTab" Style="{DynamicResource TextBlockButton}" d:Text="OFFLINE" Text="{DynamicResource MainLauncherLibrary}" FontSize="16" FontWeight="Bold" Margin="0,0,20,0" Background="Transparent" Cursor="Hand" MouseDown="OnOfflineTabClicked"/>
-                    <Image x:Name="IconUAC" Source="pack://application:,,,/Resources/Images/uac.png" Width="20" Height="20" Margin="0,0,2,8" RenderOptions.BitmapScalingMode="HighQuality" />
+                    <Image x:Name="IconUAC" Source="pack://application:,,,/Resources/Images/uac.png" Width="20" Height="20" Margin="0,0,2,0" RenderOptions.BitmapScalingMode="HighQuality" />
                     <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" d:Text="ONLINE" Text="{DynamicResource MainLauncherOnline}" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
-                    <TextBlock x:Name="workshopTab" Style="{DynamicResource TextBlockButton}" d:Text="WORKSHOP" Text="{DynamicResource MainLauncherWorkShop}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Visibility="Collapsed" Background="Transparent" Cursor="Hand" MouseDown="OnWorkShopItemsTabClicked"/>
                     <TextBlock x:Name="guidesTab" Style="{DynamicResource TextBlockButton}" d:Text="GUIDES" Text="{DynamicResource MainLauncherGuides}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnGuidesTabClicked"/>
                 </StackPanel>
                 <StackPanel x:Name="icons" Orientation="Horizontal" HorizontalAlignment="Right">

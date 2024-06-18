@@ -7,9 +7,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/AccentButtonStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/LaunchButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ListButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ScrollViewerStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/TextBlockButtonStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/BorderButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/CheckBoxStyle.xaml"/>
