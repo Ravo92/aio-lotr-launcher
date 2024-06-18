@@ -92,7 +92,7 @@ namespace LauncherGUI
 
         public static void ShowOffline()
         {
-            SetContent(new Offline());
+            SetContent(Offline.Instance);
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
@@ -110,7 +110,7 @@ namespace LauncherGUI
         {
             if (IsElevated)
             {
-                SetContent(new Online());
+                SetContent(Online.Instance);
 
                 foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
                 {
@@ -141,7 +141,7 @@ namespace LauncherGUI
 
         public static void ShowWorkShop()
         {
-            SetContent(new Workshop());
+            SetContent(Workshop.Instance);
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {
@@ -157,7 +157,7 @@ namespace LauncherGUI
 
         public static void ShowGuides()
         {
-            SetContent(new Guides());
+            SetContent(Guides.Instance);
 
             foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
             {

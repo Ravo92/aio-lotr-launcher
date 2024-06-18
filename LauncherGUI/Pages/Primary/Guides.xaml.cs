@@ -7,6 +7,8 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Guides : UserControl
     {
+        public static Guides Instance = new Guides();
+
         public Guides()
         {
             InitializeComponent();

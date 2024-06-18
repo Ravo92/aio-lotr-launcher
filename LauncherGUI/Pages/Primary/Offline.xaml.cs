@@ -19,6 +19,8 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Offline : UserControl
     {
+        public static Offline Instance = new Offline();
+
         private const string winParameter = "-win";
         private const string winXResParameter = " -xres ";
         private const string winYResParameter = " -yres ";

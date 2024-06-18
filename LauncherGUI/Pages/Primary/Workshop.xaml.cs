@@ -8,6 +8,8 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Workshop : UserControl
     {
+        public static Workshop Instance = new Workshop();
+
         public Workshop()
         {
             InitializeComponent();

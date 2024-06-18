@@ -6,7 +6,7 @@
              xmlns:onlineKit="clr-namespace:BFMECompetetiveArena_OnlineKit;assembly=BfmeOnlineKit"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500" Loaded="OnLoaded">
-    <Grid Margin="-20,0,-20,-20">
-        <onlineKit:OnlineMenu x:Name="arena" AccessToken="cb1018ab-d27b-4870-98ac-3f5df1771e7b"/>
+    <Grid>
+        <onlineKit:OnlineMenu x:Name="arena" AccessToken="cb1018ab-d27b-4870-98ac-3f5df1771e7b" CornerRadius="3"/>
     </Grid>
 </UserControl>
