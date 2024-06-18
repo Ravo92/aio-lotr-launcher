@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:LauncherGUI.Elements"
              mc:Ignorable="d" 
              d:DesignWidth="800" Height="64" Loaded="OnLoaded">
-    <Border Background="#0CFFFFFF" CornerRadius="3" x:Name="border">
-        <StackPanel x:Name="tabs" Orientation="Horizontal"/>
+    <Border CornerRadius="15" x:Name="border">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
+        </Border.Effect>
         <Border.OpacityMask>
             <VisualBrush>
                 <VisualBrush.Visual>
@@ -15,5 +17,9 @@
                 </VisualBrush.Visual>
             </VisualBrush>
         </Border.OpacityMask>
+        <Grid>
+            <local:Acrylic/>
+            <StackPanel x:Name="tabs" Orientation="Horizontal" Margin="5"/>
+        </Grid>
     </Border>
 </UserControl>

@@ -4,9 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:onlineKit="clr-namespace:BFMECompetetiveArena_OnlineKit;assembly=BfmeOnlineKit"
+             xmlns:elements="clr-namespace:LauncherGUI.Elements"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="1500" Loaded="OnLoaded">
     <Grid>
-        <onlineKit:OnlineMenu x:Name="arena" AccessToken="cb1018ab-d27b-4870-98ac-3f5df1771e7b" CornerRadius="3"/>
+        <Border Grid.Row="0" CornerRadius="15">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
+            </Border.Effect>
+            <Border.OpacityMask>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Border.OpacityMask>
+            <Grid>
+                <elements:Acrylic/>
+                <onlineKit:OnlineMenu x:Name="arena" AccessToken="cb1018ab-d27b-4870-98ac-3f5df1771e7b" CornerRadius="11" Margin="5"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

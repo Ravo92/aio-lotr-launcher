@@ -11,7 +11,8 @@
             <ColumnDefinition Width="*" MaxWidth="500" MinWidth="280"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="#0CFFFFFF">
+        <Grid Grid.Column="0">
+            <elements:Acrylic/>
             <elements:SmoothScrollViewer>
                 <StackPanel HorizontalAlignment="Right" Margin="0,60,20,0" Width="200" Name="ButtonStackPanel">
                     <TextBlock x:Name="SettingsMenuLauncherSettingsHeaderLabel" Text="{DynamicResource SettingsLauncherHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
@@ -35,7 +36,7 @@
                 </StackPanel>
             </elements:SmoothScrollViewer>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Background="#5B121212">
             <elements:SmoothScrollViewer>
                 <Border x:Name="PanelSettings" Margin="20,60,120,0"/>
             </elements:SmoothScrollViewer>
