@@ -28,56 +28,34 @@ namespace LauncherGUI.Elements
             InitializeComponent();
         }
 
-        public Int32Rect GetAbsolutePlacement()
-        {
-            Point pos = this.TransformToVisual(MainWindow.Instance!.windowGrid).Transform(new Point(0, 0));
-            return new Int32Rect((int)pos.X, (int)pos.Y, (int)this.ActualWidth, (int)this.ActualHeight);
-        }
-
         private void Update()
         {
-            try
-            {
-                Int32Rect rec = GetAbsolutePlacement();
-                if (rec.Width > 0 && rec.Height > 0 && rec.X + rec.Width <= MainWindow.Instance!.AcrylicBackground.PixelWidth && rec.Y + rec.Height <= MainWindow.Instance!.AcrylicBackground.PixelHeight)
-                    image.Source = new CroppedBitmap(MainWindow.Instance.AcrylicBackground, rec);
-            }
-            catch { }
+            if (!IsLoaded || this.Background != null || this.FindCommonVisualAncestor(MainWindow.Instance!.windowGrid) == null)
+                return;
+
+            Point pos = this.TransformToVisual(MainWindow.Instance!.windowGrid).Transform(new Point(0, 0));
+            image.Margin = new Thickness(-pos.X, -pos.Y, 0, 0);
+            image.Width = MainWindow.Instance!.windowGrid.ActualWidth;
+            image.Height = MainWindow.Instance!.windowGrid.ActualHeight;
         }
 
-        private bool IgnoreNextUpdate = false;
         private void OnLayoutUpdated(object sender, EventArgs e)
         {
-            if (DesignerProperties.GetIsInDesignMode(this) || !IsLoaded)
-                return;
-
-            if (IgnoreNextUpdate)
-            {
-                IgnoreNextUpdate = false;
-                return;
-            }
-
-            IgnoreNextUpdate = true;
-
             Update();
         }
 
         private void OnVisibilityChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DesignerProperties.GetIsInDesignMode(this) || !IsLoaded)
-                return;
-
             if (e.NewValue == (object)true)
                 Update();
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            if (!DesignerProperties.GetIsInDesignMode(this) && this.Background != null)
-                this.Background = null;
+            if (DesignerProperties.GetIsInDesignMode(this))
+                this.Background = Brushes.Gray;
 
-            if (!DesignerProperties.GetIsInDesignMode(this))
-                Update();
+            Update();
         }
     }
 }

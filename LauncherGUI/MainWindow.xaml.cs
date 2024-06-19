@@ -23,9 +23,6 @@ namespace LauncherGUI
         public static MainWindow? Instance { get; private set; }
         public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
-        private BitmapSource AcrylicBitmap = new BitmapImage(new Uri("pack://application:,,,/LauncherGUI;component/Resources/Images/BGMap_acrylic.png"));
-        public TransformedBitmap AcrylicBackground => new TransformedBitmap(AcrylicBitmap, new ScaleTransform(windowGrid.ActualWidth / AcrylicBitmap.PixelWidth, windowGrid.ActualHeight / AcrylicBitmap.PixelHeight));
-
         public MainWindow(string argument)
         {
             InitializeComponent();
