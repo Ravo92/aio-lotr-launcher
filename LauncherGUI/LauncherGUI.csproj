@@ -49,12 +49,12 @@
 		<None Remove="Resources\Images\en_bfme2_title.png" />
 		<None Remove="Resources\Images\harddrive.png" />
 		<None Remove="Resources\Images\MainIcon.png" />
+		<None Remove="Resources\Images\patch222.png" />
 		<None Remove="Resources\Images\RotWK.png" />
 		<None Remove="Resources\Images\en_RotWK_title.png" />
 		<None Remove="Resources\Images\BGMap.png" />
 		<None Remove="Resources\Images\en_RotWK_title.png" />
 		<None Remove="Resources\Images\moddb.png" />
-		<None Remove="Resources\Images\patch222.png" />
 		<None Remove="Resources\Images\patreon.png" />
 		<None Remove="Resources\Images\RotWK.png" />
 		<None Remove="Resources\Images\twitch.png" />
@@ -89,6 +89,7 @@
 		<Resource Include="Resources\Images\harddrive.png" />
 		<Resource Include="Resources\Images\MainIcon.png" />
 		<Resource Include="Resources\Images\moddb.png" />
+		<Resource Include="Resources\Images\patch222.png" />
 		<Resource Include="Resources\Images\patreon.png" />
 		<Resource Include="Resources\Images\RotWK.png" />
 		<Resource Include="Resources\Images\twitch.png" />
@@ -107,6 +108,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\BFMECompetetiveArena\src\BFMECompetetiveArena_WorkshopKit\BFMECompetetiveArena_WorkshopKit.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Elements\WorkshopTile.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Elements\LibraryTileEmpty.xaml.cs">
+		  <SubType>Code</SubType>
+		</Compile>
 		<Compile Update="Pages\Settings\Bfme1\BFME1Settings_General.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>

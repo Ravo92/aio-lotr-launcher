@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BfmeWorkshopKit.Logic;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,12 +12,29 @@ namespace LauncherGUI.Elements
     /// </summary>
     public partial class LaunchButton : UserControl
     {
-        readonly RectangleGeometry ProgressFillClip = new() { Rect = new Rect(0, 0, 0, 0) };
-
         public LaunchButton()
         {
             InitializeComponent();
-            progress.Clip = ProgressFillClip;
+
+            BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
+            BfmeWorkshopSyncManager.OnSyncUpdate += OnSyncUpdate;
+            BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
+        }
+
+        private void OnSyncBegin(BfmeWorkshopKit.Data.BfmeWorkshopEntry entry)
+        {
+            ButtonState = LaunchButtonState.Loading;
+            LoadStatus = $"Switching to {entry.Name}";
+        }
+
+        private void OnSyncUpdate(int progress)
+        {
+            LoadProgress = progress;
+        }
+
+        private void OnSyncEnd()
+        {
+            ButtonState = LaunchButtonState.Launch;
         }
 
         public event EventHandler? OnLaunchClicked;
@@ -32,41 +50,48 @@ namespace LauncherGUI.Elements
 
                 if(value == LaunchButtonState.Launch)
                 {
-                    button.Content = Application.Current.FindResource("MainLauncherPlay").ToString()!;
+                    button.Content = "Launch";
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
+                    progressIndication.Visibility = Visibility.Collapsed;
                 }
                 else if (value == LaunchButtonState.Install)
                 {
-                    button.Content = Application.Current.FindResource("MainLauncherInstall").ToString()!;
+                    button.Content = "Install";
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
+                    progressIndication.Visibility = Visibility.Collapsed;
                 }
                 else if (value == LaunchButtonState.Loading)
                 {
                     button.Content = "";
-                    LoadStatus = Application.Current.FindResource("MainLauncherLoading").ToString()!;
+                    LoadStatus = "Loading";
                     button.Opacity = 0.4d;
                     button.IsHitTestVisible = false;
                     LoadProgress = 0;
+                    progressIndication.Visibility = Visibility.Visible;
                 }
             }
         }
 
         public double LoadProgress
         {
-            get => (double)GetValue(ProgressProperty);
-            set => SetValue(ProgressProperty, value);
+            get => (double)GetValue(LoadProgressProperty);
+            set
+            {
+                SetValue(LoadProgressProperty, value);
+                progressText.Text = $"{value}%";
+            }
         }
-        public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register("DownloadProgress", typeof(double), typeof(LaunchButton), new PropertyMetadata(OnDownloadProgressChangedCallBack));
-        private static void OnDownloadProgressChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty LoadProgressProperty = DependencyProperty.Register("LoadProgress", typeof(double), typeof(LaunchButton), new PropertyMetadata(OnLoadProgressChangedCallBack));
+        private static void OnLoadProgressChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             LaunchButton progressBar = (LaunchButton)sender;
-            if (progressBar != null && progressBar.ButtonState == LaunchButtonState.Loading)
+            if (progressBar != null)
             {
-                RectAnimation b = new() { From = new Rect(0, 0, progressBar.ProgressFillClip.Rect.Width, progressBar.background.ActualHeight), To = new Rect(0, 0, progressBar.background.ActualWidth * ((double)e.NewValue / 100), progressBar.background.ActualHeight), Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
-                progressBar.ProgressFillClip.BeginAnimation(RectangleGeometry.RectProperty, b, HandoffBehavior.Compose);
-                progressBar.progressText.Text = $"{(double)e.NewValue}%";
+                DoubleAnimation da = new DoubleAnimation() { To = (double)e.NewValue / 100d, Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
+                progressBar.progressGradientStop1.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
+                progressBar.progressGradientStop2.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
             }
         }
 
@@ -75,8 +100,6 @@ namespace LauncherGUI.Elements
             get => statusText.Text;
             set => statusText.Text = value;
         }
-
-        private void Progress_SizeChanged(object sender, SizeChangedEventArgs e) => ProgressFillClip.Rect = new Rect(0, 0, ProgressFillClip.Rect.Width, e.NewSize.Height);
 
         private void OnClicked(object sender, RoutedEventArgs e)
         {

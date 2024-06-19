@@ -7,6 +7,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/AccentButtonStyle.xaml"/>
+                <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/RoundButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/LaunchButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ListButtonStyle.xaml"/>
                 <ResourceDictionary Source="/LauncherGUI;component/Resources/Styles/ScrollViewerStyle.xaml"/>

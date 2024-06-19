@@ -59,7 +59,7 @@ namespace LauncherGUI.Pages.Settings.Launcher
                 {
                     if (drive.DriveType != DriveType.CDRom || drive.DriveType != DriveType.Network || drive.DriveType != DriveType.Removable)
                     {
-                        LibraryTile libraryTile = new()
+                        GameLibraryElement libraryTile = new()
                         {
                             DriveName = string.Concat(drive.VolumeLabel == string.Empty ? Application.Current.FindResource("SettingsLauncherGeneralDriveDefaultNameText") : drive.VolumeLabel, " (", drive.Name[..^1], ")"),
                             DriveSize = Math.Floor(drive.TotalSize / Math.Pow(1024, 3)),
