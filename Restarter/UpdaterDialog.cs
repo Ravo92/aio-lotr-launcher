@@ -1,7 +1,6 @@
 ﻿using Helper;
 using AutoUpdaterDotNET;
 using System.Net;
-using System;
 
 namespace Restarter
 {

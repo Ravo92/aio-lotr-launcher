@@ -1,0 +1,17 @@
+﻿<UserControl x:Name="BFME2ChildSettingsWindow" x:Class="LauncherGUI.Pages.Subpages.Settings.Launcher.Settings_Bfme2Repair"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" FontSize="14" Loaded="BFME2ChildSettingsWindow_Loaded" Initialized="BFME2ChildSettingsWindow_Initialized">
+    <StackPanel>
+        <TextBlock Text="{DynamicResource SettingsLauncherGeneralDropDownLabelText}" d:Text="Language" HorizontalAlignment="Left" Foreground="white"/>
+        <ComboBox x:Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="0,10,0,0" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxLanguage_SelectionChanged">
+            <ComboBoxItem Content="English"/>
+            <ComboBoxItem Content="Deutsch"/>
+        </ComboBox>
+        <TextBlock Text="{DynamicResource SettingsBFMEGeneralResolutionDropDownLabelText}" d:Text="Resolution" HorizontalAlignment="Left" Margin="0,15,0,0" Foreground="white"/>
+        <ComboBox x:Name="ComboBoxResolution" HorizontalAlignment="Left" Margin="0,10,0,0" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxResolution_SelectionChanged"/>
+    </StackPanel>
+</UserControl>

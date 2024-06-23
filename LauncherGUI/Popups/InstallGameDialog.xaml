@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="/Resources/Images/BFME1LanguageSupport.png" Stretch="None" Width="450" Height="270" RenderOptions.BitmapScalingMode="NearestNeighbor">
+                    <Image Source="/Resources/Images/BFME1LanguageSupport.png" Stretch="None" Width="450" Height="270">
                         <Image.OpacityMask>
                             <VisualBrush>
                                 <VisualBrush.Visual>
@@ -58,34 +58,9 @@
                             <ComboBoxItem Content="Polski"/>
                             <ComboBoxItem Content="Norsk"/>
                         </ComboBox>
-                        <TextBlock Grid.Row="4" FontSize="14" FontWeight="SemiBold" Text="{DynamicResource GameInstallDialogLibrary}" d:Text="Library" Foreground="white"/>
+                        <TextBlock Grid.Row="4" FontSize="14" FontWeight="SemiBold" Text="Location" d:Text="Location" Foreground="white"/>
                         <elements:SmoothScrollViewer Grid.Row="6">
-                            <StackPanel>
-                                <elements:Selectable Margin="0,0,0,5">
-                                    <elements:Selectable.Title>
-                                        <Grid>
-                                            <TextBlock Text="SSD (C:)" FontSize="12" FontWeight="Medium" Foreground="White"/>
-                                            <TextBlock Text="10.9 GB FREE" FontSize="11" FontWeight="Medium" Foreground="White" HorizontalAlignment="Right"/>
-                                        </Grid>
-                                    </elements:Selectable.Title>
-                                </elements:Selectable>
-                                <elements:Selectable Margin="0,0,0,5">
-                                    <elements:Selectable.Title>
-                                        <Grid>
-                                            <TextBlock Text="Programs (D:)" FontSize="12" FontWeight="Medium" Foreground="White"/>
-                                            <TextBlock Text="428.81 GB FREE" FontSize="11" FontWeight="Medium" Foreground="White" HorizontalAlignment="Right"/>
-                                        </Grid>
-                                    </elements:Selectable.Title>
-                                </elements:Selectable>
-                                <elements:Selectable Margin="0,0,0,5">
-                                    <elements:Selectable.Title>
-                                        <Grid>
-                                            <TextBlock Text="Fast (F:)" FontSize="12" FontWeight="Medium" Foreground="White"/>
-                                            <TextBlock Text="491.75 GB FREE" FontSize="11" FontWeight="Medium" Foreground="White" HorizontalAlignment="Right"/>
-                                        </Grid>
-                                    </elements:Selectable.Title>
-                                </elements:Selectable>
-                            </StackPanel>
+                            <StackPanel x:Name="locations"/>
                         </elements:SmoothScrollViewer>
                     </Grid>
                 </Grid>

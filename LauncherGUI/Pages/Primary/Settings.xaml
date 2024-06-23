@@ -14,31 +14,31 @@
         <Grid Grid.Column="0">
             <elements:Acrylic/>
             <elements:SmoothScrollViewer>
-                <StackPanel HorizontalAlignment="Right" Margin="0,60,20,0" Width="200" Name="ButtonStackPanel">
-                    <TextBlock x:Name="SettingsMenuLauncherSettingsHeaderLabel" Text="{DynamicResource SettingsLauncherHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsMenuLauncherSettingsGeneralLabel" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsLauncherGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsMenuLauncherSettingsGeneralLabel_Click"/>
+                <StackPanel HorizontalAlignment="Right" Margin="0,60,20,0" Width="200" x:Name="categoryTabs">
+                    <TextBlock Text="{DynamicResource SettingsLauncherHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Tag="LauncherGeneral" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsLauncherGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="OnCategoryButtonClicked"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
-                    <TextBlock x:Name="SettingsBFME1Header" Text="{DynamicResource SettingsBFME1Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsBFME1General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME1General_Click"/>
-                    <Button x:Name="SettingsBFME1Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME1Repair_Click"/>
+                    <TextBlock Text="{DynamicResource SettingsBFME1Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Tag="Bfme1General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="OnCategoryButtonClicked"/>
+                    <Button Tag="Bfme1Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="OnCategoryButtonClicked"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
-                    <TextBlock x:Name="SettingsBFME2Header" Text="{DynamicResource SettingsBFME2Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsBFME2General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME2General_Click"/>
-                    <Button x:Name="SettingsBFME2Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsBFME2Repair_Click"/>
+                    <TextBlock Text="{DynamicResource SettingsBFME2Header}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Tag="Bfme2General" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="OnCategoryButtonClicked"/>
+                    <Button Tag="Bfme2Repair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="OnCategoryButtonClicked"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
 
-                    <TextBlock x:Name="SettingsRotWKHeader" Text="{DynamicResource SettingsRotWKHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Button x:Name="SettingsRotWKGeneral" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsRotWKGeneral_Click"/>
-                    <Button x:Name="SettingsRotWKRepair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="SettingsRotWKRepair_Click"/>
+                    <TextBlock Text="{DynamicResource SettingsRotWKHeader}" Foreground="#66FFFFFF" FontSize="12" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Button Tag="RotwkGeneral" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMEGeneral}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="OnCategoryButtonClicked"/>
+                    <Button Tag="RotwkRepair" Style="{DynamicResource ListButton}" Content="{DynamicResource SettingsBFMERepair}" Foreground="#D8FFFFFF" HorizontalContentAlignment="Left" Margin="-10,0,0,2" Click="OnCategoryButtonClicked"/>
                     <Rectangle Height="1" Fill="#19FFFFFF" Margin="0,20,0,20"/>
                 </StackPanel>
             </elements:SmoothScrollViewer>
         </Grid>
         <Grid Grid.Column="1" Background="#5B121212">
             <elements:SmoothScrollViewer>
-                <Border x:Name="PanelSettings" Margin="20,60,120,0"/>
+                <Border x:Name="content" Margin="20,60,120,0"/>
             </elements:SmoothScrollViewer>
             <StackPanel Background="Transparent" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,60,0" MouseDown="OnCloseClicked" Width="100">
                 <Path Width="35" Height="35" Fill="{Binding ElementName=close, Path=Foreground}" Stretch="Uniform" Data="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>

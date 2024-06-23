@@ -1,18 +1,8 @@
 ﻿using LauncherGUI.Elements;
+using System.IO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LauncherGUI.Popups
 {
@@ -24,6 +14,24 @@ namespace LauncherGUI.Popups
         public InstallGameDialog()
         {
             InitializeComponent();
+
+            foreach (var drive in DriveInfo.GetDrives())
+            {
+                if (!drive.VolumeLabel.Contains("Google"))
+                {
+                    if (drive.DriveType != DriveType.CDRom && drive.DriveType != DriveType.Network && drive.DriveType != DriveType.Removable)
+                    {
+                        Selectable element = new Selectable()
+                        {
+                            Title = new DiskDriveHeader() { DriveName = string.Concat(drive.VolumeLabel, " (", drive.Name[..^1], ")"), FreeSpace = drive.AvailableFreeSpace },
+                            Tag = drive.Name,
+                            Margin = new Thickness(0, 0, 0, 5)
+                        };
+
+                        locations.Children.Add(element);
+                    }
+                }
+            }
         }
 
         private void ComboBoxGameLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,7 +44,7 @@ namespace LauncherGUI.Popups
 
         }
 
-        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => Submit("selected_language", "selected_library"); // TODO: Put actual values here.
+        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => Submit("English", Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
 
         private void ButtonCancelClicked(object sender, RoutedEventArgs e) => Dismiss();
     }

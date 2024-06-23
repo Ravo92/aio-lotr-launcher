@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using LauncherGUI.Logic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LauncherGUI.Pages.Primary
@@ -25,7 +26,7 @@ namespace LauncherGUI.Pages.Primary
                 return;
 
             FirstLoad = false;
-            arena.Load();
+            LauncherStateManager.AsElevated(() => arena.Load());
         }
     }
 }

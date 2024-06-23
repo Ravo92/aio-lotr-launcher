@@ -3,19 +3,17 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Net.Http;
-using System.Diagnostics;
-using LauncherGUI.Helpers;
 using LauncherGUI.Elements;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using static LauncherGUI.Helpers.GameSelectorHelper;
 using LauncherGUI.Popups;
 using System.Windows.Media;
 using System.Linq;
 using BfmeWorkshopKit.Logic;
+using LauncherGUI.Logic;
 using BfmeWorkshopKit.Data;
-using Newtonsoft.Json.Linq;
+using Windows.Media.Capture;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -26,23 +24,11 @@ namespace LauncherGUI.Pages.Primary
     {
         public static Offline Instance = new Offline();
 
-        private const string winParameter = "-win";
-        private const string winXResParameter = " -xres ";
-        private const string winYResParameter = " -yres ";
         readonly Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.txt");
         readonly Uri changelogROTWK = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
 
         private readonly string tempFileBFME2 = Path.GetTempFileName() + ".html";
         private readonly string tempFileROTWK = Path.GetTempFileName() + ".html";
-
-        int xPosition = 30;
-        int yPosition = 30;
-        int xResolution = FullscreenWindowedHelper.GetScreenResolutionX() - 200;
-        int yResolution = FullscreenWindowedHelper.GetScreenResolutionY() - 200;
-
-        bool installationCanceled = false;
-
-        IntPtr gameHandle = IntPtr.Zero;
 
         private int previousSelectedIndex = -1;
 
@@ -56,51 +42,29 @@ namespace LauncherGUI.Pages.Primary
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
         }
 
-        private void OnSyncBegin(BfmeWorkshopKit.Data.BfmeWorkshopEntry entry)
-        {
-            SetActiveEntry(entry);
+        private void LauncherSettingsChanged(object sender, EventArgs e) => UpdateTitleImage();
+        private void OnLibraryTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowLibrary();
+        private void OnWorkshopTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowWorkshop();
+        private void OnNewsTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowNews();
 
-            activeEntryLoading.Visibility = Visibility.Visible;
-            activeEntryActive.Visibility = Visibility.Hidden;
-            activeEntryReloadButton.Visibility = Visibility.Hidden;
+        private void OnSyncBegin(BfmeWorkshopEntry entry)
+        {
+            activeEntry.Entry = entry;
+            activeEntry.IsLoading = true;
+            gameTabs.IsHitTestVisible = false;
+            innerTabs.IsHitTestVisible = false;
+            library.IsHitTestVisible = false;
         }
 
         private void OnSyncEnd()
         {
-            activeEntryLoading.Visibility = Visibility.Hidden;
-            activeEntryActive.Visibility = Visibility.Visible;
-            activeEntryReloadButton.Visibility = Visibility.Visible;
+            activeEntry.IsLoading = false;
+            gameTabs.IsHitTestVisible = true;
+            innerTabs.IsHitTestVisible = true;
+            library.IsHitTestVisible = true;
         }
 
-        public void SetActiveEntry(BfmeWorkshopEntry? entry)
-        {
-            if(entry == null)
-            {
-                activeEntry.Visibility = Visibility.Hidden;
-                activeEntryNullIndicator.Visibility = Visibility.Visible;
-                return;
-            }
-
-            activeEntry.Visibility = Visibility.Visible;
-            activeEntryNullIndicator.Visibility = Visibility.Hidden;
-
-            activeEntryIcon.Source = null;
-            try { activeEntryIcon.Source = new BitmapImage(new Uri(entry.Value.ArtworkUrl)); } catch { }
-            activeEntryTitle.Text = entry.Value.Name;
-            activeEntryVersion.Text = entry.Value.Version;
-            activeEntryAuthor.Text = entry.Value.Author;
-
-            if (entry.Value.Type == 0)
-                activeEntryType.Text = "Patch";
-            else if (entry.Value.Type == 1)
-                activeEntryType.Text = "Mod";
-
-            activeEntryLoading.Visibility = Visibility.Hidden;
-            activeEntryActive.Visibility = Visibility.Visible;
-            activeEntryReloadButton.Visibility = Visibility.Visible;
-        }
-
-        private async void ShowLibrary()
+        public void ShowLibrary()
         {
             foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
             {
@@ -113,15 +77,11 @@ namespace LauncherGUI.Pages.Primary
             library.Visibility = Visibility.Visible;
             workshop.Visibility = Visibility.Hidden;
 
-            SetActiveEntry(BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex));
-
-            libraryTiles.Children.Clear();
-            foreach(BfmeWorkshopEntry entry in await BfmeWorkshopLibraryManager.Search(game: gameTabs.SelectedIndex))
-                libraryTiles.Children.Add(new LibraryTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
-            libraryTiles.Children.Add(emptyLibraryTile);
+            activeEntry.Entry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
+            library.Load(gameTabs.SelectedIndex);
         }
 
-        private async void ShowWorkshop()
+        public void ShowWorkshop()
         {
             foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
             {
@@ -134,13 +94,10 @@ namespace LauncherGUI.Pages.Primary
             library.Visibility = Visibility.Hidden;
             workshop.Visibility = Visibility.Visible;
 
-            workshopTiles.Children.Clear();
-            foreach (BfmeWorkshopEntry entry in await BfmeWorkshopQueryManager.Search(game: gameTabs.SelectedIndex))
-                if(!entry.Guid.StartsWith("original-"))
-                    workshopTiles.Children.Add(new WorkshopTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
+            workshop.Load(gameTabs.SelectedIndex);
         }
 
-        private void ShowNews()
+        public void ShowNews()
         {
             foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
             {
@@ -153,64 +110,32 @@ namespace LauncherGUI.Pages.Primary
 
         private void OnLaunchGameClicked(object sender, EventArgs e)
         {
-            LauncherConfigHelper.SetWindowInvisible();
-
-            if (gameTabs.SelectedIndex == 0)
-            {
-                LaunchSelectedGame(AvailableBFMEGames.BFME1);
-            }
-            else if (gameTabs.SelectedIndex == 1)
-            {
-                LaunchSelectedGame(AvailableBFMEGames.BFME2);
-            }
-            else if (gameTabs.SelectedIndex == 2)
-            {
-                LaunchSelectedGame(AvailableBFMEGames.ROTWK);
-            }
-
-            LauncherConfigHelper.SetWindowVisible();
+            LauncherStateManager.Visible = false;
+            BfmeLaunchManager.LaunchGame(gameTabs.SelectedIndex, ToggleLaunchWindowed.IsToggled);
+            LauncherStateManager.Visible = true;
         }
 
         private void OnInstallGameClicked(object sender, EventArgs e)
         {
-            PopupVisualizer.ShowPopup(new InstallGameDialog(),
-            OnPopupSubmited: async (submitedData) =>
+            LauncherStateManager.AsElevated(() =>
             {
-                string selectedLanguage = submitedData[0];
-                string selectedLibrary = submitedData[1];
+                PopupVisualizer.ShowPopup(new InstallGameDialog(),
+                OnPopupSubmited: async (submitedData) =>
+                {
+                    int game = gameTabs.SelectedIndex;
+                    string selectedLanguage = submitedData[0];
+                    string selectedLocation = Path.Combine(submitedData[1], game < 2 ? $"BFME{game + 1}" : "RotWK");
 
-                installationCanceled = false;
-
-                launchButton.ButtonState = LaunchButtonState.Loading;
-
-                GameInstallerHelper installerHelper = new GameInstallerHelper();
-                installerHelper.ProgressChanged += (sender, progress) => Dispatcher.Invoke(() => launchButton.LoadProgress = progress);
-                installerHelper.StatusChanged += (sender, status) => Dispatcher.Invoke(() => launchButton.LoadStatus = status);
-
-                if (!installationCanceled)
                     try
                     {
-                        if (gameTabs.SelectedIndex == 0) // BFME1
-                        {
-                            await installerHelper.InstallGame(AvailableBFMEGames.BFME1);
-                        }
-                        else if (gameTabs.SelectedIndex == 1) // BFME2
-                        {
-                            await installerHelper.InstallGame(AvailableBFMEGames.BFME2);
-                        }
-                        else if (gameTabs.SelectedIndex == 2) // ROTWK
-                        {
-                            await installerHelper.InstallGame(AvailableBFMEGames.ROTWK);
-                        }
+                        BfmeRegistryManager.CreateBfmeInstallRegistry(game, selectedLocation, selectedLanguage);
+                        await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.BaseGame(game), (progress) => { }, (downloadItem, downloadProgress) => { });
                     }
-                    catch (Exception)
+                    catch(Exception ex)
                     {
-
+                        PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error had occured while installing the game\n{ex.ToString()}"));
                     }
-                    finally
-                    {
-                        launchButton.ButtonState = LaunchButtonState.Launch;
-                    }
+                });
             });
         }
 
@@ -219,95 +144,43 @@ namespace LauncherGUI.Pages.Primary
             if (gameTabs.SelectedIndex != previousSelectedIndex)
             {
                 previousSelectedIndex = gameTabs.SelectedIndex;
-
-                //switch (tabs.SelectedIndex)
-                //{
-                //    case 0: // BFME1
-                //        ChangelogPage.Source = new("https://ravo92.github.io/changelogpage");
-                //        break;
-                //    case 1: // BFME2
-                //        ChangelogPage.Source = new Uri(tempFileBFME2);
-                //        break;
-                //    case 2: // ROTWK
-                //        ChangelogPage.Source = new Uri(tempFileROTWK);
-                //        break;
-                //}
+                activeEntry.Entry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
 
                 UpdateTitleImage();
-                InitializePlayButton();
-                SetActiveEntry(BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex));
+                UpdatePlayButton();
                 ShowLibrary();
             }
         }
 
         private void UpdateTitleImage()
         {
-            if (gameTabs.SelectedIndex == 0) // BFME1
-            {
-                switch (Properties.Settings.Default.LauncherLanguageSetting)
-                {
-                    case 0:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_BFME1_title.png"));
-                        break;
-                    case 1:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_BFME1_title.png"));
-                        break;
-                }
-            }
-            else if (gameTabs.SelectedIndex == 1) // BFME1
-            {
-                switch (Properties.Settings.Default.LauncherLanguageSetting)
-                {
-                    case 0:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_BFME2_title.png"));
-                        break;
-                    case 1:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_BFME2_title.png"));
-                        break;
-                }
-            }
-            else if (gameTabs.SelectedIndex == 2) // ROTWK
-            {
-                switch (Properties.Settings.Default.LauncherLanguageSetting)
-                {
-                    case 0:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/en_ROTWK_title.png"));
-                        break;
-                    case 1:
-                        titleImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/de_ROTWK_title.png"));
-                        break;
-                }
-            }
+            string game = "";
+            if (gameTabs.SelectedIndex == 0)
+                game = "BFME1";
+            else if (gameTabs.SelectedIndex == 1)
+                game = "BFME2";
+            else if (gameTabs.SelectedIndex == 2)
+                game = "ROTWK";
+            else
+                return;
+
+            string language = "";
+            if (LauncherStateManager.Language == 0)
+                language = "en";
+            else if (LauncherStateManager.Language == 1)
+                language = "de";
+            else
+                return;
+
+            titleImage.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/Images/{language}_{game}_title.png"));
         }
 
-        private void LauncherSettingsChanged(object sender, EventArgs e)
+        private void UpdatePlayButton()
         {
-            UpdateTitleImage();
-        }
-
-        private void InitializePlayButton()
-        {
-            if (gameTabs.SelectedIndex == 0) // BFME1
-            {
-                if (Properties.Settings.Default.BFME1GameInstalled)
-                    launchButton.ButtonState = LaunchButtonState.Launch;
-                else
-                    launchButton.ButtonState = LaunchButtonState.Install;
-            }
-            else if (gameTabs.SelectedIndex == 1) // BFME2
-            {
-                if (Properties.Settings.Default.BFME2GameInstalled)
-                    launchButton.ButtonState = LaunchButtonState.Launch;
-                else
-                    launchButton.ButtonState = LaunchButtonState.Install;
-            }
-            else if (gameTabs.SelectedIndex == 2) // ROTWK
-            {
-                if (Properties.Settings.Default.ROTWKGameInstalled)
-                    launchButton.ButtonState = LaunchButtonState.Launch;
-                else
-                    launchButton.ButtonState = LaunchButtonState.Install;
-            }
+            if (BfmeRegistryManager.IsBfmeInstalled(gameTabs.SelectedIndex))
+                launchButton.ButtonState = LaunchButtonState.Launch;
+            else
+                launchButton.ButtonState = LaunchButtonState.Install;
         }
 
         private void CheckBoxWindowed_Checked(object sender, RoutedEventArgs e)
@@ -320,75 +193,6 @@ namespace LauncherGUI.Pages.Primary
         {
             Properties.Settings.Default.IsWindowed = false;
             Properties.Settings.Default.Save();
-        }
-
-        private void LaunchSelectedGame(AvailableBFMEGames availableBFMEGames)
-        {
-            Process processLaunchGame = new();
-
-            if (ToggleLaunchWindowed.IsToggled)
-                processLaunchGame.StartInfo.Arguments = winParameter + winXResParameter + xResolution + winYResParameter + yResolution;
-            else
-                processLaunchGame.StartInfo.Arguments = winParameter;
-
-            switch (availableBFMEGames)
-            {
-                case AvailableBFMEGames.BFME1:
-                    processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME1("path"), ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
-                    processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME1("path");
-                    break;
-                case AvailableBFMEGames.BFME2:
-                    processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyBFME2("path"), ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
-                    processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyBFME2("path");
-                    break;
-                case AvailableBFMEGames.ROTWK:
-                    processLaunchGame.StartInfo.FileName = Path.Combine(BFMERegistryHelper.ReadRegKeyROTWK("path"), ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
-                    processLaunchGame.StartInfo.WorkingDirectory = BFMERegistryHelper.ReadRegKeyROTWK("path");
-                    break;
-                default:
-                    break;
-            }
-
-            processLaunchGame.Start();
-
-            switch (availableBFMEGames)
-            {
-                case AvailableBFMEGames.BFME1:
-                    processLaunchGame = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME1_MAIN_GAME_FILE);
-                    break;
-                case AvailableBFMEGames.BFME2:
-                    processLaunchGame = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_BFME2_MAIN_GAME_FILE);
-                    break;
-                case AvailableBFMEGames.ROTWK:
-                    processLaunchGame = FullscreenWindowedHelper.GetProcessByFileName(ConstStringsHelper.C_ROTWK_MAIN_GAME_FILE);
-                    break;
-                default:
-                    break;
-            }
-
-            CatchMousePointerHelper.InitializeGlobalHook();
-            gameHandle = processLaunchGame.MainWindowHandle;
-
-            if (ToggleLaunchWindowed.IsToggled)
-            {
-                xPosition = 0;
-                yPosition = 0;
-                xResolution = FullscreenWindowedHelper.GetScreenResolutionX();
-                yResolution = FullscreenWindowedHelper.GetScreenResolutionY();
-
-                CatchMousePointerHelper.SetupBorderlessGameWindowWithMouseClipping(gameHandle, xPosition, yPosition, xResolution, yResolution, true);
-            }
-            else
-            {
-                CatchMousePointerHelper.SetupBorderlessGameWindowWithMouseClipping(gameHandle, xPosition, yPosition, xResolution, yResolution, false);
-            }
-
-            processLaunchGame.WaitForExit();
-
-            CatchMousePointerHelper.UnclipCursor();
-            CatchMousePointerHelper.TerminateGlobalHook();
-
-            processLaunchGame.Dispose();
         }
 
         private async void InitializeWebView()
@@ -425,20 +229,6 @@ namespace LauncherGUI.Pages.Primary
         {
             using HttpClient client = new();
             return await client.GetStringAsync(uri);
-        }
-
-        private void OnLibraryTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowLibrary();
-
-        private void OnWorkshopTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowWorkshop();
-
-        private void OnNewsTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowNews();
-
-        private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)
-        {
-            BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
-            
-            if(activeEntry != null)
-                await BfmeWorkshopSyncManager.Sync(activeEntry!.Value, (progress) => { }, (downloadItem, downloadProgress) => { });
         }
     }
 }

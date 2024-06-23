@@ -98,7 +98,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="BfmeOnlineKit" Version="1.6.4" />
+	  <PackageReference Include="BfmeOnlineKit" Version="1.6.5" />
 	  <PackageReference Include="Downloader" Version="3.0.6" />
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2535.41" />
@@ -112,28 +112,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Elements\WorkshopTile.xaml.cs">
+		<Compile Update="Elements\Workshop\WorkshopTile.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Elements\LibraryTileEmpty.xaml.cs">
+		<Compile Update="Elements\Library\LibraryTileEmpty.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Settings\Bfme1\BFME1Settings_General.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\Bfme1\Settings_Bfme1General.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Settings\Bfme1\BFME1Settings_Repair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\Bfme1\Settings_Bfme1Repair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Settings\Bfme2\BFME2Settings_General.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\Bfme2\Settings_Bfme2General.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Settings\Bfme2\BFME2Settings_Repair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\Bfme2\Settings_Bfme2Repair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Settings\RotWK\ROTWKSettings_General.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkGeneral.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Settings\RotWK\ROTWKSettings_Repair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkRepair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Popups\MessagePopup.xaml.cs">

@@ -1,9 +1,9 @@
-﻿using LauncherGUI.Pages.Settings.Launcher;
+﻿using LauncherGUI.Logic;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using static LauncherGUI.Helpers.GameSelectorHelper;
 
 namespace LauncherGUI.Pages.Primary
 {
@@ -12,167 +12,37 @@ namespace LauncherGUI.Pages.Primary
     /// </summary>
     public partial class Settings : UserControl
     {
-        public Settings(AvailableBFMEGames availableBFMEGames)
+        public Settings(string page)
         {
             InitializeComponent();
-
-            if (availableBFMEGames == AvailableBFMEGames.NONE)
-            {
-                launcherSettings_General = new LauncherSettings_General();
-                PanelSettings.Child = launcherSettings_General;
-                DrawSelectionOnMenuEntry(SettingsMenuLauncherSettingsGeneralLabel);
-            }
-            else
-            {
-                LaunchGameSettingsPage(availableBFMEGames);
-            }
+            Page = page;
         }
 
-        LauncherSettings_General? launcherSettings_General;
-        private BFME1Settings_General? bFME1Settings_General;
-        private BFME1Settings_Repair? bFME1Settings_Repair;
-        private BFME2Settings_General? bFME2Settings_General;
-        private BFME2Settings_Repair? bFME2Settings_Repair;
-        private ROTWKSettings_General? rOTWKSettings_General;
-        private ROTWKSettings_Repair? rOTWKSettings_Repair;
-
-        private void OnCloseClicked(object sender, MouseButtonEventArgs e)
+        private string _page = "";
+        public string Page
         {
-            MainWindow.SetFullContent(null);
-        }
-
-        private void LaunchGameSettingsPage(AvailableBFMEGames availableBFMEGames)
-        {
-           if (availableBFMEGames == AvailableBFMEGames.BFME1)
-                SettingsBFME1General.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-            else if (availableBFMEGames == AvailableBFMEGames.BFME2)
-                SettingsBFME2General.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-            else if (availableBFMEGames == AvailableBFMEGames.ROTWK)
-                SettingsRotWKGeneral.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-        }
-
-        private void SettingsMenuLauncherSettingsGeneralLabel_Click(object sender, RoutedEventArgs e)
-        {
-            DrawSelectionOnMenuEntry(sender);
-
-            if (launcherSettings_General == null)
+            get => _page;
+            set
             {
-                launcherSettings_General = new LauncherSettings_General();
-                PanelSettings.Child = launcherSettings_General;
-            }
-            else
-            {
-                PanelSettings.Child = launcherSettings_General;
-            }
-        }
+                _page = value;
 
-        private void SettingsBFME1General_Click(object sender, RoutedEventArgs e)
-        {
-            DrawSelectionOnMenuEntry(sender);
-
-            if (bFME1Settings_General == null)
-            {
-                bFME1Settings_General = new BFME1Settings_General();
-                PanelSettings.Child = bFME1Settings_General;
-            }
-            else
-            {
-                PanelSettings.Child = bFME1Settings_General;
-            }
-        }
-
-        private void SettingsBFME1Repair_Click(object sender, RoutedEventArgs e)
-        {
-            DrawSelectionOnMenuEntry(sender);
-
-            if (bFME1Settings_Repair == null)
-            {
-                bFME1Settings_Repair = new BFME1Settings_Repair();
-                PanelSettings.Child = bFME1Settings_Repair;
-            }
-            else
-            {
-                PanelSettings.Child = bFME1Settings_Repair;
-            }
-        }
-
-        private void SettingsBFME2General_Click(object sender, RoutedEventArgs e)
-        {
-            DrawSelectionOnMenuEntry(sender);
-
-            if (bFME2Settings_General == null)
-            {
-                bFME2Settings_General = new BFME2Settings_General();
-                PanelSettings.Child = bFME2Settings_General;
-            }
-            else
-            {
-                PanelSettings.Child = bFME2Settings_General;
-            }
-        }
-
-        private void SettingsBFME2Repair_Click(object sender, RoutedEventArgs e)
-        {
-            DrawSelectionOnMenuEntry(sender);
-
-            if (bFME2Settings_Repair == null)
-            {
-                bFME2Settings_Repair = new BFME2Settings_Repair();
-                PanelSettings.Child = bFME2Settings_Repair;
-            }
-            else
-            {
-                PanelSettings.Child = bFME2Settings_Repair;
-            }
-        }
-
-        private void SettingsRotWKGeneral_Click(object sender, RoutedEventArgs e)
-        {
-            DrawSelectionOnMenuEntry(sender);
-
-            if (rOTWKSettings_General == null)
-            {
-                rOTWKSettings_General = new ROTWKSettings_General();
-                PanelSettings.Child = rOTWKSettings_General;
-            }
-            else
-            {
-                PanelSettings.Child = rOTWKSettings_General;
-            }
-        }
-
-        private void SettingsRotWKRepair_Click(object sender, RoutedEventArgs e)
-        {
-            DrawSelectionOnMenuEntry(sender);
-
-            if (rOTWKSettings_Repair == null)
-            {
-                rOTWKSettings_Repair = new ROTWKSettings_Repair();
-                PanelSettings.Child = rOTWKSettings_Repair;
-            }
-            else
-            {
-                PanelSettings.Child = rOTWKSettings_Repair;
-            }
-        }
-
-        private void DrawSelectionOnMenuEntry(object sender)
-        {
-            Button clickedButton = (Button)sender;
-            clickedButton.Background = Brushes.Transparent;
-
-            foreach (var child in ButtonStackPanel.Children)
-            {
-                if (child is Button button)
+                foreach (var child in categoryTabs.Children)
                 {
-                    button.Background = Brushes.Transparent;
-
-                    if (clickedButton == button)
+                    if (child is Button button)
                     {
-                        button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#19FFFFFF"));
+                        if (button.Tag.ToString() == value)
+                            button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#19FFFFFF"));
+                        else
+                            button.Background = Brushes.Transparent;
                     }
                 }
+
+                content.Child = (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap[$"Settings_{value}"])!;
             }
         }
+
+        private void OnCloseClicked(object sender, MouseButtonEventArgs e) => MainWindow.SetFullContent(null);
+
+        private void OnCategoryButtonClicked(object sender, RoutedEventArgs e) => Page = ((Button)sender).Tag.ToString()!;
     }
 }
