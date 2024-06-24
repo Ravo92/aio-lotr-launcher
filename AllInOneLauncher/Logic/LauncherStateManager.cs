@@ -81,6 +81,9 @@ namespace AllInOneLauncher.Logic
             }
             else
             {
+                App.Mutex?.Dispose();
+                App.Mutex = null;
+
                 string serializedState = "";
 
                 if (MainWindow.Instance!.fullContent.Child is Settings)

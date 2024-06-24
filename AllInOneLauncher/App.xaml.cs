@@ -50,8 +50,8 @@ namespace AllInOneLauncher
 
         public static void ExitImmediately()
         {
-            App.Mutex?.Dispose();
-            App.Mutex = null;
+            Mutex?.Dispose();
+            Mutex = null;
             Environment.Exit(0);
         }
     }
