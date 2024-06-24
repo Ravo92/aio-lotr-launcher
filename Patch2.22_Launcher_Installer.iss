@@ -1,5 +1,5 @@
 #define MyAppName "Patch 2.22 Launcher"
-#define MyAppExeName "Restarter.exe"
+#define MyAppExeName "AllInOneLauncher.exe"
 #define MyAppExeVersion "1.0.7.2"
 #define MyAppPublishFolder "PatchLauncher"
 
@@ -25,7 +25,7 @@ SolidCompression=yes
 ShowLanguageDialog=yes
 WizardImageFile=setup.bmp
 LicenseFile=ReadMe.txt
-SetupIconFile=Restarter\MainIcon.ico
+SetupIconFile=AllInOneLauncher\MainIcon.ico
 VersionInfoVersion={#MyAppExeVersion}
 AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
 AppPublisher=Raphael Vogel
@@ -44,7 +44,7 @@ de.BeveledLabel=Deutsch
 en.CreateStartMenuIcon=Create start menu entries
 en.LaunchAfterInstall=Launch Application after Install
 
-de.CreateStartMenuIcon=Erstelle Verknüpfungen im Startmenü
+de.CreateStartMenuIcon=Erstelle Verkn pfungen im Startmen 
 de.LaunchAfterInstall=Starte die Anwendung nach der Installation
 
 [Files]
