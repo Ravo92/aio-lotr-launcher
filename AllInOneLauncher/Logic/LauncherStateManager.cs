@@ -96,8 +96,8 @@ namespace AllInOneLauncher.Logic
                 Process.Start(new ProcessStartInfo()
                 {
                     UseShellExecute = true,
-                    WorkingDirectory = Environment.CurrentDirectory,
-                    FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AllInOneLauncher.exe"),
+                    WorkingDirectory = Path.GetFullPath("./"),
+                    FileName = Path.Combine(Path.GetFullPath("./"), "AllInOneLauncher.exe"),
                     Arguments = serializedState,
                     Verb = "runas"
                 });
