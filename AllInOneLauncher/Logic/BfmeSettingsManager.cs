@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace AllInOneLauncher.Logic
 {
@@ -9,6 +10,9 @@ namespace AllInOneLauncher.Logic
     {
         public static string? Get(int game, string optionName)
         {
+            if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
+
             string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
@@ -24,6 +28,9 @@ namespace AllInOneLauncher.Logic
 
         public static void Set(int game, string optionName, string value)
         {
+            if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
+
             string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
@@ -41,12 +48,18 @@ namespace AllInOneLauncher.Logic
 
         public static void EnsureOptionsFile(int game)
         {
+            if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
+
             string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
+            MessageBox.Show(optionsFile + " " + (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6));
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
+
+            MessageBox.Show(optionsFile + " " + (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6));
         }
 
-        internal const string DefaultOptions = @"AllHealthBars = yes
+        public static string DefaultOptions = @$"AllHealthBars = yes
 AlternateMouseSetup = no
 AmbientVolume = 28
 AudioLOD = High
@@ -60,7 +73,7 @@ IdealStaticGameLOD = Medium
 IsThreadedLoad = yes
 MovieVolume = 25
 MusicVolume = 24
-Resolution = 1920 1080
+Resolution = {SystemDisplayManager.GetPrimaryScreenResolution().Width} {SystemDisplayManager.GetPrimaryScreenResolution().Height}
 SFXVolume = 34
 ScrollFactor = 50
 StaticGameLOD = Medium

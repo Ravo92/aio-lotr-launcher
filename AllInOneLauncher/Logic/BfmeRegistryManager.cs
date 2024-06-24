@@ -10,7 +10,7 @@ namespace AllInOneLauncher.Logic
         public static bool IsBfmeInstalled(int game) => GetBfmeInstallPath(game) != "";
         public static string GetBfmeLanguage(int game) => GetBfmeRegistryKeyValue(game, "Language");
         public static string GetBfmeInstallPath(int game) => GetBfmeRegistryKeyValue(game, "Install Dir");
-        public static string GetBfmeDataPath(int game) => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), GetBfmeRegistryKeyValue(game, "UserDataLeafName"));
+        public static string GetBfmeDataPath(int game) => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), GetBfmeRegistryKeyValue(game, "UserDataLeafName", true));
         public static string GetBfmeExecutableName(int game) => $"lotrbfme{(game > 0 ? "2" : "")}{(game > 1 ? "ep1" : "")}.exe";
         public static string GetBfmeSerialKey(int game) => GetBfmeRegistryKeyValue(game, "", true, @"\ergc");
 
@@ -46,7 +46,7 @@ namespace AllInOneLauncher.Logic
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\EA GAMES\The Battle for Middle-earth", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\EA GAMES\The Battle for Middle-earth", false);
             using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\EA GAMES\The Battle for Middle-earth", true);
             keyGameMain?.SetValue("CacheSize", "3351006208");
             keyGameMain?.SetValue("DisplayName", "The Battle for Middle-earth");
@@ -59,7 +59,7 @@ namespace AllInOneLauncher.Logic
             keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
             keyGameMain?.SetValue("SwapSize", "0");
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA Games\The Battle for Middle-earth", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA Games\The Battle for Middle-earth", false);
             using RegistryKey? keyGameAlt = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA Games\The Battle for Middle-earth", true);
             keyGameAlt?.SetValue("InstallPath", installPath);
             keyGameAlt?.SetValue("Language", language);
@@ -78,7 +78,7 @@ namespace AllInOneLauncher.Logic
         {
             string installPath = GetBfmeRegistryKeyValue(0, "Install Dir");
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme.exe", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme.exe", false);
             using RegistryKey? keyApp = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme.exe", true);
             keyApp?.SetValue("", Path.Combine(installPath, "lotrbfme.exe"));
             keyApp?.SetValue("Game Registry", @"SOFTWARE\EA GAMES\The Battle for Middle-earth");
@@ -86,7 +86,7 @@ namespace AllInOneLauncher.Logic
             keyApp?.SetValue("Path", installPath);
             keyApp?.SetValue("Restart", "0", RegistryValueKind.DWord);
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA GAMES\The Battle for Middle-earth\ergc", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA GAMES\The Battle for Middle-earth\ergc", false);
             using RegistryKey? keySerial = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA GAMES\The Battle for Middle-earth\ergc", true);
             keySerial?.SetValue("", RandomString(20));
 
@@ -99,7 +99,7 @@ namespace AllInOneLauncher.Logic
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Battle for Middle-earth II", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Battle for Middle-earth II", false);
             using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Battle for Middle-earth II", true);
             keyGameMain?.SetValue("CacheSize", "3351006208");
             keyGameMain?.SetValue("DisplayName", "The Battle for Middle-earth II");
@@ -112,7 +112,7 @@ namespace AllInOneLauncher.Logic
             keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
             keyGameMain?.SetValue("SwapSize", "0");
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II", false);
             using RegistryKey? keyGameAlt = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II", true);
             keyGameAlt?.SetValue("InstallPath", installPath);
             keyGameAlt?.SetValue("Language", language);
@@ -131,7 +131,7 @@ namespace AllInOneLauncher.Logic
         {
             string installPath = GetBfmeRegistryKeyValue(1, "Install Dir");
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2.exe", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2.exe", false);
             using RegistryKey? keyApp = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2.exe", true);
             keyApp?.SetValue("", Path.Combine(installPath, "lotrbfme2.exe"));
             keyApp?.SetValue("Game Registry", @"SOFTWARE\Electronic Arts\The Battle for Middle-earth II");
@@ -139,7 +139,7 @@ namespace AllInOneLauncher.Logic
             keyApp?.SetValue("Path", installPath);
             keyApp?.SetValue("Restart", "0", RegistryValueKind.DWord);
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc", false);
             using RegistryKey? keySerial = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc", true);
             keySerial?.SetValue("", RandomString(20));
 
@@ -152,7 +152,7 @@ namespace AllInOneLauncher.Logic
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", false);
             using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", true);
             keyGameMain?.SetValue("CacheSize", "3351006208");
             keyGameMain?.SetValue("DisplayName", "The Rise of the Witch-king");
@@ -165,7 +165,7 @@ namespace AllInOneLauncher.Logic
             keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
             keyGameMain?.SetValue("SwapSize", "0");
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", false);
             using RegistryKey? keyGameAlt = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", true);
             keyGameAlt?.SetValue("InstallPath", installPath);
             keyGameAlt?.SetValue("Language", language);
@@ -184,7 +184,7 @@ namespace AllInOneLauncher.Logic
         {
             string installPath = GetBfmeRegistryKeyValue(2, "Install Dir");
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2ep1.exe", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2ep1.exe", false);
             using RegistryKey? keyApp = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2ep1.exe", true);
             keyApp?.SetValue("", Path.Combine(installPath, "lotrbfme2ep1.exe"));
             keyApp?.SetValue("Game Registry", @"SOFTWARE\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king");
@@ -192,7 +192,7 @@ namespace AllInOneLauncher.Logic
             keyApp?.SetValue("Path", installPath);
             keyApp?.SetValue("Restart", "0", RegistryValueKind.DWord);
 
-            Registry.LocalMachine.DeleteSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc", false);
+            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc", false);
             using RegistryKey? keySerial = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc", true);
             keySerial?.SetValue("", RandomString(20));
 

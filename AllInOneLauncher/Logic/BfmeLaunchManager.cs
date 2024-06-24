@@ -8,11 +8,13 @@ namespace AllInOneLauncher.Logic
     {
         public static void LaunchGame(int game, bool windowed)
         {
+            BfmeSettingsManager.EnsureOptionsFile(game);
+
             using Process? gameProcess = Process.Start(new ProcessStartInfo()
             {
                 WorkingDirectory = BfmeRegistryManager.GetBfmeInstallPath(game),
                 FileName = Path.Combine(BfmeRegistryManager.GetBfmeInstallPath(game), BfmeRegistryManager.GetBfmeExecutableName(game)),
-                Arguments = windowed ? $"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height}" : "-win",
+                Arguments = windowed ? $"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height}" : "",
             });
 
             if (gameProcess == null)
