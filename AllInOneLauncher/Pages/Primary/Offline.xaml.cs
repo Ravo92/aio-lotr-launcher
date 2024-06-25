@@ -13,7 +13,7 @@ using System.Linq;
 using BfmeWorkshopKit.Logic;
 using AllInOneLauncher.Logic;
 using BfmeWorkshopKit.Data;
-using Windows.Media.Capture;
+using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -22,7 +22,7 @@ namespace AllInOneLauncher.Pages.Primary
     /// </summary>
     public partial class Offline : UserControl
     {
-        public static Offline Instance = new Offline();
+        internal static readonly Offline Instance = new();
 
         readonly Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.txt");
         readonly Uri changelogROTWK = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
@@ -121,7 +121,7 @@ namespace AllInOneLauncher.Pages.Primary
         private void OnLaunchGameClicked(object sender, EventArgs e)
         {
             LauncherStateManager.Visible = false;
-            BfmeLaunchManager.LaunchGame(gameTabs.SelectedIndex, ToggleLaunchWindowed.IsToggled);
+            BFMELaunchManager.LaunchGame((AvailableBFMEGames)gameTabs.SelectedIndex, ToggleLaunchWindowed.IsToggled);
             LauncherStateManager.Visible = true;
         }
 
@@ -130,20 +130,20 @@ namespace AllInOneLauncher.Pages.Primary
             LauncherStateManager.AsElevated(() =>
             {
                 PopupVisualizer.ShowPopup(new InstallGameDialog(),
-                OnPopupSubmited: async (submitedData) =>
+                OnPopupSubmited: async (submittedData) =>
                 {
                     int game = gameTabs.SelectedIndex;
-                    string selectedLanguage = submitedData[0];
-                    string selectedLocation = Path.Combine(submitedData[1], game < 2 ? $"BFME{game + 1}" : "RotWK");
+                    string selectedLanguage = submittedData[0];
+                    string selectedLocation = Path.Combine(submittedData[1], game < 2 ? $"BFME{game + 1}" : "RotWK");
 
                     try
                     {
-                        BfmeRegistryManager.CreateBfmeInstallRegistry(game, selectedLocation, selectedLanguage);
+                        BFMERegistryManager.CreateBFMEInstallRegistry((AvailableBFMEGames)game, selectedLocation, selectedLanguage);
                         await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.BaseGame(game), (progress) => { }, (downloadItem, downloadProgress) => { });
                     }
                     catch(Exception ex)
                     {
-                        PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error had occured while installing the game.\n{ex.ToString()}"));
+                        PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error had occurred while installing the game.\n{ex}"));
                     }
                 });
             });
@@ -164,7 +164,7 @@ namespace AllInOneLauncher.Pages.Primary
 
         private void UpdateTitleImage()
         {
-            string game = "";
+            string game;
             if (gameTabs.SelectedIndex == 0)
                 game = "BFME1";
             else if (gameTabs.SelectedIndex == 1)
@@ -174,7 +174,7 @@ namespace AllInOneLauncher.Pages.Primary
             else
                 return;
 
-            string language = "";
+            string language;
             if (LauncherStateManager.Language == 0)
                 language = "en";
             else if (LauncherStateManager.Language == 1)
@@ -187,7 +187,7 @@ namespace AllInOneLauncher.Pages.Primary
 
         private void UpdatePlayButton()
         {
-            if (BfmeRegistryManager.IsBfmeInstalled(gameTabs.SelectedIndex))
+            if (BFMERegistryManager.IsBFMEInstalled((AvailableBFMEGames)gameTabs.SelectedIndex))
                 launchButton.ButtonState = LaunchButtonState.Launch;
             else
                 launchButton.ButtonState = LaunchButtonState.Install;

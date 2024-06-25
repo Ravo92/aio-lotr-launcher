@@ -8,12 +8,10 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using AllInOneLauncher.Pages.Primary;
 using System.Collections.Specialized;
-using System.Security.Principal;
 using System.Windows.Media.Effects;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Elements;
 using AllInOneLauncher.Popups;
-using BfmeWorkshopKit.Logic;
 
 namespace AllInOneLauncher
 {

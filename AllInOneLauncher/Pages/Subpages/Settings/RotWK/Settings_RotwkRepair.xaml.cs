@@ -7,12 +7,12 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
     /// <summary>
     /// Interaktionslogik für ROTWKSettings_Repair.xaml
     /// </summary>
-    public partial class Settings_RotwkRepair : UserControl
+    public partial class Settings_ROTWKRepair : UserControl
     {
         bool isNotUserInteractionForResolutionDropDown = true;
         bool isNotUserInteractionForLanguageDropDown = true;
 
-        public Settings_RotwkRepair()
+        public Settings_ROTWKRepair()
         {
             InitializeComponent();
         }

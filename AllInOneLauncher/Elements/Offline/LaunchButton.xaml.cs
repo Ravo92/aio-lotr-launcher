@@ -1,5 +1,4 @@
-﻿using AllInOneLauncher.Pages.Primary;
-using BfmeWorkshopKit.Logic;
+﻿using BfmeWorkshopKit.Logic;
 using System;
 using System.Windows;
 using System.Windows.Controls;

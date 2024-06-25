@@ -99,10 +99,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="BfmeOnlineKit" Version="1.6.5" />
+	  <PackageReference Include="BFMEOnlineKit" Version="1.6.5" />
 	  <PackageReference Include="BfmeWorkshopKit" Version="1.3.1" />
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
-	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2535.41" />
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
 	  <PackageReference Include="MouseKeyHook" Version="5.7.1" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="WindowsShortcutFactory" Version="1.2.0" />
@@ -115,22 +115,22 @@
 		<Compile Update="Elements\Library\LibraryTileEmpty.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\Bfme1\Settings_Bfme1General.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_BFME1General.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\Bfme1\Settings_Bfme1Repair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_BFME1Repair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\Bfme2\Settings_Bfme2General.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_BFME2General.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\Bfme2\Settings_Bfme2Repair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_BFME2Repair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkGeneral.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_ROTWKGeneral.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkRepair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_ROTWKRepair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Popups\LauncherChangelogPopup.xaml.cs">

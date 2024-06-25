@@ -13,7 +13,7 @@ namespace AllInOneLauncher.Logic
 {
     public static class LauncherStateManager
     {
-        public static Dictionary<string, Type> TypeMap = new Dictionary<string, Type>();
+        internal static Dictionary<string, Type> TypeMap = [];
 
         public static void Init()
         {

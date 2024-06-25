@@ -5,19 +5,20 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Security.Principal;
 using AllInOneLauncher.Logic;
+using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
-    public partial class Settings_RotwkGeneral : UserControl
+    public partial class Settings_ROTWKGeneral : UserControl
     {
         private bool _isNotUserInteractionForLanguageDropDown = true;
 
-        public Settings_RotwkGeneral()
+        public Settings_ROTWKGeneral()
         {
             InitializeComponent();
 
-            BfmeRegistryManager.EnsureBfmeAppRegistry(2);
-            BfmeSettingsManager.EnsureOptionsFile(2);
+            BFMERegistryManager.EnsureBFMEAppRegistry(AvailableBFMEGames.ROTWK);
+            BFMESettingsManager.EnsureOptionsFile(AvailableBFMEGames.ROTWK);
 
             InitializeWindowElements();
         }
@@ -28,7 +29,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.ROTWKResolutionSetting) ? Properties.Settings.Default.ROTWKResolutionSetting : ComboBoxResolution.Items[^1];
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.ROTWKLanguageSetting != 0 ? Properties.Settings.Default.ROTWKLanguageSetting : 0;
 
-            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(0);
+            string cdKey = BFMERegistryManager.GetBFMESerialKey(0);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
             if (LauncherStateManager.IsElevated)
@@ -62,7 +63,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         private void SaveResolutionSettings()
         {
             Properties.Settings.Default.ROTWKResolutionSetting = ComboBoxResolution.SelectedItem?.ToString();
-            BfmeSettingsManager.Set(2, "Resolution", ComboBoxResolution.SelectedValue?.ToString() ?? string.Empty);
+            BFMESettingsManager.Set(AvailableBFMEGames.ROTWK, "Resolution", ComboBoxResolution.SelectedValue?.ToString() ?? string.Empty);
             Properties.Settings.Default.Save();
         }
 
@@ -70,8 +71,8 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             LauncherStateManager.AsElevated(() =>
             {
-                BfmeRegistryManager.EnsureBfmeAppRegistry(2);
-                string cdKey = BfmeRegistryManager.GetBfmeSerialKey(2);
+                BFMERegistryManager.EnsureBFMEAppRegistry(AvailableBFMEGames.ROTWK);
+                string cdKey = BFMERegistryManager.GetBFMESerialKey(AvailableBFMEGames.ROTWK);
                 TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
             });
         }

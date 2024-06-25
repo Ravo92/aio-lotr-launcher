@@ -1,27 +1,26 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using System.Threading;
+using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
 namespace AllInOneLauncher.Logic
 {
-    public static class BfmeLaunchManager
+    internal static class BFMELaunchManager
     {
-        public static void LaunchGame(int game, bool windowed)
+        internal static void LaunchGame(AvailableBFMEGames availableBFMEGames, bool windowed)
         {
-            BfmeSettingsManager.EnsureOptionsFile(game);
+            BFMESettingsManager.EnsureOptionsFile(availableBFMEGames);
 
             using Process? gameProcess = Process.Start(new ProcessStartInfo()
             {
-                WorkingDirectory = BfmeRegistryManager.GetBfmeInstallPath(game),
-                FileName = Path.Combine(BfmeRegistryManager.GetBfmeInstallPath(game), BfmeRegistryManager.GetBfmeExecutableName(game)),
-                Arguments = windowed ? $"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height}" : "",
+                WorkingDirectory = BFMERegistryManager.GetBFMEInstallPath(availableBFMEGames),
+                FileName = Path.Combine(BFMERegistryManager.GetBFMEInstallPath(availableBFMEGames), BFMERegistryManager.GetBFMEExecutableName(availableBFMEGames)),
+                Arguments = windowed ? $"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width - 100} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height - 100}" : "",
             });
 
             if (gameProcess == null)
                 return;
 
             SystemWindowManager.UpdateWindow(gameProcess.MainWindowHandle, 0, 0, SystemDisplayManager.GetPrimaryScreenResolution().Width, SystemDisplayManager.GetPrimaryScreenResolution().Height, windowed);
-
             SystemInputManager.ConfineCursor(0, 0, SystemDisplayManager.GetPrimaryScreenResolution().Width, SystemDisplayManager.GetPrimaryScreenResolution().Height, windowed);
 
             gameProcess.WaitForExit();

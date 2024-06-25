@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
 namespace AllInOneLauncher.Elements
 {
@@ -56,7 +57,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryActive.Visibility = Visibility.Visible;
                 activeEntryReloadButton.Visibility = Visibility.Visible;
 
-                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled(value.Value.Game);
+                IsHitTestVisible = BFMERegistryManager.IsBFMEInstalled((AvailableBFMEGames)value.Value.Game);
                 activeEntry.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { activeEntryIcon.Source = new BitmapImage(new Uri(value.Value.ArtworkUrl)); } catch { }
