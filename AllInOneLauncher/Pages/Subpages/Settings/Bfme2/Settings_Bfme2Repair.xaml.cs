@@ -5,14 +5,14 @@ using AllInOneLauncher.Logic;
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
     /// <summary>
-    /// Interaktionslogik für BFME2Settings_Repair.xaml
+    /// Interaktionslogik für Settings_Bfme2Repair.xaml
     /// </summary>
-    public partial class Settings_BFME2Repair : UserControl
+    public partial class Settings_Bfme2Repair : UserControl
     {
         bool isNotUserInteractionForResolutionDropDown = true;
         bool isNotUserInteractionForLanguageDropDown = true;
 
-        public Settings_BFME2Repair()
+        public Settings_Bfme2Repair()
         {
             InitializeComponent();
         }
@@ -45,12 +45,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void BFME2ChildSettingsWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
-
-        private void BFME2ChildSettingsWindow_Initialized(object sender, EventArgs e)
+        private void OnInitialized(object sender, EventArgs e)
         {
             ComboBoxResolution.ItemsSource = SystemDisplayManager.GetAllSupportedResolutions();
 

@@ -5,14 +5,14 @@ using AllInOneLauncher.Logic;
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
     /// <summary>
-    /// Interaktionslogik für ROTWKSettings_Repair.xaml
+    /// Interaktionslogik für Settings_RotwkRepair.xaml
     /// </summary>
-    public partial class Settings_ROTWKRepair : UserControl
+    public partial class Settings_RotwkRepair : UserControl
     {
         bool isNotUserInteractionForResolutionDropDown = true;
         bool isNotUserInteractionForLanguageDropDown = true;
 
-        public Settings_ROTWKRepair()
+        public Settings_RotwkRepair()
         {
             InitializeComponent();
         }
@@ -45,12 +45,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void ROTWKChildSettingsWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
-
-        private void ROTWKChildSettingsWindow_Initialized(object sender, EventArgs e)
+        private void OnInitialized(object sender, EventArgs e)
         {
             ComboBoxResolution.ItemsSource = SystemDisplayManager.GetAllSupportedResolutions();
 

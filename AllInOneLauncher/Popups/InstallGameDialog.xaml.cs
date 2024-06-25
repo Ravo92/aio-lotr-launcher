@@ -1,6 +1,5 @@
 ﻿using AllInOneLauncher.Elements;
 using System.IO;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
