@@ -62,7 +62,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void ButtonChangeCdKey_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ButtonChangeCdKey_Click(object sender, RoutedEventArgs e)
         {
             LauncherStateManager.AsElevated(() =>
             {
