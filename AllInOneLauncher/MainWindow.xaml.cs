@@ -13,6 +13,7 @@ using System.Windows.Media.Effects;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Elements;
 using AllInOneLauncher.Popups;
+using BfmeWorkshopKit.Logic;
 
 namespace AllInOneLauncher
 {

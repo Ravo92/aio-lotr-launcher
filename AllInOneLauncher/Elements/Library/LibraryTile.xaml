@@ -6,7 +6,7 @@
              xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
              mc:Ignorable="d" 
              Height="370" Width="250">
-    <Border CornerRadius="15" Cursor="Hand" MouseEnter="OnEnter" MouseLeave="OnLeave" MouseDown="OnClicked">
+    <Border CornerRadius="15" Cursor="Hand" MouseEnter="OnEnter" MouseLeave="OnLeave" MouseDown="OnClicked" Loaded="OnLoad">
         <Border.OpacityMask>
             <VisualBrush>
                 <VisualBrush.Visual>
@@ -38,7 +38,10 @@
                 <Grid Grid.Row="2" UseLayoutRounding="True" SnapsToDevicePixels="True">
                     <StackPanel Margin="5,0,5,0">
                         <TextBlock x:Name="title" Text="Title" FontSize="18" FontWeight="Black" TextWrapping="Wrap" Foreground="White"/>
-                        <TextBlock x:Name="version" Text="version" FontSize="11" FontWeight="Medium" Foreground="#59FFFFFF" Margin="0,5,0,0"/>
+                        <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                            <TextBlock x:Name="version" Text="version" FontSize="11" FontWeight="Medium" Foreground="#59FFFFFF"/>
+                            <Path x:Name="updateAvailableIcon" Visibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="7,0,0,0" Fill="#FF02DB2D" Stretch="UniformToFill" Width="8" Data="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+                        </StackPanel>
                     </StackPanel>
                     <Grid VerticalAlignment="Bottom" Height="23">
                         <Grid.ColumnDefinitions>

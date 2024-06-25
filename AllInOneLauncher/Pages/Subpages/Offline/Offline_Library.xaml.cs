@@ -26,6 +26,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             Game = game;
             search.Text = "";
 
+            libraryTiles.Children.Clear();
             List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: game);
             libraryTiles.Children.Clear();
             foreach (BfmeWorkshopEntry entry in entries)
@@ -35,6 +36,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         private async void Search(string keyword)
         {
+            libraryTiles.Children.Clear();
             List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: keyword);
             libraryTiles.Children.Clear();
             foreach (BfmeWorkshopEntry entry in entries)

@@ -1,4 +1,5 @@
-﻿using BfmeWorkshopKit.Logic;
+﻿using AllInOneLauncher.Pages.Primary;
+using BfmeWorkshopKit.Logic;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,18 +24,21 @@ namespace AllInOneLauncher.Elements
 
         private void OnSyncBegin(BfmeWorkshopKit.Data.BfmeWorkshopEntry entry)
         {
-            ButtonState = LaunchButtonState.Loading;
-            LoadStatus = $"Switching to {entry.Name}";
+            Dispatcher.Invoke(() =>
+            {
+                ButtonState = LaunchButtonState.Loading;
+                LoadStatus = $"Switching to {entry.Name}";
+            });
         }
 
         private void OnSyncUpdate(int progress)
         {
-            LoadProgress = progress;
+            Dispatcher.Invoke(() => LoadProgress = progress);
         }
 
         private void OnSyncEnd()
         {
-            ButtonState = LaunchButtonState.Launch;
+            Dispatcher.Invoke(() => ButtonState = LaunchButtonState.Launch);
         }
 
         public event EventHandler? OnLaunchClicked;

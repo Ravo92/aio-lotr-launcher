@@ -2,7 +2,9 @@
 using BfmeWorkshopKit.Logic;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,11 +51,7 @@ namespace AllInOneLauncher.Elements
         public bool IsUpdateAvailable
         {
             get => updateAvailableIcon.Visibility == Visibility.Visible;
-            set
-            {
-                updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
-                inLibraryIcon.Opacity = value ? 0d : 1d;
-            }
+            set => updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void OnEnter(object sender, MouseEventArgs e)
@@ -75,25 +73,14 @@ namespace AllInOneLauncher.Elements
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            Task.Run(() =>
+            Task.Run(async () =>
             {
-                string libraryDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Library");
-                foreach (var file in Directory.GetFiles(libraryDirectory))
+                BfmeWorkshopEntry? localEntry = (await BfmeWorkshopLibraryManager.Search(page: -1)).Select(x => new BfmeWorkshopEntry?(x)).FirstOrDefault(x => x != null && x.Value!.Guid == WorkshopEntry.Guid, null);
+                Dispatcher.Invoke(() =>
                 {
-                    try
-                    {
-                        BfmeWorkshopEntry entry = JsonConvert.DeserializeObject<BfmeWorkshopEntry>(File.ReadAllText(file));
-                        if(entry.Guid == WorkshopEntry.Guid)
-                        {
-                            Dispatcher.Invoke(() =>
-                            {
-                                IsInLibrary = true;
-                                IsUpdateAvailable = entry.Version != WorkshopEntry.Version;
-                            });
-                        }
-                    }
-                    catch { }
-                }
+                    IsInLibrary = localEntry != null;
+                    IsUpdateAvailable = localEntry != null && localEntry!.Value.Version != WorkshopEntry.Version;
+                });
             });
         }
     }

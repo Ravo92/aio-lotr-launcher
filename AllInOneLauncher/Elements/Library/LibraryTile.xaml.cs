@@ -10,6 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace AllInOneLauncher.Elements
 {
@@ -27,30 +30,42 @@ namespace AllInOneLauncher.Elements
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
         }
 
-        private void OnSyncBegin(BfmeWorkshopKit.Data.BfmeWorkshopEntry entry)
+        private void OnSyncBegin(BfmeWorkshopEntry entry)
         {
-            isActiveIcon.Opacity = (entry.Guid == WorkshopEntry.Guid) ? 1d : 0d;
-            IsHitTestVisible = false;
-            IsLoading = entry.Guid == WorkshopEntry.Guid;
+            if (entry.Game != WorkshopEntry.Game)
+                return;
+
+            Dispatcher.Invoke(() =>
+            {
+                isActiveIcon.Opacity = (entry.Guid == WorkshopEntry.Guid) ? 1d : 0d;
+                IsHitTestVisible = false;
+                IsLoading = entry.Guid == WorkshopEntry.Guid;
+            });
         }
 
         private void OnSyncUpdate(int progress)
         {
-            if(IsLoading)
-                LoadProgress = progress;
+            Dispatcher.Invoke(() =>
+            {
+                if (IsLoading)
+                    LoadProgress = progress;
+            });
         }
 
         private void OnSyncEnd()
         {
-            IsHitTestVisible = true;
-            IsLoading = false;
+            Dispatcher.Invoke(() =>
+            {
+                IsHitTestVisible = true;
+                IsLoading = false;
 
-            IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled(WorkshopEntry.Game);
-            content.Opacity = IsHitTestVisible ? 1 : 0.5;
-            if (IsHitTestVisible)
-                try { icon.Source = new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl)); } catch { }
-            else
-                try { icon.Source = new FormatConvertedBitmap(new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl)), PixelFormats.Gray16, BitmapPalettes.Gray16, 1); } catch { }
+                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled(WorkshopEntry.Game);
+                content.Opacity = IsHitTestVisible ? 1 : 0.5;
+                if (IsHitTestVisible)
+                    try { icon.Source = new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl)); } catch { }
+                else
+                    try { icon.Source = new FormatConvertedBitmap(new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl)), PixelFormats.Gray16, BitmapPalettes.Gray16, 1); } catch { }
+            });
         }
 
         BfmeWorkshopEntry _workshopEntry;
@@ -96,6 +111,12 @@ namespace AllInOneLauncher.Elements
             }
         }
 
+        public bool IsUpdateAvailable
+        {
+            get => updateAvailableIcon.Visibility == Visibility.Visible;
+            set => updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+        }
+
         private void OnEnter(object sender, MouseEventArgs e)
         {
             hoverEffect.Opacity = 1;
@@ -137,6 +158,19 @@ namespace AllInOneLauncher.Elements
                 progressBar.progressGradientStop1.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
                 progressBar.progressGradientStop2.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
             }
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            Task.Run(async () =>
+            {
+                try
+                {
+                    if ((await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid)).entry.Version != WorkshopEntry.Version)
+                        Dispatcher.Invoke(() => IsUpdateAvailable = true);
+                }
+                catch { }
+            });
         }
     }
 }

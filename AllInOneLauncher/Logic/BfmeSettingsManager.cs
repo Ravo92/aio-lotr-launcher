@@ -52,11 +52,8 @@ namespace AllInOneLauncher.Logic
                 Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
 
             string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
-            MessageBox.Show(optionsFile + " " + (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6));
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
-
-            MessageBox.Show(optionsFile + " " + (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6));
         }
 
         public static string DefaultOptions = @$"AllHealthBars = yes

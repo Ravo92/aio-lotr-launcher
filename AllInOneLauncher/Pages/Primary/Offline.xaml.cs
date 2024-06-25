@@ -49,19 +49,29 @@ namespace AllInOneLauncher.Pages.Primary
 
         private void OnSyncBegin(BfmeWorkshopEntry entry)
         {
-            activeEntry.Entry = entry;
-            activeEntry.IsLoading = true;
-            gameTabs.IsHitTestVisible = false;
-            innerTabs.IsHitTestVisible = false;
-            library.IsHitTestVisible = false;
+            Dispatcher.Invoke(() =>
+            {
+                if (entry.Game == gameTabs.SelectedIndex)
+                {
+                    activeEntry.Entry = entry;
+                    activeEntry.IsLoading = true;
+                }
+
+                gameTabs.IsHitTestVisible = false;
+                innerTabs.IsHitTestVisible = false;
+                library.IsHitTestVisible = false;
+            });
         }
 
         private void OnSyncEnd()
         {
-            activeEntry.IsLoading = false;
-            gameTabs.IsHitTestVisible = true;
-            innerTabs.IsHitTestVisible = true;
-            library.IsHitTestVisible = true;
+            Dispatcher.Invoke(() =>
+            {
+                activeEntry.IsLoading = false;
+                gameTabs.IsHitTestVisible = true;
+                innerTabs.IsHitTestVisible = true;
+                library.IsHitTestVisible = true;
+            });
         }
 
         public void ShowLibrary()
