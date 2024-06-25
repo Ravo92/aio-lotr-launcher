@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Security.Principal;
 using AllInOneLauncher.Logic;
 using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
@@ -63,7 +62,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void ButtonChangeCdKey_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ButtonChangeCdKey_Click(object sender, RoutedEventArgs e)
         {
             LauncherStateManager.AsElevated(() =>
             {

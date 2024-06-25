@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Controls;
-using System.Security.Principal;
 using AllInOneLauncher.Logic;
 using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
@@ -29,7 +26,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.ROTWKResolutionSetting) ? Properties.Settings.Default.ROTWKResolutionSetting : ComboBoxResolution.Items[^1];
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.ROTWKLanguageSetting != 0 ? Properties.Settings.Default.ROTWKLanguageSetting : 0;
 
-            string cdKey = BFMERegistryManager.GetBFMESerialKey(0);
+            string cdKey = BFMERegistryManager.GetBFMESerialKey(AvailableBFMEGames.ROTWK);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
             if (LauncherStateManager.IsElevated)
@@ -67,7 +64,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void ButtonChangeCdKey_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ButtonChangeCdKey_Click(object sender, RoutedEventArgs e)
         {
             LauncherStateManager.AsElevated(() =>
             {
