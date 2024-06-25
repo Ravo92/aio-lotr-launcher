@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Windows;
-using System.Net.Http;
 using AllInOneLauncher.Elements;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using AllInOneLauncher.Popups;
@@ -14,6 +11,7 @@ using BfmeWorkshopKit.Logic;
 using AllInOneLauncher.Logic;
 using BfmeWorkshopKit.Data;
 using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
+using System.Windows.Input;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -23,19 +21,11 @@ namespace AllInOneLauncher.Pages.Primary
     public partial class Offline : UserControl
     {
         internal static readonly Offline Instance = new();
-
-        readonly Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.txt");
-        readonly Uri changelogROTWK = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
-
-        private readonly string tempFileBFME2 = Path.GetTempFileName() + ".html";
-        private readonly string tempFileROTWK = Path.GetTempFileName() + ".html";
-
         private int previousSelectedIndex = -1;
 
         public Offline()
         {
             InitializeComponent();
-            InitializeWebView();
             Properties.Settings.Default.SettingsSaving += LauncherSettingsChanged;
 
             BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
@@ -43,9 +33,10 @@ namespace AllInOneLauncher.Pages.Primary
         }
 
         private void LauncherSettingsChanged(object sender, EventArgs e) => UpdateTitleImage();
-        private void OnLibraryTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowLibrary();
-        private void OnWorkshopTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowWorkshop();
-        private void OnNewsTabClicked(object sender, System.Windows.Input.MouseButtonEventArgs e) => ShowNews();
+
+        private void OnNewsTabClicked(object sender, MouseButtonEventArgs e) => ShowNews();
+        private void OnLibraryTabClicked(object sender, MouseButtonEventArgs e) => ShowLibrary();
+        private void OnWorkshopTabClicked(object sender, MouseButtonEventArgs e) => ShowWorkshop();
 
         private void OnSyncBegin(BfmeWorkshopEntry entry)
         {
@@ -74,6 +65,23 @@ namespace AllInOneLauncher.Pages.Primary
             });
         }
 
+        public void ShowNews()
+        {
+            foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
+            {
+                if (tab == newsTab)
+                    tab.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1EFFFFFF"));
+                else
+                    tab.Background = Brushes.Transparent;
+            }
+
+            news.Visibility = Visibility.Visible;
+            library.Visibility = Visibility.Hidden;
+            workshop.Visibility = Visibility.Hidden;
+
+            news.Load((BfmeGame)gameTabs.SelectedIndex);
+        }
+
         public void ShowLibrary()
         {
             foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
@@ -84,6 +92,7 @@ namespace AllInOneLauncher.Pages.Primary
                     tab.Background = Brushes.Transparent;
             }
 
+            news.Visibility = Visibility.Hidden;
             library.Visibility = Visibility.Visible;
             workshop.Visibility = Visibility.Hidden;
 
@@ -101,27 +110,17 @@ namespace AllInOneLauncher.Pages.Primary
                     tab.Background = Brushes.Transparent;
             }
 
+            news.Visibility = Visibility.Hidden;
             library.Visibility = Visibility.Hidden;
             workshop.Visibility = Visibility.Visible;
 
             workshop.Load(gameTabs.SelectedIndex);
         }
 
-        public void ShowNews()
-        {
-            foreach (Border tab in Instance!.innerTabs.Children.OfType<Border>())
-            {
-                if (tab == newsTab)
-                    tab.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#1EFFFFFF"));
-                else
-                    tab.Background = Brushes.Transparent;
-            }
-        }
-
         private void OnLaunchGameClicked(object sender, EventArgs e)
         {
             LauncherStateManager.Visible = false;
-            BFMELaunchManager.LaunchGame((AvailableBFMEGames)gameTabs.SelectedIndex, ToggleLaunchWindowed.IsToggled);
+            BfmeLaunchManager.LaunchGame((BfmeGame)gameTabs.SelectedIndex, ToggleLaunchWindowed.IsToggled);
             LauncherStateManager.Visible = true;
         }
 
@@ -138,10 +137,10 @@ namespace AllInOneLauncher.Pages.Primary
 
                     try
                     {
-                        BFMERegistryManager.CreateBFMEInstallRegistry((AvailableBFMEGames)game, selectedLocation, selectedLanguage);
+                        BfmeRegistryManager.CreateBFMEInstallRegistry((BfmeGame)game, selectedLocation, selectedLanguage);
                         await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.BaseGame(game), (progress) => { }, (downloadItem, downloadProgress) => { });
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error had occurred while installing the game.\n{ex}"));
                     }
@@ -158,7 +157,7 @@ namespace AllInOneLauncher.Pages.Primary
 
                 UpdateTitleImage();
                 UpdatePlayButton();
-                ShowLibrary();
+                ShowNews();
             }
         }
 
@@ -170,7 +169,7 @@ namespace AllInOneLauncher.Pages.Primary
             else if (gameTabs.SelectedIndex == 1)
                 game = "BFME2";
             else if (gameTabs.SelectedIndex == 2)
-                game = "ROTWK";
+                game = "Rotwk";
             else
                 return;
 
@@ -187,7 +186,7 @@ namespace AllInOneLauncher.Pages.Primary
 
         private void UpdatePlayButton()
         {
-            if (BFMERegistryManager.IsBFMEInstalled((AvailableBFMEGames)gameTabs.SelectedIndex))
+            if (BfmeRegistryManager.IsBFMEInstalled((BfmeGame)gameTabs.SelectedIndex))
                 launchButton.ButtonState = LaunchButtonState.Launch;
             else
                 launchButton.ButtonState = LaunchButtonState.Install;
@@ -203,42 +202,6 @@ namespace AllInOneLauncher.Pages.Primary
         {
             Properties.Settings.Default.IsWindowed = false;
             Properties.Settings.Default.Save();
-        }
-
-        private async void InitializeWebView()
-        {
-            string contentBFME2 = await LoadContentFromUriAsync(changelogBFME2);
-            string contentROTWK = await LoadContentFromUriAsync(changelogROTWK);
-
-            await WriteTextToFile(tempFileBFME2, contentBFME2, Encoding.UTF8, "transparent", "white");
-            await WriteTextToFile(tempFileROTWK, contentROTWK, Encoding.UTF8, "transparent", "white");
-        }
-
-        private static async Task WriteTextToFile(string filePath, string content, Encoding encoding, string backgroundColor, string foregroundColor)
-        {
-            string htmlContent = $@"
-                <!DOCTYPE html>
-                <html>
-                <head>
-                <style>
-                body {{
-                    background-color: {backgroundColor};
-                    color: {foregroundColor};
-                }}
-                </style>
-                </head>
-                <body>
-                <pre>{content}</pre>
-                </body>
-                </html>";
-
-            await File.WriteAllTextAsync(filePath, htmlContent, encoding);
-        }
-
-        private static async Task<string> LoadContentFromUriAsync(Uri uri)
-        {
-            using HttpClient client = new();
-            return await client.GetStringAsync(uri);
         }
     }
 }

@@ -2,28 +2,28 @@
 
 namespace AllInOneLauncher.Logic
 {
-    internal class LauncherGameSelectionManager
+    public class LauncherGameSelectionManager
     {
-        internal static readonly string BFME1 = "lotrbfme.exe";
-        internal static readonly string BFME2 = "lotrbfme2.exe";
-        internal static readonly string ROTWK = "lotrbfme2ep1.exe";
+        private static readonly string BFME1 = "lotrbfme.exe";
+        private static readonly string BFME2 = "lotrbfme2.exe";
+        private static readonly string Rotwk = "lotrbfme2ep1.exe";
 
-        internal enum AvailableBFMEGames
+        public enum BfmeGame
         {
             BFME1 = 0,
             BFME2 = 1,
-            ROTWK = 2,
+            Rotwk = 2,
             NONE = 3
         }
 
-        public static string GetFileName(AvailableBFMEGames availableBFMEGames)
+        public static string GetFileName(BfmeGame game)
         {
-            return availableBFMEGames switch
+            return game switch
             {
-                AvailableBFMEGames.BFME1 => BFME1,
-                AvailableBFMEGames.BFME2 => BFME2,
-                AvailableBFMEGames.ROTWK => ROTWK,
-                _ => throw new ArgumentOutOfRangeException(nameof(availableBFMEGames), availableBFMEGames, null)
+                BfmeGame.BFME1 => BFME1,
+                BfmeGame.BFME2 => BFME2,
+                BfmeGame.Rotwk => Rotwk,
+                _ => throw new ArgumentOutOfRangeException(nameof(game), game, null)
             };
         }
     }

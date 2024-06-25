@@ -5,14 +5,14 @@ using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
 namespace AllInOneLauncher.Logic
 {
-    internal static class BFMESettingsManager
+    internal static class BfmeSettingsManager
     {
-        internal static string? Get(AvailableBFMEGames availableBFMEGames, string optionName)
+        internal static string? Get(BfmeGame game, string optionName)
         {
-            if (!Directory.Exists(BFMERegistryManager.GetBFMEDataPath(availableBFMEGames)))
-                Directory.CreateDirectory(BFMERegistryManager.GetBFMEDataPath(availableBFMEGames));
+            if (!Directory.Exists(BfmeRegistryManager.GetBFMEDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBFMEDataPath(game));
 
-            string optionsFile = Path.Combine(BFMERegistryManager.GetBFMEDataPath(availableBFMEGames), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBFMEDataPath(game), "Options.ini");
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
@@ -25,12 +25,12 @@ namespace AllInOneLauncher.Logic
                 return null;
         }
 
-        internal static void Set(AvailableBFMEGames availableBFMEGames, string optionName, string value)
+        internal static void Set(BfmeGame game, string optionName, string value)
         {
-            if (!Directory.Exists(BFMERegistryManager.GetBFMEDataPath(availableBFMEGames)))
-                Directory.CreateDirectory(BFMERegistryManager.GetBFMEDataPath(availableBFMEGames));
+            if (!Directory.Exists(BfmeRegistryManager.GetBFMEDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBFMEDataPath(game));
 
-            string optionsFile = Path.Combine(BFMERegistryManager.GetBFMEDataPath(availableBFMEGames), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBFMEDataPath(game), "Options.ini");
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
@@ -45,12 +45,12 @@ namespace AllInOneLauncher.Logic
             File.WriteAllText(optionsFile, string.Join('\n', optionsTable.Select(x => $"{x.Key} = {x.Value}")));
         }
 
-        internal static void EnsureOptionsFile(AvailableBFMEGames game)
+        internal static void EnsureOptionsFile(BfmeGame game)
         {
-            if (!Directory.Exists(BFMERegistryManager.GetBFMEDataPath(game)))
-                Directory.CreateDirectory(BFMERegistryManager.GetBFMEDataPath(game));
+            if (!Directory.Exists(BfmeRegistryManager.GetBFMEDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBFMEDataPath(game));
 
-            string optionsFile = Path.Combine(BFMERegistryManager.GetBFMEDataPath(game), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBFMEDataPath(game), "Options.ini");
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
         }

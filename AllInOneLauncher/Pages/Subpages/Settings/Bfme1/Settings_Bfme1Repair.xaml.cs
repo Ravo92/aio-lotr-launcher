@@ -7,12 +7,12 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
     /// <summary>
     /// Interaktionslogik für BFME1Settings_Repair.xaml
     /// </summary>
-    public partial class Settings_BFME1Repair : UserControl
+    public partial class Settings_Bfme1Repair : UserControl
     {
         bool isNotUserInteractionForResolutionDropDown = true;
         bool isNotUserInteractionForLanguageDropDown = true;
 
-        public Settings_BFME1Repair()
+        public Settings_Bfme1Repair()
         {
             InitializeComponent();
         }

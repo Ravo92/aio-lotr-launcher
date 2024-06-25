@@ -86,24 +86,24 @@ namespace AllInOneLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int ROTWKLanguageSetting {
+        public int RotwkLanguageSetting {
             get {
-                return ((int)(this["ROTWKLanguageSetting"]));
+                return ((int)(this["RotwkLanguageSetting"]));
             }
             set {
-                this["ROTWKLanguageSetting"] = value;
+                this["RotwkLanguageSetting"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ROTWKResolutionSetting {
+        public string RotwkResolutionSetting {
             get {
-                return ((string)(this["ROTWKResolutionSetting"]));
+                return ((string)(this["RotwkResolutionSetting"]));
             }
             set {
-                this["ROTWKResolutionSetting"] = value;
+                this["RotwkResolutionSetting"] = value;
             }
         }
         
@@ -134,12 +134,12 @@ namespace AllInOneLauncher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ROTWKGameInstalled {
+        public bool RotwkGameInstalled {
             get {
-                return ((bool)(this["ROTWKGameInstalled"]));
+                return ((bool)(this["RotwkGameInstalled"]));
             }
             set {
-                this["ROTWKGameInstalled"] = value;
+                this["RotwkGameInstalled"] = value;
             }
         }
         

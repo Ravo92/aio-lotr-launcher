@@ -4,16 +4,16 @@ using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
 namespace AllInOneLauncher.Logic
 {
-    internal static class BFMELaunchManager
+    internal static class BfmeLaunchManager
     {
-        internal static void LaunchGame(AvailableBFMEGames availableBFMEGames, bool windowed)
+        internal static void LaunchGame(BfmeGame game, bool windowed)
         {
-            BFMESettingsManager.EnsureOptionsFile(availableBFMEGames);
+            BfmeSettingsManager.EnsureOptionsFile(game);
 
             using Process? gameProcess = Process.Start(new ProcessStartInfo()
             {
-                WorkingDirectory = BFMERegistryManager.GetBFMEInstallPath(availableBFMEGames),
-                FileName = Path.Combine(BFMERegistryManager.GetBFMEInstallPath(availableBFMEGames), BFMERegistryManager.GetBFMEExecutableName(availableBFMEGames)),
+                WorkingDirectory = BfmeRegistryManager.GetBFMEInstallPath(game),
+                FileName = Path.Combine(BfmeRegistryManager.GetBFMEInstallPath(game), BfmeRegistryManager.GetBFMEExecutableName(game)),
                 Arguments = windowed ? $"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width - 100} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height - 100}" : "",
             });
 
