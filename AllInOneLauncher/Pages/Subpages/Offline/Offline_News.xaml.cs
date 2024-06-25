@@ -1,10 +1,10 @@
-﻿using System;
+﻿using AllInOneLauncher.Data;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -70,7 +70,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             {
                 BfmeGame.BFME1 => new("https://ravo92.github.io/changelogpage/index.html"),
                 BfmeGame.BFME2 => changelogBFME2,
-                BfmeGame.Rotwk => changelogRotwk,
+                BfmeGame.ROTWK => changelogRotwk,
                 _ => throw new ArgumentOutOfRangeException(nameof(game), game, null)
             };
         }

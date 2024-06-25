@@ -14,7 +14,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             InitializeComponent();
 
-            BfmeRegistryManager.EnsureBFMEAppRegistry(BfmeGame.BFME2);
+            BfmeRegistryManager.EnsureBfmeAppRegistry(BfmeGame.BFME2);
             BfmeSettingsManager.EnsureOptionsFile(BfmeGame.BFME2);
 
             InitializePageElements();
@@ -26,7 +26,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.BFME2ResolutionSetting) ? Properties.Settings.Default.BFME2ResolutionSetting : ComboBoxResolution.Items[^1];
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.BFME2LanguageSetting != 0 ? Properties.Settings.Default.BFME2LanguageSetting : 0;
 
-            string cdKey = BfmeRegistryManager.GetBFMESerialKey(BfmeGame.BFME2);
+            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.BFME2);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
             if (LauncherStateManager.IsElevated)
@@ -66,8 +66,8 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             LauncherStateManager.AsElevated(() =>
             {
-                BfmeRegistryManager.EnsureBFMEAppRegistry(BfmeGame.BFME2);
-                string cdKey = BfmeRegistryManager.GetBFMESerialKey(BfmeGame.BFME2);
+                BfmeRegistryManager.EnsureBfmeAppRegistry(BfmeGame.BFME2);
+                string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.BFME2);
                 TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
             });
         }

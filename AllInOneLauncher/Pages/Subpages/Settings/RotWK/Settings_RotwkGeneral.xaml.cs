@@ -14,8 +14,8 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             InitializeComponent();
 
-            BfmeRegistryManager.EnsureBFMEAppRegistry(BfmeGame.Rotwk);
-            BfmeSettingsManager.EnsureOptionsFile(BfmeGame.Rotwk);
+            BfmeRegistryManager.EnsureBfmeAppRegistry(BfmeGame.ROTWK);
+            BfmeSettingsManager.EnsureOptionsFile(BfmeGame.ROTWK);
 
             InitializePageElements();
         }
@@ -26,7 +26,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.RotwkResolutionSetting) ? Properties.Settings.Default.RotwkResolutionSetting : ComboBoxResolution.Items[^1];
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.RotwkLanguageSetting != 0 ? Properties.Settings.Default.RotwkLanguageSetting : 0;
 
-            string cdKey = BfmeRegistryManager.GetBFMESerialKey(BfmeGame.Rotwk);
+            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.ROTWK);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
             if (LauncherStateManager.IsElevated)
@@ -60,7 +60,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         private void SaveResolutionSettings()
         {
             Properties.Settings.Default.RotwkResolutionSetting = ComboBoxResolution.SelectedItem?.ToString();
-            BfmeSettingsManager.Set(BfmeGame.Rotwk, "Resolution", ComboBoxResolution.SelectedValue?.ToString() ?? string.Empty);
+            BfmeSettingsManager.Set(BfmeGame.ROTWK, "Resolution", ComboBoxResolution.SelectedValue?.ToString() ?? string.Empty);
             Properties.Settings.Default.Save();
         }
 
@@ -68,8 +68,8 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             LauncherStateManager.AsElevated(() =>
             {
-                BfmeRegistryManager.EnsureBFMEAppRegistry(BfmeGame.Rotwk);
-                string cdKey = BfmeRegistryManager.GetBFMESerialKey(BfmeGame.Rotwk);
+                BfmeRegistryManager.EnsureBfmeAppRegistry(BfmeGame.ROTWK);
+                string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.ROTWK);
                 TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
             });
         }

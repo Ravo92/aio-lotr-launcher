@@ -22,13 +22,17 @@
         public const string C_MAIN_GAMEDAT_FILE = "game.dat";
         public const string C_BFME1_MAIN_GAME_FILE = "lotrbfme.exe";
         public const string C_BFME2_MAIN_GAME_FILE = "lotrbfme2.exe";
-        public const string C_Rotwk_MAIN_GAME_FILE = "lotrbfme2ep1.exe";
+        public const string C_ROTWK_MAIN_GAME_FILE = "lotrbfme2ep1.exe";
         public const string C_WORLDBUILDER_FILE = "worldbuilder.exe";
 
         public const string C_TOOLFOLDER_NAME = "Tools";
         public const string C_PATCHFOLDER_NAME = "Patches";
         public const string C_LOGFOLDER_NAME = "Logfiles";
         public const string C_JSON_GAMEDICTIONARY_MAIN_FILE = "GameFileDictionary.json";
+
+        public const string C_BFME1_EXECUTABLE = "lotrbfme.exe";
+        public const string C_BFME2_EXECUTABLE = "lotrbfme2.exe";
+        public const string C_ROTWK_EXECUTABLE = "lotrbfme2ep1.exe";
 
         public const string C_ERRORLOGGING_FILE = "PLEASE_REPORT_TO_DEVELOPER_UnassignedErrors.log";
         public const string C_LOGFILE_GAMEFILETOOLS_NAME = "GameFileTools.log";

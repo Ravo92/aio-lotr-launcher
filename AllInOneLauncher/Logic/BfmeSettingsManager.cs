@@ -9,48 +9,45 @@ namespace AllInOneLauncher.Logic
     {
         internal static string? Get(BfmeGame game, string optionName)
         {
-            if (!Directory.Exists(BfmeRegistryManager.GetBFMEDataPath(game)))
-                Directory.CreateDirectory(BfmeRegistryManager.GetBFMEDataPath(game));
+            if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
 
-            string optionsFile = Path.Combine(BfmeRegistryManager.GetBFMEDataPath(game), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
 
             Dictionary<string, string> optionsTable = File.ReadAllText(optionsFile).Split('\n').Where(x => x.Contains(" = ")).ToDictionary(x => x.Split(" = ")[0], x => x.Split(" = ")[1]);
 
-            if (optionsTable.ContainsKey(optionName))
-                return optionsTable[optionName];
+            if (optionsTable.TryGetValue(optionName, out string? value))
+                return value;
             else
                 return null;
         }
 
         internal static void Set(BfmeGame game, string optionName, string value)
         {
-            if (!Directory.Exists(BfmeRegistryManager.GetBFMEDataPath(game)))
-                Directory.CreateDirectory(BfmeRegistryManager.GetBFMEDataPath(game));
+            if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
 
-            string optionsFile = Path.Combine(BfmeRegistryManager.GetBFMEDataPath(game), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
 
             Dictionary<string, string> optionsTable = File.ReadAllText(optionsFile).Split('\n').Where(x => x.Contains(" = ")).ToDictionary(x => x.Split(" = ")[0], x => x.Split(" = ")[1]);
 
-            if (optionsTable.ContainsKey(optionName))
+            if (!optionsTable.TryAdd(optionName, value))
                 optionsTable[optionName] = value;
-            else
-                optionsTable.Add(optionName, value);
-
             File.WriteAllText(optionsFile, string.Join('\n', optionsTable.Select(x => $"{x.Key} = {x.Value}")));
         }
 
         internal static void EnsureOptionsFile(BfmeGame game)
         {
-            if (!Directory.Exists(BfmeRegistryManager.GetBFMEDataPath(game)))
-                Directory.CreateDirectory(BfmeRegistryManager.GetBFMEDataPath(game));
+            if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
+                Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
 
-            string optionsFile = Path.Combine(BfmeRegistryManager.GetBFMEDataPath(game), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
         }

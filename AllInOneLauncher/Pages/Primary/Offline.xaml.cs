@@ -10,8 +10,8 @@ using System.Linq;
 using BfmeWorkshopKit.Logic;
 using AllInOneLauncher.Logic;
 using BfmeWorkshopKit.Data;
-using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
 using System.Windows.Input;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -137,7 +137,7 @@ namespace AllInOneLauncher.Pages.Primary
 
                     try
                     {
-                        BfmeRegistryManager.CreateBFMEInstallRegistry((BfmeGame)game, selectedLocation, selectedLanguage);
+                        BfmeRegistryManager.CreateBfmeInstallRegistry((BfmeGame)game, selectedLocation, selectedLanguage);
                         await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.BaseGame(game), (progress) => { }, (downloadItem, downloadProgress) => { });
                     }
                     catch (Exception ex)
@@ -186,7 +186,7 @@ namespace AllInOneLauncher.Pages.Primary
 
         private void UpdatePlayButton()
         {
-            if (BfmeRegistryManager.IsBFMEInstalled((BfmeGame)gameTabs.SelectedIndex))
+            if (BfmeRegistryManager.IsBfmeInstalled((BfmeGame)gameTabs.SelectedIndex))
                 launchButton.ButtonState = LaunchButtonState.Launch;
             else
                 launchButton.ButtonState = LaunchButtonState.Install;
