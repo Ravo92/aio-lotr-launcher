@@ -5,7 +5,7 @@ using AllInOneLauncher.Logic;
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
     /// <summary>
-    /// Interaktionslogik für BFME1Settings_Repair.xaml
+    /// Interaktionslogik für Settings_Bfme1Repair.xaml
     /// </summary>
     public partial class Settings_Bfme1Repair : UserControl
     {
@@ -45,12 +45,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void BFME1ChildSettingsWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
-
-        private void BFME1ChildSettingsWindow_Initialized(object sender, EventArgs e)
+        private void OnInitialized(object sender, EventArgs e)
         {
             ComboBoxResolution.ItemsSource = SystemDisplayManager.GetAllSupportedResolutions();
 

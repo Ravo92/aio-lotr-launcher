@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher.Logic
 {

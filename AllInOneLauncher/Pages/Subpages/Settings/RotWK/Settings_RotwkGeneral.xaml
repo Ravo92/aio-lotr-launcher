@@ -1,4 +1,4 @@
-﻿<UserControl x:Name="RotwkChildSettingsWindow" x:Class="AllInOneLauncher.Pages.Subpages.Settings.Launcher.Settings_RotwkGeneral"
+<UserControl x:Name="RotwkChildSettingsWindow" x:Class="AllInOneLauncher.Pages.Subpages.Settings.Launcher.Settings_RotwkGeneral"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

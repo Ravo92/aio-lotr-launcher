@@ -5,7 +5,7 @@ using AllInOneLauncher.Logic;
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
     /// <summary>
-    /// Interaktionslogik für RotwkSettings_Repair.xaml
+    /// Interaktionslogik für Settings_RotwkRepair.xaml
     /// </summary>
     public partial class Settings_RotwkRepair : UserControl
     {
@@ -45,12 +45,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void RotwkChildSettingsWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
-
-        private void RotwkChildSettingsWindow_Initialized(object sender, EventArgs e)
+        private void OnInitialized(object sender, EventArgs e)
         {
             ComboBoxResolution.ItemsSource = SystemDisplayManager.GetAllSupportedResolutions();
 

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using AllInOneLauncher.Logic;
-using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
@@ -17,10 +17,10 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             BfmeRegistryManager.EnsureBFMEAppRegistry(BfmeGame.Rotwk);
             BfmeSettingsManager.EnsureOptionsFile(BfmeGame.Rotwk);
 
-            InitializeWindowElements();
+            InitializePageElements();
         }
 
-        private void InitializeWindowElements()
+        private void InitializePageElements()
         {
             ComboBoxResolution.ItemsSource = SystemDisplayManager.GetAllSupportedResolutions();
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.RotwkResolutionSetting) ? Properties.Settings.Default.RotwkResolutionSetting : ComboBoxResolution.Items[^1];
@@ -64,7 +64,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void ButtonChangeCdKey_Click(object sender, RoutedEventArgs e)
+        private void ButtonChangeCdKey_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             LauncherStateManager.AsElevated(() =>
             {

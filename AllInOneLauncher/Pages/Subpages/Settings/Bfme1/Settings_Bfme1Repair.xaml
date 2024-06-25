@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" FontSize="14" Loaded="BFME1ChildSettingsWindow_Loaded" Initialized="BFME1ChildSettingsWindow_Initialized">
+             d:DesignHeight="450" d:DesignWidth="800" FontSize="14" Initialized="OnInitialized">
     <StackPanel>
         <TextBlock Text="{DynamicResource SettingsLauncherGeneralDropDownLabelText}" d:Text="Language" HorizontalAlignment="Left" Foreground="white"/>
         <ComboBox x:Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="0,10,0,0" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxLanguage_SelectionChanged">

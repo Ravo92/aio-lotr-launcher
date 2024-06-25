@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using Microsoft.Win32;
-using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher.Logic
 {
@@ -23,7 +23,7 @@ namespace AllInOneLauncher.Logic
                 CreateBFME1InstallRegistry(installPath, language);
             else if (game == BfmeGame.BFME2)
                 CreateBFME2InstallRegistry(installPath, language);
-            else if (game == BfmeGame.Rotwk)
+            else if (game == BfmeGame.ROTWK)
                 CreateRotwkInstallRegistry(installPath, language);
 
             EnsureBFMEAppRegistry(game);
@@ -36,7 +36,7 @@ namespace AllInOneLauncher.Logic
                     EnsureBFME1AppRegistry();
                 else if (game == BfmeGame.BFME2)
                     EnsureBFME2AppRegistry();
-                else if (game == BfmeGame.Rotwk)
+                else if (game == BfmeGame.ROTWK)
                     EnsureRotwkAppRegistry();
             }
             catch
@@ -45,7 +45,7 @@ namespace AllInOneLauncher.Logic
             }
         }
 
-        private static void CreateBFME1InstallRegistry(string installPath, string language)
+        private static void CreateBfme1InstallRegistry(string installPath, string language)
         {
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
@@ -78,9 +78,9 @@ namespace AllInOneLauncher.Logic
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files", "Options.ini"), BfmeSettingsManager.DefaultOptions);
         }
 
-        private static void EnsureBFME1AppRegistry()
+        private static void EnsureBfme1AppRegistry()
         {
-            string installPath = GetBFMERegistryKeyValue(0, "Install Dir");
+            string installPath = GetBfmeRegistryKeyValue(0, "Install Dir");
 
             Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme.exe", false);
             using RegistryKey? keyApp = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme.exe", true);
@@ -98,7 +98,7 @@ namespace AllInOneLauncher.Logic
                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files"));
         }
 
-        private static void CreateBFME2InstallRegistry(string installPath, string language)
+        private static void CreateBfme2InstallRegistry(string installPath, string language)
         {
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
@@ -131,7 +131,7 @@ namespace AllInOneLauncher.Logic
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files", "Options.ini"), BfmeSettingsManager.DefaultOptions);
         }
 
-        private static void EnsureBFME2AppRegistry()
+        private static void EnsureBfme2AppRegistry()
         {
             string installPath = GetBFMERegistryKeyValue(BfmeGame.BFME2, "Install Dir");
 
@@ -211,7 +211,7 @@ namespace AllInOneLauncher.Logic
                 gameRegistry = @$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\{(useAltKey ? @"Electronic Arts\EA Games\The Battle for Middle-earth" : @"EA Games\The Battle for Middle-earth")}{keySuffix}";
             else if (game == BfmeGame.BFME2)
                 gameRegistry = @$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\{(useAltKey ? @"Electronic Arts\Electronic Arts\The Battle for Middle-earth II" : @"Electronic Arts\The Battle for Middle-earth II")}{keySuffix}";
-            else if (game == BfmeGame.Rotwk)
+            else if (game == BfmeGame.ROTWK)
                 gameRegistry = @$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\{(useAltKey ? @"Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king" : @"Electronic Arts\The Lord of the Rings, The Rise of the Witch-king")}{keySuffix}";
 
             using RegistryKey? registryKey = Registry.LocalMachine.OpenSubKey(gameRegistry, false);
@@ -219,14 +219,14 @@ namespace AllInOneLauncher.Logic
             return result;
         }
 
-        private static void SetBFMERegistryKeyValue(BfmeGame game, string key, string value, bool useAltKey = false, string keySuffix = "")
+        private static void SetBfmeRegistryKeyValue(BfmeGames game, string key, string value, bool useAltKey = false, string keySuffix = "")
         {
             string gameRegistry = "";
-            if (game == BfmeGame.BFME1)
+            if (game == BfmeGames.BFME1)
                 gameRegistry = @$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\{(useAltKey ? @"Electronic Arts\EA Games\The Battle for Middle-earth" : @"EA Games\The Battle for Middle-earth")}{keySuffix}";
-            else if (game == BfmeGame.BFME2)
+            else if (game == BfmeGames.BFME2)
                 gameRegistry = @$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\{(useAltKey ? @"Electronic Arts\Electronic Arts\The Battle for Middle-earth II" : @"Electronic Arts\The Battle for Middle-earth II")}{keySuffix}";
-            else if (game == BfmeGame.Rotwk)
+            else if (game == BfmeGames.ROTWK)
                 gameRegistry = @$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\{(useAltKey ? @"Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king" : @"Electronic Arts\The Lord of the Rings, The Rise of the Witch-king")}{keySuffix}";
 
             using RegistryKey? registryKey = Registry.LocalMachine.OpenSubKey(gameRegistry, true);

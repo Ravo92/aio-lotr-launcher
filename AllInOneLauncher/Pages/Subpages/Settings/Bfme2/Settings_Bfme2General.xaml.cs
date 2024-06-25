@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using AllInOneLauncher.Logic;
-using static AllInOneLauncher.Logic.LauncherGameSelectionManager;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
@@ -17,10 +17,10 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             BfmeRegistryManager.EnsureBFMEAppRegistry(BfmeGame.BFME2);
             BfmeSettingsManager.EnsureOptionsFile(BfmeGame.BFME2);
 
-            InitializeWindowElements();
+            InitializePageElements();
         }
 
-        private void InitializeWindowElements()
+        private void InitializePageElements()
         {
             ComboBoxResolution.ItemsSource = SystemDisplayManager.GetAllSupportedResolutions();
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.BFME2ResolutionSetting) ? Properties.Settings.Default.BFME2ResolutionSetting : ComboBoxResolution.Items[^1];
