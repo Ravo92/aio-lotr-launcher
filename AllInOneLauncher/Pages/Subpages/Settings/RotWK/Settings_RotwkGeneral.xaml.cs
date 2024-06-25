@@ -26,7 +26,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.ROTWKResolutionSetting) ? Properties.Settings.Default.ROTWKResolutionSetting : ComboBoxResolution.Items[^1];
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.ROTWKLanguageSetting != 0 ? Properties.Settings.Default.ROTWKLanguageSetting : 0;
 
-            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(0);
+            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGames.BFME1);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
             if (LauncherStateManager.IsElevated)
