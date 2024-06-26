@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "LauncherDriver": {
-      "commandName": "Project",
-      "commandLineArgs": "--OnlineMode"
-    }
-  }
-}
