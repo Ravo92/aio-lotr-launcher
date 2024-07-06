@@ -17,10 +17,10 @@
     <Setting Name="BFME2LanguageSetting" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ROTWKLanguageSetting" Type="System.Int32" Scope="User">
+    <Setting Name="RotwkLanguageSetting" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ROTWKResolutionSetting" Type="System.String" Scope="User">
+    <Setting Name="RotwkResolutionSetting" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="BFME1GameInstalled" Type="System.Boolean" Scope="User">
@@ -29,7 +29,7 @@
     <Setting Name="BFME2GameInstalled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ROTWKGameInstalled" Type="System.Boolean" Scope="User">
+    <Setting Name="RotwkGameInstalled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="IsWindowed" Type="System.Boolean" Scope="User">

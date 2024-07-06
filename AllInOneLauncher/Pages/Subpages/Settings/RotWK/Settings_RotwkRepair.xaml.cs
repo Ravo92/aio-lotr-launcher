@@ -27,7 +27,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
                 return;
             }
 
-            Properties.Settings.Default.ROTWKLanguageSetting = ComboBoxLanguage.SelectedIndex;
+            Properties.Settings.Default.RotwkLanguageSetting = ComboBoxLanguage.SelectedIndex;
             Properties.Settings.Default.Save();
         }
 
@@ -41,7 +41,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
                 return;
             }
 
-            Properties.Settings.Default.ROTWKResolutionSetting = ComboBoxResolution.SelectedItem.ToString();
+            Properties.Settings.Default.RotwkResolutionSetting = ComboBoxResolution.SelectedItem.ToString();
             Properties.Settings.Default.Save();
         }
 
@@ -49,15 +49,15 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             ComboBoxResolution.ItemsSource = SystemDisplayManager.GetAllSupportedResolutions();
 
-            if (Properties.Settings.Default.ROTWKResolutionSetting != null)
-                ComboBoxResolution.SelectedItem = Properties.Settings.Default.ROTWKResolutionSetting;
+            if (Properties.Settings.Default.RotwkResolutionSetting != null)
+                ComboBoxResolution.SelectedItem = Properties.Settings.Default.RotwkResolutionSetting;
             else
             {
                 ComboBoxResolution.SelectedItem = ComboBoxLanguage.Items.Count - 1;
             }
 
-            if (Properties.Settings.Default.ROTWKLanguageSetting != 0)
-                ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.ROTWKLanguageSetting;
+            if (Properties.Settings.Default.RotwkLanguageSetting != 0)
+                ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.RotwkLanguageSetting;
             else
             {
                 ComboBoxLanguage.SelectedIndex = 0;

@@ -56,7 +56,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryActive.Visibility = Visibility.Visible;
                 activeEntryReloadButton.Visibility = Visibility.Visible;
 
-                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGames)value.Value.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)value.Value.Game);
                 activeEntry.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { activeEntryIcon.Source = new BitmapImage(new Uri(value.Value.ArtworkUrl)); } catch { }

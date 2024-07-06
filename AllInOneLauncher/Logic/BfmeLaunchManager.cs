@@ -7,7 +7,7 @@ namespace AllInOneLauncher.Logic
 {
     internal static class BfmeLaunchManager
     {
-        internal static void LaunchGame(BfmeGames game, bool windowed)
+        internal static void LaunchGame(BfmeGame game, bool windowed)
         {
             BfmeSettingsManager.EnsureOptionsFile(game);
 
@@ -29,13 +29,13 @@ namespace AllInOneLauncher.Logic
             SystemInputManager.ReleaseCursor();
         }
 
-        private static string GetBfmeExecutableName(BfmeGames game)
+        private static string GetBfmeExecutableName(BfmeGame game)
         {
             return game switch
             {
-                BfmeGames.BFME1 => Constants.C_BFME1_EXECUTABLE,
-                BfmeGames.BFME2 => Constants.C_BFME2_EXECUTABLE,
-                BfmeGames.ROTWK => Constants.C_ROTWK_EXECUTABLE,
+                BfmeGame.BFME1 => Constants.C_BFME1_EXECUTABLE,
+                BfmeGame.BFME2 => Constants.C_BFME2_EXECUTABLE,
+                BfmeGame.ROTWK => Constants.C_ROTWK_EXECUTABLE,
                 _ => throw new ArgumentOutOfRangeException(nameof(game), game, null)
             };
         }

@@ -44,7 +44,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             libraryTiles.Children.Add(emptyLibraryTile);
         }
 
-        private void OnInstallMoreClicked(object sender, MouseButtonEventArgs e) => Pages.Primary.Offline.Instance.ShowWorkshop();
+        private void OnInstallMoreClicked(object sender, MouseButtonEventArgs e) => Primary.Offline.Instance.ShowWorkshop();
 
         private void OnReloadClicked(object sender, RoutedEventArgs e) => Search(search.Text);
 

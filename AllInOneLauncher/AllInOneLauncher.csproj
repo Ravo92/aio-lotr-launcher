@@ -115,22 +115,22 @@
 		<Compile Update="Elements\Library\LibraryTileEmpty.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_BFME1General.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_Bfme1General.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_BFME1Repair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_Bfme1Repair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_BFME2General.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_Bfme2General.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_BFME2Repair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_Bfme2Repair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_ROTWKGeneral.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkGeneral.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_ROTWKRepair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkRepair.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Popups\LauncherChangelogPopup.xaml.cs">

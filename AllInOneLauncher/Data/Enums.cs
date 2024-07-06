@@ -1,6 +1,6 @@
 ﻿namespace AllInOneLauncher.Data
 {
-    internal enum BfmeGames
+    public enum BfmeGame
     {
         BFME1 = 0,
         BFME2 = 1,

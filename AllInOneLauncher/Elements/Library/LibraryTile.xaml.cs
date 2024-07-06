@@ -57,7 +57,7 @@ namespace AllInOneLauncher.Elements
                 IsHitTestVisible = true;
                 IsLoading = false;
 
-                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGames)WorkshopEntry.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)WorkshopEntry.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try
@@ -99,7 +99,7 @@ namespace AllInOneLauncher.Elements
                 BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(value.Game);
                 isActiveIcon.Opacity = (activeEntry != null && activeEntry!.Value.Guid == value.Guid) ? 1d : 0d;
 
-                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGames)value.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)value.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { icon.Source = new BitmapImage(new Uri(value.ArtworkUrl)); } catch { }
