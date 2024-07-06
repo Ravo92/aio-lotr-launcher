@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using AllInOneLauncher.Logic;
@@ -26,7 +26,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.RotwkResolutionSetting) ? Properties.Settings.Default.RotwkResolutionSetting : ComboBoxResolution.Items[^1];
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.RotwkLanguageSetting != 0 ? Properties.Settings.Default.RotwkLanguageSetting : 0;
 
-            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.BFME1);
+            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.ROTWK);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
             if (LauncherStateManager.IsElevated)
