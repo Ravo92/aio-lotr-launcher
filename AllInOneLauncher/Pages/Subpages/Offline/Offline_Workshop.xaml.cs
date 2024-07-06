@@ -26,7 +26,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             search.Text = "";
 
             workshopTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Search(game: game);
+            List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: game);
             workshopTiles.Children.Clear();
             foreach (BfmeWorkshopEntry entry in entries)
                 if (!entry.Guid.StartsWith("original-"))
@@ -36,7 +36,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         private async void Search(string keyword)
         {
             workshopTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Search(game: Game, keyword: keyword);
+            List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: Game, keyword: keyword);
             workshopTiles.Children.Clear();
             foreach (BfmeWorkshopEntry entry in entries)
                 if (!entry.Guid.StartsWith("original-"))
