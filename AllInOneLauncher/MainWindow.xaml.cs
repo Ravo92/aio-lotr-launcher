@@ -12,6 +12,7 @@ using System.Windows.Media.Effects;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Elements;
 using AllInOneLauncher.Popups;
+using System.Reflection;
 
 namespace AllInOneLauncher
 {
@@ -65,6 +66,8 @@ namespace AllInOneLauncher
                 else if (args[0] == "--showLauncherUpdateLog")
                     PopupVisualizer.ShowPopup(new LauncherChangelogPopup());
             }
+
+            Application.Current.Exit += OnApplicationExit;
         }
 
         public static void SetContent(FrameworkElement? newContent) => Instance!.content.Child = newContent;
@@ -184,6 +187,22 @@ namespace AllInOneLauncher
             };
             closeApplicationItem.Click += (s, e) => Application.Current.Shutdown();
             newContextMenu.Items.Add(closeApplicationItem);
+        }
+
+        private void OnApplicationExit(object sender, ExitEventArgs e)
+        {
+            string appTempPath = Path.Combine(Path.GetTempPath(), Assembly.GetExecutingAssembly().GetName().Name!);
+            if (Directory.Exists(appTempPath))
+            {
+                try
+                {
+                    Directory.Delete(appTempPath, true);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -15,11 +16,11 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
     {
         public BfmeGame AvailableBFMEGame { get; set; }
 
-        readonly static Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.txt");
-        readonly static Uri changelogRotwk = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
+        private static string contentBFME2 = "";
+        private static string contentRotwk = "";
 
-        private readonly string tempFileBFME2 = Path.GetTempFileName() + ".html";
-        private readonly string tempFileRotwk = Path.GetTempFileName() + ".html";
+        private readonly static string tempFileBFME2 = Path.Combine(Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), Assembly.GetExecutingAssembly().GetName().Name!)).FullName, Path.GetRandomFileName() + ".html"); // Path.GetTempFileName() + ".html";
+        private readonly static string tempFileRotwk = Path.Combine(Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), Assembly.GetExecutingAssembly().GetName().Name!)).FullName, Path.GetRandomFileName() + ".html");
 
         public Offline_News()
         {
@@ -28,10 +29,10 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             Load(BfmeGame.BFME1);
         }
 
-        private async void InitializeWebView()
+        private static async void InitializeWebView()
         {
-            string contentBFME2 = await LoadContentFromUriAsync(changelogBFME2);
-            string contentRotwk = await LoadContentFromUriAsync(changelogRotwk);
+            contentBFME2 = await LoadContentFromUriAsync(new Uri("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.txt"));
+            contentRotwk = await LoadContentFromUriAsync(new Uri("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt"));
 
             await WriteTextToFile(tempFileBFME2, contentBFME2, Encoding.UTF8, "transparent", "white");
             await WriteTextToFile(tempFileRotwk, contentRotwk, Encoding.UTF8, "transparent", "white");
@@ -69,8 +70,8 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             return game switch
             {
                 BfmeGame.BFME1 => new("https://ravo92.github.io/changelogpage/index.html"),
-                BfmeGame.BFME2 => changelogBFME2,
-                BfmeGame.ROTWK => changelogRotwk,
+                BfmeGame.BFME2 => new Uri(tempFileBFME2),
+                BfmeGame.ROTWK => new Uri(tempFileRotwk),
                 _ => throw new ArgumentOutOfRangeException(nameof(game), game, null)
             };
         }
