@@ -141,11 +141,7 @@ namespace AllInOneLauncher
         private void OnLoad(object sender, RoutedEventArgs e) => CheckSize();
         private void OnSizeChanged(object sender, SizeChangedEventArgs e) => CheckSize();
 
-        public void CheckSize()
-        {
-            var dpi = VisualTreeHelper.GetDpi(this);
-            windowGrid.LayoutTransform = new ScaleTransform(1 / dpi.DpiScaleX * Math.Min(1, Math.Min((ActualWidth / 1500), (ActualHeight / 900))), 1 / dpi.DpiScaleX * Math.Min(1, Math.Min((ActualWidth / 1500), (ActualHeight / 900))));
-        }
+        public void CheckSize() => windowGrid.LayoutTransform = new ScaleTransform(Math.Min(10, Math.Min((ActualWidth / 1700), (ActualHeight / 1200))), Math.Min(10, Math.Min((ActualWidth / 1700), (ActualHeight / 1200))));
 
         private void OnTrayIconDoubleClicked(object sender, RoutedEventArgs e) => LauncherStateManager.Visible = true;
 
