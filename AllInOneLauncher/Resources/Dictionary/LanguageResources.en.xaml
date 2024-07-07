@@ -6,7 +6,6 @@
 
     <system:String x:Key="MainLauncherLibrary">SINGLEPLAYER</system:String>
     <system:String x:Key="MainLauncherOnline">MULTIPLAYER</system:String>
-    <system:String x:Key="MainLauncherWorkShop">WORKSHOP</system:String>
     <system:String x:Key="MainLauncherGuides">GUIDES</system:String>
     <system:String x:Key="MainLauncherPlay">PLAY</system:String>
     <system:String x:Key="MainLauncherInstall">INSTALL</system:String>
@@ -17,6 +16,23 @@
 
     <system:String x:Key="LauncherButtonAccept">ACCEPT</system:String>
     <system:String x:Key="LauncherButtonCancel">CANCEL</system:String>
+
+    <system:String x:Key="OfflinePageButtonNews">Changelog</system:String>
+    <system:String x:Key="OfflinePageButtonLibrary">Library</system:String>
+    <system:String x:Key="OfflinePageButtonWorkshop">Workshop</system:String>
+
+    <system:String x:Key="OfflineLaunchGameSettings">Change game startup options...</system:String>
+
+    <system:String x:Key="LibraryTileButtonSyncAgain">Sync again</system:String>
+    <system:String x:Key="LibraryTileButtonSyncing">Refreshing...</system:String>
+    <system:String x:Key="LibraryTileButtonActive">Active</system:String>
+    <system:String x:Key="LibraryTileButtonNoPatchSelected">No patch selected...</system:String>
+    <system:String x:Key="LibraryTileButtonInstallMore">Install more</system:String>
+    <system:String x:Key="LibraryTileButtonDiscoverNewObjects">Discover new content on the Workshop!</system:String>
+    <system:String x:Key="LibraryTileSearchBar">Search in library...</system:String>
+
+    <system:String x:Key="WorkshopTileSearchBar">Search in Workshop...</system:String>
+    <system:String x:Key="WorkshopSortbyDownload">Sort by downloads</system:String>
 
     <system:String x:Key="GameInstallDialogLanguage">Language</system:String>
     <system:String x:Key="GameInstallDialogLibrary">Library</system:String>

@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="140" d:DesignWidth="360">
     <Border Grid.Row="2" CornerRadius="15">
-        <Border.Effect>
+        <!--<Border.Effect>
             <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
-        </Border.Effect>
+        </Border.Effect>-->
         <Border.OpacityMask>
             <VisualBrush>
                 <VisualBrush.Visual>
@@ -56,7 +56,7 @@
                     <Border x:Name="activeEntryActive" Background="#016FB3" CornerRadius="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Hidden">
                         <StackPanel Margin="10,6,12,6" Orientation="Horizontal">
                             <Path HorizontalAlignment="Right" VerticalAlignment="Center" Fill="White" Stroke="White" StrokeThickness="0.3" Stretch="Uniform" Height="8" Data="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                            <TextBlock Text="Active" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="{DynamicResource LibraryTileButtonActive}" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </Border>
                     <Border x:Name="activeEntryLoading" Background="#016FB3" CornerRadius="14" HorizontalAlignment="Left" VerticalAlignment="Bottom">
@@ -68,12 +68,12 @@
                     <Button x:Name="activeEntryReloadButton" Style="{StaticResource RoundButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="OnResyncActiveEntry">
                         <StackPanel Margin="10,6,12,6" Orientation="Horizontal">
                             <Path HorizontalAlignment="Right" VerticalAlignment="Center" Fill="White" Stroke="White" StrokeThickness="0.3" Stretch="Uniform" Height="10" Data="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z"/>
-                            <TextBlock Text="Sync again" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="{DynamicResource LibraryTileButtonSyncAgain}" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </Button>
                 </Grid>
             </Grid>
-            <TextBlock x:Name="activeEntryNullIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1EFFFFFF" Text="No patch selected" FontSize="16" FontWeight="Medium"/>
+            <TextBlock x:Name="activeEntryNullIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1EFFFFFF" Text="{DynamicResource LibraryTileButtonNoPatchSelected}" FontSize="16" FontWeight="Medium"/>
         </Grid>
     </Border>
 </UserControl>

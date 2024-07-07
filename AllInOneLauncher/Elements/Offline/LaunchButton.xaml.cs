@@ -53,7 +53,7 @@ namespace AllInOneLauncher.Elements
 
                 if(value == LaunchButtonState.Launch)
                 {
-                    button.Content = "Launch";
+                    button.Content = Application.Current.FindResource("MainLauncherPlay").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;
@@ -61,7 +61,7 @@ namespace AllInOneLauncher.Elements
                 }
                 else if (value == LaunchButtonState.Install)
                 {
-                    button.Content = "Install";
+                    button.Content = Application.Current.FindResource("MainLauncherInstall").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;
@@ -70,7 +70,7 @@ namespace AllInOneLauncher.Elements
                 else if (value == LaunchButtonState.Loading)
                 {
                     button.Content = "";
-                    LoadStatus = "Loading";
+                    LoadStatus = Application.Current.FindResource("MainLauncherLoading").ToString()!;
                     button.Opacity = 0.4d;
                     button.IsHitTestVisible = false;
                     LoadProgress = 0;
@@ -94,7 +94,7 @@ namespace AllInOneLauncher.Elements
             LaunchButton progressBar = (LaunchButton)sender;
             if (progressBar != null)
             {
-                DoubleAnimation da = new DoubleAnimation() { To = (double)e.NewValue / 100d, Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
+                DoubleAnimation da = new() { To = (double)e.NewValue / 100d, Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
                 progressBar.progressGradientStop1.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
                 progressBar.progressGradientStop2.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
             }

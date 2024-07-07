@@ -6,7 +6,6 @@
 
     <system:String x:Key="MainLauncherLibrary">EINZELSPIELER</system:String>
     <system:String x:Key="MainLauncherOnline">MEHRSPIELER</system:String>
-    <system:String x:Key="MainLauncherWorkShop">WORKSHOP</system:String>
     <system:String x:Key="MainLauncherGuides">LEITFÄDEN</system:String>
     <system:String x:Key="MainLauncherPlay">SPIELEN</system:String>
     <system:String x:Key="MainLauncherInstall">INSTALLIEREN</system:String>
@@ -17,6 +16,23 @@
 
     <system:String x:Key="LauncherButtonAccept">ÜBERNEHMEN</system:String>
     <system:String x:Key="LauncherButtonCancel">ABBRECHEN</system:String>
+
+    <system:String x:Key="OfflinePageButtonNews">Änderungsvermerke</system:String>
+    <system:String x:Key="OfflinePageButtonLibrary">Bibliothek</system:String>
+    <system:String x:Key="OfflinePageButtonWorkshop">Workshop</system:String>
+    
+    <system:String x:Key="OfflineLaunchGameSettings">Startoptionen für Spiel ändern...</system:String>
+
+    <system:String x:Key="LibraryTileButtonSyncAgain">Synchronisieren</system:String>
+    <system:String x:Key="LibraryTileButtonSyncing">Aktualisieren...</system:String>
+    <system:String x:Key="LibraryTileButtonActive">Aktiv</system:String>
+    <system:String x:Key="LibraryTileButtonNoPatchSelected">Keine Version aktiv...</system:String>
+    <system:String x:Key="LibraryTileButtonInstallMore">Mehr Installieren</system:String>
+    <system:String x:Key="LibraryTileButtonDiscoverNewObjects">Entdecke weitere Inhalte im Workshop!</system:String>
+    <system:String x:Key="LibraryTileSearchBar">In Bibliothek suchen...</system:String>
+
+    <system:String x:Key="WorkshopTileSearchBar">Im Workshop suchen...</system:String>
+    <system:String x:Key="WorkshopSortbyDownload">Nach Downloads sortieren</system:String>
 
     <system:String x:Key="GameInstallDialogLanguage">Sprache</system:String>
     <system:String x:Key="GameInstallDialogLibrary">Bibliothek</system:String>

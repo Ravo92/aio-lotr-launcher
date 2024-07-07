@@ -38,9 +38,6 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" CornerRadius="15">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
-                        </Border.Effect>
                         <Border.OpacityMask>
                             <VisualBrush>
                                 <VisualBrush.Visual>
@@ -51,7 +48,7 @@
                         <Grid>
                             <elements:Acrylic/>
                             <StackPanel Margin="20">
-                                <Image x:Name="titleImage" HorizontalAlignment="Center" Width="200" Height="120"/>
+                                <Image x:Name="titleImage" HorizontalAlignment="Center" Width="300" Height="150" RenderOptions.BitmapScalingMode="HighQuality"/>
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -70,7 +67,7 @@
                         <Grid>
                             <elements:Acrylic/>
                             <StackPanel Margin="20,15,20,15">
-                                <TextBlock d:Text="Launch options" Text="Launch options" Foreground="White" FontSize="18" FontWeight="Black"></TextBlock>
+                                <TextBlock d:Text="Launch options" Text="{DynamicResource OfflineLaunchGameSettings}" Foreground="White" FontSize="18" FontWeight="Black"></TextBlock>
                                 <Rectangle Fill="White" Opacity="0.1" Margin="0,15,0,0" VerticalAlignment="Top" Height="1"/>
                                 <Grid Margin="0,15,0,0">
                                     <TextBlock Text="{DynamicResource SettingsLaunchGameWindowed}" d:Text="Windowed mode" Foreground="White" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
@@ -121,13 +118,13 @@
                             <elements:Acrylic/>
                             <StackPanel x:Name="innerTabs" Orientation="Horizontal" Margin="5">
                                 <Border x:Name="newsTab" Margin="0,0,2,0" Background="#1EFFFFFF" CornerRadius="18" Cursor="Hand" MouseDown="OnNewsTabClicked">
-                                    <TextBlock d:Text="News" Text="News" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
+                                    <TextBlock d:Text="News" Text="{DynamicResource OfflinePageButtonNews}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
                                 </Border>
                                 <Border x:Name="libraryTab" Margin="0,0,2,0" Background="Transparent" CornerRadius="18" Cursor="Hand" MouseDown="OnLibraryTabClicked">
-                                    <TextBlock d:Text="Library" Text="Library" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
+                                    <TextBlock d:Text="Library" Text="{DynamicResource OfflinePageButtonLibrary}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
                                 </Border>
                                 <Border x:Name="workshopTab" Margin="0,0,2,0" Background="Transparent" CornerRadius="18" Cursor="Hand" MouseDown="OnWorkshopTabClicked">
-                                    <TextBlock d:Text="Workshop" Text="Workshop" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
+                                    <TextBlock d:Text="Workshop" Text="{DynamicResource OfflinePageButtonWorkshop}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
                                 </Border>
                             </StackPanel>
                         </Grid>

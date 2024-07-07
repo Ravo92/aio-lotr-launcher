@@ -20,8 +20,8 @@
                 <Border x:Name="plusCircle" Background="#1EFFFFFF" CornerRadius="300" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
                     <Path Fill="#B2FFFFFF" Stretch="Uniform" Width="40" Margin="30" Data="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </Border>
-                <TextBlock Text="Install more" FontSize="16" FontWeight="Black" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,120,0,0"/>
-                <TextBlock Text="Discover new mods on the Workshop" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="11" FontWeight="Medium" Foreground="#59FFFFFF" Margin="0,0,0,15"/>
+                <TextBlock Text="{DynamicResource LibraryTileButtonInstallMore}" FontSize="16" FontWeight="Black" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,120,0,0"/>
+                <TextBlock Text="{DynamicResource LibraryTileButtonDiscoverNewObjects}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="11" FontWeight="Medium" Foreground="#59FFFFFF" Margin="0,0,0,15"/>
             </Grid>
             <Border x:Name="hoverEffect" Background="#0CFFFFFF" Opacity="0"/>
         </Grid>

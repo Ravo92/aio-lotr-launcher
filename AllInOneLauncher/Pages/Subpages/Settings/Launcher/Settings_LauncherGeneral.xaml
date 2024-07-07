@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="OnLoad" FontSize="14">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="OnLoad" FontSize="20">
     <StackPanel>
         <TextBlock Text="{DynamicResource SettingsLauncherGeneralLanguageDropDownLabelText}" d:Text="Language" HorizontalAlignment="Left" Foreground="white"/>
         <Grid>
@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="0,5,0,0" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxLanguage_SelectionChanged">
+            <ComboBox x:Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="20" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxLanguage_SelectionChanged">
                 <ComboBoxItem Content="English"/>
                 <ComboBoxItem Content="Deutsch"/>
             </ComboBox>

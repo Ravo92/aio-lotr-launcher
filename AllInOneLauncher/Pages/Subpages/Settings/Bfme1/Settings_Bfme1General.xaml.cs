@@ -29,8 +29,12 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.BFME1);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
+            TextBoxCDKey.IsEnabled = false;
+
             if (LauncherStateManager.IsElevated)
                 ButtonChangeCdKey.Content = Application.Current.FindResource("SettingsBFMEGeneralCDKeyButtonTextGenerate");
+            else
+                TextBoxCDKey.IsEnabled = false;
         }
 
         private void ComboBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
