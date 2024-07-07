@@ -51,9 +51,20 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             SaveResolutionSettings();
         }
 
+        private void ComboBoxGraphicsAPI_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SaveGraphicsAPISettings();
+        }
+
         private void SaveLanguageSettings()
         {
             Properties.Settings.Default.RotwkLanguageSetting = ComboBoxLanguage.SelectedIndex;
+            Properties.Settings.Default.Save();
+        }
+
+        private void SaveGraphicsAPISettings()
+        {
+            Properties.Settings.Default.RotwkGraphicAPISetting = ComboBoxGraphicsAPI.SelectedIndex;
             Properties.Settings.Default.Save();
         }
 

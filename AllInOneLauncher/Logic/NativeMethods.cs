@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Windows;
 
 namespace AllInOneLauncher.Logic
 {
-    public static class NativeMethods
+    public static partial class NativeMethods
     {
         public static readonly uint SW_RESTORE = 0x09;
 
@@ -18,45 +17,52 @@ namespace AllInOneLauncher.Logic
 
         public static readonly uint SWP_NOZORDER = 0x0004;
 
-        [DllImport("user32.dll")]
-        public static extern int ShowWindow(IntPtr hWnd, uint Msg);
+        [LibraryImport("user32.dll")]
+        internal static partial int ShowWindow(IntPtr hWnd, uint Msg);
 
-        [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
-        public static extern int GetWindowLongPtr(IntPtr hWnd, int nIndex);
+        [LibraryImport("user32.dll", EntryPoint = "GetWindowLong")]
+        internal static partial int GetWindowLongPtr(IntPtr hWnd, int nIndex);
 
-        [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
-        public static extern int SetWindowLongPtr(IntPtr hWnd, int nIndex, uint dwNewLong);
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowLong")]
+        internal static partial int SetWindowLongPtr(IntPtr hWnd, int nIndex, uint dwNewLong);
 
-        [DllImport("user32.dll")]
-        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
-        [DllImport("user32.dll")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool SetForegroundWindow(IntPtr hWnd);
 
-        [DllImport("user32.dll")]
-        public static extern bool BringWindowToTop(IntPtr hWnd);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool BringWindowToTop(IntPtr hWnd);
 
-        [DllImport("user32.dll")]
-        public static extern bool SetWindowText(IntPtr hWnd, string title);
+        [LibraryImport("user32.dll", StringMarshalling = StringMarshalling.Utf16)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool SetWindowText(IntPtr hWnd, string title);
 
-        [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
 
         [DllImport("user32.dll", BestFitMapping = false, CharSet = CharSet.Ansi, ThrowOnUnmappableChar = true)]
-        public static extern bool EnumDisplaySettings(string? deviceName, int modeNum, ref DEVMODE devMode);
+        internal static extern bool EnumDisplaySettings(string? deviceName, int modeNum, ref DEVMODE devMode);
 
-        [DllImport("user32.dll")]
-        public static extern bool ClipCursor(ref RECT lpRect);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool ClipCursor(ref RECT lpRect);
 
-        [DllImport("user32.dll")]
-        public static extern bool ClipCursor(IntPtr lpRect);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool ClipCursor(IntPtr lpRect);
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct DEVMODE
     {
-        private const int CCHDEVICENAME = 0x20;
-        private const int CCHFORMNAME = 0x20;
+        internal const int CCHDEVICENAME = 0x20;
+        internal const int CCHFORMNAME = 0x20;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
         public string dmDeviceName;
         public short dmSpecVersion;
@@ -91,10 +97,17 @@ namespace AllInOneLauncher.Logic
         public int Right;
         public int Bottom;
 
-        public static RECT Zero => new RECT() { Left = -1, Top = -1, Right = -1, Bottom = -1 };
+        public static RECT Zero => new() { Left = -1, Top = -1, Right = -1, Bottom = -1 };
+        public readonly bool IsZero() => Left == -1 && Top == -1 && Right == -1 && Bottom == -1;
+        public readonly bool Contains(System.Drawing.Point p) => new System.Drawing.Rectangle(Left, Top, Right, Bottom).Contains(p);
+    }
 
-        public bool IsZero() => Left == -1 && Top == -1 && Right == -1 && Bottom == -1;
-
-        public bool Contains(System.Drawing.Point p) => new System.Drawing.Rectangle(Left, Top, Right, Bottom).Contains(p);
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Rect
+    {
+        public int Left;
+        public int Top;
+        public int Right;
+        public int Bottom;
     }
 }

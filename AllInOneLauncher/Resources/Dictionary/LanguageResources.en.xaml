@@ -31,6 +31,7 @@
     <system:String x:Key="SettingsBFMERepair">Repair or Uninstall</system:String>
     <system:String x:Key="SettingsBFMEGeneralLanguageDropDownLabelText">Switch Game-language</system:String>
     <system:String x:Key="SettingsBFMEGeneralResolutionDropDownLabelText">Set game resolution</system:String>
+    <system:String x:Key="SettingsBFMEGeneralGraphicsAPIDropDownLabelText">Set graphics API</system:String>
     <system:String x:Key="SettingsBFMEGeneralCDKeyLabelText">Serialnumber</system:String>
     <system:String x:Key="SettingsBFMEGeneralCDKeyButtonText">Change Serial</system:String>
     <system:String x:Key="SettingsBFMEGeneralCDKeyButtonTextGenerate">Randomize</system:String>

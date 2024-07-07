@@ -49,9 +49,20 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             SaveResolutionSettings();
         }
 
+        private void ComboBoxGraphicsAPI_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SaveGraphicsAPISettings();
+        }
+
         private void SaveLanguageSettings()
         {
             Properties.Settings.Default.BFME2LanguageSetting = ComboBoxLanguage.SelectedIndex;
+            Properties.Settings.Default.Save();
+        }
+
+        private void SaveGraphicsAPISettings()
+        {
+            Properties.Settings.Default.BFME2GraphicAPISetting = ComboBoxGraphicsAPI.SelectedIndex;
             Properties.Settings.Default.Save();
         }
 

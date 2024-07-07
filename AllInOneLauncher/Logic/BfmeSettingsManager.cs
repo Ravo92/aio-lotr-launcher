@@ -54,25 +54,25 @@ namespace AllInOneLauncher.Logic
 
         internal static string DefaultOptions = $@"AllHealthBars = yes
             AlternateMouseSetup = no
-            AmbientVolume = 28
+            AmbientVolume = 50.000000
             AudioLOD = High
             Brightness = 50
-            FixedStaticGameLOD = Medium
+            FixedStaticGameLOD = UltraHigh
             FlashTutorial = 0
             HasGotOnline = yes
             HasSeenLogoMovies = yes
             HeatEffects = yes
-            IdealStaticGameLOD = Medium
+            IdealStaticGameLOD = UltraHigh
             IsThreadedLoad = yes
-            MovieVolume = 25
-            MusicVolume = 24
+            MovieVolume = 70.000000
+            MusicVolume = 70.000000
             Resolution = {SystemDisplayManager.GetPrimaryScreenResolution().Width} {SystemDisplayManager.GetPrimaryScreenResolution().Height}
-            SFXVolume = 34
+            SFXVolume = 70.000000
             ScrollFactor = 50
-            StaticGameLOD = Medium
-            TimesInGame = 0
+            StaticGameLOD = UltraHigh
+            TimesInGame = 1
             UnitDecals = yes
-            UseEAX3 = no
-            VoiceVolume = 28";
+            UseEAX3 = yes
+            VoiceVolume = 70.000000";
     }
 }
