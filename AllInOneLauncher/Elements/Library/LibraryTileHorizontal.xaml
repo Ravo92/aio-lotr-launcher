@@ -39,8 +39,8 @@
                     <Image x:Name="activeEntryIcon" VerticalAlignment="Center" Stretch="UniformToFill" Source="https://bfmeladder.com/resources/workshop-files/222-artwork.png"/>
                 </Border>
                 <Grid Grid.Column="2">
-                    <StackPanel Margin="5">
-                        <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="5" x:Name="availableTitleArea" ClipToBounds="True">
+                        <StackPanel x:Name="titleStack" Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock x:Name="activeEntryTitle" Text="2.22" FontSize="18" FontWeight="Black" TextWrapping="Wrap" Foreground="White"/>
                             <TextBlock x:Name="activeEntryVersion" Text="1.0.0" FontSize="18" FontWeight="Regular" Foreground="#59FFFFFF" VerticalAlignment="Center" Margin="7,0,0,0"/>
                         </StackPanel>

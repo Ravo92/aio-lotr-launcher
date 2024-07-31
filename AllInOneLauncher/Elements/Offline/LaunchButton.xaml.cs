@@ -23,10 +23,11 @@ namespace AllInOneLauncher.Elements
 
         private void OnSyncBegin(BfmeWorkshopKit.Data.BfmeWorkshopEntry entry)
         {
+            IsLoading = true;
             Dispatcher.Invoke(() =>
             {
-                ButtonState = LaunchButtonState.Loading;
                 LoadStatus = $"Switching to {entry.Name}";
+                ButtonState = _buttonState;
             });
         }
 
@@ -37,7 +38,8 @@ namespace AllInOneLauncher.Elements
 
         private void OnSyncEnd()
         {
-            Dispatcher.Invoke(() => ButtonState = LaunchButtonState.Launch);
+            IsLoading = false;
+            Dispatcher.Invoke(() => ButtonState = _buttonState);
         }
 
         public event EventHandler? OnLaunchClicked;
@@ -51,7 +53,16 @@ namespace AllInOneLauncher.Elements
             {
                 _buttonState = value;
 
-                if(value == LaunchButtonState.Launch)
+                if (IsLoading)
+                {
+                    button.Content = "";
+                    LoadStatus = "Loading";
+                    button.Opacity = 0.4d;
+                    button.IsHitTestVisible = false;
+                    LoadProgress = 0;
+                    progressIndication.Visibility = Visibility.Visible;
+                }
+                else if (value == LaunchButtonState.Launch)
                 {
                     button.Content = Application.Current.FindResource("MainLauncherPlay").ToString()!;
                     button.Opacity = 1d;
@@ -67,17 +78,10 @@ namespace AllInOneLauncher.Elements
                     LoadProgress = 0;
                     progressIndication.Visibility = Visibility.Collapsed;
                 }
-                else if (value == LaunchButtonState.Loading)
-                {
-                    button.Content = "";
-                    LoadStatus = Application.Current.FindResource("MainLauncherLoading").ToString()!;
-                    button.Opacity = 0.4d;
-                    button.IsHitTestVisible = false;
-                    LoadProgress = 0;
-                    progressIndication.Visibility = Visibility.Visible;
-                }
             }
         }
+
+        private bool IsLoading = false;
 
         public double LoadProgress
         {
@@ -118,7 +122,6 @@ namespace AllInOneLauncher.Elements
     public enum LaunchButtonState
     {
         Launch,
-        Install,
-        Loading
+        Install
     }
 }

@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using AllInOneLauncher.Data;
+using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace AllInOneLauncher.Elements
 {
@@ -18,6 +20,50 @@ namespace AllInOneLauncher.Elements
         public LibraryTileHorizontal()
         {
             InitializeComponent();
+
+            _ = Task.Run(async () =>
+            {
+                while (true)
+                {
+                    if (titleStack.ActualWidth <= availableTitleArea.ActualWidth)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            titleStack.BeginAnimation(FrameworkElement.MarginProperty, null);
+                            titleStack.SetValue(FrameworkElement.MarginProperty, new Thickness(0));
+                        });
+                        await Task.Delay(TimeSpan.FromSeconds(2));
+                        continue;
+                    }
+
+                    var duration = TimeSpan.FromSeconds((titleStack.ActualWidth - availableTitleArea.ActualWidth) * 0.05);
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        ThicknessAnimation l = new() { To = new Thickness(availableTitleArea.ActualWidth - titleStack.ActualWidth, 0, 0, 0), Duration = duration };
+                        Dispatcher.Invoke(() => titleStack.BeginAnimation(FrameworkElement.MarginProperty, l));
+                    });
+                    await Task.Delay(duration.Add(TimeSpan.FromSeconds(2)));
+
+                    if (titleStack.ActualWidth <= availableTitleArea.ActualWidth)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            titleStack.BeginAnimation(FrameworkElement.MarginProperty, null);
+                            titleStack.SetValue(FrameworkElement.MarginProperty, new Thickness(0));
+                        });
+                        await Task.Delay(TimeSpan.FromSeconds(2));
+                        continue;
+                    }
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        ThicknessAnimation r = new() { To = new Thickness(0, 0, 0, 0), Duration = duration };
+                        Dispatcher.Invoke(() => titleStack.BeginAnimation(FrameworkElement.MarginProperty, r));
+                    });
+                    await Task.Delay(duration.Add(TimeSpan.FromSeconds(2)));
+                }
+            });
         }
 
         BfmeWorkshopEntry? _entry = null;
@@ -27,8 +73,6 @@ namespace AllInOneLauncher.Elements
             set
             {
                 _entry = value;
-
-                IsLoading = false;
 
                 if (value == null)
                 {
@@ -52,9 +96,9 @@ namespace AllInOneLauncher.Elements
                 else if (value.Value.Type == 1)
                     activeEntryType.Text = "Mod";
 
-                activeEntryLoading.Visibility = Visibility.Hidden;
-                activeEntryActive.Visibility = Visibility.Visible;
-                activeEntryReloadButton.Visibility = Visibility.Visible;
+                activeEntryLoading.Visibility = IsLoading ? Visibility.Visible : Visibility.Hidden;
+                activeEntryActive.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
+                activeEntryReloadButton.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
 
                 IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)value.Value.Game);
                 activeEntry.Opacity = IsHitTestVisible ? 1 : 0.5;
@@ -65,11 +109,14 @@ namespace AllInOneLauncher.Elements
             }
         }
 
+        private bool isLoading = false;
         public bool IsLoading
         {
-            get => activeEntryLoading.Visibility == Visibility.Visible;
+            get => isLoading;
             set
             {
+                isLoading = value;
+
                 activeEntryLoading.Visibility = value ? Visibility.Visible : Visibility.Hidden;
                 activeEntryActive.Visibility = value ? Visibility.Hidden : Visibility.Visible;
                 activeEntryReloadButton.Visibility = value ? Visibility.Hidden : Visibility.Visible;
@@ -79,7 +126,10 @@ namespace AllInOneLauncher.Elements
         private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)
         {
             if (Entry != null)
+            {
                 Entry = BfmeWorkshopSyncManager.GetActivePatch(Entry!.Value.Game);
+                IsLoading = false;
+            }
 
             if (Entry != null)
                 await BfmeWorkshopSyncManager.Sync(Entry!.Value, (progress) => { }, (downloadItem, downloadProgress) => { });

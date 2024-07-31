@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using AllInOneLauncher.Logic;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -20,35 +21,48 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         private int Game = 0;
 
-        public async void Load(int game)
+        public void Load(int game)
         {
             Game = game;
             search.Text = "";
 
-            workshopTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: game);
-            workshopTiles.Children.Clear();
-            foreach (BfmeWorkshopEntry entry in entries)
-                if (!entry.Guid.StartsWith("original-"))
-                    workshopTiles.Children.Add(new WorkshopTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
+            Query("");
         }
 
-        private async void Search(string keyword)
+        private async void Query(string keyword)
         {
             workshopTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: Game, keyword: keyword);
-            workshopTiles.Children.Clear();
-            foreach (BfmeWorkshopEntry entry in entries)
-                if (!entry.Guid.StartsWith("original-"))
-                    workshopTiles.Children.Add(new WorkshopTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
+            if (!LauncherStateManager.Offline)
+            {
+                workshopContent.Visibility = Visibility.Visible;
+                noConnection.Visibility = Visibility.Hidden;
+
+                try
+                {
+                    List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: Game, keyword: keyword);
+                    workshopTiles.Children.Clear();
+                    foreach (BfmeWorkshopEntry entry in entries)
+                        workshopTiles.Children.Add(new WorkshopTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
+                }
+                catch
+                {
+                    workshopContent.Visibility = Visibility.Hidden;
+                    noConnection.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                workshopContent.Visibility = Visibility.Hidden;
+                noConnection.Visibility = Visibility.Visible;
+            }
         }
 
-        private void OnReloadClicked(object sender, RoutedEventArgs e) => Search(search.Text);
+        private void OnReloadClicked(object sender, RoutedEventArgs e) => Query(search.Text);
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             searchPlaceholder.Visibility = search.Text == "" ? Visibility.Visible : Visibility.Hidden;
-            Search(search.Text);
+            Query(search.Text);
         }
     }
 }

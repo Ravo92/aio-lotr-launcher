@@ -5,15 +5,21 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Security.Principal;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using Windows.Media.Protection.PlayReady;
 
 namespace AllInOneLauncher.Logic
 {
     public static class LauncherStateManager
     {
         internal static Dictionary<string, Type> TypeMap = [];
+        private static readonly HttpClient HttpClient = new() { Timeout = TimeSpan.FromSeconds(1) };
 
         public static void Init()
         {
@@ -26,7 +32,19 @@ namespace AllInOneLauncher.Logic
 
             TypeMap = Assembly.GetExecutingAssembly().GetTypes().DistinctBy(x => x.Name).ToDictionary(x => x.Name, x => x);
             Language = Properties.Settings.Default.LauncherLanguageSetting;
+
+            _ = Task.Run(() =>
+            {
+                while (true)
+                {
+                    try { Offline = HttpClient.Send(new HttpRequestMessage(HttpMethod.Get, "https://google.com.mx")).StatusCode != System.Net.HttpStatusCode.OK; }
+                    catch { Offline = true; }
+                    Thread.Sleep(2000);
+                }
+            });
         }
+
+        public static bool Offline { get; private set; } = false;
 
         public static bool Visible
         {
@@ -89,7 +107,7 @@ namespace AllInOneLauncher.Logic
                 if (MainWindow.Instance!.fullContent.Child is Settings)
                     serializedState = $"--Settings {((Settings)MainWindow.Instance!.fullContent.Child!).Page}";
                 else if (MainWindow.Instance!.content.Child is Offline)
-                    serializedState = $"--Game {Offline.Instance.gameTabs.SelectedIndex}";
+                    serializedState = $"--Game {Pages.Primary.Offline.Instance.gameTabs.SelectedIndex}";
                 else if (MainWindow.Instance!.content.Child is Online)
                     serializedState = "--Online";
 
