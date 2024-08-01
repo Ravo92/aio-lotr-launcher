@@ -1,6 +1,7 @@
 ﻿using AllInOneLauncher.Data;
 using AllInOneLauncher.Logic;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -39,11 +40,19 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         public void Load(BfmeGame AvailableBFMEGame)
         {
-            if (!LauncherStateManager.Offline)
-                newsPage.Source = GetNewsPage(AvailableBFMEGame);
+            newsPage.Visibility = System.Windows.Visibility.Visible;
+            noConnection.Visibility = System.Windows.Visibility.Hidden;
 
-            newsPage.Visibility = LauncherStateManager.Offline ? System.Windows.Visibility.Hidden : System.Windows.Visibility.Visible;
-            noConnection.Visibility = LauncherStateManager.Offline ? System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+            newsPage.Source = GetNewsPage(AvailableBFMEGame);
+        }
+
+        private void OnNavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
+        {
+            if (!e.IsSuccess)
+            {
+                newsPage.Visibility = System.Windows.Visibility.Hidden;
+                noConnection.Visibility = System.Windows.Visibility.Visible;
+            }
         }
     }
 }

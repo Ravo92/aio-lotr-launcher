@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using AllInOneLauncher.Logic;
+using System.Data.Common;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -31,26 +32,18 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         private async void Query(string keyword)
         {
-            workshopTiles.Children.Clear();
-            if (!LauncherStateManager.Offline)
+            try
             {
                 workshopContent.Visibility = Visibility.Visible;
                 noConnection.Visibility = Visibility.Hidden;
 
-                try
-                {
-                    List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: Game, keyword: keyword);
-                    workshopTiles.Children.Clear();
-                    foreach (BfmeWorkshopEntry entry in entries)
-                        workshopTiles.Children.Add(new WorkshopTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
-                }
-                catch
-                {
-                    workshopContent.Visibility = Visibility.Hidden;
-                    noConnection.Visibility = Visibility.Visible;
-                }
+                workshopTiles.Children.Clear();
+                List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: Game, keyword: keyword);
+                workshopTiles.Children.Clear();
+                foreach (BfmeWorkshopEntry entry in entries)
+                    workshopTiles.Children.Add(new WorkshopTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
             }
-            else
+            catch
             {
                 workshopContent.Visibility = Visibility.Hidden;
                 noConnection.Visibility = Visibility.Visible;

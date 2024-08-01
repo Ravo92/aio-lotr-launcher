@@ -32,19 +32,7 @@ namespace AllInOneLauncher.Logic
 
             TypeMap = Assembly.GetExecutingAssembly().GetTypes().DistinctBy(x => x.Name).ToDictionary(x => x.Name, x => x);
             Language = Properties.Settings.Default.LauncherLanguageSetting;
-
-            _ = Task.Run(() =>
-            {
-                while (true)
-                {
-                    try { Offline = HttpClient.Send(new HttpRequestMessage(HttpMethod.Get, "https://google.com.mx")).StatusCode != System.Net.HttpStatusCode.OK; }
-                    catch { Offline = true; }
-                    Thread.Sleep(2000);
-                }
-            });
         }
-
-        public static bool Offline { get; private set; } = false;
 
         public static bool Visible
         {

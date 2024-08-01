@@ -10,7 +10,7 @@
              d:DesignHeight="860" d:DesignWidth="1115">
 
     <Grid Name="WebView2Grid">
-        <Wpf:WebView2 x:Name="newsPage" DefaultBackgroundColor="Transparent" Visibility="Visible"/>
+        <Wpf:WebView2 x:Name="newsPage" NavigationCompleted="OnNavigationCompleted" DefaultBackgroundColor="Transparent" Visibility="Visible"/>
         <elements:NoConnection x:Name="noConnection" Visibility="Hidden"/>
     </Grid>
 </UserControl>
