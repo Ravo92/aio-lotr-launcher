@@ -56,7 +56,7 @@ namespace AllInOneLauncher.Elements
                 if (IsLoading)
                 {
                     button.Content = "";
-                    LoadStatus = "Loading";
+                    LoadStatus = Application.Current.FindResource("MainLauncherLoading").ToString()!;
                     button.Opacity = 0.4d;
                     button.IsHitTestVisible = false;
                     LoadProgress = 0;
