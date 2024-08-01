@@ -1,11 +1,5 @@
 ﻿using AllInOneLauncher.Data;
-using AllInOneLauncher.Logic;
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline

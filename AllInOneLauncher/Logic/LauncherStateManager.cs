@@ -5,21 +5,15 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Security.Principal;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using Windows.Media.Protection.PlayReady;
 
 namespace AllInOneLauncher.Logic
 {
     public static class LauncherStateManager
     {
         internal static Dictionary<string, Type> TypeMap = [];
-        private static readonly HttpClient HttpClient = new() { Timeout = TimeSpan.FromSeconds(1) };
 
         public static void Init()
         {
