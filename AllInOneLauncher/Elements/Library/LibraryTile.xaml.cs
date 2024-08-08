@@ -11,6 +11,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using AllInOneLauncher.Data;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace AllInOneLauncher.Elements
 {
@@ -35,9 +37,9 @@ namespace AllInOneLauncher.Elements
 
             Dispatcher.Invoke(() =>
             {
-                isActiveIcon.Opacity = (entry.Guid == WorkshopEntry.Guid) ? 1d : 0d;
                 IsHitTestVisible = false;
                 IsLoading = entry.Guid == WorkshopEntry.Guid;
+                UpdateIsActive();
             });
         }
 
@@ -77,6 +79,7 @@ namespace AllInOneLauncher.Elements
                     {
 
                     }
+                UpdateIsActive();
             });
         }
 
@@ -95,9 +98,10 @@ namespace AllInOneLauncher.Elements
                     type.Text = "Patch";
                 else if (value.Type == 1)
                     type.Text = "Mod";
-
-                BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(value.Game);
-                isActiveIcon.Opacity = (activeEntry != null && activeEntry!.Value.Guid == value.Guid) ? 1d : 0d;
+                else if (value.Type == 2)
+                    type.Text = "Enhancement";
+                else if (value.Type == 3)
+                    type.Text = "Map Pack";
 
                 IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)value.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
@@ -105,6 +109,8 @@ namespace AllInOneLauncher.Elements
                     try { icon.Source = new BitmapImage(new Uri(value.ArtworkUrl)); } catch { }
                 else
                     try { icon.Source = new FormatConvertedBitmap(new BitmapImage(new Uri(value.ArtworkUrl)), PixelFormats.Gray16, BitmapPalettes.Gray16, 1); } catch { }
+
+                UpdateIsActive();
             }
         }
 
@@ -127,6 +133,22 @@ namespace AllInOneLauncher.Elements
         {
             get => updateAvailableIcon.Visibility == Visibility.Visible;
             set => updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void UpdateIsActive()
+        {
+            if (WorkshopEntry.Type <= 1)
+            {
+                activeText.Visibility = Visibility.Visible;
+                BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry.Game);
+                isActiveIcon.Opacity = (activeEntry != null && activeEntry!.Value.Guid == WorkshopEntry.Guid) ? 1d : 0d;
+            }
+            else
+            {
+                activeText.Visibility = Visibility.Collapsed;
+                Dictionary<string, BfmeWorkshopEntry> activeEnhancements = BfmeWorkshopSyncManager.GetActiveEnhancements(WorkshopEntry.Game);
+                isActiveIcon.Opacity = activeEnhancements.ContainsKey(WorkshopEntry.Guid) ? 1d : 0d;
+            }
         }
 
         private void OnEnter(object sender, MouseEventArgs e)

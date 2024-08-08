@@ -95,6 +95,10 @@ namespace AllInOneLauncher.Elements
                     activeEntryType.Text = "Patch";
                 else if (value.Value.Type == 1)
                     activeEntryType.Text = "Mod";
+                else if (value.Value.Type == 2)
+                    activeEntryType.Text = "Enhancement";
+                else if (value.Value.Type == 3)
+                    activeEntryType.Text = "Map Pack";
 
                 activeEntryLoading.Visibility = IsLoading ? Visibility.Visible : Visibility.Hidden;
                 activeEntryActive.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;

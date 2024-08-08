@@ -36,6 +36,10 @@ namespace AllInOneLauncher.Elements
                     type.Text = "Patch";
                 else if (value.Type == 1)
                     type.Text = "Mod";
+                else if (value.Type == 2)
+                    type.Text = "Enhancement";
+                else if (value.Type == 3)
+                    type.Text = "Map Pack";
             }
         }
 
