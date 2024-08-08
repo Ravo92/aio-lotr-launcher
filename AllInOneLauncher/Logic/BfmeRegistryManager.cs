@@ -49,27 +49,27 @@ namespace AllInOneLauncher.Logic
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
 
-            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\EA GAMES\The Battle for Middle-earth", false);
-            using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\EA GAMES\The Battle for Middle-earth", true);
-            keyGameMain?.SetValue("CacheSize", "3351006208");
-            keyGameMain?.SetValue("DisplayName", "The Battle for Middle-earth");
-            keyGameMain?.SetValue("Install Dir", installPath);
-            keyGameMain?.SetValue("Language", language);
-            keyGameMain?.SetValue("Locale", "en");
-            keyGameMain?.SetValue("Product GUID", "{3F290582-3F4E-4B96-009C-E0BABAA40C42}");
-            keyGameMain?.SetValue("Region", "EUROPE");
-            keyGameMain?.SetValue("Registration", @"SOFTWARE\Electronic Arts\EA GAMES\The Battle for Middle-earth\ergc");
-            keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
-            keyGameMain?.SetValue("SwapSize", "0");
+            // Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\EA GAMES\The Battle for Middle-earth", false);
+            // using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\EA GAMES\The Battle for Middle-earth", true);
+            // keyGameMain?.SetValue("CacheSize", "3351006208");
+            // keyGameMain?.SetValue("DisplayName", "The Battle for Middle-earth");
+            // keyGameMain?.SetValue("Install Dir", installPath);
+            // keyGameMain?.SetValue("Language", language);
+            // keyGameMain?.SetValue("Locale", "en");
+            // keyGameMain?.SetValue("Product GUID", "{3F290582-3F4E-4B96-009C-E0BABAA40C42}");
+            // keyGameMain?.SetValue("Region", "EUROPE");
+            // keyGameMain?.SetValue("Registration", @"SOFTWARE\Electronic Arts\EA GAMES\The Battle for Middle-earth\ergc");
+            // keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
+            // keyGameMain?.SetValue("SwapSize", "0");
 
             Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA Games\The Battle for Middle-earth", false);
-            using RegistryKey? keyGameAlt = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA Games\The Battle for Middle-earth", true);
-            keyGameAlt?.SetValue("InstallPath", installPath);
-            keyGameAlt?.SetValue("Language", language);
-            keyGameAlt?.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
-            keyGameAlt?.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyGameAlt?.SetValue("UserDataLeafName", "My Battle for Middle-earth Files");
-            keyGameAlt?.SetValue("Version", "65539", RegistryValueKind.DWord);
+            using RegistryKey? keyGame = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA Games\The Battle for Middle-earth", true);
+            keyGame?.SetValue("InstallPath", installPath);
+            keyGame?.SetValue("Language", language);
+            keyGame?.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
+            keyGame?.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
+            keyGame?.SetValue("UserDataLeafName", "My Battle for Middle-earth Files");
+            keyGame?.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files")))
                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files"));
@@ -102,27 +102,27 @@ namespace AllInOneLauncher.Logic
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
 
-            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Battle for Middle-earth II", false);
-            using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Battle for Middle-earth II", true);
-            keyGameMain?.SetValue("CacheSize", "3351006208");
-            keyGameMain?.SetValue("DisplayName", "The Battle for Middle-earth II");
-            keyGameMain?.SetValue("Install Dir", installPath);
-            keyGameMain?.SetValue("Language", language);
-            keyGameMain?.SetValue("Locale", "en");
-            keyGameMain?.SetValue("Product GUID", "{2A9F95AB-65A3-432c-8631-B8BC5BF7477A}");
-            keyGameMain?.SetValue("Region", "EUROPE");
-            keyGameMain?.SetValue("Registration", @"SOFTWARE\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc");
-            keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
-            keyGameMain?.SetValue("SwapSize", "0");
+            // Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Battle for Middle-earth II", false);
+            // using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Battle for Middle-earth II", true);
+            // keyGameMain?.SetValue("CacheSize", "3351006208");
+            // keyGameMain?.SetValue("DisplayName", "The Battle for Middle-earth II");
+            // keyGameMain?.SetValue("Install Dir", installPath);
+            // keyGameMain?.SetValue("Language", language);
+            // keyGameMain?.SetValue("Locale", "en");
+            // keyGameMain?.SetValue("Product GUID", "{2A9F95AB-65A3-432c-8631-B8BC5BF7477A}");
+            // keyGameMain?.SetValue("Region", "EUROPE");
+            // keyGameMain?.SetValue("Registration", @"SOFTWARE\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc");
+            // keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
+            // keyGameMain?.SetValue("SwapSize", "0");
 
             Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II", false);
-            using RegistryKey? keyGameAlt = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II", true);
-            keyGameAlt?.SetValue("InstallPath", installPath);
-            keyGameAlt?.SetValue("Language", language);
-            keyGameAlt?.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
-            keyGameAlt?.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyGameAlt?.SetValue("UserDataLeafName", "My Battle for Middle-earth II Files");
-            keyGameAlt?.SetValue("Version", "65539", RegistryValueKind.DWord);
+            using RegistryKey? keyGame = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II", true);
+            keyGame.SetValue("InstallPath", installPath);
+            keyGame.SetValue("Language", language);
+            keyGame.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
+            keyGame.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
+            keyGame.SetValue("UserDataLeafName", "My Battle for Middle-earth II Files");
+            keyGame.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files")))
                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files"));
@@ -155,27 +155,27 @@ namespace AllInOneLauncher.Logic
             if (!Path.EndsInDirectorySeparator(installPath))
                 installPath += Path.DirectorySeparatorChar;
 
-            Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", false);
-            using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", true);
-            keyGameMain?.SetValue("CacheSize", "3351006208");
-            keyGameMain?.SetValue("DisplayName", "The Rise of the Witch-king");
-            keyGameMain?.SetValue("Install Dir", installPath);
-            keyGameMain?.SetValue("Language", language);
-            keyGameMain?.SetValue("Locale", "en");
-            keyGameMain?.SetValue("Product GUID", "{B931FB80-537A-4600-00AD-AC5DEDB6C25B}");
-            keyGameMain?.SetValue("Region", "EUROPE");
-            keyGameMain?.SetValue("Registration", @"SOFTWARE\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc");
-            keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
-            keyGameMain?.SetValue("SwapSize", "0");
+            // Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", false);
+            // using RegistryKey? keyGameMain = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", true);
+            // keyGameMain?.SetValue("CacheSize", "3351006208");
+            // keyGameMain?.SetValue("DisplayName", "The Rise of the Witch-king");
+            // keyGameMain?.SetValue("Install Dir", installPath);
+            // keyGameMain?.SetValue("Language", language);
+            // keyGameMain?.SetValue("Locale", "en");
+            // keyGameMain?.SetValue("Product GUID", "{B931FB80-537A-4600-00AD-AC5DEDB6C25B}");
+            // keyGameMain?.SetValue("Region", "EUROPE");
+            // keyGameMain?.SetValue("Registration", @"SOFTWARE\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc");
+            // keyGameMain?.SetValue("Suppression Exe", "rtsi.exe");
+            // keyGameMain?.SetValue("SwapSize", "0");
 
             Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", false);
-            using RegistryKey? keyGameAlt = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", true);
-            keyGameAlt?.SetValue("InstallPath", installPath);
-            keyGameAlt?.SetValue("Language", language);
-            keyGameAlt?.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
-            keyGameAlt?.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyGameAlt?.SetValue("UserDataLeafName", "My Rise of the Witch-king Files");
-            keyGameAlt?.SetValue("Version", "65539", RegistryValueKind.DWord);
+            using RegistryKey? keyGame = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king", true);
+            keyGame?.SetValue("InstallPath", installPath);
+            keyGame?.SetValue("Language", language);
+            keyGame?.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
+            keyGame?.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
+            keyGame?.SetValue("UserDataLeafName", "My Rise of the Witch-king Files");
+            keyGame?.SetValue("Version", "65539", RegistryValueKind.DWord);
 
             if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Rise of the Witch-king Files")))
                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Rise of the Witch-king Files"));
