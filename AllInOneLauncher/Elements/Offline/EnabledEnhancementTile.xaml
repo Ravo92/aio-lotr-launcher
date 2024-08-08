@@ -31,7 +31,7 @@
                 <Grid Grid.Column="2" VerticalAlignment="Top">
                     <StackPanel Margin="2" x:Name="availableTitleArea" ClipToBounds="True">
                         <StackPanel x:Name="titleStack" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock x:Name="activeEntryTitle" Text="2.22" FontSize="15" FontWeight="Black" TextWrapping="Wrap" Foreground="White"/>
+                            <TextBlock x:Name="activeEntryTitle" Text="2.22" FontSize="15" FontWeight="Bold" TextWrapping="Wrap" Foreground="White"/>
                             <TextBlock x:Name="activeEntryVersion" Text="1.0.0" FontSize="15" FontWeight="Regular" Foreground="#59FFFFFF" VerticalAlignment="Center" Margin="7,0,0,0"/>
                         </StackPanel>
                         <StackPanel x:Name="tags" Orientation="Horizontal" Margin="0,10,0,0">
