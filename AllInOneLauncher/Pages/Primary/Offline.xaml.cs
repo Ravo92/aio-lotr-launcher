@@ -12,6 +12,8 @@ using AllInOneLauncher.Logic;
 using BfmeWorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
+using static System.Net.WebRequestMethods;
+using System.Collections.Generic;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -51,6 +53,7 @@ namespace AllInOneLauncher.Pages.Primary
                 gameTabs.IsHitTestVisible = false;
                 innerTabs.IsHitTestVisible = false;
                 library.IsHitTestVisible = false;
+                enabledEnhancements.IsHitTestVisible = false;
             });
         }
 
@@ -62,6 +65,8 @@ namespace AllInOneLauncher.Pages.Primary
                 gameTabs.IsHitTestVisible = true;
                 innerTabs.IsHitTestVisible = true;
                 library.IsHitTestVisible = true;
+                enabledEnhancements.IsHitTestVisible = true;
+                UpdateEnabledEnhancements();
             });
         }
 
@@ -157,6 +162,7 @@ namespace AllInOneLauncher.Pages.Primary
 
                 UpdateTitleImage();
                 UpdatePlayButton();
+                UpdateEnabledEnhancements();
                 ShowNews();
             }
         }
@@ -190,6 +196,13 @@ namespace AllInOneLauncher.Pages.Primary
                 launchButton.ButtonState = LaunchButtonState.Launch;
             else
                 launchButton.ButtonState = LaunchButtonState.Install;
+        }
+
+        private void UpdateEnabledEnhancements()
+        {
+            enabledEnhancements.Children.Clear();
+            foreach (BfmeWorkshopEntry entry in BfmeWorkshopSyncManager.GetActiveEnhancements(gameTabs.SelectedIndex).Values)
+                enabledEnhancements.Children.Add(new EnabledEnhancementTile() { Entry = entry, Margin = new Thickness(0, 0, 0, 10) });
         }
 
         private void CheckBoxWindowed_Checked(object sender, RoutedEventArgs e)

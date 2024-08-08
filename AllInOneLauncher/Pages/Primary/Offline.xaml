@@ -36,6 +36,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" CornerRadius="15">
                         <Border.OpacityMask>
@@ -54,9 +56,6 @@
                     </Border>
                     <elements:LibraryTileHorizontal Grid.Row="2" x:Name="activeEntry"/>
                     <Border Grid.Row="4" CornerRadius="15">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
-                        </Border.Effect>
                         <Border.OpacityMask>
                             <VisualBrush>
                                 <VisualBrush.Visual>
@@ -66,17 +65,46 @@
                         </Border.OpacityMask>
                         <Grid>
                             <elements:Acrylic/>
-                            <StackPanel Margin="20,15,20,15">
-                                <TextBlock d:Text="Launch options" Text="{DynamicResource OfflineLaunchGameSettings}" Foreground="White" FontSize="18" FontWeight="Black"></TextBlock>
-                                <Rectangle Fill="White" Opacity="0.1" Margin="0,15,0,0" VerticalAlignment="Top" Height="1"/>
-                                <Grid Margin="0,15,0,0">
-                                    <TextBlock Text="{DynamicResource SettingsLaunchGameWindowed}" d:Text="Windowed mode" Foreground="White" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
-                                    <elements:Toggleable x:Name="ToggleLaunchWindowed" HorizontalAlignment="Right"/>
-                                </Grid>
-                            </StackPanel>
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" d:Text="Enabled enhancements" Text="Enabled enhancements" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
+                                <elements:SmoothScrollViewer Grid.Row="2">
+                                    <StackPanel x:Name="enabledEnhancements" Margin="5"/>
+                                </elements:SmoothScrollViewer>
+                            </Grid>
                         </Grid>
                     </Border>
-                    <Border Grid.Row="7" CornerRadius="15">
+                    <Border Grid.Row="6" CornerRadius="15">
+                        <Border.OpacityMask>
+                            <VisualBrush>
+                                <VisualBrush.Visual>
+                                    <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Border.OpacityMask>
+                        <Grid>
+                            <elements:Acrylic/>
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" d:Text="Launch options" Text="{DynamicResource OfflineLaunchGameSettings}" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
+                                <StackPanel Grid.Row="2" Margin="10,0,10,10">
+                                    <Grid>
+                                        <TextBlock Text="{DynamicResource SettingsLaunchGameWindowed}" d:Text="Windowed mode" Foreground="White" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
+                                        <elements:Toggleable x:Name="ToggleLaunchWindowed" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="8" CornerRadius="15">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
                         </Border.Effect>

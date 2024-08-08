@@ -21,7 +21,7 @@
     <system:String x:Key="OfflinePageButtonLibrary">Library</system:String>
     <system:String x:Key="OfflinePageButtonWorkshop">Workshop</system:String>
 
-    <system:String x:Key="OfflineLaunchGameSettings">Change game startup options...</system:String>
+    <system:String x:Key="OfflineLaunchGameSettings">Launch options</system:String>
 
     <system:String x:Key="LibraryTileButtonSyncAgain">Sync again</system:String>
     <system:String x:Key="LibraryTileButtonSyncing">Refreshing...</system:String>
