@@ -39,27 +39,7 @@
                     <TextBlock x:Name="searchPlaceholder" Text="{DynamicResource WorkshopTileSearchBar}" FontSize="15" FontWeight="Regular" Margin="47,0,20,1" VerticalAlignment="Center" Foreground="#66FFFFFF" IsHitTestVisible="False" Visibility="Visible"/>
                 </Grid>
             </Border>
-            <Border Grid.Column="2" CornerRadius="20" Width="250">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
-                </Border.Effect>
-                <Border.OpacityMask>
-                    <VisualBrush>
-                        <VisualBrush.Visual>
-                            <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </Border.OpacityMask>
-                <Grid>
-                    <elements:Acrylic/>
-                    <Button Style="{StaticResource RoundButton}" Background="Transparent" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                        <Grid>
-                            <TextBlock Text="{DynamicResource WorkshopSortbyDownload}" FontSize="14" FontWeight="Medium" Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
-                            <Path Stretch="Uniform" Width="13" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0" Fill="White" Data="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/>
-                        </Grid>
-                    </Button>
-                </Grid>
-            </Border>
+            <elements:DropdownPicker Grid.Column="2" x:Name="filter" Width="250" OnOptionSelected="OnFilterChanged"/>
             <Border Grid.Column="4" CornerRadius="20" Width="40">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>

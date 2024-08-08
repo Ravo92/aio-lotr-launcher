@@ -18,6 +18,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" CornerRadius="19">
                 <Border.Effect>
@@ -37,7 +39,8 @@
                     <TextBlock x:Name="searchPlaceholder" Text="{DynamicResource LibraryTileSearchBar}" FontSize="15" FontWeight="Regular" Margin="47,0,20,1" VerticalAlignment="Center" Foreground="#66FFFFFF" IsHitTestVisible="False" Visibility="Visible"/>
                 </Grid>
             </Border>
-            <Border Grid.Column="2" CornerRadius="20" Width="40">
+            <elements:DropdownPicker Grid.Column="2" x:Name="filter" Width="250" OnOptionSelected="OnFilterChanged"/>
+            <Border Grid.Column="4" CornerRadius="20" Width="40">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
                 </Border.Effect>

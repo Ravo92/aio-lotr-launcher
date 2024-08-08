@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/AccentButtonStyle.xaml"/>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/RoundButtonStyle.xaml"/>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/LaunchButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/MenuButtonStyle.xaml"/>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ListButtonStyle.xaml"/>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ScrollViewerStyle.xaml"/>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/TextBlockButtonStyle.xaml"/>

@@ -52,5 +52,6 @@
         </Grid>
         <Border x:Name="fullContent" Visibility="Collapsed"/>
         <elements:PopupVisualizer d:Visibility="Collapsed"/>
+        <elements:MenuVisualizer d:Visibility="Collapsed"/>
     </Grid>
 </Window>

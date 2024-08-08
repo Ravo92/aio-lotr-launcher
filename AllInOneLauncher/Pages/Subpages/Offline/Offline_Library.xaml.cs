@@ -6,6 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
+using AllInOneLauncher.Elements.Menues;
+using System.Windows.Media.Animation;
+using System.Diagnostics;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -17,27 +20,23 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_Library()
         {
             InitializeComponent();
+            filter.Options = ["Patches and Mods", "Enhancements", "Everything"];
         }
 
         private int Game = 0;
 
-        public async void Load(int game)
+        public void Load(int game)
         {
             Game = game;
             search.Text = "";
 
-            libraryTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: game);
-            libraryTiles.Children.Clear();
-            foreach (BfmeWorkshopEntry entry in entries)
-                libraryTiles.Children.Add(new LibraryTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
-            libraryTiles.Children.Add(emptyLibraryTile);
+            UpdateQuery();
         }
 
-        private async void Search(string keyword)
+        private async void UpdateQuery()
         {
             libraryTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: keyword);
+            List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: search.Text, type: filter.Selected == 0 ? -2 : (filter.Selected == 1 ? -3 : -1));
             libraryTiles.Children.Clear();
             foreach (BfmeWorkshopEntry entry in entries)
                 libraryTiles.Children.Add(new LibraryTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
@@ -46,12 +45,14 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         private void OnInstallMoreClicked(object sender, MouseButtonEventArgs e) => Primary.Offline.Instance.ShowWorkshop();
 
-        private void OnReloadClicked(object sender, RoutedEventArgs e) => Search(search.Text);
+        private void OnReloadClicked(object sender, RoutedEventArgs e) => UpdateQuery();
+
+        private void OnFilterChanged(object sender, EventArgs e) => UpdateQuery();
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             searchPlaceholder.Visibility = search.Text == "" ? Visibility.Visible : Visibility.Hidden;
-            Search(search.Text);
+            UpdateQuery();
         }
     }
 }
