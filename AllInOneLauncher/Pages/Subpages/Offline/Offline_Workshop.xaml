@@ -79,8 +79,9 @@
                 </Grid>
             </Border>
         </Grid>
-        <elements:SmoothScrollViewer Grid.Row="2">
+        <elements:SmoothScrollViewer Grid.Row="2" x:Name="workshopContent" Visibility="Visible">
             <WrapPanel x:Name="workshopTiles"/>
         </elements:SmoothScrollViewer>
+        <elements:NoConnection Grid.Row="2" x:Name="noConnection" Visibility="Hidden"/>
     </Grid>
 </UserControl>
