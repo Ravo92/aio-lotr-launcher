@@ -118,6 +118,7 @@
     <system:String x:Key="InstallGameDialogLocation">Bibliothek</system:String>
 
     <!--=====================  ErrorPopup  =====================-->
-    <system:String x:Key="ErrorPopupTitle">ERROR</system:String>
-    <system:String x:Key="ErrorPopupCopyError">Copy</system:String>
+    <system:String x:Key="ErrorPopupTitle">FEHLER</system:String>
+    <system:String x:Key="ErrorPopupCopyError">Text kopieren</system:String>
+    <system:String x:Key="ErrorPopupCopyErrorClicked">Text in die Zwischenablage kopiert!</system:String>
 </ResourceDictionary>

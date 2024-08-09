@@ -111,5 +111,6 @@
 
     <!--=====================  ErrorPopup  =====================-->
     <system:String x:Key="ErrorPopupTitle">ERROR</system:String>
-    <system:String x:Key="ErrorPopupCopyError">Copy</system:String>
+    <system:String x:Key="ErrorPopupCopyError">Copy text</system:String>
+    <system:String x:Key="ErrorPopupCopyErrorClicked">Text copied to clipboard!</system:String>
 </ResourceDictionary>

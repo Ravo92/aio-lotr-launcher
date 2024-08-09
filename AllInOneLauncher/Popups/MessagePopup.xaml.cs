@@ -1,7 +1,6 @@
 ﻿using AllInOneLauncher.Elements;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace AllInOneLauncher.Popups
 {

@@ -20,6 +20,14 @@ namespace AllInOneLauncher.Popups
 
         private void ButtonCancelClicked(object sender, RoutedEventArgs e) => Dismiss();
 
-        private void OnCopyErrorClicked(object sender, RoutedEventArgs e) => Clipboard.SetDataObject($"{title.Text}\n{stackTrace.Text}");
+        private void OnCopyErrorClicked(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetDataObject($"{title.Text}\n{stackTrace.Text}");
+
+            if (sender is Button button)
+            {
+                button.Content = Application.Current.FindResource("ErrorPopupCopyErrorClicked").ToString()!;
+            }
+        }
     }
 }
