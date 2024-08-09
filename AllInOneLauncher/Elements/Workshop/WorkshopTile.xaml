@@ -6,7 +6,7 @@
              xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
              mc:Ignorable="d" 
              Height="370" Width="250">
-    <Border CornerRadius="15" Cursor="Hand" MouseEnter="OnEnter" MouseLeave="OnLeave" MouseDown="OnClicked" Loaded="OnLoad">
+    <Border CornerRadius="15" Cursor="Hand" MouseEnter="OnEnter" MouseLeave="OnLeave" MouseUp="OnClicked" Loaded="OnLoad">
         <Border.OpacityMask>
             <VisualBrush>
                 <VisualBrush.Visual>

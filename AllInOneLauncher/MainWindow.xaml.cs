@@ -13,6 +13,7 @@ using AllInOneLauncher.Logic;
 using AllInOneLauncher.Elements;
 using AllInOneLauncher.Popups;
 using System.Reflection;
+using BfmeWorkshopKit.Logic;
 
 namespace AllInOneLauncher
 {
@@ -31,6 +32,7 @@ namespace AllInOneLauncher
             LauncherStateManager.Init();
             SystemInputManager.Init();
             LauncherUpdateManager.CheckForUpdates();
+            BfmeWorkshopSyncManager.UseExperimentalBaseGameFiles = true;
 
             TrayIcon.Visibility = Visibility.Collapsed;
             fullContent.Visibility = Visibility.Visible;

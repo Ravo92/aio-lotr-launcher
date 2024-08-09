@@ -1,4 +1,6 @@
-﻿using BfmeWorkshopKit.Data;
+﻿using AllInOneLauncher.Elements.Menues;
+using AllInOneLauncher.Popups;
+using BfmeWorkshopKit.Data;
 using BfmeWorkshopKit.Logic;
 using System;
 using System.Linq;
@@ -65,11 +67,41 @@ namespace AllInOneLauncher.Elements
             hoverEffect.Opacity = 0;
         }
 
-        private async void OnClicked(object sender, MouseButtonEventArgs e)
+        private void OnClicked(object sender, MouseButtonEventArgs e)
         {
-            await BfmeWorkshopLibraryManager.AddToLibrary(WorkshopEntry.Guid);
-            IsInLibrary = true;
-            IsUpdateAvailable = false;
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                AddToLibrary();
+            }
+            else if (e.ChangedButton == MouseButton.Right)
+            {
+                MenuVisualizer.ShowMenu(
+                menu: [
+                    new ContextMenuButtonItem(IsUpdateAvailable ? "Update" : (IsInLibrary ? "Already in library" : "Add to library"), !IsInLibrary || IsUpdateAvailable, clicked: AddToLibrary),
+                    new ContextMenuSpacerItem(),
+                    new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid))
+                ],
+                owner: this,
+                side: MenuSide.BottomLeft,
+                padding: 4,
+                tint: true,
+                minWidth: 200,
+                targetCursor: true);
+            }
+        }
+
+        private async void AddToLibrary()
+        {
+            try
+            {
+                await BfmeWorkshopLibraryManager.AddToLibrary(WorkshopEntry.Guid);
+                IsInLibrary = true;
+                IsUpdateAvailable = false;
+            }
+            catch (Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error occurred while trying to add {WorkshopEntry.Name} to your library.\n{ex}"));
+            }
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)

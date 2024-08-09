@@ -12,6 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using AllInOneLauncher.Data;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using AllInOneLauncher.Elements.Menues;
+using AllInOneLauncher.Pages.Subpages.Offline;
+using AllInOneLauncher.Pages.Primary;
 
 namespace AllInOneLauncher.Elements
 {
@@ -162,7 +166,57 @@ namespace AllInOneLauncher.Elements
             hoverEffect.Opacity = 0;
         }
 
-        private async void OnClicked(object sender, MouseButtonEventArgs e)
+        private void OnClicked(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                Sync();
+            }
+            else if (e.ChangedButton == MouseButton.Right)
+            {
+                if (WorkshopEntry.Type <= 1)
+                {
+                    MenuVisualizer.ShowMenu(
+                    menu: [
+                        new ContextMenuButtonItem(IsUpdateAvailable ? "Update" : "Package up to date", IsUpdateAvailable, clicked: Update),
+                        new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Switch to \"{WorkshopEntry.Name}\"" : "Sync again", true, clicked: Sync),
+                        new ContextMenuSpacerItem(),
+                        new ContextMenuButtonItem("Open keybinds folder", true),
+                        new ContextMenuButtonItem("Open game folder", true),
+                        new ContextMenuSpacerItem(),
+                        new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid)),
+                        new ContextMenuSpacerItem(),
+                        new ContextMenuButtonItem("Remove from library", true, clicked: RemoveFromLibrary)
+                    ],
+                    owner: this,
+                    side: MenuSide.BottomLeft,
+                    padding: 4,
+                    tint: true,
+                    minWidth: 200,
+                    targetCursor: true);
+                }
+                else
+                {
+                    MenuVisualizer.ShowMenu(
+                    menu: [
+                        new ContextMenuButtonItem(IsUpdateAvailable ? "Update" : "Package up to date", IsUpdateAvailable, clicked: Update),
+                        new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Enable \"{WorkshopEntry.Name}\"" : "Disable", true, clicked: Sync),
+                        new ContextMenuSpacerItem(),
+                        new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid)),
+                        new ContextMenuSpacerItem(),
+                        new ContextMenuButtonItem("Remove from library", true, clicked: RemoveFromLibrary)
+                    ],
+                    owner: this,
+                    side: MenuSide.BottomLeft,
+                    padding: 4,
+                    tint: true,
+                    minWidth: 200,
+                    targetCursor: true);
+                }
+            }
+        }
+
+        private async void Sync()
         {
             try
             {
@@ -172,6 +226,27 @@ namespace AllInOneLauncher.Elements
             {
                 PopupVisualizer.ShowPopup(new MessagePopup("SYNC ERROR", $"An unexpected error occurred while trying to load {WorkshopEntry.Name}.\n{ex}"));
             }
+        }
+
+        private async void Update()
+        {
+            try
+            {
+                await BfmeWorkshopLibraryManager.AddToLibrary(WorkshopEntry.Guid.Split(':')[0]);
+                WorkshopEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid.Split(':')[0])).entry;
+                IsUpdateAvailable = false;
+                if (isActiveIcon.Opacity == 1d) Sync();
+            }
+            catch (Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error occurred while trying to update {WorkshopEntry.Name}.\n{ex}"));
+            }
+        }
+
+        private void RemoveFromLibrary()
+        {
+            BfmeWorkshopLibraryManager.RemoveFromLibrary(WorkshopEntry.Guid.Split(':')[0]);
+            Offline.Instance.library.libraryTiles.Children.Remove(this);
         }
 
         public double LoadProgress
