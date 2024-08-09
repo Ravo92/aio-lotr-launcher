@@ -71,7 +71,7 @@ namespace AllInOneLauncher.Elements
                 return;
 
             MenuVisualizer.ShowMenu(
-            menu: Options.Select(x => new ContextMenuButtonItem(x, true, () => Selected = Options.Contains(x) ? Options.IndexOf(x) : int.MinValue) as ContextMenuItem).ToList(),
+            menu: Options.Select(x => new ContextMenuButtonItem(x, true, round: false, height: 38, clicked: () => Selected = Options.Contains(x) ? Options.IndexOf(x) : int.MinValue) as ContextMenuItem).ToList(),
             owner: frame,
             side: MenuSide.Bottom,
             space: 0,

@@ -22,7 +22,7 @@ namespace AllInOneLauncher.Elements
         private Action<ContextMenuShell, double, double>? CalcPos;
         private Action? OnDestroy;
 
-        public ContextMenuShell(FrameworkElement owner, MenuSide side, CornerRadius corners, bool fullWidth, double lifespan, Action? onDestroy, Action<ContextMenuShell, double, double> calcPos)
+        public ContextMenuShell(FrameworkElement owner, MenuSide side, CornerRadius corners, bool fullWidth, double minWidth, double lifespan, double padding, bool tint, Action? onDestroy, Action<ContextMenuShell, double, double> calcPos)
         {
             InitializeComponent();
 
@@ -30,7 +30,11 @@ namespace AllInOneLauncher.Elements
             Side = side;
             Corners = corners;
             Width = fullWidth ? owner.ActualWidth : double.NaN;
+            MinWidth = minWidth;
             Lifespan = lifespan;
+            frame_mainContent.Margin = new Thickness(padding);
+            stack_mainContent.Margin = new Thickness(padding);
+            this.tint.Visibility = tint ? Visibility.Visible : Visibility.Collapsed;
             OnDestroy = onDestroy;
             CalcPos = calcPos;
             Loaded += (o, e) => UpdatePos();
