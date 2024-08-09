@@ -1,4 +1,5 @@
-﻿using BfmeWorkshopKit.Logic;
+﻿using AllInOneLauncher.Logic;
+using BfmeWorkshopKit.Logic;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,28 +56,31 @@ namespace AllInOneLauncher.Elements
 
                 if (IsLoading)
                 {
-                    button.Content = "";
+                    text.Text = "";
                     LoadStatus = Application.Current.FindResource("MainLauncherLoading").ToString()!;
                     button.Opacity = 0.4d;
                     button.IsHitTestVisible = false;
                     LoadProgress = 0;
                     progressIndication.Visibility = Visibility.Visible;
+                    IconUAC.Visibility = Visibility.Collapsed;
                 }
                 else if (value == LaunchButtonState.Launch)
                 {
-                    button.Content = Application.Current.FindResource("MainLauncherPlay").ToString()!;
+                    text.Text = Application.Current.FindResource("MainLauncherPlay").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;
                     progressIndication.Visibility = Visibility.Collapsed;
+                    IconUAC.Visibility = Visibility.Collapsed;
                 }
                 else if (value == LaunchButtonState.Install)
                 {
-                    button.Content = Application.Current.FindResource("MainLauncherInstall").ToString()!;
+                    text.Text = Application.Current.FindResource("MainLauncherInstall").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;
                     progressIndication.Visibility = Visibility.Collapsed;
+                    IconUAC.Visibility = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
                 }
             }
         }
@@ -114,7 +118,7 @@ namespace AllInOneLauncher.Elements
         {
             if (ButtonState == LaunchButtonState.Launch)
                 OnLaunchClicked?.Invoke(this, EventArgs.Empty);
-            else if(ButtonState == LaunchButtonState.Install)
+            else if (ButtonState == LaunchButtonState.Install)
                 OnInstallClicked?.Invoke(this, EventArgs.Empty);
         }
     }
