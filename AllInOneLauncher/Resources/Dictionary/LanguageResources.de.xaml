@@ -57,7 +57,7 @@
     <system:String x:Key="LibraryTileEmptyInstallMore">Mehr Installieren</system:String>
     <system:String x:Key="LibraryTileEmptyDiscoverMore">Entdecke weitere Inhalte im Workshop!</system:String>
     
-    
+   
 
     <!--=====================  Offline/Workshop  =====================-->
     <system:String x:Key="WorkshopPageSearchPlaceholder">Im Workshop suchen...</system:String>
@@ -116,5 +116,4 @@
     <system:String x:Key="InstallGameDialogTitle">Spiel installieren</system:String>
     <system:String x:Key="InstallGameDialogLanguage">Sprache</system:String>
     <system:String x:Key="InstallGameDialogLocation">Bibliothek</system:String>
-
 </ResourceDictionary>

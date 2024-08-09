@@ -118,7 +118,7 @@ namespace AllInOneLauncher.Elements
         {
             if (ButtonState == LaunchButtonState.Launch)
                 OnLaunchClicked?.Invoke(this, EventArgs.Empty);
-            else if(ButtonState == LaunchButtonState.Install)
+            else if (ButtonState == LaunchButtonState.Install)
                 OnInstallClicked?.Invoke(this, EventArgs.Empty);
         }
     }

@@ -14,6 +14,7 @@ namespace AllInOneLauncher.Logic
     public static class LauncherStateManager
     {
         internal static Dictionary<string, Type> TypeMap = [];
+        public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
         public static void Init()
         {
@@ -70,8 +71,6 @@ namespace AllInOneLauncher.Logic
                 Properties.Settings.Default.Save();
             }
         }
-
-        public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
         public static void AsElevated(Action action)
         {

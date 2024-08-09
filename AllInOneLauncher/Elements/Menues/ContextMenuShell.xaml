@@ -11,7 +11,7 @@
     </UserControl.Effect>
     <Grid x:Name="mainGrid" RenderTransformOrigin="0,1" Opacity="1">
         <Grid Margin="0">
-            <Border x:Name="border_content" Background="{Binding Fill, ElementName=triangle}" d:Background="#252526" Margin="0" CornerRadius="5" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
+            <Border x:Name="border_content" d:Background="#252526" Margin="0" CornerRadius="5" BorderThickness="0" RenderTransformOrigin="0.5,0.5">
                 <Border.OpacityMask>
                     <VisualBrush>
                         <VisualBrush.Visual>
