@@ -6,9 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
-using AllInOneLauncher.Elements.Menues;
-using System.Windows.Media.Animation;
-using System.Diagnostics;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -20,7 +17,11 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_Library()
         {
             InitializeComponent();
-            filter.Options = ["Patches and Mods", "Enhancements", "Everything"];
+            filter.Options = [
+                Application.Current.FindResource("WorkshopFilterbyPatchesAndMods").ToString(),
+                Application.Current.FindResource("WorkshopFilterbyEnhancements").ToString(),
+                Application.Current.FindResource("WorkshopFilterbyEverything").ToString()
+                ];
         }
 
         private int Game = 0;

@@ -71,11 +71,11 @@
                                     <RowDefinition Height="10"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" d:Text="Enabled enhancements" Text="Enabled enhancements" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
+                                <TextBlock Grid.Row="0" d:Text="Enabled enhancements" Text="{DynamicResource OfflineTitleEnabledEnhancements}" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
                                 <elements:SmoothScrollViewer Grid.Row="2">
                                     <StackPanel x:Name="enabledEnhancements" Margin="5"/>
                                 </elements:SmoothScrollViewer>
-                                <TextBlock Grid.Row="2" x:Name="activeEnhancementsNullIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1EFFFFFF" Text="No enhancements active" FontSize="16" FontWeight="Medium"/>
+                                <TextBlock Grid.Row="2" x:Name="activeEnhancementsNullIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1EFFFFFF" Text="{DynamicResource OfflineInfoNoEnabledEnhancements}" FontSize="16" FontWeight="Medium"/>
                             </Grid>
                         </Grid>
                     </Border>

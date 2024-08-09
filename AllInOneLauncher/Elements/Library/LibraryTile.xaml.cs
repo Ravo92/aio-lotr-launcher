@@ -12,9 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using AllInOneLauncher.Data;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using AllInOneLauncher.Elements.Menues;
-using AllInOneLauncher.Pages.Subpages.Offline;
 using AllInOneLauncher.Pages.Primary;
 
 namespace AllInOneLauncher.Elements

@@ -22,6 +22,8 @@
     <system:String x:Key="OfflinePageButtonWorkshop">Workshop</system:String>
     
     <system:String x:Key="OfflineLaunchGameSettings">Startoptionen für Spiel ändern...</system:String>
+    <system:String x:Key="OfflineTitleEnabledEnhancements">Aktivierte Zusatzmodule</system:String>
+    <system:String x:Key="OfflineInfoNoEnabledEnhancements">Keine Zusatzmodule aktiv</system:String>
 
     <system:String x:Key="LibraryTileButtonSyncAgain">Synchronisieren</system:String>
     <system:String x:Key="LibraryTileButtonSyncing">Aktualisieren...</system:String>
@@ -33,6 +35,12 @@
 
     <system:String x:Key="WorkshopTileSearchBar">Im Workshop suchen...</system:String>
     <system:String x:Key="WorkshopSortbyDownload">Nach Downloads sortieren</system:String>
+    <system:String x:Key="WorkshopSortbyMostDownloads">Downloads absteigend</system:String>
+    <system:String x:Key="WorkshopSortbyMostRecent">Datum absteigend</system:String>
+    <system:String x:Key="WorkshopSortbyMostAlphabetical">Alphabet aufsteigend</system:String>
+    <system:String x:Key="WorkshopFilterbyPatchesAndMods">Patches und Mods</system:String>
+    <system:String x:Key="WorkshopFilterbyEnhancements">Zusatzmodule</system:String>
+    <system:String x:Key="WorkshopFilterbyEverything">Kein Filter (Alles)</system:String>
 
     <system:String x:Key="GameInstallDialogLanguage">Sprache</system:String>
     <system:String x:Key="GameInstallDialogLibrary">Bibliothek</system:String>

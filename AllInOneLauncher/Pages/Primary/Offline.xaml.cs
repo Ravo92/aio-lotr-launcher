@@ -26,7 +26,11 @@ namespace AllInOneLauncher.Pages.Primary
         public Offline()
         {
             InitializeComponent();
-            Properties.Settings.Default.SettingsSaving += LauncherSettingsChanged;
+            Properties.Settings.Default.SettingsSaving += (s, e) =>
+            {
+                UpdateTitleImage();
+                UpdatePlayButton();
+            };
 
             BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
