@@ -75,6 +75,7 @@
                                 <elements:SmoothScrollViewer Grid.Row="2">
                                     <StackPanel x:Name="enabledEnhancements" Margin="5"/>
                                 </elements:SmoothScrollViewer>
+                                <TextBlock Grid.Row="2" x:Name="activeEnhancementsNullIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1EFFFFFF" Text="No enhancements active" FontSize="16" FontWeight="Medium"/>
                             </Grid>
                         </Grid>
                     </Border>
