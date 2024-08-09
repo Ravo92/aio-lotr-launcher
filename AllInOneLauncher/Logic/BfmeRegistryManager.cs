@@ -68,13 +68,13 @@ namespace AllInOneLauncher.Logic
             keyGame?.SetValue("Language", language);
             keyGame?.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyGame?.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyGame?.SetValue("UserDataLeafName", "My Battle for Middle-earth Files");
+            keyGame?.SetValue("UserDataLeafName", Constants.C_APPDATAFOLDER_BFME1_NAME_EN);
             keyGame?.SetValue("Version", "65539", RegistryValueKind.DWord);
 
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME1_NAME_EN)))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME1_NAME_EN));
 
-            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files", "Options.ini"), BfmeSettingsManager.DefaultOptions);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME1_NAME_EN, Constants.C_OPTIONSINI_FILENAME), BfmeSettingsManager.DefaultOptions);
         }
 
         private static void EnsureBfme1AppRegistry()
@@ -83,7 +83,7 @@ namespace AllInOneLauncher.Logic
 
             Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme.exe", false);
             using RegistryKey? keyApp = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme.exe", true);
-            keyApp?.SetValue("", Path.Combine(installPath, "lotrbfme.exe"));
+            keyApp?.SetValue("", Path.Combine(installPath, Constants.C_BFME1_EXECUTABLE));
             keyApp?.SetValue("Game Registry", @"SOFTWARE\EA GAMES\The Battle for Middle-earth");
             keyApp?.SetValue("Installed", "1", RegistryValueKind.DWord);
             keyApp?.SetValue("Path", installPath);
@@ -93,8 +93,8 @@ namespace AllInOneLauncher.Logic
             using RegistryKey? keySerial = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\EA GAMES\The Battle for Middle-earth\ergc", true);
             keySerial?.SetValue("", RandomString(20));
 
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth Files"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME1_NAME_EN)))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME1_NAME_EN));
         }
 
         private static void CreateBfme2InstallRegistry(string installPath, string language)
@@ -121,13 +121,13 @@ namespace AllInOneLauncher.Logic
             keyGame.SetValue("Language", language);
             keyGame.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyGame.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyGame.SetValue("UserDataLeafName", "My Battle for Middle-earth II Files");
+            keyGame.SetValue("UserDataLeafName", Constants.C_APPDATAFOLDER_BFME2_NAME_EN);
             keyGame.SetValue("Version", "65539", RegistryValueKind.DWord);
 
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME2_NAME_EN)))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME2_NAME_EN));
 
-            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files", "Options.ini"), BfmeSettingsManager.DefaultOptions);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME2_NAME_EN, Constants.C_OPTIONSINI_FILENAME), BfmeSettingsManager.DefaultOptions);
         }
 
         private static void EnsureBfme2AppRegistry()
@@ -136,7 +136,7 @@ namespace AllInOneLauncher.Logic
 
             Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2.exe", false);
             using RegistryKey? keyApp = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2.exe", true);
-            keyApp?.SetValue("", Path.Combine(installPath, "lotrbfme2.exe"));
+            keyApp?.SetValue("", Path.Combine(installPath, Constants.C_BFME2_EXECUTABLE));
             keyApp?.SetValue("Game Registry", @"SOFTWARE\Electronic Arts\The Battle for Middle-earth II");
             keyApp?.SetValue("Installed", "1", RegistryValueKind.DWord);
             keyApp?.SetValue("Path", installPath);
@@ -146,8 +146,8 @@ namespace AllInOneLauncher.Logic
             using RegistryKey? keySerial = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Battle for Middle-earth II\ergc", true);
             keySerial?.SetValue("", RandomString(20));
 
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Battle for Middle-earth II Files"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME2_NAME_EN)))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_BFME2_NAME_EN));
         }
 
         private static void CreateRotwkInstallRegistry(string installPath, string language)
@@ -174,13 +174,13 @@ namespace AllInOneLauncher.Logic
             keyGame?.SetValue("Language", language);
             keyGame?.SetValue("MapPackVersion", "65536", RegistryValueKind.DWord);
             keyGame?.SetValue("UseLocalUserMaps", "0", RegistryValueKind.DWord);
-            keyGame?.SetValue("UserDataLeafName", "My Rise of the Witch-king Files");
+            keyGame?.SetValue("UserDataLeafName", Constants.C_APPDATAFOLDER_Rotwk_NAME_EN);
             keyGame?.SetValue("Version", "65539", RegistryValueKind.DWord);
 
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Rise of the Witch-king Files")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Rise of the Witch-king Files"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_Rotwk_NAME_EN)))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_Rotwk_NAME_EN));
 
-            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Rise of the Witch-king Files", "Options.ini"), BfmeSettingsManager.DefaultOptions);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_Rotwk_NAME_EN, Constants.C_OPTIONSINI_FILENAME), BfmeSettingsManager.DefaultOptions);
         }
 
         private static void EnsureRotwkAppRegistry()
@@ -189,7 +189,7 @@ namespace AllInOneLauncher.Logic
 
             Registry.LocalMachine.DeleteSubKeyTree(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2ep1.exe", false);
             using RegistryKey? keyApp = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Microsoft\Windows\CurrentVersion\App Paths\lotrbfme2ep1.exe", true);
-            keyApp?.SetValue("", Path.Combine(installPath, "lotrbfme2ep1.exe"));
+            keyApp?.SetValue("", Path.Combine(installPath, Constants.C_ROTWK_EXECUTABLE));
             keyApp?.SetValue("Game Registry", @"SOFTWARE\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king");
             keyApp?.SetValue("Installed", "1", RegistryValueKind.DWord);
             keyApp?.SetValue("Path", installPath);
@@ -199,8 +199,8 @@ namespace AllInOneLauncher.Logic
             using RegistryKey? keySerial = Registry.LocalMachine.CreateSubKey(@$"SOFTWARE\{(nint.Size == 8 ? "WOW6432Node" : "")}\Electronic Arts\Electronic Arts\The Lord of the Rings, The Rise of the Witch-king\ergc", true);
             keySerial?.SetValue("", RandomString(20));
 
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Rise of the Witch-king Files")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "My Rise of the Witch-king Files"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_Rotwk_NAME_EN)))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Constants.C_APPDATAFOLDER_Rotwk_NAME_EN));
         }
 
         private static string GetBfmeRegistryKeyValue(BfmeGame game, string key, bool useAltKey = false, string keySuffix = "")

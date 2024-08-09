@@ -29,8 +29,8 @@ namespace AllInOneLauncher.Elements
                     {
                         Dispatcher.Invoke(() =>
                         {
-                            titleStack.BeginAnimation(FrameworkElement.MarginProperty, null);
-                            titleStack.SetValue(FrameworkElement.MarginProperty, new Thickness(0));
+                            titleStack.BeginAnimation(MarginProperty, null);
+                            titleStack.SetValue(MarginProperty, new Thickness(0));
                         });
                         await Task.Delay(TimeSpan.FromSeconds(2));
                         continue;
@@ -41,7 +41,7 @@ namespace AllInOneLauncher.Elements
                     Dispatcher.Invoke(() =>
                     {
                         ThicknessAnimation l = new() { To = new Thickness(availableTitleArea.ActualWidth - titleStack.ActualWidth, 0, 0, 0), Duration = duration };
-                        Dispatcher.Invoke(() => titleStack.BeginAnimation(FrameworkElement.MarginProperty, l));
+                        Dispatcher.Invoke(() => titleStack.BeginAnimation(MarginProperty, l));
                     });
                     await Task.Delay(duration.Add(TimeSpan.FromSeconds(2)));
 
@@ -49,8 +49,8 @@ namespace AllInOneLauncher.Elements
                     {
                         Dispatcher.Invoke(() =>
                         {
-                            titleStack.BeginAnimation(FrameworkElement.MarginProperty, null);
-                            titleStack.SetValue(FrameworkElement.MarginProperty, new Thickness(0));
+                            titleStack.BeginAnimation(MarginProperty, null);
+                            titleStack.SetValue(MarginProperty, new Thickness(0));
                         });
                         await Task.Delay(TimeSpan.FromSeconds(2));
                         continue;
@@ -59,7 +59,7 @@ namespace AllInOneLauncher.Elements
                     Dispatcher.Invoke(() =>
                     {
                         ThicknessAnimation r = new() { To = new Thickness(0, 0, 0, 0), Duration = duration };
-                        Dispatcher.Invoke(() => titleStack.BeginAnimation(FrameworkElement.MarginProperty, r));
+                        Dispatcher.Invoke(() => titleStack.BeginAnimation(MarginProperty, r));
                     });
                     await Task.Delay(duration.Add(TimeSpan.FromSeconds(2)));
                 }

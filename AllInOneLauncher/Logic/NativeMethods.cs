@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace AllInOneLauncher.Logic
@@ -16,6 +17,84 @@ namespace AllInOneLauncher.Logic
         public static readonly int WS_DLGFRAME = 0x00400000;
 
         public static readonly uint SWP_NOZORDER = 0x0004;
+
+        public const int WH_KEYBOARD_LL = 13;
+        public const int WH_MOUSE_LL = 14;
+
+        public delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
+        public delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+
+            public static RECT Zero => new() { Left = 0, Top = 0, Right = 0, Bottom = 0 };
+
+            public readonly bool IsZero() => Left == 0 && Top == 0 && Right == 0 && Bottom == 0;
+
+            public readonly bool Contains(POINT point) => point.x >= Left && point.x <= Right && point.y >= Top && point.y <= Bottom;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct DEVMODE
+        {
+            internal const int CCHDEVICENAME = 0x20;
+            internal const int CCHFORMNAME = 0x20;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
+            public string dmDeviceName;
+            public short dmSpecVersion;
+            public short dmDriverVersion;
+            public short dmSize;
+            public short dmDriverExtra;
+            public int dmFields;
+            public int dmPositionX;
+            public int dmPositionY;
+            public int dmDisplayOrientation;
+            public int dmDisplayFixedOutput;
+            public short dmColor;
+            public short dmDuplex;
+            public short dmYResolution;
+            public short dmTTOption;
+            public short dmCollate;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
+            public string dmFormName;
+            public short dmLogPixels;
+            public int dmBitsPerPel;
+            public int dmPelsWidth;
+            public int dmPelsHeight;
+            public int dmDisplayFlags;
+            public int dmDisplayFrequency;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Rect
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int x;
+            public int y;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MSLLHOOKSTRUCT
+        {
+            public POINT pt;
+            public int mouseData;
+            public int flags;
+            public int time;
+            public IntPtr dwExtraInfo;
+        }
 
         [LibraryImport("user32.dll")]
         internal static partial int ShowWindow(IntPtr hWnd, uint Msg);
@@ -56,58 +135,40 @@ namespace AllInOneLauncher.Logic
         [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool ClipCursor(IntPtr lpRect);
-    }
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct DEVMODE
-    {
-        internal const int CCHDEVICENAME = 0x20;
-        internal const int CCHFORMNAME = 0x20;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
-        public string dmDeviceName;
-        public short dmSpecVersion;
-        public short dmDriverVersion;
-        public short dmSize;
-        public short dmDriverExtra;
-        public int dmFields;
-        public int dmPositionX;
-        public int dmPositionY;
-        public int dmDisplayOrientation;
-        public int dmDisplayFixedOutput;
-        public short dmColor;
-        public short dmDuplex;
-        public short dmYResolution;
-        public short dmTTOption;
-        public short dmCollate;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
-        public string dmFormName;
-        public short dmLogPixels;
-        public int dmBitsPerPel;
-        public int dmPelsWidth;
-        public int dmPelsHeight;
-        public int dmDisplayFlags;
-        public int dmDisplayFrequency;
-    }
+        [LibraryImport("user32.dll", SetLastError = true, EntryPoint = "SetWindowsHookExW")]
+        internal static partial IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct RECT
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
+        [LibraryImport("user32.dll", SetLastError = true, EntryPoint = "SetWindowsHookExW")]
+        internal static partial IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
 
-        public static RECT Zero => new() { Left = -1, Top = -1, Right = -1, Bottom = -1 };
-        public readonly bool IsZero() => Left == -1 && Top == -1 && Right == -1 && Bottom == -1;
-        public readonly bool Contains(System.Drawing.Point p) => new System.Drawing.Rectangle(Left, Top, Right, Bottom).Contains(p);
-    }
+        [LibraryImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool UnhookWindowsHookEx(IntPtr hhk);
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Rect
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
+        [LibraryImport("user32.dll", SetLastError = true)]
+        internal static partial IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+
+        [LibraryImport("kernel32.dll", EntryPoint = "GetModuleHandleW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        public static partial IntPtr GetModuleHandle(string lpModuleName);
+
+        public static IntPtr SetKeyboardHook(LowLevelKeyboardProc proc)
+        {
+            using Process curProcess = Process.GetCurrentProcess();
+            using ProcessModule curModule = curProcess.MainModule!;
+            return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+        }
+
+        public static IntPtr SetMouseHook(LowLevelMouseProc proc)
+        {
+            using Process curProcess = Process.GetCurrentProcess();
+            using ProcessModule curModule = curProcess.MainModule!;
+            return SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+        }
+
+        public static bool Unhook(IntPtr hookID)
+        {
+            return UnhookWindowsHookEx(hookID);
+        }
     }
 }

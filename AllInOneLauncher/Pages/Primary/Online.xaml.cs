@@ -9,8 +9,7 @@ namespace AllInOneLauncher.Pages.Primary
     /// </summary>
     public partial class Online : UserControl
     {
-        public static Online Instance = new Online();
-
+        internal static Online Instance = new();
         private bool FirstLoad = true;
 
         public Online()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using static AllInOneLauncher.Logic.NativeMethods;
 
 namespace AllInOneLauncher.Logic
 {

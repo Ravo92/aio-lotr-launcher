@@ -12,7 +12,7 @@ namespace AllInOneLauncher.Logic
             if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
                 Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
 
-            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), Constants.C_OPTIONSINI_FILENAME);
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
@@ -30,7 +30,7 @@ namespace AllInOneLauncher.Logic
             if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
                 Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
 
-            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), Constants.C_OPTIONSINI_FILENAME);
 
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
@@ -47,7 +47,7 @@ namespace AllInOneLauncher.Logic
             if (!Directory.Exists(BfmeRegistryManager.GetBfmeDataPath(game)))
                 Directory.CreateDirectory(BfmeRegistryManager.GetBfmeDataPath(game));
 
-            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), "Options.ini");
+            string optionsFile = Path.Combine(BfmeRegistryManager.GetBfmeDataPath(game), Constants.C_OPTIONSINI_FILENAME);
             if (!File.Exists(optionsFile) || File.ReadAllText(optionsFile).Length <= 6)
                 File.WriteAllText(optionsFile, DefaultOptions);
         }

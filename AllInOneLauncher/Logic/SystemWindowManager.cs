@@ -1,38 +1,62 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+using static AllInOneLauncher.Logic.NativeMethods;
 
 namespace AllInOneLauncher.Logic
 {
     public static class SystemWindowManager
     {
+        private static int previousState = 1;
+
         public static void UpdateWindow(IntPtr handle, int xPos, int yPos, int xRes, int yRes, bool removeBorder = true)
         {
             if (IsWindowFullscreen(handle))
                 return;
 
-            NativeMethods.ShowWindow(handle, NativeMethods.SW_RESTORE);
+            previousState = ShowWindow(handle, SW_RESTORE);
+
+            if (previousState == 0)
+            {
+
+            }
 
             if (removeBorder)
             {
-                long currentStyle = NativeMethods.GetWindowLongPtr(handle, NativeMethods.GWL_STYLE);
-                currentStyle &= ~(NativeMethods.WS_BORDER | NativeMethods.WS_DLGFRAME | NativeMethods.WS_THICKFRAME | NativeMethods.WS_MINIMIZEBOX | NativeMethods.WS_MAXIMIZEBOX | NativeMethods.WS_SYSMENU);
-                NativeMethods.SetWindowLongPtr(handle, NativeMethods.GWL_STYLE, (uint)currentStyle);
+                long currentStyle = GetWindowLongPtr(handle, GWL_STYLE);
+                currentStyle &= ~(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU);
+                IntPtr previousStyle = SetWindowLongPtr(handle, GWL_STYLE, (uint)currentStyle);
+
+                if (previousStyle == IntPtr.Zero)
+                {
+                    int error = Marshal.GetLastWin32Error();
+                    if (error != 0)
+                    {
+                        throw new System.ComponentModel.Win32Exception(error, "SetWindowLongPtr failed.");
+                    }
+                }
             }
 
-            NativeMethods.SetWindowPos(handle, handle, xPos, yPos, xRes, yRes, NativeMethods.SWP_NOZORDER);
-            NativeMethods.SetForegroundWindow(handle);
+            SetWindowPos(handle, handle, xPos, yPos, xRes, yRes, SWP_NOZORDER);
+            SetForegroundWindow(handle);
         }
 
         public static void ActivateWindow(IntPtr handle)
         {
-            NativeMethods.ShowWindow(handle, NativeMethods.SW_RESTORE);
-            NativeMethods.SetForegroundWindow(handle);
-            NativeMethods.BringWindowToTop(handle);
+            previousState = ShowWindow(handle, SW_RESTORE);
+
+            if (previousState == 0)
+            {
+
+            }
+
+            SetForegroundWindow(handle);
+            BringWindowToTop(handle);
         }
 
         public static bool IsWindowFullscreen(IntPtr handle)
         {
             Rect rect = default;
-            NativeMethods.GetWindowRect(handle, ref rect);
+            GetWindowRect(handle, ref rect);
             return rect.Left == -32000 && rect.Top == -32000;
         }
     }

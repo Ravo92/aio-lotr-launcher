@@ -12,7 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using AllInOneLauncher.Data;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace AllInOneLauncher.Elements
 {
@@ -28,6 +27,8 @@ namespace AllInOneLauncher.Elements
             BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
             BfmeWorkshopSyncManager.OnSyncUpdate += OnSyncUpdate;
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
+
+            BfmeWorkshopSyncManager.UseExperimentalBaseGameFiles = true;
         }
 
         private void OnSyncBegin(BfmeWorkshopEntry entry)

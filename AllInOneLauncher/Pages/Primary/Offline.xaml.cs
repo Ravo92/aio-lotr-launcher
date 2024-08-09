@@ -12,8 +12,6 @@ using AllInOneLauncher.Logic;
 using BfmeWorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
-using static System.Net.WebRequestMethods;
-using System.Collections.Generic;
 
 namespace AllInOneLauncher.Pages.Primary
 {
