@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,9 @@ namespace AllInOneLauncher.Elements
     {
         private static PopupVisualizer? Instance;
         private static List<Action> PopupQueue = new List<Action>();
+
+        public static event EventHandler? OnPopupOpened;
+        public static event EventHandler? OnPopupClosed;
 
         public static PopupBody? CurentPopup => (Instance != null && Instance.content.Child is PopupBody) ? (PopupBody)Instance.content.Child : null;
 
@@ -58,6 +62,7 @@ namespace AllInOneLauncher.Elements
 
             Instance.content.Child = popup;
             Instance.root.IsHitTestVisible = true;
+            OnPopupOpened?.Invoke(null, EventArgs.Empty);
 
             Instance.popupBody.Margin = popup.Margin;
             Instance.popupBody.VerticalAlignment = popup.VerticalAlignment;
@@ -97,6 +102,7 @@ namespace AllInOneLauncher.Elements
             else
             {
                 Instance.root.IsHitTestVisible = false;
+                OnPopupClosed?.Invoke(null, EventArgs.Empty);
             }
 
             if (Instance.content.Child is PopupBody)

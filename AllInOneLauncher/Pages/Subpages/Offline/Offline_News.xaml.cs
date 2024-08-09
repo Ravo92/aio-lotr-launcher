@@ -1,6 +1,9 @@
 ﻿using AllInOneLauncher.Data;
+using AllInOneLauncher.Elements;
 using System;
+using System.IO;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -19,6 +22,22 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         {
             InitializeComponent();
             Load(BfmeGame.BFME1);
+            PopupVisualizer.OnPopupOpened += (s, e) => SetNewsVisibility(false);
+            PopupVisualizer.OnPopupClosed += (s, e) => SetNewsVisibility(true);
+        }
+
+        private void SetNewsVisibility(bool isVisible)
+        {
+            if (isVisible && newsPage.Height == 0)
+            {
+                newsPageImage.Visibility = System.Windows.Visibility.Hidden;
+                newsPage.Height = double.NaN;
+            }
+            else if (!isVisible && newsPage.Height != 0)
+            {
+                newsPageImage.Visibility = System.Windows.Visibility.Visible;
+                newsPage.Height = 0;
+            }
         }
 
         private static Uri GetNewsPage(BfmeGame game)
@@ -46,6 +65,20 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             {
                 newsPage.Visibility = System.Windows.Visibility.Hidden;
                 noConnection.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                Dispatcher.Invoke(async () =>
+                {
+                    // Cursed workaround for WebView2 airspace issue
+                    MemoryStream ms = new MemoryStream();
+                    await newsPage.CoreWebView2.CapturePreviewAsync(Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Png, ms);
+                    BitmapImage bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.StreamSource = ms;
+                    bi.EndInit();
+                    newsPageImage.Source = bi;
+                });
             }
         }
     }
