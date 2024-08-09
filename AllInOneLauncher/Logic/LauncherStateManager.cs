@@ -55,9 +55,6 @@ namespace AllInOneLauncher.Logic
             get => Properties.Settings.Default.LauncherLanguageSetting;
             set
             {
-                Properties.Settings.Default.LauncherLanguageSetting = value;
-                Properties.Settings.Default.Save();
-
                 ResourceDictionary resourceDictionary = [];
                 switch (value)
                 {
@@ -69,6 +66,9 @@ namespace AllInOneLauncher.Logic
                         break;
                 }
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+                Properties.Settings.Default.LauncherLanguageSetting = value;
+                Properties.Settings.Default.Save();
             }
         }
 

@@ -74,6 +74,11 @@
     <system:String x:Key="LauncherTrayContextMenuShowApplication">Show Launcher window</system:String>
     <system:String x:Key="LauncherTrayContextMenuCloseApplication">Close Launcher</system:String>
 
+    <system:String x:Key="LauncherTitleMessageBoxSystemError">ERROR</system:String>
+    <system:String x:Key="LauncherTextMessageBoxSystemError">An unexpected error had occurred while installing the game:</system:String>
+    <system:String x:Key="LauncherTextCopyButtonMessageBoxSystemError">📋 Copy text</system:String>
+    <system:String x:Key="LauncherTextCopyButtonMessageBoxSystemErrorSucess">Text copied to clipboard!</system:String>
+
     <system:String x:Key="LibraryBFME1Logo">pack://application:,,,/Resources/Images/en_bfme1_title.png</system:String>
     <system:String x:Key="LibraryBFME2Logo">pack://application:,,,/Resources/Images/en_bfme2_title.png</system:String>
     <system:String x:Key="LibraryRotWKLogo">pack://application:,,,/Resources/Images/en_rotwk_title.png</system:String>

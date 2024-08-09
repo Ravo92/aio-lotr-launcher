@@ -17,11 +17,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_Library()
         {
             InitializeComponent();
-            filter.Options = [
-                Application.Current.FindResource("WorkshopFilterbyPatchesAndMods").ToString(),
-                Application.Current.FindResource("WorkshopFilterbyEnhancements").ToString(),
-                Application.Current.FindResource("WorkshopFilterbyEverything").ToString()
-                ];
+            filter.Options = ["{WorkshopFilterbyPatchesAndMods}", "{WorkshopFilterbyEnhancements}", "{WorkshopFilterbyEverything}"];
         }
 
         private int Game = 0;

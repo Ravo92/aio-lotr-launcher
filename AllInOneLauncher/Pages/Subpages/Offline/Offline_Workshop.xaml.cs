@@ -17,17 +17,8 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         {
             InitializeComponent();
 
-            typeFilter.Options = [
-                Application.Current.FindResource("WorkshopFilterbyPatchesAndMods").ToString(),
-                Application.Current.FindResource("WorkshopFilterbyEnhancements").ToString(),
-                Application.Current.FindResource("WorkshopFilterbyEverything").ToString()
-                ];
-
-            searchFilter.Options = [
-                Application.Current.FindResource("WorkshopSortbyMostDownloads").ToString(),
-                Application.Current.FindResource("WorkshopSortbyMostRecent").ToString(),
-                Application.Current.FindResource("WorkshopSortbyMostAlphabetical").ToString()
-                ];
+            typeFilter.Options = ["{WorkshopFilterbyPatchesAndMods}", "{WorkshopFilterbyEnhancements}", "{WorkshopFilterbyEverything}"];
+            searchFilter.Options = ["{WorkshopSortbyMostDownloads}", "{WorkshopSortbyMostRecent}", "{WorkshopSortbyMostAlphabetical}"];
         }
 
         private int Game = 0;
