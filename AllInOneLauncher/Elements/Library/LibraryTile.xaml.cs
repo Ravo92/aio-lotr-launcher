@@ -31,6 +31,8 @@ namespace AllInOneLauncher.Elements
             BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
             BfmeWorkshopSyncManager.OnSyncUpdate += OnSyncUpdate;
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
+
+            BfmeWorkshopSyncManager.UseExperimentalBaseGameFiles = true;
         }
 
         private void OnSyncBegin(BfmeWorkshopEntry entry)

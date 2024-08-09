@@ -202,7 +202,7 @@ namespace AllInOneLauncher
                 }
                 catch (Exception ex)
                 {
-                    
+                    Console.WriteLine($"Error deleting the folder with the name: {ex.Message}");
                 }
             }
         }
