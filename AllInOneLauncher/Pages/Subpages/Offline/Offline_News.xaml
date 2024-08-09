@@ -11,6 +11,7 @@
 
     <Grid Name="WebView2Grid">
         <Wpf:WebView2 x:Name="newsPage" NavigationCompleted="OnNavigationCompleted" DefaultBackgroundColor="Transparent" Visibility="Visible"/>
+        <Image x:Name="newsPageImage" Stretch="Fill"/>
         <elements:NoConnection x:Name="noConnection" Visibility="Hidden"/>
     </Grid>
 </UserControl>
