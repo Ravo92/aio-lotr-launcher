@@ -10,7 +10,7 @@ namespace AllInOneLauncher.Popups
     /// </summary>
     public partial class MessagePopup : PopupBody
     {
-        public MessagePopup(string title, string errorMessage, string stackTrace)
+        public MessagePopup(string title, string message)
         {
             InitializeComponent();
             this.title.Text = string.Join("", title.Split("{").Select(x => !x.Contains("}") ? x : ((Application.Current.FindResource(x.Split("}")[0]).ToString() ?? "") + x.Split("}")[1])));

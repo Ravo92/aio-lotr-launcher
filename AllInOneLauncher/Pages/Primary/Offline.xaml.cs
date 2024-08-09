@@ -13,6 +13,7 @@ using BfmeWorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
 using System.Windows.Documents;
+using System.Diagnostics;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -148,11 +149,7 @@ namespace AllInOneLauncher.Pages.Primary
                     }
                     catch (Exception ex)
                     {
-                        string title = Application.Current.FindResource("LauncherTitleMessageBoxSystemError").ToString()!;
-                        string errorMessage = Application.Current.FindResource("LauncherTextMessageBoxSystemError").ToString()!;
-                        string stackTrace = ex.StackTrace!;
-
-                        PopupVisualizer.ShowPopup(new MessagePopup(title, errorMessage, stackTrace));
+                        PopupVisualizer.ShowPopup(new ErrorPopup(ex));
                     }
                 });
             });
