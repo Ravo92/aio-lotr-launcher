@@ -118,7 +118,7 @@ namespace AllInOneLauncher.Elements
             DoubleAnimation opacityAnimation = new DoubleAnimation() { To = 0, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
             Instance.root.BeginAnimation(OpacityProperty, opacityAnimation);
 
-            (Instance.Parent as Panel).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = new BlurEffect() { Radius = 0 };
+            (Instance.Parent as Panel).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = null;
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)

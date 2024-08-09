@@ -201,6 +201,7 @@ namespace AllInOneLauncher.Pages.Primary
             enabledEnhancements.Children.Clear();
             foreach (BfmeWorkshopEntry entry in BfmeWorkshopSyncManager.GetActiveEnhancements(gameTabs.SelectedIndex).Values)
                 enabledEnhancements.Children.Add(new EnabledEnhancementTile() { Entry = entry, Margin = new Thickness(0, 0, 0, 10) });
+            activeEnhancementsNullIndicator.Visibility = enabledEnhancements.Children.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void CheckBoxWindowed_Checked(object sender, RoutedEventArgs e)
