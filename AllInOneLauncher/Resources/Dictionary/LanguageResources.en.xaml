@@ -14,8 +14,8 @@
     <system:String x:Key="GenericInstall">INSTALL</system:String>
     <system:String x:Key="GenericLoading">LOADING</system:String>
     <system:String x:Key="GenericPlay">PLAY</system:String>
-    
-    
+
+
 
     <!--=====================  MainWindow  =====================-->
     <system:String x:Key="MainWindowTitle">All-in-One Launcher by 2.22 Team</system:String>
@@ -108,4 +108,8 @@
     <system:String x:Key="InstallGameDialogTitle">INSTALL GAME</system:String>
     <system:String x:Key="InstallGameDialogLanguage">Language</system:String>
     <system:String x:Key="InstallGameDialogLocation">Location</system:String>
+
+    <!--=====================  ErrorPopup  =====================-->
+    <system:String x:Key="ErrorPopupTitle">ERROR</system:String>
+    <system:String x:Key="ErrorPopupCopyError">Copy</system:String>
 </ResourceDictionary>

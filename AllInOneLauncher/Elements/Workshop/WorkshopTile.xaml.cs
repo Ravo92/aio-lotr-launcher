@@ -105,7 +105,7 @@ namespace AllInOneLauncher.Elements
             }
             catch (Exception ex)
             {
-# warning PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error occurred while trying to add {WorkshopEntry.Name} to your library.\n{ex}"));
+                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
             }
         }
 
