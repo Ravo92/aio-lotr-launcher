@@ -225,7 +225,7 @@ namespace AllInOneLauncher.Elements
             }
             catch (Exception ex)
             {
-                PopupVisualizer.ShowPopup(new MessagePopup("SYNC ERROR", $"An unexpected error occurred while trying to load {WorkshopEntry.Name}.\n{ex}"));
+#warning PopupVisualizer.ShowPopup(new MessagePopup("SYNC ERROR", $"An unexpected error occurred while trying to load {WorkshopEntry.Name}.\n{ex}"));
             }
         }
 
@@ -240,7 +240,7 @@ namespace AllInOneLauncher.Elements
             }
             catch (Exception ex)
             {
-                PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error occurred while trying to update {WorkshopEntry.Name}.\n{ex}"));
+                #warning PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error occurred while trying to update {WorkshopEntry.Name}.\n{ex}"));
             }
         }
 

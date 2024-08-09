@@ -44,7 +44,7 @@ namespace AllInOneLauncher.Logic
                     }
                     catch (Exception ex)
                     {
-                        PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error had occurred while updating.\n{ex}"));
+# warning PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error had occurred while updating.\n{ex}"));
                     }
                 }
             }

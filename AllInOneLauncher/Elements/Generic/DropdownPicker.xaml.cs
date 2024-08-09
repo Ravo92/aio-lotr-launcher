@@ -4,18 +4,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AllInOneLauncher.Elements
 {
@@ -31,7 +22,7 @@ namespace AllInOneLauncher.Elements
             Loaded += (s, e) => title.Text = Options.Count > Selected ? (Options[Selected].StartsWith("{") && Options[Selected].EndsWith("}") ? (Application.Current.FindResource(Options[Selected].TrimStart('{').TrimEnd('}')).ToString() ?? "") : Options[Selected]) : "";
         }
         public event EventHandler? OnOptionSelected;
-        private List<string> options = new List<string>();
+        private List<string> options = [];
         public List<string> Options
         {
             get => options;
@@ -79,11 +70,11 @@ namespace AllInOneLauncher.Elements
             fullWidth: true,
             onDestroy: () =>
             {
-                CornerRadiusAnimation ca = new CornerRadiusAnimation() { From = new CornerRadius(20, 20, 0, 0), To = new CornerRadius(20), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
+                CornerRadiusAnimation ca = new() { From = new CornerRadius(20, 20, 0, 0), To = new CornerRadius(20), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
                 frame.BeginAnimation(Border.CornerRadiusProperty, ca);
             });
 
-            CornerRadiusAnimation ca = new CornerRadiusAnimation() { From = new CornerRadius(20), To = new CornerRadius(20, 20, 0, 0), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
+            CornerRadiusAnimation ca = new() { From = new CornerRadius(20), To = new CornerRadius(20, 20, 0, 0), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
             frame.BeginAnimation(Border.CornerRadiusProperty, ca);
         }
     }

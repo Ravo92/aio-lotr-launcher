@@ -111,7 +111,7 @@
     <system:String x:Key="SettingsPageBFMESectionLanguageLanguage">Spielsprache ändern</system:String>
 
 
-
+   
     <!--=====================  InstallGameDialog  =====================-->
     <system:String x:Key="InstallGameDialogTitle">Spiel installieren</system:String>
     <system:String x:Key="InstallGameDialogLanguage">Sprache</system:String>

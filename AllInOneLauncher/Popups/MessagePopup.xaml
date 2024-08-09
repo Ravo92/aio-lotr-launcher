@@ -6,22 +6,37 @@
              xmlns:local="clr-namespace:AllInOneLauncher.Popups"
              xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
              mc:Ignorable="d" 
-             Width="540" MinHeight="320" HorizontalAlignment="Center" VerticalAlignment="Center">
-    <Grid>
+             Width="700" Height="500" MinHeight="340" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Name="title" Grid.Row="0" Text="MESSAGE TITLE" Foreground="White" FontSize="20" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-        <Rectangle Grid.Row="1" Fill="White" Opacity="0.2" Margin="0,10,0,0" VerticalAlignment="Top" Height="1"/>
-        <Border Grid.Row="2" CornerRadius="5" BorderThickness="0">
-            <TextBlock Name="message" Text="Message body" Foreground="White" FontSize="15" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap"></TextBlock>
-        </Border>
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Grid.Column="1" Grid.Row="2" Content="Okay" VerticalAlignment="Center" Click="ButtonCancelClicked" Width="150"/>
+
+        <TextBlock Name="title" Grid.Row="0" Text="ERROR" Foreground="White" FontSize="22" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Name="errorMessage" Grid.Row="2" Text="An unexpected error had occurred while installing the game:" Foreground="White" FontSize="16" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,0,0,10"/>
+        <Grid Grid.Row="4" Margin="0">
+            <Border CornerRadius="5" BorderThickness="1" BorderBrush="#808080" Background="#2E2E2E" Padding="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="{DynamicResource LauncherTextCopyButtonMessageBoxSystemError}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CopyButton_Click" Background="Transparent" Foreground="White" FontSize="14" Padding="10" BorderThickness="0" Cursor="Hand"/>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                        <TextBlock Name="stackTraceBlock" Foreground="LightGray" FontFamily="Consolas" FontSize="16" TextWrapping="WrapWithOverflow" Margin="-10 0 0 0"/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Okay" VerticalAlignment="Center" Click="ButtonCancelClicked" Width="150" Height="40" FontSize="16"/>
         </StackPanel>
     </Grid>
 </elements:PopupBody>

@@ -12,6 +12,7 @@ using AllInOneLauncher.Logic;
 using BfmeWorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
+using System.Windows.Documents;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -147,7 +148,11 @@ namespace AllInOneLauncher.Pages.Primary
                     }
                     catch (Exception ex)
                     {
-                        PopupVisualizer.ShowPopup(new MessagePopup("ERROR", $"An unexpected error had occurred while installing the game.\n{ex}"));
+                        string title = Application.Current.FindResource("LauncherTitleMessageBoxSystemError").ToString()!;
+                        string errorMessage = Application.Current.FindResource("LauncherTextMessageBoxSystemError").ToString()!;
+                        string stackTrace = ex.StackTrace!;
+
+                        PopupVisualizer.ShowPopup(new MessagePopup(title, errorMessage, stackTrace));
                     }
                 });
             });
