@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
         mc:Ignorable="d"
-        Title="{DynamicResource MainLauncherTitle}" MinWidth="1024" MinHeight="786" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Visibility="Visible" SnapsToDevicePixels="True" Loaded="OnLoad" Closing="LauncherMainWindow_Closing" RenderOptions.BitmapScalingMode="HighQuality">
+        Title="{DynamicResource MainWindowTitle}" MinWidth="1024" MinHeight="786" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Visibility="Visible" SnapsToDevicePixels="True" Loaded="OnLoad" Closing="LauncherMainWindow_Closing" RenderOptions.BitmapScalingMode="HighQuality">
     <Grid x:Name="windowGrid">
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Resources/Images/BGMap.png"/>
@@ -21,10 +21,10 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel x:Name="tabs" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock x:Name="offlineTab" Style="{DynamicResource TextBlockButton}" d:Text="OFFLINE" Text="{DynamicResource MainLauncherLibrary}" FontSize="16" FontWeight="Bold" Margin="0,0,20,0" Background="Transparent" Cursor="Hand" MouseDown="OnOfflineTabClicked"/>
+                    <TextBlock x:Name="offlineTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainWindowSingleplayerTab}" FontSize="16" FontWeight="Bold" Margin="0,0,20,0" Background="Transparent" Cursor="Hand" MouseDown="OnOfflineTabClicked"/>
                     <Image x:Name="IconUAC" Source="pack://application:,,,/Resources/Images/uac.png" Width="20" Height="20" Margin="0,0,2,0"/>
-                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" d:Text="ONLINE" Text="{DynamicResource MainLauncherOnline}" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
-                    <TextBlock x:Name="guidesTab" Style="{DynamicResource TextBlockButton}" d:Text="GUIDES" Text="{DynamicResource MainLauncherGuides}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnGuidesTabClicked"/>
+                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainWindowMultiplayerTab}" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
+                    <TextBlock x:Name="guidesTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainWindowGuidesTab}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnGuidesTabClicked"/>
                 </StackPanel>
                 <StackPanel x:Name="icons" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Image Tag="https://www.youtube.com/@BeyondStandards" Source="pack://application:,,,/Resources/Images/youtube.png" Height="32" Margin="0,0,5,0" Cursor="Hand" MouseDown="OnLinkButtonClicked"/>

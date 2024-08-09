@@ -21,20 +21,20 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource SettingsBFMEGeneralLanguageDropDownLabelText}" d:Text="Language" HorizontalAlignment="Left" Foreground="white"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource SettingsPageBFMESectionLanguageLanguage}" HorizontalAlignment="Left" Foreground="white"/>
             <ComboBox Grid.Column="0" Grid.Row="1" x:Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="20" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxLanguage_SelectionChanged">
                 <ComboBoxItem Content="English"/>
                 <ComboBoxItem Content="Deutsch"/>
             </ComboBox>
-            <TextBlock Grid.Column="1" Grid.Row="0" Text="{DynamicResource SettingsBFMEGeneralGraphicsAPIDropDownLabelText}" d:Text="Graphics API" Margin="10,0,0,0" HorizontalAlignment="Left" Foreground="white"/>
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{DynamicResource SettingsPageBFMESectionVideoGraphicsApi}" Margin="10,0,0,0" HorizontalAlignment="Left" Foreground="white"/>
             <ComboBox Grid.Column="1" Grid.Row="1" x:Name="ComboBoxGraphicsAPI" HorizontalAlignment="Left" Margin="10,5,0,0" FontSize="20" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxGraphicsAPI_SelectionChanged">
                 <ComboBoxItem Content="DirectX 9.0c"/>
                 <ComboBoxItem Content="Vulkan"/>
             </ComboBox>
-            <TextBlock Grid.Column="0" Grid.Row="3" Text="{DynamicResource SettingsBFMEGeneralResolutionDropDownLabelText}" d:Text="Resolution" HorizontalAlignment="Left" Foreground="white"/>
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="{DynamicResource SettingsPageBFMESectionVideoResolution}" HorizontalAlignment="Left" Foreground="white"/>
             <ComboBox Grid.Column="0" Grid.Row="4" x:Name="ComboBoxResolution" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="20" Width="250" IsReadOnly="True" SelectionChanged="ComboBoxResolution_SelectionChanged"/>
-            <TextBlock Grid.Column="0" Grid.Row="6" Text="{DynamicResource SettingsBFMEGeneralCDKeyLabelText}" d:Text="Serialnumber" HorizontalAlignment="Left" Foreground="white"/>
-            <TextBox Grid.Column="0" Grid.Row="7" x:Name="TextBoxCDKey" Height="40" TextWrapping="Wrap" Text="TextBox" Width="500" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="26" MaxLength="24"/>
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="{DynamicResource SettingsPageBFMESectionGeneralSerialNumber}" HorizontalAlignment="Left" Foreground="white"/>
+            <TextBox Grid.Column="0" Grid.Row="7" x:Name="TextBoxCDKey" Height="40" TextWrapping="Wrap" d:Text="TextBox" Width="500" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="26" MaxLength="24"/>
             <Button Grid.Column="1" Grid.Row="7" x:Name="ButtonChangeCdKey" Height="40" Width="200" HorizontalAlignment="Left" Margin="10,5,0,0" Click="ButtonChangeCdKey_Click">
                 <Grid Width="168" Height="20">
                     <Grid.ColumnDefinitions>
@@ -42,7 +42,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image x:Name="IconUAC" Source="pack://application:,,,/Resources/Images/uac.png" HorizontalAlignment="center"/>
-                    <TextBlock Grid.Column="1" Margin="15, 0, 0, 0" Text="{DynamicResource SettingsBFMEGeneralCDKeyButtonText}" d:Text="Change Serial"/>
+                    <TextBlock Grid.Column="1" Margin="15, 0, 0, 0" Text="{DynamicResource SettingsPageBFMESectionGeneralChangeSerial}"/>
                 </Grid>
             </Button>
         </Grid>

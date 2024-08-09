@@ -20,6 +20,7 @@ namespace AllInOneLauncher.Elements
         public LibraryTileHorizontal()
         {
             InitializeComponent();
+            Properties.Settings.Default.SettingsSaving += (s, e) => UpdateType();
 
             _ = Task.Run(async () =>
             {
@@ -66,13 +67,13 @@ namespace AllInOneLauncher.Elements
             });
         }
 
-        BfmeWorkshopEntry? _entry = null;
-        public BfmeWorkshopEntry? Entry
+        BfmeWorkshopEntry? _workshopEntry = null;
+        public BfmeWorkshopEntry? WorkshopEntry
         {
-            get => _entry;
+            get => _workshopEntry;
             set
             {
-                _entry = value;
+                _workshopEntry = value;
 
                 if (value == null)
                 {
@@ -90,15 +91,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryTitle.Text = value.Value.Name;
                 activeEntryVersion.Text = value.Value.Version;
                 activeEntryAuthor.Text = $"by {value.Value.Author}";
-
-                if (value.Value.Type == 0)
-                    activeEntryType.Text = "Patch";
-                else if (value.Value.Type == 1)
-                    activeEntryType.Text = "Mod";
-                else if (value.Value.Type == 2)
-                    activeEntryType.Text = "Enhancement";
-                else if (value.Value.Type == 3)
-                    activeEntryType.Text = "Map Pack";
+                UpdateType();
 
                 activeEntryLoading.Visibility = IsLoading ? Visibility.Visible : Visibility.Hidden;
                 activeEntryActive.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
@@ -127,16 +120,31 @@ namespace AllInOneLauncher.Elements
             }
         }
 
+        private void UpdateType()
+        {
+            if (WorkshopEntry == null)
+                return;
+
+            if (WorkshopEntry.Value.Type == 0)
+                entryType.Text = Application.Current.FindResource("LibraryTilePatchType").ToString()!;
+            else if (WorkshopEntry.Value.Type == 1)
+                entryType.Text = Application.Current.FindResource("LibraryTileModType").ToString()!;
+            else if (WorkshopEntry.Value.Type == 2)
+                entryType.Text = Application.Current.FindResource("LibraryTileEnhancementType").ToString()!;
+            else if (WorkshopEntry.Value.Type == 3)
+                entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
+        }
+
         private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)
         {
-            if (Entry != null)
+            if (WorkshopEntry != null)
             {
-                Entry = BfmeWorkshopSyncManager.GetActivePatch(Entry!.Value.Game);
+                WorkshopEntry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
                 IsLoading = false;
             }
 
-            if (Entry != null)
-                await BfmeWorkshopSyncManager.Sync(Entry!.Value, (progress) => { }, (downloadItem, downloadProgress) => { });
+            if (WorkshopEntry != null)
+                await BfmeWorkshopSyncManager.Sync(WorkshopEntry!.Value, (progress) => { }, (downloadItem, downloadProgress) => { });
         }
     }
 }

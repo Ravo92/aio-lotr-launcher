@@ -71,11 +71,11 @@
                                     <RowDefinition Height="10"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" d:Text="Enabled enhancements" Text="Enabled enhancements" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
+                                <TextBlock Grid.Row="0" Text="{DynamicResource OfflinePageEnabledEnhancements}" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
                                 <elements:SmoothScrollViewer Grid.Row="2">
                                     <StackPanel x:Name="enabledEnhancements" Margin="5"/>
                                 </elements:SmoothScrollViewer>
-                                <TextBlock Grid.Row="2" x:Name="activeEnhancementsNullIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1EFFFFFF" Text="No enhancements active" FontSize="16" FontWeight="Medium"/>
+                                <TextBlock Grid.Row="2" x:Name="activeEnhancementsNullIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1EFFFFFF" Text="{DynamicResource OfflinePageNoEnhancementsActive}" FontSize="16" FontWeight="Medium"/>
                             </Grid>
                         </Grid>
                     </Border>
@@ -95,10 +95,10 @@
                                     <RowDefinition Height="15"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" d:Text="Launch options" Text="{DynamicResource OfflineLaunchGameSettings}" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
+                                <TextBlock Grid.Row="0" Text="{DynamicResource OfflinePageLaunchOptions}" Foreground="White" FontSize="18" FontWeight="Black" Margin="10,10,10,0"></TextBlock>
                                 <StackPanel Grid.Row="2" Margin="10,0,10,10">
                                     <Grid>
-                                        <TextBlock Text="{DynamicResource SettingsLaunchGameWindowed}" d:Text="Windowed mode" Foreground="White" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{DynamicResource OfflinePageLaunchOptionsWindowedMode}" Foreground="White" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"/>
                                         <elements:Toggleable x:Name="ToggleLaunchWindowed" HorizontalAlignment="Right"/>
                                     </Grid>
                                 </StackPanel>
@@ -147,13 +147,13 @@
                             <elements:Acrylic/>
                             <StackPanel x:Name="innerTabs" Orientation="Horizontal" Margin="5">
                                 <Border x:Name="newsTab" Margin="0,0,2,0" Background="#1EFFFFFF" CornerRadius="18" Cursor="Hand" MouseDown="OnNewsTabClicked">
-                                    <TextBlock d:Text="News" Text="{DynamicResource OfflinePageButtonNews}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
+                                    <TextBlock Text="{DynamicResource OfflinePageNewsTab}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
                                 </Border>
                                 <Border x:Name="libraryTab" Margin="0,0,2,0" Background="Transparent" CornerRadius="18" Cursor="Hand" MouseDown="OnLibraryTabClicked">
-                                    <TextBlock d:Text="Library" Text="{DynamicResource OfflinePageButtonLibrary}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
+                                    <TextBlock Text="{DynamicResource OfflinePageLibraryTab}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
                                 </Border>
                                 <Border x:Name="workshopTab" Margin="0,0,2,0" Background="Transparent" CornerRadius="18" Cursor="Hand" MouseDown="OnWorkshopTabClicked">
-                                    <TextBlock d:Text="Workshop" Text="{DynamicResource OfflinePageButtonWorkshop}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
+                                    <TextBlock Text="{DynamicResource OfflinePageWorkshopTab}" FontSize="14" FontWeight="Bold" Margin="20,10,20,10" Foreground="White"/>
                                 </Border>
                             </StackPanel>
                         </Grid>

@@ -16,8 +16,8 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_Workshop()
         {
             InitializeComponent();
-            typeFilter.Options = ["Patches and Mods", "Enhancements", "Everything"];
-            searchFilter.Options = ["Most downloads", "Most recent", "Alphabetical"];
+            typeFilter.Options = ["{LibraryPageFilterPatchesAndMods}", "{LibraryPageFilterEnhancements}", "{LibraryPageFilterEverything}"];
+            searchFilter.Options = ["{WorkshopPageSortByMostDownloads}", "{WorkshopPageSortByMostRecent}", "{WorkshopPageSortAlphabetical}"];
         }
 
         private int Game = 0;

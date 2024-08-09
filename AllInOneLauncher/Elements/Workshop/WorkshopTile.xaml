@@ -51,7 +51,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" x:Name="tags" Orientation="Horizontal">
                             <Border Margin="0,0,6,0" Background="#1EFFFFFF" CornerRadius="12">
-                                <TextBlock x:Name="type" Text="Type" FontSize="10" FontWeight="Bold" Margin="10,5,10,5" Foreground="White"/>
+                                <TextBlock x:Name="entryType" Text="Type" FontSize="10" FontWeight="Bold" Margin="10,5,10,5" Foreground="White"/>
                             </Border>
                             <Border Margin="0,0,6,0" Background="#1EFFFFFF" CornerRadius="12">
                                 <TextBlock x:Name="author" Text="Author" FontSize="10" FontWeight="Bold" Margin="10,5,10,5" Foreground="White"/>

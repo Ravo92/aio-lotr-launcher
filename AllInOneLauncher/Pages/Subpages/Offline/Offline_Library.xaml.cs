@@ -20,7 +20,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_Library()
         {
             InitializeComponent();
-            filter.Options = ["Patches and Mods", "Enhancements", "Everything"];
+            filter.Options = ["{LibraryPageFilterPatchesAndMods}", "{LibraryPageFilterEnhancements}", "{LibraryPageFilterEverything}"];
         }
 
         private int Game = 0;

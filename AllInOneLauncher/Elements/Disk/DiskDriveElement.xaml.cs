@@ -43,7 +43,7 @@ namespace AllInOneLauncher.Elements
 
                 driveSpaceUsageBar.Progress = (DriveSize - FreeSpace) / DriveSize * 100d;
                 driveSpaceUsageBar.ProgressFillBrush = new SolidColorBrush(driveSpaceUsageBar.Progress < 85 ? (Color)ColorConverter.ConvertFromString("#FF7BFF7B") : (Color)ColorConverter.ConvertFromString("#FFFF8D7B"));
-                driveSize.Text = $"{FreeSpace:N0} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize:N0} GB";
+                driveSize.Text = $"{FreeSpace:N0} GB {Application.Current.FindResource("SettingsPageLauncherSectionGeneralDriveSizeText")} {DriveSize:N0} GB";
             }
         }
 
@@ -57,7 +57,7 @@ namespace AllInOneLauncher.Elements
 
                 driveSpaceUsageBar.Progress = (DriveSize - FreeSpace) / DriveSize * 100d;
                 driveSpaceUsageBar.ProgressFillBrush = new SolidColorBrush(driveSpaceUsageBar.Progress < 85 ? (Color)ColorConverter.ConvertFromString("#FF7BFF7B") : (Color)ColorConverter.ConvertFromString("#FFFF8D7B"));
-                driveSize.Text = $"{FreeSpace:N0} GB {Application.Current.FindResource("SettingsLauncherGeneralDriveSizeText")} {DriveSize:N0} GB";
+                driveSize.Text = $"{FreeSpace:N0} GB {Application.Current.FindResource("SettingsPageLauncherSectionGeneralDriveSizeText")} {DriveSize:N0} GB";
             }
         }
     }

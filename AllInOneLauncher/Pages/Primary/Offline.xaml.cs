@@ -26,13 +26,15 @@ namespace AllInOneLauncher.Pages.Primary
         public Offline()
         {
             InitializeComponent();
-            Properties.Settings.Default.SettingsSaving += LauncherSettingsChanged;
+            Properties.Settings.Default.SettingsSaving += (s, e) =>
+            {
+                UpdateTitleImage();
+                UpdatePlayButton();
+            };
 
             BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
         }
-
-        private void LauncherSettingsChanged(object sender, EventArgs e) => UpdateTitleImage();
 
         private void OnNewsTabClicked(object sender, MouseButtonEventArgs e) => ShowNews();
         private void OnLibraryTabClicked(object sender, MouseButtonEventArgs e) => ShowLibrary();
@@ -44,7 +46,7 @@ namespace AllInOneLauncher.Pages.Primary
             {
                 if (entry.Game == gameTabs.SelectedIndex)
                 {
-                    activeEntry.Entry = entry;
+                    activeEntry.WorkshopEntry = entry;
                     activeEntry.IsLoading = true;
                 }
 
@@ -99,7 +101,7 @@ namespace AllInOneLauncher.Pages.Primary
             library.Visibility = Visibility.Visible;
             workshop.Visibility = Visibility.Hidden;
 
-            activeEntry.Entry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
+            activeEntry.WorkshopEntry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
             library.Load(gameTabs.SelectedIndex);
         }
 
@@ -156,7 +158,7 @@ namespace AllInOneLauncher.Pages.Primary
             if (gameTabs.SelectedIndex != previousSelectedIndex)
             {
                 previousSelectedIndex = gameTabs.SelectedIndex;
-                activeEntry.Entry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
+                activeEntry.WorkshopEntry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
 
                 UpdateTitleImage();
                 UpdatePlayButton();
@@ -200,7 +202,7 @@ namespace AllInOneLauncher.Pages.Primary
         {
             enabledEnhancements.Children.Clear();
             foreach (BfmeWorkshopEntry entry in BfmeWorkshopSyncManager.GetActiveEnhancements(gameTabs.SelectedIndex).Values)
-                enabledEnhancements.Children.Add(new EnabledEnhancementTile() { Entry = entry, Margin = new Thickness(0, 0, 0, 10) });
+                enabledEnhancements.Children.Add(new EnabledEnhancementTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 0, 10) });
             activeEnhancementsNullIndicator.Visibility = enabledEnhancements.Children.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 

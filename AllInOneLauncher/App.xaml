@@ -5,6 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Dictionary/LanguageResources.en.xaml"/>
+                
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/AccentButtonStyle.xaml"/>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/RoundButtonStyle.xaml"/>
