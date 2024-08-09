@@ -57,7 +57,7 @@ namespace AllInOneLauncher.Elements
                 if (IsLoading)
                 {
                     text.Text = "";
-                    LoadStatus = Application.Current.FindResource("MainLauncherLoading").ToString()!;
+                    LoadStatus = Application.Current.FindResource("GenericLoading").ToString()!;
                     button.Opacity = 0.4d;
                     button.IsHitTestVisible = false;
                     LoadProgress = 0;
@@ -66,7 +66,7 @@ namespace AllInOneLauncher.Elements
                 }
                 else if (value == LaunchButtonState.Launch)
                 {
-                    text.Text = Application.Current.FindResource("MainLauncherPlay").ToString()!;
+                    text.Text = Application.Current.FindResource("GenericPlay").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;
@@ -75,7 +75,7 @@ namespace AllInOneLauncher.Elements
                 }
                 else if (value == LaunchButtonState.Install)
                 {
-                    text.Text = Application.Current.FindResource("MainLauncherInstall").ToString()!;
+                    text.Text = Application.Current.FindResource("GenericInstall").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;

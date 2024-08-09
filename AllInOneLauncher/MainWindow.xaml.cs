@@ -178,14 +178,14 @@ namespace AllInOneLauncher
 
             MenuItem showApplicationItem = new()
             {
-                Header = Application.Current.FindResource("LauncherTrayContextMenuShowApplication")
+                Header = Application.Current.FindResource("TrayIconShowApplication")
             };
             showApplicationItem.Click += (s, e) => LauncherStateManager.Visible = true;
             newContextMenu.Items.Add(showApplicationItem);
 
             MenuItem closeApplicationItem = new()
             {
-                Header = Application.Current.FindResource("LauncherTrayContextMenuCloseApplication")
+                Header = Application.Current.FindResource("TrayIconCloseApplication")
             };
             closeApplicationItem.Click += (s, e) => Application.Current.Shutdown();
             newContextMenu.Items.Add(closeApplicationItem);

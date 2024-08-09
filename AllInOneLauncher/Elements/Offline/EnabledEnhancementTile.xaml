@@ -36,7 +36,7 @@
                         </StackPanel>
                         <StackPanel x:Name="tags" Orientation="Horizontal" Margin="0,10,0,0">
                             <Border Margin="0,0,6,0" Background="#1EFFFFFF" CornerRadius="14">
-                                <TextBlock x:Name="activeEntryType" Text="Type" FontSize="10" FontWeight="Bold" Margin="12,6,12,6" Foreground="White"/>
+                                <TextBlock x:Name="entryType" Text="Type" FontSize="10" FontWeight="Bold" Margin="12,6,12,6" Foreground="White"/>
                             </Border>
                             <Border Margin="0,0,6,0" Background="#1EFFFFFF" CornerRadius="14">
                                 <TextBlock x:Name="activeEntryAuthor" Text="Author" FontSize="10" FontWeight="Bold" Margin="12,6,12,6" Foreground="White"/>

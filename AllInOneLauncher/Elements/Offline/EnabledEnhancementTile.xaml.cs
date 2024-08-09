@@ -2,6 +2,7 @@
 using AllInOneLauncher.Logic;
 using BfmeWorkshopKit.Data;
 using BfmeWorkshopKit.Logic;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,29 +28,22 @@ namespace AllInOneLauncher.Elements
         public EnabledEnhancementTile()
         {
             InitializeComponent();
+            Properties.Settings.Default.SettingsSaving += (s, e) => UpdateType();
         }
 
-        BfmeWorkshopEntry _entry;
-        public BfmeWorkshopEntry Entry
+        BfmeWorkshopEntry _workshopEntry;
+        public BfmeWorkshopEntry WorkshopEntry
         {
-            get => _entry;
+            get => _workshopEntry;
             set
             {
-                _entry = value;
+                _workshopEntry = value;
 
                 activeEntryIcon.Source = null;
                 activeEntryTitle.Text = value.Name;
                 activeEntryVersion.Text = value.Version;
                 activeEntryAuthor.Text = $"by {value.Author}";
-
-                if (value.Type == 0)
-                    activeEntryType.Text = "Patch";
-                else if (value.Type == 1)
-                    activeEntryType.Text = "Mod";
-                else if (value.Type == 2)
-                    activeEntryType.Text = "Enhancement";
-                else if (value.Type == 3)
-                    activeEntryType.Text = "Map Pack";
+                UpdateType();
 
                 IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)value.Game);
                 activeEntry.Opacity = IsHitTestVisible ? 1 : 0.5;
@@ -60,9 +54,21 @@ namespace AllInOneLauncher.Elements
             }
         }
 
+        private void UpdateType()
+        {
+            if (WorkshopEntry.Type == 0)
+                entryType.Text = Application.Current.FindResource("LibraryTilePatchType").ToString()!;
+            else if (WorkshopEntry.Type == 1)
+                entryType.Text = Application.Current.FindResource("LibraryTileModType").ToString()!;
+            else if (WorkshopEntry.Type == 2)
+                entryType.Text = Application.Current.FindResource("LibraryTileEnhancementType").ToString()!;
+            else if (WorkshopEntry.Type == 3)
+                entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
+        }
+
         private async void OnDeactivateClicked(object sender, RoutedEventArgs e)
         {
-            await BfmeWorkshopSyncManager.Sync(Entry, (progress) => { }, (downloadItem, downloadProgress) => { });
+            await BfmeWorkshopSyncManager.Sync(WorkshopEntry, (progress) => { }, (downloadItem, downloadProgress) => { });
         }
     }
 }

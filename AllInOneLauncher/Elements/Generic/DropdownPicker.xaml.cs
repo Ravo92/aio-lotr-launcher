@@ -1,4 +1,6 @@
 ﻿using AllInOneLauncher.Elements.Menues;
+using AllInOneLauncher.Logic;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

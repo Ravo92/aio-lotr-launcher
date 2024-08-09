@@ -20,6 +20,7 @@ namespace AllInOneLauncher.Elements
         public WorkshopTile()
         {
             InitializeComponent();
+            Properties.Settings.Default.SettingsSaving += (s, e) => UpdateType();
         }
 
         BfmeWorkshopEntry _workshopEntry;
@@ -33,15 +34,7 @@ namespace AllInOneLauncher.Elements
                 title.Text = value.Name;
                 version.Text = value.Version;
                 author.Text = $"by {value.Author}";
-
-                if (value.Type == 0)
-                    type.Text = "Patch";
-                else if (value.Type == 1)
-                    type.Text = "Mod";
-                else if (value.Type == 2)
-                    type.Text = "Enhancement";
-                else if (value.Type == 3)
-                    type.Text = "Map Pack";
+                UpdateType();
             }
         }
 
@@ -55,6 +48,18 @@ namespace AllInOneLauncher.Elements
         {
             get => updateAvailableIcon.Visibility == Visibility.Visible;
             set => updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void UpdateType()
+        {
+            if (WorkshopEntry.Type == 0)
+                entryType.Text = Application.Current.FindResource("LibraryTilePatchType").ToString()!;
+            else if (WorkshopEntry.Type == 1)
+                entryType.Text = Application.Current.FindResource("LibraryTileModType").ToString()!;
+            else if (WorkshopEntry.Type == 2)
+                entryType.Text = Application.Current.FindResource("LibraryTileEnhancementType").ToString()!;
+            else if (WorkshopEntry.Type == 3)
+                entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
         }
 
         private void OnEnter(object sender, MouseEventArgs e)

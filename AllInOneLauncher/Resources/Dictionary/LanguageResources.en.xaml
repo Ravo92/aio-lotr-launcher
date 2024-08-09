@@ -2,85 +2,110 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=netstandard">
 
-    <system:String x:Key="MainLauncherTitle">All-in-One Launcher by 2.22 Team</system:String>
+    <!--=====================  TrayIcon  =====================-->
+    <system:String x:Key="TrayIconShowApplication">Show Launcher window</system:String>
+    <system:String x:Key="TrayIconCloseApplication">Close Launcher</system:String>
+    
+    
+    
+    <!--=====================  Generic  =====================-->
+    <system:String x:Key="GenericCancel">CANCEL</system:String>
+    <system:String x:Key="GenericClose">CLOSE</system:String>
+    <system:String x:Key="GenericInstall">INSTALL</system:String>
+    <system:String x:Key="GenericLoading">LOADING</system:String>
+    <system:String x:Key="GenericPlay">PLAY</system:String>
+    
+    
 
-    <system:String x:Key="MainLauncherLibrary">SINGLEPLAYER</system:String>
-    <system:String x:Key="MainLauncherOnline">MULTIPLAYER</system:String>
-    <system:String x:Key="MainLauncherGuides">GUIDES</system:String>
-    <system:String x:Key="MainLauncherPlay">PLAY</system:String>
-    <system:String x:Key="MainLauncherInstall">INSTALL</system:String>
-    <system:String x:Key="MainLauncherLoading">LOADING</system:String>
+    <!--=====================  MainWindow  =====================-->
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by 2.22 Team</system:String>
+    <system:String x:Key="MainWindowSingleplayerTab">SINGLEPLAYER</system:String>
+    <system:String x:Key="MainWindowMultiplayerTab">MULTIPLAYER</system:String>
+    <system:String x:Key="MainWindowGuidesTab">GUIDES</system:String>
+    
+    
 
-    <system:String x:Key="GameTitleLabelInstall">Install</system:String>
-    <system:String x:Key="SettingsLauncherClose">CLOSE</system:String>
+    <!--=====================  Offline  =====================-->
+    <system:String x:Key="OfflinePageNewsTab">Changelog</system:String>
+    <system:String x:Key="OfflinePageLibraryTab">Library</system:String>
+    <system:String x:Key="OfflinePageWorkshopTab">Workshop</system:String>
+    <system:String x:Key="OfflinePageEnabledEnhancements">Enabled enhancements</system:String>
+    <system:String x:Key="OfflinePageNoEnhancementsActive">No enhancements active</system:String>
+    <system:String x:Key="OfflinePageLaunchOptions">Launch options</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Windowed mode</system:String>
 
-    <system:String x:Key="LauncherButtonAccept">ACCEPT</system:String>
-    <system:String x:Key="LauncherButtonCancel">CANCEL</system:String>
+    <!--=====================  Offline/Library  =====================-->
+    <system:String x:Key="LibraryPageSearchPlaceholder">Search in library...</system:String>
 
-    <system:String x:Key="OfflinePageButtonNews">Changelog</system:String>
-    <system:String x:Key="OfflinePageButtonLibrary">Library</system:String>
-    <system:String x:Key="OfflinePageButtonWorkshop">Workshop</system:String>
+    <system:String x:Key="LibraryPageFilterPatchesAndMods">Patches and mods</system:String>
+    <system:String x:Key="LibraryPageFilterEnhancements">Enhancements</system:String>
+    <system:String x:Key="LibraryPageFilterEverything">Everything</system:String>
 
-    <system:String x:Key="OfflineLaunchGameSettings">Launch options</system:String>
-    <system:String x:Key="OfflineTitleEnabledEnhancements">Enabled enhancements</system:String>
-    <system:String x:Key="OfflineInfoNoEnabledEnhancements">No enhancements active</system:String>
+    <!--=====================  Offline/Workshop  =====================-->
+    <system:String x:Key="WorkshopPageSearchPlaceholder">Search in Workshop...</system:String>
+    
+    <system:String x:Key="WorkshopPageFilterPatchesAndMods">Patches and mods</system:String>
+    <system:String x:Key="WorkshopPageFilterEnhancements">Enhancements</system:String>
+    <system:String x:Key="WorkshopPageFilterEverything">Everything</system:String>
+    
+    <system:String x:Key="WorkshopPageSortByMostDownloads">Most downloads</system:String>
+    <system:String x:Key="WorkshopPageSortByMostRecent">Most recent</system:String>
+    <system:String x:Key="WorkshopPageSortAlphabetical">Alphabetical</system:String>
 
-    <system:String x:Key="LibraryTileButtonSyncAgain">Sync again</system:String>
-    <system:String x:Key="LibraryTileButtonSyncing">Refreshing...</system:String>
-    <system:String x:Key="LibraryTileButtonActive">Active</system:String>
-    <system:String x:Key="LibraryTileButtonNoPatchSelected">No patch selected...</system:String>
-    <system:String x:Key="LibraryTileButtonInstallMore">Install more</system:String>
-    <system:String x:Key="LibraryTileButtonDiscoverNewObjects">Discover new content on the Workshop!</system:String>
-    <system:String x:Key="LibraryTileSearchBar">Search in library...</system:String>
+    <!--=====================  LibraryTile  =====================-->
+    <system:String x:Key="LibraryTileSyncing">Syncing</system:String>
+    <system:String x:Key="LibraryTileActive">Active</system:String>
+    <system:String x:Key="LibraryTilePatchType">Patch</system:String>
+    <system:String x:Key="LibraryTileModType">Mod</system:String>
+    <system:String x:Key="LibraryTileEnhancementType">Enhancement</system:String>
+    <system:String x:Key="LibraryTileMapPackType">Map pack</system:String>
 
-    <system:String x:Key="WorkshopTileSearchBar">Search in Workshop...</system:String>
-    <system:String x:Key="WorkshopSortbyDownload">Sort by downloads</system:String>
-    <system:String x:Key="WorkshopSortbyMostDownloads">Most downloads</system:String>
-    <system:String x:Key="WorkshopSortbyMostRecent">Most recent</system:String>
-    <system:String x:Key="WorkshopSortbyMostAlphabetical">Alphabetical</system:String>
-    <system:String x:Key="WorkshopFilterbyPatchesAndMods">Patches and Mods</system:String>
-    <system:String x:Key="WorkshopFilterbyEnhancements">Enhancements</system:String>
-    <system:String x:Key="WorkshopFilterbyEverything">Everything</system:String>
+    <!--=====================  LibraryTileHorizontal  =====================-->
+    <system:String x:Key="LibraryTileHorizontalNoPatchSelected">No patch selected</system:String>
+    <system:String x:Key="LibraryTileHorizontalSyncAgain">Sync again</system:String>
 
-    <system:String x:Key="GameInstallDialogLanguage">Language</system:String>
-    <system:String x:Key="GameInstallDialogLibrary">Library</system:String>
+    <!--=====================  LibraryTileEmpty  =====================-->
+    <system:String x:Key="LibraryTileEmptyInstallMore">Install more</system:String>
+    <system:String x:Key="LibraryTileEmptyDiscoverMore">Discover new content on the Workshop!</system:String>
+    
+    
 
-    <system:String x:Key="SettingsLauncherHeader">Launcher Settings</system:String>
-    <system:String x:Key="SettingsLauncherGeneral">General</system:String>
-    <system:String x:Key="SettingsLaunchGameWindowed">Windowed mode</system:String>
+    <!--=====================  Settings  =====================-->
+    <system:String x:Key="SettingsPageLauncherSectionHeader">Launcher Settings</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneral">General</system:String>
 
-    <system:String x:Key="SettingsBFMEGeneral">General</system:String>
-    <system:String x:Key="SettingsBFMEVideo">Video &amp; Resolution</system:String>
-    <system:String x:Key="SettingsBFMELanguage">Language &amp; Sound</system:String>
-    <system:String x:Key="SettingsBFMERepair">Repair or Uninstall</system:String>
-    <system:String x:Key="SettingsBFMEGeneralLanguageDropDownLabelText">Switch Game-language</system:String>
-    <system:String x:Key="SettingsBFMEGeneralResolutionDropDownLabelText">Set game resolution</system:String>
-    <system:String x:Key="SettingsBFMEGeneralGraphicsAPIDropDownLabelText">Set graphics API</system:String>
-    <system:String x:Key="SettingsBFMEGeneralCDKeyLabelText">Serialnumber</system:String>
-    <system:String x:Key="SettingsBFMEGeneralCDKeyButtonText">Change Serial</system:String>
-    <system:String x:Key="SettingsBFMEGeneralCDKeyButtonTextGenerate">Randomize</system:String>
+    <system:String x:Key="SettingsPageBFME1SectionHeader">The Battle for Middle-earth™</system:String>
+    <system:String x:Key="SettingsPageBFME2SectionHeader">The Battle for Middle-earth™ II</system:String>
+    <system:String x:Key="SettingsPageRotWKSectionHeader">Rise of the Witchking™</system:String>
+    <system:String x:Key="SettingsPageBFMESectionGeneral">General</system:String>
+    <system:String x:Key="SettingsPageBFMESectionVideo">Video &amp; Resolution</system:String>
+    <system:String x:Key="SettingsPageBFMESectionLanguage">Language &amp; Sound</system:String>
+    <system:String x:Key="SettingsPageBFMESectionRepair">Repair or Uninstall</system:String>
 
-    <system:String x:Key="SettingsBFME1Header">The Battle for Middle-earth™</system:String>
-    <system:String x:Key="SettingsBFME2Header">The Battle for Middle-earth™ II</system:String>
-    <system:String x:Key="SettingsRotWKHeader">Rise of the Witchking™</system:String>
+    <!--=====================  Settings/Launcher Settings/General  =====================-->
+    <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Launcher language</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Close Launcher to tray</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Library settings</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Add Library Location</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralDriveSizeText">free of</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Local Disk</system:String>
 
-    <system:String x:Key="SettingsLauncherGeneralLanguageDropDownLabelText">Switch Launcher-language</system:String>
-    <system:String x:Key="SettingsLauncherGeneralCloseToTray">Close Launcher to tray</system:String>
-    <system:String x:Key="SettingsLauncherGeneralLibraryLabelText">Library settings</system:String>
-    <system:String x:Key="SettingsLauncherGeneralLibraryButtonText">Add Library Location</system:String>
-    <system:String x:Key="SettingsLauncherGeneralDriveSizeText">free of</system:String>
-    <system:String x:Key="SettingsLauncherGeneralDriveDefaultNameText">Local Disk</system:String>
+    <!--=====================  Settings/BFME Settings/General  =====================-->
+    <system:String x:Key="SettingsPageBFMESectionGeneralSerialNumber">Serialnumber</system:String>
+    <system:String x:Key="SettingsPageBFMESectionGeneralChangeSerial">Change Serial</system:String>
+    <system:String x:Key="SettingsPageBFMESectionGeneralRandomizeSerial">Randomize</system:String>
 
-    <system:String x:Key="LauncherTrayContextMenuShowApplication">Show Launcher window</system:String>
-    <system:String x:Key="LauncherTrayContextMenuCloseApplication">Close Launcher</system:String>
+    <!--=====================  Settings/BFME Settings/Video & Resolution  =====================-->
+    <system:String x:Key="SettingsPageBFMESectionVideoResolution">Game resolution</system:String>
+    <system:String x:Key="SettingsPageBFMESectionVideoGraphicsApi">Graphics API</system:String>
 
-    <system:String x:Key="LauncherTitleMessageBoxSystemError">ERROR</system:String>
-    <system:String x:Key="LauncherTextMessageBoxSystemError">An unexpected error had occurred while installing the game:</system:String>
-    <system:String x:Key="LauncherTextCopyButtonMessageBoxSystemError">📋 Copy text</system:String>
-    <system:String x:Key="LauncherTextCopyButtonMessageBoxSystemErrorSucess">Text copied to clipboard!</system:String>
+    <!--=====================  Settings/BFME Settings/Language & Sound  =====================-->
+    <system:String x:Key="SettingsPageBFMESectionLanguageLanguage">Game language</system:String>
+    
+    
 
-    <system:String x:Key="LibraryBFME1Logo">pack://application:,,,/Resources/Images/en_bfme1_title.png</system:String>
-    <system:String x:Key="LibraryBFME2Logo">pack://application:,,,/Resources/Images/en_bfme2_title.png</system:String>
-    <system:String x:Key="LibraryRotWKLogo">pack://application:,,,/Resources/Images/en_rotwk_title.png</system:String>
-
+    <!--=====================  InstallGameDialog  =====================-->
+    <system:String x:Key="InstallGameDialogTitle">INSTALL GAME</system:String>
+    <system:String x:Key="InstallGameDialogLanguage">Language</system:String>
+    <system:String x:Key="InstallGameDialogLocation">Location</system:String>
 </ResourceDictionary>

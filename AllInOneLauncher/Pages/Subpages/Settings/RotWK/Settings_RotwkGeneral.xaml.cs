@@ -32,7 +32,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             TextBoxCDKey.IsEnabled = false;
 
             if (LauncherStateManager.IsElevated)
-                ButtonChangeCdKey.Content = Application.Current.FindResource("SettingsBFMEGeneralCDKeyButtonTextGenerate");
+                ButtonChangeCdKey.Content = Application.Current.FindResource("SettingsPageBFMESectionGeneralRandomizeSerial");
             else
                 TextBoxCDKey.IsEnabled = false;
         }

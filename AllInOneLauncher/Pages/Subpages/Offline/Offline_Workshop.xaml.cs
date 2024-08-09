@@ -16,9 +16,8 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_Workshop()
         {
             InitializeComponent();
-
-            typeFilter.Options = ["{WorkshopFilterbyPatchesAndMods}", "{WorkshopFilterbyEnhancements}", "{WorkshopFilterbyEverything}"];
-            searchFilter.Options = ["{WorkshopSortbyMostDownloads}", "{WorkshopSortbyMostRecent}", "{WorkshopSortbyMostAlphabetical}"];
+            typeFilter.Options = ["{WorkshopPageFilterPatchesAndMods}", "{WorkshopPageFilterEnhancements}", "{WorkshopPageFilterEverything}"];
+            searchFilter.Options = ["{WorkshopPageSortByMostDownloads}", "{WorkshopPageSortByMostRecent}", "{WorkshopPageSortAlphabetical}"];
         }
 
         private int Game = 0;
