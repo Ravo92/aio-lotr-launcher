@@ -1,0 +1,37 @@
+﻿<Application x:Class="AllInOneLauncher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AllInOneLauncher">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Dictionary/LanguageResources.en.xaml"/>
+                
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/AccentButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/RoundButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/CircleButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/LaunchButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/MenuButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ListButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/TextBlockButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/BorderButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary>
+                    <Style x:Key="FocusVisual">
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
