@@ -181,13 +181,9 @@ namespace AllInOneLauncher.Pages.Primary
             else
                 return;
 
-            string language;
-            if (LauncherStateManager.Language == 0)
-                language = "en";
-            else if (LauncherStateManager.Language == 1)
+            string language = "en";
+            if (LauncherStateManager.Language == 1)
                 language = "de";
-            else
-                return;
 
             titleImage.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/Images/{language}_{game}_title.png"));
         }

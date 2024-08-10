@@ -11,12 +11,12 @@ using System.Windows;
 
 namespace AllInOneLauncher.Logic
 {
-    public static class LauncherStateManager
+    internal static class LauncherStateManager
     {
-        internal static Dictionary<string, Type> TypeMap = [];
-        public static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+        internal static Dictionary<string, Type>? TypeMap { get; private set; }
+        internal static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
-        public static void Init()
+        internal static void Init()
         {
             if (!File.Exists(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath))
             {
@@ -26,21 +26,25 @@ namespace AllInOneLauncher.Logic
             }
 
             TypeMap = Assembly.GetExecutingAssembly().GetTypes().DistinctBy(x => x.Name).ToDictionary(x => x.Name, x => x);
-            Language = Properties.Settings.Default.LauncherLanguageSetting;
+
+            if (Properties.Settings.Default.LauncherLanguageSetting == -1)
+                Language = 0;
+            else
+                Language = Properties.Settings.Default.LauncherLanguageSetting;
         }
 
-        public static bool Visible
+        internal static bool Visible
         {
             get => MainWindow.Instance!.ShowInTaskbar;
             set
             {
-                if(value && MainWindow.Instance!.WindowState == WindowState.Minimized)
+                if (value && MainWindow.Instance!.WindowState == WindowState.Minimized)
                 {
                     MainWindow.Instance!.WindowState = WindowState.Normal;
                     MainWindow.Instance!.ShowInTaskbar = true;
                     MainWindow.Instance!.Activate();
                 }
-                else if(!value && MainWindow.Instance!.WindowState == WindowState.Normal || MainWindow.Instance!.WindowState == WindowState.Maximized)
+                else if (!value && MainWindow.Instance!.WindowState == WindowState.Normal || MainWindow.Instance!.WindowState == WindowState.Maximized)
                 {
                     MainWindow.Instance!.WindowState = WindowState.Minimized;
                     MainWindow.Instance!.ShowInTaskbar = false;
@@ -50,29 +54,45 @@ namespace AllInOneLauncher.Logic
             }
         }
 
-        public static int Language
+        private static int _language;
+        internal static int Language
         {
-            get => Properties.Settings.Default.LauncherLanguageSetting;
+            get => _language;
             set
             {
-                ResourceDictionary resourceDictionary = [];
-                switch (value)
+                _language = value;
+
+                var languageDictionary = new Dictionary<int, string>
                 {
-                    case 0:
-                        resourceDictionary.Source = new Uri("..\\..\\..\\Resources\\Dictionary\\LanguageResources.en.xaml", UriKind.Relative);
-                        break;
-                    case 1:
-                        resourceDictionary.Source = new Uri("..\\..\\..\\Resources\\Dictionary\\LanguageResources.de.xaml", UriKind.Relative);
-                        break;
+                    { 0, "LanguageResources.en.xaml" },
+                    { 1, "LanguageResources.de.xaml" },
+                    { 2, "LanguageResources.fr.xaml" },
+                    { 3, "LanguageResources.it.xaml" },
+                    { 4, "LanguageResources.es.xaml" },
+                    { 5, "LanguageResources.sv.xaml" },
+                    { 6, "LanguageResources.nl.xaml" },
+                    { 7, "LanguageResources.pl.xaml" },
+                    { 8, "LanguageResources.no.xaml" },
+                    { 9, "LanguageResources.ru.xaml" }
+                };
+
+                ResourceDictionary resourceDictionary = [];
+                if (languageDictionary.TryGetValue(value, out string? resourceFileName))
+                {
+                    resourceDictionary.Source = new Uri($"..\\..\\..\\Resources\\Dictionary\\{resourceFileName}", UriKind.Relative);
+                    Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
                 }
-                Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+                else
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), "Invalid language selection.");
+                }
 
                 Properties.Settings.Default.LauncherLanguageSetting = value;
                 Properties.Settings.Default.Save();
             }
         }
 
-        public static void AsElevated(Action action)
+        internal static void AsElevated(Action action)
         {
             if (IsElevated)
             {

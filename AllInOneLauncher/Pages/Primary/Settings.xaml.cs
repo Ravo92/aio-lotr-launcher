@@ -37,7 +37,7 @@ namespace AllInOneLauncher.Pages.Primary
                     }
                 }
 
-                content.Child = (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap[$"Settings_{value}"])!;
+                content.Child = (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap![$"Settings_{value}"])!;
             }
         }
 
