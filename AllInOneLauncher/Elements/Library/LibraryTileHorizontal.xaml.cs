@@ -1,5 +1,5 @@
-﻿using BfmeWorkshopKit.Data;
-using BfmeWorkshopKit.Logic;
+﻿using BfmeFoundationProject.WorkshopKit.Data;
+using BfmeFoundationProject.WorkshopKit.Logic;
 using AllInOneLauncher.Logic;
 using System;
 using System.Windows;
@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using AllInOneLauncher.Data;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
+using BfmeFoundationProject.BfmeRegistryManagement;
 
 namespace AllInOneLauncher.Elements
 {
@@ -97,7 +98,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryActive.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
                 activeEntryReloadButton.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
 
-                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)value.Value.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Value.Game);
                 activeEntry.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { activeEntryIcon.Source = new BitmapImage(new Uri(value.Value.ArtworkUrl)); } catch { }

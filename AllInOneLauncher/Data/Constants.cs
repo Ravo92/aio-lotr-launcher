@@ -2,10 +2,6 @@
 {
     internal class Constants
     {
-        public const string C_APPDATAFOLDER_BFME1_NAME_EN = "My Battle for Middle-earth Files";
-        public const string C_APPDATAFOLDER_BFME2_NAME_EN = "My Battle for Middle-earth II Files";
-        public const string C_APPDATAFOLDER_Rotwk_NAME_EN = "My Rise of the Witch-king Files";
-
         public const string C_MUTEX_NAME = "Patch Launcher 2.22 Ravo92";
         public const string C_LAUNCHER_SHORTCUT_NAME = "Patch 2.22 Launcher";
 
@@ -15,10 +11,6 @@
         public const string C_TOOLFOLDER_NAME = "Tools";
         public const string C_PATCHFOLDER_NAME = "Patches";
         public const string C_LOGFOLDER_NAME = "Logfiles";
-
-        public const string C_BFME1_EXECUTABLE = "lotrbfme.exe";
-        public const string C_BFME2_EXECUTABLE = "lotrbfme2.exe";
-        public const string C_ROTWK_EXECUTABLE = "lotrbfme2ep1.exe";
 
         public const string C_ERRORLOGGING_FILE = "PLEASE_REPORT_TO_DEVELOPER_UnassignedErrors.log";
         public const string C_LOGFILE_GAMEFILETOOLS_NAME = "GameFileTools.log";
