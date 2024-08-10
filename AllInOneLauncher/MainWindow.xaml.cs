@@ -13,7 +13,7 @@ using AllInOneLauncher.Logic;
 using AllInOneLauncher.Elements;
 using AllInOneLauncher.Popups;
 using System.Reflection;
-using BfmeWorkshopKit.Logic;
+using BfmeFoundationProject.WorkshopKit.Logic;
 
 namespace AllInOneLauncher
 {

@@ -1,7 +1,7 @@
 ﻿using AllInOneLauncher.Elements.Menues;
 using AllInOneLauncher.Popups;
-using BfmeWorkshopKit.Data;
-using BfmeWorkshopKit.Logic;
+using BfmeFoundationProject.WorkshopKit.Data;
+using BfmeFoundationProject.WorkshopKit.Logic;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

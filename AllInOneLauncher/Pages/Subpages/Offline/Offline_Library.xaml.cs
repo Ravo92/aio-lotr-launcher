@@ -1,5 +1,5 @@
-﻿using BfmeWorkshopKit.Data;
-using BfmeWorkshopKit.Logic;
+﻿using BfmeFoundationProject.WorkshopKit.Data;
+using BfmeFoundationProject.WorkshopKit.Logic;
 using AllInOneLauncher.Elements;
 using System;
 using System.Windows;

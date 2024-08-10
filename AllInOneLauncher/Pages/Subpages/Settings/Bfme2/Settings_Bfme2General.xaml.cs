@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Data;
+using BfmeFoundationProject.BfmeRegistryManagement;
+using BfmeFoundationProject.BfmeRegistryManagement.Data;
 
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
@@ -14,8 +16,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             InitializeComponent();
 
-            BfmeRegistryManager.EnsureBfmeAppRegistry(BfmeGame.BFME2);
-            BfmeSettingsManager.EnsureOptionsFile(BfmeGame.BFME2);
+            BfmeRegistryManager.EnsureDefaults((int)BfmeGame.BFME2);
 
             InitializePageElements();
         }
@@ -26,7 +27,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ComboBoxResolution.SelectedItem = !string.IsNullOrEmpty(Properties.Settings.Default.BFME2ResolutionSetting) ? Properties.Settings.Default.BFME2ResolutionSetting : ComboBoxResolution.Items[^1];
             ComboBoxLanguage.SelectedIndex = Properties.Settings.Default.BFME2LanguageSetting != 0 ? Properties.Settings.Default.BFME2LanguageSetting : 0;
 
-            string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.BFME2);
+            string cdKey = BfmeRegistryManager.GetKeyValue((int)BfmeGame.BFME2, BfmeRegistryKey.SerialKey);
             TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
 
             TextBoxCDKey.IsEnabled = false;
@@ -81,8 +82,8 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             LauncherStateManager.AsElevated(() =>
             {
-                BfmeRegistryManager.EnsureBfmeAppRegistry(BfmeGame.BFME2);
-                string cdKey = BfmeRegistryManager.GetBfmeSerialKey(BfmeGame.BFME2);
+                BfmeRegistryManager.EnsureDefaults((int)BfmeGame.BFME2);
+                string cdKey = BfmeRegistryManager.GetKeyValue((int)BfmeGame.BFME2, BfmeRegistryKey.SerialKey);
                 TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
             });
         }

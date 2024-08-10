@@ -1,5 +1,5 @@
-﻿using BfmeWorkshopKit.Data;
-using BfmeWorkshopKit.Logic;
+﻿using BfmeFoundationProject.WorkshopKit.Data;
+using BfmeFoundationProject.WorkshopKit.Logic;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Popups;
 using System;
@@ -14,6 +14,7 @@ using AllInOneLauncher.Data;
 using System.Collections.Generic;
 using AllInOneLauncher.Elements.Menues;
 using AllInOneLauncher.Pages.Primary;
+using BfmeFoundationProject.BfmeRegistryManagement;
 
 namespace AllInOneLauncher.Elements
 {
@@ -61,7 +62,7 @@ namespace AllInOneLauncher.Elements
                 IsHitTestVisible = true;
                 IsLoading = false;
 
-                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)WorkshopEntry.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled(WorkshopEntry.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try
@@ -97,7 +98,7 @@ namespace AllInOneLauncher.Elements
                 author.Text = $"by {value.Author}";
                 UpdateType();
 
-                IsHitTestVisible = BfmeRegistryManager.IsBfmeInstalled((BfmeGame)value.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { icon.Source = new BitmapImage(new Uri(value.ArtworkUrl)); } catch { }

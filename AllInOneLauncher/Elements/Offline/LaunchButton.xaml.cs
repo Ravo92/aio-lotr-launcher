@@ -1,5 +1,5 @@
 ﻿using AllInOneLauncher.Logic;
-using BfmeWorkshopKit.Logic;
+using BfmeFoundationProject.WorkshopKit.Logic;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +22,7 @@ namespace AllInOneLauncher.Elements
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
         }
 
-        private void OnSyncBegin(BfmeWorkshopKit.Data.BfmeWorkshopEntry entry)
+        private void OnSyncBegin(BfmeFoundationProject.WorkshopKit.Data.BfmeWorkshopEntry entry)
         {
             IsLoading = true;
             Dispatcher.Invoke(() =>
