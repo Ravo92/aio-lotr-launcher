@@ -41,8 +41,8 @@
                     <TextBlock x:Name="searchPlaceholder" Text="{DynamicResource WorkshopPageSearchPlaceholder}" FontSize="15" FontWeight="Regular" Margin="47,0,20,1" VerticalAlignment="Center" Foreground="#66FFFFFF" IsHitTestVisible="False" Visibility="Visible"/>
                 </Grid>
             </Border>
-            <elements:DropdownPicker Grid.Column="2" x:Name="typeFilter" Width="250" OnOptionSelected="OnFilterChanged"/>
-            <elements:DropdownPicker Grid.Column="4" x:Name="searchFilter" Width="250" OnOptionSelected="OnFilterChanged"/>
+            <elements:DropdownPicker Grid.Column="2" x:Name="searchFilter" Width="250" OnOptionSelected="OnFilterChanged"/>
+            <elements:DropdownPicker Grid.Column="4" x:Name="typeFilter" Width="250" OnOptionSelected="OnFilterChanged"/>
             <Border Grid.Column="6" CornerRadius="20" Width="40">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>

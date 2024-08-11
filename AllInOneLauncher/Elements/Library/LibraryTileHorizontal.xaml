@@ -22,10 +22,7 @@
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" CornerRadius="9" Background="#1EFFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104.3" Height="120">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="4" Opacity="0.5" Color="#FF424242" ShadowDepth="2" Direction="270"/>
-                    </Border.Effect>
+                <Border Grid.Column="0" CornerRadius="9" Background="#1EFFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="104.3" Height="120" UseLayoutRounding="True">
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>

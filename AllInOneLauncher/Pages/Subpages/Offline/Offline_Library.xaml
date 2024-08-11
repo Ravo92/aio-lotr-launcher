@@ -20,6 +20,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0" CornerRadius="19">
                 <Border.Effect>
@@ -39,8 +41,32 @@
                     <TextBlock x:Name="searchPlaceholder" Text="{DynamicResource LibraryPageSearchPlaceholder}" FontSize="15" FontWeight="Regular" Margin="47,0,20,1" VerticalAlignment="Center" Foreground="#66FFFFFF" IsHitTestVisible="False" Visibility="Visible"/>
                 </Grid>
             </Border>
-            <elements:DropdownPicker Grid.Column="2" x:Name="filter" Width="250" OnOptionSelected="OnFilterChanged"/>
-            <Border Grid.Column="4" CornerRadius="20" Width="40">
+            <Border Grid.Column="2" CornerRadius="20" Background="Transparent">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
+                </Border.Effect>
+                <Border.OpacityMask>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Border.OpacityMask>
+                <Grid>
+                    <elements:Acrylic/>
+                    <Button Style="{StaticResource MenuButton}" Background="Transparent" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OnCreateSnapshotClicked">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,2,0">
+                            <Grid>
+                                <elements:MiniSpinner x:Name="snapshotSpinner" IsLoading="False"/>
+                                <Path x:Name="snapshotIcon" Stretch="Uniform" Fill="#CCFFFFFF" Data="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z" Width="18" Height="17"/>
+                            </Grid>
+                            <TextBlock x:Name="snapshotText" Text="Make shapshot" FontSize="14" FontWeight="Medium" Margin="12,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+            <elements:DropdownPicker Grid.Column="4" x:Name="filter" Width="250" OnOptionSelected="OnFilterChanged"/>
+            <Border Grid.Column="6" CornerRadius="20" Width="40">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
                 </Border.Effect>

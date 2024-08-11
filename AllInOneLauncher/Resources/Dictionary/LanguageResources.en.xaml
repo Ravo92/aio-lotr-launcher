@@ -39,6 +39,7 @@
 
     <system:String x:Key="LibraryPageFilterPatchesAndMods">Patches and mods</system:String>
     <system:String x:Key="LibraryPageFilterEnhancements">Enhancements</system:String>
+    <system:String x:Key="LibraryPageFilterSnapshots">Snapshots</system:String>
     <system:String x:Key="LibraryPageFilterEverything">Everything</system:String>
 
     <!--=====================  Offline/Workshop  =====================-->
@@ -59,6 +60,7 @@
     <system:String x:Key="LibraryTileModType">Mod</system:String>
     <system:String x:Key="LibraryTileEnhancementType">Enhancement</system:String>
     <system:String x:Key="LibraryTileMapPackType">Map pack</system:String>
+    <system:String x:Key="LibraryTileSnapshotType">Snapshot</system:String>
 
     <!--=====================  LibraryTileHorizontal  =====================-->
     <system:String x:Key="LibraryTileHorizontalNoPatchSelected">No patch selected</system:String>

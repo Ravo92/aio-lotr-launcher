@@ -16,9 +16,6 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" CornerRadius="8" Background="#1EFFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56.5" Height="65">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="4" Opacity="0.5" Color="#FF424242" ShadowDepth="2" Direction="270"/>
-                    </Border.Effect>
                     <Border.OpacityMask>
                         <VisualBrush>
                             <VisualBrush.Visual>
