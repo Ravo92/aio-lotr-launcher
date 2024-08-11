@@ -25,6 +25,7 @@
                 <ComboBoxItem Content="Polski"/>
                 <ComboBoxItem Content="Norsk"/>
                 <ComboBoxItem Content="Русский"/>
+                <ComboBoxItem Content="العربية"/>
             </ComboBox>
             <CheckBox x:Name="CheckBoxCloseToTray" Margin="0,5,0,0" Grid.Column="1" Unchecked="CheckBoxCloseToTray_Unchecked" Checked="CheckBoxCloseToTray_Checked"/>
             <TextBlock Text="{DynamicResource SettingsPageLauncherSectionGeneralCloseToTray}" FontSize="20" HorizontalAlignment="Left" Margin="0,10,0,0" Foreground="white" Grid.Column="2"/>

@@ -73,7 +73,8 @@ namespace AllInOneLauncher.Logic
                     { 6, "LanguageResources.nl.xaml" },
                     { 7, "LanguageResources.pl.xaml" },
                     { 8, "LanguageResources.no.xaml" },
-                    { 9, "LanguageResources.ru.xaml" }
+                    { 9, "LanguageResources.ru.xaml" },
+                    { 10, "LanguageResources.ar.xaml" }
                 };
 
                 ResourceDictionary resourceDictionary = [];
