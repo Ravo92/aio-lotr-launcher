@@ -51,7 +51,7 @@
     <system:String x:Key="SettingsPageBFMESectionLanguage">Язык и Звук</system:String>
     <system:String x:Key="SettingsPageBFMESectionRepair">Ремонт или Удаление</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Язык лаунчера</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Закрыть лаунчер в системный трей</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Свернуть лаунчер в системный трей</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Настройки библиотеки</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Добавить расположение библиотеки</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveSizeText">свободно из</system:String>
