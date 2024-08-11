@@ -82,7 +82,7 @@ namespace AllInOneLauncher.Elements
             DoubleAnimation opacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
             Instance.root.BeginAnimation(OpacityProperty, opacityAnimation);
 
-            (Instance.Parent as Panel).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = new BlurEffect() { Radius = 8, RenderingBias = RenderingBias.Performance };
+            (Instance.Parent as Panel).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = new BlurEffect() { Radius = 8 };
         }
 
         public static void HidePopup()
