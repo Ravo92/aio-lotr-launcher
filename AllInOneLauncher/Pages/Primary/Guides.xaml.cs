@@ -7,7 +7,7 @@ namespace AllInOneLauncher.Pages.Primary
     /// </summary>
     public partial class Guides : UserControl
     {
-        public static Guides Instance = new Guides();
+        internal static Guides Instance = new();
 
         public Guides()
         {

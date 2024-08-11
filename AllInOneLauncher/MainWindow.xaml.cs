@@ -136,9 +136,26 @@ namespace AllInOneLauncher
             }
         }
 
+        public static void ShowPatreons()
+        {
+            SetContent(Patreons.Instance);
+
+            foreach (TextBlock tab in Instance!.tabs.Children.OfType<TextBlock>())
+            {
+                if (tab == Instance.patreonsTab)
+                    tab.Foreground = new SolidColorBrush(Color.FromRgb(21, 167, 233));
+                else
+                {
+                    tab.Foreground = Brushes.White;
+                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                }
+            }
+        }
+
         private void OnOfflineTabClicked(object sender, MouseButtonEventArgs e) => ShowOffline();
         private void OnOnlineTabClicked(object sender, MouseButtonEventArgs e) => ShowOnline();
         private void OnGuidesTabClicked(object sender, MouseButtonEventArgs e) => ShowGuides();
+        private void OnPatreonsTabClicked(object sender, MouseButtonEventArgs e) => ShowPatreons();
 
         private void OnSettingsButtonClicked(object sender, MouseButtonEventArgs e) => SetFullContent(new Settings("LauncherGeneral"));
         private void OnLinkButtonClicked(object sender, MouseButtonEventArgs e) => Process.Start(new ProcessStartInfo("explorer", ((FrameworkElement)sender).Tag.ToString() ?? ""));
