@@ -130,9 +130,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" CornerRadius="23">
-                        <!--<Border.Effect>
+                        <Border.Effect>
                             <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
-                        </Border.Effect>-->
+                        </Border.Effect>
                         <Border.OpacityMask>
                             <VisualBrush>
                                 <VisualBrush.Visual>
