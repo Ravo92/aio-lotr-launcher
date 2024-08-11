@@ -14,7 +14,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
     {
         public BfmeGame AvailableBFMEGame { get; set; }
 
-        readonly static Uri changelogBFME1 = new("https://ravo92.github.io/changelogpage/index.html");
+        readonly static Uri changelogBFME1 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/index.html");
         readonly static Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.html");
         readonly static Uri changelogRotwk = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
 
