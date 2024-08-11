@@ -23,6 +23,8 @@ Using the Bfme Workshop, **switching between patches and mods is effortless**, a
 - Built in Bfme guides - New to the game? don't worry, we'll help!
 
 ## Download
-https://bfmeladder.com/download
+
+ModDB Download:
+https://www.moddb.com/mods/battle-for-middle-earth-patch-222/downloads/patch-222
 
 ###### Developed by: Ravo92 (*@ravo92*) & Gazdag Marcell (*@marcellvokk*)
