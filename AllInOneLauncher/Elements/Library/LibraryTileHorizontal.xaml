@@ -55,7 +55,7 @@
                     </Border>
                     <Border x:Name="activeEntryLoading" Background="#016FB3" CornerRadius="14" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <StackPanel Margin="10,6,12,6" Orientation="Horizontal">
-                            <elements:NanoSpinner HorizontalAlignment="Right" VerticalAlignment="Center" IsLoading="True"/>
+                            <elements:NanoSpinner x:Name="loadingSpinner" HorizontalAlignment="Right" VerticalAlignment="Center" IsLoading="False" d:IsLoading="True"/>
                             <TextBlock Text="{DynamicResource LibraryTileSyncing}" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </Border>
