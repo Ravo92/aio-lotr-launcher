@@ -38,7 +38,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
                 noConnection.Visibility = Visibility.Hidden;
 
                 workshopTiles.Children.Clear();
-                List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: Game, keyword: search.Text, type: typeFilter.Selected == 0 ? -2 : (typeFilter.Selected == 1 ? -3 : -1), sortMode: searchFilter.Selected);
+                List<BfmeWorkshopEntry> entries = await BfmeWorkshopQueryManager.Query(game: Game, keyword: search.Text, type: new[]{ -2, -3, -1 }[typeFilter.Selected], sortMode: searchFilter.Selected);
                 workshopTiles.Children.Clear();
                 foreach (BfmeWorkshopEntry entry in entries)
                     workshopTiles.Children.Add(new WorkshopTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });

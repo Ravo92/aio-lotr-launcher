@@ -39,6 +39,7 @@
 
     <system:String x:Key="LibraryPageFilterPatchesAndMods">Patches und Mods</system:String>
     <system:String x:Key="LibraryPageFilterEnhancements">Zusatzmodule</system:String>
+    <system:String x:Key="LibraryPageFilterSnapshots">Schnappschüsse</system:String>
     <system:String x:Key="LibraryPageFilterEverything">Kein Filter (Alles)</system:String>
 
     <!--=====================  LibraryTile  =====================-->
@@ -48,6 +49,7 @@
     <system:String x:Key="LibraryTileModType">Mod</system:String>
     <system:String x:Key="LibraryTileEnhancementType">Zusatzmodul</system:String>
     <system:String x:Key="LibraryTileMapPackType">Kartenpaket</system:String>
+    <system:String x:Key="LibraryTileSnapshotType">Schnappschuss</system:String>
 
     <!--=====================  LibraryTileHorizontal  =====================-->
     <system:String x:Key="LibraryTileHorizontalNoPatchSelected">Keine Version aktiv</system:String>

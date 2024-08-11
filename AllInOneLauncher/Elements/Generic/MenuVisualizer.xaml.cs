@@ -70,7 +70,7 @@ namespace AllInOneLauncher.Elements
                     finalPos.X = ownerRect.X;
                 }
 
-                if (finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
+                if (!targetCursor && finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
                 {
                     menu.Side = MenuSide.Top;
                     if (side == MenuSide.Bottom)
@@ -151,7 +151,7 @@ namespace AllInOneLauncher.Elements
                     finalPos.X = ownerRect.X;
                 }
 
-                if (finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
+                if (!targetCursor && finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
                 {
                     menu.Side = MenuSide.Top;
                     if (side == MenuSide.Bottom)
@@ -232,7 +232,7 @@ namespace AllInOneLauncher.Elements
                     finalPos.X = ownerRect.X;
                 }
 
-                if (finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
+                if (!targetCursor && finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
                 {
                     menu.Side = MenuSide.Top;
                     if (side == MenuSide.Bottom)

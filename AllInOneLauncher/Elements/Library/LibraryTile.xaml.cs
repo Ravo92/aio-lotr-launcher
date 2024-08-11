@@ -134,6 +134,8 @@ namespace AllInOneLauncher.Elements
                 entryType.Text = Application.Current.FindResource("LibraryTileEnhancementType").ToString()!;
             else if (WorkshopEntry.Type == 3)
                 entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
+            else if (WorkshopEntry.Type == 4)
+                entryType.Text = Application.Current.FindResource("LibraryTileSnapshotType").ToString()!;
         }
 
         public bool IsUpdateAvailable
@@ -144,7 +146,7 @@ namespace AllInOneLauncher.Elements
 
         private void UpdateIsActive()
         {
-            if (WorkshopEntry.Type <= 1)
+            if (WorkshopEntry.Type == 0 || WorkshopEntry.Type == 1 || WorkshopEntry.Type == 4)
             {
                 activeText.Visibility = Visibility.Visible;
                 BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry.Game);
@@ -176,7 +178,7 @@ namespace AllInOneLauncher.Elements
             }
             else if (e.ChangedButton == MouseButton.Right)
             {
-                if (WorkshopEntry.Type <= 1)
+                if (WorkshopEntry.Type == 0 || WorkshopEntry.Type == 1 || WorkshopEntry.Type == 4)
                 {
                     MenuVisualizer.ShowMenu(
                     menu: [

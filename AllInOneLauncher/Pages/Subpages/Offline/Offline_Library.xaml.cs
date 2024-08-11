@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
+using AllInOneLauncher.Popups;
+using System.ComponentModel;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -17,7 +19,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_Library()
         {
             InitializeComponent();
-            filter.Options = ["{LibraryPageFilterPatchesAndMods}", "{LibraryPageFilterEnhancements}", "{LibraryPageFilterEverything}"];
+            filter.Options = ["{LibraryPageFilterPatchesAndMods}", "{LibraryPageFilterEnhancements}", "{LibraryPageFilterSnapshots}", "{LibraryPageFilterEverything}"];
         }
 
         private int Game = 0;
@@ -33,11 +35,36 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         private async void UpdateQuery()
         {
             libraryTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: search.Text, type: filter.Selected == 0 ? -2 : (filter.Selected == 1 ? -3 : -1));
+            List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: search.Text, type: new []{ -2, -3, 4, -1 }[filter.Selected]);
             libraryTiles.Children.Clear();
             foreach (BfmeWorkshopEntry entry in entries)
                 libraryTiles.Children.Add(new LibraryTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
-            libraryTiles.Children.Add(emptyLibraryTile);
+            if (filter.Selected != 2) libraryTiles.Children.Add(emptyLibraryTile);
+        }
+
+        private async void OnCreateSnapshotClicked(object sender, RoutedEventArgs e)
+        {
+            Primary.Offline.Instance.Disabled = true;
+            snapshotSpinner.IsLoading = true;
+            snapshotIcon.Visibility = Visibility.Hidden;
+
+            try
+            {
+                var entry = await BfmeWorkshopSyncManager.CreateSnapshot(Game);
+
+                BfmeWorkshopLibraryManager.AddToLibrary(entry);
+                if (filter.Selected == 2) UpdateQuery();
+            }
+            catch(Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
+            }
+            finally
+            {
+                snapshotSpinner.IsLoading = false;
+                snapshotIcon.Visibility = Visibility.Visible;
+                Primary.Offline.Instance.Disabled = false;
+            }
         }
 
         private void OnInstallMoreClicked(object sender, MouseButtonEventArgs e) => Primary.Offline.Instance.ShowWorkshop();

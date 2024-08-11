@@ -134,6 +134,8 @@ namespace AllInOneLauncher.Elements
                 entryType.Text = Application.Current.FindResource("LibraryTileEnhancementType").ToString()!;
             else if (WorkshopEntry.Value.Type == 3)
                 entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
+            else if (WorkshopEntry.Value.Type == 4)
+                entryType.Text = Application.Current.FindResource("LibraryTileSnapshotType").ToString()!;
         }
 
         private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)

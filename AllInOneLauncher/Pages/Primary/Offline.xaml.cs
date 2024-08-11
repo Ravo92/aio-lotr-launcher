@@ -53,10 +53,7 @@ namespace AllInOneLauncher.Pages.Primary
                     activeEntry.IsLoading = true;
                 }
 
-                gameTabs.IsHitTestVisible = false;
-                innerTabs.IsHitTestVisible = false;
-                library.IsHitTestVisible = false;
-                enabledEnhancements.IsHitTestVisible = false;
+                Disabled = true;
             });
         }
 
@@ -65,12 +62,21 @@ namespace AllInOneLauncher.Pages.Primary
             Dispatcher.Invoke(() =>
             {
                 activeEntry.IsLoading = false;
-                gameTabs.IsHitTestVisible = true;
-                innerTabs.IsHitTestVisible = true;
-                library.IsHitTestVisible = true;
-                enabledEnhancements.IsHitTestVisible = true;
+                Disabled = false;
                 UpdateEnabledEnhancements();
             });
+        }
+
+        public bool Disabled
+        {
+            get => gameTabs.IsHitTestVisible == false;
+            set
+            {
+                gameTabs.IsHitTestVisible = !value;
+                innerTabs.IsHitTestVisible = !value;
+                library.IsHitTestVisible = !value;
+                enabledEnhancements.IsHitTestVisible = !value;
+            }
         }
 
         public void ShowNews()
