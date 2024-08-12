@@ -16,14 +16,13 @@ namespace PatchLauncher
         int iconNumber = Settings.Default.BackgroundMusicIcon;
         readonly SoundPlayerHelper soundPlayerHelper = new();
 
-        LanguageFiles? patchPackLanguages;
-        LanguagePacks languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[GameFileTools.CheckIfJSONLanguageExists(Settings.Default.InstalledLanguageISOCode, AssemblyNameHelper.BFMELauncherGameName)];
         readonly MainPacks mainPack = JSONDataListHelper._MainPackSettings;
+        LanguagePacks languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[GameFileTools.CheckIfJSONLanguageExists(Settings.Default.InstalledLanguageISOCode, AssemblyNameHelper.BFMELauncherGameName)];
 
         readonly ChangelogPagePatch changelogPagePatch = new();
         readonly ChangelogPageLauncher changelogPageLauncher = new();
 
-        readonly string displayNameFromRegistry = RegistryService.ReadRegKeyBFME25("displayName");
+        readonly string displayName = "The Rise of the Witch-king";
 
         static bool IsLauncherCurrentlyWorking = false;
 
@@ -55,11 +54,12 @@ namespace PatchLauncher
             LblModExplanation.ForeColor = Color.FromArgb(114, 153, 169);
             LblModExplanation.BackColor = Color.Transparent;
             LblModExplanation.BorderStyle = BorderStyle.None;
-            LblModExplanation.OutlineForeColor = Color.FromArgb(173, 216, 232);
+            LblModExplanation.OutlineForeColor = Color.FromArgb(173, 215, 232);
             LblModExplanation.OutlineWidth = 2;
 
-            PBarActualFile.ForeColor = Color.FromArgb(173, 216, 232);
-            PBarActualFile.BackColor = Color.FromArgb(114, 153, 169);
+            PBarActualFile.ForeColor = Color.FromArgb(114, 153, 169);
+            PBarActualFile.BackColor = Color.FromArgb(173, 215, 232);
+            PBarActualFile.TextColor = Color.FromArgb(40, 60, 80);
 
             BtnInstall.FlatAppearance.BorderSize = 0;
             BtnInstall.FlatStyle = FlatStyle.Flat;
@@ -135,7 +135,7 @@ namespace PatchLauncher
 
                 PanelPlaceholder.Padding = new Padding(80, 60, 80, 60);
 
-                if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKeyBFME25("path"))) || RegistryService.ReadRegKeyBFME25("path") == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(RegistryService.ReadRegKeyBFME25("path"), ConstStrings.C_BFME25_MAIN_GAME_FILE)))
+                if ((Settings.Default.GameInstallPath == "" && !Directory.Exists(RegistryService.ReadRegKeyBFME25("InstallPath"))) || RegistryService.ReadRegKeyBFME25("InstallPath") == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND || !File.Exists(Path.Combine(RegistryService.ReadRegKeyBFME25("InstallPath"), ConstStrings.C_BFME25_MAIN_GAME_FILE)))
                 {
                     Settings.Default.IsGameInstalled = false;
                     BtnInstall.Text = Strings.BtnInstall_TextInstall;
@@ -155,17 +155,17 @@ namespace PatchLauncher
                 else
                 {
                     Settings.Default.IsGameInstalled = true;
-                    Settings.Default.GameInstallPath = RegistryService.ReadRegKeyBFME25("path");
+                    Settings.Default.GameInstallPath = RegistryService.ReadRegKeyBFME25("InstallPath");
                     Settings.Default.InstalledLanguageISOCode = RegistryService.GameLanguage(AssemblyNameHelper.BFMELauncherGameName);
                     Settings.Default.Save();
                 }
 
-                if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
+                if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayName))
                     GameDesktopShortcutToolStripMenuItem.Checked = true;
                 else
                     GameDesktopShortcutToolStripMenuItem.Checked = false;
 
-                if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry), displayNameFromRegistry))
+                if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayName), displayName))
                     GameStartmenuShortcutsToolStripMenuItem.Checked = true;
                 else
                     GameStartmenuShortcutsToolStripMenuItem.Checked = false;
@@ -204,13 +204,11 @@ namespace PatchLauncher
 
             try
             {
-                if (Settings.Default.PatchVersionInstalled == 201)
+                if (Settings.Default.PatchVersionInstalled == mainPack.LatestPatchVersionOfficial)
                 {
                     MessageBox.Show(Strings.Msg_UpdateAlreadyActive_Text, Strings.Msg_UpdateAlreadyActive_Title, MessageBoxButtons.OK);
-                    UpdatePanelButtonActiveState();
-
                     TurnPatchesAndModsViewOn();
-
+                    UpdatePanelButtonActiveState();
                     return;
                 }
 
@@ -224,10 +222,10 @@ namespace PatchLauncher
                 LogHelper.LoggerRepairFile.Information("Started Repairing...");
                 await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-                LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+                LogHelper.LoggerRepairFile.Information("Downloading and/or extracting main game files if needed...");
                 await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-                LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+                LogHelper.LoggerRepairFile.Information("Downloading and/or extracting language files if needed...");
                 await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
                 if (AssemblyNameHelper.EAXWasActivated)
@@ -248,9 +246,11 @@ namespace PatchLauncher
             catch (Exception ex)
             {
                 LogHelper.LoggerBFME25GUI.Error(ex.ToString());
+                MessageBox.Show("Something went wrong. Please see Logfiles for further Details. \n We will no reset the launcher state so you can close it. \n Please click on the discord Logo to get support.");
             }
 
             TurnPatchesAndModsViewOn();
+            UpdatePanelButtonActiveState();
         }
 
         private async void PatchesButtonBFME25Clicked(object? sender, EventArgs e)
@@ -260,11 +260,6 @@ namespace PatchLauncher
             PatchesButtonsBFME25 patchesButtonsBFME25 = (PatchesButtonsBFME25)sender!;
             int version = Convert.ToInt32(patchesButtonsBFME25.Tag);
             PatchPacks patchPacks = JSONDataListHelper._DictionaryPatchPacksSettings[version];
-
-            if (patchPacks.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode))
-            {
-                patchPackLanguages = patchPacks.LanguageFiles[Settings.Default.InstalledLanguageISOCode];
-            }
 
             if (Settings.Default.PatchVersionInstalled == version)
             {
@@ -286,10 +281,10 @@ namespace PatchLauncher
                     LogHelper.LoggerRepairFile.Information("Started Repairing...");
                     await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-                    LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+                    LogHelper.LoggerRepairFile.Information("Downloading and/or extracting main game files if needed...");
                     await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-                    LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+                    LogHelper.LoggerRepairFile.Information("Downloading and/or extracting language files if needed...");
                     await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
                     if (Settings.Default.ActivePatchOrModExternalProgramFolderPath == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND + "\\" + patchPacks.ThirdPartyToolExecutableName)
@@ -304,26 +299,15 @@ namespace PatchLauncher
                         LogHelper.LoggerRepairFile.Information("Started Repairing...");
                         await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-                        LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+                        LogHelper.LoggerRepairFile.Information("Downloading and/or extracting main game files if needed...");
                         await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-                        LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+                        LogHelper.LoggerRepairFile.Information("Downloading and/or extracting language files if needed...");
                         await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
                         TurnPatchesAndModsViewOn();
 
-                        if (version == 202)
-                        {
-                            Settings.Default.ActivePatchOrModExternalProgramFolderPath = Path.Combine(RegistryService.ReadRegKey(patchPacks.RegistryPathForInstalledProgram, patchPacks.RegistryKeyName), patchPacks.ThirdPartyToolExecutableName);
-                            Settings.Default.Save();
-                        }
-
                         return;
-                    }
-
-                    if (patchPacks.LanguageFiles.ContainsKey(Settings.Default.InstalledLanguageISOCode) && patchPackLanguages != null)
-                    {
-                        await InstallUpdateRepairRoutine(patchPackLanguages!.FileName, patchPackLanguages.URLs, patchPackLanguages.MD5);
                     }
 
                     Settings.Default.PatchVersionInstalled = version;
@@ -362,7 +346,7 @@ namespace PatchLauncher
 
                         languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
 
-                        RegistryService.WriteRegKeysInstallationBFME25(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
+                        RegistryService.WriteRegKeysInstallationBFME25(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLanguage);
 
                         await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
                         await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
@@ -733,25 +717,9 @@ namespace PatchLauncher
 
             try
             {
-                if (!File.Exists(Settings.Default.ActivePatchOrModExternalProgramFolderPath) && !string.IsNullOrEmpty(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
-                {
-                    throw new FileNotFoundException("Third party tool not found!", Path.GetFileName(Settings.Default.ActivePatchOrModExternalProgramFolderPath));
-                }
-
-                if (!Settings.Default.ActivePatchOrModExternalProgramLaunchAbility && !string.IsNullOrEmpty(Settings.Default.ActivePatchOrModExternalProgramFolderPath))
-                {
-                    Process processLaunchExternalTool = new();
-                    processLaunchExternalTool.StartInfo.FileName = Settings.Default.ActivePatchOrModExternalProgramFolderPath;
-                    processLaunchExternalTool.StartInfo.WorkingDirectory = Path.GetDirectoryName(Settings.Default.ActivePatchOrModExternalProgramFolderPath);
-                    processLaunchExternalTool.Start();
-                    await processLaunchExternalTool.WaitForExitAsync();
-                    processLaunchExternalTool.Dispose();
-                }
-
                 Process processLaunchGame = new();
                 processLaunchGame.StartInfo.FileName = Path.Combine(Settings.Default.GameInstallPath, ConstStrings.C_BFME25_MAIN_GAME_FILE);
 
-                // Start game windowed
                 if (Settings.Default.StartGameWindowed)
                 {
                     processLaunchGame.StartInfo.Arguments = "-win";
@@ -767,7 +735,7 @@ namespace PatchLauncher
             }
             catch (Exception ex)
             {
-                LogHelper.LoggerBFME2GUI.Error(ex.ToString());
+                LogHelper.LoggerBFME25GUI.Error(ex.ToString());
                 DialogResult dialogResult = MessageBox.Show(Strings.Msg_ErrorStartingGame_Text, Strings.Msg_ErrorStartingGame_Title, MessageBoxButtons.OKCancel);
                 if (dialogResult == DialogResult.OK)
                 {
@@ -888,7 +856,7 @@ namespace PatchLauncher
 
                 languagePackSettings = JSONDataListHelper._DictionarylanguageSettings[Settings.Default.InstalledLanguageISOCode];
 
-                RegistryService.WriteRegKeysInstallationBFME25(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLocale, languagePackSettings.RegistrySelectedLanguageName, languagePackSettings.RegistrySelectedLanguage);
+                RegistryService.WriteRegKeysInstallationBFME25(Settings.Default.GameInstallPath, languagePackSettings.RegistrySelectedLanguage);
 
                 await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
                 await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
@@ -900,7 +868,7 @@ namespace PatchLauncher
                     GameDesktopShortcutToolStripMenuItem.PerformClick();
                 }
 
-                if (Settings.Default.CreateStartMenuShortcut && !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry), displayNameFromRegistry))
+                if (Settings.Default.CreateStartMenuShortcut && !ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayName), displayName))
                 {
                     GameStartmenuShortcutsToolStripMenuItem.PerformClick();
                 }
@@ -913,16 +881,16 @@ namespace PatchLauncher
 
         private void GameDesktopShortcutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayNameFromRegistry))
+            if (ShortCutHelper.DoesTheShortCutExist(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), displayName))
             {
-                ShortCutHelper.DeleteGameShortcutFromDesktop(displayNameFromRegistry);
+                ShortCutHelper.DeleteGameShortcutFromDesktop(displayName);
                 GameDesktopShortcutToolStripMenuItem.Checked = false;
             }
             else
             {
                 ShortCutHelper.CreateShortcutToDesktop(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName),
                     ConstStrings.C_BFME25_MAIN_GAME_FILE),
-                    displayNameFromRegistry,
+                    displayName,
                     Settings.Default.StartGameWindowed == true ? "-win" : "");
                 GameDesktopShortcutToolStripMenuItem.Checked = true;
             }
@@ -930,22 +898,22 @@ namespace PatchLauncher
 
         private void GameStartmenuShortcutsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry), displayNameFromRegistry))
+            if (ShortCutHelper.DoesTheShortCutExist(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayName), displayName))
             {
-                ShortCutHelper.DeleteGameShortcutsFromStartMenu(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayNameFromRegistry));
+                ShortCutHelper.DeleteGameShortcutsFromStartMenu(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu), "Programs", "Electronic Arts", displayName));
                 GameStartmenuShortcutsToolStripMenuItem.Checked = false;
             }
             else
             {
-                ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_BFME25_MAIN_GAME_FILE), displayNameFromRegistry,
+                ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_BFME25_MAIN_GAME_FILE), displayName,
                     Path.Combine("Programs", "Electronic Arts",
-                    displayNameFromRegistry),
+                    displayName),
                     Settings.Default.StartGameWindowed == true ? "-win" : "");
 
                 ShortCutHelper.CreateShortcutToStartMenu(Path.Combine(RegistryService.GameInstallPath(AssemblyNameHelper.BFMELauncherGameName), ConstStrings.C_WORLDBUILDER_FILE), "Worldbuilder",
                     Path.Combine("Programs",
                     "Electronic Arts",
-                    displayNameFromRegistry));
+                    displayName));
 
                 GameStartmenuShortcutsToolStripMenuItem.Checked = true;
             }
@@ -996,10 +964,10 @@ namespace PatchLauncher
             LogHelper.LoggerRepairFile.Information("Started Repairing...");
             await RepairFileHelper.RepairFeature(AssemblyNameHelper.BFMELauncherGameName);
 
-            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting MainGame-Files if needed...");
+            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting main game files if needed...");
             await InstallUpdateRepairRoutine(mainPack.FileName, mainPack.URLs, mainPack.MD5);
 
-            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting Language-Files if needed...");
+            LogHelper.LoggerRepairFile.Information("Downloading and/or extracting language files if needed...");
             await InstallUpdateRepairRoutine(languagePackSettings.LanguagePackName, languagePackSettings.URLs, languagePackSettings.MD5);
 
             if (AssemblyNameHelper.EAXWasActivated)

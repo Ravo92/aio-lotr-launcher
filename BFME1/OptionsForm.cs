@@ -29,7 +29,7 @@ namespace PatchLauncher
         string FlagResolution = "800 600";
         string FlagUnitDecals = "yes";
 
-        string FlagSelectedIsoCode = "en_us";
+        string selectedLanguageName = "English";
         string FlagUseEAX = "yes";
 
         //Launcher Settings
@@ -435,9 +435,9 @@ namespace PatchLauncher
                 ResolutionY.Text = Screen.PrimaryScreen.Bounds.Height.ToString();
             }
 
-            if (Settings.Default.InstalledLanguageISOCode != FlagSelectedIsoCode)
+            if (Settings.Default.InstalledLanguageISOCode != selectedLanguageName)
             {
-                FlagSelectedIsoCode = Settings.Default.InstalledLanguageISOCode;
+                selectedLanguageName = Settings.Default.InstalledLanguageISOCode;
             }
 
             CmbSelectGameLanguage.DisplayMember = "Value";
@@ -481,7 +481,7 @@ namespace PatchLauncher
 
             CmBLanguage.SelectedIndex = Settings.Default.LauncherLanguage switch
             {
-                "de" => 1,
+                "German" => 1,
                 _ => 0,
             };
 
@@ -584,10 +584,10 @@ namespace PatchLauncher
         {
             SaveSettings();
 
-            if (FlagSelectedIsoCode != Settings.Default.InstalledLanguageISOCode)
+            if (selectedLanguageName != Settings.Default.InstalledLanguageISOCode)
             {
                 ChangedGameLanguage.UserChangedGameLanguageInSettings = true;
-                Settings.Default.InstalledLanguageISOCode = FlagSelectedIsoCode;
+                Settings.Default.InstalledLanguageISOCode = selectedLanguageName;
                 Settings.Default.Save();
             }
 
@@ -1318,10 +1318,10 @@ namespace PatchLauncher
             switch (CmBLanguage.SelectedIndex)
             {
                 case 0:
-                    FlagLauncherLanguageIndex = "en";
+                    FlagLauncherLanguageIndex = "English";
                     break;
                 case 1:
-                    FlagLauncherLanguageIndex = "de";
+                    FlagLauncherLanguageIndex = "German";
                     break;
                 default:
                     break;
@@ -1331,9 +1331,8 @@ namespace PatchLauncher
         private void CmbSelectGameLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox control = (ComboBox)sender;
-            string isoCode = (string)control.SelectedValue;
-            LanguagePacks settings = JSONDataListHelper._DictionarylanguageSettings[isoCode];
-            FlagSelectedIsoCode = settings.RegistrySelectedLocale;
+            LanguagePacks settings = JSONDataListHelper._DictionarylanguageSettings[(string)control.SelectedValue];
+            selectedLanguageName = settings.RegistrySelectedLanguage;
         }
     }
 }

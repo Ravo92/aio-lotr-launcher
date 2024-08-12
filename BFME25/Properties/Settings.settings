@@ -29,11 +29,8 @@
     <Setting Name="LatestPatchVersion" Type="System.Int32" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LauncherLanguage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">en</Value>
-    </Setting>
     <Setting Name="InstalledLanguageISOCode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">en_uk</Value>
+      <Value Profile="(Default)">English</Value>
     </Setting>
     <Setting Name="CreateStartMenuShortcut" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -52,6 +49,9 @@
     </Setting>
     <Setting Name="ActivePatchOrModExternalProgramLaunchAbility" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LauncherLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">English</Value>
     </Setting>
   </Settings>
 </SettingsFile>

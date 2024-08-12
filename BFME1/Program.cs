@@ -12,7 +12,7 @@ namespace PatchLauncher
     internal class Program
     {
         static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
-        static readonly string RegistryDetectedGameLocale = RegistryService.ReadRegKeyBFME1("locale");
+        static readonly string RegistryDetectedGameLanguage = RegistryService.ReadRegKeyBFME1("Language");
 
         /// <summary>
         ///  The main entry point for the application.
@@ -55,11 +55,19 @@ namespace PatchLauncher
 
             ApplicationConfiguration.Initialize();
 
+            if (Settings.Default.LauncherLanguage == "en")
+                Settings.Default.LauncherLanguage = "English";
+
+            if (Settings.Default.LauncherLanguage == "de")
+                Settings.Default.LauncherLanguage = "German";
+
+            Settings.Default.Save();
+
             try
             {
                 Thread.CurrentThread.CurrentUICulture = Settings.Default.LauncherLanguage switch
                 {
-                    "de" => new System.Globalization.CultureInfo("de"),
+                    "German" => new System.Globalization.CultureInfo("de"),
                     _ => new System.Globalization.CultureInfo("en"),
                 };
 
@@ -67,28 +75,28 @@ namespace PatchLauncher
                 {
                     switch (Settings.Default.InstalledLanguageISOCode)
                     {
-                        case "de":
-                            if (RegistryDetectedGameLocale == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                        case "German":
+                            if (RegistryDetectedGameLanguage == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                             {
-                                Settings.Default.InstalledLanguageISOCode = "de";
+                                Settings.Default.InstalledLanguageISOCode = "German";
                                 Settings.Default.Save();
                             }
                             else
                             {
-                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLocale;
+                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLanguage;
                                 Settings.Default.Save();
                             }
                             break;
 
                         default:
-                            if (RegistryDetectedGameLocale == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                            if (RegistryDetectedGameLanguage == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                             {
-                                Settings.Default.InstalledLanguageISOCode = "en_uk";
+                                Settings.Default.InstalledLanguageISOCode = "English";
                                 Settings.Default.Save();
                             }
                             else
                             {
-                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLocale;
+                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLanguage;
                                 Settings.Default.Save();
                             }
                             break;
@@ -108,7 +116,7 @@ namespace PatchLauncher
                     //string json = File.ReadAllText(Path.Combine(Application.StartupPath, ConstStrings.C_JSON_GAMEDICTIONARY_MAIN_FILE));
                     GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result; //JsonConvert.DeserializeObject<GameFileDictionary>(json)!;  //GameFileTools.LoadGameFileDictionary().Result;
 
-                    JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
+                    JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLanguage, x => x);
                     JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[AssemblyNameHelper.BFMELauncherGameName];
                     JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.Index, x => x);
 

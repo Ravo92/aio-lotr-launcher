@@ -12,7 +12,7 @@ namespace PatchLauncher
     internal class Program
     {
         static readonly Mutex _mutex = new(true, ConstStrings.C_MUTEX_NAME);
-        static readonly string RegistryDetectedGameLocale = RegistryService.ReadRegKeyBFME25("locale");
+        static readonly string RegistryDetectedGameLanguage = RegistryService.ReadRegKeyBFME25("Language");
 
         /// <summary>
         ///  The main entry point for the application.
@@ -59,7 +59,7 @@ namespace PatchLauncher
             {
                 Thread.CurrentThread.CurrentUICulture = Settings.Default.LauncherLanguage switch
                 {
-                    "de" => new System.Globalization.CultureInfo("de"),
+                    "German" => new System.Globalization.CultureInfo("German"),
                     _ => new System.Globalization.CultureInfo("en"),
                 };
 
@@ -67,28 +67,28 @@ namespace PatchLauncher
                 {
                     switch (Settings.Default.InstalledLanguageISOCode)
                     {
-                        case "de":
-                            if (RegistryDetectedGameLocale == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                        case "German":
+                            if (RegistryDetectedGameLanguage == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                             {
-                                Settings.Default.InstalledLanguageISOCode = "de";
+                                Settings.Default.InstalledLanguageISOCode = "German";
                                 Settings.Default.Save();
                             }
                             else
                             {
-                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLocale;
+                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLanguage;
                                 Settings.Default.Save();
                             }
                             break;
 
                         default:
-                            if (RegistryDetectedGameLocale == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
+                            if (RegistryDetectedGameLanguage == ConstStrings.C_REGISTRY_SERVICE_NOT_FOUND)
                             {
-                                Settings.Default.InstalledLanguageISOCode = "en_uk";
+                                Settings.Default.InstalledLanguageISOCode = "English";
                                 Settings.Default.Save();
                             }
                             else
                             {
-                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLocale;
+                                Settings.Default.InstalledLanguageISOCode = RegistryDetectedGameLanguage;
                                 Settings.Default.Save();
                             }
                             break;
@@ -107,7 +107,7 @@ namespace PatchLauncher
                     GameFileTools _gameFileTools = new();
                     GameFileDictionary gameFileDictionary = GameFileTools.LoadGameFileDictionary().Result;
 
-                    JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLocale, x => x);
+                    JSONDataListHelper._DictionarylanguageSettings = gameFileDictionary.LanguagePacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.RegistrySelectedLanguage, x => x);
                     JSONDataListHelper._MainPackSettings = gameFileDictionary.MainPacks[AssemblyNameHelper.BFMELauncherGameName];
                     JSONDataListHelper._DictionaryPatchPacksSettings = gameFileDictionary.PatchPacks[AssemblyNameHelper.BFMELauncherGameName].ToDictionary(x => x.Index, x => x);
 

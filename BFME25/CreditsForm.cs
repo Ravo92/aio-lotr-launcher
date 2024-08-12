@@ -1,7 +1,6 @@
 ﻿using Helper;
 using System;
 using System.Drawing;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,10 +18,10 @@ namespace PatchLauncher
 
             BtnClose.FlatAppearance.BorderSize = 0;
             BtnClose.FlatStyle = FlatStyle.Flat;
-            BtnClose.BackColor = Color.FromArgb(18, 18, 18);
+            BtnClose.BackColor = Color.Transparent;
             BtnClose.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_NEUTR;
-            BtnClose.Font = FontHelper.GetFont(0, 16); ;
-            BtnClose.ForeColor = Color.FromArgb(168, 190, 98);
+            BtnClose.Font = FontHelper.GetFont(0, 14);
+            BtnClose.ForeColor = Color.FromArgb(114, 153, 169);
         }
 
         private void BtnOptions_Click(object sender, EventArgs e)
@@ -34,7 +33,7 @@ namespace PatchLauncher
         private void BtnClose_MouseLeave(object sender, EventArgs e)
         {
             BtnClose.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_NEUTR;
-            BtnClose.ForeColor = Color.FromArgb(168, 190, 98);
+            BtnClose.ForeColor = Color.FromArgb(114, 153, 169);
         }
 
         private void BtnClose_MouseEnter(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace PatchLauncher
         private void BtnClose_MouseDown(object sender, MouseEventArgs e)
         {
             BtnClose.BackgroundImage = ConstStrings.C_BFME25_BUTTONIMAGE_CLICK;
-            BtnClose.ForeColor = Color.FromArgb(168, 190, 98);
+            BtnClose.ForeColor = Color.FromArgb(114, 153, 169);
             Task.Run(() => SoundPlayerHelper.PlaySoundClick());
         }
 

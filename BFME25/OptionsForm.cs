@@ -34,7 +34,7 @@ namespace PatchLauncher
 
         string FlagResolution = "1024 768";
 
-        string FlagSelectedIsoCode = "en_uk";
+        string FlagSelectedIsoCode = "English";
         string FlagHighAudio = "High";
         string FlagUseEAX = "yes";
 
@@ -95,7 +95,7 @@ namespace PatchLauncher
 
             //Label-Styles
 
-            if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "de")
+            if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "German")
                 LblSettingsTitle.Font = FontHelper.GetFont(1, 15);
             else
                 LblSettingsTitle.Font = FontHelper.GetFont(1, 20);
@@ -140,7 +140,7 @@ namespace PatchLauncher
 
             CmbSelectLauncherLanguage.SelectedIndex = Settings.Default.LauncherLanguage switch
             {
-                "de" => 1,
+                "German" => 1,
                 _ => 0,
             };
 
@@ -836,7 +836,7 @@ namespace PatchLauncher
             ComboBox control = (ComboBox)sender;
             string isoCode = (string)control.SelectedValue;
             LanguagePacks settings = JSONDataListHelper._DictionarylanguageSettings[isoCode];
-            FlagSelectedIsoCode = settings.RegistrySelectedLocale;
+            FlagSelectedIsoCode = settings.RegistrySelectedLanguage;
         }
 
         private void CmbSelectLauncherLanguage_SelectedIndexChanged(object sender, EventArgs e)
@@ -844,10 +844,10 @@ namespace PatchLauncher
             switch (CmbSelectLauncherLanguage.SelectedIndex)
             {
                 case 0:
-                    FlagLauncherLanguageIndex = "en";
+                    FlagLauncherLanguageIndex = "English";
                     break;
                 case 1:
-                    FlagLauncherLanguageIndex = "de";
+                    FlagLauncherLanguageIndex = "German";
                     break;
                 default:
                     break;

@@ -33,7 +33,7 @@
       <Value Profile="(Default)">en</Value>
     </Setting>
     <Setting Name="InstalledLanguageISOCode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">en_uk</Value>
+      <Value Profile="(Default)">English</Value>
     </Setting>
     <Setting Name="CreateStartMenuShortcut" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

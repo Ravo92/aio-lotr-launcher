@@ -14,7 +14,7 @@ namespace PatchLauncher
     {
         bool FlagCreateDesktopShortcut = true;
         bool FlagCreateStartMenuShortcut = true;
-        string FlagSelectedIsoCode = "en_uk";
+        string selectedLanguageName = "English";
 
         readonly Dictionary<string, string> _selectedLanguageDictionary = JSONDataListHelper._DictionarylanguageSettings.ToDictionary(x => x.Key, x => x.Value.RegistrySelectedLanguage);
 
@@ -103,9 +103,9 @@ namespace PatchLauncher
             {
                 TxtInstallPath.Text = Settings.Default.GameInstallPath;
             }
-            else if (RegistryService.ReadRegKeyBFME25("path") != "ValueNotFound")
+            else if (RegistryService.ReadRegKeyBFME25("InstallPath") != "ValueNotFound")
             {
-                TxtInstallPath.Text = RegistryService.ReadRegKeyBFME25("path");
+                TxtInstallPath.Text = RegistryService.ReadRegKeyBFME25("InstallPath");
             }
             else
             {
@@ -154,7 +154,7 @@ namespace PatchLauncher
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             Settings.Default.GameInstallPath = TxtInstallPath.Text;
-            Settings.Default.InstalledLanguageISOCode = FlagSelectedIsoCode;
+            Settings.Default.InstalledLanguageISOCode = selectedLanguageName;
             Settings.Default.CreateDesktopShortcut = FlagCreateDesktopShortcut;
             Settings.Default.CreateStartMenuShortcut = FlagCreateStartMenuShortcut;
             Settings.Default.Save();
@@ -263,7 +263,7 @@ namespace PatchLauncher
             var control = (ComboBox)sender;
             string isoCode = (string)control.SelectedValue;
             var settings = JSONDataListHelper._DictionarylanguageSettings[isoCode];
-            FlagSelectedIsoCode = settings.RegistrySelectedLocale;
+            selectedLanguageName = settings.RegistrySelectedLanguage;
         }
 
         private void TxtInstallPath_TextChanged(object sender, EventArgs e)
@@ -272,14 +272,14 @@ namespace PatchLauncher
             int totalFreeDiskSpace = GameFileTools.CheckIfThereIsEnoughDiskSpace(TxtInstallPath.Text).totalFreeDiskSpace;
             string driveLetter = GameFileTools.CheckIfThereIsEnoughDiskSpace(TxtInstallPath.Text).driveLetter;
 
-            if (Settings.Default.LauncherLanguage == "de")
+            if (Settings.Default.LauncherLanguage == "German")
                 LblFreeSpace.Text = "Freier Platz: " + totalFreeDiskSpace.ToString() + " GB / Gesamter Platz: " + totalDiskSpace.ToString() + " GB";
             else
                 LblFreeSpace.Text = "Free Space: " + totalFreeDiskSpace.ToString() + " GB / Total Space: " + totalDiskSpace.ToString() + " GB";
 
             if (totalFreeDiskSpace <= 10)
             {
-                if (Settings.Default.LauncherLanguage == "de")
+                if (Settings.Default.LauncherLanguage == "German")
                     MessageBox.Show(string.Format("Auf der Partition \"{0}\" ist nicht genügend freier Platz vorhanden.\nBitte etwas Platz freischaufeln und dann erneut versuchen!", driveLetter), "Nicht genug freier Speicherplatz", MessageBoxButtons.OK);
                 else
                     MessageBox.Show(string.Format("There is not enough disk space on the partition \"{0}\".\nPlease free some space before you can install the game", driveLetter), "Not enough free space", MessageBoxButtons.OK);
