@@ -116,6 +116,7 @@ namespace AllInOneLauncher.Elements
                 isLoading = value;
 
                 activeEntryLoading.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+                loadingSpinner.IsLoading = value;
                 activeEntryActive.Visibility = value ? Visibility.Hidden : Visibility.Visible;
                 activeEntryReloadButton.Visibility = value ? Visibility.Hidden : Visibility.Visible;
             }

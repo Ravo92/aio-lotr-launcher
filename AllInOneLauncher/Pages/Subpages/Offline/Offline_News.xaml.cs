@@ -28,15 +28,15 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         private void SetNewsVisibility(bool isVisible)
         {
-            if (isVisible && newsPage.Height == 0)
+            if (isVisible && newsPage.Visibility == System.Windows.Visibility.Hidden)
             {
                 newsPageImage.Visibility = System.Windows.Visibility.Hidden;
-                newsPage.Height = double.NaN;
+                newsPage.Visibility = System.Windows.Visibility.Visible;
             }
-            else if (!isVisible && newsPage.Height != 0)
+            else if (!isVisible && newsPage.Visibility == System.Windows.Visibility.Visible)
             {
                 newsPageImage.Visibility = System.Windows.Visibility.Visible;
-                newsPage.Height = 0;
+                newsPage.Visibility = System.Windows.Visibility.Hidden;
             }
         }
 
@@ -56,6 +56,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             newsPage.Visibility = System.Windows.Visibility.Visible;
             noConnection.Visibility = System.Windows.Visibility.Hidden;
 
+            newsPageImage.Source = null;
             newsPage.Source = GetNewsPage(AvailableBFMEGame);
         }
 
