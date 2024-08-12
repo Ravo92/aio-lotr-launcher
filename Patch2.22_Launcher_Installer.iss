@@ -1,7 +1,7 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "Restarter.exe"
 #define MyAppExeVersion "1.0.7.3"
-#define MyAppPublishFolder "PatchLauncher"
+#define MyAppPublishFolder "RELEASE"
 
 [Setup]
 AppName={#MyAppName}
@@ -30,7 +30,7 @@ VersionInfoVersion={#MyAppExeVersion}
 AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
 AppPublisher=Raphael Vogel
 AppPublisherURL=https://github.com/Ravo92
-ArchitecturesInstallIn64BitMode=x64 arm64
+ArchitecturesInstallIn64BitMode=x64compatible
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
