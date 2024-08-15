@@ -9,7 +9,7 @@
     <system:String x:Key="GenericInstall">تثبيت</system:String>
     <system:String x:Key="GenericLoading">جارٍ التحميل</system:String>
     <system:String x:Key="GenericPlay">لعب</system:String>
-    <system:String x:Key="MainWindowTitle">المُشغل الشامل من فريق 2.22</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">لاعب فردي</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">متعدد اللاعبين</system:String>
     <system:String x:Key="MainWindowGuidesTab">أدلة</system:String>

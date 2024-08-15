@@ -9,7 +9,7 @@
     <system:String x:Key="GenericInstall">УСТАНОВИТЬ</system:String>
     <system:String x:Key="GenericLoading">ЗАГРУЗКА</system:String>
     <system:String x:Key="GenericPlay">ИГРАТЬ</system:String>
-    <system:String x:Key="MainWindowTitle">Универсальный лаунчер от команды 2.22</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">ОДИНОЧНАЯ ИГРА</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">МНОГОПОЛЬЗОВАТЕЛЬСКАЯ ИГРА</system:String>
     <system:String x:Key="MainWindowGuidesTab">РУКОВОДСТВА</system:String>

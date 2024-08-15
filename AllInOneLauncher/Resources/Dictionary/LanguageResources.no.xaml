@@ -9,7 +9,7 @@
     <system:String x:Key="GenericInstall">INSTALLER</system:String>
     <system:String x:Key="GenericLoading">LASTER</system:String>
     <system:String x:Key="GenericPlay">SPILL</system:String>
-    <system:String x:Key="MainWindowTitle">Alt-i-ett Launcher av 2.22 Team</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">ENSPILLER</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">FLERSPILLER</system:String>
     <system:String x:Key="MainWindowGuidesTab">VEILEDNINGER</system:String>

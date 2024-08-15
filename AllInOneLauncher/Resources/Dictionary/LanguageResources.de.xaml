@@ -18,7 +18,7 @@
 
 
     <!--=====================  MainWindow  =====================-->
-    <system:String x:Key="MainWindowTitle">All-in-One-Launcher von den Machern von Patch 2.22</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">EINZELSPIELER</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">MEHRSPIELER</system:String>
     <system:String x:Key="MainWindowGuidesTab">LEITFÄDEN</system:String>

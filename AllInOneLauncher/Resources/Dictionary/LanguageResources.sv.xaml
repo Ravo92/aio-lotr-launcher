@@ -9,7 +9,7 @@
     <system:String x:Key="GenericInstall">INSTALLERA</system:String>
     <system:String x:Key="GenericLoading">LADDAR</system:String>
     <system:String x:Key="GenericPlay">SPELA</system:String>
-    <system:String x:Key="MainWindowTitle">Allt-i-ett Launcher av 2.22 Team</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">ENSAMSPELARE</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">FLERSPELARE</system:String>
     <system:String x:Key="MainWindowGuidesTab">GUIDER</system:String>

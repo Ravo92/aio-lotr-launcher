@@ -9,7 +9,7 @@
     <system:String x:Key="GenericInstall">INSTALAR</system:String>
     <system:String x:Key="GenericLoading">CARGANDO</system:String>
     <system:String x:Key="GenericPlay">JUGAR</system:String>
-    <system:String x:Key="MainWindowTitle">Lanzador todo en uno por el equipo 2.22</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">UN JUGADOR</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">MULTIJUGADOR</system:String>
     <system:String x:Key="MainWindowGuidesTab">GUÍAS</system:String>

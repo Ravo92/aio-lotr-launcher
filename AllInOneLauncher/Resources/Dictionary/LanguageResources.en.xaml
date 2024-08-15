@@ -18,7 +18,7 @@
 
 
     <!--=====================  MainWindow  =====================-->
-    <system:String x:Key="MainWindowTitle">All-in-One Launcher by 2.22 Team</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">SINGLEPLAYER</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">MULTIPLAYER</system:String>
     <system:String x:Key="MainWindowGuidesTab">GUIDES</system:String>
