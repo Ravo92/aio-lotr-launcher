@@ -23,7 +23,7 @@ namespace AllInOneLauncher.Popups
             InitializeComponent();
 
             foreach (var drive in Drives) LocationDropdown.Options.Add($"{drive.VolumeLabel} ({drive.Name.Replace(@"\", "")})");
-            LocationDropdown.Options.Add("Select custom location");
+            LocationDropdown.Options.Add(App.Current.FindResource("SelectNewLocationPopupSelectCustom").ToString() ?? "");
         }
 
         private void ButtonAcceptClicked(object sender, RoutedEventArgs e)

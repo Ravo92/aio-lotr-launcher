@@ -14,6 +14,7 @@
     <system:String x:Key="GenericInstall">INSTALLIEREN</system:String>
     <system:String x:Key="GenericLoading">LÄDT</system:String>
     <system:String x:Key="GenericPlay">SPIELEN</system:String>
+    <system:String x:Key="GenericAdd">ADD</system:String>
 
 
 
@@ -116,6 +117,10 @@
     <system:String x:Key="InstallGameDialogTitle">Spiel installieren</system:String>
     <system:String x:Key="InstallGameDialogLanguage">Sprache</system:String>
     <system:String x:Key="InstallGameDialogLocation">Bibliothek</system:String>
+    
+    <!--=====================  SelectNewLocationPopup  =====================-->
+    <system:String x:Key="SelectNewLocationPopupTitle">ADD NEW LIBRARY</system:String>
+    <system:String x:Key="SelectNewLocationPopupSelectCustom">Select custom location</system:String>
 
     <!--=====================  ErrorPopup  =====================-->
     <system:String x:Key="ErrorPopupTitle">FEHLER</system:String>
