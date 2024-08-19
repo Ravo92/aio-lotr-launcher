@@ -22,13 +22,14 @@ namespace AllInOneLauncher.Elements
         private readonly Action<ContextMenuShell, double, double>? CalcPos;
         private readonly Action? OnDestroy;
 
-        public ContextMenuShell(FrameworkElement owner, MenuSide side, CornerRadius corners, bool fullWidth, double minWidth, double lifespan, double padding, bool tint, Action? onDestroy, Action<ContextMenuShell, double, double> calcPos)
+        public ContextMenuShell(FrameworkElement owner, MenuSide side, CornerRadius corners, ColorStyle colorStyle, bool fullWidth, double minWidth, double lifespan, double padding, bool tint, Action? onDestroy, Action<ContextMenuShell, double, double> calcPos)
         {
             InitializeComponent();
 
             Owner = owner;
             Side = side;
             Corners = corners;
+            ColorStyle = colorStyle;
             Width = fullWidth ? owner.ActualWidth : double.NaN;
             MinWidth = minWidth;
             Lifespan = lifespan;
@@ -226,6 +227,25 @@ namespace AllInOneLauncher.Elements
         {
             get => border_content.CornerRadius;
             set => border_content.CornerRadius = value;
+        }
+
+
+        private ColorStyle colorStyle = ColorStyle.Acrylic;
+        public ColorStyle ColorStyle
+        {
+            get => colorStyle;
+            set
+            {
+                colorStyle = value;
+
+                acrylicStyle.Visibility = Visibility.Collapsed;
+                navyStyle.Visibility = Visibility.Collapsed;
+
+                if (value == ColorStyle.Acrylic)
+                    acrylicStyle.Visibility = Visibility.Visible;
+                else if (value == ColorStyle.Navy)
+                    navyStyle.Visibility = Visibility.Visible;
+            }
         }
 
         private void BeginLife(double lifespan)

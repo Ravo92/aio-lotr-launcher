@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AllInOneLauncher.Elements"
              mc:Ignorable="d" d:Height="40">
-    <Border Grid.Column="2" x:Name="frame" CornerRadius="20" Width="250" Background="Transparent">
+    <Border Grid.Column="2" x:Name="frame" CornerRadius="20" Background="Transparent">
         <Border.Effect>
             <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
         </Border.Effect>
@@ -17,7 +17,8 @@
             </VisualBrush>
         </Border.OpacityMask>
         <Grid>
-            <local:Acrylic/>
+            <local:Acrylic x:Name="acrylicStyle"/>
+            <Grid x:Name="navyStyle" Background="#3A3F4C" Visibility="Collapsed"/>
             <Button x:Name="button" Style="{StaticResource MenuButton}" Background="Transparent" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OnDropdownClicked">
                 <Grid>
                     <TextBlock x:Name="title" Text="DropdownPicker" FontSize="14" FontWeight="Medium" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>

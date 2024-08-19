@@ -11,7 +11,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid x:Name="area">
-            <Border x:Name="border_regular" Background="#19FFFFFF" CornerRadius="4" Visibility="Visible"/>
+            <Border x:Name="border_regular" Background="#3A3F4C" CornerRadius="4" Visibility="Visible"/>
             <Border x:Name="border_selected" Background="#028BDB" CornerRadius="4" Visibility="Collapsed"/>
             <Border x:Name="content" VerticalAlignment="Center" Margin="15,0,15,0">
                 <ContentPresenter Content="{Binding Title, ElementName=userControl}"/>

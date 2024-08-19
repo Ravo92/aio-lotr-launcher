@@ -5,6 +5,8 @@ using System.Windows;
 using AllInOneLauncher.Elements;
 using System.Collections.Specialized;
 using AllInOneLauncher.Logic;
+using System.Linq;
+using AllInOneLauncher.Popups;
 
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
@@ -19,40 +21,24 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             DataContext = this;
         }
 
-        private void OnLoad(object sender, RoutedEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e) => LoadLibraryDrives();
+
+        private void LoadLibraryDrives()
         {
-            GetDriveData();
+            libraryDrives.Children.Clear();
+            foreach (string libraryDrive in Properties.Settings.Default.LibraryDrives.OfType<string>().Where(x => x != null))
+                libraryDrives.Children.Add(new LibraryDriveElement(libraryDrive));
         }
 
-        private void GetDriveData()
+        private void OnAddNewLocationClicked(object sender, RoutedEventArgs e)
         {
-            libraryTiles.Children.Clear();
-
-            StringCollection myStringCollection = Properties.Settings.Default.UsedLibraryPartitions;
-
-            foreach (var drive in DriveInfo.GetDrives())
+            PopupVisualizer.ShowPopup(new SelectNewLocationPopup(),
+            OnPopupSubmited: (submitedData) =>
             {
-                if (!drive.VolumeLabel.Contains("Google"))
-                {
-                    if (drive.DriveType != DriveType.CDRom || drive.DriveType != DriveType.Network || drive.DriveType != DriveType.Removable)
-                    {
-                        DiskDriveElement libraryTile = new()
-                        {
-                            DriveName = string.Concat(drive.VolumeLabel == string.Empty ? Application.Current.FindResource("SettingsLauncherGeneralDriveDefaultNameText") : drive.VolumeLabel, " (", drive.Name[..^1], ")"),
-                            DriveSize = Math.Floor(drive.TotalSize / Math.Pow(1024, 3)),
-                            FreeSpace = Math.Floor(drive.AvailableFreeSpace / Math.Pow(1024, 3))
-                        };
-
-                        if (myStringCollection.Contains(drive.Name))
-                            libraryTiles.Children.Add(libraryTile);
-                    }
-                }
-            }
-        }
-
-        private void ButtonAddLibrary_Click(object sender, RoutedEventArgs e)
-        {
-
+                Properties.Settings.Default.LibraryDrives.Add(submitedData[0]);
+                Properties.Settings.Default.Save();
+                LoadLibraryDrives();
+            });
         }
     }
 }

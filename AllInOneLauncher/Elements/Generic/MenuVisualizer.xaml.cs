@@ -26,7 +26,7 @@ namespace AllInOneLauncher.Elements
         public static Brush StandardBrush => new SolidColorBrush(Color.FromArgb(255, 37, 37, 38));
         public static Rect GetAbsolutePlacement(FrameworkElement element) => new Rect(element.TransformToVisual(Instance!.content).Transform(new Point(0, 0)), new Size(element.ActualWidth, element.ActualHeight));
 
-        public static ContextMenuShell? ShowMenu(string text, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
+        public static ContextMenuShell? ShowMenu(string text, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
         {
             if (Instance == null)
                 return null;
@@ -34,7 +34,7 @@ namespace AllInOneLauncher.Elements
             if (ActiveMenues.Any(x => x.Owner == owner))
                 return null;
 
-            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
+            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
             {
                 Rect ownerRect = GetAbsolutePlacement(owner);
                 Point finalPos = new Point(ownerRect.X, ownerRect.Y);
@@ -107,7 +107,7 @@ namespace AllInOneLauncher.Elements
             return menuShell;
         }
 
-        public static ContextMenuShell? ShowMenu(Page content, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
+        public static ContextMenuShell? ShowMenu(Page content, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
         {
             if (Instance == null)
                 return null;
@@ -115,7 +115,7 @@ namespace AllInOneLauncher.Elements
             if (ActiveMenues.Any(x => x.Owner == owner))
                 return null;
 
-            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
+            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
             {
                 Rect ownerRect = GetAbsolutePlacement(owner);
                 Point finalPos = new Point(ownerRect.X, ownerRect.Y);
@@ -188,7 +188,7 @@ namespace AllInOneLauncher.Elements
             return menuShell;
         }
 
-        public static ContextMenuShell? ShowMenu(List<ContextMenuItem> menu, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
+        public static ContextMenuShell? ShowMenu(List<ContextMenuItem> menu, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
         {
             if (Instance == null)
                 return null;
@@ -196,7 +196,7 @@ namespace AllInOneLauncher.Elements
             if (ActiveMenues.Any(x => x.Owner == owner))
                 return null;
 
-            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
+            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
             {
                 Rect ownerRect = GetAbsolutePlacement(owner);
                 Point finalPos = new Point(ownerRect.X, ownerRect.Y);

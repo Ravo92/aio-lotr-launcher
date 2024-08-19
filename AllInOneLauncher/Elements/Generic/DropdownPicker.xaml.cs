@@ -65,6 +65,36 @@ namespace AllInOneLauncher.Elements
             set => Selected = Options.Contains(value) ? Options.IndexOf(value) : Selected;
         }
 
+        private ColorStyle colorStyle = ColorStyle.Acrylic;
+        public ColorStyle ColorStyle
+        {
+            get => colorStyle;
+            set
+            {
+                colorStyle = value;
+
+                acrylicStyle.Visibility = Visibility.Collapsed;
+                navyStyle.Visibility = Visibility.Collapsed;
+
+                if (value == ColorStyle.Acrylic)
+                    acrylicStyle.Visibility = Visibility.Visible;
+                else if (value == ColorStyle.Navy)
+                    navyStyle.Visibility = Visibility.Visible;
+            }
+        }
+
+        private double corners = 20;
+        public double Corners
+        {
+            get => corners;
+            set
+            {
+                corners = value;
+
+                frame.CornerRadius = new CornerRadius(value);
+            }
+        }
+
         private void OnDropdownClicked(object sender, RoutedEventArgs e)
         {
             if (MenuVisualizer.HasMenuOn(frame))
@@ -75,15 +105,16 @@ namespace AllInOneLauncher.Elements
             owner: frame,
             side: MenuSide.Bottom,
             space: 0,
-            corners: new CornerRadius(0, 0, 20, 20),
+            corners: new CornerRadius(0, 0, Corners, Corners),
+            colorStyle: ColorStyle,
             fullWidth: true,
             onDestroy: () =>
             {
-                CornerRadiusAnimation ca = new() { From = new CornerRadius(20, 20, 0, 0), To = new CornerRadius(20), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
+                CornerRadiusAnimation ca = new() { From = new CornerRadius(Corners, Corners, 0, 0), To = new CornerRadius(Corners), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
                 frame.BeginAnimation(Border.CornerRadiusProperty, ca);
             });
 
-            CornerRadiusAnimation ca = new() { From = new CornerRadius(20), To = new CornerRadius(20, 20, 0, 0), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
+            CornerRadiusAnimation ca = new() { From = new CornerRadius(Corners), To = new CornerRadius(Corners, Corners, 0, 0), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
             frame.BeginAnimation(Border.CornerRadiusProperty, ca);
         }
     }
@@ -131,4 +162,10 @@ namespace AllInOneLauncher.Elements
 
         protected override Freezable CreateInstanceCore() => new CornerRadiusAnimation();
     }
+}
+
+public enum ColorStyle
+{
+    Acrylic,
+    Navy
 }

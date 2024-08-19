@@ -20,7 +20,8 @@
                     </VisualBrush>
                 </Border.OpacityMask>
                 <Grid>
-                    <local:Acrylic/>
+                    <local:Acrylic x:Name="acrylicStyle"/>
+                    <Grid x:Name="navyStyle" Background="#3A3F4C" Visibility="Collapsed"/>
                     <Grid x:Name="tint" Background="#33000000" Visibility="Collapsed"/>
                     <TextBlock x:Name="label_text" Foreground="White" Padding="0" Margin="12,5,12,8" TextAlignment="Center" FontSize="13" Text="Hi!"></TextBlock>
                     <Frame x:Name="frame_mainContent" Focusable="False" IsTabStop="False" Visibility="Collapsed" d:Visibility="Visible"></Frame>
