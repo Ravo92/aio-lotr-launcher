@@ -18,7 +18,7 @@
 
 
     <!--=====================  MainWindow  =====================-->
-    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the Bfme Foundation Project</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">SINGLEPLAYER</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">MULTIPLAYER</system:String>
     <system:String x:Key="MainWindowGuidesTab">GUIDES</system:String>
@@ -36,6 +36,7 @@
 
     <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">Search in library...</system:String>
+    <system:String x:Key="LibraryPageMakeSnapshot">Make snapshots</system:String>
 
     <system:String x:Key="LibraryPageFilterPatchesAndMods">Patches and mods</system:String>
     <system:String x:Key="LibraryPageFilterEnhancements">Enhancements</system:String>
@@ -75,14 +76,12 @@
     <!--=====================  Settings  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionHeader">Launcher Settings</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneral">General</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibrary">Library</system:String>
 
     <system:String x:Key="SettingsPageBFME1SectionHeader">The Battle for Middle-earth™</system:String>
     <system:String x:Key="SettingsPageBFME2SectionHeader">The Battle for Middle-earth™ II</system:String>
     <system:String x:Key="SettingsPageRotWKSectionHeader">Rise of the Witchking™</system:String>
     <system:String x:Key="SettingsPageBFMESectionGeneral">General</system:String>
-    <system:String x:Key="SettingsPageBFMESectionVideo">Video &amp; Resolution</system:String>
-    <system:String x:Key="SettingsPageBFMESectionLanguage">Language &amp; Sound</system:String>
-    <system:String x:Key="SettingsPageBFMESectionRepair">Repair or Uninstall</system:String>
 
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Launcher language</system:String>
@@ -94,7 +93,6 @@
 
     <!--=====================  Settings/BFME Settings/General  =====================-->
     <system:String x:Key="SettingsPageBFMESectionGeneralSerialNumber">Serialnumber</system:String>
-    <system:String x:Key="SettingsPageBFMESectionGeneralChangeSerial">Change Serial</system:String>
     <system:String x:Key="SettingsPageBFMESectionGeneralRandomizeSerial">Randomize</system:String>
 
     <!--=====================  Settings/BFME Settings/Video & Resolution  =====================-->

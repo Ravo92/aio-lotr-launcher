@@ -160,22 +160,23 @@ namespace AllInOneLauncher.Elements
                     IsHitTestVisible = false;
                     label_text.Visibility = Visibility.Visible;
                     frame_mainContent.Visibility = Visibility.Collapsed;
-                    stack_mainContent.Visibility = Visibility.Collapsed;
+                    stack_mainContent_scrollview.Visibility = Visibility.Collapsed;
                 }
                 else if (value == MenuContent.Page)
                 {
                     IsHitTestVisible = true;
                     label_text.Visibility = Visibility.Collapsed;
                     frame_mainContent.Visibility = Visibility.Visible;
-                    stack_mainContent.Visibility = Visibility.Collapsed;
+                    stack_mainContent_scrollview.Visibility = Visibility.Collapsed;
                 }
                 else if (value == MenuContent.Menu)
                 {
                     IsHitTestVisible = true;
                     label_text.Visibility = Visibility.Collapsed;
                     frame_mainContent.Visibility = Visibility.Collapsed;
-                    stack_mainContent.Visibility = Visibility.Visible;
-                    stack_mainContent.MinWidth = 150;
+                    stack_mainContent_scrollview.Visibility = Visibility.Visible;
+                    stack_mainContent_scrollview.MinWidth = 150;
+                    stack_mainContent_scrollview.MaxHeight = 400;
                 }
 
                 OnPropertyChanged();

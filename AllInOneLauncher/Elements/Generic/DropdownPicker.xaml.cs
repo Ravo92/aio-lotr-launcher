@@ -21,7 +21,9 @@ namespace AllInOneLauncher.Elements
             Properties.Settings.Default.SettingsSaving += (s, e) => title.Text = Options.Count > Selected ? (Options[Selected].StartsWith("{") && Options[Selected].EndsWith("}") ? (Application.Current.FindResource(Options[Selected].TrimStart('{').TrimEnd('}')).ToString() ?? "") : Options[Selected]) : "";
             Loaded += (s, e) => title.Text = Options.Count > Selected ? (Options[Selected].StartsWith("{") && Options[Selected].EndsWith("}") ? (Application.Current.FindResource(Options[Selected].TrimStart('{').TrimEnd('}')).ToString() ?? "") : Options[Selected]) : "";
         }
+
         public event EventHandler? OnOptionSelected;
+
         private List<string> options = [];
         public List<string> Options
         {
@@ -36,6 +38,7 @@ namespace AllInOneLauncher.Elements
                 MenuVisualizer.HideMenuOn(frame);
             }
         }
+
         private int selected = 0;
         public int Selected
         {
@@ -54,6 +57,12 @@ namespace AllInOneLauncher.Elements
 
                 MenuVisualizer.HideMenuOn(frame);
             }
+        }
+
+        public string SelectedValue
+        {
+            get => Options.Count > Selected ? Options[Selected] : "";
+            set => Selected = Options.Contains(value) ? Options.IndexOf(value) : Selected;
         }
 
         private void OnDropdownClicked(object sender, RoutedEventArgs e)
@@ -109,18 +118,9 @@ namespace AllInOneLauncher.Elements
             CornerRadius fromVal = From;
             CornerRadius toVal = To;
 
-            if (animationClock.CurrentProgress == null)
-            {
-                return fromVal;
-            }
-
+            if (animationClock.CurrentProgress == null) return fromVal;
             double progress = animationClock.CurrentProgress.Value;
-
-            // Apply easing function if specified
-            if (EasingFunction != null)
-            {
-                progress = EasingFunction.Ease(progress);
-            }
+            if (EasingFunction != null) progress = EasingFunction.Ease(progress);
 
             return new CornerRadius(
                 fromVal.TopLeft + (toVal.TopLeft - fromVal.TopLeft) * progress,
@@ -129,9 +129,6 @@ namespace AllInOneLauncher.Elements
                 fromVal.BottomLeft + (toVal.BottomLeft - fromVal.BottomLeft) * progress);
         }
 
-        protected override Freezable CreateInstanceCore()
-        {
-            return new CornerRadiusAnimation();
-        }
+        protected override Freezable CreateInstanceCore() => new CornerRadiusAnimation();
     }
 }

@@ -33,7 +33,7 @@ namespace AllInOneLauncher.Elements
                 try { icon.Source = new BitmapImage(new Uri(value.ArtworkUrl)); } catch { }
                 title.Text = value.Name;
                 version.Text = value.Version;
-                author.Text = $"by {value.Author}";
+                author.Text = value.Author;
                 UpdateType();
             }
         }

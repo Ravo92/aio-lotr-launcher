@@ -24,7 +24,9 @@
                     <Grid x:Name="tint" Background="#33000000" Visibility="Collapsed"/>
                     <TextBlock x:Name="label_text" Foreground="White" Padding="0" Margin="12,5,12,8" TextAlignment="Center" FontSize="13" Text="Hi!"></TextBlock>
                     <Frame x:Name="frame_mainContent" Focusable="False" IsTabStop="False" Visibility="Collapsed" d:Visibility="Visible"></Frame>
-                    <StackPanel x:Name="stack_mainContent" Focusable="False" Margin="0" Visibility="Collapsed" d:Visibility="Visible"></StackPanel>
+                    <local:SmoothScrollViewer x:Name="stack_mainContent_scrollview" Visibility="Collapsed" d:Visibility="Visible">
+                        <StackPanel x:Name="stack_mainContent" Focusable="False" Margin="0"></StackPanel>
+                    </local:SmoothScrollViewer>
                 </Grid>
             </Border>
         </Grid>

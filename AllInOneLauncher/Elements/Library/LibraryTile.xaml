@@ -73,7 +73,7 @@
                         <Border Grid.Column="2" x:Name="isActiveIcon" Background="#016FB3" CornerRadius="12" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                             <StackPanel Margin="8,5,8,5" Orientation="Horizontal" Height="13">
                                 <Path HorizontalAlignment="Right" VerticalAlignment="Center" Fill="White" Stroke="White" StrokeThickness="0.3" Stretch="Uniform" Height="6" Data="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                                <TextBlock x:Name="activeText" Text="Active" FontSize="10" FontWeight="Bold" Margin="5,0,2,0" VerticalAlignment="Center" Foreground="White" Visibility="Visible"/>
+                                <TextBlock x:Name="activeText" Text="{DynamicResource LibraryTileActive}" FontSize="10" FontWeight="Bold" Margin="5,0,2,0" VerticalAlignment="Center" Foreground="White" Visibility="Visible"/>
                             </StackPanel>
                         </Border>
                         <elements:MiniSpinner Grid.Column="2" x:Name="loadingIcon" HorizontalAlignment="Right" VerticalAlignment="Center" IsLoading="False"/>

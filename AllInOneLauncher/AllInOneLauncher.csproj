@@ -99,9 +99,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="BfmeFoundationProject.BfmeRegistryManagement" Version="1.0.2" />
+	  <PackageReference Include="BfmeFoundationProject.BfmeRegistryManagement" Version="1.0.4" />
 	  <PackageReference Include="BfmeFoundationProject.OnlineKit" Version="1.7.5" />
-	  <PackageReference Include="BfmeFoundationProject.WorkshopKit" Version="1.6.2" />
+	  <PackageReference Include="BfmeFoundationProject.WorkshopKit" Version="1.6.4" />
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -115,22 +115,7 @@
 		<Compile Update="Elements\Library\LibraryTileEmpty.xaml.cs">
 		  <SubType>Code</SubType>
 		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_Bfme1General.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME1\Settings_Bfme1Repair.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_Bfme2General.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-		<Compile Update="Pages\Subpages\Settings\BFME2\Settings_Bfme2Repair.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkGeneral.xaml.cs">
-			<SubType>Code</SubType>
-		</Compile>
-		<Compile Update="Pages\Subpages\Settings\RotWK\Settings_RotwkRepair.xaml.cs">
+		<Compile Update="Pages\Subpages\Settings\Bfme\Settings_BfmeGeneral.xaml.cs">
 			<SubType>Code</SubType>
 		</Compile>
 		<Compile Update="Popups\LauncherChangelogPopup.xaml.cs">

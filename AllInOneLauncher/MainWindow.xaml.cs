@@ -71,7 +71,7 @@ namespace AllInOneLauncher
                     Offline.Instance.gameTabs.InitialSelectedIndex = int.Parse(args[1]);
                 else if (args[0] == "--Online")
                     ShowOnline();
-                else if (args[0] == "--showLauncherUpdateLog")
+                else if (args[0] == "--LauncherChangelog")
                     PopupVisualizer.ShowPopup(new LauncherChangelogPopup());
             }
         }

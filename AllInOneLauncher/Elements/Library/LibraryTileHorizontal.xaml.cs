@@ -91,7 +91,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryIcon.Source = null;
                 activeEntryTitle.Text = value.Value.Name;
                 activeEntryVersion.Text = value.Value.Version;
-                activeEntryAuthor.Text = $"by {value.Value.Author}";
+                activeEntryAuthor.Text = value.Value.Author;
                 UpdateType();
 
                 activeEntryLoading.Visibility = IsLoading ? Visibility.Visible : Visibility.Hidden;

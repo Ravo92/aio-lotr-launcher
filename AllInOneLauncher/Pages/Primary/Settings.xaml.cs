@@ -1,5 +1,7 @@
-﻿using AllInOneLauncher.Logic;
+﻿using AllInOneLauncher.Data;
+using AllInOneLauncher.Logic;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -37,7 +39,9 @@ namespace AllInOneLauncher.Pages.Primary
                     }
                 }
 
-                content.Child = (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap![$"Settings_{value}"])!;
+                string pageName = value.Split('(').First();
+                int gameIndex = value.Contains("(") ? int.Parse(value.Split('(').Last().Split(')').First()) : -1;
+                content.Child = gameIndex == -1 ? (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap![$"Settings_{pageName}"])! : (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap![$"Settings_{pageName}"], (BfmeGame)gameIndex)!;
             }
         }
 

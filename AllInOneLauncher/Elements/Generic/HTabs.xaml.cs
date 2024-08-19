@@ -12,7 +12,7 @@ namespace AllInOneLauncher.Elements
     /// </summary>
     public partial class HTabs : UserControl
     {
-        private bool FirstLoad = true;
+        private bool HasLoaded = false;
 
         public HTabs()
         {
@@ -28,26 +28,14 @@ namespace AllInOneLauncher.Elements
             set
             {
                 _tabs = value;
-
                 foreach (var tab in _tabs)
-                {
                     tabs.Children.Add(new HTab() { Owner = this, Icon = tab });
-                }
             }
         }
 
         public int SelectedIndex
         {
-            get
-            {
-                int index = tabs.Children.OfType<HTab>().ToList().FindIndex(x => x.Selected);
-                if (index == -1)
-                {
-                    index = 0;
-                }
-
-                return index;
-            }
+            get => HasLoaded ? tabs.Children.OfType<HTab>().ToList().FindIndex(x => x.Selected) : InitialSelectedIndex;
             set
             {
                 int i = 0;
@@ -65,10 +53,10 @@ namespace AllInOneLauncher.Elements
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (!FirstLoad)
+            if (HasLoaded)
                 return;
 
-            FirstLoad = false;
+            HasLoaded = true;
             Tabs = _tabs;
             SelectedIndex = InitialSelectedIndex;
         }

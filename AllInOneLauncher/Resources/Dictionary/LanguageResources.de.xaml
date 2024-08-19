@@ -18,7 +18,7 @@
 
 
     <!--=====================  MainWindow  =====================-->
-    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
+    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the Bfme Foundation Project</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">EINZELSPIELER</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">MEHRSPIELER</system:String>
     <system:String x:Key="MainWindowGuidesTab">LEITFÄDEN</system:String>
@@ -36,6 +36,7 @@
 
     <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">In Bibliothek suchen...</system:String>
+    <system:String x:Key="LibraryPageMakeSnapshot">Schnappschuss machen</system:String>
 
     <system:String x:Key="LibraryPageFilterPatchesAndMods">Patches und Mods</system:String>
     <system:String x:Key="LibraryPageFilterEnhancements">Zusatzmodule</system:String>
@@ -83,14 +84,12 @@
     <!--=====================  Settings  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionHeader">Launcher Einstellungen</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneral">Allgemein</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibrary">Bibliothek</system:String>
 
     <system:String x:Key="SettingsPageBFME1SectionHeader">Die Schlacht um Mittelerde™</system:String>
     <system:String x:Key="SettingsPageBFME2SectionHeader">Die Schlacht um Mittelerde™ II</system:String>
     <system:String x:Key="SettingsPageRotWKSectionHeader">Aufstieg des Hexenkönigs™</system:String>
     <system:String x:Key="SettingsPageBFMESectionGeneral">Allgemein</system:String>
-    <system:String x:Key="SettingsPageBFMESectionVideo">Grafik &amp; Auflösung</system:String>
-    <system:String x:Key="SettingsPageBFMESectionLanguage">Sprache &amp; Ton</system:String>
-    <system:String x:Key="SettingsPageBFMESectionRepair">Reparieren oder Deinstallieren</system:String>
 
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Launcher-Sprache ändern</system:String>
@@ -102,7 +101,6 @@
 
     <!--=====================  Settings/BFME Settings/General  =====================-->
     <system:String x:Key="SettingsPageBFMESectionGeneralSerialNumber">Seriennummer</system:String>
-    <system:String x:Key="SettingsPageBFMESectionGeneralChangeSerial">Ändern</system:String>
     <system:String x:Key="SettingsPageBFMESectionGeneralRandomizeSerial">Randomisieren</system:String>
 
     <!--=====================  Settings/BFME Settings/Video & Resolution  =====================-->

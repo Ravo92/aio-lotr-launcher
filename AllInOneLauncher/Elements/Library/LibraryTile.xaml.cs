@@ -95,7 +95,7 @@ namespace AllInOneLauncher.Elements
                 _workshopEntry = value;
                 title.Text = value.Name;
                 version.Text = value.Version;
-                author.Text = $"by {value.Author}";
+                author.Text = value.Author;
                 UpdateType();
 
                 IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Game);
