@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,12 +17,12 @@ namespace AllInOneLauncher.Elements
     public partial class PopupVisualizer : UserControl
     {
         private static PopupVisualizer? Instance;
-        private static List<Action> PopupQueue = new List<Action>();
+        private static readonly List<Action> PopupQueue = [];
 
         public static event EventHandler? OnPopupOpened;
         public static event EventHandler? OnPopupClosed;
 
-        public static PopupBody? CurentPopup => (Instance != null && Instance.content.Child is PopupBody) ? (PopupBody)Instance.content.Child : null;
+        public static PopupBody? CurentPopup => (Instance != null && Instance.content.Child is PopupBody body) ? body : null;
 
         public PopupVisualizer()
         {
@@ -54,10 +53,10 @@ namespace AllInOneLauncher.Elements
                 OnPopupClosed?.Invoke();
             };
 
-            if (Instance.content.Child is PopupBody)
+            if (Instance.content.Child is PopupBody body)
             {
-                ((PopupBody)Instance.content.Child).OnSubmited = null;
-                ((PopupBody)Instance.content.Child).ClosePopup = null;
+                body.OnSubmited = null;
+                body.ClosePopup = null;
             }
 
             Instance.content.Child = popup;
@@ -75,14 +74,14 @@ namespace AllInOneLauncher.Elements
             Instance.popupBody.RenderTransformOrigin = new Point(0.5, 0.5);
             Instance.popupBody.RenderTransform = new ScaleTransform(1, 1);
 
-            DoubleAnimation scaleAnimation = new DoubleAnimation() { From = 0.4, To = 1, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
+            DoubleAnimation scaleAnimation = new() { From = 0.4, To = 1, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
             Instance.popupBody.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnimation);
             Instance.popupBody.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
 
-            DoubleAnimation opacityAnimation = new DoubleAnimation() { From = 0, To = 1, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
+            DoubleAnimation opacityAnimation = new() { From = 0, To = 1, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
             Instance.root.BeginAnimation(OpacityProperty, opacityAnimation);
 
-            (Instance.Parent as Panel).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = new BlurEffect() { Radius = 8 };
+            ((Panel)Instance.Parent).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = new BlurEffect() { Radius = 8 };
         }
 
         public static void HidePopup()
@@ -105,20 +104,20 @@ namespace AllInOneLauncher.Elements
                 OnPopupClosed?.Invoke(null, EventArgs.Empty);
             }
 
-            if (Instance.content.Child is PopupBody)
+            if (Instance.content.Child is PopupBody body)
             {
-                ((PopupBody)Instance.content.Child).OnSubmited = null;
-                ((PopupBody)Instance.content.Child).ClosePopup = null;
+                body.OnSubmited = null;
+                body.ClosePopup = null;
             }
 
-            DoubleAnimation scaleAnimation = new DoubleAnimation() { To = 0.4, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
+            DoubleAnimation scaleAnimation = new() { To = 0.4, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
             Instance.popupBody.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnimation);
             Instance.popupBody.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
 
-            DoubleAnimation opacityAnimation = new DoubleAnimation() { To = 0, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
+            DoubleAnimation opacityAnimation = new() { To = 0, Duration = TimeSpan.FromSeconds(0.2), EasingFunction = new QuadraticEase() };
             Instance.root.BeginAnimation(OpacityProperty, opacityAnimation);
 
-            (Instance.Parent as Panel).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = null;
+            ((Panel)Instance.Parent).Children.OfType<FrameworkElement>().First(x => x.Name == "outerContent").Effect = null;
         }
 
         private void OnMouseUp(object sender, MouseButtonEventArgs e)

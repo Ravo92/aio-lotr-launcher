@@ -19,11 +19,11 @@ namespace AllInOneLauncher.Elements
             InitializeComponent();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
 
-        public event EventHandler OnToggledChanged;
+        public event EventHandler? OnToggledChanged;
 
         private bool _isToggled = false;
         public bool IsToggled
@@ -41,16 +41,16 @@ namespace AllInOneLauncher.Elements
 
                     if (value)
                     {
-                        ThicknessAnimation ta = new ThicknessAnimation { To = new Thickness(20, 0, 0, 0), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
-                        ColorAnimation ca = new ColorAnimation { To = (Color)ColorConverter.ConvertFromString("#028BDB"), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
+                        ThicknessAnimation ta = new() { To = new Thickness(20, 0, 0, 0), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
+                        ColorAnimation ca = new() { To = (Color)ColorConverter.ConvertFromString("#028BDB"), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
 
                         border_thumb.BeginAnimation(MarginProperty, ta);
                         border_shell.Background.BeginAnimation(SolidColorBrush.ColorProperty, ca);
                     }
                     else
                     {
-                        ThicknessAnimation ta = new ThicknessAnimation { To = new Thickness(0, 0, 0, 0), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
-                        ColorAnimation ca = new ColorAnimation { To = (Color)ColorConverter.ConvertFromString("#26FFFFFF"), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
+                        ThicknessAnimation ta = new() { To = new Thickness(0, 0, 0, 0), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
+                        ColorAnimation ca = new() { To = (Color)ColorConverter.ConvertFromString("#26FFFFFF"), EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.2) };
 
                         border_thumb.BeginAnimation(MarginProperty, ta);
                         border_shell.Background.BeginAnimation(SolidColorBrush.ColorProperty, ca);

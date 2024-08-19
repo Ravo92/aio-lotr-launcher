@@ -18,7 +18,7 @@ namespace AllInOneLauncher.Elements
             mainStoryboard.Begin();
         }
 
-        private Storyboard? mainStoryboard = null;
+        private readonly Storyboard mainStoryboard;
 
         private bool _isLoading = false;
         public bool IsLoading
@@ -45,7 +45,7 @@ namespace AllInOneLauncher.Elements
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

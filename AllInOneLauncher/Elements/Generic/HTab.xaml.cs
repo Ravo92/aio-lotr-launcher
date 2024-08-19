@@ -14,7 +14,7 @@ namespace AllInOneLauncher.Elements
             InitializeComponent();
         }
 
-        public HTabs Owner { get; set; }
+        public HTabs Owner { get; set; } = null!;
 
         public ImageSource Icon
         {
@@ -45,7 +45,10 @@ namespace AllInOneLauncher.Elements
             }
         }
 
-        private void OnClicked(object sender, MouseButtonEventArgs e) => Owner.SelectedIndex = Owner.tabs.Children.IndexOf(this);
+        private void OnClicked(object sender, MouseButtonEventArgs e)
+        {
+            Owner.SelectedIndex = Owner.tabs.Children.IndexOf(this);
+        }
 
         private void OnMouseEntered(object sender, MouseEventArgs e)
         {

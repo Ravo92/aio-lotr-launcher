@@ -26,7 +26,7 @@ namespace AllInOneLauncher
             if (launcherOpenAlready)
             {
                 Process currentProcess = Process.GetCurrentProcess();
-                Process.GetProcessesByName(currentProcess.ProcessName).Where(x => x.Id != currentProcess.Id).ToImmutableList().ForEach(x => SystemWindowManager.ActivateWindow(x.MainWindowHandle));
+                Process.GetProcessesByName(currentProcess.ProcessName).Where(x => x.Id != currentProcess.Id).ToImmutableList().ForEach(x => SystemInputManager.ActivateWindow(x.MainWindowHandle));
                 Current.Shutdown();
             }
             else

@@ -17,10 +17,10 @@ namespace AllInOneLauncher.Elements
     public partial class ContextMenuShell : UserControl
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        private void OnPropertyChanged([CallerMemberName] string? propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private Action<ContextMenuShell, double, double>? CalcPos;
-        private Action? OnDestroy;
+        private readonly Action<ContextMenuShell, double, double>? CalcPos;
+        private readonly Action? OnDestroy;
 
         public ContextMenuShell(FrameworkElement owner, MenuSide side, CornerRadius corners, bool fullWidth, double minWidth, double lifespan, double padding, bool tint, Action? onDestroy, Action<ContextMenuShell, double, double> calcPos)
         {
@@ -253,7 +253,7 @@ namespace AllInOneLauncher.Elements
                 mainGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, da);
                 mainGrid.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, da);
 
-                DoubleAnimation dao = new DoubleAnimation { From = 1f, To = 0f, EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.075) };
+                DoubleAnimation dao = new() { From = 1f, To = 0f, EasingFunction = new QuadraticEase(), Duration = TimeSpan.FromSeconds(0.075) };
                 mainGrid.BeginAnimation(OpacityProperty, dao);
             }
         }
