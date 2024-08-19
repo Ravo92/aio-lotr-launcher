@@ -26,8 +26,13 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         private void LoadLibraryDrives()
         {
             libraryDrives.Children.Clear();
+            int i = 0;
             foreach (string libraryDrive in Properties.Settings.Default.LibraryDrives.OfType<string>().Where(x => x != null))
+            {
+                if (i != 0) libraryDrives.Children.Add(new Divider());
                 libraryDrives.Children.Add(new LibraryDriveElement(libraryDrive));
+                i++;
+            }
         }
 
         private void OnAddNewLocationClicked(object sender, RoutedEventArgs e)
