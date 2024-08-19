@@ -57,10 +57,19 @@ namespace AllInOneLauncher
             ReloadContextMenu();
             ShowOffline();
 
+            Application.Current.Exit += OnApplicationExit;
+            Loaded += (sender, e) => ProcessCommandLineArgs(args);
+        }
+
+        private static void ProcessCommandLineArgs(string[] args)
+        {
             if (args.Length > 0)
             {
                 if (args[0] == "--Settings" && args.Length > 1)
-                    SetFullContent(new Settings(args[1]));
+                   // SetFullContent(new Settings("LauncherGeneral"));
+
+                SetFullContent(new Settings("Bfme1General"));
+                // SetFullContent(new Settings(args[1]));
                 else if (args[0] == "--Game" && args.Length > 1)
                     Offline.Instance.gameTabs.InitialSelectedIndex = int.Parse(args[1]);
                 else if (args[0] == "--Online")
@@ -68,8 +77,6 @@ namespace AllInOneLauncher
                 else if (args[0] == "--showLauncherUpdateLog")
                     PopupVisualizer.ShowPopup(new LauncherChangelogPopup());
             }
-
-            Application.Current.Exit += OnApplicationExit;
         }
 
         public static void SetContent(FrameworkElement? newContent) => Instance!.content.Child = newContent;

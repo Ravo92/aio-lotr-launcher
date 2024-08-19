@@ -21,7 +21,7 @@ namespace AllInOneLauncher.Elements
 
         public event EventHandler? SelectedIndexChanged;
 
-        private List<ImageSource> _tabs = new List<ImageSource>();
+        private List<ImageSource> _tabs = [];
         public List<ImageSource> Tabs
         {
             get => _tabs;
@@ -29,7 +29,7 @@ namespace AllInOneLauncher.Elements
             {
                 _tabs = value;
 
-                foreach(var tab in _tabs)
+                foreach (var tab in _tabs)
                 {
                     tabs.Children.Add(new HTab() { Owner = this, Icon = tab });
                 }
@@ -38,11 +38,20 @@ namespace AllInOneLauncher.Elements
 
         public int SelectedIndex
         {
-            get => tabs.Children.OfType<HTab>().ToList().FindIndex(x => x.Selected);
+            get
+            {
+                int index = tabs.Children.OfType<HTab>().ToList().FindIndex(x => x.Selected);
+                if (index == -1)
+                {
+                    index = 0;
+                }
+
+                return index;
+            }
             set
             {
                 int i = 0;
-                foreach(var tab in tabs.Children.OfType<HTab>())
+                foreach (var tab in tabs.Children.OfType<HTab>())
                 {
                     tab.Selected = i == value;
                     i++;

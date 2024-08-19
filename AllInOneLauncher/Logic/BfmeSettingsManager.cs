@@ -12,8 +12,6 @@ namespace AllInOneLauncher.Logic
     {
         internal static string? Get(BfmeGame game, string optionName)
         {
-            BfmeRegistryManager.EnsureDefaults((int)game);
-
             string optionsFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.UserDataLeafName), Constants.C_OPTIONSINI_FILENAME);
             Dictionary<string, string> optionsTable = File.ReadAllText(optionsFile).Split('\n').Where(x => x.Contains(" = ")).ToDictionary(x => x.Split(" = ")[0], x => x.Split(" = ")[1]);
 
@@ -25,8 +23,6 @@ namespace AllInOneLauncher.Logic
 
         internal static void Set(BfmeGame game, string optionName, string value)
         {
-            BfmeRegistryManager.EnsureDefaults((int)game);
-
             string optionsFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.UserDataLeafName), Constants.C_OPTIONSINI_FILENAME);
             Dictionary<string, string> optionsTable = File.ReadAllText(optionsFile).Split('\n').Where(x => x.Contains(" = ")).ToDictionary(x => x.Split(" = ")[0], x => x.Split(" = ")[1]);
 

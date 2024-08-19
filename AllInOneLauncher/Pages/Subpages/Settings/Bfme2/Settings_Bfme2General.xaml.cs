@@ -11,13 +11,11 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
     public partial class Settings_Bfme2General : UserControl
     {
         private bool _isNotUserInteractionForLanguageDropDown = true;
+        private string newRandomCDKey = string.Empty;
 
         public Settings_Bfme2General()
         {
             InitializeComponent();
-
-            BfmeRegistryManager.EnsureDefaults((int)BfmeGame.BFME2);
-
             InitializePageElements();
         }
 
@@ -82,10 +80,15 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             LauncherStateManager.AsElevated(() =>
             {
-                BfmeRegistryManager.EnsureDefaults((int)BfmeGame.BFME2);
-                string cdKey = BfmeRegistryManager.GetKeyValue((int)BfmeGame.BFME2, BfmeRegistryKey.SerialKey);
-                TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)));
+                newRandomCDKey = string.Concat(from s in Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20) select s[System.Random.Shared.Next(s.Length)]);
+                TextBoxCDKey.Text = string.Join("-", Enumerable.Range(0, newRandomCDKey.Length / 4).Select(i => newRandomCDKey.Substring(i * 4, 4)));
             });
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (LauncherStateManager.IsElevated)
+                BfmeRegistryManager.SetKeyValue((int)BfmeGame.BFME1, BfmeRegistryKey.SerialKey, newRandomCDKey, Microsoft.Win32.RegistryValueKind.String);
         }
     }
 }

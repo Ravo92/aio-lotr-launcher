@@ -109,18 +109,19 @@ namespace AllInOneLauncher.Logic
                 if (MainWindow.Instance!.fullContent.Child is Settings)
                     serializedState = $"--Settings {((Settings)MainWindow.Instance!.fullContent.Child!).Page}";
                 else if (MainWindow.Instance!.content.Child is Offline)
-                    serializedState = $"--Game {Pages.Primary.Offline.Instance.gameTabs.SelectedIndex}";
+                    serializedState = $"--Game {Offline.Instance.gameTabs.SelectedIndex}";
                 else if (MainWindow.Instance!.content.Child is Online)
                     serializedState = "--Online";
 
-                Process.Start(new ProcessStartInfo()
+                ProcessStartInfo debug = new()
                 {
                     UseShellExecute = true,
                     WorkingDirectory = Path.GetFullPath("./"),
                     FileName = Path.Combine(Path.GetFullPath("./"), "AllInOneLauncher.exe"),
                     Arguments = serializedState,
                     Verb = "runas"
-                });
+                };
+                Process.Start(debug);
 
                 Environment.Exit(0);
             }

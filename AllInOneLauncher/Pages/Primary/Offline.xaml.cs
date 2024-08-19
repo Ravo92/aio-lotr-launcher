@@ -12,8 +12,6 @@ using AllInOneLauncher.Logic;
 using BfmeFoundationProject.WorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
-using System.Windows.Documents;
-using System.Diagnostics;
 using BfmeFoundationProject.BfmeRegistryManagement;
 
 namespace AllInOneLauncher.Pages.Primary

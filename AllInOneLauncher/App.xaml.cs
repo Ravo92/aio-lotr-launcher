@@ -31,7 +31,7 @@ namespace AllInOneLauncher
             }
             else
             {
-                new MainWindow(Environment.GetCommandLineArgs().Skip(1).ToArray());
+                _ = new MainWindow(Environment.GetCommandLineArgs().Skip(1).ToArray());
             }
         }
 

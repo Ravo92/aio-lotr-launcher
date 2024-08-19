@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using AllInOneLauncher.Data;
 using BfmeFoundationProject.BfmeRegistryManagement;
@@ -12,11 +11,11 @@ namespace AllInOneLauncher.Logic
     {
         internal static void LaunchGame(BfmeGame game, bool windowed)
         {
-            BfmeRegistryManager.EnsureDefaults((int)game);
-
-            ProcessStartInfo startInfo = new();
-            startInfo.WorkingDirectory = BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.InstallPath);
-            startInfo.FileName = Path.Combine(BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.InstallPath), BfmeDefaults.DefaultGameExecutableNames[(int)game]);
+            ProcessStartInfo startInfo = new()
+            {
+                WorkingDirectory = BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.InstallPath),
+                FileName = Path.Combine(BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.InstallPath), BfmeDefaults.DefaultGameExecutableNames[(int)game])
+            };
             if (windowed) startInfo.ArgumentList.Add($"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width - 100} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height - 100}");
             if (BfmeWorkshopSyncManager.GetActiveModPath((int)game) != null) startInfo.ArgumentList.Add($"-mod {BfmeWorkshopSyncManager.GetActiveModPath((int)game)}");
 
