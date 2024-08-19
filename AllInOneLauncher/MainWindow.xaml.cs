@@ -66,10 +66,7 @@ namespace AllInOneLauncher
             if (args.Length > 0)
             {
                 if (args[0] == "--Settings" && args.Length > 1)
-                   // SetFullContent(new Settings("LauncherGeneral"));
-
-                SetFullContent(new Settings("Bfme1General"));
-                // SetFullContent(new Settings(args[1]));
+                    SetFullContent(new Settings(args[1]));
                 else if (args[0] == "--Game" && args.Length > 1)
                     Offline.Instance.gameTabs.InitialSelectedIndex = int.Parse(args[1]);
                 else if (args[0] == "--Online")
