@@ -37,7 +37,7 @@
     <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Indíttás normál ablakban</system:String>
 
     <!--=====================  Offline/Library  =====================-->
-    <system:String x:Key="LibraryPageSearchPlaceholder">Keress a könyvtárban...</system:String>
+    <system:String x:Key="LibraryPageSearchPlaceholder">Keresés a könyvtárban...</system:String>
     <system:String x:Key="LibraryPageMakeSnapshot">Mentés készítése</system:String>
 
     <system:String x:Key="LibraryPageFilterPatchesAndMods">Játékok és modok</system:String>
@@ -46,7 +46,7 @@
     <system:String x:Key="LibraryPageFilterEverything">Minden</system:String>
 
     <!--=====================  Offline/Workshop  =====================-->
-    <system:String x:Key="WorkshopPageSearchPlaceholder">Keress a Műhelyben...</system:String>
+    <system:String x:Key="WorkshopPageSearchPlaceholder">Keresés a Műhelyben...</system:String>
 
     <system:String x:Key="WorkshopPageFilterPatchesAndMods">Játékok és modok</system:String>
     <system:String x:Key="WorkshopPageFilterEnhancements">Kiegészíttők</system:String>
