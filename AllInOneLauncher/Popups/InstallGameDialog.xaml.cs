@@ -35,7 +35,7 @@ namespace AllInOneLauncher.Popups
             }
         }
 
-        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => Submit(LanguageDropdown.SelectedValue, Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
+        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => SubmitAsElevated(LanguageDropdown.SelectedValue, Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
 
         private void ButtonCancelClicked(object sender, RoutedEventArgs e) => Dismiss();
     }
