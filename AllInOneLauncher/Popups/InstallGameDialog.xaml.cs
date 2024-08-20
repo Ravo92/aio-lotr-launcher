@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace AllInOneLauncher.Popups
 {
@@ -35,7 +34,7 @@ namespace AllInOneLauncher.Popups
             }
         }
 
-        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => Submit("English", Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
+        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => Submit(LanguageDropdown.SelectedValue, Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
 
         private void ButtonCancelClicked(object sender, RoutedEventArgs e) => Dismiss();
     }

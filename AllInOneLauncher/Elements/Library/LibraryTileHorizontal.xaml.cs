@@ -1,12 +1,10 @@
 ﻿using BfmeFoundationProject.WorkshopKit.Data;
 using BfmeFoundationProject.WorkshopKit.Logic;
-using AllInOneLauncher.Logic;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using AllInOneLauncher.Data;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 using BfmeFoundationProject.BfmeRegistryManagement;

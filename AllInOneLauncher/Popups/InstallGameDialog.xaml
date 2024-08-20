@@ -51,6 +51,13 @@
                         <elements:DropdownPicker.Options>
                             <system:String>English</system:String>
                             <system:String>Deutsch</system:String>
+                            <system:String>Français</system:String>
+                            <system:String>Italiano</system:String>
+                            <system:String>Español</system:String>
+                            <system:String>Svenska</system:String>
+                            <system:String>Nederlands</system:String>
+                            <system:String>Polski</system:String>
+                            <system:String>Norsk</system:String>
                         </elements:DropdownPicker.Options>
                     </elements:DropdownPicker>
                     <TextBlock Grid.Row="4" FontSize="14" FontWeight="SemiBold" Text="{DynamicResource InstallGameDialogLocation}" Foreground="white"/>
