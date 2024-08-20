@@ -15,6 +15,7 @@
     <system:String x:Key="GenericLoading">BETÖLTÉS</system:String>
     <system:String x:Key="GenericPlay">INDÍTTÁS</system:String>
     <system:String x:Key="GenericAdd">HOZZÁADÁS</system:String>
+    <system:String x:Key="GenericFree">SZABAD</system:String>
 
 
 
@@ -91,6 +92,15 @@
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Könyvtár hozzáadása</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveSizeText">szabad a(z)</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Helyi Lemez</system:String>
+
+    <!--=====================  Settings/Launcher Settings/Library  =====================-->
+    <system:String x:Key="SettingsPageLauncherSectionLibraryAddNewLocation">Új hely hozzáadása</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeText">szabad a(z)</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeTextSufix">-ból</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryGamesFileCategory">JÁTÉKTÁR</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryWorkshopFileCateogry">MŰHELY</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryNonLauncherFileCateogry">EGYÉB</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryFreeSpaceCateogry">SZABAD</system:String>
 
     <!--=====================  Settings/BFME Settings/General  =====================-->
     <system:String x:Key="SettingsPageBFMESectionGeneralSerialNumber">CD Kulcs</system:String>

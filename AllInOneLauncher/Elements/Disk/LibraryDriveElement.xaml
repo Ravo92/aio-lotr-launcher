@@ -24,16 +24,16 @@
         </Border>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <Border Height="10" Width="10" Background="#FF23B4FF" CornerRadius="360"/>
-            <TextBlock Text="GAMES" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
+            <TextBlock Text="{DynamicResource SettingsPageLauncherSectionLibraryGamesFileCategory}" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
             <TextBlock x:Name="gamesSize" Text="0 GB" Foreground="White" Opacity="0.4" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
             <Border Height="10" Width="10" Background="#FF23FF6D" CornerRadius="360" Margin="15,0,0,0"/>
-            <TextBlock Text="WORKSHOP" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
+            <TextBlock Text="{DynamicResource SettingsPageLauncherSectionLibraryWorkshopFileCateogry}" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
             <TextBlock x:Name="workshopSize" Text="0 GB" Foreground="White" Opacity="0.4" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
             <Border Height="10" Width="10" Background="#FFFFA623" CornerRadius="360" Margin="15,0,0,0"/>
-            <TextBlock Text="NON-LAUNCHER" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
+            <TextBlock Text="{DynamicResource SettingsPageLauncherSectionLibraryNonLauncherFileCateogry}" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
             <TextBlock x:Name="nonLauncherSize" Text="0 GB" Foreground="White" Opacity="0.4" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
             <Border Height="10" Width="10" Background="White" Opacity="0.4" CornerRadius="360" Margin="15,0,0,0"/>
-            <TextBlock Text="FREE" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
+            <TextBlock Text="{DynamicResource SettingsPageLauncherSectionLibraryFreeSpaceCateogry}" Foreground="White" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
             <TextBlock x:Name="freeSize" Text="0 GB" Foreground="White" Opacity="0.4" FontWeight="Medium" FontSize="13" Margin="5,-2,0,0"/>
         </StackPanel>
     </StackPanel>

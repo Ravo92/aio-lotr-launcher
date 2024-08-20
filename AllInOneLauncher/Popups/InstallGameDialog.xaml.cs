@@ -26,7 +26,7 @@ namespace AllInOneLauncher.Popups
 
                 locations.Children.Add(new Selectable()
                 {
-                    Title = new LibraryDriveHeader() { LibraryDriveName = string.Concat(drive.VolumeLabel, " (", drive.Name.Replace(@"\", ""), ")"), LibraryDriveSize = $"{Math.Floor(drive.AvailableFreeSpace / Math.Pow(1024, 3)):N0} GB FREE", Mini = true },
+                    Title = new LibraryDriveHeader() { LibraryDriveName = string.Concat(drive.VolumeLabel, " (", drive.Name.Replace(@"\", ""), ")"), LibraryDriveSize = $"{Math.Floor(drive.AvailableFreeSpace / Math.Pow(1024, 3)):N0} GB {App.Current.FindResource("GenericFree")}", Mini = true },
                     Tag = libraryPath,
                     Margin = new Thickness(0, 0, 0, 5),
                     UseLayoutRounding = true,

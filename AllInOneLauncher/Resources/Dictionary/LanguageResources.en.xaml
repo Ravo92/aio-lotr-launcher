@@ -15,6 +15,7 @@
     <system:String x:Key="GenericLoading">LOADING</system:String>
     <system:String x:Key="GenericPlay">PLAY</system:String>
     <system:String x:Key="GenericAdd">ADD</system:String>
+    <system:String x:Key="GenericFree">FREE</system:String>
 
 
 
@@ -89,8 +90,16 @@
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Close Launcher to tray</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Library settings</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Add Library Location</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionGeneralDriveSizeText">free of</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Local Disk</system:String>
+
+    <!--=====================  Settings/Launcher Settings/Library  =====================-->
+    <system:String x:Key="SettingsPageLauncherSectionLibraryAddNewLocation">Add new location</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeText">free of</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeTextSufix">_</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryGamesFileCategory">GAMES</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryWorkshopFileCateogry">WORKSHOP</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryNonLauncherFileCateogry">NON-LAUNCHER</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryFreeSpaceCateogry">FREE</system:String>
 
     <!--=====================  Settings/BFME Settings/General  =====================-->
     <system:String x:Key="SettingsPageBFMESectionGeneralSerialNumber">Serialnumber</system:String>

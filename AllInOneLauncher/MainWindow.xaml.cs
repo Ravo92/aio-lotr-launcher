@@ -14,6 +14,9 @@ using AllInOneLauncher.Elements;
 using AllInOneLauncher.Popups;
 using System.Reflection;
 using BfmeFoundationProject.WorkshopKit.Logic;
+using System.Threading.Tasks;
+using BfmeFoundationProject.WorkshopKit.Data;
+using BfmeFoundationProject.BfmeRegistryManagement;
 
 namespace AllInOneLauncher
 {
@@ -55,6 +58,9 @@ namespace AllInOneLauncher
 
             Application.Current.Exit += OnApplicationExit;
             Loaded += (sender, e) => ProcessCommandLineArgs(args);
+
+            BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
+            BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
         }
 
         private static void ProcessCommandLineArgs(string[] args)
@@ -72,9 +78,27 @@ namespace AllInOneLauncher
             }
         }
 
+        private void OnSyncBegin(BfmeWorkshopEntry entry)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                settingsIcon.IsHitTestVisible = false;
+                settingsIcon.Opacity = 0.4;
+            });
+        }
+
+        private void OnSyncEnd()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                settingsIcon.IsHitTestVisible = true;
+                settingsIcon.Opacity = 1;
+            });
+        }
+
         public static void SetContent(FrameworkElement? newContent) => Instance!.content.Child = newContent;
 
-        public static void SetFullContent(FrameworkElement? newContent)
+        public static async void SetFullContent(FrameworkElement? newContent)
         {
             Instance!.content.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
             Instance.fullContent.Child = newContent;
@@ -86,6 +110,16 @@ namespace AllInOneLauncher
                 Instance.background.Effect = new BlurEffect() { Radius = 20 };
             else
                 Instance.background.Effect = null;
+
+            if (Settings.NeedsResync)
+                for (int game = 0; game < 3; game++)
+                {
+                    if (!BfmeRegistryManager.IsInstalled(game) || (game == 2 && !BfmeRegistryManager.IsInstalled(1))) continue;
+                    var activePatch = BfmeWorkshopSyncManager.GetActivePatch(game);
+                    if (activePatch != null) try { await BfmeWorkshopSyncManager.Sync(activePatch.Value, (progress) => { }, (downloadItem, downloadProgress) => { }); } catch(Exception ex) { PopupVisualizer.ShowPopup(new ErrorPopup(ex)); }
+                }
+
+            Settings.NeedsResync = false;
         }
 
         public static void ShowOffline()
