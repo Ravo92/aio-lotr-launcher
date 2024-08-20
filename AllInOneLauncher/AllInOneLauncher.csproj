@@ -158,11 +158,11 @@
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="powershell -ExecutionPolicy Bypass -File scripts/PreBuildAPIScript.ps1" />
+	  <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)..\scripts\PreBuildAPIScript.ps1&quot;" />
 	</Target>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="powershell -ExecutionPolicy Bypass -File scripts/PostBuildAPIScript.ps1" />
+	  <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)..\scripts\PostBuildAPIScript.ps1&quot;" />
 	</Target>
 
 </Project>

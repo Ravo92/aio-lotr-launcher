@@ -169,6 +169,12 @@ AutoTest.Net/
 # Folder for Inno-Setup Files
 PatchLauncher/
 
+# Ignore those scripts
+scripts/
+scripts/PreBuildScript.ps1
+scripts/PostBuildScript.ps1
+scripts/Online.xaml.bak
+
 # DocProject is a documentation generator add-in
 DocProject/buildhelp/
 DocProject/Help/*.HxT
@@ -231,11 +237,6 @@ _pkginfo.txt
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !?*.[Cc]ache/
-
-# ignore those scripts
-scripts/PreBuildScript.ps1
-scripts/PostBuildScript.ps1
-scripts/Online.xaml.bak
 
 # Others
 ClientBin/
