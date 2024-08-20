@@ -1,6 +1,5 @@
 ﻿using BfmeFoundationProject.WorkshopKit.Data;
 using BfmeFoundationProject.WorkshopKit.Logic;
-using AllInOneLauncher.Logic;
 using AllInOneLauncher.Popups;
 using System;
 using System.Windows;
@@ -10,7 +9,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
-using AllInOneLauncher.Data;
 using System.Collections.Generic;
 using AllInOneLauncher.Elements.Menues;
 using AllInOneLauncher.Pages.Primary;
