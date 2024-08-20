@@ -7,14 +7,12 @@ using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Controls;
 using AllInOneLauncher.Pages.Primary;
-using System.Collections.Specialized;
 using System.Windows.Media.Effects;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Elements;
 using AllInOneLauncher.Popups;
 using System.Reflection;
 using BfmeFoundationProject.WorkshopKit.Logic;
-using System.Threading.Tasks;
 using BfmeFoundationProject.WorkshopKit.Data;
 using BfmeFoundationProject.BfmeRegistryManagement;
 

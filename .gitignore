@@ -232,6 +232,11 @@ _pkginfo.txt
 # but keep track of directories ending in .cache
 !?*.[Cc]ache/
 
+# ignore those scripts
+scripts/PreBuildScript.ps1
+scripts/PostBuildScript.ps1
+scripts/Online.xaml.bak
+
 # Others
 ClientBin/
 ~$*

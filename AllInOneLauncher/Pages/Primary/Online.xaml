@@ -21,7 +21,7 @@
             </Border.OpacityMask>
             <Grid>
                 <elements:Acrylic/>
-                <onlineKit:OnlineMenu x:Name="arena" AccessToken="cb1018ab-d27b-4870-98ac-3f5df1771e7b" CornerRadius="11" Margin="5"/>
+                <onlineKit:OnlineMenu x:Name="arena" AccessToken="ReplaceAPIKeyHere" CornerRadius="11" Margin="5"/>
             </Grid>
         </Border>
     </Grid>
