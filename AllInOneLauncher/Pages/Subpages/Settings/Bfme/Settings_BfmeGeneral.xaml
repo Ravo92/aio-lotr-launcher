@@ -20,16 +20,6 @@
         </Grid>
         <elements:Divider/>
         <Grid>
-            <TextBlock Text="{DynamicResource SettingsPageBFMESectionVideoGraphicsApi}" FontSize="17" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="white"/>
-            <elements:DropdownPicker x:Name="GraphicsApiDropdown" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Width="250" Height="40" OnOptionSelected="OnGraphicsApiOptionSelected">
-                <elements:DropdownPicker.Options>
-                    <system:String>DirectX 9.0c</system:String>
-                    <system:String>Vulkan</system:String>
-                </elements:DropdownPicker.Options>
-            </elements:DropdownPicker>
-        </Grid>
-        <elements:Divider/>
-        <Grid>
             <TextBlock Text="{DynamicResource SettingsPageBFMESectionVideoResolution}" FontSize="17" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="white"/>
             <elements:DropdownPicker x:Name="ResolutionDropdown" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Width="250" Height="40" OnOptionSelected="OnGameResolutionOptionSelected"/>
         </Grid>

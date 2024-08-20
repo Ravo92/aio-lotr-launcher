@@ -67,14 +67,6 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void OnGraphicsApiOptionSelected(object sender, System.EventArgs e)
-        {
-            if (Game == BfmeGame.BFME1) Properties.Settings.Default.BFME1GraphicAPISetting = GraphicsApiDropdown.Selected;
-            if (Game == BfmeGame.BFME2) Properties.Settings.Default.BFME2GraphicAPISetting = GraphicsApiDropdown.Selected;
-            if (Game == BfmeGame.ROTWK) Properties.Settings.Default.RotwkGraphicAPISetting = GraphicsApiDropdown.Selected;
-            Properties.Settings.Default.Save();
-        }
-
         private void ButtonChangeCdKey_Click(object sender, RoutedEventArgs e)
         {
             LauncherStateManager.AsElevated(() =>
