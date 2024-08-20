@@ -15,11 +15,13 @@ namespace AllInOneLauncher
     public partial class App : Application
     {
         internal static Mutex? Mutex;
+        public static string[] Args = [];
 
         protected override void OnStartup(StartupEventArgs e)
         {
             Mutex = new Mutex(true, Constants.C_MUTEX_NAME, out bool launcherNotOpenAlready);
             bool launcherOpenAlready = !launcherNotOpenAlready;
+            Args = Environment.GetCommandLineArgs().Skip(1).ToArray();
 
             base.OnStartup(e);
 
@@ -31,7 +33,8 @@ namespace AllInOneLauncher
             }
             else
             {
-                _ = new MainWindow(Environment.GetCommandLineArgs().Skip(1).ToArray());
+                App.Current.Resources["VisibleIfNotElevated"] = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
+                _ = new MainWindow();
             }
         }
 

@@ -27,7 +27,7 @@ namespace AllInOneLauncher
     {
         public static MainWindow? Instance { get; private set; }
 
-        public MainWindow(string[] args)
+        public MainWindow()
         {
             InitializeComponent();
             Instance = this;
@@ -38,9 +38,6 @@ namespace AllInOneLauncher
 
             TrayIcon.Visibility = Visibility.Collapsed;
             fullContent.Visibility = Visibility.Visible;
-
-            if (LauncherStateManager.IsElevated)
-                IconUAC.Visibility = Visibility.Collapsed;
 
             Width = SystemParameters.WorkArea.Width * 0.7;
             Height = SystemParameters.WorkArea.Height * 0.8;
@@ -56,24 +53,27 @@ namespace AllInOneLauncher
             ShowOffline();
 
             Application.Current.Exit += OnApplicationExit;
-            Loaded += (sender, e) => ProcessCommandLineArgs(args);
+            Loaded += (sender, e) => ProcessCommandLineArgs();
 
             BfmeWorkshopSyncManager.OnSyncBegin += OnSyncBegin;
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
         }
 
-        private static void ProcessCommandLineArgs(string[] args)
+        private static void ProcessCommandLineArgs()
         {
-            if (args.Length > 0)
+            if (App.Args.Length > 0)
             {
-                if (args[0] == "--Settings" && args.Length > 1)
-                    SetFullContent(new Settings(args[1]));
-                else if (args[0] == "--Game" && args.Length > 1)
-                    Offline.Instance.gameTabs.InitialSelectedIndex = int.Parse(args[1]);
-                else if (args[0] == "--Online")
+                if (App.Args[0] == "--Settings" && App.Args.Length > 1)
+                    SetFullContent(new Settings(App.Args[1]));
+                else if (App.Args[0] == "--Game" && App.Args.Length > 1)
+                    Offline.Instance.gameTabs.InitialSelectedIndex = int.Parse(App.Args[1]);
+                else if (App.Args[0] == "--Online")
                     ShowOnline();
-                else if (args[0] == "--LauncherChangelog")
+                else if (App.Args[0] == "--LauncherChangelog")
                     PopupVisualizer.ShowPopup(new LauncherChangelogPopup());
+
+                if (App.Args.Length > 4 && App.Args[2] == "--InstallGameDialog")
+                    Offline.Instance.InstallGame(int.Parse(App.Args[1]), App.Args[3], App.Args[4]);
             }
         }
 

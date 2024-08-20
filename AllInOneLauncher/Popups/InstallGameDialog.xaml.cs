@@ -1,4 +1,5 @@
 ﻿using AllInOneLauncher.Elements;
+using AllInOneLauncher.Logic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,7 +36,7 @@ namespace AllInOneLauncher.Popups
             }
         }
 
-        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => Submit("English", Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
+        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => SubmitAsElevated("English", Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
 
         private void ButtonCancelClicked(object sender, RoutedEventArgs e) => Dismiss();
     }
