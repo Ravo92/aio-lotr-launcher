@@ -33,7 +33,6 @@ namespace AllInOneLauncher
             Instance = this;
 
             LauncherStateManager.Init();
-            SystemInputManager.Init();
             LauncherUpdateManager.CheckForUpdates();
             BfmeWorkshopSyncManager.UseExperimentalBaseGameFiles = true;
 
@@ -46,9 +45,9 @@ namespace AllInOneLauncher
             Width = SystemParameters.WorkArea.Width * 0.7;
             Height = SystemParameters.WorkArea.Height * 0.8;
 
-            if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory), "BfmeLibrary")))
+            if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory)!, "BfmeLibrary")))
             {
-                Properties.Settings.Default.LibraryDrives = [Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory), "BfmeLibrary")];
+                Properties.Settings.Default.LibraryDrives = [Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory)!, "BfmeLibrary")];
                 Properties.Settings.Default.Save();
             }
 
