@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
 using AllInOneLauncher.Popups;
-using System.ComponentModel;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
