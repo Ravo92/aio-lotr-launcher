@@ -138,26 +138,25 @@ namespace AllInOneLauncher.Pages.Primary
 
         private void OnInstallGameClicked(object sender, EventArgs e)
         {
-            LauncherStateManager.AsElevated(() =>
-            {
-                PopupVisualizer.ShowPopup(new InstallGameDialog(),
-                OnPopupSubmited: async (submittedData) =>
-                {
-                    int game = gameTabs.SelectedIndex;
-                    string selectedLanguage = submittedData[0];
-                    string selectedLocation = Path.Combine(submittedData[1], game < 2 ? $"BFME{game + 1}" : "RotWK");
+            PopupVisualizer.ShowPopup(new InstallGameDialog(),
+            OnPopupSubmited: (submittedData) => InstallGame(gameTabs.SelectedIndex, submittedData[0], submittedData[1]));
+        }
 
-                    try
-                    {
-                        BfmeRegistryManager.CreateNewInstallRegistry(game, selectedLocation, selectedLanguage);
-                        await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.BaseGame(game), (progress) => { }, (downloadItem, downloadProgress) => { });
-                        UpdatePlayButton();
-                    }
-                    catch (Exception ex)
-                    {
-                        PopupVisualizer.ShowPopup(new ErrorPopup(ex));
-                    }
-                });
+        public void InstallGame(int game, string selectedLanguage, string selectedLocation)
+        {
+            LauncherStateManager.AsElevated(async () =>
+            {
+                try
+                {
+                    BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game < 2 ? $"BFME{game + 1}" : "RotWK"), selectedLanguage);
+                    if (game == 2 && !BfmeRegistryManager.IsInstalled(1)) BfmeRegistryManager.CreateNewInstallRegistry(1, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
+                    await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.BaseGame(game), (progress) => { }, (downloadItem, downloadProgress) => { });
+                    UpdatePlayButton();
+                }
+                catch (Exception ex)
+                {
+                    PopupVisualizer.ShowPopup(new ErrorPopup(ex));
+                }
             });
         }
 

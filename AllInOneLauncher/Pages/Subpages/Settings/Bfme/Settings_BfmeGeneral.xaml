@@ -42,7 +42,7 @@
                         <elements:Acrylic/>
                         <Button Style="{StaticResource MenuButton}" Background="Transparent" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ButtonChangeCdKey_Click">
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                                <Image x:Name="IconUAC" Source="pack://application:,,,/Resources/Images/uac.png" HorizontalAlignment="Center" Margin="0,0,10,0"/>
+                                <Image Source="pack://application:,,,/Resources/Images/uac.png" HorizontalAlignment="Center" Margin="0,0,10,0" Visibility="{DynamicResource VisibleIfNotElevated}"/>
                                 <TextBlock Grid.Column="1" Text="{DynamicResource SettingsPageBFMESectionGeneralRandomizeSerial}"/>
                             </StackPanel>
                         </Button>

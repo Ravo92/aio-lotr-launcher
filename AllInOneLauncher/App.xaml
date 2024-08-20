@@ -31,6 +31,9 @@
                         </Setter>
                     </Style>
                 </ResourceDictionary>
+                <ResourceDictionary>
+                    <Visibility x:Key="VisibleIfNotElevated">Visible</Visibility>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

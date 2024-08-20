@@ -56,31 +56,28 @@ namespace AllInOneLauncher.Elements
 
                 if (IsLoading)
                 {
-                    text.Text = "";
+                    button.Content = "";
                     LoadStatus = Application.Current.FindResource("GenericLoading").ToString()!;
                     button.Opacity = 0.4d;
                     button.IsHitTestVisible = false;
                     LoadProgress = 0;
                     progressIndication.Visibility = Visibility.Visible;
-                    IconUAC.Visibility = Visibility.Collapsed;
                 }
                 else if (value == LaunchButtonState.Launch)
                 {
-                    text.Text = Application.Current.FindResource("GenericPlay").ToString()!;
+                    button.Content = Application.Current.FindResource("GenericPlay").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;
                     progressIndication.Visibility = Visibility.Collapsed;
-                    IconUAC.Visibility = Visibility.Collapsed;
                 }
                 else if (value == LaunchButtonState.Install)
                 {
-                    text.Text = Application.Current.FindResource("GenericInstall").ToString()!;
+                    button.Content = Application.Current.FindResource("GenericInstall").ToString()!;
                     button.Opacity = 1d;
                     button.IsHitTestVisible = true;
                     LoadProgress = 0;
                     progressIndication.Visibility = Visibility.Collapsed;
-                    IconUAC.Visibility = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
                 }
             }
         }

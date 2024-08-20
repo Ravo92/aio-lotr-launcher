@@ -47,7 +47,6 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 
             string cdKey = BfmeRegistryManager.GetKeyValue((int)Game, BfmeRegistryKey.SerialKey);
             curentSerialNumber.Text = $"Curent serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
-            IconUAC.Visibility = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void OnLanguageOptionSelected(object sender, System.EventArgs e)

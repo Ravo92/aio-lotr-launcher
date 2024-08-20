@@ -1,4 +1,6 @@
-﻿using AllInOneLauncher.Pages.Primary;
+﻿using AllInOneLauncher.Elements;
+using AllInOneLauncher.Pages.Primary;
+using AllInOneLauncher.Popups;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
