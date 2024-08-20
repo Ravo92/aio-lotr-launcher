@@ -22,7 +22,7 @@
                 <Button Style="{StaticResource MenuButton}" Background="Transparent" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OnAddNewLocationClicked">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Path Stretch="Uniform" Fill="#CCFFFFFF" UseLayoutRounding="True" SnapsToDevicePixels="True" Data="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" Width="17" Height="17"/>
-                        <TextBlock Text="Add new location" FontSize="14" FontWeight="Medium" Margin="12,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+                        <TextBlock Text="{DynamicResource SettingsPageLauncherSectionLibraryAddNewLocation}" FontSize="14" FontWeight="Medium" Margin="12,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
             </Grid>
