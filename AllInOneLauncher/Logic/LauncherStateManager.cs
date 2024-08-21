@@ -1,6 +1,4 @@
-﻿using AllInOneLauncher.Elements;
-using AllInOneLauncher.Pages.Primary;
-using AllInOneLauncher.Popups;
+﻿using AllInOneLauncher.Pages.Primary;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -42,7 +40,14 @@ namespace AllInOneLauncher.Logic
             {
                 if (value && MainWindow.Instance!.WindowState == WindowState.Minimized)
                 {
-                    MainWindow.Instance!.WindowState = WindowState.Normal;
+                    try
+                    {
+                        MainWindow.Instance!.WindowState = WindowState.Normal;
+                    }
+                    catch (System.ComponentModel.Win32Exception ex)
+                    {
+                        Debug.WriteLine(ex);
+                    }
                     MainWindow.Instance!.ShowInTaskbar = true;
                     MainWindow.Instance!.Activate();
                 }

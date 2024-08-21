@@ -50,14 +50,14 @@
                     <elements:DropdownPicker Grid.Row="2" x:Name="LanguageDropdown" VerticalAlignment="Center" FontSize="20" Height="40" ColorStyle="Navy" Corners="4">
                         <elements:DropdownPicker.Options>
                             <system:String>English</system:String>
-                            <system:String>Deutsch</system:String>
-                            <system:String>Français</system:String>
-                            <system:String>Italiano</system:String>
-                            <system:String>Español</system:String>
-                            <system:String>Svenska</system:String>
-                            <system:String>Nederlands</system:String>
-                            <system:String>Polski</system:String>
-                            <system:String>Norsk</system:String>
+                            <system:String>German</system:String>
+                            <system:String>French</system:String>
+                            <system:String>Italian</system:String>
+                            <system:String>Spanish</system:String>
+                            <system:String>Swedish</system:String>
+                            <system:String>Dutch</system:String>
+                            <system:String>Polish</system:String>
+                            <system:String>Norwegian</system:String>
                         </elements:DropdownPicker.Options>
                     </elements:DropdownPicker>
                     <TextBlock Grid.Row="4" FontSize="14" FontWeight="SemiBold" Text="{DynamicResource InstallGameDialogLocation}" Foreground="white"/>

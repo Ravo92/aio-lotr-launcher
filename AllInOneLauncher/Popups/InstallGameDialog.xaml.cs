@@ -1,5 +1,4 @@
 ﻿using AllInOneLauncher.Elements;
-using AllInOneLauncher.Logic;
 using System;
 using System.Collections.Generic;
 using System.IO;
