@@ -24,6 +24,7 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<PlatformTarget>x64</PlatformTarget>
 		<SignAssembly>False</SignAssembly>
+		<RunPostBuildEvent>Always</RunPostBuildEvent>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -101,9 +102,9 @@
 	<ItemGroup>
 	  <PackageReference Include="BfmeFoundationProject.BfmeRegistryManagement" Version="1.0.4" />
 	  <PackageReference Include="BfmeFoundationProject.OnlineKit" Version="1.7.5" />
-	  <PackageReference Include="BfmeFoundationProject.WorkshopKit" Version="1.6.5" />
+	  <PackageReference Include="BfmeFoundationProject.WorkshopKit" Version="1.6.6" />
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
-	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2651.64" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="WindowsShortcutFactory" Version="1.2.0" />
 	</ItemGroup>
@@ -155,5 +156,13 @@
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
 	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)..\scripts\PreBuildAPIScript.ps1&quot;" />
+	</Target>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)..\scripts\PostBuildAPIScript.ps1&quot;" />
+	</Target>
 
 </Project>
