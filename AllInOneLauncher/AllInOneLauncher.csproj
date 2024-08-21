@@ -49,6 +49,7 @@
 		<None Remove="Resources\Images\en_bfme1_title.png" />
 		<None Remove="Resources\Images\bfme2.png" />
 		<None Remove="Resources\Images\en_bfme2_title.png" />
+		<None Remove="Resources\Images\github.png" />
 		<None Remove="Resources\Images\harddrive.png" />
 		<None Remove="Resources\Images\MainIcon.png" />
 		<None Remove="Resources\Images\patch222.png" />
@@ -107,6 +108,12 @@
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2651.64" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="WindowsShortcutFactory" Version="1.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Resources\Images\github.png">
+	    <Generator></Generator>
+	  </Resource>
 	</ItemGroup>
 
 	<ItemGroup>
