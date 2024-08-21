@@ -7,7 +7,7 @@
                     xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
                     xmlns:webView="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
                     mc:Ignorable="d" 
-                    Width="1200" d:Height="1000" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,80,0,80">
+                    Width="1200" d:Height="1000" HorizontalAlignment="Center" VerticalAlignment="Stretch">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

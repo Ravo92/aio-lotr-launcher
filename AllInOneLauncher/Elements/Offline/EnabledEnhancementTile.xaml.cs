@@ -43,7 +43,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryIcon.Source = null;
                 activeEntryTitle.Text = value.Name;
                 activeEntryVersion.Text = value.Version;
-                activeEntryAuthor.Text = $"by {value.Author}";
+                activeEntryAuthor.Text = value.Author;
                 UpdateType();
 
                 IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Game);

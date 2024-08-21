@@ -23,7 +23,7 @@ namespace AllInOneLauncher.Elements.Menues
 
         public override FrameworkElement GenerateElement()
         {
-            Button b = new Button() { Content = Text, Style = Round ? Application.Current.FindResource("RoundedMenuButton") as Style : Application.Current.FindResource("MenuButton") as Style, IsHitTestVisible = Enabled, Opacity = Enabled ? 1d : 0.4d, Height = Height };
+            Button b = new Button() { Content = Text, Style = Round ? Application.Current.FindResource("ContextMenuButton") as Style : Application.Current.FindResource("FlatButton") as Style, IsHitTestVisible = Enabled, Opacity = Enabled ? 1d : 0.4d, Height = Height };
             if (Enabled)
                 b.Click += (s, e) => Clicked?.Invoke();
             return b;

@@ -225,8 +225,8 @@ namespace AllInOneLauncher.Elements
 
         public CornerRadius Corners
         {
-            get => border_content.CornerRadius;
-            set => border_content.CornerRadius = value;
+            get => border_background.CornerRadius;
+            set => border_background.CornerRadius = value;
         }
 
 

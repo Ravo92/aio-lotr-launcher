@@ -35,7 +35,7 @@ namespace AllInOneLauncher.Elements
                     title.Text = value[selected];
                 else
                     Selected = 0;
-                MenuVisualizer.HideMenuOn(frame);
+                MenuVisualizer.HideMenuOn(this);
             }
         }
 
@@ -55,7 +55,7 @@ namespace AllInOneLauncher.Elements
                     OnOptionSelected?.Invoke(this, EventArgs.Empty);
                 }
 
-                MenuVisualizer.HideMenuOn(frame);
+                MenuVisualizer.HideMenuOn(border_background);
             }
         }
 
@@ -91,18 +91,18 @@ namespace AllInOneLauncher.Elements
             {
                 corners = value;
 
-                frame.CornerRadius = new CornerRadius(value);
+                border_background.CornerRadius = new CornerRadius(value);
             }
         }
 
         private void OnDropdownClicked(object sender, RoutedEventArgs e)
         {
-            if (MenuVisualizer.HasMenuOn(frame))
+            if (MenuVisualizer.HasMenuOn(border_background))
                 return;
 
             MenuVisualizer.ShowMenu(
             menu: Options.Select(x => new ContextMenuButtonItem(x.StartsWith("{") && x.EndsWith("}") ? (Application.Current.FindResource(x.TrimStart('{').TrimEnd('}')).ToString() ?? "") : x, true, round: false, height: 38, clicked: () => Selected = Options.Contains(x) ? Options.IndexOf(x) : int.MinValue) as ContextMenuItem).ToList(),
-            owner: frame,
+            owner: border_background,
             side: MenuSide.Bottom,
             space: 0,
             corners: new CornerRadius(0, 0, Corners, Corners),
@@ -111,11 +111,11 @@ namespace AllInOneLauncher.Elements
             onDestroy: () =>
             {
                 CornerRadiusAnimation ca = new() { From = new CornerRadius(Corners, Corners, 0, 0), To = new CornerRadius(Corners), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
-                frame.BeginAnimation(Border.CornerRadiusProperty, ca);
+                border_background.BeginAnimation(Border.CornerRadiusProperty, ca);
             });
 
             CornerRadiusAnimation ca = new() { From = new CornerRadius(Corners), To = new CornerRadius(Corners, Corners, 0, 0), Duration = TimeSpan.FromSeconds(0.075), EasingFunction = new QuadraticEase() };
-            frame.BeginAnimation(Border.CornerRadiusProperty, ca);
+            border_background.BeginAnimation(Border.CornerRadiusProperty, ca);
         }
     }
 

@@ -34,27 +34,12 @@
         <StackPanel>
             <Grid>
                 <TextBlock Text="{DynamicResource SettingsPageBFMESectionGeneralSerialNumber}" FontSize="17" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="white"/>
-                <Border Grid.Column="1" Grid.Row="7" x:Name="ButtonChangeCdKey" Height="40" HorizontalAlignment="Right" VerticalAlignment="Center" CornerRadius="20" Background="Transparent">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
-                    </Border.Effect>
-                    <Border.OpacityMask>
-                        <VisualBrush>
-                            <VisualBrush.Visual>
-                                <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Border.OpacityMask>
-                    <Grid>
-                        <elements:Acrylic/>
-                        <Button Style="{StaticResource MenuButton}" Background="Transparent" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ButtonChangeCdKey_Click">
-                            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                                <Image Source="pack://application:,,,/Resources/Images/uac.png" HorizontalAlignment="Center" Margin="0,0,10,0" Visibility="{DynamicResource VisibleIfNotElevated}"/>
-                                <TextBlock Grid.Column="1" Text="{DynamicResource SettingsPageBFMESectionGeneralRandomizeSerial}"/>
-                            </StackPanel>
-                        </Button>
-                    </Grid>
-                </Border>
+                <Button x:Name="ButtonChangeCdKey" Style="{StaticResource AcrylicRoundButton}" Background="Transparent" HorizontalAlignment="Right" Click="ButtonChangeCdKey_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Resources/Images/uac.png" HorizontalAlignment="Center" Margin="0,0,10,0" Visibility="{DynamicResource VisibleIfNotElevated}"/>
+                        <TextBlock Grid.Column="1" Text="{DynamicResource SettingsPageBFMESectionGeneralRandomizeSerial}"/>
+                    </StackPanel>
+                </Button>
             </Grid>
             <TextBlock x:Name="curentSerialNumber" Text="Curent serial number: " FontSize="15" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="white" Opacity="0.4" Margin="0,10,0,0"/>
         </StackPanel>

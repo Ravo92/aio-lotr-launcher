@@ -21,11 +21,11 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel x:Name="tabs" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock x:Name="offlineTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainWindowSingleplayerTab}" FontSize="16" FontWeight="Bold" Margin="0,0,20,0" Background="Transparent" Cursor="Hand" MouseDown="OnOfflineTabClicked"/>
+                    <TextBlock x:Name="offlineTab" Style="{DynamicResource TextBlockHover}" Text="{DynamicResource MainWindowSingleplayerTab}" FontSize="16" FontWeight="Bold" Margin="0,0,20,0" Background="Transparent" Cursor="Hand" MouseDown="OnOfflineTabClicked"/>
                     <Image Source="pack://application:,,,/Resources/Images/uac.png" Width="20" Height="20" Margin="0,0,6,0" Visibility="{DynamicResource VisibleIfNotElevated}"/>
-                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainWindowMultiplayerTab}" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
-                    <TextBlock x:Name="guidesTab" Style="{DynamicResource TextBlockButton}" Text="{DynamicResource MainWindowGuidesTab}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnGuidesTabClicked"/>
-                    <TextBlock x:Name="patreonsTab" Style="{DynamicResource TextBlockButton}" Text="PATREONS" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnPatreonsTabClicked"/>
+                    <TextBlock x:Name="onlineTab" Style="{DynamicResource TextBlockHover}" Text="{DynamicResource MainWindowMultiplayerTab}" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnOnlineTabClicked"/>
+                    <TextBlock x:Name="guidesTab" Style="{DynamicResource TextBlockHover}" Text="{DynamicResource MainWindowGuidesTab}" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnGuidesTabClicked"/>
+                    <TextBlock x:Name="patreonsTab" Style="{DynamicResource TextBlockHover}" Text="PATREONS" FontSize="16" FontWeight="Bold" Margin="20,0,0,0" Background="Transparent" Cursor="Hand" MouseDown="OnPatreonsTabClicked"/>
                 </StackPanel>
                 <StackPanel x:Name="icons" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Image Tag="https://www.youtube.com/@BeyondStandards" Source="pack://application:,,,/Resources/Images/youtube.png" Height="32" Margin="0,0,5,0" Cursor="Hand" MouseDown="OnLinkButtonClicked"/>

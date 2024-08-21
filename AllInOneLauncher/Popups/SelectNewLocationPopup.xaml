@@ -22,7 +22,7 @@
             <elements:DropdownPicker x:Name="LocationDropdown" FontSize="20" Height="40" ColorStyle="Navy" Corners="4"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Grid.Column="0" Grid.Row="2" x:Name="ButtonAccept" Style="{StaticResource AccentButton}" Content="{DynamicResource GenericAdd}" VerticalAlignment="Center" Click="ButtonAcceptClicked" Width="150" Margin="0,0,10,0"/>
+            <Button Grid.Column="0" Grid.Row="2" x:Name="ButtonAccept" Style="{StaticResource HiglightButton}" Content="{DynamicResource GenericAdd}" VerticalAlignment="Center" Click="ButtonAcceptClicked" Width="150" Margin="0,0,10,0"/>
             <Button Grid.Column="1" Grid.Row="2" x:Name="ButtonCancel" Content="{DynamicResource GenericCancel}" VerticalAlignment="Center" Click="ButtonCancelClicked" Width="150"/>
         </StackPanel>
     </Grid>
