@@ -40,7 +40,7 @@ jobs:
 
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Create Main App
-      run: dotnet publish -c Release -o PatchLauncher "AllInOneLauncher\AllInOneLauncher.csproj" --runtime win-x64 --self-contained true /p:UseAppHost=true
+      run: dotnet publish -c Release -o PatchLauncher "AllInOneLauncher\AllInOneLauncher.csproj" --runtime win-x64 --self-contained true /p:UseAppHost=true /p:RunPreBuildEvents=false /p:RunPostBuildEvents=false
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x86|x64
