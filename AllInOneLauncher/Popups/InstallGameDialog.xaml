@@ -68,7 +68,7 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Grid.Column="0" Grid.Row="2" x:Name="ButtonAccept" Style="{StaticResource AccentButton}" VerticalAlignment="Center" Click="ButtonAcceptClicked" Width="150" Margin="0,0,10,0">
+            <Button Grid.Column="0" Grid.Row="2" x:Name="ButtonAccept" Style="{StaticResource HiglightButton}" VerticalAlignment="Center" Click="ButtonAcceptClicked" Width="150" Margin="0,0,10,0">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/Resources/Images/uac.png" Width="16" Stretch="Uniform" Margin="0,0,10,-2" Visibility="{DynamicResource VisibleIfNotElevated}"/>
                     <TextBlock Text="{DynamicResource GenericInstall}"/>

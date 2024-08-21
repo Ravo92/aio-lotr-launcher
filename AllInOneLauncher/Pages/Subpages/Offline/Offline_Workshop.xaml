@@ -43,24 +43,9 @@
             </Border>
             <elements:DropdownPicker Grid.Column="2" x:Name="searchFilter" Width="250" OnOptionSelected="OnFilterChanged"/>
             <elements:DropdownPicker Grid.Column="4" x:Name="typeFilter" Width="250" OnOptionSelected="OnFilterChanged"/>
-            <Border Grid.Column="6" CornerRadius="20" Width="40">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="6" Opacity="0.3" Color="Black" ShadowDepth="2" Direction="270"/>
-                </Border.Effect>
-                <Border.OpacityMask>
-                    <VisualBrush>
-                        <VisualBrush.Visual>
-                            <Border Background="Black" SnapsToDevicePixels="True" CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </Border.OpacityMask>
-                <Grid>
-                    <elements:Acrylic/>
-                    <Button Style="{StaticResource RoundButton}" Background="Transparent" Click="OnReloadClicked">
-                        <Path Stretch="Uniform" Width="13" Fill="White" Data="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z"/>
-                    </Button>
-                </Grid>
-            </Border>
+            <Button Grid.Column="6" Style="{StaticResource AcrylicRoundButton}" Width="40" Padding="0" Background="Transparent" Click="OnReloadClicked">
+                <Path Stretch="Uniform" Width="13" Fill="White" Data="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z"/>
+            </Button>
         </Grid>
         <elements:SmoothScrollViewer Grid.Row="2" x:Name="workshopContent" Visibility="Visible">
             <WrapPanel x:Name="workshopTiles"/>

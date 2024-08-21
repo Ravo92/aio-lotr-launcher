@@ -48,11 +48,7 @@
                     </Border>
                 </Grid>
                 <Grid Grid.Column="3">
-                    <Button Style="{StaticResource CircleButton}" VerticalAlignment="Center" HorizontalAlignment="Right" Click="OnDeactivateClicked" Margin="0,0,5,0">
-                        <StackPanel Margin="12" Orientation="Horizontal">
-                            <Path HorizontalAlignment="Right" VerticalAlignment="Center" Fill="White" Stretch="Uniform" Width="10" Data="M 124.4508 237.5879 c 12.5158 -12.5158 12.5158 -32.739 -0 -45.2548 s -32.739 -12.5158 -45.2548 0 L -22.6274 294.1564 L -124.4508 192.333 c -12.5158 -12.5158 -32.739 -12.5158 -45.2548 0 s -12.5158 32.739 0 45.2548 L -67.8823 339.4113 L -169.7056 441.2346 c -12.5158 12.5158 -12.5158 32.739 0 45.2548 s 32.739 12.5158 45.2548 -0 L -22.6274 384.6661 L 79.196 486.4895 c 12.5158 12.5158 32.739 12.5158 45.2548 -0 s 12.5158 -32.739 -0 -45.2548 L 22.6274 339.4113 L 124.4508 237.5879 z"/>
-                        </StackPanel>
-                    </Button>
+                    <Button Style="{StaticResource DestructiveButton}" VerticalAlignment="Center" HorizontalAlignment="Right" Click="OnDeactivateClicked" Margin="0,0,5,0"/>
                 </Grid>
             </Grid>
         </Grid>

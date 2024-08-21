@@ -6,20 +6,24 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Dictionary/LanguageResources.en.xaml"/>
+
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/AcrylicRoundButtonStyle.xaml"/>
+
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/DefaultButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/HiglightButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/RoundButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/FlatButtonStyle.xaml"/>
                 
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/AccentButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/RoundButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/CircleButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/LaunchButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/MenuButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ListButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ScrollViewerStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/TextBlockButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/BorderButtonStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/ComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/TextBoxStyle.xaml"/>
-                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/CheckBoxStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/LaunchButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/SettingsButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/ContextMenuButtonStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Buttons/DestructiveButtonStyle.xaml"/>
+                
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Other/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Other/TextBlockHoverStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Other/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Other/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/AllInOneLauncher;component/Resources/Styles/Other/CheckBoxStyle.xaml"/>
                 <ResourceDictionary>
                     <Style x:Key="FocusVisual">
                         <Setter Property="Control.Template">

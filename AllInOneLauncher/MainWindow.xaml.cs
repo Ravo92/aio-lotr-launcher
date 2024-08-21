@@ -130,7 +130,7 @@ namespace AllInOneLauncher
                 else
                 {
                     tab.Foreground = Brushes.White;
-                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                    tab.Style = (Style)Instance.FindResource("TextBlockHover");
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace AllInOneLauncher
                 else
                 {
                     tab.Foreground = Brushes.White;
-                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                    tab.Style = (Style)Instance.FindResource("TextBlockHover");
                 }
             }
         }
@@ -162,7 +162,7 @@ namespace AllInOneLauncher
                 else
                 {
                     tab.Foreground = Brushes.White;
-                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                    tab.Style = (Style)Instance.FindResource("TextBlockHover");
                 }
             }
         }
@@ -178,7 +178,7 @@ namespace AllInOneLauncher
                 else
                 {
                     tab.Foreground = Brushes.White;
-                    tab.Style = (Style)Instance.FindResource("TextBlockButton");
+                    tab.Style = (Style)Instance.FindResource("TextBlockHover");
                 }
             }
         }
