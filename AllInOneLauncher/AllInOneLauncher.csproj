@@ -10,10 +10,10 @@
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<StartupObject>AllInOneLauncher.App</StartupObject>
+		<AssemblyName>AllInOneLauncher</AssemblyName>
 		<ApplicationIcon>MainIcon.ico</ApplicationIcon>
 		<Version>2.0.0.0</Version>
 		<AssemblyVersion>2.0.0.0</AssemblyVersion>
-		<AssemblyName>AllInOneLauncher</AssemblyName>
 		<FileVersion>2.0.0.0</FileVersion>
 		<BaseOutputPath>..\build</BaseOutputPath>
 		<Copyright>Raphael Vogel</Copyright>
