@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "AllInOneLauncher.exe"
-#define MyAppExeVersion "2.0.0.0"
+#define MyAppExeVersion "2.0.0.1"
 #define MyAppPublishFolder "RELEASE"
 
 [Setup]
