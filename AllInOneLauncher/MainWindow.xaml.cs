@@ -32,7 +32,7 @@ namespace AllInOneLauncher
 
             LauncherStateManager.Init();
             LauncherUpdateManager.CheckForUpdates();
-            BfmeWorkshopSyncManager.UseExperimentalBaseGameFiles = true;
+            BfmeWorkshopSyncManager.UseExperimentalBaseGameFiles = false;
 
             TrayIcon.Visibility = Visibility.Collapsed;
             fullContent.Visibility = Visibility.Visible;
