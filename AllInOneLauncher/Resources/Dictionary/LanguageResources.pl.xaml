@@ -35,6 +35,7 @@
     <system:String x:Key="OfflinePageNoEnhancementsActive">Brak aktywnych ulepszeń</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">Opcje uruchamiania</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Tryb okienkowy</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsAltTabMode">Aktywuj wsparcie ALT+TAB</system:String>
 
     <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">Szukaj w bibliotece...</system:String>

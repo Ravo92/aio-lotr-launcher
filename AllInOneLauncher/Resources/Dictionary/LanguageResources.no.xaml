@@ -35,6 +35,7 @@
     <system:String x:Key="OfflinePageNoEnhancementsActive">Ingen forbedringer aktivert</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">Startalternativer</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Vindu-modus</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsAltTabMode">Aktiver ALT+TAB-støtte</system:String>
 
     <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">Søk i biblioteket...</system:String>

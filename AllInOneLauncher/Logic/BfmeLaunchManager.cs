@@ -21,7 +21,7 @@ namespace AllInOneLauncher.Logic
 
             if (windowed)
                 startInfo.Arguments = $"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width - 100} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height - 110}";
-            else
+            else if (Properties.Settings.Default.IsWindowed)
                 startInfo.Arguments = $"-win -xres {SystemDisplayManager.GetPrimaryScreenResolution().Width} -yres {SystemDisplayManager.GetPrimaryScreenResolution().Height}";
 
             if (BfmeWorkshopSyncManager.GetActiveModPath((int)game) != null) startInfo.ArgumentList.Add($"-mod {BfmeWorkshopSyncManager.GetActiveModPath((int)game)}");
@@ -31,8 +31,10 @@ namespace AllInOneLauncher.Logic
 
             windowHandle = SystemGameWindowManager.FindWindowByClassName("E99E8455-CC9B-488a-BA22-0E8A8F74F9FA");
 
-            if (!windowed)
+            if (Properties.Settings.Default.IsWindowed && !windowed)
+            {
                 SystemGameWindowManager.RemoveWindowBorder(windowHandle, SystemDisplayManager.GetPrimaryScreenResolution().Width, SystemDisplayManager.GetPrimaryScreenResolution().Height, 0, 0);
+            }
             else
             {
                 SystemGameWindowManager.SetWindowPos(windowHandle, IntPtr.Zero, 25, 25, 0, 0, 0x0001 | 0x0020 | 0x0040);

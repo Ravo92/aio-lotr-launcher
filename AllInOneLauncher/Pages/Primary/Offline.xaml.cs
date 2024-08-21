@@ -27,6 +27,10 @@ namespace AllInOneLauncher.Pages.Primary
         public Offline()
         {
             InitializeComponent();
+
+            if (Properties.Settings.Default.IsWindowed)
+                ToggleAltTabSupport.IsToggled = true;
+
             Properties.Settings.Default.SettingsSaving += (s, e) =>
             {
                 UpdateTitleImage();
@@ -218,6 +222,16 @@ namespace AllInOneLauncher.Pages.Primary
         private void CheckBoxWindowed_Unchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.IsWindowed = false;
+            Properties.Settings.Default.Save();
+        }
+
+        private void ToggleAltTabSupport_OnToggledChanged(object sender, EventArgs e)
+        {
+            if (ToggleAltTabSupport.IsToggled)
+                Properties.Settings.Default.IsWindowed = true;
+            else
+                Properties.Settings.Default.IsWindowed = false;
+
             Properties.Settings.Default.Save();
         }
     }

@@ -35,6 +35,7 @@
     <system:String x:Key="OfflinePageNoEnhancementsActive">Нет активных улучшений</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">Опции запуска</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Оконный режим</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsAltTabMode">Активировать поддержку ALT+TAB</system:String>
 
     <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">Поиск в библиотеке...</system:String>

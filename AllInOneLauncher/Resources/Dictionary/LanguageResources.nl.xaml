@@ -29,6 +29,7 @@
     <system:String x:Key="OfflinePageNoEnhancementsActive">Geen verbeteringen actief</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">Startopties</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Venstermodus</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsAltTabMode">ALT+TAB-ondersteuning activeren</system:String>
 
     <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">Zoeken in bibliotheek...</system:String>

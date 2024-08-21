@@ -35,6 +35,7 @@
     <system:String x:Key="OfflinePageNoEnhancementsActive">لا توجد تحسينات مفعلة</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">خيارات التشغيل</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">وضع النوافذ</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsAltTabMode">تفعيل دعم ALT+TAB</system:String>
 
     <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">ابحث في المكتبة...</system:String>
