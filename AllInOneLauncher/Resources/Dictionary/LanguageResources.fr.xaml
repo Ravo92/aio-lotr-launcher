@@ -2,17 +2,26 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=netstandard">
 
-    <system:String x:Key="TrayIconShowApplication">Afficher la fenêtre du lanceur</system:String>
-    <system:String x:Key="TrayIconCloseApplication">Fermer le lanceur</system:String>
+    <!--=====================  TrayIcon  =====================-->
+    <system:String x:Key="TrayIconShowApplication">Afficher la fenêtre du Launcher</system:String>
+    <system:String x:Key="TrayIconCloseApplication">Fermer le Launcher</system:String>
+
+    <!--=====================  Generic  =====================-->
     <system:String x:Key="GenericCancel">ANNULER</system:String>
     <system:String x:Key="GenericClose">FERMER</system:String>
     <system:String x:Key="GenericInstall">INSTALLER</system:String>
     <system:String x:Key="GenericLoading">CHARGEMENT</system:String>
     <system:String x:Key="GenericPlay">JOUER</system:String>
-    <system:String x:Key="MainWindowTitle">All-in-One Launcher by Ravo92 &amp; the "Bfme Foundation Project"</system:String>
+    <system:String x:Key="GenericAdd">AJOUTER</system:String>
+    <system:String x:Key="GenericFree">GRATUIT</system:String>
+
+    <!--=====================  MainWindow  =====================-->
+    <system:String x:Key="MainWindowTitle">Launcher Tout-en-un par Ravo92 &amp; le Projet Bfme Foundation</system:String>
     <system:String x:Key="MainWindowSingleplayerTab">SOLO</system:String>
     <system:String x:Key="MainWindowMultiplayerTab">MULTIJOUEUR</system:String>
     <system:String x:Key="MainWindowGuidesTab">GUIDES</system:String>
+
+    <!--=====================  Offline  =====================-->
     <system:String x:Key="OfflinePageNewsTab">Journal des modifications</system:String>
     <system:String x:Key="OfflinePageLibraryTab">Bibliothèque</system:String>
     <system:String x:Key="OfflinePageWorkshopTab">Atelier</system:String>
@@ -20,52 +29,92 @@
     <system:String x:Key="OfflinePageNoEnhancementsActive">Aucune amélioration active</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">Options de lancement</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Mode fenêtré</system:String>
+
+    <!--=====================  Offline/Library  =====================-->
     <system:String x:Key="LibraryPageSearchPlaceholder">Rechercher dans la bibliothèque...</system:String>
-    <system:String x:Key="LibraryPageFilterPatchesAndMods">Patches et mods</system:String>
+    <system:String x:Key="LibraryPageMakeSnapshot">Créer des captures</system:String>
+
+    <system:String x:Key="LibraryPageFilterPatchesAndMods">Correctifs et mods</system:String>
     <system:String x:Key="LibraryPageFilterEnhancements">Améliorations</system:String>
+    <system:String x:Key="LibraryPageFilterSnapshots">Captures</system:String>
     <system:String x:Key="LibraryPageFilterEverything">Tout</system:String>
-    <system:String x:Key="WorkshopPageSearchPlaceholder">Rechercher dans l'atelier...</system:String>
-    <system:String x:Key="WorkshopPageFilterPatchesAndMods">Patches et mods</system:String>
+
+    <!--=====================  Offline/Workshop  =====================-->
+    <system:String x:Key="WorkshopPageSearchPlaceholder">Rechercher dans l'Atelier...</system:String>
+
+    <system:String x:Key="WorkshopPageFilterPatchesAndMods">Correctifs et mods</system:String>
     <system:String x:Key="WorkshopPageFilterEnhancements">Améliorations</system:String>
     <system:String x:Key="WorkshopPageFilterEverything">Tout</system:String>
+
     <system:String x:Key="WorkshopPageSortByMostDownloads">Le plus téléchargé</system:String>
     <system:String x:Key="WorkshopPageSortByMostRecent">Le plus récent</system:String>
     <system:String x:Key="WorkshopPageSortAlphabetical">Alphabétique</system:String>
+
+    <!--=====================  LibraryTile  =====================-->
     <system:String x:Key="LibraryTileSyncing">Synchronisation</system:String>
     <system:String x:Key="LibraryTileActive">Actif</system:String>
-    <system:String x:Key="LibraryTilePatchType">Patch</system:String>
+    <system:String x:Key="LibraryTilePatchType">Correctif</system:String>
     <system:String x:Key="LibraryTileModType">Mod</system:String>
     <system:String x:Key="LibraryTileEnhancementType">Amélioration</system:String>
     <system:String x:Key="LibraryTileMapPackType">Pack de cartes</system:String>
-    <system:String x:Key="LibraryTileHorizontalNoPatchSelected">Aucun patch sélectionné</system:String>
+    <system:String x:Key="LibraryTileSnapshotType">Capture</system:String>
+
+    <!--=====================  LibraryTileHorizontal  =====================-->
+    <system:String x:Key="LibraryTileHorizontalNoPatchSelected">Aucun correctif sélectionné</system:String>
     <system:String x:Key="LibraryTileHorizontalSyncAgain">Synchroniser à nouveau</system:String>
+
+    <!--=====================  LibraryTileEmpty  =====================-->
     <system:String x:Key="LibraryTileEmptyInstallMore">Installer plus</system:String>
-    <system:String x:Key="LibraryTileEmptyDiscoverMore">Découvrez de nouveaux contenus sur l'atelier !</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionHeader">Paramètres du lanceur</system:String>
+    <system:String x:Key="LibraryTileEmptyDiscoverMore">Découvrez du nouveau contenu sur l'Atelier !</system:String>
+
+    <!--=====================  Settings  =====================-->
+    <system:String x:Key="SettingsPageLauncherSectionHeader">Paramètres du Launcher</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneral">Général</system:String>
-    <system:String x:Key="SettingsPageBFME1SectionHeader">Le Seigneur des Anneaux™</system:String>
-    <system:String x:Key="SettingsPageBFME2SectionHeader">Le Seigneur des Anneaux™ II</system:String>
-    <system:String x:Key="SettingsPageRotWKSectionHeader">L'ascension du roi sorcier™</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibrary">Bibliothèque</system:String>
+
+    <system:String x:Key="SettingsPageBFME1SectionHeader">Le Seigneur des Anneaux : La Bataille pour la Terre du Milieu™</system:String>
+    <system:String x:Key="SettingsPageBFME2SectionHeader">Le Seigneur des Anneaux : La Bataille pour la Terre du Milieu™ II</system:String>
+    <system:String x:Key="SettingsPageRotWKSectionHeader">L'Avènement du Roi-Sorcier™</system:String>
     <system:String x:Key="SettingsPageBFMESectionGeneral">Général</system:String>
-    <system:String x:Key="SettingsPageBFMESectionVideo">Vidéo et résolution</system:String>
-    <system:String x:Key="SettingsPageBFMESectionLanguage">Langue et son</system:String>
-    <system:String x:Key="SettingsPageBFMESectionRepair">Réparer ou désinstaller</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Langue du lanceur</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Fermer le lanceur dans la barre des tâches</system:String>
+
+    <!--=====================  Settings/Launcher Settings/General  =====================-->
+    <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Langue du Launcher</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Fermer le Launcher dans la barre d'état système</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Paramètres de la bibliothèque</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Ajouter un emplacement de bibliothèque</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionGeneralDriveSizeText">libre de</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Disque local</system:String>
+
+    <!--=====================  Settings/Launcher Settings/Library  =====================-->
+    <system:String x:Key="SettingsPageLauncherSectionLibraryAddNewLocation">Ajouter un nouvel emplacement</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeText">libre sur</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeTextSufix">_</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryGamesFileCategory">JEUX</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryWorkshopFileCateogry">ATELIER</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryNonLauncherFileCateogry">NON-LAUNCHER</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryFreeSpaceCateogry">LIBRE</system:String>
+
+    <!--=====================  Settings/BFME Settings/General  =====================-->
     <system:String x:Key="SettingsPageBFMESectionGeneralSerialNumber">Numéro de série</system:String>
-    <system:String x:Key="SettingsPageBFMESectionGeneralChangeSerial">Changer le numéro de série</system:String>
-    <system:String x:Key="SettingsPageBFMESectionGeneralRandomizeSerial">Aléatoire</system:String>
+    <system:String x:Key="SettingsPageBFMESectionGeneralRandomizeSerial">Randomiser</system:String>
+
+    <!--=====================  Settings/BFME Settings/Video & Resolution  =====================-->
     <system:String x:Key="SettingsPageBFMESectionVideoResolution">Résolution du jeu</system:String>
     <system:String x:Key="SettingsPageBFMESectionVideoGraphicsApi">API graphique</system:String>
+
+    <!--=====================  Settings/BFME Settings/Language & Sound  =====================-->
     <system:String x:Key="SettingsPageBFMESectionLanguageLanguage">Langue du jeu</system:String>
+
+    <!--=====================  InstallGameDialog  =====================-->
     <system:String x:Key="InstallGameDialogTitle">INSTALLER LE JEU</system:String>
     <system:String x:Key="InstallGameDialogLanguage">Langue</system:String>
     <system:String x:Key="InstallGameDialogLocation">Emplacement</system:String>
+
+    <!--=====================  SelectNewLocationPopup  =====================-->
+    <system:String x:Key="SelectNewLocationPopupTitle">AJOUTER UNE NOUVELLE BIBLIOTHÈQUE</system:String>
+    <system:String x:Key="SelectNewLocationPopupSelectCustom">Sélectionner un emplacement personnalisé</system:String>
+
+    <!--=====================  ErrorPopup  =====================-->
     <system:String x:Key="ErrorPopupTitle">ERREUR</system:String>
     <system:String x:Key="ErrorPopupCopyError">Copier le texte</system:String>
-    <system:String x:Key="ErrorPopupCopyErrorClicked">Texte copié dans le presse-papier !</system:String>
+    <system:String x:Key="ErrorPopupCopyErrorClicked">Texte copié dans le presse-papiers !</system:String>
 </ResourceDictionary>

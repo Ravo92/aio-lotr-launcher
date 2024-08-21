@@ -27,7 +27,7 @@ namespace AllInOneLauncher.Elements
             DriveInfo drive = Drives[$@"{libraryPath.Split(@":\").First()}:\"];
 
             header.LibraryDriveName = $"{drive.VolumeLabel} ({drive.Name.Replace(@"\", "")})";
-            header.LibraryDriveSize = $"{Math.Floor(drive.AvailableFreeSpace / Math.Pow(1024, 3)):N0} GB {Application.Current.FindResource("SettingsPageLauncherSectionLibraryDriveSizeText")} {Math.Floor(drive.TotalSize / Math.Pow(1024, 3)):N0} GB{Application.Current.FindResource("SettingsPageLauncherSectionLibraryDriveSizeTextSufix")}";
+            header.LibraryDriveSize = $"{Math.Floor(drive.AvailableFreeSpace / Math.Pow(1024, 3)):N0} GB {Application.Current.FindResource("SettingsPageLauncherSectionLibraryDriveSizeText")} {Math.Floor(drive.TotalSize / Math.Pow(1024, 3)):N0} GB{Application.Current.FindResource("SettingsPageLauncherSectionLibraryDriveSizeTextSufix").ToString().Replace("_", "")}";
 
             long gamesSize = 0;
             if (Directory.Exists(Path.Combine(libraryPath, "BFME1"))) gamesSize += await Task.Run(() => new DirectoryInfo(Path.Combine(libraryPath, "BFME1")).EnumerateFiles("*.*", SearchOption.AllDirectories).Sum(file => file.Length));

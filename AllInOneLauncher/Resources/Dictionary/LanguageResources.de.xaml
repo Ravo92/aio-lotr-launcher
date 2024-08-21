@@ -101,13 +101,13 @@
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Lokaler Datenträger</system:String>
 
     <!--=====================  Settings/Launcher Settings/Library  =====================-->
-    <system:String x:Key="SettingsPageLauncherSectionLibraryAddNewLocation">Add new location</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryAddNewLocation">Neuen Standort hinzufügen</system:String>
     <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeText">frei von</system:String>
     <system:String x:Key="SettingsPageLauncherSectionLibraryDriveSizeTextSufix">_</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionLibraryGamesFileCategory">GAMES</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionLibraryWorkshopFileCateogry">WORKSHOP</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionLibraryNonLauncherFileCateogry">NON-LAUNCHER</system:String>
-    <system:String x:Key="SettingsPageLauncherSectionLibraryFreeSpaceCateogry">FREE</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryGamesFileCategory">SPIELE</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryWorkshopFileCateogry">WERKSTATT</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryNonLauncherFileCateogry">NICHT-LAUNCHER</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionLibraryFreeSpaceCateogry">FREI</system:String>
 
     <!--=====================  Settings/BFME Settings/General  =====================-->
     <system:String x:Key="SettingsPageBFMESectionGeneralSerialNumber">Seriennummer</system:String>
@@ -128,8 +128,8 @@
     <system:String x:Key="InstallGameDialogLocation">Bibliothek</system:String>
     
     <!--=====================  SelectNewLocationPopup  =====================-->
-    <system:String x:Key="SelectNewLocationPopupTitle">ADD NEW LIBRARY</system:String>
-    <system:String x:Key="SelectNewLocationPopupSelectCustom">Select custom location</system:String>
+    <system:String x:Key="SelectNewLocationPopupTitle">NEUE BIBLIOTHEK HINZUFÜGEN</system:String>
+    <system:String x:Key="SelectNewLocationPopupSelectCustom">Benutzerdefinierten Standort auswählen</system:String>
 
     <!--=====================  ErrorPopup  =====================-->
     <system:String x:Key="ErrorPopupTitle">FEHLER</system:String>
