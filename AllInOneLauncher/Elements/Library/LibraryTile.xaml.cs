@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using AllInOneLauncher.Elements.Menues;
 using AllInOneLauncher.Pages.Primary;
 using BfmeFoundationProject.BfmeRegistryManagement;
+using System.Diagnostics;
+using System.IO;
 
 namespace AllInOneLauncher.Elements
 {
@@ -183,8 +185,13 @@ namespace AllInOneLauncher.Elements
                         new ContextMenuButtonItem(IsUpdateAvailable ? "Update" : "Package up to date", IsUpdateAvailable, clicked: Update),
                         new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Switch to \"{WorkshopEntry.Name}\"" : "Sync again", true, clicked: Sync),
                         new ContextMenuSpacerItem(),
-                        new ContextMenuButtonItem("Open keybinds folder", true),
-                        new ContextMenuButtonItem("Open game folder", true),
+                        new ContextMenuButtonItem("Open keybinds folder", true, clicked: () =>
+                        {
+                            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Keybinds", $"{WorkshopEntry.GameName()}-{WorkshopEntry.Name}")))
+                                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Keybinds", $"{WorkshopEntry.GameName()}-{WorkshopEntry.Name}"));
+                            Process.Start(new ProcessStartInfo("explorer.exe", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Keybinds", $"{WorkshopEntry.GameName()}-{WorkshopEntry.Name}")));
+                        }),
+                        new ContextMenuButtonItem("Open game folder", true, clicked: () => Process.Start(new ProcessStartInfo("explorer.exe", Path.Combine(BfmeRegistryManager.GetKeyValue(WorkshopEntry.Game, BfmeFoundationProject.BfmeRegistryManagement.Data.BfmeRegistryKey.InstallPath))))),
                         new ContextMenuSpacerItem(),
                         new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid)),
                         new ContextMenuSpacerItem(),
