@@ -113,7 +113,7 @@ namespace AllInOneLauncher.Elements
         {
             Task.Run(async () =>
             {
-                BfmeWorkshopEntry? localEntry = (await BfmeWorkshopLibraryManager.Search(page: -1)).Select(x => new BfmeWorkshopEntry?(x)).FirstOrDefault(x => x != null && x.Value!.Guid == WorkshopEntry.Guid, null);
+                BfmeWorkshopEntry? localEntry = await BfmeWorkshopLibraryManager.Get(WorkshopEntry.Guid);
                 Dispatcher.Invoke(() =>
                 {
                     IsInLibrary = localEntry != null;

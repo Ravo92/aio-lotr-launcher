@@ -15,6 +15,7 @@ using AllInOneLauncher.Pages.Primary;
 using BfmeFoundationProject.BfmeRegistryManagement;
 using System.Diagnostics;
 using System.IO;
+using Windows.Graphics.Printing.Workflow;
 
 namespace AllInOneLauncher.Elements
 {
@@ -241,8 +242,8 @@ namespace AllInOneLauncher.Elements
         {
             try
             {
-                await BfmeWorkshopLibraryManager.AddToLibrary(WorkshopEntry.Guid.Split(':')[0]);
                 WorkshopEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid.Split(':')[0])).entry;
+                BfmeWorkshopLibraryManager.AddToLibrary(WorkshopEntry);
                 IsUpdateAvailable = false;
                 if (isActiveIcon.Opacity == 1d) Sync();
             }
@@ -288,10 +289,7 @@ namespace AllInOneLauncher.Elements
                     if ((await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid)).entry.Version != WorkshopEntry.Version)
                         Dispatcher.Invoke(() => IsUpdateAvailable = true);
                 }
-                catch
-                {
-
-                }
+                catch { }
             });
         }
     }

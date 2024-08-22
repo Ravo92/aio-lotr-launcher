@@ -21,6 +21,10 @@
             <Grid>
                 <local:Acrylic x:Name="acrylicStyle"/>
                 <Grid x:Name="navyStyle" Background="#3A3F4C" Visibility="Collapsed"/>
+                <Grid x:Name="regularStyle" Visibility="Collapsed">
+                    <local:Acrylic/>
+                    <Grid Background="White" Opacity="0.1"/>
+                </Grid>
                 <Grid x:Name="tint" Background="#33000000" Visibility="Collapsed"/>
             </Grid>
         </Border>

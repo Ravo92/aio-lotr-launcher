@@ -34,7 +34,7 @@
     <system:String x:Key="OfflinePageEnabledEnhancements">Aktív kiegészítők</system:String>
     <system:String x:Key="OfflinePageNoEnhancementsActive">Nincs aktív kiegészítő</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">Indíttási beállítások</system:String>
-    <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Indíttás normál ablakban</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Ablak mód</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsAltTabMode">ALT+TAB támogatás engedélyezése</system:String>
 
     <!--=====================  Offline/Library  =====================-->

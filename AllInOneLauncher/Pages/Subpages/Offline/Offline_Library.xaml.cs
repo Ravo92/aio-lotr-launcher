@@ -50,7 +50,6 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             try
             {
                 var entry = await BfmeWorkshopSyncManager.CreateSnapshot(Game);
-
                 BfmeWorkshopLibraryManager.AddToLibrary(entry);
                 if (filter.Selected == 2) UpdateQuery();
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace AllInOneLauncher.Logic
 {
@@ -61,6 +62,10 @@ namespace AllInOneLauncher.Logic
             return allResolutions;
         }
 
-        public static Size GetPrimaryScreenResolution() => new(Convert.ToInt32(System.Windows.SystemParameters.PrimaryScreenWidth), Convert.ToInt32(System.Windows.SystemParameters.PrimaryScreenHeight));
+        public static Size GetPrimaryScreenResolution()
+        {
+            using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
+                return new Size((int)(Screen.PrimaryScreen.Bounds.Width / (g.DpiX / 96)), (int)(Screen.PrimaryScreen.Bounds.Height / (g.DpiY / 96)));
+        }
     }
 }

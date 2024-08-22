@@ -36,6 +36,7 @@ namespace AllInOneLauncher.Logic
 
         private const int SWP_SHOWWINDOW = 0x0040;
         private const int SWP_FRAMECHANGED = 0x0020;
+        private const int SWP_NOSIZE = 0x0001;
 
         public static IntPtr FindWindowByClassName(string className, int timeoutMilliseconds = 10000, int pollingInterval = 100)
         {
@@ -74,7 +75,7 @@ namespace AllInOneLauncher.Logic
             return hWnd;
         }
 
-        public static bool RemoveWindowBorder(IntPtr hWnd, int resolutionX, int resolutionY, int positionX = 0, int positionY = 0)
+        public static bool RemoveWindowBorder(IntPtr hWnd, int positionX = 0, int positionY = 0)
         {
             if (hWnd != IntPtr.Zero)
             {
@@ -84,7 +85,7 @@ namespace AllInOneLauncher.Logic
                 style &= ~(WS_BORDER | WS_DLGFRAME | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX);
                 _ = SetWindowLongPtrA(hWnd, GWL_STYLE, new IntPtr(style));
 
-                SetWindowPos(hWnd, IntPtr.Zero, positionX, positionY, resolutionX, resolutionY, SWP_SHOWWINDOW | SWP_FRAMECHANGED);
+                SetWindowPos(hWnd, IntPtr.Zero, positionX, positionY, 0, 0, SWP_SHOWWINDOW | SWP_FRAMECHANGED | SWP_NOSIZE);
 
                 SystemInputManager.SetTargetHWnd(hWnd);
                 return true;

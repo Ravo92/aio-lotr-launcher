@@ -13,6 +13,8 @@ using BfmeFoundationProject.WorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
 using BfmeFoundationProject.BfmeRegistryManagement;
+using Microsoft.VisualBasic.Devices;
+using System.Threading.Tasks;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -27,9 +29,6 @@ namespace AllInOneLauncher.Pages.Primary
         public Offline()
         {
             InitializeComponent();
-
-            if (Properties.Settings.Default.IsWindowed)
-                ToggleAltTabSupport.IsToggled = true;
 
             Properties.Settings.Default.SettingsSaving += (s, e) =>
             {
@@ -136,7 +135,7 @@ namespace AllInOneLauncher.Pages.Primary
         private void OnLaunchGameClicked(object sender, EventArgs e)
         {
             LauncherStateManager.Visible = false;
-            BfmeLaunchManager.LaunchGame((BfmeGame)gameTabs.SelectedIndex, ToggleLaunchWindowed.IsToggled);
+            BfmeLaunchManager.LaunchGame((BfmeGame)gameTabs.SelectedIndex, windowMode.Selected);
             LauncherStateManager.Visible = true;
         }
 
@@ -154,7 +153,7 @@ namespace AllInOneLauncher.Pages.Primary
                 {
                     BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game < 2 ? $"BFME{game + 1}" : "RotWK"), selectedLanguage);
                     if (game == 2 && !BfmeRegistryManager.IsInstalled(1)) BfmeRegistryManager.CreateNewInstallRegistry(1, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
-                    await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.BaseGame(game), (progress) => { }, (downloadItem, downloadProgress) => { });
+                    await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch(game), (progress) => { }, (downloadItem, downloadProgress) => { });
                     UpdatePlayButton();
                 }
                 catch (Exception ex)
@@ -164,17 +163,23 @@ namespace AllInOneLauncher.Pages.Primary
             });
         }
 
-        private void TabChanged(object sender, EventArgs e)
+        private async void TabChanged(object sender, EventArgs e)
         {
             if (gameTabs.SelectedIndex != previousSelectedIndex)
             {
                 previousSelectedIndex = gameTabs.SelectedIndex;
-                activeEntry.WorkshopEntry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
+                activeEntry.WorkshopEntry = await Task.Run(() => BfmeWorkshopSyncManager.GetActivePatch(previousSelectedIndex));
 
                 UpdateTitleImage();
                 UpdatePlayButton();
                 UpdateEnabledEnhancements();
-                ShowNews();
+
+                if (news.Visibility == Visibility.Visible)
+                    ShowNews();
+                else if (library.Visibility == Visibility.Visible)
+                    ShowLibrary();
+                else if (workshop.Visibility == Visibility.Visible)
+                    ShowWorkshop();
             }
         }
 
@@ -211,28 +216,6 @@ namespace AllInOneLauncher.Pages.Primary
             foreach (BfmeWorkshopEntry entry in BfmeWorkshopSyncManager.GetActiveEnhancements(gameTabs.SelectedIndex).Values)
                 enabledEnhancements.Children.Add(new EnabledEnhancementTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 0, 10) });
             activeEnhancementsNullIndicator.Visibility = enabledEnhancements.Children.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void CheckBoxWindowed_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.IsWindowed = true;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBoxWindowed_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.IsWindowed = false;
-            Properties.Settings.Default.Save();
-        }
-
-        private void ToggleAltTabSupport_OnToggledChanged(object sender, EventArgs e)
-        {
-            if (ToggleAltTabSupport.IsToggled)
-                Properties.Settings.Default.IsWindowed = true;
-            else
-                Properties.Settings.Default.IsWindowed = false;
-
-            Properties.Settings.Default.Save();
         }
     }
 }

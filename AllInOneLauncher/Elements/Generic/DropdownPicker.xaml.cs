@@ -75,11 +75,14 @@ namespace AllInOneLauncher.Elements
 
                 acrylicStyle.Visibility = Visibility.Collapsed;
                 navyStyle.Visibility = Visibility.Collapsed;
+                regularStyle.Visibility = Visibility.Collapsed;
 
                 if (value == ColorStyle.Acrylic)
                     acrylicStyle.Visibility = Visibility.Visible;
                 else if (value == ColorStyle.Navy)
                     navyStyle.Visibility = Visibility.Visible;
+                else if (value == ColorStyle.Regular)
+                    regularStyle.Visibility = Visibility.Visible;
             }
         }
 
@@ -167,5 +170,6 @@ namespace AllInOneLauncher.Elements
 public enum ColorStyle
 {
     Acrylic,
-    Navy
+    Navy,
+    Regular
 }

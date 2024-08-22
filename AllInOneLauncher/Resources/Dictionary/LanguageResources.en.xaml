@@ -34,7 +34,7 @@
     <system:String x:Key="OfflinePageEnabledEnhancements">Enabled enhancements</system:String>
     <system:String x:Key="OfflinePageNoEnhancementsActive">No enhancements active</system:String>
     <system:String x:Key="OfflinePageLaunchOptions">Launch options</system:String>
-    <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Windowed</system:String>
+    <system:String x:Key="OfflinePageLaunchOptionsWindowedMode">Display mode</system:String>
     <system:String x:Key="OfflinePageLaunchOptionsAltTabMode">Activate ALT+TAB support</system:String>
 
     <!--=====================  Offline/Library  =====================-->
