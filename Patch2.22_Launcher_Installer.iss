@@ -1,7 +1,7 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "AllInOneLauncher.exe"
-#define MyAppExeVersion "2.0.0.1"
-#define MyAppPublishFolder "RELEASE"
+#define MyAppExeVersion "2.0.0.2"
+#define MyAppPublishFolder "build\Publish"
 
 [Setup]
 AppName={#MyAppName}
@@ -422,5 +422,5 @@ Type: filesandordirs; Name: "{app}\wpfgfx_cor3.dll"
 Type: filesandordirs; Name: "{app}\*"
 
 [Run]
-Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--showLauncherUpdateLog"
-Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent; Parameters: "--showLauncherUpdateLog"
+Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchAfterInstall}; Flags: postinstall shellexec nowait unchecked skipifsilent; Parameters: "--LauncherChangelog"
+Filename: {app}\{#MyAppExeName}; Flags: postinstall nowait shellexec skipifnotsilent; Parameters: "--LauncherChangelog"
