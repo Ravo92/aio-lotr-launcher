@@ -10,8 +10,75 @@
              d:DesignHeight="860" d:DesignWidth="1115">
 
     <Grid Name="WebView2Grid">
-        <Wpf:WebView2 x:Name="newsPage" NavigationCompleted="OnNavigationCompleted" DefaultBackgroundColor="Transparent" Visibility="Visible"/>
-        <Image x:Name="newsPageImage" Stretch="Fill" Visibility="Hidden"/>
+        <Wpf:WebView2 x:Name="newsPage" DefaultBackgroundColor="Transparent" Visibility="Visible"/>
+        <StackPanel x:Name="newsPagePlaceholder" Visibility="Hidden" d:Visibility="Visible">
+            <Border Height="20" Width="300" Background="White" Opacity="0.1" CornerRadius="7" HorizontalAlignment="Left"/>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Width="300" Background="White" Margin="0,80,0,0" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Width="300" Background="White" Margin="0,80,0,0" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Height="20" Margin="0,30,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="100" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="200" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+                <Border Height="20" Margin="0,0,10,0" Width="300" Background="White" Opacity="0.3" CornerRadius="7" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </StackPanel>
         <elements:NoConnection x:Name="noConnection" Visibility="Hidden"/>
     </Grid>
 </UserControl>

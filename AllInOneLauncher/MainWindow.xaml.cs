@@ -73,6 +73,8 @@ namespace AllInOneLauncher
                 if (App.Args.Length > 4 && App.Args[2] == "--InstallGameDialog")
                     Offline.Instance.InstallGame(int.Parse(App.Args[1]), App.Args[3], App.Args[4]);
             }
+
+            PopupVisualizer.ShowPopup(new LauncherChangelogPopup());
         }
 
         private void OnSyncBegin(BfmeWorkshopEntry entry)

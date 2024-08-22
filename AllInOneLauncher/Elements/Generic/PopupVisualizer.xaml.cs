@@ -22,7 +22,7 @@ namespace AllInOneLauncher.Elements
         public static event EventHandler? OnPopupOpened;
         public static event EventHandler? OnPopupClosed;
 
-        public static PopupBody? CurentPopup => (Instance != null && Instance.content.Child is PopupBody body) ? body : null;
+        public static PopupBody? CurentPopup => (Instance != null && Instance.content.Child is PopupBody body && ((PopupBody)Instance.content.Child).ClosePopup != null) ? body : null;
 
         public PopupVisualizer()
         {

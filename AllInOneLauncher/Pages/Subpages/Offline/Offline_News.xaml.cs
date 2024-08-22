@@ -2,6 +2,7 @@
 using AllInOneLauncher.Elements;
 using System;
 using System.IO;
+using System.Net.Http;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -14,72 +15,79 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
     {
         public BfmeGame AvailableBFMEGame { get; set; }
 
-        readonly static Uri changelogBFME1 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/index.html");
-        readonly static Uri changelogBFME2 = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.html");
-        readonly static Uri changelogRotwk = new("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
+        private static string ChangelogBFME1 = "";
+        private static string ChangelogBFME2 = "";
+        private static string ChangelogRotwk = "";
 
         public Offline_News()
         {
             InitializeComponent();
-            Load(BfmeGame.BFME1);
+            InitPages();
             PopupVisualizer.OnPopupOpened += (s, e) => SetNewsVisibility(false);
             PopupVisualizer.OnPopupClosed += (s, e) => SetNewsVisibility(true);
+        }
+
+        private async void InitPages()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient() { Timeout = TimeSpan.FromSeconds(10) })
+                {
+                    ChangelogBFME1 = (await client.GetStringAsync("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/index.html")).Replace("href=\"design.css\"", "href=\"https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/design.css\"");
+                    ChangelogBFME2 = await client.GetStringAsync("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.html");
+                    ChangelogRotwk = await client.GetStringAsync("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
+                }
+            }
+            catch
+            {
+                newsPage.Visibility = System.Windows.Visibility.Hidden;
+                noConnection.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            Load(BfmeGame.BFME1);
         }
 
         private void SetNewsVisibility(bool isVisible)
         {
             if (isVisible && newsPage.Visibility == System.Windows.Visibility.Hidden)
             {
-                newsPageImage.Visibility = System.Windows.Visibility.Hidden;
+                newsPagePlaceholder.Visibility = System.Windows.Visibility.Hidden;
                 newsPage.Visibility = System.Windows.Visibility.Visible;
             }
             else if (!isVisible && newsPage.Visibility == System.Windows.Visibility.Visible)
             {
-                newsPageImage.Visibility = System.Windows.Visibility.Visible;
+                newsPagePlaceholder.Visibility = System.Windows.Visibility.Visible;
                 newsPage.Visibility = System.Windows.Visibility.Hidden;
             }
         }
 
-        private static Uri GetNewsPage(BfmeGame game)
+        private static string GetNewsPage(BfmeGame game)
         {
             return game switch
             {
-                BfmeGame.BFME1 => changelogBFME1,
-                BfmeGame.BFME2 => changelogBFME2,
-                BfmeGame.ROTWK => changelogRotwk,
+                BfmeGame.BFME1 => ChangelogBFME1,
+                BfmeGame.BFME2 => ChangelogBFME2,
+                BfmeGame.ROTWK => ChangelogRotwk,
                 _ => throw new ArgumentOutOfRangeException(nameof(game), game, null)
             };
         }
 
-        public void Load(BfmeGame AvailableBFMEGame)
+        public async void Load(BfmeGame game)
         {
-            newsPage.Visibility = System.Windows.Visibility.Visible;
-            noConnection.Visibility = System.Windows.Visibility.Hidden;
-
-            newsPageImage.Source = null;
-            newsPage.Source = GetNewsPage(AvailableBFMEGame);
-        }
-
-        private void OnNavigationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs e)
-        {
-            if (!e.IsSuccess)
+            string newsPageContent = GetNewsPage(game);
+            if (newsPageContent == "")
             {
                 newsPage.Visibility = System.Windows.Visibility.Hidden;
                 noConnection.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
-                Dispatcher.Invoke(async () =>
-                {
-                    // Cursed workaround for WebView2 airspace issue
-                    MemoryStream ms = new MemoryStream();
-                    await newsPage.CoreWebView2.CapturePreviewAsync(Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Png, ms);
-                    BitmapImage bi = new BitmapImage();
-                    bi.BeginInit();
-                    bi.StreamSource = ms;
-                    bi.EndInit();
-                    newsPageImage.Source = bi;
-                });
+                newsPage.Visibility = System.Windows.Visibility.Visible;
+                noConnection.Visibility = System.Windows.Visibility.Hidden;
+
+                await newsPage.EnsureCoreWebView2Async();
+                newsPage.NavigateToString(GetNewsPage(game));
+                SetNewsVisibility(PopupVisualizer.CurentPopup == null);
             }
         }
     }
