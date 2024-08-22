@@ -43,6 +43,7 @@ namespace AllInOneLauncher.Elements
             {
                 IsHitTestVisible = false;
                 IsLoading = entry.Guid == WorkshopEntry.Guid;
+                IsUpdateAvailable = false;
                 UpdateIsActive();
             });
         }
@@ -125,40 +126,10 @@ namespace AllInOneLauncher.Elements
             }
         }
 
-        private void UpdateType()
-        {
-            if (WorkshopEntry.Type == 0)
-                entryType.Text = Application.Current.FindResource("LibraryTilePatchType").ToString()!;
-            else if (WorkshopEntry.Type == 1)
-                entryType.Text = Application.Current.FindResource("LibraryTileModType").ToString()!;
-            else if (WorkshopEntry.Type == 2)
-                entryType.Text = Application.Current.FindResource("LibraryTileEnhancementType").ToString()!;
-            else if (WorkshopEntry.Type == 3)
-                entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
-            else if (WorkshopEntry.Type == 4)
-                entryType.Text = Application.Current.FindResource("LibraryTileSnapshotType").ToString()!;
-        }
-
         public bool IsUpdateAvailable
         {
             get => updateAvailableIcon.Visibility == Visibility.Visible;
             set => updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
-        }
-
-        private void UpdateIsActive()
-        {
-            if (WorkshopEntry.Type == 0 || WorkshopEntry.Type == 1 || WorkshopEntry.Type == 4)
-            {
-                activeText.Visibility = Visibility.Visible;
-                BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry.Game);
-                isActiveIcon.Opacity = (activeEntry != null && activeEntry!.Value.Guid == WorkshopEntry.Guid) ? 1d : 0d;
-            }
-            else
-            {
-                activeText.Visibility = Visibility.Collapsed;
-                Dictionary<string, BfmeWorkshopEntry> activeEnhancements = BfmeWorkshopSyncManager.GetActiveEnhancements(WorkshopEntry.Game);
-                isActiveIcon.Opacity = activeEnhancements.ContainsKey(WorkshopEntry.Guid) ? 1d : 0d;
-            }
         }
 
         private void OnEnter(object sender, MouseEventArgs e)
@@ -183,7 +154,6 @@ namespace AllInOneLauncher.Elements
                 {
                     MenuVisualizer.ShowMenu(
                     menu: [
-                        new ContextMenuButtonItem(IsUpdateAvailable ? "Update" : "Package up to date", IsUpdateAvailable, clicked: Update),
                         new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Switch to \"{WorkshopEntry.Name}\"" : "Sync again", true, clicked: Sync),
                         new ContextMenuSpacerItem(),
                         new ContextMenuButtonItem("Open keybinds folder", true, clicked: () =>
@@ -209,7 +179,6 @@ namespace AllInOneLauncher.Elements
                 {
                     MenuVisualizer.ShowMenu(
                     menu: [
-                        new ContextMenuButtonItem(IsUpdateAvailable ? "Update" : "Package up to date", IsUpdateAvailable, clicked: Update),
                         new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Enable \"{WorkshopEntry.Name}\"" : "Disable", true, clicked: Sync),
                         new ContextMenuSpacerItem(),
                         new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid)),
@@ -230,6 +199,7 @@ namespace AllInOneLauncher.Elements
         {
             try
             {
+                IsUpdateAvailable = false;
                 await BfmeWorkshopSyncManager.Sync(WorkshopEntry, (progress) => { }, (downloadItem, downloadProgress) => { });
             }
             catch (Exception ex)
@@ -238,14 +208,49 @@ namespace AllInOneLauncher.Elements
             }
         }
 
-        private async void Update()
+        private void UpdateType()
+        {
+            if (WorkshopEntry.Type == 0)
+                entryType.Text = Application.Current.FindResource("LibraryTilePatchType").ToString()!;
+            else if (WorkshopEntry.Type == 1)
+                entryType.Text = Application.Current.FindResource("LibraryTileModType").ToString()!;
+            else if (WorkshopEntry.Type == 2)
+                entryType.Text = Application.Current.FindResource("LibraryTileEnhancementType").ToString()!;
+            else if (WorkshopEntry.Type == 3)
+                entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
+            else if (WorkshopEntry.Type == 4)
+                entryType.Text = Application.Current.FindResource("LibraryTileSnapshotType").ToString()!;
+        }
+
+        private void UpdateIsActive()
+        {
+            if (WorkshopEntry.Type == 0 || WorkshopEntry.Type == 1 || WorkshopEntry.Type == 4)
+            {
+                activeText.Visibility = Visibility.Visible;
+                BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry.Game);
+                isActiveIcon.Opacity = (activeEntry != null && activeEntry!.Value.Guid == WorkshopEntry.Guid) ? 1d : 0d;
+            }
+            else
+            {
+                activeText.Visibility = Visibility.Collapsed;
+                Dictionary<string, BfmeWorkshopEntry> activeEnhancements = BfmeWorkshopSyncManager.GetActiveEnhancements(WorkshopEntry.Game);
+                isActiveIcon.Opacity = activeEnhancements.ContainsKey(WorkshopEntry.Guid) ? 1d : 0d;
+            }
+        }
+
+        private async void CheckForUpdates()
         {
             try
             {
-                WorkshopEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid.Split(':')[0])).entry;
-                BfmeWorkshopLibraryManager.AddToLibrary(WorkshopEntry);
-                IsUpdateAvailable = false;
-                if (isActiveIcon.Opacity == 1d) Sync();
+                BfmeWorkshopEntry latestEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid)).entry;
+                if (WorkshopEntry.Version != latestEntry.Version)
+                    BfmeWorkshopLibraryManager.AddToLibrary(latestEntry);
+
+                Dispatcher.Invoke(() => WorkshopEntry = latestEntry);
+
+                BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(latestEntry.Game);
+                if (activeEntry != null && activeEntry.Value.Guid == latestEntry.Guid && activeEntry.Value.Version != latestEntry.Version)
+                    Dispatcher.Invoke(() => IsUpdateAvailable = true);
             }
             catch (Exception ex)
             {
@@ -282,15 +287,7 @@ namespace AllInOneLauncher.Elements
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            Task.Run(async () =>
-            {
-                try
-                {
-                    if ((await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid)).entry.Version != WorkshopEntry.Version)
-                        Dispatcher.Invoke(() => IsUpdateAvailable = true);
-                }
-                catch { }
-            });
+            Task.Run(CheckForUpdates);
         }
     }
 }

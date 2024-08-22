@@ -63,6 +63,7 @@
     <!--=====================  LibraryTileHorizontal  =====================-->
     <system:String x:Key="LibraryTileHorizontalNoPatchSelected">Nessuna patch selezionata</system:String>
     <system:String x:Key="LibraryTileHorizontalSyncAgain">Sincronizza di nuovo</system:String>
+    <system:String x:Key="LibraryTileHorizontalUpdate">Update</system:String>
 
     <!--=====================  LibraryTileEmpty  =====================-->
     <system:String x:Key="LibraryTileEmptyInstallMore">Installa di più</system:String>

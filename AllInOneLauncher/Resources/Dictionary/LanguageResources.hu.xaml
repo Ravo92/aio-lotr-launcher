@@ -69,6 +69,7 @@
     <!--=====================  LibraryTileHorizontal  =====================-->
     <system:String x:Key="LibraryTileHorizontalNoPatchSelected">Nincs aktív játék</system:String>
     <system:String x:Key="LibraryTileHorizontalSyncAgain">Újraszinkronizálás</system:String>
+    <system:String x:Key="LibraryTileHorizontalUpdate">Frissítés</system:String>
 
     <!--=====================  LibraryTileEmpty  =====================-->
     <system:String x:Key="LibraryTileEmptyInstallMore">Irány a Műhely</system:String>

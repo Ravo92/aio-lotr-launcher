@@ -61,8 +61,10 @@
                     </Border>
                     <Button x:Name="activeEntryReloadButton" Style="{StaticResource RoundButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="OnResyncActiveEntry">
                         <StackPanel Margin="10,6,12,6" Orientation="Horizontal">
-                            <Path HorizontalAlignment="Right" VerticalAlignment="Center" Fill="White" Stroke="White" StrokeThickness="0.3" Stretch="Uniform" Height="10" Data="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z"/>
-                            <TextBlock Text="{DynamicResource LibraryTileHorizontalSyncAgain}" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                            <Path x:Name="syncAgainIcon" HorizontalAlignment="Right" VerticalAlignment="Center" Fill="White" Stroke="White" StrokeThickness="0.3" Stretch="Uniform" Height="10" Data="M289.088 296.704h92.992a32 32 0 0 1 0 64H232.96a32 32 0 0 1-32-32V179.712a32 32 0 0 1 64 0v50.56a384 384 0 0 1 643.84 282.88 384 384 0 0 1-383.936 384 384 384 0 0 1-384-384h64a320 320 0 1 0 640 0 320 320 0 0 0-555.712-216.448z"/>
+                            <Path x:Name="updateIcon" HorizontalAlignment="Right" VerticalAlignment="Center" Fill="White" Stroke="White" StrokeThickness="0.3" Stretch="UniformToFill" Height="10" Data="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z" Visibility="Collapsed"/>
+                            <TextBlock x:Name="syncAgainText" Text="{DynamicResource LibraryTileHorizontalSyncAgain}" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock x:Name="updateText" Text="{DynamicResource LibraryTileHorizontalUpdate}" FontSize="12" FontWeight="Bold" Margin="7,0,0,0" VerticalAlignment="Center" Foreground="White" Visibility="Collapsed"/>
                         </StackPanel>
                     </Button>
                 </Grid>

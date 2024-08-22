@@ -48,7 +48,7 @@ namespace AllInOneLauncher.Pages.Primary
         {
             Dispatcher.Invoke(() =>
             {
-                if (entry.Game == gameTabs.SelectedIndex)
+                if (entry.Game == gameTabs.SelectedIndex && (entry.Type == 0 || entry.Type == 1 || entry.Type == 4))
                 {
                     activeEntry.WorkshopEntry = entry;
                     activeEntry.IsLoading = true;

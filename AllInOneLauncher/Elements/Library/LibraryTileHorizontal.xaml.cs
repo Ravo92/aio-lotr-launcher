@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 using BfmeFoundationProject.BfmeRegistryManagement;
+using System.Diagnostics;
 
 namespace AllInOneLauncher.Elements
 {
@@ -90,7 +91,9 @@ namespace AllInOneLauncher.Elements
                 activeEntryTitle.Text = value.Value.Name;
                 activeEntryVersion.Text = value.Value.Version;
                 activeEntryAuthor.Text = value.Value.Author;
+                IsUpdateAvailable = false;
                 UpdateType();
+                CheckForUpdates();
 
                 activeEntryLoading.Visibility = IsLoading ? Visibility.Visible : Visibility.Hidden;
                 activeEntryActive.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
@@ -120,6 +123,19 @@ namespace AllInOneLauncher.Elements
             }
         }
 
+        public bool IsUpdateAvailable
+        {
+            get => updateText.Visibility == Visibility.Visible;
+            set
+            {
+                updateText.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                updateIcon.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                syncAgainText.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                syncAgainIcon.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+                activeEntryReloadButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString($"#{(value ? "FF5DAF47" : "19FFFFFF")}"));
+            }
+        }
+
         private void UpdateType()
         {
             if (WorkshopEntry == null)
@@ -137,12 +153,29 @@ namespace AllInOneLauncher.Elements
                 entryType.Text = Application.Current.FindResource("LibraryTileSnapshotType").ToString()!;
         }
 
+        private async void CheckForUpdates()
+        {
+            if (WorkshopEntry == null)
+                return;
+
+            BfmeWorkshopEntry latestEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Value.Guid)).entry;
+            if (WorkshopEntry.Value.Version != latestEntry.Version)
+                Dispatcher.Invoke(() => IsUpdateAvailable = true);
+        }
+
         private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)
         {
             if (WorkshopEntry != null)
             {
-                WorkshopEntry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
-                IsLoading = false;
+                BfmeWorkshopEntry? entry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
+                
+                if (entry != null)
+                {
+                    try { entry = (await BfmeWorkshopQueryManager.Get(entry!.Value.Guid)).entry; } catch { }
+                    WorkshopEntry = entry;
+                    IsUpdateAvailable = false;
+                    IsLoading = false;
+                }
             }
 
             if (WorkshopEntry != null)
