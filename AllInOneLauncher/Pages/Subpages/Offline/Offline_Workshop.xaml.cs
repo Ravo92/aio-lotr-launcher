@@ -18,6 +18,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             InitializeComponent();
             typeFilter.Options = ["{WorkshopPageFilterPatchesAndMods}", "{WorkshopPageFilterEnhancements}", "{WorkshopPageFilterEverything}"];
             searchFilter.Options = ["{WorkshopPageSortByMostDownloads}", "{WorkshopPageSortByMostRecent}", "{WorkshopPageSortAlphabetical}"];
+            typeFilter.Selected = 2;
         }
 
         private int Game = 0;

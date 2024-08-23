@@ -21,6 +21,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         {
             InitializeComponent();
             filter.Options = ["{LibraryPageFilterPatchesAndMods}", "{LibraryPageFilterEnhancements}", "{LibraryPageFilterSnapshots}", "{LibraryPageFilterEverything}"];
+            filter.Selected = 3;
         }
 
         private int Game = 0;

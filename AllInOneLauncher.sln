@@ -5,10 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllInOneLauncher", "AllInOneLauncher\AllInOneLauncher.csproj", "{50F3CE5E-F440-47B3-8499-1C7B009B718E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BfmeFoundationProject_WorkshopKit", "..\BfmeFoundationProject\src\BfmeFoundationProject_WorkshopKit\BfmeFoundationProject_WorkshopKit.csproj", "{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BfmeFoundationProject_BfmeRegistryManagement", "..\BfmeFoundationProject\src\BfmeFoundationProject_BfmeRegistryManagement\BfmeFoundationProject_BfmeRegistryManagement.csproj", "{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,22 +21,6 @@ Global
 		{50F3CE5E-F440-47B3-8499-1C7B009B718E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50F3CE5E-F440-47B3-8499-1C7B009B718E}.Release|x86.ActiveCfg = Release|Any CPU
 		{50F3CE5E-F440-47B3-8499-1C7B009B718E}.Release|x86.Build.0 = Release|Any CPU
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Debug|x86.ActiveCfg = Debug|x86
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Debug|x86.Build.0 = Debug|x86
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Release|x86.ActiveCfg = Release|x86
-		{7F5B5EBC-0D72-4106-A180-F880B2D6DBC5}.Release|x86.Build.0 = Release|x86
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Debug|x86.ActiveCfg = Debug|x86
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Debug|x86.Build.0 = Debug|x86
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Release|x86.ActiveCfg = Release|x86
-		{6B83C8E3-2E96-446B-99CA-5A4ABE6C210B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
