@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Launcher-språk</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Lukk Launcher til systemkurv</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Opprett snarvei på skrivebordet for launcheren</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Bibliotekinnstillinger</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Legg til bibliotekplassering</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Lokal disk</system:String>

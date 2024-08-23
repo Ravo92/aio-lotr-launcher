@@ -82,6 +82,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Launcher-taal</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Launcher sluiten naar tray</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Maak een bureaublad snelkoppeling voor de launcher</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Bibliotheekinstellingen</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Bibliotheeklocatie toevoegen</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Lokale schijf</system:String>

@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">لغة المشغل</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">إغلاق المشغل إلى علبة النظام</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">إنشاء اختصار على سطح المكتب للمشغل</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">إعدادات المكتبة</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">إضافة موقع مكتبة</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">القرص المحلي</system:String>

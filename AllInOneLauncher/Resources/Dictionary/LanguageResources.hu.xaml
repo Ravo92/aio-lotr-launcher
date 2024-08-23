@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Nyelv</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Indító elrejtése a tálcára</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Indítóikon létrehozása az asztalon</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Könyvtár beállítások</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Könyvtár hozzáadása</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveSizeText">szabad a(z)</system:String>

@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Språk för Launcher</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Stäng Launcher till systemfältet</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Skapa genväg på skrivbordet för startprogrammet</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Bibliotekets inställningar</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Lägg till bibliotekets plats</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Lokalt disk</system:String>

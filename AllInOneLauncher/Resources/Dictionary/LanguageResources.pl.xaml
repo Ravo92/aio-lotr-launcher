@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Język Launchera</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Zamknij Launcher do zasobnika</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Utwórz skrót na pulpicie dla launchera</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Ustawienia biblioteki</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Dodaj lokalizację biblioteki</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Dysk lokalny</system:String>

@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Idioma del Launcher</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Cerrar Launcher a la bandeja</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Crear un acceso directo en el escritorio para el lanzador</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Configuración de la biblioteca</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Agregar ubicación de la Biblioteca</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Disco Local</system:String>

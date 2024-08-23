@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Язык Launchera</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Закрывать Launcher в трей</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Создать ярлык на рабочем столе для лаунчера</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Настройки библиотеки</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Добавить местоположение библиотеки</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Локальный диск</system:String>

@@ -98,6 +98,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Launcher-Sprache ändern</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Launcher beim schließen ins Tray-Menü minimieren</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Desktop-Verknüpfung für den Launcher erstellen</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Bibliotheks-Einstellungen</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Bibliothek hinzufügen</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Lokaler Datenträger</system:String>

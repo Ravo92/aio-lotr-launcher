@@ -90,6 +90,7 @@
     <!--=====================  Settings/Launcher Settings/General  =====================-->
     <system:String x:Key="SettingsPageLauncherSectionGeneralLanguage">Launcher language</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralCloseToTray">Close Launcher to tray</system:String>
+    <system:String x:Key="SettingsPageLauncherSectionGeneralCreateDesktopIcon">Create desktop shortcut for Launcher</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralLibraryHeader">Library settings</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralAddLibraryLocation">Add Library Location</system:String>
     <system:String x:Key="SettingsPageLauncherSectionGeneralDriveDefaultNameText">Local Disk</system:String>

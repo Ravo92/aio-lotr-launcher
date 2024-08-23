@@ -6,8 +6,6 @@ using System.Diagnostics;
 using AllInOneLauncher.Logic;
 using System.Collections.Immutable;
 using AllInOneLauncher.Data;
-using WindowsShortcutFactory;
-using System.IO;
 
 namespace AllInOneLauncher
 {
@@ -17,28 +15,13 @@ namespace AllInOneLauncher
     public partial class App : Application
     {
         internal static Mutex? Mutex;
-        public static string[] Args = [];
+        internal static string[] Args = [];
 
         protected override void OnStartup(StartupEventArgs e)
         {
             Mutex = new Mutex(true, Constants.C_MUTEX_NAME, out bool launcherNotOpenAlready);
             bool launcherOpenAlready = !launcherNotOpenAlready;
             Args = Environment.GetCommandLineArgs().Skip(1).ToArray();
-
-            try
-            {
-                if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Patch 2.22 Launcher.lnk")))
-                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Patch 2.22 Launcher.lnk"));
-
-                using var shortcut = new WindowsShortcut
-                {
-                    Path = Process.GetCurrentProcess().MainModule!.FileName ?? "",
-                    Description = "All-in-One Launcher by Ravo92 & the Bfme Foundation Project"
-                };
-
-                shortcut.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Patch 2.22 Launcher.lnk"));
-            }
-            catch { }
 
             base.OnStartup(e);
 
