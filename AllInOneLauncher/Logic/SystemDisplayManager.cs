@@ -64,8 +64,8 @@ namespace AllInOneLauncher.Logic
 
         public static Size GetPrimaryScreenResolution()
         {
-            using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
-                return new Size((int)(Screen.PrimaryScreen.Bounds.Width / (g.DpiX / 96)), (int)(Screen.PrimaryScreen.Bounds.Height / (g.DpiY / 96)));
+            using Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+            return new Size((int)(Screen.PrimaryScreen!.Bounds.Width / (g.DpiX / 96)), (int)(Screen.PrimaryScreen.Bounds.Height / (g.DpiY / 96)));
         }
     }
 }

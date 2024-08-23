@@ -2,20 +2,19 @@
 using System.Linq;
 using System.Windows;
 using System.Threading;
-using System.Diagnostics;
 using AllInOneLauncher.Logic;
-using System.Collections.Immutable;
 using AllInOneLauncher.Data;
+using System.IO.Pipes;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace AllInOneLauncher
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         internal static Mutex? Mutex;
         internal static string[] Args = [];
+        private const string PipeName = Constants.C_NAMED_PIPE_NAME;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -23,19 +22,60 @@ namespace AllInOneLauncher
             bool launcherOpenAlready = !launcherNotOpenAlready;
             Args = Environment.GetCommandLineArgs().Skip(1).ToArray();
 
-            base.OnStartup(e);
-
             if (launcherOpenAlready)
             {
-                Process currentProcess = Process.GetCurrentProcess();
-                Process.GetProcessesByName(currentProcess.ProcessName).Where(x => x.Id != currentProcess.Id).ToImmutableList().ForEach(x => SystemInputManager.ActivateWindow(x.MainWindowHandle));
+                using (var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out))
+                {
+                    client.Connect(3000);
+                    using var writer = new StreamWriter(client);
+                    writer.WriteLine("SHOW_WINDOW");
+                    writer.Flush();
+                }
                 Current.Shutdown();
+                return;
             }
-            else
+
+            base.OnStartup(e);
+            StartServer();
+
+            Current.Resources["VisibleIfNotElevated"] = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+
+        private static void StartServer()
+        {
+            Task.Run(() =>
             {
-                App.Current.Resources["VisibleIfNotElevated"] = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
-                _ = new MainWindow();
-            }
+                using var server = new NamedPipeServerStream(PipeName, PipeDirection.In);
+                while (true)
+                {
+                    server.WaitForConnection();
+                    using (var reader = new StreamReader(server))
+                    {
+                        var message = reader.ReadLine();
+                        if (message == "SHOW_WINDOW")
+                        {
+                            Current.Dispatcher.Invoke(() =>
+                            {
+                                var mainWindow = Current.MainWindow;
+                                if (mainWindow != null)
+                                {
+                                    if (mainWindow.WindowState == WindowState.Minimized)
+                                    {
+                                        mainWindow.WindowState = WindowState.Normal;
+                                    }
+                                    mainWindow.Activate();
+                                    mainWindow.Topmost = true;
+                                    mainWindow.Topmost = false;
+                                    mainWindow.Focus();
+                                }
+                            });
+                        }
+                    }
+                    server.Disconnect();
+                }
+            });
         }
 
         protected override void OnExit(ExitEventArgs e)

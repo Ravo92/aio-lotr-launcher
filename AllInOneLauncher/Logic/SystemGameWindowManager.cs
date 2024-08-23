@@ -24,6 +24,12 @@ namespace AllInOneLauncher.Logic
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        internal static extern IntPtr FindWindow(string? lpClassName, string? lpWindowName);
+
+        [DllImport("user32.dll")]
+        internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
         private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
         private const int GWL_STYLE = -16;
@@ -45,7 +51,7 @@ namespace AllInOneLauncher.Logic
 
             while (hWnd == IntPtr.Zero && elapsedTime < timeoutMilliseconds)
             {
-                hWnd = FindWindow(className);
+                hWnd = FindWindowFromClassName(className);
                 if (hWnd == IntPtr.Zero)
                 {
                     Thread.Sleep(pollingInterval);
@@ -56,7 +62,7 @@ namespace AllInOneLauncher.Logic
             return hWnd;
         }
 
-        private static IntPtr FindWindow(string className)
+        private static IntPtr FindWindowFromClassName(string className)
         {
             IntPtr hWnd = IntPtr.Zero;
 
