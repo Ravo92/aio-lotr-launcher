@@ -40,7 +40,8 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
                 using var shortcut = new WindowsShortcut
                 {
                     Path = Environment.ProcessPath ?? "",
-                    Description = "All-in-One Launcher by Ravo92, MarcellVokk & the Bfme Foundation Project"
+                    Description = "All-in-One Launcher by Ravo92, MarcellVokk & the Bfme Foundation Project",
+                    WorkingDirectory = Environment.ProcessPath
                 };
                 shortcut.Save(desktopShortCutFilePath);
             }
