@@ -1,10 +1,8 @@
 ﻿using AllInOneLauncher.Data;
 using AllInOneLauncher.Elements;
 using System;
-using System.IO;
 using System.Net.Http;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -31,12 +29,10 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         {
             try
             {
-                using (HttpClient client = new HttpClient() { Timeout = TimeSpan.FromSeconds(10) })
-                {
-                    ChangelogBFME1 = (await client.GetStringAsync("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/index.html")).Replace("href=\"design.css\"", "href=\"https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/design.css\"");
-                    ChangelogBFME2 = await client.GetStringAsync("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.html");
-                    ChangelogRotwk = await client.GetStringAsync("https://gitlab.com/forlongthefat/rotwk-unofficial-202/-/raw/develop/_202Changelog.txt");
-                }
+                using HttpClient client = new() { Timeout = TimeSpan.FromSeconds(10) };
+                ChangelogBFME1 = (await client.GetStringAsync("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/index.html")).Replace("href=\"design.css\"", "href=\"https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme1/design.css\"");
+                ChangelogBFME2 = await client.GetStringAsync("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/bfme2/106/changelog.html");
+                ChangelogRotwk = await client.GetStringAsync("https://bfmelauncherfiles.ravonator.at/LauncherPages/changelogpages/rotwk/202/changelog.html");
             }
             catch
             {
