@@ -11,7 +11,7 @@ namespace AllInOneLauncher.Logic
 {
     internal static class BfmeLaunchManager
     {
-        internal static void LaunchGame(BfmeGame game, int displayMode)
+        internal static async void LaunchGame(BfmeGame game, int displayMode)
         {
             ProcessStartInfo startInfo = new()
             {
@@ -32,10 +32,11 @@ namespace AllInOneLauncher.Logic
                 startInfo.ArgumentList.Add("-win");
             }
 
-            if (BfmeWorkshopSyncManager.GetActiveModPath((int)game) != null)
+            string? activeModPath = await BfmeWorkshopSyncManager.GetActiveModPath((int)game);
+            if (activeModPath != null)
             {
                 startInfo.ArgumentList.Add("-mod");
-                startInfo.ArgumentList.Add(BfmeWorkshopSyncManager.GetActiveModPath((int)game));
+                startInfo.ArgumentList.Add(activeModPath);
             }
 
             using Process? gameProcess = Process.Start(startInfo);

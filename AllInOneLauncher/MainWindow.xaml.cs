@@ -112,8 +112,8 @@ namespace AllInOneLauncher
                 for (int game = 0; game < 3; game++)
                 {
                     if (!BfmeRegistryManager.IsInstalled(game) || (game == 2 && !BfmeRegistryManager.IsInstalled(1))) continue;
-                    var activePatch = BfmeWorkshopSyncManager.GetActivePatch(game);
-                    if (activePatch != null) try { await BfmeWorkshopSyncManager.Sync(activePatch.Value, (progress) => { }, (downloadItem, downloadProgress) => { }); } catch(Exception ex) { PopupVisualizer.ShowPopup(new ErrorPopup(ex)); }
+                    var activeEntry = await BfmeWorkshopSyncManager.GetActivePatch(game);
+                    if (activeEntry != null) try { await BfmeWorkshopSyncManager.Sync(activeEntry.Value); } catch(Exception ex) { PopupVisualizer.ShowPopup(new ErrorPopup(ex)); }
                 }
 
             Settings.NeedsResync = false;

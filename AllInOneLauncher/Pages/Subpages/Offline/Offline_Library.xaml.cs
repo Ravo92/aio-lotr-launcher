@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Collections.Generic;
 using AllInOneLauncher.Popups;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace AllInOneLauncher.Pages.Subpages.Offline
 {
@@ -23,6 +25,20 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         private int Game = 0;
 
+        private void OnInstallMoreClicked(object sender, MouseButtonEventArgs e) => Primary.Offline.Instance.ShowWorkshop();
+        private void OnReloadClicked(object sender, RoutedEventArgs e)
+        {
+            UpdateQuery();
+            Task.Run(Primary.Offline.Instance.activeEntry.CheckForUpdates);
+        }
+        private void OnFilterChanged(object sender, EventArgs e) => UpdateQuery();
+
+        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchPlaceholder.Visibility = search.Text == "" ? Visibility.Visible : Visibility.Hidden;
+            UpdateQuery();
+        }
+
         public void Load(int game)
         {
             Game = game;
@@ -34,9 +50,9 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         private async void UpdateQuery()
         {
             libraryTiles.Children.Clear();
-            List<BfmeWorkshopEntry> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: search.Text, type: new []{ -2, -3, 4, -1 }[filter.Selected]);
+            List<BfmeWorkshopEntryPreview> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: search.Text, type: new []{ -2, -3, 4, -1 }[filter.Selected]);
             libraryTiles.Children.Clear();
-            foreach (BfmeWorkshopEntry entry in entries)
+            foreach (BfmeWorkshopEntryPreview entry in entries)
                 libraryTiles.Children.Add(new LibraryTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
             if (filter.Selected != 2) libraryTiles.Children.Add(emptyLibraryTile);
         }
@@ -50,7 +66,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             try
             {
                 var entry = await BfmeWorkshopSyncManager.CreateSnapshot(Game);
-                BfmeWorkshopLibraryManager.AddToLibrary(entry);
+                BfmeWorkshopLibraryManager.AddOrUpdate(entry);
                 if (filter.Selected == 2) UpdateQuery();
             }
             catch(Exception ex)
@@ -63,18 +79,6 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
                 snapshotIcon.Visibility = Visibility.Visible;
                 Primary.Offline.Instance.Disabled = false;
             }
-        }
-
-        private void OnInstallMoreClicked(object sender, MouseButtonEventArgs e) => Primary.Offline.Instance.ShowWorkshop();
-
-        private void OnReloadClicked(object sender, RoutedEventArgs e) => UpdateQuery();
-
-        private void OnFilterChanged(object sender, EventArgs e) => UpdateQuery();
-
-        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
-        {
-            searchPlaceholder.Visibility = search.Text == "" ? Visibility.Visible : Visibility.Hidden;
-            UpdateQuery();
         }
     }
 }

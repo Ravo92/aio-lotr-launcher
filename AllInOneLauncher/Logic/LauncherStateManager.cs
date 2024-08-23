@@ -44,10 +44,7 @@ namespace AllInOneLauncher.Logic
                     {
                         MainWindow.Instance!.WindowState = WindowState.Normal;
                     }
-                    catch (System.ComponentModel.Win32Exception ex)
-                    {
-                        Debug.WriteLine(ex);
-                    }
+                    catch { }
                     MainWindow.Instance!.ShowInTaskbar = true;
                     MainWindow.Instance!.Activate();
                 }

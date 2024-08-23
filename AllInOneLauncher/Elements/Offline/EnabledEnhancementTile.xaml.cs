@@ -69,7 +69,7 @@ namespace AllInOneLauncher.Elements
 
         private async void OnDeactivateClicked(object sender, RoutedEventArgs e)
         {
-            await BfmeWorkshopSyncManager.Sync(WorkshopEntry, (progress) => { }, (downloadItem, downloadProgress) => { });
+            await BfmeWorkshopSyncManager.Sync(WorkshopEntry);
         }
     }
 }

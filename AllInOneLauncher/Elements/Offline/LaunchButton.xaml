@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:Width="340">
     <Grid x:Name="background">
         <Button x:Name="button" Style="{DynamicResource LaunchButton}" Padding="50,24,50,24" FontSize="22" Click="OnClicked" Content="LAUNCH"/>
-        <Border Background="#33FFFFFF" CornerRadius="9" IsHitTestVisible="False">
+        <Border Background="#028BDB" CornerRadius="9" IsHitTestVisible="False">
             <Border.OpacityMask>
                 <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Color="Black" Offset="0"/>

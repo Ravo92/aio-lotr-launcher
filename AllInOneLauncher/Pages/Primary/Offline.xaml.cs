@@ -15,6 +15,7 @@ using AllInOneLauncher.Data;
 using BfmeFoundationProject.BfmeRegistryManagement;
 using Microsoft.VisualBasic.Devices;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -111,7 +112,6 @@ namespace AllInOneLauncher.Pages.Primary
             library.Visibility = Visibility.Visible;
             workshop.Visibility = Visibility.Hidden;
 
-            activeEntry.WorkshopEntry = BfmeWorkshopSyncManager.GetActivePatch(gameTabs.SelectedIndex);
             library.Load(gameTabs.SelectedIndex);
         }
 
@@ -153,7 +153,7 @@ namespace AllInOneLauncher.Pages.Primary
                 {
                     BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game < 2 ? $"BFME{game + 1}" : "RotWK"), selectedLanguage);
                     if (game == 2 && !BfmeRegistryManager.IsInstalled(1)) BfmeRegistryManager.CreateNewInstallRegistry(1, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
-                    await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch(game), (progress) => { }, (downloadItem, downloadProgress) => { });
+                    await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch(game));
                     UpdatePlayButton();
                 }
                 catch (Exception ex)
@@ -168,7 +168,7 @@ namespace AllInOneLauncher.Pages.Primary
             if (gameTabs.SelectedIndex != previousSelectedIndex)
             {
                 previousSelectedIndex = gameTabs.SelectedIndex;
-                activeEntry.WorkshopEntry = await Task.Run(() => BfmeWorkshopSyncManager.GetActivePatch(previousSelectedIndex));
+                activeEntry.WorkshopEntry = await BfmeWorkshopSyncManager.GetActivePatch(previousSelectedIndex);
 
                 UpdateTitleImage();
                 UpdatePlayButton();
@@ -210,10 +210,10 @@ namespace AllInOneLauncher.Pages.Primary
                 launchButton.ButtonState = LaunchButtonState.Install;
         }
 
-        private void UpdateEnabledEnhancements()
+        private async void UpdateEnabledEnhancements()
         {
             enabledEnhancements.Children.Clear();
-            foreach (BfmeWorkshopEntry entry in BfmeWorkshopSyncManager.GetActiveEnhancements(gameTabs.SelectedIndex).Values)
+            foreach (BfmeWorkshopEntry entry in (await BfmeWorkshopSyncManager.GetActiveEnhancements(gameTabs.SelectedIndex)).Values)
                 enabledEnhancements.Children.Add(new EnabledEnhancementTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 0, 10) });
             activeEnhancementsNullIndicator.Visibility = enabledEnhancements.Children.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }

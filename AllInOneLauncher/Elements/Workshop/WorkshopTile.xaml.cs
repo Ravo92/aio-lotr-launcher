@@ -3,6 +3,7 @@ using AllInOneLauncher.Popups;
 using BfmeFoundationProject.WorkshopKit.Data;
 using BfmeFoundationProject.WorkshopKit.Logic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,8 +24,8 @@ namespace AllInOneLauncher.Elements
             Properties.Settings.Default.SettingsSaving += (s, e) => UpdateType();
         }
 
-        BfmeWorkshopEntry _workshopEntry;
-        public BfmeWorkshopEntry WorkshopEntry
+        BfmeWorkshopEntryPreview _workshopEntry;
+        public BfmeWorkshopEntryPreview WorkshopEntry
         {
             get => _workshopEntry;
             set
@@ -34,6 +35,7 @@ namespace AllInOneLauncher.Elements
                 title.Text = value.Name;
                 version.Text = value.Version;
                 author.Text = value.Author;
+                IsInLibrary = BfmeWorkshopLibraryManager.IsInLibrary(value.Guid);
                 UpdateType();
             }
         }
@@ -44,10 +46,30 @@ namespace AllInOneLauncher.Elements
             set => inLibraryIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
         }
 
-        public bool IsUpdateAvailable
+        private void OnEnter(object sender, MouseEventArgs e) => hoverEffect.Opacity = 1;
+        private void OnLeave(object sender, MouseEventArgs e) => hoverEffect.Opacity = 0;
+
+        private void OnClicked(object sender, MouseButtonEventArgs e)
         {
-            get => updateAvailableIcon.Visibility == Visibility.Visible;
-            set => updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                AddToLibrary();
+            }
+            else if (e.ChangedButton == MouseButton.Right)
+            {
+                MenuVisualizer.ShowMenu(
+                menu: [
+                    new ContextMenuButtonItem(IsInLibrary ? "Already in library" : "Add to library", !IsInLibrary, clicked: AddToLibrary),
+                    new ContextMenuSpacerItem(),
+                    new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid))
+                ],
+                owner: this,
+                side: MenuSide.BottomLeft,
+                padding: 4,
+                tint: true,
+                minWidth: 200,
+                targetCursor: true);
+            }
         }
 
         private void UpdateType()
@@ -62,64 +84,17 @@ namespace AllInOneLauncher.Elements
                 entryType.Text = Application.Current.FindResource("LibraryTileMapPackType").ToString()!;
         }
 
-        private void OnEnter(object sender, MouseEventArgs e)
-        {
-            hoverEffect.Opacity = 1;
-        }
-
-        private void OnLeave(object sender, MouseEventArgs e)
-        {
-            hoverEffect.Opacity = 0;
-        }
-
-        private void OnClicked(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                AddToLibrary();
-            }
-            else if (e.ChangedButton == MouseButton.Right)
-            {
-                MenuVisualizer.ShowMenu(
-                menu: [
-                    new ContextMenuButtonItem(IsUpdateAvailable ? "Update" : (IsInLibrary ? "Already in library" : "Add to library"), !IsInLibrary || IsUpdateAvailable, clicked: AddToLibrary),
-                    new ContextMenuSpacerItem(),
-                    new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid))
-                ],
-                owner: this,
-                side: MenuSide.BottomLeft,
-                padding: 4,
-                tint: true,
-                minWidth: 200,
-                targetCursor: true);
-            }
-        }
-
         private async void AddToLibrary()
         {
             try
             {
-                await BfmeWorkshopLibraryManager.AddToLibrary(WorkshopEntry.Guid);
+                await BfmeWorkshopLibraryManager.AddOrUpdate(WorkshopEntry.Guid);
                 IsInLibrary = true;
-                IsUpdateAvailable = false;
             }
             catch (Exception ex)
             {
                 PopupVisualizer.ShowPopup(new ErrorPopup(ex));
             }
-        }
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            Task.Run(async () =>
-            {
-                BfmeWorkshopEntry? localEntry = await BfmeWorkshopLibraryManager.Get(WorkshopEntry.Guid);
-                Dispatcher.Invoke(() =>
-                {
-                    IsInLibrary = localEntry != null;
-                    IsUpdateAvailable = localEntry != null && localEntry!.Value.Version != WorkshopEntry.Version;
-                });
-            });
         }
     }
 }

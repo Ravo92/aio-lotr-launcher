@@ -93,7 +93,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryAuthor.Text = value.Value.Author;
                 IsUpdateAvailable = false;
                 UpdateType();
-                CheckForUpdates();
+                Task.Run(CheckForUpdates);
 
                 activeEntryLoading.Visibility = IsLoading ? Visibility.Visible : Visibility.Hidden;
                 activeEntryActive.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
@@ -136,6 +136,19 @@ namespace AllInOneLauncher.Elements
             }
         }
 
+        private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)
+        {
+            BfmeWorkshopEntry? activeEntry = await BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
+            if (activeEntry != null)
+            {
+                try { activeEntry = (await BfmeWorkshopQueryManager.Get(activeEntry!.Value.Guid)).entry; } catch { }
+                WorkshopEntry = activeEntry.Value;
+                IsUpdateAvailable = false;
+                IsLoading = false;
+                await BfmeWorkshopSyncManager.Sync(activeEntry.Value);
+            }
+        }
+
         private void UpdateType()
         {
             if (WorkshopEntry == null)
@@ -153,33 +166,18 @@ namespace AllInOneLauncher.Elements
                 entryType.Text = Application.Current.FindResource("LibraryTileSnapshotType").ToString()!;
         }
 
-        private async void CheckForUpdates()
+        public async void CheckForUpdates()
         {
-            if (WorkshopEntry == null)
-                return;
-
-            BfmeWorkshopEntry latestEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Value.Guid)).entry;
-            if (WorkshopEntry.Value.Version != latestEntry.Version)
-                Dispatcher.Invoke(() => IsUpdateAvailable = true);
-        }
-
-        private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)
-        {
-            if (WorkshopEntry != null)
+            try
             {
-                BfmeWorkshopEntry? entry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
-                
-                if (entry != null)
-                {
-                    try { entry = (await BfmeWorkshopQueryManager.Get(entry!.Value.Guid)).entry; } catch { }
-                    WorkshopEntry = entry;
-                    IsUpdateAvailable = false;
-                    IsLoading = false;
-                }
-            }
+                if (WorkshopEntry == null)
+                    return;
 
-            if (WorkshopEntry != null)
-                await BfmeWorkshopSyncManager.Sync(WorkshopEntry!.Value, (progress) => { }, (downloadItem, downloadProgress) => { });
+                BfmeWorkshopEntry latestEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Value.Guid)).entry;
+                if (WorkshopEntry != null && latestEntry.Guid == WorkshopEntry.Value.Guid && WorkshopEntry.Value.Version != latestEntry.Version)
+                    Dispatcher.Invoke(() => IsUpdateAvailable = true);
+            }
+            catch { }
         }
     }
 }

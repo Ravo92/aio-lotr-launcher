@@ -34,62 +34,8 @@ namespace AllInOneLauncher.Elements
             BfmeWorkshopSyncManager.OnSyncEnd += OnSyncEnd;
         }
 
-        private void OnSyncBegin(BfmeWorkshopEntry entry)
-        {
-            if (entry.Game != WorkshopEntry.Game)
-                return;
-
-            Dispatcher.Invoke(() =>
-            {
-                IsHitTestVisible = false;
-                IsLoading = entry.Guid == WorkshopEntry.Guid;
-                IsUpdateAvailable = false;
-                UpdateIsActive();
-            });
-        }
-
-        private void OnSyncUpdate(int progress)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (IsLoading)
-                    LoadProgress = progress;
-            });
-        }
-
-        private void OnSyncEnd()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                IsHitTestVisible = true;
-                IsLoading = false;
-
-                IsHitTestVisible = BfmeRegistryManager.IsInstalled(WorkshopEntry.Game);
-                content.Opacity = IsHitTestVisible ? 1 : 0.5;
-                if (IsHitTestVisible)
-                    try
-                    {
-                        icon.Source = new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl));
-                    }
-                    catch
-                    {
-
-                    }
-                else
-                    try
-                    {
-                        icon.Source = new FormatConvertedBitmap(new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl)), PixelFormats.Gray16, BitmapPalettes.Gray16, 1);
-                    }
-                    catch
-                    {
-
-                    }
-                UpdateIsActive();
-            });
-        }
-
-        BfmeWorkshopEntry _workshopEntry;
-        public BfmeWorkshopEntry WorkshopEntry
+        BfmeWorkshopEntryPreview _workshopEntry;
+        public BfmeWorkshopEntryPreview WorkshopEntry
         {
             get => _workshopEntry;
             set
@@ -98,7 +44,6 @@ namespace AllInOneLauncher.Elements
                 title.Text = value.Name;
                 version.Text = value.Version;
                 author.Text = value.Author;
-                UpdateType();
 
                 IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
@@ -107,7 +52,8 @@ namespace AllInOneLauncher.Elements
                 else
                     try { icon.Source = new FormatConvertedBitmap(new BitmapImage(new Uri(value.ArtworkUrl)), PixelFormats.Gray16, BitmapPalettes.Gray16, 1); } catch { }
 
-                UpdateIsActive();
+                UpdateType();
+                Task.Run(UpdateIsActive);
             }
         }
 
@@ -126,20 +72,70 @@ namespace AllInOneLauncher.Elements
             }
         }
 
-        public bool IsUpdateAvailable
+        public double LoadProgress
         {
-            get => updateAvailableIcon.Visibility == Visibility.Visible;
-            set => updateAvailableIcon.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+            get => (double)GetValue(LoadProgressProperty);
+            set
+            {
+                SetValue(LoadProgressProperty, value);
+                progressText.Text = $"{value}%";
+            }
+        }
+        public static readonly DependencyProperty LoadProgressProperty = DependencyProperty.Register("LoadProgress", typeof(double), typeof(LibraryTile), new PropertyMetadata(OnLoadProgressChangedCallBack));
+        private static void OnLoadProgressChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            LibraryTile progressBar = (LibraryTile)sender;
+            if (progressBar != null)
+            {
+                DoubleAnimation da = new() { To = (double)e.NewValue / 100d, Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
+                progressBar.progressGradientStop1.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
+                progressBar.progressGradientStop2.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
+            }
         }
 
-        private void OnEnter(object sender, MouseEventArgs e)
+        private void OnLoad(object sender, RoutedEventArgs e) => Task.Run(CheckForUpdates);
+        private void OnEnter(object sender, MouseEventArgs e) => hoverEffect.Opacity = 1;
+        private void OnLeave(object sender, MouseEventArgs e) => hoverEffect.Opacity = 0;
+
+        private void OnSyncBegin(BfmeWorkshopEntry entry)
         {
-            hoverEffect.Opacity = 1;
+            if (entry.Game != WorkshopEntry.Game)
+                return;
+
+            Dispatcher.Invoke(() =>
+            {
+                IsHitTestVisible = false;
+                if (WorkshopEntry.Type == 0 || WorkshopEntry.Type == 1 || WorkshopEntry.Type == 4)
+                    IsLoading = entry.Guid == WorkshopEntry.Guid;
+            });
         }
 
-        private void OnLeave(object sender, MouseEventArgs e)
+        private void OnSyncUpdate(int progress)
         {
-            hoverEffect.Opacity = 0;
+            Dispatcher.Invoke(() =>
+            {
+                if (IsLoading)
+                    LoadProgress = progress;
+            });
+        }
+
+        private void OnSyncEnd()
+        {
+            UpdateIsActive();
+            Dispatcher.Invoke(() =>
+            {
+                IsLoading = false;
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled(WorkshopEntry.Game);
+                content.Opacity = IsHitTestVisible ? 1 : 0.5;
+                try
+                {
+                    if (IsHitTestVisible)
+                        icon.Source = new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl));
+                    else
+                        icon.Source = new FormatConvertedBitmap(new BitmapImage(new Uri(WorkshopEntry.ArtworkUrl)), PixelFormats.Gray16, BitmapPalettes.Gray16, 1);
+                }
+                catch { }
+            });
         }
 
         private void OnClicked(object sender, MouseButtonEventArgs e)
@@ -195,19 +191,6 @@ namespace AllInOneLauncher.Elements
             }
         }
 
-        private async void Sync()
-        {
-            try
-            {
-                IsUpdateAvailable = false;
-                await BfmeWorkshopSyncManager.Sync(WorkshopEntry, (progress) => { }, (downloadItem, downloadProgress) => { });
-            }
-            catch (Exception ex)
-            {
-                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
-            }
-        }
-
         private void UpdateType()
         {
             if (WorkshopEntry.Type == 0)
@@ -226,15 +209,33 @@ namespace AllInOneLauncher.Elements
         {
             if (WorkshopEntry.Type == 0 || WorkshopEntry.Type == 1 || WorkshopEntry.Type == 4)
             {
-                activeText.Visibility = Visibility.Visible;
-                BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry.Game);
-                isActiveIcon.Opacity = (activeEntry != null && activeEntry!.Value.Guid == WorkshopEntry.Guid) ? 1d : 0d;
+                bool isActive = BfmeWorkshopSyncManager.IsPatchActive(WorkshopEntry.Game, WorkshopEntry.Guid);
+                Dispatcher.Invoke(() =>
+                {
+                    activeText.Visibility = Visibility.Visible;
+                    isActiveIcon.Opacity = isActive ? 1d : 0d;
+                });
             }
             else
             {
-                activeText.Visibility = Visibility.Collapsed;
-                Dictionary<string, BfmeWorkshopEntry> activeEnhancements = BfmeWorkshopSyncManager.GetActiveEnhancements(WorkshopEntry.Game);
-                isActiveIcon.Opacity = activeEnhancements.ContainsKey(WorkshopEntry.Guid) ? 1d : 0d;
+                bool isActive = BfmeWorkshopSyncManager.IsEnhancementActive(WorkshopEntry.Game, WorkshopEntry.Guid);
+                Dispatcher.Invoke(() =>
+                {
+                    activeText.Visibility = Visibility.Collapsed;
+                    isActiveIcon.Opacity = isActive ? 1d : 0d;
+                });
+            }
+        }
+
+        private async void Sync()
+        {
+            try
+            {
+                await BfmeWorkshopSyncManager.Sync((await BfmeWorkshopLibraryManager.Get(WorkshopEntry.Guid)).Value);
+            }
+            catch (Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
             }
         }
 
@@ -244,50 +245,18 @@ namespace AllInOneLauncher.Elements
             {
                 BfmeWorkshopEntry latestEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid)).entry;
                 if (WorkshopEntry.Version != latestEntry.Version)
-                    BfmeWorkshopLibraryManager.AddToLibrary(latestEntry);
-
-                Dispatcher.Invoke(() => WorkshopEntry = latestEntry);
-
-                BfmeWorkshopEntry? activeEntry = BfmeWorkshopSyncManager.GetActivePatch(latestEntry.Game);
-                if (activeEntry != null && activeEntry.Value.Guid == latestEntry.Guid && activeEntry.Value.Version != latestEntry.Version)
-                    Dispatcher.Invoke(() => IsUpdateAvailable = true);
+                {
+                    BfmeWorkshopLibraryManager.AddOrUpdate(latestEntry);
+                    Dispatcher.Invoke(() => WorkshopEntry = latestEntry.Preview());
+                }
             }
-            catch (Exception ex)
-            {
-                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
-            }
+            catch { }
         }
 
         private void RemoveFromLibrary()
         {
-            BfmeWorkshopLibraryManager.RemoveFromLibrary(WorkshopEntry.Guid.Split(':')[0]);
+            BfmeWorkshopLibraryManager.Remove(WorkshopEntry.Guid);
             Offline.Instance.library.libraryTiles.Children.Remove(this);
-        }
-
-        public double LoadProgress
-        {
-            get => (double)GetValue(LoadProgressProperty);
-            set
-            {
-                SetValue(LoadProgressProperty, value);
-                progressText.Text = $"{value}%";
-            }
-        }
-        public static readonly DependencyProperty LoadProgressProperty = DependencyProperty.Register("LoadProgress", typeof(double), typeof(LibraryTile), new PropertyMetadata(OnLoadProgressChangedCallBack));
-        private static void OnLoadProgressChangedCallBack(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            LibraryTile progressBar = (LibraryTile)sender;
-            if (progressBar != null)
-            {
-                DoubleAnimation da = new() { To = (double)e.NewValue / 100d, Duration = TimeSpan.FromSeconds((double)e.NewValue == 0d ? 0d : 0.5d) };
-                progressBar.progressGradientStop1.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
-                progressBar.progressGradientStop2.BeginAnimation(GradientStop.OffsetProperty, da, HandoffBehavior.Compose);
-            }
-        }
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            Task.Run(CheckForUpdates);
         }
     }
 }
