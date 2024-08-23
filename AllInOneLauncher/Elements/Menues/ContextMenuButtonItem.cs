@@ -6,13 +6,15 @@ namespace AllInOneLauncher.Elements.Menues
 {
     public class ContextMenuButtonItem : ContextMenuItem
     {
-        public ContextMenuButtonItem(string text, bool enabled, bool round = true, double height = 34, Action? clicked = null)
+        public ContextMenuButtonItem(string text, bool enabled, bool round = true, double height = 34, Action? clicked = null, Action? mouseEntered = null, Action? mouseLeft = null)
         {
             Text = text;
             Enabled = enabled;
             Round = round;
             Height = height;
             Clicked = clicked;
+            MouseEntered = mouseEntered;
+            MouseLeft = mouseLeft;
         }
 
         public string Text { get; set; } = "";
@@ -20,6 +22,8 @@ namespace AllInOneLauncher.Elements.Menues
         public bool Round { get; set; } = true;
         public double Height { get; set; } = 34;
         public Action? Clicked { get; set; }
+        public Action? MouseEntered { get; set; }
+        public Action? MouseLeft { get; set; }
 
         public override FrameworkElement GenerateElement()
         {

@@ -54,7 +54,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             if (Game == BfmeGame.BFME1) Properties.Settings.Default.BFME1LanguageSetting = LanguageDropdown.Selected;
             if (Game == BfmeGame.BFME2) Properties.Settings.Default.BFME2LanguageSetting = LanguageDropdown.Selected;
             if (Game == BfmeGame.ROTWK) Properties.Settings.Default.RotwkLanguageSetting = LanguageDropdown.Selected;
-            // BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.Language, LanguageDropdown.SelectedValue);
+            LauncherStateManager.AsElevated(() => BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.Language, LanguageDropdown.SelectedValue));
             Primary.Settings.NeedsResync = true;
             Properties.Settings.Default.Save();
         }
@@ -64,7 +64,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             if (Game == BfmeGame.BFME1) Properties.Settings.Default.BFME1ResolutionSetting = ResolutionDropdown.SelectedValue;
             if (Game == BfmeGame.BFME2) Properties.Settings.Default.BFME2ResolutionSetting = ResolutionDropdown.SelectedValue;
             if (Game == BfmeGame.ROTWK) Properties.Settings.Default.RotwkResolutionSetting = ResolutionDropdown.SelectedValue;
-            BfmeSettingsManager.Set(Game, "Resolution", ResolutionDropdown.SelectedValue);
+            LauncherStateManager.AsElevated(() => BfmeSettingsManager.Set(Game, "Resolution", ResolutionDropdown.SelectedValue));
             Properties.Settings.Default.Save();
         }
 

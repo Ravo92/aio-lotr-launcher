@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
         mc:Ignorable="d"
-        Title="{DynamicResource MainWindowTitle}" MinWidth="1024" MinHeight="786" Width="1280" Height="720" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Visibility="Visible" SnapsToDevicePixels="True" Loaded="OnLoad" Closing="LauncherMainWindow_Closing" RenderOptions.BitmapScalingMode="HighQuality">
+        Title="{DynamicResource MainWindowTitle}" FontSize="14" WindowStartupLocation="CenterScreen" SizeChanged="OnSizeChanged" WindowStyle="ThreeDBorderWindow" Visibility="Visible" SnapsToDevicePixels="True" Loaded="OnLoad" Closing="LauncherMainWindow_Closing" RenderOptions.BitmapScalingMode="HighQuality">
     <Grid x:Name="windowGrid">
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Resources/Images/BGMap.png"/>

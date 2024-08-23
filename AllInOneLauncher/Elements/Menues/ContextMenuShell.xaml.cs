@@ -86,6 +86,10 @@ namespace AllInOneLauncher.Elements
                 {
                     mainGrid.RenderTransformOrigin = new Point(0, 1);
                 }
+                else if (value == MenuSide.TopRight)
+                {
+                    mainGrid.RenderTransformOrigin = new Point(0, 0.5);
+                }
 
                 OnPropertyChanged();
             }
