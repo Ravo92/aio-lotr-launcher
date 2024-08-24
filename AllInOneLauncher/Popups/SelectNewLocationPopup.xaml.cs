@@ -16,7 +16,7 @@ namespace AllInOneLauncher.Popups
     /// </summary>
     public partial class SelectNewLocationPopup : PopupBody
     {
-        private DriveInfo[] Drives = DriveInfo.GetDrives().Where(x => x.DriveType == DriveType.Fixed && !Properties.Settings.Default.LibraryDrives.OfType<string>().Any(y => Path.GetPathRoot(y) == x.Name)).ToArray();
+        private DriveInfo[] Drives = DriveInfo.GetDrives().Where(x => x.DriveType == DriveType.Fixed && !Properties.Settings.Default.LibraryLocations.OfType<string>().Any(y => Path.GetPathRoot(y) == x.Name)).ToArray();
 
         public SelectNewLocationPopup()
         {

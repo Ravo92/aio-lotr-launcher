@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
 using System.Configuration;
+using System.Security.Principal;
 
 namespace AllInOneLauncher
 {
@@ -16,25 +17,24 @@ namespace AllInOneLauncher
     {
         internal static Mutex? Mutex;
         internal static string[] Args = [];
-        private const string PipeName = Constants.C_NAMED_PIPE_NAME;
 
         public static CoreWebView2Environment? GlobalWebView2Environment { get; private set; }
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            if (!LauncherStateManager.IsElevated)
+            if (!new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
             {
-                LauncherStateManager.RestartElevated();
+                LauncherStateManager.Restart();
                 return;
             }
 
-            Mutex = new Mutex(true, Constants.C_MUTEX_NAME, out bool launcherNotOpenAlready);
+            Mutex = new Mutex(true, "17cf5b95-4261-4254-8978-d61580c3b057", out bool launcherNotOpenAlready);
             bool launcherOpenAlready = !launcherNotOpenAlready;
             Args = Environment.GetCommandLineArgs().Skip(1).ToArray();
 
             if (launcherOpenAlready)
             {
-                using (var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out))
+                using (var client = new NamedPipeClientStream(".", "8d9d7d24-97d9-4efc-abcc-ccd09f3480bd", PipeDirection.Out))
                 {
                     client.Connect(3000);
                     using var writer = new StreamWriter(client);
@@ -52,7 +52,6 @@ namespace AllInOneLauncher
 
             StartServer();
 
-            Current.Resources["VisibleIfNotElevated"] = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
             var mainWindow = new MainWindow();
             mainWindow.Show();
         }
@@ -61,7 +60,7 @@ namespace AllInOneLauncher
         {
             Task.Run(() =>
             {
-                using var server = new NamedPipeServerStream(PipeName, PipeDirection.In);
+                using var server = new NamedPipeServerStream("8d9d7d24-97d9-4efc-abcc-ccd09f3480bd", PipeDirection.In);
                 while (true)
                 {
                     server.WaitForConnection();

@@ -40,15 +40,28 @@ namespace AllInOneLauncher
             Width = SystemParameters.WorkArea.Width * 0.72;
             Height = SystemParameters.WorkArea.Height * 0.85;
 
-            if (Properties.Settings.Default.LibraryDrives.Contains("NotSet"))
+            if (Properties.Settings.Default.LibraryLocations.Contains("NotSet"))
             {
-                Properties.Settings.Default.LibraryDrives = [Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")];
+                Properties.Settings.Default.LibraryLocations = [Path.Combine(Path.GetPathRoot(Environment.ProcessPath) ?? "C:/", "BfmeLibrary")];
                 Properties.Settings.Default.Save();
             }
-            else if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")))
+            else if (!Properties.Settings.Default.LibraryLocations.Contains(Path.Combine(Path.GetPathRoot(Environment.ProcessPath) ?? "C:/", "BfmeLibrary")))
             {
-                Properties.Settings.Default.LibraryDrives = [Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")];
+                Properties.Settings.Default.LibraryLocations.Add(Path.Combine(Path.GetPathRoot(Environment.ProcessPath) ?? "C:/", "BfmeLibrary"));
                 Properties.Settings.Default.Save();
+            }
+
+            for (int game = 0; game < 3; game++)
+            {
+                if (BfmeRegistryManager.IsInstalled(game) && BfmeRegistryManager.GetKeyValue(game, BfmeFoundationProject.BfmeRegistryManagement.Data.BfmeRegistryKey.InstallPath).Contains(Path.GetDirectoryName(Environment.ProcessPath)!))
+                {
+                    PopupVisualizer.ShowPopup(new MessagePopup("INVALID INSTALL LOCATION", "The All In One Launcher has been installed inside one of the games folders. This is not allowed, please reinstall the launcher in a different location!"),
+                    OnPopupClosed: () =>
+                    {
+                        Application.Current.Shutdown();
+                    });
+                    break;
+                }
             }
 
             CheckSize();
@@ -66,17 +79,8 @@ namespace AllInOneLauncher
         {
             if (App.Args.Length > 0)
             {
-                if (App.Args[0] == "--Settings" && App.Args.Length > 1)
-                    SetFullContent(new Settings(App.Args[1]));
-                else if (App.Args[0] == "--Game" && App.Args.Length > 1)
-                    Offline.Instance.gameTabs.InitialSelectedIndex = int.Parse(App.Args[1]);
-                else if (App.Args[0] == "--Online")
-                    ShowOnline();
-                else if (App.Args[0] == "--LauncherChangelog")
+                if (App.Args[0] == "--LauncherChangelog")
                     PopupVisualizer.ShowPopup(new LauncherChangelogPopup());
-
-                if (App.Args.Length > 4 && App.Args[2] == "--InstallGameDialog")
-                    Offline.Instance.InstallGame(int.Parse(App.Args[1]), App.Args[3], App.Args[4]);
             }
         }
 
@@ -215,7 +219,7 @@ namespace AllInOneLauncher
 
         private void LauncherMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Properties.Settings.Default.CloseLauncherToTray)
+            if (Properties.Settings.Default.HideToTrayOnClose)
             {
                 e.Cancel = true;
                 ReloadContextMenu();

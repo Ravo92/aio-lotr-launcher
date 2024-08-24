@@ -27,7 +27,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             libraryDrives.Children.Clear();
             int i = 0;
-            foreach (string libraryDrive in Properties.Settings.Default.LibraryDrives.OfType<string>().Where(x => x != null))
+            foreach (string libraryDrive in Properties.Settings.Default.LibraryLocations.OfType<string>().Where(x => x != null))
             {
                 if (i != 0) libraryDrives.Children.Add(new Divider());
                 libraryDrives.Children.Add(new LibraryDriveElement(libraryDrive));
@@ -40,7 +40,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             PopupVisualizer.ShowPopup(new SelectNewLocationPopup(),
             OnPopupSubmited: (submitedData) =>
             {
-                Properties.Settings.Default.LibraryDrives.Add(submitedData[0]);
+                Properties.Settings.Default.LibraryLocations.Add(submitedData[0]);
                 Properties.Settings.Default.Save();
                 LoadLibraryDrives();
             });

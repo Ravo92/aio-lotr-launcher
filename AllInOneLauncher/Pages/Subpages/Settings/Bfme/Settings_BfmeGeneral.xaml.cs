@@ -23,20 +23,8 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             ResolutionDropdown.Options = SystemDisplayManager.GetAllSupportedResolutions();
 
-            ResolutionDropdown.SelectedValue = Game switch
-            {
-                BfmeGame.BFME1 => !string.IsNullOrEmpty(Properties.Settings.Default.BFME1ResolutionSetting) ? Properties.Settings.Default.BFME1ResolutionSetting : ResolutionDropdown.Options.Last(),
-                BfmeGame.BFME2 => !string.IsNullOrEmpty(Properties.Settings.Default.BFME2ResolutionSetting) ? Properties.Settings.Default.BFME2ResolutionSetting : ResolutionDropdown.Options.Last(),
-                BfmeGame.ROTWK => !string.IsNullOrEmpty(Properties.Settings.Default.RotwkResolutionSetting) ? Properties.Settings.Default.RotwkResolutionSetting : ResolutionDropdown.Options.Last(),
-                _ => ResolutionDropdown.Options.Last()
-            };
-            LanguageDropdown.Selected = Game switch
-            {
-                BfmeGame.BFME1 => Properties.Settings.Default.BFME1LanguageSetting != 0 ? Properties.Settings.Default.BFME1LanguageSetting : 0,
-                BfmeGame.BFME2 => Properties.Settings.Default.BFME2LanguageSetting != 0 ? Properties.Settings.Default.BFME2LanguageSetting : 0,
-                BfmeGame.ROTWK => Properties.Settings.Default.RotwkLanguageSetting != 0 ? Properties.Settings.Default.RotwkLanguageSetting : 0,
-                _ => 0
-            };
+            ResolutionDropdown.SelectedValue = BfmeSettingsManager.Get(Game, "Resolution") ?? ResolutionDropdown.Options.First();
+            LanguageDropdown.SelectedValue = BfmeRegistryManager.GetKeyValue((int)Game, BfmeRegistryKey.Language);
             title.Text = Game switch
             {
                 BfmeGame.BFME1 => Application.Current.FindResource("SettingsPageBFME1SectionHeader").ToString(),
@@ -51,9 +39,6 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 
         private void OnLanguageOptionSelected(object sender, System.EventArgs e)
         {
-            if (Game == BfmeGame.BFME1) Properties.Settings.Default.BFME1LanguageSetting = LanguageDropdown.Selected;
-            if (Game == BfmeGame.BFME2) Properties.Settings.Default.BFME2LanguageSetting = LanguageDropdown.Selected;
-            if (Game == BfmeGame.ROTWK) Properties.Settings.Default.RotwkLanguageSetting = LanguageDropdown.Selected;
             BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.Language, LanguageDropdown.SelectedValue);
             Primary.Settings.NeedsResync = true;
             Properties.Settings.Default.Save();
@@ -61,9 +46,6 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 
         private void OnGameResolutionOptionSelected(object sender, System.EventArgs e)
         {
-            if (Game == BfmeGame.BFME1) Properties.Settings.Default.BFME1ResolutionSetting = ResolutionDropdown.SelectedValue;
-            if (Game == BfmeGame.BFME2) Properties.Settings.Default.BFME2ResolutionSetting = ResolutionDropdown.SelectedValue;
-            if (Game == BfmeGame.ROTWK) Properties.Settings.Default.RotwkResolutionSetting = ResolutionDropdown.SelectedValue;
             BfmeSettingsManager.Set(Game, "Resolution", ResolutionDropdown.SelectedValue);
             Properties.Settings.Default.Save();
         }

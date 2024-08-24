@@ -19,7 +19,7 @@ namespace AllInOneLauncher.Popups
             InitializeComponent();
 
             locations.Children.Clear();
-            foreach (string libraryPath in Properties.Settings.Default.LibraryDrives.OfType<string>().Where(x => x != null))
+            foreach (string libraryPath in Properties.Settings.Default.LibraryLocations.OfType<string>().Where(x => x != null))
             {
                 DriveInfo drive = Drives[$@"{libraryPath.Split(@":\").First()}:\"];
 
@@ -34,7 +34,7 @@ namespace AllInOneLauncher.Popups
             }
         }
 
-        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => SubmitAsElevated(LanguageDropdown.SelectedValue, Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
+        private void ButtonAcceptClicked(object sender, RoutedEventArgs e) => Submit(LanguageDropdown.SelectedValue, Selectable.GetSelectedTagInContainer(locations)!.ToString()!);
 
         private void ButtonCancelClicked(object sender, RoutedEventArgs e) => Dismiss();
     }

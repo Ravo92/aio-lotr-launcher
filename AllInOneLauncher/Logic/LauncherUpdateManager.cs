@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace AllInOneLauncher.Logic
 {
@@ -27,29 +28,32 @@ namespace AllInOneLauncher.Logic
             string curentVersionHash = await Task.Run(() => FileUtils.GetFileMd5Hash(applicationPath));
             string latestVersionHash = await HttpUtils.Get("applications/versionHash", new Dictionary<string, string>() { { "name", "all-in-one-launcher" }, { "version", "main" }, });
 
-            if (curentVersionHash == latestVersionHash) return;
+            if (curentVersionHash == latestVersionHash)
+            {
+                if (applicationPath.Contains("_new.exe"))
+                {
+                    File.Move(applicationPath, applicationPath.Replace("_new.exe", ".exe"), true);
+                    LauncherStateManager.Restart();
+                }
+                else if (File.Exists(applicationPath.Replace(".exe", "_new.exe")))
+                {
+                    File.Delete(applicationPath.Replace(".exe", "_new.exe"));
+                }
+                return;
+            }
 
             try
             {
                 LauncherUpdatePopup updatePopup = new();
                 PopupVisualizer.ShowPopup(updatePopup);
 
-                await Update("main", (progress) => updatePopup.LoadProgress = progress);
-
-                Process.Start(applicationPath);
-                Application.Current.Shutdown();
+                await HttpUtils.Download($"https://bfmeladder.com/api/applications/build?id=all-in-one-launcher-main", applicationPath.Replace(".exe", "_new.exe"), (progress) => updatePopup.LoadProgress = progress);
+                LauncherStateManager.Restart(true);
             }
             catch (Exception ex)
             {
                 PopupVisualizer.ShowPopup(new ErrorPopup(ex));
             }
-        }
-
-        public static async Task Update(string branch, Action<int> downloadProgress)
-        {
-            string applicationPath = Environment.ProcessPath ?? "";
-            File.Move(applicationPath, Path.Combine(Path.GetDirectoryName(applicationPath)!, $"{Path.GetFileNameWithoutExtension(applicationPath)}_old.exe"), true);
-            await HttpUtils.Download($"https://bfmeladder.com/api/applications/build?id=all-in-one-launcher-{branch}", applicationPath, downloadProgress);
         }
     }
 

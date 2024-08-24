@@ -8,13 +8,13 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows;
+using Windows.Storage;
 
 namespace AllInOneLauncher.Logic
 {
     internal static class LauncherStateManager
     {
         internal static Dictionary<string, Type>? TypeMap { get; private set; }
-        internal static bool IsElevated => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
         internal static void Init()
         {
@@ -27,10 +27,10 @@ namespace AllInOneLauncher.Logic
 
             TypeMap = Assembly.GetExecutingAssembly().GetTypes().DistinctBy(x => x.Name).ToDictionary(x => x.Name, x => x);
 
-            if (Properties.Settings.Default.LauncherLanguageSetting == -1)
+            if (Properties.Settings.Default.LauncherLanguage == -1)
                 Language = 0;
             else
-                Language = Properties.Settings.Default.LauncherLanguageSetting;
+                Language = Properties.Settings.Default.LauncherLanguage;
         }
 
         internal static bool Visible
@@ -93,31 +93,21 @@ namespace AllInOneLauncher.Logic
                     throw new ArgumentOutOfRangeException(nameof(value), "Invalid language selection.");
                 }
 
-                Properties.Settings.Default.LauncherLanguageSetting = value;
+                Properties.Settings.Default.LauncherLanguage = value;
                 Properties.Settings.Default.Save();
             }
         }
 
-        internal static void RestartElevated()
+        internal static void Restart(bool update = false)
         {
             App.Mutex?.Dispose();
             App.Mutex = null;
 
-            string serializedState = "";
-
-            if (MainWindow.Instance!.fullContent.Child is Settings)
-                serializedState = $"--Settings {((Settings)MainWindow.Instance!.fullContent.Child!).Page}";
-            else if (MainWindow.Instance!.content.Child is Offline)
-                serializedState = $"--Game {Offline.Instance.gameTabs.SelectedIndex}";
-            else if (MainWindow.Instance!.content.Child is Online)
-                serializedState = "--Online";
-
             ProcessStartInfo elevated = new()
             {
                 UseShellExecute = true,
-                WorkingDirectory = Path.GetFullPath("./"),
-                FileName = Path.Combine(Path.GetFullPath("./"), "AllInOneLauncher.exe"),
-                Arguments = serializedState,
+                WorkingDirectory = Path.GetDirectoryName(Environment.ProcessPath) ?? "./",
+                FileName = update ? Environment.ProcessPath?.Replace(".exe", "_new.exe") : Environment.ProcessPath?.Replace("_new.exe", ".exe"),
                 Verb = "runas"
             };
             Process.Start(elevated);

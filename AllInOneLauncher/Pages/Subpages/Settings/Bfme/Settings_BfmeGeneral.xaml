@@ -34,12 +34,7 @@
         <StackPanel>
             <Grid>
                 <TextBlock Text="{DynamicResource SettingsPageBFMESectionGeneralSerialNumber}" FontSize="17" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="white"/>
-                <Button x:Name="ButtonChangeCdKey" Style="{StaticResource AcrylicRoundButton}" Background="Transparent" HorizontalAlignment="Right" Click="ButtonChangeCdKey_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/Resources/Images/uac.png" HorizontalAlignment="Center" Margin="0,0,10,0" Visibility="{DynamicResource VisibleIfNotElevated}"/>
-                        <TextBlock Grid.Column="1" Text="{DynamicResource SettingsPageBFMESectionGeneralRandomizeSerial}"/>
-                    </StackPanel>
-                </Button>
+                <Button x:Name="ButtonChangeCdKey" Style="{StaticResource AcrylicRoundButton}" Background="Transparent" HorizontalAlignment="Right" Click="ButtonChangeCdKey_Click" Content="{DynamicResource SettingsPageBFMESectionGeneralRandomizeSerial}"/>
             </Grid>
             <TextBlock x:Name="curentSerialNumber" Text="Curent serial number: " FontSize="15" FontWeight="Medium" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="white" Opacity="0.4" Margin="0,10,0,0"/>
         </StackPanel>
