@@ -18,7 +18,7 @@ namespace AllInOneLauncher
         internal static string[] Args = [];
         private const string PipeName = Constants.C_NAMED_PIPE_NAME;
 
-        public static CoreWebView2Environment GlobalWebView2Environment { get; private set; }
+        public static CoreWebView2Environment? GlobalWebView2Environment { get; private set; }
 
         protected override async void OnStartup(StartupEventArgs e)
         {
