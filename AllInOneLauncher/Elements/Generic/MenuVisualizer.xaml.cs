@@ -1,6 +1,7 @@
 ﻿using AllInOneLauncher.Elements.Menues;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,7 @@ namespace AllInOneLauncher.Elements
         public static Brush StandardBrush => new SolidColorBrush(Color.FromArgb(255, 37, 37, 38));
         public static Rect GetAbsolutePlacement(FrameworkElement element) => new Rect(element.TransformToVisual(Instance!.content).Transform(new Point(0, 0)), new Size(element.ActualWidth, element.ActualHeight));
 
-        public static ContextMenuShell? ShowMenu(string text, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
+        public static ContextMenuShell? ShowMenu(string text, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool closeWhenMouseLeaves = false, bool targetCursor = false, Action? onDestroy = null)
         {
             if (Instance == null)
                 return null;
@@ -34,7 +35,7 @@ namespace AllInOneLauncher.Elements
             if (ActiveMenues.Any(x => x.Owner == owner))
                 return null;
 
-            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
+            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, closeWhenMouseLeaves, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
             {
                 Rect ownerRect = GetAbsolutePlacement(owner);
                 Point finalPos = new Point(ownerRect.X, ownerRect.Y);
@@ -49,49 +50,59 @@ namespace AllInOneLauncher.Elements
                     finalPos.X = ownerRect.X + ownerRect.Width + space;
                     finalPos.Y = ownerRect.Y - menuHeight / 2 + ownerRect.Height / 2;
                 }
-                else if (side == MenuSide.TopLeft)
-                {
-                    finalPos.Y = ownerRect.Y - menuHeight - space;
-                    finalPos.X = ownerRect.X;
-                }
-                else if (side == MenuSide.TopRight)
-                {
-                    finalPos.Y = ownerRect.Y;
-                    finalPos.X = ownerRect.X + ownerRect.Width + space;
-                }
                 else if (side == MenuSide.Top)
                 {
                     finalPos.Y = ownerRect.Y - menuHeight - space;
                     finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                 }
-                if (side == MenuSide.Bottom)
+                else if (side == MenuSide.Bottom)
                 {
                     finalPos.Y = ownerRect.Y + ownerRect.Height + space;
                     finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                 }
-                else if (side == MenuSide.BottomLeft)
+                else if (side == MenuSide.TopLeft)
+                {
+                    finalPos.Y = ownerRect.Y - padding;
+                    finalPos.X = ownerRect.X - menuWidth - space;
+                }
+                else if (side == MenuSide.TopRight)
+                {
+                    finalPos.Y = ownerRect.Y - padding;
+                    finalPos.X = ownerRect.X + ownerRect.Width + space;
+                }
+                else if (side == MenuSide.BottomRight)
                 {
                     finalPos.Y = ownerRect.Y + ownerRect.Height + space;
-                    finalPos.X = ownerRect.X;
+                    finalPos.X = ownerRect.X + ownerRect.Width + space;
                 }
 
-                if (!targetCursor && finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
+                if (!targetCursor)
                 {
-                    menu.Side = MenuSide.Top;
-                    if (side == MenuSide.Bottom)
+                    if (side == MenuSide.TopRight && finalPos.X + menuWidth > Instance.content.ActualWidth)
                     {
-                        finalPos.Y = ownerRect.Y - menuHeight + space;
+                        menu.Side = MenuSide.TopLeft;
+                        finalPos.Y = ownerRect.Y - padding;
+                        finalPos.X = ownerRect.X - menuWidth - space;
+                    }
+
+                    if (side == MenuSide.Right && finalPos.X + menuWidth > Instance.content.ActualWidth)
+                    {
+                        menu.Side = MenuSide.Left;
+                        finalPos.X = ownerRect.X - menuWidth - space;
+                        finalPos.Y = ownerRect.Y - menuHeight / 2 + ownerRect.Height / 2;
+                    }
+
+                    if (side == MenuSide.Bottom && finalPos.Y + menuHeight > Instance.content.ActualHeight)
+                    {
+                        menu.Side = MenuSide.Top;
+                        finalPos.Y = ownerRect.Y - menuHeight - space;
                         finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                     }
-                    else
-                    {
-                        finalPos.Y = ownerRect.Y - menuHeight + space;
-                        finalPos.X = ownerRect.X;
-                    }
                 }
-
-                if (targetCursor)
+                else
+                {
                     finalPos = Mouse.GetPosition(Instance);
+                }
 
                 menu.Margin = new Thickness(finalPos.X, finalPos.Y, 0, 0);
                 menu.IsMenuVisible = true;
@@ -112,7 +123,7 @@ namespace AllInOneLauncher.Elements
             return menuShell;
         }
 
-        public static ContextMenuShell? ShowMenu(Page content, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
+        public static ContextMenuShell? ShowMenu(Page content, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool closeWhenMouseLeaves = false, bool targetCursor = false, Action? onDestroy = null)
         {
             if (Instance == null)
                 return null;
@@ -120,7 +131,7 @@ namespace AllInOneLauncher.Elements
             if (ActiveMenues.Any(x => x.Owner == owner))
                 return null;
 
-            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
+            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, closeWhenMouseLeaves, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
             {
                 Rect ownerRect = GetAbsolutePlacement(owner);
                 Point finalPos = new Point(ownerRect.X, ownerRect.Y);
@@ -135,49 +146,59 @@ namespace AllInOneLauncher.Elements
                     finalPos.X = ownerRect.X + ownerRect.Width + space;
                     finalPos.Y = ownerRect.Y - menuHeight / 2 + ownerRect.Height / 2;
                 }
-                else if (side == MenuSide.TopLeft)
-                {
-                    finalPos.Y = ownerRect.Y - menuHeight - space;
-                    finalPos.X = ownerRect.X;
-                }
-                else if (side == MenuSide.TopRight)
-                {
-                    finalPos.Y = ownerRect.Y;
-                    finalPos.X = ownerRect.X + ownerRect.Width + space;
-                }
                 else if (side == MenuSide.Top)
                 {
                     finalPos.Y = ownerRect.Y - menuHeight - space;
                     finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                 }
-                if (side == MenuSide.Bottom)
+                else if (side == MenuSide.Bottom)
                 {
                     finalPos.Y = ownerRect.Y + ownerRect.Height + space;
                     finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                 }
-                else if (side == MenuSide.BottomLeft)
+                else if (side == MenuSide.TopLeft)
+                {
+                    finalPos.Y = ownerRect.Y - padding;
+                    finalPos.X = ownerRect.X - menuWidth - space;
+                }
+                else if (side == MenuSide.TopRight)
+                {
+                    finalPos.Y = ownerRect.Y - padding;
+                    finalPos.X = ownerRect.X + ownerRect.Width + space;
+                }
+                else if (side == MenuSide.BottomRight)
                 {
                     finalPos.Y = ownerRect.Y + ownerRect.Height + space;
-                    finalPos.X = ownerRect.X;
+                    finalPos.X = ownerRect.X + ownerRect.Width + space;
                 }
 
-                if (!targetCursor && finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
+                if (!targetCursor)
                 {
-                    menu.Side = MenuSide.Top;
-                    if (side == MenuSide.Bottom)
+                    if (side == MenuSide.TopRight && finalPos.X + menuWidth > Instance.content.ActualWidth)
                     {
-                        finalPos.Y = ownerRect.Y - menuHeight + space;
+                        menu.Side = MenuSide.TopLeft;
+                        finalPos.Y = ownerRect.Y - padding;
+                        finalPos.X = ownerRect.X - menuWidth - space;
+                    }
+
+                    if (side == MenuSide.Right && finalPos.X + menuWidth > Instance.content.ActualWidth)
+                    {
+                        menu.Side = MenuSide.Left;
+                        finalPos.X = ownerRect.X - menuWidth - space;
+                        finalPos.Y = ownerRect.Y - menuHeight / 2 + ownerRect.Height / 2;
+                    }
+
+                    if (side == MenuSide.Bottom && finalPos.Y + menuHeight > Instance.content.ActualHeight)
+                    {
+                        menu.Side = MenuSide.Top;
+                        finalPos.Y = ownerRect.Y - menuHeight - space;
                         finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                     }
-                    else
-                    {
-                        finalPos.Y = ownerRect.Y - menuHeight + space;
-                        finalPos.X = ownerRect.X;
-                    }
                 }
-
-                if (targetCursor)
+                else
+                {
                     finalPos = Mouse.GetPosition(Instance);
+                }
 
                 menu.Margin = new Thickness(finalPos.X, finalPos.Y, 0, 0);
                 menu.IsMenuVisible = true;
@@ -198,7 +219,7 @@ namespace AllInOneLauncher.Elements
             return menuShell;
         }
 
-        public static ContextMenuShell? ShowMenu(List<ContextMenuItem> menu, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool targetCursor = false, Action? onDestroy = null)
+        public static ContextMenuShell? ShowMenu(List<ContextMenuItem> menu, FrameworkElement owner, MenuSide side, double space = 2, double padding = 0, bool tint = false, CornerRadius? corners = null, ColorStyle colorStyle = ColorStyle.Acrylic, bool fullWidth = false, double minWidth = 0, double lifetime = -1, bool closeWhenMouseLeaves = false, bool targetCursor = false, Action? onDestroy = null)
         {
             if (Instance == null)
                 return null;
@@ -206,7 +227,7 @@ namespace AllInOneLauncher.Elements
             if (ActiveMenues.Any(x => x.Owner == owner))
                 return null;
 
-            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
+            ContextMenuShell menuShell = new ContextMenuShell(owner, side, corners ?? new CornerRadius(5), colorStyle, fullWidth, minWidth, lifetime, closeWhenMouseLeaves, padding, tint, onDestroy, (menu, menuWidth, menuHeight) =>
             {
                 Rect ownerRect = GetAbsolutePlacement(owner);
                 Point finalPos = new Point(ownerRect.X, ownerRect.Y);
@@ -221,49 +242,59 @@ namespace AllInOneLauncher.Elements
                     finalPos.X = ownerRect.X + ownerRect.Width + space;
                     finalPos.Y = ownerRect.Y - menuHeight / 2 + ownerRect.Height / 2;
                 }
-                else if (side == MenuSide.TopLeft)
-                {
-                    finalPos.Y = ownerRect.Y - menuHeight - space;
-                    finalPos.X = ownerRect.X;
-                }
-                else if (side == MenuSide.TopRight)
-                {
-                    finalPos.Y = ownerRect.Y;
-                    finalPos.X = ownerRect.X + ownerRect.Width + space;
-                }
                 else if (side == MenuSide.Top)
                 {
                     finalPos.Y = ownerRect.Y - menuHeight - space;
                     finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                 }
-                if (side == MenuSide.Bottom)
+                else if (side == MenuSide.Bottom)
                 {
                     finalPos.Y = ownerRect.Y + ownerRect.Height + space;
                     finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                 }
-                else if (side == MenuSide.BottomLeft)
+                else if (side == MenuSide.TopLeft)
+                {
+                    finalPos.Y = ownerRect.Y - padding;
+                    finalPos.X = ownerRect.X - menuWidth - space;
+                }
+                else if (side == MenuSide.TopRight)
+                {
+                    finalPos.Y = ownerRect.Y - padding;
+                    finalPos.X = ownerRect.X + ownerRect.Width + space;
+                }
+                else if (side == MenuSide.BottomRight)
                 {
                     finalPos.Y = ownerRect.Y + ownerRect.Height + space;
-                    finalPos.X = ownerRect.X;
+                    finalPos.X = ownerRect.X + ownerRect.Width + space;
                 }
 
-                if (!targetCursor && finalPos.Y + menuHeight > Instance.content.ActualHeight && (side == MenuSide.Bottom || side == MenuSide.BottomLeft))
+                if (!targetCursor)
                 {
-                    menu.Side = MenuSide.Top;
-                    if (side == MenuSide.Bottom)
+                    if (side == MenuSide.TopRight && finalPos.X + menuWidth > Instance.content.ActualWidth)
                     {
-                        finalPos.Y = ownerRect.Y - menuHeight + space;
+                        menu.Side = MenuSide.TopLeft;
+                        finalPos.Y = ownerRect.Y - padding;
+                        finalPos.X = ownerRect.X - menuWidth - space;
+                    }
+
+                    if (side == MenuSide.Right && finalPos.X + menuWidth > Instance.content.ActualWidth)
+                    {
+                        menu.Side = MenuSide.Left;
+                        finalPos.X = ownerRect.X - menuWidth - space;
+                        finalPos.Y = ownerRect.Y - menuHeight / 2 + ownerRect.Height / 2;
+                    }
+
+                    if (side == MenuSide.Bottom && finalPos.Y + menuHeight > Instance.content.ActualHeight)
+                    {
+                        menu.Side = MenuSide.Top;
+                        finalPos.Y = ownerRect.Y - menuHeight - space;
                         finalPos.X = ownerRect.X - menuWidth / 2 + ownerRect.Width / 2;
                     }
-                    else
-                    {
-                        finalPos.Y = ownerRect.Y - menuHeight + space;
-                        finalPos.X = ownerRect.X;
-                    }
                 }
-
-                if (targetCursor)
+                else
+                {
                     finalPos = Mouse.GetPosition(Instance);
+                }
 
                 menu.Margin = new Thickness(finalPos.X, finalPos.Y, 0, 0);
                 menu.IsMenuVisible = true;
@@ -353,6 +384,12 @@ namespace AllInOneLauncher.Elements
                     getParent((FrameworkElement)child.Parent);
             }
         }
+
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            foreach (ContextMenuShell menu in ActiveMenues.Where(x => x.CloseWhenMouseLeaves).ToList())
+                menu.StartDestroy();
+        }
     }
 
     public enum MenuSide
@@ -360,10 +397,10 @@ namespace AllInOneLauncher.Elements
         Left,
         Right,
         Top,
+        Bottom,
         TopLeft,
         TopRight,
-        Bottom,
-        BottomLeft,
+        BottomRight,
     }
 
     public enum MenuContent

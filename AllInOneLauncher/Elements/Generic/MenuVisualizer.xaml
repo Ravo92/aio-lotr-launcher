@@ -8,6 +8,6 @@
              d:DesignHeight="450" d:DesignWidth="800" SizeChanged="OnResized" Loaded="OnLoaded">
     <Grid>
         <Grid x:Name="background" Background="Transparent" IsHitTestVisible="False"/>
-        <Grid x:Name="content"/>
+        <Grid x:Name="content" MouseLeave="OnMouseLeave"/>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using AllInOneLauncher.Data;
 using AllInOneLauncher.Logic;
+using AllInOneLauncher.Popups;
 using BfmeFoundationProject.BfmeRegistryManagement;
 using BfmeFoundationProject.WorkshopKit.Data;
 using BfmeFoundationProject.WorkshopKit.Logic;
@@ -69,7 +70,14 @@ namespace AllInOneLauncher.Elements
 
         private async void OnDeactivateClicked(object sender, RoutedEventArgs e)
         {
-            await BfmeWorkshopSyncManager.Sync(WorkshopEntry);
+            try
+            {
+                await BfmeWorkshopSyncManager.Sync(WorkshopEntry);
+            }
+            catch(Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
+            }
         }
     }
 }

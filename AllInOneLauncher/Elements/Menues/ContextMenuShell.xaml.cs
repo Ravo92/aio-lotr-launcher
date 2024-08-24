@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,7 +23,7 @@ namespace AllInOneLauncher.Elements
         private readonly Action<ContextMenuShell, double, double>? CalcPos;
         private readonly Action? OnDestroy;
 
-        public ContextMenuShell(FrameworkElement owner, MenuSide side, CornerRadius corners, ColorStyle colorStyle, bool fullWidth, double minWidth, double lifespan, double padding, bool tint, Action? onDestroy, Action<ContextMenuShell, double, double> calcPos)
+        public ContextMenuShell(FrameworkElement owner, MenuSide side, CornerRadius corners, ColorStyle colorStyle, bool fullWidth, double minWidth, double lifespan, bool closeWhenMouseLeaves, double padding, bool tint, Action? onDestroy, Action<ContextMenuShell, double, double> calcPos)
         {
             InitializeComponent();
 
@@ -33,6 +34,7 @@ namespace AllInOneLauncher.Elements
             Width = fullWidth ? owner.ActualWidth : double.NaN;
             MinWidth = minWidth;
             Lifespan = lifespan;
+            CloseWhenMouseLeaves = closeWhenMouseLeaves;
             frame_mainContent.Margin = new Thickness(padding);
             stack_mainContent.Margin = new Thickness(padding);
             this.tint.Visibility = tint ? Visibility.Visible : Visibility.Collapsed;
@@ -48,6 +50,7 @@ namespace AllInOneLauncher.Elements
 
         public FrameworkElement Owner { get; private set; }
         public double Lifespan { get; private set; }
+        public bool CloseWhenMouseLeaves {  get; private set; }
 
         private MenuSide _side = MenuSide.Bottom;
         public MenuSide Side
@@ -78,13 +81,13 @@ namespace AllInOneLauncher.Elements
                     mainGrid.RenderTransformOrigin = new Point(0.5, 0);
                 }
 
-                if (value == MenuSide.BottomLeft)
+                if (value == MenuSide.BottomRight)
                 {
                     mainGrid.RenderTransformOrigin = new Point(0, 0);
                 }
                 else if (value == MenuSide.TopLeft)
                 {
-                    mainGrid.RenderTransformOrigin = new Point(0, 1);
+                    mainGrid.RenderTransformOrigin = new Point(1, 0.5);
                 }
                 else if (value == MenuSide.TopRight)
                 {
@@ -142,7 +145,7 @@ namespace AllInOneLauncher.Elements
                 stack_mainContent.Children.Clear();
                 if (value != null)
                     foreach (var item in value)
-                        stack_mainContent.Children.Add(item.GenerateElement());
+                        stack_mainContent.Children.Add(item.GenerateElement(this));
 
                 OnPropertyChanged();
             }
@@ -253,6 +256,15 @@ namespace AllInOneLauncher.Elements
                 else if (value == ColorStyle.Regular)
                     regularStyle.Visibility = Visibility.Visible;
             }
+        }
+
+        public void HideSubmenues()
+        {
+            if (_contentMenu == null) return;
+
+            for (int i = 0; i < _contentMenu.Count; i++)
+                if (_contentMenu[i] is ContextMenuSubmenuItem)
+                    MenuVisualizer.HideMenuOn(stack_mainContent.Children.OfType<FrameworkElement>().ElementAt(i));
         }
 
         private void BeginLife(double lifespan)

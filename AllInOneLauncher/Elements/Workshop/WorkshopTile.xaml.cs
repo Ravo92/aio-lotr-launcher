@@ -60,11 +60,11 @@ namespace AllInOneLauncher.Elements
                 MenuVisualizer.ShowMenu(
                 menu: [
                     new ContextMenuButtonItem(IsInLibrary ? "Already in library" : "Add to library", !IsInLibrary, clicked: AddToLibrary),
-                    new ContextMenuSpacerItem(),
+                    new ContextMenuSeparatorItem(),
                     new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid))
                 ],
                 owner: this,
-                side: MenuSide.BottomLeft,
+                side: MenuSide.BottomRight,
                 padding: 4,
                 tint: true,
                 minWidth: 200,
@@ -88,7 +88,7 @@ namespace AllInOneLauncher.Elements
         {
             try
             {
-                await BfmeWorkshopLibraryManager.AddOrUpdate(WorkshopEntry.Guid);
+                BfmeWorkshopLibraryManager.AddOrUpdate(await BfmeWorkshopDownloadManager.Download(WorkshopEntry.Guid));
                 IsInLibrary = true;
             }
             catch (Exception ex)
