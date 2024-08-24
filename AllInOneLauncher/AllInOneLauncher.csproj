@@ -12,9 +12,9 @@
 		<StartupObject>AllInOneLauncher.App</StartupObject>
 		<AssemblyName>AllInOneLauncher</AssemblyName>
 		<ApplicationIcon>MainIcon.ico</ApplicationIcon>
-		<Version>2.0.1.0</Version>
-		<AssemblyVersion>2.0.1.0</AssemblyVersion>
-		<FileVersion>2.0.1.0</FileVersion>
+		<Version>2.0.2.0</Version>
+		<AssemblyVersion>2.0.2.0</AssemblyVersion>
+		<FileVersion>2.0.2.0</FileVersion>
 		<BaseOutputPath>..\build</BaseOutputPath>
 		<Copyright>Raphael Vogel</Copyright>
 		<PackageId>BFME Launcher</PackageId>

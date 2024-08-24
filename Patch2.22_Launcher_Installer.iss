@@ -1,6 +1,6 @@
 #define MyAppName "Patch 2.22 Launcher"
 #define MyAppExeName "AllInOneLauncher.exe"
-#define MyAppExeVersion "2.0.1.0"
+#define MyAppExeVersion "2.0.2.0"
 #define MyAppPublishFolder "RELEASE"
 
 [Setup]
@@ -35,10 +35,12 @@ ArchitecturesInstallIn64BitMode=x64compatible
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
 Name: de; MessagesFile: "compiler:Languages\German.isl"
+Name: fr; MessagesFile: "compiler:Languages\French.isl"
 
 [Messages]
 en.BeveledLabel=English
 de.BeveledLabel=Deutsch
+fr.BeveledLabel=Français
 
 [CustomMessages]
 en.CreateStartMenuIcon=Create start menu entries
@@ -46,6 +48,9 @@ en.LaunchAfterInstall=Launch Application after Install
 
 de.CreateStartMenuIcon=Erstelle Verknüpfungen im Startmenü
 de.LaunchAfterInstall=Starte die Anwendung nach der Installation
+
+fr.CreateStartMenuIcon=Créer des entrées dans le menu démarrer
+fr.LaunchAfterInstall=Lancer l'application après l'installation
 
 [Files]
 Source: "{#MyAppPublishFolder}\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion
@@ -64,6 +69,7 @@ Type: filesandordirs; Name: "{app}\ar"
 Type: filesandordirs; Name: "{app}\BFME1.exe.WebView2"
 Type: filesandordirs; Name: "{app}\BFME2.exe.WebView2"
 Type: filesandordirs; Name: "{app}\BFME25.exe.WebView2"
+Type: filesandordirs; Name: "{app}\AllInOneLauncher.exe.WebView2"
 Type: filesandordirs; Name: "{app}\cs"
 Type: filesandordirs; Name: "{app}\da"
 Type: filesandordirs; Name: "{app}\de"

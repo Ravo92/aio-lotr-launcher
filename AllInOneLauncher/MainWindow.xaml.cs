@@ -40,9 +40,14 @@ namespace AllInOneLauncher
             Width = SystemParameters.WorkArea.Width * 0.72;
             Height = SystemParameters.WorkArea.Height * 0.85;
 
-            if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory)!, "BfmeLibrary")))
+            if (Properties.Settings.Default.LibraryDrives.Contains("NotSet"))
             {
-                Properties.Settings.Default.LibraryDrives = [Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory)!, "BfmeLibrary")];
+                Properties.Settings.Default.LibraryDrives = [Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")];
+                Properties.Settings.Default.Save();
+            }
+            else if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")))
+            {
+                Properties.Settings.Default.LibraryDrives = [Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")];
                 Properties.Settings.Default.Save();
             }
 

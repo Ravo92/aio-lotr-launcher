@@ -107,7 +107,7 @@
                                         <elements:DropdownPicker Grid.Column="1" x:Name="windowMode" ColorStyle="Regular" Height="40" Width="170">
                                             <elements:DropdownPicker.Options>
                                                 <system:String>Fullscreen</system:String>
-                                                <system:String>Borderless</system:String>
+                                                <system:String>Borderless (Bugged)</system:String>
                                                 <system:String>Windowed</system:String>
                                             </elements:DropdownPicker.Options>
                                         </elements:DropdownPicker>
