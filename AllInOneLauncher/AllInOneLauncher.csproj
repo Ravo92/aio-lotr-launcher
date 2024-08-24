@@ -101,16 +101,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="BfmeFoundationProject.BfmeRegistryManagement" Version="1.0.5" />
 	  <PackageReference Include="BfmeFoundationProject.OnlineKit" Version="1.7.5" />
+	  <PackageReference Include="BfmeFoundationProject.WorkshopKit" Version="1.7.6" />
 	  <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2651.64" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="WindowsShortcutFactory" Version="1.2.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\BfmeFoundationProject\src\BfmeFoundationProject_BfmeRegistryManagement\BfmeFoundationProject_BfmeRegistryManagement.csproj" />
-	  <ProjectReference Include="..\..\BfmeFoundationProject\src\BfmeFoundationProject_WorkshopKit\BfmeFoundationProject_WorkshopKit.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

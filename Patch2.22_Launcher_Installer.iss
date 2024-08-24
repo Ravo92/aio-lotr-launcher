@@ -1,7 +1,7 @@
-#define MyAppName "Patch 2.22 Launcher"
+#define MyAppName "All In One Launcher"
 #define MyAppExeName "AllInOneLauncher.exe"
-#define MyAppExeVersion "2.0.2.0"
-#define MyAppPublishFolder "RELEASE"
+#define MyAppExeVersion "4.1.0.0"
+#define MyAppPublishFolder "build\Publish"
 
 [Setup]
 AppName={#MyAppName}
@@ -12,10 +12,10 @@ WizardStyle=modern
 DefaultDirName=C:\{#MyAppName}
 DefaultGroupName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
-VersionInfoDescription=Patch 2.22 Launcher Setup
-VersionInfoProductName=Patch 2.22 Launcher
+VersionInfoDescription=All In One Launcher Setup
+VersionInfoProductName=All In One Launcher
 OutputDir=setup
-OutputBaseFilename=BFMELauncherSetup
+OutputBaseFilename=AllInOneLauncherSetup
 DisableWelcomePage=no
 PrivilegesRequired=admin
 MissingMessagesWarning=yes
@@ -28,7 +28,7 @@ LicenseFile=ReadMe.txt
 SetupIconFile=AllInOneLauncher\MainIcon.ico
 VersionInfoVersion={#MyAppExeVersion}
 AppSupportURL=https://discord.com/invite/Q5Yyy3XCuu
-AppPublisher=Raphael Vogel
+AppPublisher=Raphael Vogel and the Bfme Foundation Project
 AppPublisherURL=https://github.com/Ravo92
 ArchitecturesInstallIn64BitMode=x64compatible
 
