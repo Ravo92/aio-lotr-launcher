@@ -98,38 +98,31 @@ namespace AllInOneLauncher.Logic
             }
         }
 
-        internal static void AsElevated(Action action)
+        internal static void RestartElevated()
         {
-            if (IsElevated)
+            App.Mutex?.Dispose();
+            App.Mutex = null;
+
+            string serializedState = "";
+
+            if (MainWindow.Instance!.fullContent.Child is Settings)
+                serializedState = $"--Settings {((Settings)MainWindow.Instance!.fullContent.Child!).Page}";
+            else if (MainWindow.Instance!.content.Child is Offline)
+                serializedState = $"--Game {Offline.Instance.gameTabs.SelectedIndex}";
+            else if (MainWindow.Instance!.content.Child is Online)
+                serializedState = "--Online";
+
+            ProcessStartInfo elevated = new()
             {
-                action?.Invoke();
-            }
-            else
-            {
-                App.Mutex?.Dispose();
-                App.Mutex = null;
+                UseShellExecute = true,
+                WorkingDirectory = Path.GetFullPath("./"),
+                FileName = Path.Combine(Path.GetFullPath("./"), "AllInOneLauncher.exe"),
+                Arguments = serializedState,
+                Verb = "runas"
+            };
+            Process.Start(elevated);
 
-                string serializedState = "";
-
-                if (MainWindow.Instance!.fullContent.Child is Settings)
-                    serializedState = $"--Settings {((Settings)MainWindow.Instance!.fullContent.Child!).Page}";
-                else if (MainWindow.Instance!.content.Child is Offline)
-                    serializedState = $"--Game {Offline.Instance.gameTabs.SelectedIndex}";
-                else if (MainWindow.Instance!.content.Child is Online)
-                    serializedState = "--Online";
-
-                ProcessStartInfo debug = new()
-                {
-                    UseShellExecute = true,
-                    WorkingDirectory = Path.GetFullPath("./"),
-                    FileName = Path.Combine(Path.GetFullPath("./"), "AllInOneLauncher.exe"),
-                    Arguments = serializedState,
-                    Verb = "runas"
-                };
-                Process.Start(debug);
-
-                Environment.Exit(0);
-            }
+            Environment.Exit(0);
         }
     }
 }

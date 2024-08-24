@@ -54,7 +54,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             if (Game == BfmeGame.BFME1) Properties.Settings.Default.BFME1LanguageSetting = LanguageDropdown.Selected;
             if (Game == BfmeGame.BFME2) Properties.Settings.Default.BFME2LanguageSetting = LanguageDropdown.Selected;
             if (Game == BfmeGame.ROTWK) Properties.Settings.Default.RotwkLanguageSetting = LanguageDropdown.Selected;
-            LauncherStateManager.AsElevated(() => BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.Language, LanguageDropdown.SelectedValue));
+            BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.Language, LanguageDropdown.SelectedValue);
             Primary.Settings.NeedsResync = true;
             Properties.Settings.Default.Save();
         }
@@ -64,18 +64,15 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             if (Game == BfmeGame.BFME1) Properties.Settings.Default.BFME1ResolutionSetting = ResolutionDropdown.SelectedValue;
             if (Game == BfmeGame.BFME2) Properties.Settings.Default.BFME2ResolutionSetting = ResolutionDropdown.SelectedValue;
             if (Game == BfmeGame.ROTWK) Properties.Settings.Default.RotwkResolutionSetting = ResolutionDropdown.SelectedValue;
-            LauncherStateManager.AsElevated(() => BfmeSettingsManager.Set(Game, "Resolution", ResolutionDropdown.SelectedValue));
+            BfmeSettingsManager.Set(Game, "Resolution", ResolutionDropdown.SelectedValue);
             Properties.Settings.Default.Save();
         }
 
         private void ButtonChangeCdKey_Click(object sender, RoutedEventArgs e)
         {
-            LauncherStateManager.AsElevated(() =>
-            {
-                string cdKey = string.Concat(from s in Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20) select s[System.Random.Shared.Next(s.Length)]);
-                curentSerialNumber.Text = $"Current serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
-                BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.SerialKey, cdKey, Microsoft.Win32.RegistryValueKind.String);
-            });
+            string cdKey = string.Concat(from s in Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20) select s[System.Random.Shared.Next(s.Length)]);
+            curentSerialNumber.Text = $"Current serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
+            BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.SerialKey, cdKey, Microsoft.Win32.RegistryValueKind.String);
         }
     }
 }

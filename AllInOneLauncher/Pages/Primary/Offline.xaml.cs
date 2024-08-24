@@ -142,22 +142,19 @@ namespace AllInOneLauncher.Pages.Primary
             OnPopupSubmited: (submittedData) => InstallGame(gameTabs.SelectedIndex, submittedData[0], submittedData[1]));
         }
 
-        public void InstallGame(int game, string selectedLanguage, string selectedLocation)
+        public async void InstallGame(int game, string selectedLanguage, string selectedLocation)
         {
-            LauncherStateManager.AsElevated(async () =>
+            try
             {
-                try
-                {
-                    BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game < 2 ? $"BFME{game + 1}" : "RotWK"), selectedLanguage);
-                    if (game == 2 && !BfmeRegistryManager.IsInstalled(1)) BfmeRegistryManager.CreateNewInstallRegistry(1, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
-                    await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch(game));
-                    UpdatePlayButton();
-                }
-                catch (Exception ex)
-                {
-                    PopupVisualizer.ShowPopup(new ErrorPopup(ex));
-                }
-            });
+                BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game < 2 ? $"BFME{game + 1}" : "RotWK"), selectedLanguage);
+                if (game == 2 && !BfmeRegistryManager.IsInstalled(1)) BfmeRegistryManager.CreateNewInstallRegistry(1, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
+                await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch(game));
+                UpdatePlayButton();
+            }
+            catch (Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
+            }
         }
 
         private async void TabChanged(object sender, EventArgs e)
@@ -165,7 +162,7 @@ namespace AllInOneLauncher.Pages.Primary
             if (gameTabs.SelectedIndex != previousSelectedIndex)
             {
                 previousSelectedIndex = gameTabs.SelectedIndex;
-                activeEntry.WorkshopEntry = await BfmeWorkshopSyncManager.GetActivePatch(previousSelectedIndex);
+                activeEntry.WorkshopEntry = await BfmeWorkshopStateManager.GetActivePatch(previousSelectedIndex);
 
                 UpdateTitleImage();
                 UpdatePlayButton();
@@ -210,7 +207,7 @@ namespace AllInOneLauncher.Pages.Primary
         private async void UpdateEnabledEnhancements()
         {
             enabledEnhancements.Children.Clear();
-            foreach (BfmeWorkshopEntry entry in (await BfmeWorkshopSyncManager.GetActiveEnhancements(gameTabs.SelectedIndex)).Values)
+            foreach (BfmeWorkshopEntry entry in (await BfmeWorkshopStateManager.GetActiveEnhancements(gameTabs.SelectedIndex)).Values)
                 enabledEnhancements.Children.Add(new EnabledEnhancementTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 0, 10) });
             activeEnhancementsNullIndicator.Visibility = enabledEnhancements.Children.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }

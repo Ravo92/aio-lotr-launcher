@@ -22,6 +22,12 @@ namespace AllInOneLauncher
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            if (!LauncherStateManager.IsElevated)
+            {
+                LauncherStateManager.RestartElevated();
+                return;
+            }
+
             Mutex = new Mutex(true, Constants.C_MUTEX_NAME, out bool launcherNotOpenAlready);
             bool launcherOpenAlready = !launcherNotOpenAlready;
             Args = Environment.GetCommandLineArgs().Skip(1).ToArray();

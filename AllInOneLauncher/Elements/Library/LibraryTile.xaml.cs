@@ -221,7 +221,7 @@ namespace AllInOneLauncher.Elements
         {
             if (WorkshopEntry.Type == 0 || WorkshopEntry.Type == 1 || WorkshopEntry.Type == 4)
             {
-                bool isActive = BfmeWorkshopSyncManager.IsPatchActive(WorkshopEntry.Game, WorkshopEntry.Guid);
+                bool isActive = BfmeWorkshopStateManager.IsPatchActive(WorkshopEntry.Game, WorkshopEntry.Guid);
                 Dispatcher.Invoke(() =>
                 {
                     activeText.Visibility = Visibility.Visible;
@@ -230,7 +230,7 @@ namespace AllInOneLauncher.Elements
             }
             else
             {
-                bool isActive = BfmeWorkshopSyncManager.IsEnhancementActive(WorkshopEntry.Game, WorkshopEntry.Guid);
+                bool isActive = BfmeWorkshopStateManager.IsEnhancementActive(WorkshopEntry.Game, WorkshopEntry.Guid);
                 Dispatcher.Invoke(() =>
                 {
                     activeText.Visibility = Visibility.Collapsed;
@@ -247,6 +247,10 @@ namespace AllInOneLauncher.Elements
                     await BfmeWorkshopSyncManager.Sync((await BfmeWorkshopLibraryManager.Get(WorkshopEntry.Guid)).Value);
                 else
                     await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopDownloadManager.Download($"{WorkshopEntry.Guid}:{version}"));
+            }
+            catch (BfmeWorkshopEnhancementIncompatibleSyncException ex)
+            {
+                PopupVisualizer.ShowPopup(new MessagePopup("COMPATIBILITY ERROR", ex.Message));
             }
             catch (Exception ex)
             {

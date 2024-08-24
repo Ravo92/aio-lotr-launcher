@@ -141,7 +141,7 @@ namespace AllInOneLauncher.Elements
         {
             try
             {
-                BfmeWorkshopEntry? activeEntry = await BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
+                BfmeWorkshopEntry? activeEntry = await BfmeWorkshopStateManager.GetActivePatch(WorkshopEntry!.Value.Game);
                 if (activeEntry != null)
                 {
                     try { activeEntry = await BfmeWorkshopDownloadManager.Download(activeEntry!.Value.Guid); } catch { }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AllInOneLauncher.Popups"
              xmlns:elements="clr-namespace:AllInOneLauncher.Elements"
              mc:Ignorable="d" 
-             Width="700" Height="500" MinHeight="340" HorizontalAlignment="Center" VerticalAlignment="Center">
+             Width="500" Height="300" MinHeight="340" HorizontalAlignment="Center" VerticalAlignment="Center">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

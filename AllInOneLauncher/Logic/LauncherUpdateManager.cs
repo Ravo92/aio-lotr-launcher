@@ -33,23 +33,20 @@ namespace AllInOneLauncher.Logic
 
             if (curentVersionHash == latestVersionHash) return;
 
-            LauncherStateManager.AsElevated(async () =>
+            try
             {
-                try
-                {
-                    LauncherUpdatePopup updatePopup = new();
-                    PopupVisualizer.ShowPopup(updatePopup);
+                LauncherUpdatePopup updatePopup = new();
+                PopupVisualizer.ShowPopup(updatePopup);
 
-                    await Update("main", (progress) => updatePopup.LoadProgress = progress);
+                await Update("main", (progress) => updatePopup.LoadProgress = progress);
 
-                    Process.Start(applicationPath);
-                    Application.Current.Shutdown();
-                }
-                catch (Exception ex)
-                {
-                    PopupVisualizer.ShowPopup(new ErrorPopup(ex));
-                }
-            });
+                Process.Start(applicationPath);
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
+            }
         }
 
         public static async Task Update(string branch, Action<int> downloadProgress)

@@ -31,7 +31,7 @@ namespace AllInOneLauncher.Logic
                 startInfo.ArgumentList.Add("-win");
             }
 
-            string? activeModPath = await BfmeWorkshopSyncManager.GetActiveModPath((int)game);
+            string? activeModPath = await BfmeWorkshopStateManager.GetActiveModPath((int)game);
             if (activeModPath != null)
             {
                 startInfo.ArgumentList.Add("-mod");

@@ -25,7 +25,7 @@ namespace AllInOneLauncher.Pages.Primary
                 return;
 
             FirstLoad = false;
-            LauncherStateManager.AsElevated(() => arena.Load());
+            arena.Load();
         }
     }
 }
