@@ -20,6 +20,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_News()
         {
             InitializeComponent();
+            InitializeWebView();
             InitPages();
             PopupVisualizer.OnPopupOpened += (s, e) => SetNewsVisibility(false);
             PopupVisualizer.OnPopupClosed += (s, e) => SetNewsVisibility(true);
@@ -85,6 +86,11 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
                 newsPage.NavigateToString(GetNewsPage(game));
                 SetNewsVisibility(PopupVisualizer.CurentPopup == null);
             }
+        }
+
+        private async void InitializeWebView()
+        {
+            await newsPage.EnsureCoreWebView2Async(App.GlobalWebView2Environment);
         }
     }
 }

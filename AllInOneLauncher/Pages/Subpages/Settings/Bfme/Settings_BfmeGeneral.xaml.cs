@@ -46,7 +46,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             };
 
             string cdKey = BfmeRegistryManager.GetKeyValue((int)Game, BfmeRegistryKey.SerialKey);
-            curentSerialNumber.Text = $"Curent serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
+            curentSerialNumber.Text = $"Current serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
         }
 
         private void OnLanguageOptionSelected(object sender, System.EventArgs e)
@@ -73,7 +73,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             LauncherStateManager.AsElevated(() =>
             {
                 string cdKey = string.Concat(from s in Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20) select s[System.Random.Shared.Next(s.Length)]);
-                curentSerialNumber.Text = $"Curent serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
+                curentSerialNumber.Text = $"Current serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
                 BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.SerialKey, cdKey, Microsoft.Win32.RegistryValueKind.String);
             });
         }

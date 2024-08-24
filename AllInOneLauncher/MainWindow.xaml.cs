@@ -37,8 +37,8 @@ namespace AllInOneLauncher
             TrayIcon.Visibility = Visibility.Collapsed;
             fullContent.Visibility = Visibility.Visible;
 
-            Width = System.Windows.SystemParameters.WorkArea.Width * 0.72;
-            Height = System.Windows.SystemParameters.WorkArea.Height * 0.85;
+            Width = SystemParameters.WorkArea.Width * 0.72;
+            Height = SystemParameters.WorkArea.Height * 0.85;
 
             if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory)!, "BfmeLibrary")))
             {

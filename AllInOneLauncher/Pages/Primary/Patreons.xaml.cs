@@ -12,7 +12,13 @@ namespace AllInOneLauncher.Pages.Primary
         public Patreons()
         {
             InitializeComponent();
+            InitializeWebView();
             PatreonsPage.Source = new("https://bfmelauncherfiles.ravonator.at/LauncherPages/patreons/index.html");
+        }
+
+        private async void InitializeWebView()
+        {
+            await PatreonsPage.EnsureCoreWebView2Async(App.GlobalWebView2Environment);
         }
     }
 }

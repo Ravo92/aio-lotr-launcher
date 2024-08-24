@@ -1,7 +1,6 @@
 ﻿using AllInOneLauncher.Data;
 using AllInOneLauncher.Logic;
 using BfmeFoundationProject.BfmeRegistryManagement;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using System.Windows;
@@ -16,7 +15,7 @@ namespace AllInOneLauncher.Pages.Primary
     /// </summary>
     public partial class Settings : UserControl
     {
-        public static bool NeedsResync = false;
+        public static bool NeedsResync;
 
         public Settings(string page)
         {
@@ -28,7 +27,7 @@ namespace AllInOneLauncher.Pages.Primary
             {
                 if (child is Button button)
                 {
-                    if (button.Tag.ToString().Contains("(")) button.IsHitTestVisible = BfmeRegistryManager.IsInstalled(int.Parse(button.Tag.ToString().Split('(').Last().Split(')').First()));
+                    if (button.Tag.ToString()!.Contains('(')) button.IsHitTestVisible = BfmeRegistryManager.IsInstalled(int.Parse(button.Tag.ToString()!.Split('(').Last().Split(')').First()));
                     button.Opacity = button.IsHitTestVisible ? 1 : 0.4;
                 }
             }
@@ -54,7 +53,7 @@ namespace AllInOneLauncher.Pages.Primary
                 }
 
                 string pageName = value.Split('(').First();
-                int gameIndex = value.Contains("(") ? int.Parse(value.Split('(').Last().Split(')').First()) : -1;
+                int gameIndex = value.Contains('(') ? int.Parse(value.Split('(').Last().Split(')').First()) : -1;
                 content.Child = gameIndex == -1 ? (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap![$"Settings_{pageName}"])! : (FrameworkElement)Activator.CreateInstance(LauncherStateManager.TypeMap![$"Settings_{pageName}"], (BfmeGame)gameIndex)!;
             }
         }

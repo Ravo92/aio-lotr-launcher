@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -45,27 +46,36 @@ namespace AllInOneLauncher.Logic
         public static List<string> GetAllSupportedResolutions()
         {
             List<string> allResolutions = [];
-
             DEVMODE vDevMode = new();
             int i = 0;
+
             while (EnumDisplaySettings(null, i, ref vDevMode))
             {
                 if (vDevMode.dmDisplayFrequency == 60 && vDevMode.dmBitsPerPel == 32 && vDevMode.dmDisplayFixedOutput == 0)
-                    allResolutions.Add(vDevMode.dmPelsWidth.ToString() + " " + vDevMode.dmPelsHeight.ToString());
+                {
+                    string resolution = vDevMode.dmPelsWidth + " " + vDevMode.dmPelsHeight;
+                    allResolutions.Add(resolution);
+                }
 
                 i++;
             }
 
+            allResolutions = allResolutions
+                .Select(r => new { Resolution = r, Width = int.Parse(r.Split(' ')[0]), Height = int.Parse(r.Split(' ')[1]) })
+                .OrderBy(r => r.Width)
+                .ThenBy(r => r.Height)
+                .Select(r => r.Resolution)
+                .ToList();
+
             allResolutions.RemoveRange(0, Math.Min(3, allResolutions.Count));
-            allResolutions[^1] = allResolutions[^1];
 
             return allResolutions;
         }
 
         public static Size GetPrimaryScreenResolution()
         {
-            using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
-                return new Size((int)(Screen.PrimaryScreen.Bounds.Width / (g.DpiX / 96)), (int)(Screen.PrimaryScreen.Bounds.Height / (g.DpiY / 96)));
+            using Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+            return new Size((int)(Screen.PrimaryScreen!.Bounds.Width / (g.DpiX / 96)), (int)(Screen.PrimaryScreen.Bounds.Height / (g.DpiY / 96)));
         }
     }
 }
