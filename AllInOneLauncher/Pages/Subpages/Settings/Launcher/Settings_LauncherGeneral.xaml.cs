@@ -4,12 +4,13 @@ using System;
 using System.Windows;
 using AllInOneLauncher.Logic;
 using WindowsShortcutFactory;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
     public partial class Settings_LauncherGeneral : UserControl
     {
-        private readonly string desktopShortCutFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Patch 2.22 Launcher.lnk");
+        private readonly string desktopShortCutFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), Constants.C_LAUNCHER_SHORTCUT_NAME);
 
         public Settings_LauncherGeneral()
         {

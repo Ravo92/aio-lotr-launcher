@@ -13,9 +13,6 @@ using BfmeFoundationProject.WorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
 using BfmeFoundationProject.BfmeRegistryManagement;
-using Microsoft.VisualBasic.Devices;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace AllInOneLauncher.Pages.Primary
 {

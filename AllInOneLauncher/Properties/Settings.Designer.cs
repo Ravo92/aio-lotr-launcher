@@ -228,17 +228,5 @@ namespace AllInOneLauncher.Properties {
                 this["CreateLauncherDesktopIcon"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Einstellung {
-            get {
-                return ((string)(this["Einstellung"]));
-            }
-            set {
-                this["Einstellung"] = value;
-            }
-        }
     }
 }

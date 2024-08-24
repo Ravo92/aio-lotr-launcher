@@ -7,6 +7,8 @@ using AllInOneLauncher.Data;
 using System.IO.Pipes;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Web.WebView2.Core;
+using System.Configuration;
 
 namespace AllInOneLauncher
 {
@@ -16,7 +18,9 @@ namespace AllInOneLauncher
         internal static string[] Args = [];
         private const string PipeName = Constants.C_NAMED_PIPE_NAME;
 
-        protected override void OnStartup(StartupEventArgs e)
+        public static CoreWebView2Environment GlobalWebView2Environment { get; private set; }
+
+        protected override async void OnStartup(StartupEventArgs e)
         {
             Mutex = new Mutex(true, Constants.C_MUTEX_NAME, out bool launcherNotOpenAlready);
             bool launcherOpenAlready = !launcherNotOpenAlready;
@@ -36,6 +40,10 @@ namespace AllInOneLauncher
             }
 
             base.OnStartup(e);
+
+            string parentDirectory = Directory.GetParent(Directory.GetParent(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath)!.FullName)!.FullName;
+            GlobalWebView2Environment = await CoreWebView2Environment.CreateAsync(null, Path.Combine(parentDirectory, "temp"));
+
             StartServer();
 
             Current.Resources["VisibleIfNotElevated"] = LauncherStateManager.IsElevated ? Visibility.Collapsed : Visibility.Visible;
