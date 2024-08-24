@@ -20,7 +20,6 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         public Offline_News()
         {
             InitializeComponent();
-            InitializeWebView();
             InitPages();
             PopupVisualizer.OnPopupOpened += (s, e) => SetNewsVisibility(false);
             PopupVisualizer.OnPopupClosed += (s, e) => SetNewsVisibility(true);
@@ -28,6 +27,8 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
 
         private async void InitPages()
         {
+            await newsPage.EnsureCoreWebView2Async(App.GlobalWebView2Environment);
+
             try
             {
                 using HttpClient client = new() { Timeout = TimeSpan.FromSeconds(10) };
@@ -38,6 +39,16 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
             catch
             {
                 newsPage.Visibility = System.Windows.Visibility.Hidden;
+                noConnection.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            if (newsPage.CoreWebView2 != null)
+            {
+                newsPage.NavigateToString(GetNewsPage(BfmeGame.BFME1));
+                SetNewsVisibility(PopupVisualizer.CurentPopup == null);
+            }
+            else
+            {
                 noConnection.Visibility = System.Windows.Visibility.Visible;
             }
 
@@ -86,11 +97,6 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
                 newsPage.NavigateToString(GetNewsPage(game));
                 SetNewsVisibility(PopupVisualizer.CurentPopup == null);
             }
-        }
-
-        private async void InitializeWebView()
-        {
-            await newsPage.EnsureCoreWebView2Async(App.GlobalWebView2Environment);
         }
     }
 }

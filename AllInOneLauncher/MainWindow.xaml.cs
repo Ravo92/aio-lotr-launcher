@@ -40,9 +40,14 @@ namespace AllInOneLauncher
             Width = SystemParameters.WorkArea.Width * 0.72;
             Height = SystemParameters.WorkArea.Height * 0.85;
 
-            if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory)!, "BfmeLibrary")))
+            if (Properties.Settings.Default.LibraryDrives.Contains("NotSet"))
             {
-                Properties.Settings.Default.LibraryDrives = [Path.Combine(Path.GetPathRoot(Environment.CurrentDirectory)!, "BfmeLibrary")];
+                Properties.Settings.Default.LibraryDrives = [Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")];
+                Properties.Settings.Default.Save();
+            }
+            else if (!Properties.Settings.Default.LibraryDrives.Contains(Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")))
+            {
+                Properties.Settings.Default.LibraryDrives = [Path.Combine(Environment.CurrentDirectory!, "BfmeLibrary")];
                 Properties.Settings.Default.Save();
             }
 
@@ -113,7 +118,7 @@ namespace AllInOneLauncher
                 {
                     if (!BfmeRegistryManager.IsInstalled(game) || (game == 2 && !BfmeRegistryManager.IsInstalled(1))) continue;
                     var activeEntry = await BfmeWorkshopSyncManager.GetActivePatch(game);
-                    if (activeEntry != null) try { await BfmeWorkshopSyncManager.Sync(activeEntry.Value); } catch(Exception ex) { PopupVisualizer.ShowPopup(new ErrorPopup(ex)); }
+                    if (activeEntry != null) try { await BfmeWorkshopSyncManager.Sync(activeEntry.Value); } catch (Exception ex) { PopupVisualizer.ShowPopup(new ErrorPopup(ex)); }
                 }
 
             Settings.NeedsResync = false;
