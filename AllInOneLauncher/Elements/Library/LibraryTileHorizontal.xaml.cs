@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 using BfmeFoundationProject.BfmeRegistryManagement;
 using System.Diagnostics;
+using AllInOneLauncher.Popups;
 
 namespace AllInOneLauncher.Elements
 {
@@ -138,14 +139,21 @@ namespace AllInOneLauncher.Elements
 
         private async void OnResyncActiveEntry(object sender, RoutedEventArgs e)
         {
-            BfmeWorkshopEntry? activeEntry = await BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
-            if (activeEntry != null)
+            try
             {
-                try { activeEntry = (await BfmeWorkshopQueryManager.Get(activeEntry!.Value.Guid)).entry; } catch { }
-                WorkshopEntry = activeEntry.Value;
-                IsUpdateAvailable = false;
-                IsLoading = false;
-                await BfmeWorkshopSyncManager.Sync(activeEntry.Value);
+                BfmeWorkshopEntry? activeEntry = await BfmeWorkshopSyncManager.GetActivePatch(WorkshopEntry!.Value.Game);
+                if (activeEntry != null)
+                {
+                    try { activeEntry = await BfmeWorkshopDownloadManager.Download(activeEntry!.Value.Guid); } catch { }
+                    WorkshopEntry = activeEntry.Value;
+                    IsUpdateAvailable = false;
+                    IsLoading = false;
+                    await BfmeWorkshopSyncManager.Sync(activeEntry.Value);
+                }
+            }
+            catch(Exception ex)
+            {
+                PopupVisualizer.ShowPopup(new ErrorPopup(ex));
             }
         }
 
@@ -173,8 +181,8 @@ namespace AllInOneLauncher.Elements
                 if (WorkshopEntry == null)
                     return;
 
-                BfmeWorkshopEntry latestEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Value.Guid)).entry;
-                if (WorkshopEntry != null && latestEntry.Guid == WorkshopEntry.Value.Guid && WorkshopEntry.Value.Version != latestEntry.Version)
+                var workshopVersion = await BfmeWorkshopQueryManager.Get(WorkshopEntry.Value.Guid);
+                if (WorkshopEntry != null && WorkshopEntry.Value.Guid == workshopVersion.entry.Guid && WorkshopEntry.Value.Version != workshopVersion.entry.Version)
                     Dispatcher.Invoke(() => IsUpdateAvailable = true);
             }
             catch { }

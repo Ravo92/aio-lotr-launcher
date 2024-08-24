@@ -25,11 +25,14 @@ namespace AllInOneLauncher.Elements.Menues
         public Action? MouseEntered { get; set; }
         public Action? MouseLeft { get; set; }
 
-        public override FrameworkElement GenerateElement()
+        public override FrameworkElement GenerateElement(ContextMenuShell shell)
         {
-            Button b = new Button() { Content = Text, Style = Round ? Application.Current.FindResource("ContextMenuButton") as Style : Application.Current.FindResource("FlatButton") as Style, IsHitTestVisible = Enabled, Opacity = Enabled ? 1d : 0.4d, Height = Height };
+            Button b = new Button() { Content = Text.StartsWith("{") && Text.EndsWith("}") ? (Application.Current.FindResource(Text.TrimStart('{').TrimEnd('}')).ToString() ?? "") : Text, Style = Round ? Application.Current.FindResource("ContextMenuButton") as Style : Application.Current.FindResource("FlatButton") as Style, IsHitTestVisible = Enabled, Opacity = Enabled ? 1d : 0.4d, Height = Height };
             if (Enabled)
+            {
                 b.Click += (s, e) => Clicked?.Invoke();
+                b.MouseEnter += (s, e) => shell.HideSubmenues();
+            }
             return b;
         }
     }

@@ -16,6 +16,7 @@ using BfmeFoundationProject.BfmeRegistryManagement;
 using System.Diagnostics;
 using System.IO;
 using Windows.Graphics.Printing.Workflow;
+using System.Linq;
 
 namespace AllInOneLauncher.Elements
 {
@@ -55,6 +56,13 @@ namespace AllInOneLauncher.Elements
                 UpdateType();
                 Task.Run(UpdateIsActive);
             }
+        }
+
+        BfmeWorkshopEntryMetadata _workshopMetadata;
+        public BfmeWorkshopEntryMetadata WorkshopMetadata
+        {
+            get => _workshopMetadata;
+            set => _workshopMetadata = value;
         }
 
         public bool IsLoading
@@ -150,8 +158,10 @@ namespace AllInOneLauncher.Elements
                 {
                     MenuVisualizer.ShowMenu(
                     menu: [
-                        new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Switch to \"{WorkshopEntry.Name}\"" : "Sync again", true, clicked: Sync),
-                        new ContextMenuSpacerItem(),
+                        new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Switch to \"{WorkshopEntry.Name}\"" : "Sync again", true, clicked: () => Sync()),
+                        new ContextMenuSeparatorItem(),
+                        new ContextMenuSubmenuItem("Sync old version", submenu: WorkshopMetadata.Versions != null ? WorkshopMetadata.Versions.Where(x => x != WorkshopEntry.Version).Reverse<string>().Select(x => new ContextMenuButtonItem(x, true, clicked: () => Sync(x)) as ContextMenuItem).ToList() : [], WorkshopMetadata.Versions != null && WorkshopMetadata.Versions.Count > 1),
+                        new ContextMenuSeparatorItem(),
                         new ContextMenuButtonItem("Open keybinds folder", true, clicked: () =>
                         {
                             if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Keybinds", $"{WorkshopEntry.GameName()}-{WorkshopEntry.Name}")))
@@ -159,13 +169,13 @@ namespace AllInOneLauncher.Elements
                             Process.Start(new ProcessStartInfo("explorer.exe", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Keybinds", $"{WorkshopEntry.GameName()}-{WorkshopEntry.Name}")));
                         }),
                         new ContextMenuButtonItem("Open game folder", true, clicked: () => Process.Start(new ProcessStartInfo("explorer.exe", Path.Combine(BfmeRegistryManager.GetKeyValue(WorkshopEntry.Game, BfmeFoundationProject.BfmeRegistryManagement.Data.BfmeRegistryKey.InstallPath))))),
-                        new ContextMenuSpacerItem(),
+                        new ContextMenuSeparatorItem(),
                         new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid)),
-                        new ContextMenuSpacerItem(),
+                        new ContextMenuSeparatorItem(),
                         new ContextMenuButtonItem("Remove from library", true, clicked: RemoveFromLibrary)
                     ],
                     owner: this,
-                    side: MenuSide.BottomLeft,
+                    side: MenuSide.BottomRight,
                     padding: 4,
                     tint: true,
                     minWidth: 200,
@@ -175,14 +185,16 @@ namespace AllInOneLauncher.Elements
                 {
                     MenuVisualizer.ShowMenu(
                     menu: [
-                        new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Enable \"{WorkshopEntry.Name}\"" : "Disable", true, clicked: Sync),
-                        new ContextMenuSpacerItem(),
+                        new ContextMenuButtonItem(isActiveIcon.Opacity == 0d ? $"Enable \"{WorkshopEntry.Name}\"" : "Disable", true, clicked: () => Sync()),
+                        new ContextMenuSeparatorItem(),
+                        new ContextMenuSubmenuItem("Sync old version", submenu: WorkshopMetadata.Versions != null ? WorkshopMetadata.Versions.Where(x => x != WorkshopEntry.Version).Reverse<string>().Select(x => new ContextMenuButtonItem(x, true, clicked: () => Sync(x)) as ContextMenuItem).ToList() : [], WorkshopMetadata.Versions != null && WorkshopMetadata.Versions.Count > 1),
+                        new ContextMenuSeparatorItem(),
                         new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid)),
-                        new ContextMenuSpacerItem(),
+                        new ContextMenuSeparatorItem(),
                         new ContextMenuButtonItem("Remove from library", true, clicked: RemoveFromLibrary)
                     ],
                     owner: this,
-                    side: MenuSide.BottomLeft,
+                    side: MenuSide.BottomRight,
                     padding: 4,
                     tint: true,
                     minWidth: 200,
@@ -227,11 +239,14 @@ namespace AllInOneLauncher.Elements
             }
         }
 
-        private async void Sync()
+        private async void Sync(string version = "")
         {
             try
             {
-                await BfmeWorkshopSyncManager.Sync((await BfmeWorkshopLibraryManager.Get(WorkshopEntry.Guid)).Value);
+                if (version == "")
+                    await BfmeWorkshopSyncManager.Sync((await BfmeWorkshopLibraryManager.Get(WorkshopEntry.Guid)).Value);
+                else
+                    await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopDownloadManager.Download($"{WorkshopEntry.Guid}:{version}"));
             }
             catch (Exception ex)
             {
@@ -243,11 +258,12 @@ namespace AllInOneLauncher.Elements
         {
             try
             {
-                BfmeWorkshopEntry latestEntry = (await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid)).entry;
-                if (WorkshopEntry.Version != latestEntry.Version)
+                var workshopVersion = await BfmeWorkshopQueryManager.Get(WorkshopEntry.Guid);
+                WorkshopMetadata = workshopVersion.metadata;
+                if (WorkshopEntry.Version != workshopVersion.entry.Version)
                 {
-                    BfmeWorkshopLibraryManager.AddOrUpdate(latestEntry);
-                    Dispatcher.Invoke(() => WorkshopEntry = latestEntry.Preview());
+                    Dispatcher.Invoke(() => WorkshopEntry = workshopVersion.entry);
+                    BfmeWorkshopLibraryManager.AddOrUpdate(await BfmeWorkshopDownloadManager.Download(workshopVersion.entry.Guid));
                 }
             }
             catch { }

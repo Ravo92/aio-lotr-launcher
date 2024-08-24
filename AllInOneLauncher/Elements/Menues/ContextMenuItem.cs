@@ -4,6 +4,6 @@ namespace AllInOneLauncher.Elements.Menues
 {
     public abstract class ContextMenuItem
     {
-        public abstract FrameworkElement GenerateElement();
+        public abstract FrameworkElement GenerateElement(ContextMenuShell shell);
     }
 }

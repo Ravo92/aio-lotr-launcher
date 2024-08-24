@@ -104,7 +104,7 @@ namespace AllInOneLauncher.Elements
                 return;
 
             MenuVisualizer.ShowMenu(
-            menu: Options.Select(x => new ContextMenuButtonItem(x.StartsWith("{") && x.EndsWith("}") ? (Application.Current.FindResource(x.TrimStart('{').TrimEnd('}')).ToString() ?? "") : x, true, round: false, height: 38, clicked: () => Selected = Options.Contains(x) ? Options.IndexOf(x) : int.MinValue) as ContextMenuItem).ToList(),
+            menu: Options.Select(x => new ContextMenuButtonItem(x, true, round: false, height: 38, clicked: () => Selected = Options.Contains(x) ? Options.IndexOf(x) : int.MinValue) as ContextMenuItem).ToList(),
             owner: border_background,
             side: MenuSide.Bottom,
             space: 0,

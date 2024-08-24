@@ -51,7 +51,7 @@ namespace AllInOneLauncher.Pages.Subpages.Offline
         private async void UpdateQuery()
         {
             libraryTiles.Children.Clear();
-            List<BfmeWorkshopEntryPreview> entries = await BfmeWorkshopLibraryManager.Search(game: Game, keyword: search.Text, type: new []{ -2, -3, 4, -1 }[filter.Selected]);
+            List<BfmeWorkshopEntryPreview> entries = await BfmeWorkshopLibraryManager.Query(game: Game, keyword: search.Text, type: new []{ -2, -3, 4, -1 }[filter.Selected]);
             libraryTiles.Children.Clear();
             foreach (BfmeWorkshopEntryPreview entry in entries)
                 libraryTiles.Children.Add(new LibraryTile() { WorkshopEntry = entry, Margin = new Thickness(0, 0, 10, 10) });
