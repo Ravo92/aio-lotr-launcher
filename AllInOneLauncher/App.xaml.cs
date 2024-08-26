@@ -2,14 +2,11 @@
 using System.Linq;
 using System.Windows;
 using System.Threading;
-using AllInOneLauncher.Logic;
-using AllInOneLauncher.Data;
 using System.IO.Pipes;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
 using System.Configuration;
-using System.Security.Principal;
 
 namespace AllInOneLauncher
 {
@@ -22,26 +19,17 @@ namespace AllInOneLauncher
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            if (!new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
-            {
-                LauncherStateManager.Restart();
-                return;
-            }
-
             Mutex = new Mutex(true, "17cf5b95-4261-4254-8978-d61580c3b057", out bool launcherNotOpenAlready);
             bool launcherOpenAlready = !launcherNotOpenAlready;
             Args = Environment.GetCommandLineArgs().Skip(1).ToArray();
 
             if (launcherOpenAlready)
             {
-                using (var client = new NamedPipeClientStream(".", "8d9d7d24-97d9-4efc-abcc-ccd09f3480bd", PipeDirection.Out))
-                {
-                    client.Connect(3000);
-                    using var writer = new StreamWriter(client);
-                    writer.WriteLine("SHOW_WINDOW");
-                    writer.Flush();
-                }
-                Current.Shutdown();
+                using var client = new NamedPipeClientStream(".", "8d9d7d24-97d9-4efc-abcc-ccd09f3480bd", PipeDirection.Out);
+                client.Connect(3000);
+                using var writer = new StreamWriter(client);
+                writer.WriteLine("SHOW_WINDOW");
+                writer.Flush();
                 return;
             }
 
@@ -60,32 +48,32 @@ namespace AllInOneLauncher
         {
             Task.Run(() =>
             {
-                using var server = new NamedPipeServerStream("8d9d7d24-97d9-4efc-abcc-ccd09f3480bd", PipeDirection.In);
+                using var server = new NamedPipeServerStream("8d9d7d24-97d9-4efc-abcc-ccd09f3480bd", PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
+
                 while (true)
                 {
                     server.WaitForConnection();
-                    using (var reader = new StreamReader(server))
+                    using var reader = new StreamReader(server);
+                    var message = reader.ReadLine();
+                    if (message == "SHOW_WINDOW")
                     {
-                        var message = reader.ReadLine();
-                        if (message == "SHOW_WINDOW")
+                        Current.Dispatcher.Invoke(() =>
                         {
-                            Current.Dispatcher.Invoke(() =>
+                            var mainWindow = Current.MainWindow;
+                            if (mainWindow != null)
                             {
-                                var mainWindow = Current.MainWindow;
-                                if (mainWindow != null)
+                                if (mainWindow.WindowState == WindowState.Minimized)
                                 {
-                                    if (mainWindow.WindowState == WindowState.Minimized)
-                                    {
-                                        mainWindow.WindowState = WindowState.Normal;
-                                    }
-                                    mainWindow.Activate();
-                                    mainWindow.Topmost = true;
-                                    mainWindow.Topmost = false;
-                                    mainWindow.Focus();
+                                    mainWindow.WindowState = WindowState.Normal;
                                 }
-                            });
-                        }
+                                mainWindow.Activate();
+                                mainWindow.Topmost = true;
+                                mainWindow.Topmost = false;
+                                mainWindow.Focus();
+                            }
+                        });
                     }
+
                     server.Disconnect();
                 }
             });

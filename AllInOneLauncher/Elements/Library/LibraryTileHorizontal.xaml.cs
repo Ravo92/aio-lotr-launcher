@@ -7,9 +7,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
-using BfmeFoundationProject.BfmeRegistryManagement;
-using System.Diagnostics;
 using AllInOneLauncher.Popups;
+using AllInOneLauncher.Logic;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher.Elements
 {
@@ -100,7 +100,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryActive.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
                 activeEntryReloadButton.Visibility = IsLoading ? Visibility.Hidden : Visibility.Visible;
 
-                IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Value.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled((BfmeGame)value.Value.Game);
                 activeEntry.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { activeEntryIcon.Source = new BitmapImage(new Uri(value.Value.ArtworkUrl)); } catch { }

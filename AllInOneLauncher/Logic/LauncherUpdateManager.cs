@@ -3,15 +3,12 @@ using AllInOneLauncher.Popups;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace AllInOneLauncher.Logic
 {
@@ -23,7 +20,9 @@ namespace AllInOneLauncher.Logic
             return;
 #endif
 
+#pragma warning disable CS0162
             string applicationPath = Environment.ProcessPath ?? "";
+#pragma warning restore CS0162
 
             string curentVersionHash = await Task.Run(() => FileUtils.GetFileMd5Hash(applicationPath));
             string latestVersionHash = await HttpUtils.Get("applications/versionHash", new Dictionary<string, string>() { { "name", "all-in-one-launcher" }, { "version", "main" }, });

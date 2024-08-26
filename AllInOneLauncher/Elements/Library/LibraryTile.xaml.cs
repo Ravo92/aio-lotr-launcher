@@ -9,14 +9,14 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using AllInOneLauncher.Elements.Menues;
 using AllInOneLauncher.Pages.Primary;
-using BfmeFoundationProject.BfmeRegistryManagement;
 using System.Diagnostics;
 using System.IO;
-using Windows.Graphics.Printing.Workflow;
 using System.Linq;
+using AllInOneLauncher.Logic;
+using AllInOneLauncher.Data;
+using static AllInOneLauncher.Logic.BfmeRegistryManager;
 
 namespace AllInOneLauncher.Elements
 {
@@ -46,7 +46,7 @@ namespace AllInOneLauncher.Elements
                 version.Text = value.Version;
                 author.Text = value.Author;
 
-                IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled((BfmeGame)value.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { icon.Source = new BitmapImage(new Uri(value.ArtworkUrl)); } catch { }
@@ -133,7 +133,7 @@ namespace AllInOneLauncher.Elements
             Dispatcher.Invoke(() =>
             {
                 IsLoading = false;
-                IsHitTestVisible = BfmeRegistryManager.IsInstalled(WorkshopEntry.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled((BfmeGame)WorkshopEntry.Game);
                 content.Opacity = IsHitTestVisible ? 1 : 0.5;
                 try
                 {
@@ -168,7 +168,7 @@ namespace AllInOneLauncher.Elements
                                 Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Keybinds", $"{WorkshopEntry.GameName()}-{WorkshopEntry.Name}"));
                             Process.Start(new ProcessStartInfo("explorer.exe", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BFME Workshop", "Keybinds", $"{WorkshopEntry.GameName()}-{WorkshopEntry.Name}")));
                         }),
-                        new ContextMenuButtonItem("Open game folder", true, clicked: () => Process.Start(new ProcessStartInfo("explorer.exe", Path.Combine(BfmeRegistryManager.GetKeyValue(WorkshopEntry.Game, BfmeFoundationProject.BfmeRegistryManagement.Data.BfmeRegistryKey.InstallPath))))),
+                        new ContextMenuButtonItem("Open game folder", true, clicked: () => Process.Start(new ProcessStartInfo("explorer.exe", Path.Combine(BfmeRegistryManager.GetKeyValue((BfmeGame)WorkshopEntry.Game, BfmeRegistryKey.InstallPath))))),
                         new ContextMenuSeparatorItem(),
                         new ContextMenuButtonItem("Copy package GUID", true, clicked: () => Clipboard.SetDataObject(WorkshopEntry.Guid)),
                         new ContextMenuSeparatorItem(),

@@ -12,7 +12,6 @@ using AllInOneLauncher.Logic;
 using BfmeFoundationProject.WorkshopKit.Data;
 using System.Windows.Input;
 using AllInOneLauncher.Data;
-using BfmeFoundationProject.BfmeRegistryManagement;
 
 namespace AllInOneLauncher.Pages.Primary
 {
@@ -139,16 +138,24 @@ namespace AllInOneLauncher.Pages.Primary
         private void OnInstallGameClicked(object sender, EventArgs e)
         {
             PopupVisualizer.ShowPopup(new InstallGameDialog(),
-            OnPopupSubmited: (submittedData) => InstallGame(gameTabs.SelectedIndex, submittedData[0], submittedData[1]));
+            OnPopupSubmited: (submittedData) => InstallGame((BfmeGame)gameTabs.SelectedIndex, submittedData[0], submittedData[1]));
         }
 
-        public async void InstallGame(int game, string selectedLanguage, string selectedLocation)
+        public async void InstallGame(BfmeGame game, string selectedLanguage, string selectedLocation)
         {
             try
             {
-                BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game < 2 ? $"BFME{game + 1}" : "RotWK"), selectedLanguage);
-                if (game == 2 && !BfmeRegistryManager.IsInstalled(1)) BfmeRegistryManager.CreateNewInstallRegistry(1, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
-                await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch(game));
+                // BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game < 2 ? $"BFME{game + 1}" : "RotWK"), selectedLanguage);
+                // if (game == 2 && !BfmeRegistryManager.IsInstalled(BfmeGame.BFME2)) BfmeRegistryManager.CreateNewInstallRegistry(BfmeGame.BFME2, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
+                // await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch(game));
+
+                BfmeRegistryManager.CreateNewInstallRegistry(game, Path.Combine(selectedLocation, game == BfmeGame.ROTWK ? "RotWK" : $"BFME{(int)game + 1}"), selectedLanguage);
+
+                if (game == BfmeGame.ROTWK && !BfmeRegistryManager.IsInstalled(BfmeGame.BFME2))
+                    BfmeRegistryManager.CreateNewInstallRegistry(BfmeGame.BFME2, Path.Combine(selectedLocation, "BFME2"), selectedLanguage);
+
+                await BfmeWorkshopSyncManager.Sync(await BfmeWorkshopEntry.OfficialPatch((int)game));
+
                 UpdatePlayButton();
             }
             catch (Exception ex)
@@ -198,7 +205,7 @@ namespace AllInOneLauncher.Pages.Primary
 
         private void UpdatePlayButton()
         {
-            if (BfmeRegistryManager.IsInstalled(gameTabs.SelectedIndex))
+            if (BfmeRegistryManager.IsInstalled((BfmeGame)gameTabs.SelectedIndex))
                 launchButton.ButtonState = LaunchButtonState.Launch;
             else
                 launchButton.ButtonState = LaunchButtonState.Install;

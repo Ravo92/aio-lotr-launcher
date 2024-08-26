@@ -14,7 +14,8 @@ using AllInOneLauncher.Popups;
 using System.Reflection;
 using BfmeFoundationProject.WorkshopKit.Logic;
 using BfmeFoundationProject.WorkshopKit.Data;
-using BfmeFoundationProject.BfmeRegistryManagement;
+using static AllInOneLauncher.Logic.BfmeRegistryManager;
+using AllInOneLauncher.Data;
 
 namespace AllInOneLauncher
 {
@@ -51,19 +52,19 @@ namespace AllInOneLauncher
                 Properties.Settings.Default.Save();
             }
 
-            for (int game = 0; game < 3; game++)
+            foreach (BfmeGame game in Enum.GetValues(typeof(BfmeGame)).Cast<BfmeGame>().Where(g => g != BfmeGame.NONE))
             {
-                if (BfmeRegistryManager.IsInstalled(game) && BfmeRegistryManager.GetKeyValue(game, BfmeFoundationProject.BfmeRegistryManagement.Data.BfmeRegistryKey.InstallPath).Contains(Path.GetDirectoryName(Environment.ProcessPath)!))
+                if (IsInstalled(game) && GetKeyValue(game, BfmeRegistryKey.InstallPath).Contains(Path.GetDirectoryName(Environment.ProcessPath)!))
                 {
-                    PopupVisualizer.ShowPopup(new MessagePopup("INVALID INSTALL LOCATION", "The All In One Launcher has been installed inside one of the games folders. This is not allowed, please reinstall the launcher in a different location!"),
-                    OnPopupClosed: () =>
-                    {
-                        Application.Current.Shutdown();
-                    });
+                    PopupVisualizer.ShowPopup(new MessagePopup("INVALID INSTALL LOCATION",
+                        "The All In One Launcher has been installed inside one of the game's folders. This is not allowed, please reinstall the launcher in a different location!"),
+                        OnPopupClosed: () =>
+                        {
+                            Application.Current.Shutdown();
+                        });
                     break;
                 }
             }
-
             CheckSize();
             ReloadContextMenu();
             ShowOffline();
@@ -112,16 +113,16 @@ namespace AllInOneLauncher
             Instance.tabs.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
             Instance.icons.Visibility = newContent != null ? Visibility.Collapsed : Visibility.Visible;
 
-            if (newContent is Settings)
-                Instance.background.Effect = new BlurEffect() { Radius = 20 };
-            else
-                Instance.background.Effect = null;
+            Instance.background.Effect = newContent is Settings ? new BlurEffect() { Radius = 20 } : null;
 
             if (Settings.NeedsResync)
-                for (int game = 0; game < 3; game++)
+            {
+                foreach (BfmeGame game in Enum.GetValues(typeof(BfmeGame)))
                 {
-                    if (!BfmeRegistryManager.IsInstalled(game) || (game == 2 && !BfmeRegistryManager.IsInstalled(1))) continue;
-                    var activeEntry = await BfmeWorkshopStateManager.GetActivePatch(game);
+                    if (!IsInstalled(game) || (game == BfmeGame.ROTWK && !IsInstalled(BfmeGame.BFME2)))
+                        continue;
+
+                    var activeEntry = await BfmeWorkshopStateManager.GetActivePatch((int)game);
                     if (activeEntry != null)
                     {
                         try
@@ -134,9 +135,11 @@ namespace AllInOneLauncher
                         }
                     }
                 }
+            }
 
             Settings.NeedsResync = false;
         }
+
 
         public static void ShowOffline()
         {

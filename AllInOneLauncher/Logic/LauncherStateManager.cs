@@ -1,14 +1,11 @@
-﻿using AllInOneLauncher.Pages.Primary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Principal;
 using System.Windows;
-using Windows.Storage;
 
 namespace AllInOneLauncher.Logic
 {

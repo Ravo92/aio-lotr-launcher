@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using AllInOneLauncher.Data;
-using BfmeFoundationProject.BfmeRegistryManagement;
-using BfmeFoundationProject.BfmeRegistryManagement.Data;
 using BfmeFoundationProject.WorkshopKit.Logic;
+using static AllInOneLauncher.Logic.BfmeRegistryManager;
 
 namespace AllInOneLauncher.Logic
 {
     internal static class BfmeLaunchManager
     {
-        internal static async void LaunchGame(BfmeGame game, int displayMode)
+        internal static async void LaunchGame(Data.BfmeGame game, int displayMode)
         {
             ProcessStartInfo startInfo = new()
             {
-                WorkingDirectory = BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.InstallPath),
-                FileName = Path.Combine(BfmeRegistryManager.GetKeyValue((int)game, BfmeRegistryKey.InstallPath), BfmeDefaults.DefaultGameExecutableNames[(int)game])
+                WorkingDirectory = GetKeyValue(game, BfmeRegistryKey.InstallPath),
+                FileName = Path.Combine(GetKeyValue(game, BfmeRegistryKey.InstallPath), GameInfos[game].DefaultRegistryKey) // BfmeDefaults.DefaultGameExecutableNames[(int)game])
             };
 
             if (displayMode == 1)

@@ -1,24 +1,13 @@
 ﻿using AllInOneLauncher.Data;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Popups;
-using BfmeFoundationProject.BfmeRegistryManagement;
 using BfmeFoundationProject.WorkshopKit.Data;
 using BfmeFoundationProject.WorkshopKit.Logic;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AllInOneLauncher.Elements
 {
@@ -47,7 +36,7 @@ namespace AllInOneLauncher.Elements
                 activeEntryAuthor.Text = value.Author;
                 UpdateType();
 
-                IsHitTestVisible = BfmeRegistryManager.IsInstalled(value.Game);
+                IsHitTestVisible = BfmeRegistryManager.IsInstalled((BfmeGame)value.Game);
                 activeEntry.Opacity = IsHitTestVisible ? 1 : 0.5;
                 if (IsHitTestVisible)
                     try { activeEntryIcon.Source = new BitmapImage(new Uri(value.ArtworkUrl)); } catch { }

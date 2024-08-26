@@ -3,8 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using AllInOneLauncher.Logic;
 using AllInOneLauncher.Data;
-using BfmeFoundationProject.BfmeRegistryManagement;
-using BfmeFoundationProject.BfmeRegistryManagement.Data;
+using static AllInOneLauncher.Logic.BfmeRegistryManager;
 
 namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
 {
@@ -24,7 +23,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
             ResolutionDropdown.Options = SystemDisplayManager.GetAllSupportedResolutions();
 
             ResolutionDropdown.SelectedValue = BfmeSettingsManager.Get(Game, "Resolution") ?? ResolutionDropdown.Options.First();
-            LanguageDropdown.SelectedValue = BfmeRegistryManager.GetKeyValue((int)Game, BfmeRegistryKey.Language);
+            LanguageDropdown.SelectedValue = GetKeyValue(Game, BfmeRegistryKey.Language);
             title.Text = Game switch
             {
                 BfmeGame.BFME1 => Application.Current.FindResource("SettingsPageBFME1SectionHeader").ToString(),
@@ -33,13 +32,13 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
                 _ => ""
             };
 
-            string cdKey = BfmeRegistryManager.GetKeyValue((int)Game, BfmeRegistryKey.SerialKey);
+            string cdKey = GetKeyValue(Game, BfmeRegistryKey.SerialKey);
             curentSerialNumber.Text = $"Current serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
         }
 
         private void OnLanguageOptionSelected(object sender, System.EventArgs e)
         {
-            BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.Language, LanguageDropdown.SelectedValue);
+            SetKeyValue(Game, BfmeRegistryKey.Language, LanguageDropdown.SelectedValue);
             Primary.Settings.NeedsResync = true;
             Properties.Settings.Default.Save();
         }
@@ -54,7 +53,7 @@ namespace AllInOneLauncher.Pages.Subpages.Settings.Launcher
         {
             string cdKey = string.Concat(from s in Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20) select s[System.Random.Shared.Next(s.Length)]);
             curentSerialNumber.Text = $"Current serial number: {string.Join("-", Enumerable.Range(0, cdKey.Length / 4).Select(i => cdKey.Substring(i * 4, 4)))}";
-            BfmeRegistryManager.SetKeyValue((int)Game, BfmeRegistryKey.SerialKey, cdKey, Microsoft.Win32.RegistryValueKind.String);
+            SetKeyValue(Game, BfmeRegistryKey.SerialKey, cdKey, Microsoft.Win32.RegistryValueKind.String);
         }
     }
 }
