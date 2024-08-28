@@ -76,7 +76,7 @@ namespace AllInOneLauncher.Logic
 
             if (key == BfmeRegistryKey.InstallPath)
             {
-                using RegistryKey? registryKey = Registry.LocalMachine.OpenSubKey(Path.Combine(registryBasePath, GameInfos[game].DeprecatedRegistryKey), writable: false);
+                using RegistryKey? registryKey = Registry.CurrentUser.OpenSubKey(Path.Combine(registryBasePath, GameInfos[game].DeprecatedRegistryKey), writable: false);
                 if (registryKey != null)
                 {
                     string? installPath = registryKey.GetValue("Install Dir") as string;
@@ -87,7 +87,7 @@ namespace AllInOneLauncher.Logic
                 }
             }
 
-            using RegistryKey? registryKey2 = Registry.LocalMachine.OpenSubKey(Path.Combine(registryBasePath, GameInfos[game].DefaultRegistryKey) + subKeySuffix, writable: false);
+            using RegistryKey? registryKey2 = Registry.CurrentUser.OpenSubKey(Path.Combine(registryBasePath, GameInfos[game].DefaultRegistryKey) + subKeySuffix, writable: false);
             return registryKey2?.GetValue(name) as string ?? EmptyRegistryKeyOrPath;
         }
 
@@ -107,7 +107,7 @@ namespace AllInOneLauncher.Logic
             };
             string text = key != BfmeRegistryKey.SerialKey ? "" : "\\ergc";
             string value2 = text;
-            using RegistryKey? registryKey = Registry.LocalMachine.CreateSubKey(
+            using RegistryKey? registryKey = Registry.CurrentUser.CreateSubKey(
                 Path.Combine(SoftwareRegistryPath, nint.Size == 8 ? Wow64Node : EmptyRegistryKeyOrPath, GameInfos[game].DefaultRegistryKey + value2),
                 writable: true
             );
@@ -143,7 +143,7 @@ namespace AllInOneLauncher.Logic
         {
             string appPathRegistryKey = Path.Combine(SoftwareRegistryPath, is64Bit ? Wow64Node : EmptyRegistryKeyOrPath, "Microsoft\\Windows\\CurrentVersion\\App Paths", GameInfos[game].ExecutableName);
 
-            using RegistryKey? registryKey = Registry.LocalMachine.CreateSubKey(appPathRegistryKey, writable: true);
+            using RegistryKey? registryKey = Registry.CurrentUser.CreateSubKey(appPathRegistryKey, writable: true);
             if (registryKey == null) return;
 
             registryKey.SetValue("", Path.Combine(GetKeyValue(game, BfmeRegistryKey.InstallPath), GameInfos[game].ExecutableName));
@@ -157,7 +157,7 @@ namespace AllInOneLauncher.Logic
         internal static void DeleteAppPathRegistryKey(BfmeGame game)
         {
             string appPathRegistryKey = Path.Combine(SoftwareRegistryPath, is64Bit ? Wow64Node : EmptyRegistryKeyOrPath, "Microsoft\\Windows\\CurrentVersion\\App Paths", GameInfos[game].ExecutableName);
-            Registry.LocalMachine.DeleteSubKeyTree(appPathRegistryKey, throwOnMissingSubKey: false);
+            Registry.CurrentUser.DeleteSubKeyTree(appPathRegistryKey, throwOnMissingSubKey: false);
         }
 
         [SupportedOSPlatform("windows")]
@@ -166,11 +166,11 @@ namespace AllInOneLauncher.Logic
             if (!new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
                 return;
 
-            using RegistryKey? registryKey = Registry.LocalMachine.OpenSubKey(SoftwareRegistryPath + (is64Bit ? Wow64Node : EmptyRegistryKeyOrPath) + "\\" + GameInfos[game].DeprecatedRegistryKey, writable: false);
+            using RegistryKey? registryKey = Registry.CurrentUser.OpenSubKey(SoftwareRegistryPath + (is64Bit ? Wow64Node : EmptyRegistryKeyOrPath) + "\\" + GameInfos[game].DeprecatedRegistryKey, writable: false);
             if (registryKey != null)
             {
                 SetKeyValue(game, BfmeRegistryKey.InstallPath, registryKey.GetValue("Install Dir")?.ToString() ?? string.Empty);
-                Registry.LocalMachine.DeleteSubKeyTree(SoftwareRegistryPath + (is64Bit ? Wow64Node : EmptyRegistryKeyOrPath) + "\\" + GameInfos[game].DeprecatedRegistryKey, throwOnMissingSubKey: false);
+                Registry.CurrentUser.DeleteSubKeyTree(SoftwareRegistryPath + (is64Bit ? Wow64Node : EmptyRegistryKeyOrPath) + "\\" + GameInfos[game].DeprecatedRegistryKey, throwOnMissingSubKey: false);
             }
         }
 
